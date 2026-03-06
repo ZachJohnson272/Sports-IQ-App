@@ -978,7 +978,187 @@
 
   .round-complete p { color: var(--muted); font-size: 15px; }
 
-  @media (max-width: 360px) {
+  /* ===================== MODE SELECT ===================== */
+  .mode-grid { display: flex; flex-direction: column; gap: 12px; }
+
+  .mode-card {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.2);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    color: var(--text);
+  }
+
+  .mode-card:hover {
+    border-color: var(--jazz-purple);
+    background: rgba(107,63,160,0.1);
+    transform: translateY(-2px);
+  }
+
+  .mode-icon { font-size: 26px; flex-shrink: 0; }
+
+  .mode-info { flex: 1; }
+
+  .mode-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+
+  .mode-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .mode-stats-mini {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--jazz-sky);
+    flex-shrink: 0;
+  }
+
+  /* Card front text (for name→pos and stats→player modes) */
+  .card-front-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    gap: 12px;
+    z-index: 1;
+  }
+
+  .front-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+
+  .front-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(26px, 7vw, 36px);
+    letter-spacing: 2px;
+    text-align: center;
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  .front-stat-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .front-stat-chip {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    text-align: center;
+  }
+
+  .front-stat-chip .fsv {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--jazz-sky);
+    display: block;
+  }
+
+  .front-stat-chip .fsk {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Multiple choice */
+  .mc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .mc-btn {
+    background: var(--surface);
+    border: 2px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 14px 10px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .mc-btn:hover { border-color: var(--jazz-purple); background: rgba(107,63,160,0.1); }
+  .mc-btn.selected { border-color: var(--jazz-sky); background: rgba(91,184,212,0.1); }
+  .mc-btn.correct { border-color: #3dcc7a; background: rgba(61,204,122,0.15); color: #3dcc7a; }
+  .mc-btn.wrong { border-color: #e05555; background: rgba(224,85,85,0.15); color: #e05555; }
+
+  /* Lineup mode */
+  .lineup-grid { display: flex; flex-direction: column; gap: 10px; }
+
+  .lineup-row {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lineup-pos {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--jazz-sky);
+    width: 40px;
+    flex-shrink: 0;
+  }
+
+  .lineup-select {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 8px 12px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .lineup-result-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 4px 0;
+  }
+
+  .lineup-result-row .check { color: #3dcc7a; }
+  .lineup-result-row .cross { color: #e05555; }
+
+  /* ===================== END NEW CSS ===================== */
+
     .btn-miss, .btn-got { font-size: 16px; padding: 14px; }
     .card-scene { max-width: 300px; }
   }
@@ -1076,7 +1256,7 @@
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Portland Trail Blazers <span class="cs-tag">Soon</span></button>
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Sacramento Kings <span class="cs-tag">Soon</span></button>
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> San Antonio Spurs <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn active-team-btn" onclick="goJazzTeam()"><span>🏀</span> Utah Jazz <span class="active-tag">Play Now ▶</span></button>
+      <button class="team-row-btn active-team-btn" onclick="goJazzTeam()"><span>🏀</span> Utah Jazz <span class="active-tag">Start Grinding 💪</span></button>
 
       <!-- EASTERN CONFERENCE -->
       <div class="division-label">Eastern Conference</div>
@@ -1147,30 +1327,92 @@
         </div>
       </div>
     </div>
-    <button class="btn-primary" onclick="startLearning()">▶ &nbsp;Start Learning</button>
+    <button class="btn-primary" onclick="showPage('modeSelect')">💪 &nbsp;Start Grinding</button>
   </div>
 </div>
 
-<!-- ============== FLASHCARD PAGE ============== -->
+<!-- ============== MODE SELECT PAGE ============== -->
+<div class="page" id="modeSelect">
+  <div class="nav-header">
+    <button class="btn-ghost" onclick="goJazzTeam()">← Back</button>
+    <div class="nav-header-title">Choose Mode</div>
+    <div></div>
+  </div>
+  <div class="nav-content">
+    <p class="nav-hint">Pick a study mode</p>
+    <div class="mode-grid">
+
+      <button class="mode-card" onclick="startMode('photoName')">
+        <div class="mode-icon">📸</div>
+        <div class="mode-info">
+          <div class="mode-title">Photo → Name</div>
+          <div class="mode-desc">See the face, guess the name & position</div>
+        </div>
+        <div class="mode-stats-mini" id="modeStats_photoName">0/18</div>
+      </button>
+
+      <button class="mode-card" onclick="startMode('namePos')">
+        <div class="mode-icon">📋</div>
+        <div class="mode-info">
+          <div class="mode-title">Name → Position</div>
+          <div class="mode-desc">See the name, guess the position & photo</div>
+        </div>
+        <div class="mode-stats-mini" id="modeStats_namePos">0/18</div>
+      </button>
+
+      <button class="mode-card" onclick="startMode('statsPlayer')">
+        <div class="mode-icon">📊</div>
+        <div class="mode-info">
+          <div class="mode-title">Stats → Player</div>
+          <div class="mode-desc">See height, age, college — guess who</div>
+        </div>
+        <div class="mode-stats-mini" id="modeStats_statsPlayer">0/18</div>
+      </button>
+
+      <button class="mode-card" onclick="startMode('multiChoice')">
+        <div class="mode-icon">🔤</div>
+        <div class="mode-info">
+          <div class="mode-title">Multiple Choice</div>
+          <div class="mode-desc">4 options — pick the right player</div>
+        </div>
+        <div class="mode-stats-mini" id="modeStats_multiChoice">0/18</div>
+      </button>
+
+      <button class="mode-card" onclick="startMode('lineup')">
+        <div class="mode-icon">📝</div>
+        <div class="mode-info">
+          <div class="mode-title">Guess the Lineup</div>
+          <div class="mode-desc">Fill in the starting 5 by position</div>
+        </div>
+        <div class="mode-stats-mini" id="modeStats_lineup">—</div>
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============== UNIVERSAL FLASHCARD PAGE ============== -->
 <div class="page" id="flashcards">
   <div class="fc-header">
     <div class="fc-progress-text">
       <span id="fcCurrent">1</span> / <span id="fcTotal">18</span>
     </div>
     <div class="fc-mastery-badge" id="fcMasteryBadge">0% mastered</div>
-    <button class="btn-ghost" onclick="goJazzTeam()">✕ Exit</button>
+    <button class="btn-ghost" onclick="showPage('modeSelect')">✕ Exit</button>
   </div>
   <div class="fc-progress-bar">
     <div class="fc-progress-fill" id="fcProgressBar" style="width:0%"></div>
   </div>
 
   <div class="fc-arena">
-    <!-- Card -->
+
+    <!-- PHOTO→NAME / NAME→POS / STATS→PLAYER card -->
     <div class="card-scene" id="cardScene" onclick="flipCard()">
       <div class="card-3d" id="card3d">
         <div class="card-face card-front">
-          <img class="player-photo" id="playerPhoto" src="" alt="">
-          <div class="photo-overlay"></div>
+          <img class="player-photo" id="playerPhoto" src="" alt="" style="display:none">
+          <div class="photo-overlay" id="photoOverlay" style="display:none"></div>
+          <div class="card-front-text" id="cardFrontText" style="display:none"></div>
           <div class="card-front-hint">
             <div class="flip-hint">↕ Tap to reveal</div>
           </div>
@@ -1185,10 +1427,23 @@
       </div>
     </div>
 
-    <!-- Answer buttons -->
+    <!-- Answer buttons (photo/name/stats modes) -->
     <div class="answer-btns answer-btns-hidden" id="answerBtns">
       <button class="btn-miss" onclick="answerCard(false)">❌ &nbsp;Missed it</button>
       <button class="btn-got" onclick="answerCard(true)">✅ &nbsp;Got it</button>
+    </div>
+
+    <!-- Multiple Choice options -->
+    <div id="mcOptions" style="display:none;width:100%;max-width:380px;">
+      <div class="mc-grid" id="mcGrid"></div>
+      <button class="btn-primary" id="mcSubmit" onclick="submitMC()" style="margin-top:14px;display:none;">Submit Answer</button>
+    </div>
+
+    <!-- Lineup mode -->
+    <div id="lineupMode" style="display:none;width:100%;max-width:420px;">
+      <div class="lineup-grid" id="lineupGrid"></div>
+      <button class="btn-primary" id="lineupSubmit" onclick="submitLineup()" style="margin-top:14px;">Check Lineup</button>
+      <div id="lineupResult" style="display:none;margin-top:12px;text-align:center;"></div>
     </div>
 
     <!-- Round complete -->
@@ -1196,11 +1451,12 @@
       <div class="trophy">🏆</div>
       <h2>Round Complete!</h2>
       <p id="roundCompleteMsg">Keep going to improve your score.</p>
-      <button class="btn-primary" style="width:100%;max-width:300px" onclick="startLearning()">▶ &nbsp;Next Round</button>
-      <button class="btn-ghost" style="margin-top:4px" onclick="goJazzTeam()">← Back to Jazz</button>
+      <button class="btn-primary" style="width:100%;max-width:300px" onclick="restartCurrentMode()">▶ &nbsp;Next Round</button>
+      <button class="btn-ghost" style="margin-top:8px" onclick="showPage('modeSelect')">← Change Mode</button>
     </div>
   </div>
 </div>
+
 
 <!-- ============== MASTERY PAGE ============== -->
 <div class="page" id="mastery">
@@ -1254,21 +1510,32 @@ const ROSTER = [
   { name:"Vince Williams Jr.", position:"G", age:25, height:'6\'4"', college:"VCU", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397441.png" }
 ];
 
-// ===================== STATE =====================
 const posMap = { G: 'Guard', F: 'Forward', C: 'Center' };
+const posFullMap = { G: 'Guard', F: 'Forward', C: 'Center' };
 
-let playerData = ROSTER.map(p => ({
-  ...p,
-  correct: 0,
-  attempts: 0
-}));
+// Per-mode mastery storage
+const modes = ['photoName', 'namePos', 'statsPlayer', 'multiChoice', 'lineup'];
+let modeData = {};
+modes.forEach(m => {
+  modeData[m] = ROSTER.map((p, i) => ({ idx: i, correct: 0, attempts: 0 }));
+});
+let lineupAttempts = 0, lineupCorrect = 0;
 
-let deck = [];
-let deckIndex = 0;
-let isFlipped = false;
-let cardAnswered = false;
+// Current session state
+let currentMode = null;
+let deck = [], deckIndex = 0;
+let isFlipped = false, cardAnswered = false;
+let mcSelected = null;
 
 // ===================== HELPERS =====================
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 function getMastery(pd) {
   if (pd.attempts === 0) return null;
   return Math.round((pd.correct / pd.attempts) * 100);
@@ -1278,58 +1545,44 @@ function isLearned(pd) {
   return pd.attempts >= 2 && getMastery(pd) >= 80;
 }
 
-function getTeamMastery() {
-  const total = playerData.reduce((s, p) => s + p.attempts, 0);
-  const correct = playerData.reduce((s, p) => s + p.correct, 0);
+function getModeMastery(mode) {
+  const data = modeData[mode];
+  const total = data.reduce((s, p) => s + p.attempts, 0);
+  const correct = data.reduce((s, p) => s + p.correct, 0);
   if (total === 0) return 0;
   return Math.round((correct / total) * 100);
 }
 
-function getLearnedCount() {
-  return playerData.filter(isLearned).length;
+function getModeLearnedCount(mode) {
+  return modeData[mode].filter(isLearned).length;
 }
 
-function getTotalAttempts() {
-  return playerData.reduce((s, p) => s + p.attempts, 0);
-}
-
-// Weighted shuffle: missed players appear more often
-function buildDeck() {
+function buildDeck(mode) {
   const pool = [];
-  playerData.forEach((pd, idx) => {
+  modeData[mode].forEach((pd, idx) => {
     const m = getMastery(pd);
-    let weight = 2;
-    if (m === null) weight = 2;
-    else if (m < 50) weight = 4;
-    else if (m < 80) weight = 3;
-    else weight = 1;
+    let weight = m === null ? 2 : m < 50 ? 4 : m < 80 ? 3 : 1;
     for (let i = 0; i < weight; i++) pool.push(idx);
   });
-  // shuffle
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  // deduplicate while keeping weights (take first occurrence of each, then repeats)
-  // actually keep all for repetition, just cap at 18 cards per round
+  shuffle(pool);
   return pool.slice(0, 18);
+}
+
+function getRandomOthers(excludeIdx, count) {
+  const others = ROSTER.map((_, i) => i).filter(i => i !== excludeIdx);
+  shuffle(others);
+  return others.slice(0, count);
 }
 
 // ===================== NAVIGATION =====================
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  if (id === 'modeSelect') updateModeStats();
 }
 
-function goHome() {
-  updateHomeStats();
-  showPage('home');
-}
-
-function goJazzTeam() {
-  updateHomeStats();
-  showPage('jazzTeam');
-}
+function goHome() { showPage('home'); }
+function goJazzTeam() { updateHomeStats(); showPage('jazzTeam'); }
 
 function showComingSoon() {
   const toast = document.getElementById('toast');
@@ -1337,79 +1590,154 @@ function showComingSoon() {
   setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-function goMastery() {
-  renderMastery();
-  showPage('mastery');
-}
+function goMastery() { showPage('mastery'); }
 
-// ===================== HOME =====================
+// ===================== HOME STATS =====================
 function updateHomeStats() {
-  const m = getTeamMastery();
-  document.getElementById('homeMasteryPct').textContent = m + '%';
-  document.getElementById('homeMasteryBar').style.width = m + '%';
-  document.getElementById('homeLearnedCount').textContent = getLearnedCount();
-  document.getElementById('homeTotalAttempts').textContent = getTotalAttempts();
+  // aggregate across all modes
+  let totalCorrect = 0, totalAttempts = 0;
+  modes.filter(m => m !== 'lineup').forEach(m => {
+    modeData[m].forEach(p => { totalCorrect += p.correct; totalAttempts += p.attempts; });
+  });
+  const pct = totalAttempts === 0 ? 0 : Math.round((totalCorrect / totalAttempts) * 100);
+  document.getElementById('homeMasteryPct').textContent = pct + '%';
+  document.getElementById('homeMasteryBar').style.width = pct + '%';
+  // learned = learned in at least one mode
+  const learnedSet = new Set();
+  modes.filter(m => m !== 'lineup').forEach(m => {
+    modeData[m].forEach((pd, i) => { if (isLearned(pd)) learnedSet.add(i); });
+  });
+  document.getElementById('homeLearnedCount').textContent = learnedSet.size;
+  document.getElementById('homeTotalAttempts').textContent = totalAttempts;
 }
 
-function startLearning() {
-  deck = buildDeck();
+function updateModeStats() {
+  modes.filter(m => m !== 'lineup').forEach(m => {
+    const el = document.getElementById('modeStats_' + m);
+    if (el) el.textContent = getModeLearnedCount(m) + '/18';
+  });
+  const lineupEl = document.getElementById('modeStats_lineup');
+  if (lineupEl) lineupEl.textContent = lineupAttempts > 0 ? lineupCorrect + '/' + lineupAttempts : '—';
+}
+
+// ===================== START MODE =====================
+function startMode(mode) {
+  currentMode = mode;
+  if (mode === 'lineup') { startLineup(); return; }
+  deck = buildDeck(mode);
   deckIndex = 0;
-  document.getElementById('roundComplete').classList.remove('show');
+
+  // show/hide UI panels
   document.getElementById('cardScene').style.display = '';
-  document.getElementById('answerBtns').style.display = '';
+  document.getElementById('answerBtns').style.display = mode === 'multiChoice' ? 'none' : '';
+  document.getElementById('mcOptions').style.display = mode === 'multiChoice' ? '' : 'none';
+  document.getElementById('lineupMode').style.display = 'none';
+  document.getElementById('roundComplete').classList.remove('show');
+
   document.getElementById('fcTotal').textContent = deck.length;
   loadCard();
   showPage('flashcards');
 }
 
-// ===================== FLASHCARD =====================
-function loadCard() {
-  if (deckIndex >= deck.length) {
-    endRound(); return;
-  }
+function restartCurrentMode() { startMode(currentMode); }
 
-  const pd = playerData[deck[deckIndex]];
+// ===================== LOAD CARD =====================
+function loadCard() {
+  if (deckIndex >= deck.length) { endRound(); return; }
+
+  const playerIdx = deck[deckIndex];
+  const pd = ROSTER[playerIdx];
+  const modePd = modeData[currentMode][playerIdx];
+
   isFlipped = false;
   cardAnswered = false;
+  mcSelected = null;
 
   const c3d = document.getElementById('card3d');
   c3d.classList.remove('flipped');
 
-  document.getElementById('playerPhoto').src = pd.image_url;
+  // Reset front
+  const photoEl = document.getElementById('playerPhoto');
+  const overlayEl = document.getElementById('photoOverlay');
+  const frontTextEl = document.getElementById('cardFrontText');
+
+  photoEl.style.display = 'none';
+  overlayEl.style.display = 'none';
+  frontTextEl.style.display = 'none';
+
+  // Back always has photo + name + pos
   document.getElementById('backPhoto').src = pd.image_url;
   document.getElementById('backName').textContent = pd.name;
-  document.getElementById('backPos').textContent = posMap[pd.position] || pd.position;
+  document.getElementById('backPos').textContent = posMap[pd.position] + ' (' + pd.position + ')';
 
-  // stats on back
-  document.getElementById('backStats').innerHTML = `
-    <div class="back-stat"><span class="sv">${pd.height}</span><span class="sk">Height</span></div>
-    <div class="back-stat"><span class="sv">${pd.age}</span><span class="sk">Age</span></div>
-    <div class="back-stat"><span class="sv">${pd.college}</span><span class="sk">College</span></div>
-  `;
+  const m = getMastery(modePd);
+  document.getElementById('cardStreak').innerHTML = `<span>${modePd.attempts === 0 ? 'First attempt' : modePd.correct + '/' + modePd.attempts + ' correct (' + m + '%)'}</span>`;
 
-  // streak info
-  const m = getMastery(pd);
-  const streak = pd.attempts === 0 ? 'First attempt' 
-    : `${pd.correct}/${pd.attempts} correct (${m}%)`;
-  document.getElementById('cardStreak').innerHTML = `<span>${streak}</span>`;
+  // Mode-specific FRONT
+  if (currentMode === 'photoName') {
+    photoEl.src = pd.image_url;
+    photoEl.style.display = '';
+    overlayEl.style.display = '';
+    document.getElementById('backStats').innerHTML = `
+      <div class="back-stat"><span class="sv">${pd.height}</span><span class="sk">Height</span></div>
+      <div class="back-stat"><span class="sv">${pd.age}</span><span class="sk">Age</span></div>
+      <div class="back-stat"><span class="sv">${pd.college}</span><span class="sk">College</span></div>`;
+  }
+
+  else if (currentMode === 'namePos') {
+    frontTextEl.style.display = '';
+    frontTextEl.innerHTML = `
+      <div class="front-label">Who plays for the Jazz?</div>
+      <div class="front-main">${pd.name}</div>`;
+    document.getElementById('backStats').innerHTML = `
+      <div class="back-stat"><span class="sv">${pd.height}</span><span class="sk">Height</span></div>
+      <div class="back-stat"><span class="sv">${pd.age}</span><span class="sk">Age</span></div>`;
+  }
+
+  else if (currentMode === 'statsPlayer') {
+    frontTextEl.style.display = '';
+    frontTextEl.innerHTML = `
+      <div class="front-label">Who is this Jazz player?</div>
+      <div class="front-stat-row">
+        <div class="front-stat-chip"><span class="fsv">${pd.height}</span><span class="fsk">Height</span></div>
+        <div class="front-stat-chip"><span class="fsv">${pd.age}</span><span class="fsk">Age</span></div>
+        <div class="front-stat-chip"><span class="fsv">${pd.college}</span><span class="fsk">College</span></div>
+        <div class="front-stat-chip"><span class="fsv">${posMap[pd.position]}</span><span class="fsk">Position</span></div>
+      </div>`;
+    document.getElementById('backStats').innerHTML = '';
+  }
+
+  else if (currentMode === 'multiChoice') {
+    photoEl.src = pd.image_url;
+    photoEl.style.display = '';
+    overlayEl.style.display = '';
+    document.getElementById('backStats').innerHTML = `
+      <div class="back-stat"><span class="sv">${pd.height}</span><span class="sk">Height</span></div>
+      <div class="back-stat"><span class="sv">${pd.age}</span><span class="sk">Age</span></div>
+      <div class="back-stat"><span class="sv">${pd.college}</span><span class="sk">College</span></div>`;
+    buildMCOptions(playerIdx);
+  }
 
   // progress
   document.getElementById('fcCurrent').textContent = deckIndex + 1;
   document.getElementById('fcProgressBar').style.width = ((deckIndex / deck.length) * 100) + '%';
-  document.getElementById('fcMasteryBadge').textContent = getTeamMastery() + '% mastered';
+  document.getElementById('fcMasteryBadge').textContent = getModeMastery(currentMode) + '% mastered';
 
-  // animate card in
+  // animate
   const scene = document.getElementById('cardScene');
   scene.classList.remove('entering');
   void scene.offsetWidth;
   scene.classList.add('entering');
 
-  // hide answer buttons until flipped
-  document.getElementById('answerBtns').classList.add('answer-btns-hidden');
+  // hide answer buttons for non-MC modes until flipped
+  if (currentMode !== 'multiChoice') {
+    document.getElementById('answerBtns').classList.add('answer-btns-hidden');
+  }
 }
 
+// ===================== FLIP =====================
 function flipCard() {
-  if (cardAnswered) return;
+  if (cardAnswered || currentMode === 'multiChoice') return;
   isFlipped = !isFlipped;
   document.getElementById('card3d').classList.toggle('flipped', isFlipped);
   if (isFlipped) {
@@ -1419,15 +1747,14 @@ function flipCard() {
   }
 }
 
+// ===================== ANSWER (flip modes) =====================
 function answerCard(correct) {
   if (cardAnswered || !isFlipped) return;
   cardAnswered = true;
+  const playerIdx = deck[deckIndex];
+  modeData[currentMode][playerIdx].attempts++;
+  if (correct) modeData[currentMode][playerIdx].correct++;
 
-  const pd = playerData[deck[deckIndex]];
-  pd.attempts++;
-  if (correct) pd.correct++;
-
-  // flash feedback
   const flash = document.getElementById('feedbackFlash');
   flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
   setTimeout(() => { flash.className = 'feedback-flash'; }, 350);
@@ -1436,71 +1763,169 @@ function answerCard(correct) {
   setTimeout(loadCard, 420);
 }
 
+// ===================== MULTIPLE CHOICE =====================
+function buildMCOptions(correctIdx) {
+  const others = getRandomOthers(correctIdx, 3);
+  const options = shuffle([correctIdx, ...others]);
+  const grid = document.getElementById('mcGrid');
+  grid.innerHTML = '';
+  options.forEach(idx => {
+    const btn = document.createElement('button');
+    btn.className = 'mc-btn';
+    btn.textContent = ROSTER[idx].name;
+    btn.onclick = () => selectMC(btn, idx, correctIdx);
+    grid.appendChild(btn);
+  });
+  document.getElementById('mcSubmit').style.display = 'none';
+}
+
+function selectMC(btn, selectedIdx, correctIdx) {
+  if (cardAnswered) return;
+  mcSelected = { selectedIdx, correctIdx };
+  document.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('mcSubmit').style.display = '';
+}
+
+function submitMC() {
+  if (!mcSelected || cardAnswered) return;
+  cardAnswered = true;
+  const { selectedIdx, correctIdx } = mcSelected;
+  const correct = selectedIdx === correctIdx;
+  const playerIdx = deck[deckIndex];
+  modeData[currentMode][playerIdx].attempts++;
+  if (correct) modeData[currentMode][playerIdx].correct++;
+
+  // reveal correct/wrong
+  document.querySelectorAll('.mc-btn').forEach(btn => {
+    const idx = [...document.getElementById('mcGrid').children].indexOf(btn);
+    const btnPlayerIdx = [...document.getElementById('mcGrid').querySelectorAll('.mc-btn')].indexOf(btn);
+  });
+
+  // color the buttons
+  document.querySelectorAll('.mc-btn').forEach(btn => {
+    if (btn.textContent === ROSTER[correctIdx].name) btn.classList.add('correct');
+    else if (btn.classList.contains('selected')) btn.classList.add('wrong');
+  });
+
+  // flip to reveal
+  setTimeout(() => {
+    document.getElementById('card3d').classList.add('flipped');
+    document.getElementById('mcSubmit').style.display = 'none';
+  }, 600);
+
+  const flash = document.getElementById('feedbackFlash');
+  flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
+  setTimeout(() => { flash.className = 'feedback-flash'; }, 350);
+
+  setTimeout(() => {
+    deckIndex++;
+    loadCard();
+    document.getElementById('mcGrid').innerHTML = '';
+  }, 1800);
+}
+
+// ===================== LINEUP MODE =====================
+const LINEUP_POSITIONS = [
+  { label: 'PG', full: 'Point Guard', posCode: 'G' },
+  { label: 'SG', full: 'Shooting Guard', posCode: 'G' },
+  { label: 'SF', full: 'Small Forward', posCode: 'F' },
+  { label: 'PF', full: 'Power Forward', posCode: 'F' },
+  { label: 'C',  full: 'Center', posCode: 'C' }
+];
+
+// Designated starting lineup for the Jazz
+const JAZZ_STARTING_LINEUP = {
+  PG: 'Keyonte George',
+  SG: 'Vince Williams Jr.',
+  SF: 'Cody Williams',
+  PF: 'Jaren Jackson Jr.',
+  C:  'Walker Kessler'
+};
+
+function startLineup() {
+  document.getElementById('cardScene').style.display = 'none';
+  document.getElementById('answerBtns').style.display = 'none';
+  document.getElementById('mcOptions').style.display = 'none';
+  document.getElementById('roundComplete').classList.remove('show');
+  document.getElementById('lineupMode').style.display = '';
+  document.getElementById('lineupResult').style.display = 'none';
+
+  document.getElementById('fcCurrent').textContent = '—';
+  document.getElementById('fcTotal').textContent = '—';
+  document.getElementById('fcMasteryBadge').textContent = lineupAttempts > 0 ? Math.round((lineupCorrect/lineupAttempts)*100) + '% mastered' : '0% mastered';
+
+  const grid = document.getElementById('lineupGrid');
+  grid.innerHTML = '';
+
+  LINEUP_POSITIONS.forEach(pos => {
+    const row = document.createElement('div');
+    row.className = 'lineup-row';
+    row.innerHTML = `
+      <div class="lineup-pos">${pos.label}</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:2px;">
+        <div style="font-size:11px;color:var(--muted);letter-spacing:1px;">${pos.full}</div>
+        <select class="lineup-select" id="lineup_${pos.label}">
+          <option value="">— Select player —</option>
+          ${ROSTER.filter(p => p.position === pos.posCode).map(p => `<option value="${p.name}">${p.name}</option>`).join('')}
+        </select>
+      </div>`;
+    grid.appendChild(row);
+  });
+
+  document.getElementById('lineupSubmit').style.display = '';
+  showPage('flashcards');
+}
+
+function submitLineup() {
+  const resultDiv = document.getElementById('lineupResult');
+  resultDiv.style.display = '';
+  let html = '';
+  let correct = 0;
+
+  LINEUP_POSITIONS.forEach(pos => {
+    const selected = document.getElementById('lineup_' + pos.label).value;
+    const expected = JAZZ_STARTING_LINEUP[pos.label];
+    const isRight = selected === expected;
+    if (isRight) correct++;
+    html += `<div class="lineup-result-row">
+      <span class="${isRight ? 'check' : 'cross'}">${isRight ? '✅' : '❌'}</span>
+      <span style="color:var(--muted);width:32px;">${pos.label}</span>
+      <span>${selected || '(none)'}</span>
+      ${!isRight ? `<span style="color:var(--muted);font-size:12px;">→ ${expected}</span>` : ''}
+    </div>`;
+  });
+
+  lineupAttempts++;
+  if (correct === 5) lineupCorrect++;
+  html += `<div style="margin-top:12px;font-family:'Bebas Neue',sans-serif;font-size:22px;color:${correct===5?'#3dcc7a':'var(--jazz-sky)'};">${correct}/5 Correct</div>`;
+  html += `<button class="btn-ghost" style="margin-top:12px;" onclick="startLineup()">Try Again</button>`;
+
+  resultDiv.innerHTML = html;
+  document.getElementById('lineupSubmit').style.display = 'none';
+  document.getElementById('fcMasteryBadge').textContent = lineupAttempts > 0 ? Math.round((lineupCorrect/lineupAttempts)*100) + '% correct' : '0%';
+}
+
+// ===================== END ROUND =====================
 function endRound() {
   document.getElementById('cardScene').style.display = 'none';
   document.getElementById('answerBtns').style.display = 'none';
+  document.getElementById('mcOptions').style.display = 'none';
 
-  const m = getTeamMastery();
-  const learned = getLearnedCount();
+  const m = getModeMastery(currentMode);
+  const learned = getModeLearnedCount(currentMode);
   const rc = document.getElementById('roundComplete');
   rc.classList.add('show');
-  document.getElementById('roundCompleteMsg').textContent = 
-    `Team mastery: ${m}% · ${learned}/18 players learned`;
+  document.getElementById('roundCompleteMsg').textContent =
+    `Mode mastery: ${m}% · ${learned}/18 players learned`;
 }
 
 // ===================== MASTERY PAGE =====================
-function renderMastery() {
-  const m = getTeamMastery();
-  const learned = getLearnedCount();
-  const total = getTotalAttempts();
-
-  document.getElementById('masteryBigPct').textContent = m + '%';
-  document.getElementById('masteryBar').style.width = m + '%';
-  document.getElementById('masteryDetail').textContent = 
-    `${learned} of 18 players mastered · ${total} total attempts`;
-
-  const container = document.getElementById('playerRows');
-  container.innerHTML = '';
-
-  // sort: attempted first (by mastery desc), then unattempted
-  const sorted = [...playerData].sort((a, b) => {
-    const ma = getMastery(a), mb = getMastery(b);
-    if (ma === null && mb === null) return 0;
-    if (ma === null) return 1;
-    if (mb === null) return -1;
-    return mb - ma;
-  });
-
-  sorted.forEach(pd => {
-    const m = getMastery(pd);
-    let tier = 'none';
-    if (m !== null) {
-      if (m >= 80) tier = 'high';
-      else if (m >= 50) tier = 'mid';
-      else tier = 'low';
-    }
-    const pctText = m === null ? '—' : m + '%';
-
-    const row = document.createElement('div');
-    row.className = 'player-row';
-    row.innerHTML = `
-      <img class="player-thumb" src="${pd.image_url}" alt="${pd.name}">
-      <div class="player-row-info">
-        <div class="player-row-name">${pd.name}</div>
-        <div class="player-row-pos">${posMap[pd.position] || pd.position}</div>
-      </div>
-      <div class="player-row-right">
-        <div class="player-pct ${tier}">${pctText}</div>
-        <div class="player-attempts">${pd.attempts > 0 ? pd.correct+'/'+pd.attempts : 'Not studied'}</div>
-        <div class="mini-bar"><div class="mini-fill ${tier}" style="width:${m ?? 0}%"></div></div>
-      </div>
-    `;
-    container.appendChild(row);
-  });
-}
+function renderMastery() {}
 
 // ===================== INIT =====================
 updateHomeStats();
+
 </script>
 </body>
 </html>
