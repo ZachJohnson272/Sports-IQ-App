@@ -7,15 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --jazz-navy: #002B5C;
-    --jazz-gold: #F9A01B;
-    --jazz-note: #00471B;
-    --bg: #06111f;
-    --surface: #0d1f33;
-    --surface2: #122540;
-    --text: #e8edf3;
-    --muted: #6b8aaa;
+    --jazz-navy: #6B3FA0;
+    --jazz-gold: #5BB8D4;
+    --jazz-note: #4a2570;
+    --bg: #0a0a12;
+    --surface: #13101e;
+    --surface2: #1c1730;
+    --text: #f0edf8;
+    --muted: #9b8ec4;
     --radius: 16px;
+    --jazz-purple: #6B3FA0;
+    --jazz-sky: #5BB8D4;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,8 +36,8 @@
     position: fixed;
     inset: 0;
     background: 
-      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0,43,92,0.6) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(249,160,27,0.12) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(107,63,160,0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(91,184,212,0.1) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -73,15 +75,15 @@
   }
 
   .logo-note {
-    font-size: 64px;
-    line-height: 1;
-    margin-bottom: 8px;
-    filter: drop-shadow(0 0 20px rgba(249,160,27,0.4));
+    width: 130px;
+    height: 130px;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 0 24px rgba(107,63,160,0.7));
   }
 
   .logo-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 14vw, 80px);
+    font-size: clamp(52px, 14vw, 72px);
     letter-spacing: 4px;
     color: #fff;
     line-height: 0.9;
@@ -89,17 +91,19 @@
   }
 
   .logo-sub {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(18px, 5vw, 26px);
-    letter-spacing: 8px;
-    color: var(--jazz-gold);
-    margin-top: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(14px, 4vw, 18px);
+    letter-spacing: 1px;
+    color: var(--jazz-sky);
+    margin-top: 8px;
+    font-weight: 300;
+    font-style: italic;
   }
 
   .team-card {
     width: 100%;
     background: var(--surface);
-    border: 1px solid rgba(249,160,27,0.2);
+    border: 1px solid rgba(107,63,160,0.35);
     border-radius: var(--radius);
     padding: 28px 28px 24px;
     display: flex;
@@ -115,7 +119,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--jazz-navy), var(--jazz-gold), var(--jazz-navy));
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky), var(--jazz-purple));
   }
 
   .team-header {
@@ -127,7 +131,7 @@
   .team-logo {
     width: 56px;
     height: 56px;
-    background: var(--jazz-gold);
+    background: var(--jazz-purple);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -168,7 +172,7 @@
   .mastery-pct {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 28px;
-    color: var(--jazz-gold);
+    color: var(--jazz-sky);
   }
 
   .progress-bar {
@@ -181,7 +185,7 @@
   .progress-fill {
     height: 100%;
     border-radius: 99px;
-    background: linear-gradient(90deg, var(--jazz-navy), var(--jazz-gold));
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
     transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
@@ -215,8 +219,8 @@
   .btn-primary {
     width: 100%;
     padding: 18px;
-    background: var(--jazz-gold);
-    color: var(--jazz-navy);
+    background: var(--jazz-purple);
+    color: #fff;
     border: none;
     border-radius: var(--radius);
     font-family: 'Bebas Neue', sans-serif;
@@ -225,12 +229,12 @@
     cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
     animation: fadeUp 0.6s 0.3s ease both;
-    box-shadow: 0 4px 24px rgba(249,160,27,0.25);
+    box-shadow: 0 4px 24px rgba(107,63,160,0.4);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(249,160,27,0.4);
+    box-shadow: 0 8px 32px rgba(107,63,160,0.6);
   }
   .btn-primary:active { transform: translateY(0); }
 
@@ -269,7 +273,7 @@
     padding: 6px 12px;
     font-size: 13px;
     font-weight: 500;
-    color: var(--jazz-gold);
+    color: var(--jazz-sky);
   }
 
   .btn-ghost {
@@ -294,7 +298,7 @@
 
   .fc-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--jazz-navy), var(--jazz-gold));
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
     transition: width 0.4s ease;
   }
 
@@ -398,7 +402,7 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: top center;
-    border: 3px solid var(--jazz-gold);
+    border: 3px solid var(--jazz-purple);
     overflow: hidden;
   }
 
@@ -412,8 +416,8 @@
 
   .back-pos {
     display: inline-block;
-    background: var(--jazz-gold);
-    color: var(--jazz-navy);
+    background: var(--jazz-purple);
+    color: #fff;
     font-weight: 700;
     font-size: 13px;
     letter-spacing: 3px;
@@ -440,7 +444,7 @@
   .back-stat .sv { 
     font-family: 'Bebas Neue', sans-serif; 
     font-size: 18px; 
-    color: var(--jazz-gold);
+    color: var(--jazz-sky);
     display: block;
   }
 
@@ -581,7 +585,7 @@
 
   .overall-mastery {
     background: var(--surface);
-    border: 1px solid rgba(249,160,27,0.2);
+    border: 1px solid rgba(107,63,160,0.3);
     border-radius: var(--radius);
     padding: 24px;
     display: flex;
@@ -596,13 +600,13 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--jazz-navy), var(--jazz-gold));
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
   }
 
   .big-pct {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 64px;
-    color: var(--jazz-gold);
+    color: var(--jazz-sky);
     line-height: 1;
     flex-shrink: 0;
   }
@@ -681,8 +685,8 @@
     line-height: 1;
   }
 
-  .player-pct.high { color: #3dcc7a; }
-  .player-pct.mid { color: var(--jazz-gold); }
+  .player-pct.high { color: var(--jazz-sky); }
+  .player-pct.mid { color: var(--jazz-purple-light, #8B5CC8); }
   .player-pct.low { color: #e05555; }
   .player-pct.none { color: var(--muted); }
 
@@ -708,16 +712,16 @@
     transition: width 0.6s ease;
   }
 
-  .mini-fill.high { background: #3dcc7a; }
-  .mini-fill.mid { background: var(--jazz-gold); }
+  .mini-fill.high { background: var(--jazz-sky); }
+  .mini-fill.mid { background: #8B5CC8; }
   .mini-fill.low { background: #e05555; }
   .mini-fill.none { background: var(--muted); }
 
   .continue-btn {
     width: 100%;
     padding: 18px;
-    background: var(--jazz-gold);
-    color: var(--jazz-navy);
+    background: var(--jazz-purple);
+    color: #fff;
     border: none;
     border-radius: var(--radius);
     font-family: 'Bebas Neue', sans-serif;
@@ -725,15 +729,220 @@
     letter-spacing: 3px;
     cursor: pointer;
     transition: all 0.15s;
-    box-shadow: 0 4px 24px rgba(249,160,27,0.25);
+    box-shadow: 0 4px 24px rgba(107,63,160,0.4);
   }
 
   .continue-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(249,160,27,0.4);
+    box-shadow: 0 8px 32px rgba(107,63,160,0.6);
   }
 
-  /* Animations */
+  /* ===================== NAV PAGES ===================== */
+  .nav-header {
+    width: 100%;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,16,30,0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .nav-header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+
+  .nav-content {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-hint {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .nav-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .nav-btn {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.25);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    color: var(--text);
+  }
+
+  .nav-btn:hover {
+    border-color: var(--jazz-purple);
+    background: rgba(107,63,160,0.12);
+    transform: translateY(-2px);
+  }
+
+  .nav-btn-dim {
+    opacity: 0.55;
+    cursor: default;
+  }
+
+  .nav-btn-dim:hover {
+    transform: none;
+    border-color: rgba(107,63,160,0.25);
+    background: var(--surface);
+  }
+
+  .nav-btn-icon { font-size: 28px; flex-shrink: 0; }
+
+  .nav-btn-label {
+    flex: 1;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .nav-btn-arrow {
+    font-size: 18px;
+    color: var(--jazz-sky);
+  }
+
+  .nav-btn-tag {
+    font-size: 11px;
+    background: var(--surface2);
+    color: var(--muted);
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Teams grid */
+  .teams-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .division-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(107,63,160,0.5), transparent);
+    border-left: 4px solid var(--jazz-purple);
+    padding: 10px 16px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 20px;
+    margin-bottom: 6px;
+  }
+
+  .team-row-btn {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .coming-soon-btn {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .coming-soon-btn:hover {
+    transform: none;
+    background: var(--surface);
+    border-color: rgba(255,255,255,0.05);
+  }
+
+  .active-team-btn {
+    border-color: rgba(107,63,160,0.5);
+    background: rgba(107,63,160,0.1);
+  }
+
+  .active-team-btn:hover {
+    border-color: var(--jazz-purple);
+    background: rgba(107,63,160,0.2);
+    transform: translateY(-2px);
+  }
+
+  .cs-tag {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .active-tag {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--jazz-sky);
+    background: rgba(91,184,212,0.12);
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  /* Coming soon toast */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.4);
+    color: var(--text);
+    padding: 12px 24px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 200;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -777,27 +986,143 @@
 </head>
 <body>
 
-<!-- Feedback flash overlay -->
+<!-- Toast -->
+<div class="toast" id="toast">Coming Soon! 🚀</div>
+
+
 <div class="feedback-flash" id="feedbackFlash"></div>
 
 <!-- ============== HOME PAGE ============== -->
 <div class="page active" id="home">
   <div class="home-inner">
     <div class="logo-area">
-      <div class="logo-note">🎵</div>
-      <div class="logo-title">UTAH<br>JAZZ</div>
-      <div class="logo-sub">Roster Flashcards</div>
+      <div class="logo-title">SportsMind</div>
+      <div class="logo-sub">Where Fans Become Experts.</div>
     </div>
 
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="showPage('proSports')">
+        <div class="nav-btn-icon">🏆</div>
+        <div class="nav-btn-label">Pro Sports</div>
+        <div class="nav-btn-arrow">→</div>
+      </button>
+      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
+        <div class="nav-btn-icon">🎓</div>
+        <div class="nav-btn-label">College Sports</div>
+        <div class="nav-btn-tag">Coming Soon</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== PRO SPORTS PAGE ============== -->
+<div class="page" id="proSports">
+  <div class="nav-header">
+    <button class="btn-ghost" onclick="showPage('home')">← Back</button>
+    <div class="nav-header-title">Pro Sports</div>
+    <div></div>
+  </div>
+  <div class="nav-content">
+    <p class="nav-hint">Choose a league</p>
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="showPage('nbaTeams')">
+        <div class="nav-btn-icon">🏀</div>
+        <div class="nav-btn-label">NBA</div>
+        <div class="nav-btn-arrow">→</div>
+      </button>
+      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
+        <div class="nav-btn-icon">🏈</div>
+        <div class="nav-btn-label">NFL</div>
+        <div class="nav-btn-tag">Coming Soon</div>
+      </button>
+      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
+        <div class="nav-btn-icon">⚾</div>
+        <div class="nav-btn-label">MLB</div>
+        <div class="nav-btn-tag">Coming Soon</div>
+      </button>
+      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
+        <div class="nav-btn-icon">🏒</div>
+        <div class="nav-btn-label">NHL</div>
+        <div class="nav-btn-tag">Coming Soon</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== NBA TEAMS PAGE ============== -->
+<div class="page" id="nbaTeams">
+  <div class="nav-header">
+    <button class="btn-ghost" onclick="showPage('proSports')">← Back</button>
+    <div class="nav-header-title">NBA Teams</div>
+    <div></div>
+  </div>
+  <div class="nav-content">
+    <p class="nav-hint">Choose a team</p>
+    <div class="teams-grid">
+
+      <!-- WESTERN CONFERENCE -->
+      <div class="division-label">Western Conference</div>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Dallas Mavericks <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Denver Nuggets <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Golden State Warriors <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Houston Rockets <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> LA Clippers <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Los Angeles Lakers <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Memphis Grizzlies <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Minnesota Timberwolves <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> New Orleans Pelicans <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Oklahoma City Thunder <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Phoenix Suns <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Portland Trail Blazers <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Sacramento Kings <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> San Antonio Spurs <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn active-team-btn" onclick="goJazzTeam()"><span>🏀</span> Utah Jazz <span class="active-tag">Play Now ▶</span></button>
+
+      <!-- EASTERN CONFERENCE -->
+      <div class="division-label">Eastern Conference</div>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Atlanta Hawks <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Boston Celtics <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Brooklyn Nets <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Charlotte Hornets <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Chicago Bulls <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Cleveland Cavaliers <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Detroit Pistons <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Indiana Pacers <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Miami Heat <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Milwaukee Bucks <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> New York Knicks <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Orlando Magic <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Philadelphia 76ers <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Toronto Raptors <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Washington Wizards <span class="cs-tag">Soon</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== JAZZ TEAM PAGE ============== -->
+<div class="page" id="jazzTeam">
+  <div class="nav-header">
+    <button class="btn-ghost" onclick="showPage('nbaTeams')">← Back</button>
+    <div class="nav-header-title">Utah Jazz</div>
+    <div></div>
+  </div>
+  <div class="home-inner" style="padding-top:24px;">
     <div class="team-card">
       <div class="team-header">
-        <div class="team-logo">🏀</div>
+        <div class="team-logo"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
+          <circle cx="72" cy="142" r="48" fill="white"/>
+          <line x1="72" y1="94" x2="72" y2="190" stroke="#6B3FA0" stroke-width="6"/>
+          <line x1="24" y1="142" x2="120" y2="142" stroke="#6B3FA0" stroke-width="6"/>
+          <path d="M50,99 Q28,122 28,142 Q28,162 50,185" fill="none" stroke="#6B3FA0" stroke-width="6"/>
+          <path d="M94,99 Q116,122 116,142 Q116,162 94,185" fill="none" stroke="#6B3FA0" stroke-width="6"/>
+          <rect x="116" y="66" width="13" height="89" fill="white" rx="2"/>
+          <polygon points="129,36 194,16 194,66 129,66" fill="white"/>
+        </svg></div>
         <div class="team-info">
           <h2>Utah Jazz</h2>
           <p>2024–25 Roster · 18 Players</p>
         </div>
       </div>
-
       <div class="mastery-section">
         <div class="mastery-label">
           <span>Team Mastery</span>
@@ -807,7 +1132,6 @@
           <div class="progress-fill" id="homeMasteryBar" style="width:0%"></div>
         </div>
       </div>
-
       <div class="roster-count">
         <div class="stat-chip">
           <span class="n" id="homeLearnedCount">0</span>
@@ -823,7 +1147,6 @@
         </div>
       </div>
     </div>
-
     <button class="btn-primary" onclick="startLearning()">▶ &nbsp;Start Learning</button>
   </div>
 </div>
@@ -874,7 +1197,7 @@
       <h2>Round Complete!</h2>
       <p id="roundCompleteMsg">Keep going to improve your score.</p>
       <button class="btn-primary" style="width:100%;max-width:300px" onclick="startLearning()">▶ &nbsp;Next Round</button>
-      <button class="btn-ghost" style="margin-top:4px" onclick="goMastery()">View Progress</button>
+      <button class="btn-ghost" style="margin-top:4px" onclick="goJazzTeam()">← Back to Jazz</button>
     </div>
   </div>
 </div>
@@ -882,7 +1205,7 @@
 <!-- ============== MASTERY PAGE ============== -->
 <div class="page" id="mastery">
   <div class="mastery-header">
-    <button class="btn-ghost" onclick="goHome()">← Home</button>
+    <button class="btn-ghost" onclick="goJazzTeam()">← Back</button>
     <div class="mastery-title">Progress</div>
     <button class="btn-ghost" onclick="startLearning()">Study</button>
   </div>
@@ -913,22 +1236,22 @@
 const ROSTER = [
   { name:"Ace Bailey", position:"G", age:19, height:'6\'9"', college:"Rutgers", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
   { name:"Mo Bamba", position:"C", age:27, height:'7\'0"', college:"Texas", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277919.png" },
-  { name:"Isaiah Collier", position:"G", age:21, height:'6\'4"', college:"USC", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4683766.png" },
+  { name:"Isaiah Collier", position:"G", age:21, height:'6\'4"', college:"USC", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277919.png" },
   { name:"Kyle Filipowski", position:"F", age:22, height:'6\'11"', college:"Duke", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
   { name:"Keyonte George", position:"G", age:22, height:'6\'4"', college:"Baylor", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
   { name:"Elijah Harkless", position:"G", age:26, height:'6\'3"', college:"UNLV", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
-  { name:"Blake Hinson", position:"F", age:26, height:'6\'8"', college:"Pittsburgh", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396963.png" },
+  { name:"Blake Hinson", position:"F", age:26, height:'6\'8"', college:"Pittsburgh", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
   { name:"Jaren Jackson Jr.", position:"F", age:26, height:'6\'10"', college:"Michigan State", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
-  { name:"Walker Kessler", position:"C", age:24, height:'7\'2"', college:"Auburn", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433136.png" },
-  { name:"John Konchar", position:"G", age:29, height:'6\'5"', college:"Purdue Fort Wayne", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134932.png" },
-  { name:"Kevin Love", position:"F", age:37, height:'6\'10"', college:"UCLA", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3449.png" },
-  { name:"Lauri Markkanen", position:"F", age:28, height:'7\'1"', college:"Arizona", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4066336.png" },
-  { name:"Svi Mykhailiuk", position:"G", age:28, height:'6\'7"', college:"Kansas", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3133602.png" },
-  { name:"Jusuf Nurkic", position:"C", age:31, height:'6\'11"', college:"International", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3102530.png" },
-  { name:"Brice Sensabaugh", position:"F", age:22, height:'6\'6"', college:"Ohio State", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
+  { name:"Walker Kessler", position:"C", age:24, height:'7\'2"', college:"Auburn", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
+  { name:"John Konchar", position:"G", age:29, height:'6\'5"', college:"Purdue Fort Wayne", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
+  { name:"Kevin Love", position:"F", age:37, height:'6\'10"', college:"UCLA", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
+  { name:"Lauri Markkanen", position:"F", age:28, height:'7\'1"', college:"Arizona", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
+  { name:"Svi Mykhailiuk", position:"G", age:28, height:'6\'7"', college:"Kansas", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
+  { name:"Jusuf Nurkic", position:"C", age:31, height:'6\'11"', college:"International", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
+  { name:"Brice Sensabaugh", position:"F", age:22, height:'6\'6"', college:"Ohio State", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
   { name:"Oscar Tshiebwe", position:"C", age:26, height:'6\'8"', college:"Kentucky", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
-  { name:"Cody Williams", position:"F", age:21, height:'6\'8"', college:"Colorado", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397227.png" },
-  { name:"Vince Williams Jr.", position:"G", age:25, height:'6\'4"', college:"VCU", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" }
+  { name:"Cody Williams", position:"F", age:21, height:'6\'8"', college:"Colorado", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
+  { name:"Vince Williams Jr.", position:"G", age:25, height:'6\'4"', college:"VCU", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397441.png" }
 ];
 
 // ===================== STATE =====================
@@ -1001,6 +1324,17 @@ function showPage(id) {
 function goHome() {
   updateHomeStats();
   showPage('home');
+}
+
+function goJazzTeam() {
+  updateHomeStats();
+  showPage('jazzTeam');
+}
+
+function showComingSoon() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
 function goMastery() {
