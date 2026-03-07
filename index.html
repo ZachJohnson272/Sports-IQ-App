@@ -1,4 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jazz Roster — Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --jazz-navy: #6B3FA0;
+    --jazz-gold: #5BB8D4;
+    --jazz-note: #4a2570;
+    --bg: #0a0a12;
+    --surface: #13101e;
+    --surface2: #1c1730;
+    --text: #f0edf8;
+    --muted: #9b8ec4;
+    --radius: 16px;
+    --jazz-purple: #6B3FA0;
+    --jazz-sky: #5BB8D4;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
     background: 
       radial-gradient(ellipse 80% 50% at 20% -10%, rgba(107,63,160,0.55) 0%, transparent 60%),
       radial-gradient(ellipse 60% 40% at 80% 110%, rgba(91,184,212,0.1) 0%, transparent 60%);
@@ -23,7 +58,6 @@
 
   .home-inner {
     width: 100%;
-    max-width: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -968,16 +1002,16 @@
     border-radius: 8px;
     color: #1a1200;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px;
+    font-size: 11px;
     letter-spacing: 1px;
-    padding: 8px 14px;
+    padding: 5px 9px;
     cursor: pointer;
     transition: all 0.15s;
     white-space: nowrap;
     position: relative;
   }
   .lnr-daily:hover { filter: brightness(1.1); transform: translateY(-1px); }
-  .lnr-daily::before { content: '🔥'; margin-right: 3px; animation: flamePulse 1.4s ease-in-out infinite; display: inline-block; }
+  .lnr-daily::before { content: '🔥'; margin-right: 2px; animation: flamePulse 1.4s ease-in-out infinite; display: inline-block; font-size: 10px; }
 
   @keyframes flamePulse {
     0%,100% { transform: scale(1); }
@@ -1144,6 +1178,759 @@
   #dp-played-msg .ps  { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
   #dp-played-msg .pa  { background: var(--surface2); border-radius: 10px; padding: 12px; font-size: 14px; }
   #dp-played-msg .pa strong { color: var(--jazz-sky); }
+
+  /* ===================== DAILY XP GOAL ===================== */
+  .xp-card {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.35);
+    border-radius: var(--radius);
+    padding: 18px 20px 14px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s 0.15s ease both;
+    margin-bottom: 16px;
+  }
+  .xp-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #f7a54f, #f5c842, #5bb8f5);
+  }
+  .xp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .xp-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  .xp-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .xp-bar-wrap {
+    height: 10px;
+    background: var(--surface2);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 7px;
+  }
+  .xp-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #f7a54f, #f5c842);
+    transition: width 0.55s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+  }
+  .xp-bar-fill.done {
+    background: linear-gradient(90deg, #43e97b, #38f9d7);
+  }
+  .xp-bar-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    border-radius: 99px;
+  }
+  .xp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .xp-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #f5c842;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .xp-count.done { color: #43e97b; }
+  .xp-of { font-size: 12px; color: var(--muted); }
+  .xp-streak {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .xp-streak-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: #f5c842;
+  }
+  .xp-complete {
+    display: none;
+    margin-top: 10px;
+    background: linear-gradient(135deg, rgba(67,233,123,0.12), rgba(56,249,215,0.12));
+    border: 1px solid rgba(67,233,123,0.35);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #43e97b;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 0.3s ease both;
+  }
+  .xp-complete.show { display: flex; }
+  /* Floating XP pop */
+  .xp-pop {
+    position: fixed;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #f5c842;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    pointer-events: none;
+    z-index: 9999;
+    animation: xpFloat 1.3s ease forwards;
+  }
+  @keyframes xpFloat {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    60%  { opacity: 1; transform: translateY(-55px) scale(1.25); }
+    100% { opacity: 0; transform: translateY(-90px) scale(0.9); }
+  }
+
+  /* ===================== BOTTOM NAV ===================== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,10,22,0.97);
+    border-top: 1px solid rgba(107,63,160,0.3);
+    backdrop-filter: blur(16px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+    height: 64px;
+  }
+  .bn-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 12px;
+    transition: all 0.18s;
+    flex: 1;
+    position: relative;
+  }
+  .bn-tab:hover { background: rgba(107,63,160,0.15); }
+  .bn-tab.active { background: rgba(107,63,160,0.2); }
+  .bn-tab-icon {
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 0.18s;
+  }
+  .bn-tab.active .bn-tab-icon { transform: scale(1.15); }
+  .bn-tab-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.18s;
+    letter-spacing: 0.3px;
+  }
+  .bn-tab.active .bn-tab-label { color: var(--jazz-sky); }
+  .bn-tab-pip {
+    position: absolute;
+    top: 4px; right: 8px;
+    width: 7px; height: 7px;
+    background: #f5c842;
+    border-radius: 50%;
+    display: none;
+  }
+  .bn-tab-pip.show { display: block; }
+
+  /* Pages need bottom padding so content doesn't hide behind nav */
+  .page { padding-bottom: 72px !important; }
+  #home { padding-bottom: 72px !important; }
+
+  /* ===================== DASHBOARD (HOME) ===================== */
+  .dash-section { width: 100%; max-width: 420px; margin-bottom: 18px; }
+  .dash-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding: 0 2px;
+  }
+  .dash-level-card {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(107,63,160,0.35), rgba(91,184,212,0.15));
+    border: 1px solid rgba(107,63,160,0.5);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+    animation: fadeUp 0.4s ease both;
+  }
+  .dash-level-badge {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(107,63,160,0.4);
+  }
+  .dash-level-info { flex: 1; }
+  .dash-level-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1;
+  }
+  .dash-level-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .dash-level-xp-bar {
+    height: 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .dash-level-xp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6B3FA0, #5BB8D4);
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+  .dash-quick-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .dash-quick-btn {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.3);
+    border-radius: 14px;
+    padding: 14px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: fadeUp 0.4s ease both;
+  }
+  .dash-quick-btn:hover { border-color: var(--jazz-purple); transform: translateY(-2px); }
+  .dash-quick-btn:active { transform: translateY(0); }
+  .dqb-icon { font-size: 22px; }
+  .dqb-label { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1px; color: #fff; }
+  .dqb-sub { font-size: 11px; color: var(--muted); }
+
+  /* ===================== LEARN PAGE ===================== */
+  #learnPage .nav-header { position: sticky; top: 0; z-index: 10; background: rgba(10,10,18,0.95); backdrop-filter: blur(12px); }
+  .learn-section { width: 100%; max-width: 420px; padding: 0 20px; margin-bottom: 24px; }
+  .learn-section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .learn-card {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.3);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 10px;
+    animation: fadeUp 0.3s ease both;
+  }
+  .learn-card:hover { border-color: var(--jazz-purple); transform: translateX(4px); }
+  .learn-card-icon {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .learn-card-info { flex: 1; }
+  .learn-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; color: #fff; }
+  .learn-card-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .learn-card-arrow { color: var(--muted); font-size: 16px; }
+  .learn-card-badge {
+    background: linear-gradient(135deg, #f7a54f, #f5c842);
+    color: #1a1200;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 99px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===================== LEADERBOARD PAGE ===================== */
+  #leaderboardPage .nav-content { width: 100%; max-width: 420px; padding: 16px 20px; }
+  .lb-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .lb-tab {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .lb-tab.active { background: rgba(107,63,160,0.25); border-color: var(--jazz-purple); color: #fff; }
+  .lb-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.2);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    animation: fadeUp 0.3s ease both;
+    transition: all 0.15s;
+  }
+  .lb-row.me { border-color: var(--jazz-purple); background: rgba(107,63,160,0.15); }
+  .lb-rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--muted);
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .lb-rank.gold { color: #f5c842; }
+  .lb-rank.silver { color: #c0c0c0; }
+  .lb-rank.bronze { color: #cd7f32; }
+  .lb-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .lb-info { flex: 1; }
+  .lb-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .lb-xp-label { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .lb-xp-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: #f5c842;
+    letter-spacing: 1px;
+  }
+  .lb-coming {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .lb-coming-icon { font-size: 40px; margin-bottom: 12px; }
+  .lb-coming-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
+
+  /* ===================== PROGRESS PAGE ===================== */
+  #progressPage .nav-content { width: 100%; max-width: 420px; padding: 16px 20px; }
+  .prog-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .prog-stat-card {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.25);
+    border-radius: 14px;
+    padding: 16px 14px;
+    animation: fadeUp 0.3s ease both;
+  }
+  .prog-stat-card.full { grid-column: span 2; }
+  .psc-icon { font-size: 22px; margin-bottom: 8px; }
+  .psc-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1;
+  }
+  .psc-val.accent { color: var(--jazz-sky); }
+  .psc-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .prog-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin: 6px 0 10px;
+  }
+  .prog-xp-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 80px;
+    padding: 0 4px;
+    margin-bottom: 6px;
+  }
+  .prog-xp-bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+  .prog-xp-bar {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    background: linear-gradient(180deg, var(--jazz-sky), var(--jazz-purple));
+    min-height: 4px;
+    transition: height 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .prog-xp-day { font-size: 10px; color: var(--muted); }
+  .prog-dp-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .prog-dp-row {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.2);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.3s ease both;
+  }
+  .prog-dp-result { font-size: 20px; }
+  .prog-dp-info { flex: 1; }
+  .prog-dp-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .prog-dp-date { font-size: 11px; color: var(--muted); }
+  .prog-dp-pts {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: #f5c842;
+    letter-spacing: 1px;
+  }
+  .prog-empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; }
+
+  /* ===================== PROFILE PAGE ===================== */
+  #profilePage .nav-content { width: 100%; max-width: 420px; padding: 16px 20px; }
+  .prof-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0 24px;
+    animation: fadeUp 0.4s ease both;
+  }
+  .prof-avatar {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    margin-bottom: 12px;
+    box-shadow: 0 6px 24px rgba(107,63,160,0.5);
+  }
+  .prof-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: #fff;
+  }
+  .prof-title { font-size: 13px; color: var(--jazz-sky); margin-top: 3px; }
+  .prof-xp-total {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: #f5c842;
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+  .prof-stats-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .prof-stat {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.25);
+    border-radius: 14px;
+    padding: 14px 10px;
+    text-align: center;
+    animation: fadeUp 0.4s ease both;
+  }
+  .prof-stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .prof-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+.prof-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin: 4px 0 12px;
+  }
+  .settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .settings-row:last-child { border-bottom: none; }
+  .settings-row:hover .sr-label { color: #fff; }
+  .sr-left { display: flex; align-items: center; gap: 12px; }
+  .sr-icon { font-size: 18px; }
+  .sr-label { font-size: 14px; color: var(--muted); transition: color 0.15s; }
+  .sr-arrow { color: var(--muted); font-size: 14px; }
+
+  /* ===================== COMPLETED SPORTS DROPDOWN ===================== */
+  .sports-dropdown-wrap {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .sports-dropdown-btn {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.35);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: #fff;
+  }
+  .sports-dropdown-btn:hover { border-color: var(--jazz-purple); }
+  .sports-dropdown-btn.open { border-radius: 14px 14px 0 0; border-color: var(--jazz-purple); }
+  .sdb-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sdb-icon { font-size: 18px; }
+  .sdb-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+  .sdb-count {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 4px;
+  }
+  .sdb-arrow {
+    color: var(--muted);
+    font-size: 14px;
+    transition: transform 0.25s ease;
+  }
+  .sdb-arrow.open { transform: rotate(180deg); }
+  .sports-dropdown-body {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--jazz-purple);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    overflow: hidden;
+  }
+  .sports-dropdown-body.open { display: block; }
+  .sports-category {
+    padding: 10px 18px 4px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    background: rgba(107,63,160,0.08);
+  }
+  .sport-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.12s;
+  }
+  .sport-row:hover { background: rgba(107,63,160,0.1); }
+  .sport-row-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
+  .sport-row-info { flex: 1; }
+  .sport-row-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .sport-row-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .sport-row-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 99px;
+    flex-shrink: 0;
+  }
+  .sport-row-status.complete {
+    background: rgba(67,233,123,0.15);
+    color: #43e97b;
+    border: 1px solid rgba(67,233,123,0.3);
+  }
+  .sport-row-status.in-progress {
+    background: rgba(245,200,66,0.12);
+    color: #f5c842;
+    border: 1px solid rgba(245,200,66,0.3);
+  }
+  .sport-row-status.not-started {
+    background: rgba(155,142,196,0.1);
+    color: var(--muted);
+    border: 1px solid rgba(155,142,196,0.2);
+  }
+
+  /* ===================== HOME STAT BOXES ===================== */
+  .home-top {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+  }
+  .home-brand {
+    text-align: center;
+    padding: 6px 0 2px;
+  }
+  .home-brand-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 5vw, 26px);
+    letter-spacing: 6px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1;
+  }
+  .home-user-box {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.35);
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .home-user-icon {
+    font-size: 20px;
+  }
+  .home-user-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1;
+  }
+  .home-user-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+  .home-stat-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .hsb {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.3);
+    border-radius: 14px;
+    padding: 16px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    animation: fadeUp 0.4s ease both;
+  }
+  .hsb-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .hsb-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+  .hsb.streak  { border-color: rgba(245,200,66,0.4); }
+  .hsb.streak .hsb-val  { color: #f5c842; }
+  .hsb.xptotal { border-color: rgba(91,184,212,0.4); }
+  .hsb.xptotal .hsb-val { color: var(--jazz-sky); }
+  .hsb.dailyxp { border-color: rgba(192,132,252,0.4); }
+  .hsb.dailyxp .hsb-val { color: #c084fc; }
+  .home-level-box {
+    background: linear-gradient(135deg, rgba(107,63,160,0.35), rgba(91,184,212,0.15));
+    border: 1px solid rgba(107,63,160,0.5);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: fadeUp 0.4s 0.05s ease both;
+  }
+  .hlb-left { display: flex; align-items: center; gap: 14px; width: 100%; }
+  .hlb-num {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(107,63,160,0.4);
+  }
+  .hlb-info { flex: 1; }
+  .hlb-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1;
+  }
+  .hlb-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .hlb-bar-wrap {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .hlb-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6B3FA0, #5BB8D4);
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
 </style>
 </head>
 <body>
@@ -1196,23 +1983,74 @@
 
 <!-- ============== HOME PAGE ============== -->
 <div class="page active" id="home">
-  <div class="home-inner">
-    <div class="logo-area">
-      <div class="logo-title">SportsMind</div>
-      <div class="logo-sub">Where Fans Become Experts.</div>
+  <div class="home-inner" style="padding-top:14px;justify-content:flex-start;align-items:center;">
+
+    <div class="home-top">
+
+      <!-- SportsMind branding — narrow top strip -->
+      <div class="home-brand">
+        <div class="home-brand-title">S P O R T S M I N D</div>
+      </div>
+
+      <!-- Username box -->
+      <div class="home-user-box">
+        <div class="home-user-icon">👤</div>
+        <div>
+          <div class="home-user-name" id="homeUsername">SportsFan</div>
+          <div class="home-user-sub">Welcome back 👋</div>
+        </div>
+      </div>
+
+      <!-- Level box -->
+      <div class="home-level-box">
+        <div class="hlb-left">
+          <div class="hlb-num" id="hlbNum">1</div>
+          <div class="hlb-info">
+            <div class="hlb-name" id="hlbName">ROOKIE</div>
+            <div class="hlb-sub" id="hlbSub">Just Getting Started</div>
+            <div class="hlb-bar-wrap">
+              <div class="hlb-bar-fill" id="hlbFill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 stat boxes -->
+      <div class="home-stat-boxes">
+        <div class="hsb streak">
+          <div class="hsb-val" id="hsbStreak">0</div>
+          <div class="hsb-label">🔥 Streak</div>
+        </div>
+        <div class="hsb xptotal">
+          <div class="hsb-val" id="hsbXpTotal">0</div>
+          <div class="hsb-label">⚡ Total XP</div>
+        </div>
+        <div class="hsb dailyxp">
+          <div class="hsb-val" id="hsbDailyXp">0/50</div>
+          <div class="hsb-label">📅 Daily XP</div>
+        </div>
+      </div>
+
+      <!-- Daily XP Goal card -->
+      <div class="xp-card" id="xpCard" style="margin-bottom:0;">
+        <div class="xp-header">
+          <span class="xp-title">⚡ Daily Goal</span>
+          <span class="xp-subtitle">Earn 50 XP today</span>
+        </div>
+        <div class="xp-bar-wrap" style="height:12px;">
+          <div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div>
+        </div>
+        <div class="xp-row" style="margin-top:6px;">
+          <div>
+            <span class="xp-count" id="xpCount">0</span>
+            <span class="xp-of"> / 50 XP</span>
+          </div>
+        </div>
+        <div class="xp-complete" id="xpComplete">🏆 Daily Goal Complete! +10 Bonus XP awarded!</div>
+      </div>
+
     </div>
-    <div class="nav-btns">
-      <button class="nav-btn" onclick="showPage('proSports')">
-        <div class="nav-btn-icon">🏆</div>
-        <div class="nav-btn-label">Pro Sports</div>
-        <div class="nav-btn-arrow">→</div>
-      </button>
-      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
-        <div class="nav-btn-icon">🎓</div>
-        <div class="nav-btn-label">College Sports</div>
-        <div class="nav-btn-tag">Coming Soon</div>
-      </button>
-    </div>
+
   </div>
 </div>
 
@@ -1232,8 +2070,8 @@
         <div class="lnr-icon">🏀</div>
         <div class="lnr-label">NBA</div>
         <div class="lnr-btns">
-          <button class="lnr-quiz" onclick="showPage('nbaTeams')">Quiz →</button>
-          <button class="lnr-daily" onclick="dpOpen('nba')" id="dp-btn-nba">Daily</button>
+          <button class="lnr-quiz" onclick="showPage('nbaTeams')">Learn</button>
+          <button class="lnr-daily" onclick="dpOpen('nba')" id="dp-btn-nba"> Daily Quiz</button>
         </div>
       </div>
 
@@ -1243,7 +2081,7 @@
         <div class="lnr-label">NFL</div>
         <div class="lnr-btns">
           <button class="lnr-quiz lnr-quiz-dim" onclick="showComingSoon()">Soon</button>
-          <button class="lnr-daily" onclick="dpOpen('nfl')" id="dp-btn-nfl">Daily</button>
+          <button class="lnr-daily" onclick="dpOpen('nfl')" id="dp-btn-nfl"> Daily Quiz</button>
         </div>
       </div>
 
@@ -1253,7 +2091,7 @@
         <div class="lnr-label">MLB</div>
         <div class="lnr-btns">
           <button class="lnr-quiz lnr-quiz-dim" onclick="showComingSoon()">Soon</button>
-          <button class="lnr-daily" onclick="dpOpen('mlb')" id="dp-btn-mlb">Daily</button>
+          <button class="lnr-daily" onclick="dpOpen('mlb')" id="dp-btn-mlb"> Daily Quiz</button>
         </div>
       </div>
 
@@ -1263,10 +2101,56 @@
         <div class="lnr-label">NHL</div>
         <div class="lnr-btns">
           <button class="lnr-quiz lnr-quiz-dim" onclick="showComingSoon()">Soon</button>
-          <button class="lnr-daily" onclick="dpOpen('nhl')" id="dp-btn-nhl">Daily</button>
+          <button class="lnr-daily" onclick="dpOpen('nhl')" id="dp-btn-nhl"> Daily Quiz</button>
         </div>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- ============== COLLEGE SPORTS PAGE ============== -->
+<div class="page" id="collegeSports">
+  <div class="nav-header">
+    <button class="btn-ghost" onclick="showPage('home')">← Back</button>
+    <div class="nav-header-title">College Sports</div>
+    <div></div>
+  </div>
+  <div class="nav-content">
+    <p class="nav-hint">Choose a sport</p>
+    <div class="nav-btns">
+      <div class="league-nav-row" style="opacity:0.7;">
+        <div class="lnr-icon">🏀</div>
+        <div class="lnr-label">NCAA Basketball</div>
+        <div class="lnr-btns">
+          <button class="lnr-quiz lnr-quiz-dim" onclick="showComingSoon()">Soon</button>
+          <button class="lnr-daily lnr-quiz-dim" onclick="showComingSoon()"> Daily Quiz</button>
+        </div>
+      </div>
+      <div class="league-nav-row" style="opacity:0.7;">
+        <div class="lnr-icon">🏈</div>
+        <div class="lnr-label">NCAA Football</div>
+        <div class="lnr-btns">
+          <button class="lnr-quiz lnr-quiz-dim" onclick="showComingSoon()">Soon</button>
+          <button class="lnr-daily lnr-quiz-dim" onclick="showComingSoon()"> Daily Quiz</button>
+        </div>
+      </div>
+      <div class="league-nav-row" style="opacity:0.7;">
+        <div class="lnr-icon">⚾</div>
+        <div class="lnr-label">NCAA Baseball</div>
+        <div class="lnr-btns">
+          <button class="lnr-quiz lnr-quiz-dim" onclick="showComingSoon()">Soon</button>
+          <button class="lnr-daily lnr-quiz-dim" onclick="showComingSoon()"> Daily Quiz</button>
+        </div>
+      </div>
+      <div class="league-nav-row" style="opacity:0.7;">
+        <div class="lnr-icon">⚽</div>
+        <div class="lnr-label">NCAA Soccer</div>
+        <div class="lnr-btns">
+          <button class="lnr-quiz lnr-quiz-dim" onclick="showComingSoon()">Soon</button>
+          <button class="lnr-daily lnr-quiz-dim" onclick="showComingSoon()"> Daily Quiz</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1670,7 +2554,7 @@ function answerCard(correct) {
   cardAnswered = true;
   const playerIdx = deck[deckIndex];
   modeData[currentMode][playerIdx].attempts++;
-  if (correct) modeData[currentMode][playerIdx].correct++;
+  if (correct) { modeData[currentMode][playerIdx].correct++; xpAward(3); }
   const flash = document.getElementById('feedbackFlash');
   flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
   setTimeout(() => { flash.className = 'feedback-flash'; }, 350);
@@ -1709,7 +2593,7 @@ function submitMC() {
   const correct = selectedIdx === correctIdx;
   const playerIdx = deck[deckIndex];
   modeData[currentMode][playerIdx].attempts++;
-  if (correct) modeData[currentMode][playerIdx].correct++;
+  if (correct) { modeData[currentMode][playerIdx].correct++; xpAward(3); }
   document.querySelectorAll('.mc-btn').forEach(btn => {
     if (btn.textContent === ROSTER[correctIdx].name) btn.classList.add('correct');
     else if (btn.classList.contains('selected')) btn.classList.add('wrong');
@@ -1794,6 +2678,7 @@ function endRound() {
   const learned = getModeLearnedCount(currentMode);
   document.getElementById('roundComplete').classList.add('show');
   document.getElementById('roundCompleteMsg').textContent = `Mode mastery: ${m}% · ${learned}/18 players learned`;
+  if (m === 100) xpAward(15);
 }
 
 // ===================== DAILY PLAYER =====================
@@ -1928,6 +2813,7 @@ function dpSubmit() {
     document.getElementById('dp-guess').disabled = true;
     document.getElementById('dp-submit').disabled = true;
     dpSaveResult(true, pts);
+    xpAward(20);
     const s = dpLoadState(dpSport);
     document.getElementById('dp-stat-streak').textContent = s.streak;
     document.getElementById('dp-stat-best').textContent   = s.bestStreak;
@@ -2046,1903 +2932,670 @@ function dpUpdateBadges() {
 document.getElementById('dp-guess').addEventListener('keydown', e => { if (e.key === 'Enter') dpSubmit(); });
 document.getElementById('dp-overlay').addEventListener('click', e => { if (e.target === document.getElementById('dp-overlay')) dpClose(); });
 
-// ===================== INIT =====================
-updateHomeStats();
-dpUpdateBadges();
-</script>
-</body>
-</html>    inset: 0;
-    background: 
-      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(107,63,160,0.55) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(91,184,212,0.1) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .page { 
-    position: fixed; 
-    inset: 0; 
-    display: none; 
-    z-index: 1;
-    overflow-y: auto;
-  }
-  .page.active { display: flex; flex-direction: column; align-items: center; }
-
-  /* ===================== HOME PAGE ===================== */
-  #home {
-    justify-content: center;
-    padding: 40px 20px;
-  }
-
-  .home-inner {
-    width: 100%;
-    max-width: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-
-  .logo-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 48px;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .logo-note {
-    width: 130px;
-    height: 130px;
-    margin-bottom: 4px;
-    filter: drop-shadow(0 0 24px rgba(107,63,160,0.7));
-  }
-
-  .logo-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 14vw, 72px);
-    letter-spacing: 4px;
-    color: #fff;
-    line-height: 0.9;
-    text-align: center;
-  }
-
-  .logo-sub {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(14px, 4vw, 18px);
-    letter-spacing: 1px;
-    color: var(--jazz-sky);
-    margin-top: 8px;
-    font-weight: 300;
-    font-style: italic;
-  }
-
-  .team-card {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.35);
-    border-radius: var(--radius);
-    padding: 28px 28px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    animation: fadeUp 0.6s 0.15s ease both;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .team-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky), var(--jazz-purple));
-  }
-
-  .team-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .team-logo {
-    width: 56px;
-    height: 56px;
-    background: var(--jazz-purple);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    flex-shrink: 0;
-  }
-
-  .team-info h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 2px;
-    line-height: 1;
-  }
-
-  .team-info p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 3px;
-  }
-
-  .mastery-section { display: flex; flex-direction: column; gap: 10px; }
-
-  .mastery-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  .mastery-label span:first-child {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--muted);
-    font-weight: 500;
-  }
-
-  .mastery-pct {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--jazz-sky);
-  }
-
-  .progress-bar {
-    height: 6px;
-    background: var(--surface2);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    border-radius: 99px;
-    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
-    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .roster-count {
-    display: flex;
-    gap: 12px;
-  }
-
-  .stat-chip {
-    flex: 1;
-    background: var(--surface2);
-    border-radius: 10px;
-    padding: 10px 12px;
-    text-align: center;
-  }
-
-  .stat-chip .n {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    color: var(--jazz-gold);
-    display: block;
-  }
-
-  .stat-chip .l {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .btn-primary {
-    width: 100%;
-    padding: 18px;
-    background: var(--jazz-purple);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 3px;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    animation: fadeUp 0.6s 0.3s ease both;
-    box-shadow: 0 4px 24px rgba(107,63,160,0.4);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(107,63,160,0.6);
-  }
-  .btn-primary:active { transform: translateY(0); }
-
-  /* ===================== FLASHCARD PAGE ===================== */
-  #flashcards {
-    padding: 0;
-    justify-content: flex-start;
-  }
-
-  .fc-header {
-    width: 100%;
-    padding: 20px 24px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(13,31,51,0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .fc-progress-text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: var(--muted);
-  }
-
-  .fc-progress-text span { color: var(--jazz-gold); }
-
-  .fc-mastery-badge {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--jazz-sky);
-  }
-
-  .btn-ghost {
-    background: none;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: var(--muted);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-ghost:hover { border-color: var(--jazz-gold); color: var(--jazz-gold); }
-
-  .fc-progress-bar {
-    width: 100%;
-    height: 3px;
-    background: var(--surface2);
-  }
-
-  .fc-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
-    transition: width 0.4s ease;
-  }
-
-  .fc-arena {
-    flex: 1;
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 32px 24px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
-
-  /* Flashcard flip */
-  .card-scene {
-    width: 100%;
-    max-width: 360px;
-    aspect-ratio: 3/4;
-    perspective: 1000px;
-    cursor: pointer;
-  }
-
-  .card-3d {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-  }
-
-  .card-3d.flipped { transform: rotateY(180deg); }
-
-  .card-face {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(249,160,27,0.15);
-  }
-
-  .card-front {
-    background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .player-photo {
-    position: absolute;
-    inset: 0;
-    object-fit: cover;
-    object-position: top center;
-    width: 100%;
-    height: 100%;
-  }
-
-  .photo-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(6,17,31,0.9) 0%, rgba(6,17,31,0.3) 40%, transparent 70%);
-  }
-
-  .card-front-hint {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-  }
-
-  .flip-hint {
-    font-size: 12px;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-
-  .card-back {
-    background: var(--surface);
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 36px 28px;
-    gap: 16px;
-    text-align: center;
-  }
-
-  .back-photo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top center;
-    border: 3px solid var(--jazz-purple);
-    overflow: hidden;
-  }
-
-  .back-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(28px, 8vw, 38px);
-    letter-spacing: 2px;
-    line-height: 1.1;
-    color: #fff;
-  }
-
-  .back-pos {
-    display: inline-block;
-    background: var(--jazz-purple);
-    color: #fff;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: 99px;
-  }
-
-  .back-stats {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .back-stat {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 8px 14px;
-    text-align: center;
-  }
-
-  .back-stat .sv { 
-    font-family: 'Bebas Neue', sans-serif; 
-    font-size: 18px; 
-    color: var(--jazz-sky);
-    display: block;
-  }
-
-  .back-stat .sk { 
-    font-size: 10px; 
-    color: var(--muted); 
-    text-transform: uppercase; 
-    letter-spacing: 1px; 
-  }
-
-  .card-streak {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 6px 14px;
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  .card-streak span { color: var(--jazz-gold); font-weight: 600; }
-
-  /* Answer buttons */
-  .answer-btns {
-    display: flex;
-    gap: 16px;
-    width: 100%;
-    max-width: 360px;
-  }
-
-  .btn-miss {
-    flex: 1;
-    padding: 18px;
-    background: rgba(220,60,60,0.12);
-    border: 1.5px solid rgba(220,60,60,0.35);
-    color: #e05555;
-    border-radius: 14px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .btn-miss:hover {
-    background: rgba(220,60,60,0.22);
-    border-color: rgba(220,60,60,0.6);
-    transform: translateY(-2px);
-  }
-
-  .btn-got {
-    flex: 1;
-    padding: 18px;
-    background: rgba(30,160,80,0.12);
-    border: 1.5px solid rgba(30,160,80,0.35);
-    color: #3dcc7a;
-    border-radius: 14px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .btn-got:hover {
-    background: rgba(30,160,80,0.22);
-    border-color: rgba(30,160,80,0.6);
-    transform: translateY(-2px);
-  }
-
-  .btn-miss:active, .btn-got:active { transform: translateY(0); }
-
-  .answer-btns-hidden { opacity: 0.3; pointer-events: none; }
-
-  /* Flash feedback */
-  .feedback-flash {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .feedback-flash.show-miss { 
-    background: rgba(220,60,60,0.15); 
-    opacity: 1; 
-  }
-
-  .feedback-flash.show-got { 
-    background: rgba(30,160,80,0.12); 
-    opacity: 1; 
-  }
-
-  /* ===================== MASTERY PAGE ===================== */
-  #mastery {
-    justify-content: flex-start;
-    padding: 0;
-  }
-
-  .mastery-header {
-    width: 100%;
-    padding: 24px 24px 20px;
-    background: rgba(13,31,51,0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .mastery-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 3px;
-  }
-
-  .mastery-content {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 24px 20px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .overall-mastery {
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.3);
-    border-radius: var(--radius);
-    padding: 24px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .overall-mastery::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
-  }
-
-  .big-pct {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 64px;
-    color: var(--jazz-sky);
-    line-height: 1;
-    flex-shrink: 0;
-  }
-
-  .overall-details { flex: 1; }
-
-  .overall-details h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 2px;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  .overall-details .progress-bar { margin-bottom: 8px; }
-
-  .overall-details p {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .roster-list { display: flex; flex-direction: column; gap: 10px; }
-
-  .roster-list h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: 3px;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
-
-  .player-row {
-    background: var(--surface);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    border: 1px solid rgba(255,255,255,0.04);
-    transition: border-color 0.2s;
-  }
-
-  .player-row:hover { border-color: rgba(249,160,27,0.2); }
-
-  .player-thumb {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top center;
-    flex-shrink: 0;
-    border: 2px solid var(--surface2);
-  }
-
-  .player-row-info { flex: 1; min-width: 0; }
-
-  .player-row-name {
-    font-weight: 600;
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .player-row-pos {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 1px;
-  }
-
-  .player-row-right { text-align: right; flex-shrink: 0; }
-
-  .player-pct {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    line-height: 1;
-  }
-
-  .player-pct.high { color: var(--jazz-sky); }
-  .player-pct.mid { color: var(--jazz-purple-light, #8B5CC8); }
-  .player-pct.low { color: #e05555; }
-  .player-pct.none { color: var(--muted); }
-
-  .player-attempts {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .mini-bar {
-    width: 60px;
-    height: 4px;
-    background: var(--surface2);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-top: 4px;
-    margin-left: auto;
-  }
-
-  .mini-fill {
-    height: 100%;
-    border-radius: 99px;
-    transition: width 0.6s ease;
-  }
-
-  .mini-fill.high { background: var(--jazz-sky); }
-  .mini-fill.mid { background: #8B5CC8; }
-  .mini-fill.low { background: #e05555; }
-  .mini-fill.none { background: var(--muted); }
-
-  .continue-btn {
-    width: 100%;
-    padding: 18px;
-    background: var(--jazz-purple);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 3px;
-    cursor: pointer;
-    transition: all 0.15s;
-    box-shadow: 0 4px 24px rgba(107,63,160,0.4);
-  }
-
-  .continue-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(107,63,160,0.6);
-  }
-
-  /* ===================== NAV PAGES ===================== */
-  .nav-header {
-    width: 100%;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(13,16,30,0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .nav-header-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 3px;
-  }
-
-  .nav-content {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 28px 20px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .nav-hint {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
-
-  .nav-btns {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-    animation: fadeUp 0.4s ease both;
-  }
-
-  .nav-btn {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.25);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-    color: var(--text);
-  }
-
-  .nav-btn:hover {
-    border-color: var(--jazz-purple);
-    background: rgba(107,63,160,0.12);
-    transform: translateY(-2px);
-  }
-
-  .nav-btn-dim {
-    opacity: 0.55;
-    cursor: default;
-  }
-
-  .nav-btn-dim:hover {
-    transform: none;
-    border-color: rgba(107,63,160,0.25);
-    background: var(--surface);
-  }
-
-  .nav-btn-icon { font-size: 28px; flex-shrink: 0; }
-
-  .nav-btn-label {
-    flex: 1;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 2px;
-  }
-
-  .nav-btn-arrow {
-    font-size: 18px;
-    color: var(--jazz-sky);
-  }
-
-  .nav-btn-tag {
-    font-size: 11px;
-    background: var(--surface2);
-    color: var(--muted);
-    padding: 3px 10px;
-    border-radius: 99px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  /* Teams grid */
-  .teams-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .division-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 3px;
-    color: #fff;
-    background: linear-gradient(90deg, rgba(107,63,160,0.5), transparent);
-    border-left: 4px solid var(--jazz-purple);
-    padding: 10px 16px;
-    border-radius: 0 8px 8px 0;
-    margin-top: 20px;
-    margin-bottom: 6px;
-  }
-
-  .team-row-btn {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-  }
-
-  .coming-soon-btn {
-    opacity: 0.45;
-    cursor: default;
-  }
-
-  .coming-soon-btn:hover {
-    transform: none;
-    background: var(--surface);
-    border-color: rgba(255,255,255,0.05);
-  }
-
-  .active-team-btn {
-    border-color: rgba(107,63,160,0.5);
-    background: rgba(107,63,160,0.1);
-  }
-
-  .active-team-btn:hover {
-    border-color: var(--jazz-purple);
-    background: rgba(107,63,160,0.2);
-    transform: translateY(-2px);
-  }
-
-  .cs-tag {
-    margin-left: auto;
-    font-size: 10px;
-    color: var(--muted);
-    background: var(--surface2);
-    padding: 2px 8px;
-    border-radius: 99px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .active-tag {
-    margin-left: auto;
-    font-size: 11px;
-    color: var(--jazz-sky);
-    background: rgba(91,184,212,0.12);
-    padding: 3px 10px;
-    border-radius: 99px;
-    letter-spacing: 1px;
-    font-weight: 600;
-  }
-
-  /* Coming soon toast */
-  .toast {
-    position: fixed;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.4);
-    color: var(--text);
-    padding: 12px 24px;
-    border-radius: 99px;
-    font-size: 14px;
-    font-weight: 500;
-    z-index: 200;
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    white-space: nowrap;
-  }
-
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes cardIn {
-    from { opacity: 0; transform: scale(0.92) translateY(16px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .card-scene.entering { animation: cardIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-
-  /* Completion state */
-  .round-complete {
-    text-align: center;
-    padding: 40px 24px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    animation: fadeUp 0.4s ease both;
-  }
-
-  .round-complete.show { display: flex; }
-
-  .trophy { font-size: 64px; }
-
-  .round-complete h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 2px;
-  }
-
-  .round-complete p { color: var(--muted); font-size: 15px; }
-
-  /* ===================== MODE SELECT ===================== */
-  .mode-grid { display: flex; flex-direction: column; gap: 12px; }
-
-  .mode-card {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.2);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-    color: var(--text);
-  }
-
-  .mode-card:hover {
-    border-color: var(--jazz-purple);
-    background: rgba(107,63,160,0.1);
-    transform: translateY(-2px);
-  }
-
-  .mode-icon { font-size: 26px; flex-shrink: 0; }
-
-  .mode-info { flex: 1; }
-
-  .mode-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 1px;
-    line-height: 1.1;
-  }
-
-  .mode-desc {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .mode-stats-mini {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    color: var(--jazz-sky);
-    flex-shrink: 0;
-  }
-
-  /* Card front text (for name→pos and stats→player modes) */
-  .card-front-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    gap: 12px;
-    z-index: 1;
-  }
-
-  .front-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--muted);
-  }
-
-  .front-main {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(26px, 7vw, 36px);
-    letter-spacing: 2px;
-    text-align: center;
-    color: #fff;
-    line-height: 1.1;
-  }
-
-  .front-stat-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 8px;
-  }
-
-  .front-stat-chip {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 8px 14px;
-    text-align: center;
-  }
-
-  .front-stat-chip .fsv {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    color: var(--jazz-sky);
-    display: block;
-  }
-
-  .front-stat-chip .fsk {
-    font-size: 10px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* Multiple choice */
-  .mc-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .mc-btn {
-    background: var(--surface);
-    border: 2px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 14px 10px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  .mc-btn:hover { border-color: var(--jazz-purple); background: rgba(107,63,160,0.1); }
-  .mc-btn.selected { border-color: var(--jazz-sky); background: rgba(91,184,212,0.1); }
-  .mc-btn.correct { border-color: #3dcc7a; background: rgba(61,204,122,0.15); color: #3dcc7a; }
-  .mc-btn.wrong { border-color: #e05555; background: rgba(224,85,85,0.15); color: #e05555; }
-
-  /* Lineup mode */
-  .lineup-grid { display: flex; flex-direction: column; gap: 10px; }
-
-  .lineup-row {
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.2);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .lineup-pos {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    color: var(--jazz-sky);
-    width: 40px;
-    flex-shrink: 0;
-  }
-
-  .lineup-select {
-    flex: 1;
-    background: var(--surface2);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    padding: 8px 12px;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .lineup-result-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    padding: 4px 0;
-  }
-
-  .lineup-result-row .check { color: #3dcc7a; }
-  .lineup-result-row .cross { color: #e05555; }
-
-  /* ===================== END NEW CSS ===================== */
-
-    .btn-miss, .btn-got { font-size: 16px; padding: 14px; }
-    .card-scene { max-width: 300px; }
-  }
-</style>
-</head>
-<body>
-
-<!-- Toast -->
-<div class="toast" id="toast">Coming Soon! 🚀</div>
-
-
-<div class="feedback-flash" id="feedbackFlash"></div>
-
-<!-- ============== HOME PAGE ============== -->
-<div class="page active" id="home">
-  <div class="home-inner">
-    <div class="logo-area">
-      <div class="logo-title">SportsMind</div>
-      <div class="logo-sub">Where Fans Become Experts.</div>
-    </div>
-
-    <div class="nav-btns">
-      <button class="nav-btn" onclick="showPage('proSports')">
-        <div class="nav-btn-icon">🏆</div>
-        <div class="nav-btn-label">Pro Sports</div>
-        <div class="nav-btn-arrow">→</div>
-      </button>
-      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
-        <div class="nav-btn-icon">🎓</div>
-        <div class="nav-btn-label">College Sports</div>
-        <div class="nav-btn-tag">Coming Soon</div>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ============== PRO SPORTS PAGE ============== -->
-<div class="page" id="proSports">
-  <div class="nav-header">
-    <button class="btn-ghost" onclick="showPage('home')">← Back</button>
-    <div class="nav-header-title">Pro Sports</div>
-    <div></div>
-  </div>
-  <div class="nav-content">
-    <p class="nav-hint">Choose a league</p>
-    <div class="nav-btns">
-      <button class="nav-btn" onclick="showPage('nbaTeams')">
-        <div class="nav-btn-icon">🏀</div>
-        <div class="nav-btn-label">NBA</div>
-        <div class="nav-btn-arrow">→</div>
-      </button>
-      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
-        <div class="nav-btn-icon">🏈</div>
-        <div class="nav-btn-label">NFL</div>
-        <div class="nav-btn-tag">Coming Soon</div>
-      </button>
-      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
-        <div class="nav-btn-icon">⚾</div>
-        <div class="nav-btn-label">MLB</div>
-        <div class="nav-btn-tag">Coming Soon</div>
-      </button>
-      <button class="nav-btn nav-btn-dim" onclick="showComingSoon()">
-        <div class="nav-btn-icon">🏒</div>
-        <div class="nav-btn-label">NHL</div>
-        <div class="nav-btn-tag">Coming Soon</div>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ============== NBA TEAMS PAGE ============== -->
-<div class="page" id="nbaTeams">
-  <div class="nav-header">
-    <button class="btn-ghost" onclick="showPage('proSports')">← Back</button>
-    <div class="nav-header-title">NBA Teams</div>
-    <div></div>
-  </div>
-  <div class="nav-content">
-    <p class="nav-hint">Choose a team</p>
-    <div class="teams-grid">
-
-      <!-- WESTERN CONFERENCE -->
-      <div class="division-label">Western Conference</div>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Dallas Mavericks <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Denver Nuggets <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Golden State Warriors <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Houston Rockets <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> LA Clippers <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Los Angeles Lakers <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Memphis Grizzlies <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Minnesota Timberwolves <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> New Orleans Pelicans <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Oklahoma City Thunder <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Phoenix Suns <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Portland Trail Blazers <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Sacramento Kings <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> San Antonio Spurs <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn active-team-btn" onclick="goJazzTeam()"><span>🏀</span> Utah Jazz <span class="active-tag">Start Grinding 💪</span></button>
-
-      <!-- EASTERN CONFERENCE -->
-      <div class="division-label">Eastern Conference</div>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Atlanta Hawks <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Boston Celtics <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Brooklyn Nets <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Charlotte Hornets <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Chicago Bulls <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Cleveland Cavaliers <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Detroit Pistons <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Indiana Pacers <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Miami Heat <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Milwaukee Bucks <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> New York Knicks <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Orlando Magic <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Philadelphia 76ers <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Toronto Raptors <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Washington Wizards <span class="cs-tag">Soon</span></button>
-    </div>
-  </div>
-</div>
-
-<!-- ============== JAZZ TEAM PAGE ============== -->
-<div class="page" id="jazzTeam">
-  <div class="nav-header">
-    <button class="btn-ghost" onclick="showPage('nbaTeams')">← Back</button>
-    <div class="nav-header-title">Utah Jazz</div>
-    <div></div>
-  </div>
-  <div class="home-inner" style="padding-top:24px;">
-    <div class="team-card">
-      <div class="team-header">
-        <div class="team-logo"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
-          <circle cx="72" cy="142" r="48" fill="white"/>
-          <line x1="72" y1="94" x2="72" y2="190" stroke="#6B3FA0" stroke-width="6"/>
-          <line x1="24" y1="142" x2="120" y2="142" stroke="#6B3FA0" stroke-width="6"/>
-          <path d="M50,99 Q28,122 28,142 Q28,162 50,185" fill="none" stroke="#6B3FA0" stroke-width="6"/>
-          <path d="M94,99 Q116,122 116,142 Q116,162 94,185" fill="none" stroke="#6B3FA0" stroke-width="6"/>
-          <rect x="116" y="66" width="13" height="89" fill="white" rx="2"/>
-          <polygon points="129,36 194,16 194,66 129,66" fill="white"/>
-        </svg></div>
-        <div class="team-info">
-          <h2>Utah Jazz</h2>
-          <p>2024–25 Roster · 18 Players</p>
-        </div>
-      </div>
-      <div class="mastery-section">
-        <div class="mastery-label">
-          <span>Team Mastery</span>
-          <div class="mastery-pct" id="homeMasteryPct">0%</div>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="homeMasteryBar" style="width:0%"></div>
-        </div>
-      </div>
-      <div class="roster-count">
-        <div class="stat-chip">
-          <span class="n" id="homeLearnedCount">0</span>
-          <span class="l">Learned</span>
-        </div>
-        <div class="stat-chip">
-          <span class="n">18</span>
-          <span class="l">Total</span>
-        </div>
-        <div class="stat-chip">
-          <span class="n" id="homeTotalAttempts">0</span>
-          <span class="l">Attempts</span>
-        </div>
-      </div>
-    </div>
-    <button class="btn-primary" onclick="showPage('modeSelect')">💪 &nbsp;Start Grinding</button>
-  </div>
-</div>
-
-<!-- ============== MODE SELECT PAGE ============== -->
-<div class="page" id="modeSelect">
-  <div class="nav-header">
-    <button class="btn-ghost" onclick="goJazzTeam()">← Back</button>
-    <div class="nav-header-title">Choose Mode</div>
-    <div></div>
-  </div>
-  <div class="nav-content">
-    <p class="nav-hint">Pick a study mode</p>
-    <div class="mode-grid">
-
-      <button class="mode-card" onclick="startMode('photoName')">
-        <div class="mode-icon">📸</div>
-        <div class="mode-info">
-          <div class="mode-title">Photo → Name</div>
-          <div class="mode-desc">See the face, guess the name & position</div>
-        </div>
-        <div class="mode-stats-mini" id="modeStats_photoName">0/18</div>
-      </button>
-
-      <button class="mode-card" onclick="startMode('namePos')">
-        <div class="mode-icon">📋</div>
-        <div class="mode-info">
-          <div class="mode-title">Name → Position</div>
-          <div class="mode-desc">See the name, guess the position & photo</div>
-        </div>
-        <div class="mode-stats-mini" id="modeStats_namePos">0/18</div>
-      </button>
-
-      <button class="mode-card" onclick="startMode('statsPlayer')">
-        <div class="mode-icon">📊</div>
-        <div class="mode-info">
-          <div class="mode-title">Stats → Player</div>
-          <div class="mode-desc">See height, age, college — guess who</div>
-        </div>
-        <div class="mode-stats-mini" id="modeStats_statsPlayer">0/18</div>
-      </button>
-
-      <button class="mode-card" onclick="startMode('multiChoice')">
-        <div class="mode-icon">🔤</div>
-        <div class="mode-info">
-          <div class="mode-title">Multiple Choice</div>
-          <div class="mode-desc">4 options — pick the right player</div>
-        </div>
-        <div class="mode-stats-mini" id="modeStats_multiChoice">0/18</div>
-      </button>
-
-      <button class="mode-card" onclick="startMode('lineup')">
-        <div class="mode-icon">📝</div>
-        <div class="mode-info">
-          <div class="mode-title">Guess the Lineup</div>
-          <div class="mode-desc">Fill in the starting 5 by position</div>
-        </div>
-        <div class="mode-stats-mini" id="modeStats_lineup">—</div>
-      </button>
-
-    </div>
-  </div>
-</div>
-
-<!-- ============== UNIVERSAL FLASHCARD PAGE ============== -->
-<div class="page" id="flashcards">
-  <div class="fc-header">
-    <div class="fc-progress-text">
-      <span id="fcCurrent">1</span> / <span id="fcTotal">18</span>
-    </div>
-    <div class="fc-mastery-badge" id="fcMasteryBadge">0% mastered</div>
-    <button class="btn-ghost" onclick="showPage('modeSelect')">✕ Exit</button>
-  </div>
-  <div class="fc-progress-bar">
-    <div class="fc-progress-fill" id="fcProgressBar" style="width:0%"></div>
-  </div>
-
-  <div class="fc-arena">
-
-    <!-- PHOTO→NAME / NAME→POS / STATS→PLAYER card -->
-    <div class="card-scene" id="cardScene" onclick="flipCard()">
-      <div class="card-3d" id="card3d">
-        <div class="card-face card-front">
-          <img class="player-photo" id="playerPhoto" src="" alt="" style="display:none">
-          <div class="photo-overlay" id="photoOverlay" style="display:none"></div>
-          <div class="card-front-text" id="cardFrontText" style="display:none"></div>
-          <div class="card-front-hint">
-            <div class="flip-hint">↕ Tap to reveal</div>
-          </div>
-        </div>
-        <div class="card-face card-back">
-          <img class="back-photo" id="backPhoto" src="" alt="">
-          <div class="back-name" id="backName">—</div>
-          <div class="back-pos" id="backPos">—</div>
-          <div class="back-stats" id="backStats"></div>
-          <div class="card-streak" id="cardStreak">First attempt</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Answer buttons (photo/name/stats modes) -->
-    <div class="answer-btns answer-btns-hidden" id="answerBtns">
-      <button class="btn-miss" onclick="answerCard(false)">❌ &nbsp;Missed it</button>
-      <button class="btn-got" onclick="answerCard(true)">✅ &nbsp;Got it</button>
-    </div>
-
-    <!-- Multiple Choice options -->
-    <div id="mcOptions" style="display:none;width:100%;max-width:380px;">
-      <div class="mc-grid" id="mcGrid"></div>
-      <button class="btn-primary" id="mcSubmit" onclick="submitMC()" style="margin-top:14px;display:none;">Submit Answer</button>
-    </div>
-
-    <!-- Lineup mode -->
-    <div id="lineupMode" style="display:none;width:100%;max-width:420px;">
-      <div class="lineup-grid" id="lineupGrid"></div>
-      <button class="btn-primary" id="lineupSubmit" onclick="submitLineup()" style="margin-top:14px;">Check Lineup</button>
-      <div id="lineupResult" style="display:none;margin-top:12px;text-align:center;"></div>
-    </div>
-
-    <!-- Round complete -->
-    <div class="round-complete" id="roundComplete">
-      <div class="trophy">🏆</div>
-      <h2>Round Complete!</h2>
-      <p id="roundCompleteMsg">Keep going to improve your score.</p>
-      <button class="btn-primary" style="width:100%;max-width:300px" onclick="restartCurrentMode()">▶ &nbsp;Next Round</button>
-      <button class="btn-ghost" style="margin-top:8px" onclick="showPage('modeSelect')">← Change Mode</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- ============== MASTERY PAGE ============== -->
-<div class="page" id="mastery">
-  <div class="mastery-header">
-    <button class="btn-ghost" onclick="goJazzTeam()">← Back</button>
-    <div class="mastery-title">Progress</div>
-    <button class="btn-ghost" onclick="startLearning()">Study</button>
-  </div>
-
-  <div class="mastery-content">
-    <div class="overall-mastery">
-      <div class="big-pct" id="masteryBigPct">0%</div>
-      <div class="overall-details">
-        <h3>Team Mastery</h3>
-        <div class="progress-bar">
-          <div class="progress-fill" id="masteryBar" style="width:0%"></div>
-        </div>
-        <p id="masteryDetail">0 of 18 players mastered</p>
-      </div>
-    </div>
-
-    <div class="roster-list">
-      <h3>Per-Player Breakdown</h3>
-      <div id="playerRows"></div>
-    </div>
-
-    <button class="continue-btn" onclick="startLearning()">▶ &nbsp;Continue Training</button>
-  </div>
-</div>
 
-<script>
-// ===================== DATA =====================
-const ROSTER = [
-  { name:"Ace Bailey", position:"G", age:19, height:'6\'9"', college:"Rutgers", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
-  { name:"Mo Bamba", position:"C", age:27, height:'7\'0"', college:"Texas", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277919.png" },
-  { name:"Isaiah Collier", position:"G", age:21, height:'6\'4"', college:"USC", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277919.png" },
-  { name:"Kyle Filipowski", position:"F", age:22, height:'6\'11"', college:"Duke", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
-  { name:"Keyonte George", position:"G", age:22, height:'6\'4"', college:"Baylor", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
-  { name:"Elijah Harkless", position:"G", age:26, height:'6\'3"', college:"UNLV", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
-  { name:"Blake Hinson", position:"F", age:26, height:'6\'8"', college:"Pittsburgh", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
-  { name:"Jaren Jackson Jr.", position:"F", age:26, height:'6\'10"', college:"Michigan State", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
-  { name:"Walker Kessler", position:"C", age:24, height:'7\'2"', college:"Auburn", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
-  { name:"John Konchar", position:"G", age:29, height:'6\'5"', college:"Purdue Fort Wayne", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
-  { name:"Kevin Love", position:"F", age:37, height:'6\'10"', college:"UCLA", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
-  { name:"Lauri Markkanen", position:"F", age:28, height:'7\'1"', college:"Arizona", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
-  { name:"Svi Mykhailiuk", position:"G", age:28, height:'6\'7"', college:"Kansas", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
-  { name:"Jusuf Nurkic", position:"C", age:31, height:'6\'11"', college:"International", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
-  { name:"Brice Sensabaugh", position:"F", age:22, height:'6\'6"', college:"Ohio State", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
-  { name:"Oscar Tshiebwe", position:"C", age:26, height:'6\'8"', college:"Kentucky", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
-  { name:"Cody Williams", position:"F", age:21, height:'6\'8"', college:"Colorado", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
-  { name:"Vince Williams Jr.", position:"G", age:25, height:'6\'4"', college:"VCU", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397441.png" }
+// ===================== DAILY XP SYSTEM =====================
+const XP_GOAL = 50;
+const XP_BONUS = 10;
+
+function xpDayKey() {
+  const d = new Date();
+  return 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
+}
+
+function xpLoad() {
+  try { return JSON.parse(localStorage.getItem(xpDayKey()) || 'null') || {xp:0,done:false,bonusGiven:false}; }
+  catch { return {xp:0,done:false,bonusGiven:false}; }
+}
+
+function xpSave(data) {
+  localStorage.setItem(xpDayKey(), JSON.stringify(data));
+}
+
+function xpStreakLoad() {
+  try { return JSON.parse(localStorage.getItem('xp_streak') || '{}'); }
+  catch { return {}; }
+}
+
+function xpStreakSave(s) { localStorage.setItem('xp_streak', JSON.stringify(s)); }
+
+function xpGetStreak() { return xpStreakLoad().count || 0; }
+
+function xpStreakUpdate() {
+  const s = xpStreakLoad();
+  const today = xpDayKey();
+  if (s.lastDay === today) return; // already updated today
+  const d = new Date(); d.setDate(d.getDate() - 1);
+  const yesterday = 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
+  s.count = (s.lastDay === yesterday) ? (s.count || 0) + 1 : 1;
+  s.lastDay = today;
+  xpStreakSave(s);
+}
+
+function xpAward(amount) {
+  const data = xpLoad();
+  if (data.done && data.bonusGiven && amount <= 0) return;
+  data.xp = (data.xp || 0) + amount;
+  if (!data.done && data.xp >= XP_GOAL) {
+    data.done = true;
+    if (!data.bonusGiven) {
+      data.bonusGiven = true;
+      data.xp += XP_BONUS;
+      xpStreakUpdate();
+    }
+  }
+  xpSave(data);
+  xpRender();
+  xpPop('+' + amount + ' XP');
+}
+
+function xpRender() {
+  refreshHome();
+  const data = xpLoad();
+  const xp = data.xp || 0;
+  const pct = Math.min((xp / XP_GOAL) * 100, 100);
+  const fill = document.getElementById('xpBarFill');
+  const count = document.getElementById('xpCount');
+  const complete = document.getElementById('xpComplete');
+  const streak = document.getElementById('xpStreakNum');
+  if (!fill) return;
+  fill.style.width = pct + '%';
+  if (data.done) fill.classList.add('done'); else fill.classList.remove('done');
+  count.textContent = xp;
+  if (data.done) count.classList.add('done'); else count.classList.remove('done');
+  if (data.done) complete.classList.add('show'); else complete.classList.remove('show');
+  if (streak) streak.textContent = xpGetStreak();
+}
+
+function xpPop(text) {
+  const el = document.createElement('div');
+  el.className = 'xp-pop';
+  el.textContent = text;
+  el.style.left = (window.innerWidth / 2 - 35) + 'px';
+  el.style.top = '110px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1400);
+}
+
+
+// ===================== BOTTOM NAV + NEW PAGES =====================
+
+// Level system
+const LEVELS = [
+  { min:0,    name:'Rookie',      title:'Just Getting Started' },
+  { min:100,  name:'Fan',         title:'Sports Enthusiast' },
+  { min:300,  name:'Follower',    title:'Regular Viewer' },
+  { min:600,  name:'Supporter',   title:'Dedicated Fan' },
+  { min:1000, name:'Analyst',     title:'Breaking It Down' },
+  { min:1500, name:'Scout',       title:'Eye for Talent' },
+  { min:2200, name:'Expert',      title:'Deep Knowledge' },
+  { min:3000, name:'Guru',        title:'Sports Sage' },
+  { min:4000, name:'Legend',      title:'Hall of Fame Mind' },
 ];
 
-const posMap = { G: 'Guard', F: 'Forward', C: 'Center' };
-const posFullMap = { G: 'Guard', F: 'Forward', C: 'Center' };
-
-// Per-mode mastery storage
-const modes = ['photoName', 'namePos', 'statsPlayer', 'multiChoice', 'lineup'];
-let modeData = {};
-modes.forEach(m => {
-  modeData[m] = ROSTER.map((p, i) => ({ idx: i, correct: 0, attempts: 0 }));
-});
-let lineupAttempts = 0, lineupCorrect = 0;
-
-// Current session state
-let currentMode = null;
-let deck = [], deckIndex = 0;
-let isFlipped = false, cardAnswered = false;
-let mcSelected = null;
-
-// ===================== HELPERS =====================
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+function xpGetTotal() {
+  let total = 0;
+  // Sum all daily XP entries from localStorage
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith('xp_day_')) {
+      try {
+        const d = JSON.parse(localStorage.getItem(key));
+        total += d.xp || 0;
+      } catch {}
+    }
   }
-  return arr;
+  return total;
 }
 
-function getMastery(pd) {
-  if (pd.attempts === 0) return null;
-  return Math.round((pd.correct / pd.attempts) * 100);
+function xpGetLevel(totalXp) {
+  let level = LEVELS[0];
+  let levelNum = 1;
+  for (let i = 0; i < LEVELS.length; i++) {
+    if (totalXp >= LEVELS[i].min) { level = LEVELS[i]; levelNum = i + 1; }
+  }
+  const nextLevel = LEVELS[levelNum] || null;
+  const pct = nextLevel
+    ? Math.min(((totalXp - level.min) / (nextLevel.min - level.min)) * 100, 100)
+    : 100;
+  return { levelNum, level, nextLevel, pct };
 }
 
-function isLearned(pd) {
-  return pd.attempts >= 2 && getMastery(pd) >= 80;
-}
 
-function getModeMastery(mode) {
-  const data = modeData[mode];
-  const total = data.reduce((s, p) => s + p.attempts, 0);
-  const correct = data.reduce((s, p) => s + p.correct, 0);
-  if (total === 0) return 0;
-  return Math.round((correct / total) * 100);
-}
 
-function getModeLearnedCount(mode) {
-  return modeData[mode].filter(isLearned).length;
-}
+// --- Bottom nav switch ---
+const BN_TAB_MAP = {
+  home: 'home',
+  learn: 'learnPage',
+  leaderboard: 'leaderboardPage',
+  progress: 'progressPage',
+  profile: 'profilePage'
+};
 
-function buildDeck(mode) {
-  const pool = [];
-  modeData[mode].forEach((pd, idx) => {
-    const m = getMastery(pd);
-    let weight = m === null ? 2 : m < 50 ? 4 : m < 80 ? 3 : 1;
-    for (let i = 0; i < weight; i++) pool.push(idx);
-  });
-  shuffle(pool);
-  return pool.slice(0, 18);
-}
+function bnSwitch(tab) {
+  // Update tab states
+  document.querySelectorAll('.bn-tab').forEach(t => t.classList.remove('active'));
+  const btn = document.getElementById('bn-' + tab);
+  if (btn) btn.classList.add('active');
 
-function getRandomOthers(excludeIdx, count) {
-  const others = ROSTER.map((_, i) => i).filter(i => i !== excludeIdx);
-  shuffle(others);
-  return others.slice(0, count);
-}
-
-// ===================== NAVIGATION =====================
-function showPage(id) {
+  // Show correct page
+  const pageId = BN_TAB_MAP[tab];
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if (id === 'modeSelect') updateModeStats();
+  const page = document.getElementById(pageId);
+  if (page) page.classList.add('active');
+
+  // Refresh page data
+  if (tab === 'home') { updateHomeStats(); xpRender(); refreshHome(); }
+  if (tab === 'learn') { }
+  if (tab === 'leaderboard') { lbRender('global'); }
+  if (tab === 'progress') { progRender(); }
+  if (tab === 'profile') { profRender(); }
 }
 
-function goHome() { showPage('home'); }
-function goJazzTeam() { updateHomeStats(); showPage('jazzTeam'); }
-
-function showComingSoon() {
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2200);
+function bnGoFlashcards() {
+  // Navigate into the Jazz Team then mode select
+  showPage('proSports');
 }
 
-function goMastery() { showPage('mastery'); }
+// Make showPage keep bottom nav visible (don't hide it)
+const _origShowPage = showPage;
+function showPage(id) {
+  _origShowPage(id);
+  // If navigating to a "tab root" page, sync the bottom nav
+  const reverseMap = { home:'home', learnPage:'learn', leaderboardPage:'leaderboard', progressPage:'progress', profilePage:'profile' };
+  if (reverseMap[id]) {
+    document.querySelectorAll('.bn-tab').forEach(t => t.classList.remove('active'));
+    const btn = document.getElementById('bn-' + reverseMap[id]);
+    if (btn) btn.classList.add('active');
+  }
+}
 
-// ===================== HOME STATS =====================
-function updateHomeStats() {
-  // aggregate across all modes
-  let totalCorrect = 0, totalAttempts = 0;
-  modes.filter(m => m !== 'lineup').forEach(m => {
-    modeData[m].forEach(p => { totalCorrect += p.correct; totalAttempts += p.attempts; });
+// --- Dashboard refresh ---
+function bnUpdateDash() { refreshHome(); }
+
+// --- Leaderboard ---
+const LB_GLOBAL = [
+  { name:'HoopHead99',  xp:4820, icon:'🏀' },
+  { name:'GridironKing',xp:3940, icon:'🏈' },
+  { name:'BaseballIQ',  xp:3200, icon:'⚾' },
+  { name:'PuckMaster',  xp:2750, icon:'🏒' },
+  { name:'CourtVision', xp:2310, icon:'👁️' },
+  { name:'YOU',         xp:0,    icon:'⭐', isMe:true },
+  { name:'SportsBrain', xp:0,    icon:'🧠', belowMe:true },
+  { name:'FantasyKing', xp:0,    icon:'👑', belowMe:true },
+];
+
+function lbSwitch(type, btn) {
+  document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  lbRender(type);
+}
+
+function lbRender(type) {
+  const el = document.getElementById('lbContent');
+  if (!el) return;
+  if (type === 'friends') {
+    el.innerHTML = `<div class="lb-coming"><div class="lb-coming-icon">👥</div><div class="lb-coming-title">Friends Leaderboard</div><div>Coming soon — challenge your friends!</div></div>`;
+    return;
+  }
+  const totalXp = xpGetTotal();
+  let rows = JSON.parse(JSON.stringify(LB_GLOBAL));
+  // inject real XP for "YOU"
+  rows = rows.map(r => {
+    if (r.isMe) r.xp = totalXp;
+    if (r.belowMe) r.xp = Math.max(0, totalXp - Math.floor(Math.random()*80+20));
+    return r;
   });
-  const pct = totalAttempts === 0 ? 0 : Math.round((totalCorrect / totalAttempts) * 100);
-  document.getElementById('homeMasteryPct').textContent = pct + '%';
-  document.getElementById('homeMasteryBar').style.width = pct + '%';
-  // learned = learned in at least one mode
+  if (type === 'weekly') {
+    rows = rows.map(r => ({ ...r, xp: Math.floor(r.xp * 0.15) }));
+  }
+  rows.sort((a,b) => b.xp - a.xp);
+  const rankClasses = ['gold','silver','bronze'];
+  const rankEmojis = ['🥇','🥈','🥉'];
+  el.innerHTML = rows.map((r,i) => {
+    const rClass = rankClasses[i] || '';
+    const rankDisplay = i < 3 ? rankEmojis[i] : (i+1);
+    return `<div class="lb-row ${r.isMe?'me':''}">
+      <div class="lb-rank ${rClass}">${rankDisplay}</div>
+      <div class="lb-avatar" style="background:rgba(107,63,160,0.2)">${r.icon}</div>
+      <div class="lb-info">
+        <div class="lb-name">${r.isMe ? 'You' : r.name}</div>
+        <div class="lb-xp-label">${type==='weekly'?'This week':'All time'}</div>
+      </div>
+      <div class="lb-xp-val">${r.xp.toLocaleString()} XP</div>
+    </div>`;
+  }).join('');
+}
+
+// --- Progress ---
+function progRender() {
+  updateSportsDropdown();
+  // Stat grid
+  let totalCorrect=0, totalAttempts=0;
+  modes.filter(m=>m!=='lineup').forEach(m=>{
+    modeData[m].forEach(p=>{ totalCorrect+=p.correct; totalAttempts+=p.attempts; });
+  });
+  const acc = totalAttempts===0 ? 0 : Math.round((totalCorrect/totalAttempts)*100);
+  const totalXp = xpGetTotal();
+  const streak = xpGetStreak();
+  const { levelNum } = xpGetLevel(totalXp);
+
+  const grid = document.getElementById('progStatGrid');
+  if (grid) grid.innerHTML = `
+    <div class="prog-stat-card">
+      <div class="psc-icon">✅</div>
+      <div class="psc-val">${totalCorrect}</div>
+      <div class="psc-label">Correct Answers</div>
+    </div>
+    <div class="prog-stat-card">
+      <div class="psc-icon">🎯</div>
+      <div class="psc-val accent">${acc}%</div>
+      <div class="psc-label">Accuracy</div>
+    </div>
+    <div class="prog-stat-card">
+      <div class="psc-icon">🔥</div>
+      <div class="psc-val">${streak}</div>
+      <div class="psc-label">Day Streak</div>
+    </div>
+    <div class="prog-stat-card">
+      <div class="psc-icon">⭐</div>
+      <div class="psc-val">${levelNum}</div>
+      <div class="psc-label">Level</div>
+    </div>
+    <div class="prog-stat-card full">
+      <div class="psc-icon">⚡</div>
+      <div class="psc-val accent">${totalXp}</div>
+      <div class="psc-label">Total XP Earned</div>
+    </div>`;
+
+  // XP chart — last 7 days
+  const chart = document.getElementById('progXpChart');
+  if (chart) {
+    const days = [];
+    for (let i=6; i>=0; i--) {
+      const d = new Date(); d.setDate(d.getDate()-i);
+      const key = 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
+      let xp = 0;
+      try { xp = (JSON.parse(localStorage.getItem(key))||{}).xp||0; } catch{}
+      const labels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      days.push({ xp, label: labels[d.getDay()] });
+    }
+    const maxXp = Math.max(...days.map(d=>d.xp), 1);
+    chart.innerHTML = days.map(d=>`
+      <div class="prog-xp-bar-wrap">
+        <div class="prog-xp-bar" style="height:${Math.max(4,Math.round((d.xp/maxXp)*68))}px"></div>
+        <div class="prog-xp-day">${d.label}</div>
+      </div>`).join('');
+  }
+
+  // Daily player history
+  const dpList = document.getElementById('progDpList');
+  if (dpList) {
+    const sports = ['nba','nfl','mlb','nhl'];
+    let entries = [];
+    sports.forEach(sport => {
+      for (let i=0; i<localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('siq_daily_'+sport+'_')) {
+          try {
+            const d = JSON.parse(localStorage.getItem(key));
+            if (d.played) entries.push({ sport, key, ...d });
+          } catch {}
+        }
+      }
+    });
+    entries.sort((a,b) => (b.key||'').localeCompare(a.key||''));
+    entries = entries.slice(0,8);
+    if (entries.length === 0) {
+      dpList.innerHTML = '<div class="prog-empty">No daily player history yet. Play your first Daily Quiz!</div>';
+    } else {
+      dpList.innerHTML = entries.map(e=>`
+        <div class="prog-dp-row">
+          <div class="prog-dp-result">${e.won?'✅':'❌'}</div>
+          <div class="prog-dp-info">
+            <div class="prog-dp-name">${e.playerName || 'Unknown'}</div>
+            <div class="prog-dp-date">${e.sport?.toUpperCase()} · ${e.key?.replace('siq_daily_'+e.sport+'_','') || ''}</div>
+          </div>
+          <div class="prog-dp-pts">${e.won ? '+'+e.pts+'pts' : 'Missed'}</div>
+        </div>`).join('');
+    }
+  }
+}
+
+// --- Profile ---
+function profRender() {
+  const totalXp = xpGetTotal();
+  const { levelNum, level } = xpGetLevel(totalXp);
+  const streak = xpGetStreak();
+
+  const el = id => document.getElementById(id);
+  if (el('profName'))       el('profName').textContent       = 'SportsFan';
+  if (el('profTitle'))      el('profTitle').textContent      = level.title;
+  if (el('profXpTotal'))    el('profXpTotal').textContent    = totalXp.toLocaleString() + ' Total XP';
+  if (el('profLevel'))      el('profLevel').textContent      = levelNum;
+  if (el('profStreak'))     el('profStreak').textContent     = streak;
+}
+
+// Update dash level card when home loads
+function bnUpdateHomeLevel() { refreshHome(); }
+
+function refreshHome() {
+  const totalXp = xpGetTotal();
+  const { levelNum, level, nextLevel, pct } = xpGetLevel(totalXp);
+  const streak = xpGetStreak();
+  const dayData = xpLoad();
+  const dailyXp = dayData.xp || 0;
+  const el = id => document.getElementById(id);
+
+  // Level box
+  if (el('hlbNum'))  el('hlbNum').textContent  = levelNum;
+  if (el('hlbName')) el('hlbName').textContent = level.name.toUpperCase();
+  if (el('hlbSub'))  el('hlbSub').textContent  = level.title + (nextLevel ? ` · ${Math.round(nextLevel.min - totalXp)} XP to ${nextLevel.name}` : ' · MAX LEVEL');
+  if (el('hlbFill')) el('hlbFill').style.width = pct + '%';
+
+  // Stat boxes
+  if (el('hsbStreak'))  el('hsbStreak').textContent  = streak;
+  if (el('hsbXpTotal')) el('hsbXpTotal').textContent = totalXp.toLocaleString();
+  if (el('hsbDailyXp')) el('hsbDailyXp').textContent = dailyXp + '/50';
+
+  // Username
+  if (el('homeUsername')) el('homeUsername').textContent = localStorage.getItem('siq_username') || 'SportsFan';
+}
+
+function xpResetConfirm() {
+  if (confirm('Reset all progress? This cannot be undone.')) {
+    const keysToRemove = [];
+    for (let i=0; i<localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && (k.startsWith('xp_') || k.startsWith('siq_'))) keysToRemove.push(k);
+    }
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+    xpRender();
+    profRender();
+    progRender();
+  }
+}
+
+
+// ===================== COMPLETED SPORTS DROPDOWN =====================
+function toggleSportsDropdown() {
+  const body  = document.getElementById('sportsDropdownBody');
+  const arrow = document.getElementById('sportsDropdownArrow');
+  const btn   = document.getElementById('sportsDropdownBtn');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  if (!isOpen) updateSportsDropdown();
+}
+
+function updateSportsDropdown() {
+  // NBA: calculate mastery across all modes
   const learnedSet = new Set();
   modes.filter(m => m !== 'lineup').forEach(m => {
     modeData[m].forEach((pd, i) => { if (isLearned(pd)) learnedSet.add(i); });
   });
-  document.getElementById('homeLearnedCount').textContent = learnedSet.size;
-  document.getElementById('homeTotalAttempts').textContent = totalAttempts;
-}
+  const learnedCount = learnedSet.size;
+  const totalPlayers = 18;
+  const allDone = learnedCount >= totalPlayers;
+  const anyStarted = learnedCount > 0;
 
-function updateModeStats() {
-  modes.filter(m => m !== 'lineup').forEach(m => {
-    const el = document.getElementById('modeStats_' + m);
-    if (el) el.textContent = getModeLearnedCount(m) + '/18';
-  });
-  const lineupEl = document.getElementById('modeStats_lineup');
-  if (lineupEl) lineupEl.textContent = lineupAttempts > 0 ? lineupCorrect + '/' + lineupAttempts : '—';
-}
+  const subEl    = document.getElementById('sdNBASub');
+  const statusEl = document.getElementById('sdNBAStatus');
 
-// ===================== START MODE =====================
-function startMode(mode) {
-  currentMode = mode;
-  if (mode === 'lineup') { startLineup(); return; }
-  deck = buildDeck(mode);
-  deckIndex = 0;
+  if (subEl)    subEl.textContent = `Utah Jazz · ${learnedCount}/${totalPlayers} players learned`;
 
-  // show/hide UI panels
-  document.getElementById('cardScene').style.display = '';
-  document.getElementById('answerBtns').style.display = mode === 'multiChoice' ? 'none' : '';
-  document.getElementById('mcOptions').style.display = mode === 'multiChoice' ? '' : 'none';
-  document.getElementById('lineupMode').style.display = 'none';
-  document.getElementById('roundComplete').classList.remove('show');
-
-  document.getElementById('fcTotal').textContent = deck.length;
-  loadCard();
-  showPage('flashcards');
-}
-
-function restartCurrentMode() { startMode(currentMode); }
-
-// ===================== LOAD CARD =====================
-function loadCard() {
-  if (deckIndex >= deck.length) { endRound(); return; }
-
-  const playerIdx = deck[deckIndex];
-  const pd = ROSTER[playerIdx];
-  const modePd = modeData[currentMode][playerIdx];
-
-  isFlipped = false;
-  cardAnswered = false;
-  mcSelected = null;
-
-  const c3d = document.getElementById('card3d');
-  c3d.classList.remove('flipped');
-
-  // Reset front
-  const photoEl = document.getElementById('playerPhoto');
-  const overlayEl = document.getElementById('photoOverlay');
-  const frontTextEl = document.getElementById('cardFrontText');
-
-  photoEl.style.display = 'none';
-  overlayEl.style.display = 'none';
-  frontTextEl.style.display = 'none';
-
-  // Back always has photo + name + pos
-  document.getElementById('backPhoto').src = pd.image_url;
-  document.getElementById('backName').textContent = pd.name;
-  document.getElementById('backPos').textContent = posMap[pd.position] + ' (' + pd.position + ')';
-
-  const m = getMastery(modePd);
-  document.getElementById('cardStreak').innerHTML = `<span>${modePd.attempts === 0 ? 'First attempt' : modePd.correct + '/' + modePd.attempts + ' correct (' + m + '%)'}</span>`;
-
-  // Mode-specific FRONT
-  if (currentMode === 'photoName') {
-    photoEl.src = pd.image_url;
-    photoEl.style.display = '';
-    overlayEl.style.display = '';
-    document.getElementById('backStats').innerHTML = `
-      <div class="back-stat"><span class="sv">${pd.height}</span><span class="sk">Height</span></div>
-      <div class="back-stat"><span class="sv">${pd.age}</span><span class="sk">Age</span></div>
-      <div class="back-stat"><span class="sv">${pd.college}</span><span class="sk">College</span></div>`;
+  if (statusEl) {
+    if (allDone) {
+      statusEl.className = 'sport-row-status complete';
+      statusEl.textContent = '✅ Complete';
+    } else if (anyStarted) {
+      statusEl.className = 'sport-row-status in-progress';
+      statusEl.textContent = `⏳ ${Math.round((learnedCount/totalPlayers)*100)}%`;
+    } else {
+      statusEl.className = 'sport-row-status not-started';
+      statusEl.textContent = '○ Not Started';
+    }
   }
 
-  else if (currentMode === 'namePos') {
-    frontTextEl.style.display = '';
-    frontTextEl.innerHTML = `
-      <div class="front-label">Who plays for the Jazz?</div>
-      <div class="front-main">${pd.name}</div>`;
-    document.getElementById('backStats').innerHTML = `
-      <div class="back-stat"><span class="sv">${pd.height}</span><span class="sk">Height</span></div>
-      <div class="back-stat"><span class="sv">${pd.age}</span><span class="sk">Age</span></div>`;
-  }
-
-  else if (currentMode === 'statsPlayer') {
-    frontTextEl.style.display = '';
-    frontTextEl.innerHTML = `
-      <div class="front-label">Who is this Jazz player?</div>
-      <div class="front-stat-row">
-        <div class="front-stat-chip"><span class="fsv">${pd.height}</span><span class="fsk">Height</span></div>
-        <div class="front-stat-chip"><span class="fsv">${pd.age}</span><span class="fsk">Age</span></div>
-        <div class="front-stat-chip"><span class="fsv">${pd.college}</span><span class="fsk">College</span></div>
-        <div class="front-stat-chip"><span class="fsv">${posMap[pd.position]}</span><span class="fsk">Position</span></div>
-      </div>`;
-    document.getElementById('backStats').innerHTML = '';
-  }
-
-  else if (currentMode === 'multiChoice') {
-    photoEl.src = pd.image_url;
-    photoEl.style.display = '';
-    overlayEl.style.display = '';
-    document.getElementById('backStats').innerHTML = `
-      <div class="back-stat"><span class="sv">${pd.height}</span><span class="sk">Height</span></div>
-      <div class="back-stat"><span class="sv">${pd.age}</span><span class="sk">Age</span></div>
-      <div class="back-stat"><span class="sv">${pd.college}</span><span class="sk">College</span></div>`;
-    buildMCOptions(playerIdx);
-  }
-
-  // progress
-  document.getElementById('fcCurrent').textContent = deckIndex + 1;
-  document.getElementById('fcProgressBar').style.width = ((deckIndex / deck.length) * 100) + '%';
-  document.getElementById('fcMasteryBadge').textContent = getModeMastery(currentMode) + '% mastered';
-
-  // animate
-  const scene = document.getElementById('cardScene');
-  scene.classList.remove('entering');
-  void scene.offsetWidth;
-  scene.classList.add('entering');
-
-  // hide answer buttons for non-MC modes until flipped
-  if (currentMode !== 'multiChoice') {
-    document.getElementById('answerBtns').classList.add('answer-btns-hidden');
-  }
+  // Count of completed sports (only NBA is unlocked for now)
+  const countEl = document.getElementById('sportsCompleteCount');
+  if (countEl) countEl.textContent = allDone ? '· 1/8 Complete' : anyStarted ? `· 0/8 Complete` : '· 0/8 Complete';
 }
-
-// ===================== FLIP =====================
-function flipCard() {
-  if (cardAnswered || currentMode === 'multiChoice') return;
-  isFlipped = !isFlipped;
-  document.getElementById('card3d').classList.toggle('flipped', isFlipped);
-  if (isFlipped) {
-    document.getElementById('answerBtns').classList.remove('answer-btns-hidden');
-  } else {
-    document.getElementById('answerBtns').classList.add('answer-btns-hidden');
-  }
-}
-
-// ===================== ANSWER (flip modes) =====================
-function answerCard(correct) {
-  if (cardAnswered || !isFlipped) return;
-  cardAnswered = true;
-  const playerIdx = deck[deckIndex];
-  modeData[currentMode][playerIdx].attempts++;
-  if (correct) modeData[currentMode][playerIdx].correct++;
-
-  const flash = document.getElementById('feedbackFlash');
-  flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
-  setTimeout(() => { flash.className = 'feedback-flash'; }, 350);
-
-  deckIndex++;
-  setTimeout(loadCard, 420);
-}
-
-// ===================== MULTIPLE CHOICE =====================
-function buildMCOptions(correctIdx) {
-  const others = getRandomOthers(correctIdx, 3);
-  const options = shuffle([correctIdx, ...others]);
-  const grid = document.getElementById('mcGrid');
-  grid.innerHTML = '';
-  options.forEach(idx => {
-    const btn = document.createElement('button');
-    btn.className = 'mc-btn';
-    btn.textContent = ROSTER[idx].name;
-    btn.onclick = () => selectMC(btn, idx, correctIdx);
-    grid.appendChild(btn);
-  });
-  document.getElementById('mcSubmit').style.display = 'none';
-}
-
-function selectMC(btn, selectedIdx, correctIdx) {
-  if (cardAnswered) return;
-  mcSelected = { selectedIdx, correctIdx };
-  document.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  document.getElementById('mcSubmit').style.display = '';
-}
-
-function submitMC() {
-  if (!mcSelected || cardAnswered) return;
-  cardAnswered = true;
-  const { selectedIdx, correctIdx } = mcSelected;
-  const correct = selectedIdx === correctIdx;
-  const playerIdx = deck[deckIndex];
-  modeData[currentMode][playerIdx].attempts++;
-  if (correct) modeData[currentMode][playerIdx].correct++;
-
-  // reveal correct/wrong
-  document.querySelectorAll('.mc-btn').forEach(btn => {
-    const idx = [...document.getElementById('mcGrid').children].indexOf(btn);
-    const btnPlayerIdx = [...document.getElementById('mcGrid').querySelectorAll('.mc-btn')].indexOf(btn);
-  });
-
-  // color the buttons
-  document.querySelectorAll('.mc-btn').forEach(btn => {
-    if (btn.textContent === ROSTER[correctIdx].name) btn.classList.add('correct');
-    else if (btn.classList.contains('selected')) btn.classList.add('wrong');
-  });
-
-  // flip to reveal
-  setTimeout(() => {
-    document.getElementById('card3d').classList.add('flipped');
-    document.getElementById('mcSubmit').style.display = 'none';
-  }, 600);
-
-  const flash = document.getElementById('feedbackFlash');
-  flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
-  setTimeout(() => { flash.className = 'feedback-flash'; }, 350);
-
-  setTimeout(() => {
-    deckIndex++;
-    loadCard();
-    document.getElementById('mcGrid').innerHTML = '';
-  }, 1800);
-}
-
-// ===================== LINEUP MODE =====================
-const LINEUP_POSITIONS = [
-  { label: 'PG', full: 'Point Guard', posCode: 'G' },
-  { label: 'SG', full: 'Shooting Guard', posCode: 'G' },
-  { label: 'SF', full: 'Small Forward', posCode: 'F' },
-  { label: 'PF', full: 'Power Forward', posCode: 'F' },
-  { label: 'C',  full: 'Center', posCode: 'C' }
-];
-
-// Designated starting lineup for the Jazz
-const JAZZ_STARTING_LINEUP = {
-  PG: 'Keyonte George',
-  SG: 'Vince Williams Jr.',
-  SF: 'Cody Williams',
-  PF: 'Jaren Jackson Jr.',
-  C:  'Walker Kessler'
-};
-
-function startLineup() {
-  document.getElementById('cardScene').style.display = 'none';
-  document.getElementById('answerBtns').style.display = 'none';
-  document.getElementById('mcOptions').style.display = 'none';
-  document.getElementById('roundComplete').classList.remove('show');
-  document.getElementById('lineupMode').style.display = '';
-  document.getElementById('lineupResult').style.display = 'none';
-
-  document.getElementById('fcCurrent').textContent = '—';
-  document.getElementById('fcTotal').textContent = '—';
-  document.getElementById('fcMasteryBadge').textContent = lineupAttempts > 0 ? Math.round((lineupCorrect/lineupAttempts)*100) + '% mastered' : '0% mastered';
-
-  const grid = document.getElementById('lineupGrid');
-  grid.innerHTML = '';
-
-  LINEUP_POSITIONS.forEach(pos => {
-    const row = document.createElement('div');
-    row.className = 'lineup-row';
-    row.innerHTML = `
-      <div class="lineup-pos">${pos.label}</div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:2px;">
-        <div style="font-size:11px;color:var(--muted);letter-spacing:1px;">${pos.full}</div>
-        <select class="lineup-select" id="lineup_${pos.label}">
-          <option value="">— Select player —</option>
-          ${ROSTER.filter(p => p.position === pos.posCode).map(p => `<option value="${p.name}">${p.name}</option>`).join('')}
-        </select>
-      </div>`;
-    grid.appendChild(row);
-  });
-
-  document.getElementById('lineupSubmit').style.display = '';
-  showPage('flashcards');
-}
-
-function submitLineup() {
-  const resultDiv = document.getElementById('lineupResult');
-  resultDiv.style.display = '';
-  let html = '';
-  let correct = 0;
-
-  LINEUP_POSITIONS.forEach(pos => {
-    const selected = document.getElementById('lineup_' + pos.label).value;
-    const expected = JAZZ_STARTING_LINEUP[pos.label];
-    const isRight = selected === expected;
-    if (isRight) correct++;
-    html += `<div class="lineup-result-row">
-      <span class="${isRight ? 'check' : 'cross'}">${isRight ? '✅' : '❌'}</span>
-      <span style="color:var(--muted);width:32px;">${pos.label}</span>
-      <span>${selected || '(none)'}</span>
-      ${!isRight ? `<span style="color:var(--muted);font-size:12px;">→ ${expected}</span>` : ''}
-    </div>`;
-  });
-
-  lineupAttempts++;
-  if (correct === 5) lineupCorrect++;
-  html += `<div style="margin-top:12px;font-family:'Bebas Neue',sans-serif;font-size:22px;color:${correct===5?'#3dcc7a':'var(--jazz-sky)'};">${correct}/5 Correct</div>`;
-  html += `<button class="btn-ghost" style="margin-top:12px;" onclick="startLineup()">Try Again</button>`;
-
-  resultDiv.innerHTML = html;
-  document.getElementById('lineupSubmit').style.display = 'none';
-  document.getElementById('fcMasteryBadge').textContent = lineupAttempts > 0 ? Math.round((lineupCorrect/lineupAttempts)*100) + '% correct' : '0%';
-}
-
-// ===================== END ROUND =====================
-function endRound() {
-  document.getElementById('cardScene').style.display = 'none';
-  document.getElementById('answerBtns').style.display = 'none';
-  document.getElementById('mcOptions').style.display = 'none';
-
-  const m = getModeMastery(currentMode);
-  const learned = getModeLearnedCount(currentMode);
-  const rc = document.getElementById('roundComplete');
-  rc.classList.add('show');
-  document.getElementById('roundCompleteMsg').textContent =
-    `Mode mastery: ${m}% · ${learned}/18 players learned`;
-}
-
-// ===================== MASTERY PAGE =====================
-function renderMastery() {}
 
 // ===================== INIT =====================
 updateHomeStats();
-
+dpUpdateBadges();
+xpRender();
+bnUpdateHomeLevel();
 </script>
+
+<!-- ===================== BOTTOM NAV ===================== -->
+<nav class="bottom-nav">
+  <button class="bn-tab active" id="bn-home" onclick="bnSwitch('home')">
+    <div class="bn-tab-icon">🏠</div>
+    <div class="bn-tab-label">Home</div>
+  </button>
+  <button class="bn-tab" id="bn-leaderboard" onclick="bnSwitch('leaderboard')">
+    <div class="bn-tab-icon">🏆</div>
+    <div class="bn-tab-label">Leaderboard</div>
+  </button>
+  <button class="bn-tab" id="bn-learn" onclick="bnSwitch('learn')">
+    <div class="bn-tab-icon">🧠</div>
+    <div class="bn-tab-label">Learn</div>
+  </button>
+  <button class="bn-tab" id="bn-progress" onclick="bnSwitch('progress')">
+    <div class="bn-tab-icon">📊</div>
+    <div class="bn-tab-label">Progress</div>
+  </button>
+  <button class="bn-tab" id="bn-profile" onclick="bnSwitch('profile')">
+    <div class="bn-tab-icon">👤</div>
+    <div class="bn-tab-label">Profile</div>
+  </button>
+</nav>
+
+<!-- ===================== LEARN PAGE ===================== -->
+<div class="page" id="learnPage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Learn</div>
+    <div></div>
+  </div>
+  <div style="width:100%;max-width:420px;padding:16px 20px;">
+    <div class="learn-section-label">PRO SPORTS</div>
+    <div class="learn-card" onclick="showPage('proSports')">
+      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🏆</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">Pro Sports</div>
+        <div class="learn-card-sub">NBA, NFL, MLB, NHL</div>
+      </div>
+      <div class="learn-card-arrow">→</div>
+    </div>
+    <div class="learn-card" onclick="showPage('collegeSports')">
+      <div class="learn-card-icon" style="background:rgba(91,184,212,0.15);">🎓</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">College Sports</div>
+        <div class="learn-card-sub">NCAA Basketball, Football &amp; more</div>
+      </div>
+      <div class="learn-card-arrow">→</div>
+    </div>
+    <div class="learn-section-label" style="margin-top:8px;">DAILY CHALLENGES</div>
+    <div class="learn-card" onclick="dpOpen('nba')">
+      <div class="learn-card-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">NBA Daily Player</div>
+        <div class="learn-card-sub">Guess today's player</div>
+      </div>
+      <span class="learn-card-badge" id="learnDailyBadge">DAILY</span>
+    </div>
+    <div class="learn-section-label" style="margin-top:8px;">STUDY MODES</div>
+    <div class="learn-card" onclick="bnGoFlashcards()">
+      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🃏</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">Flashcards</div>
+        <div class="learn-card-sub">Photo → Name, Stats → Player</div>
+      </div>
+      <div class="learn-card-arrow">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LEADERBOARD PAGE ===================== -->
+<div class="page" id="leaderboardPage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Leaderboard</div>
+    <div></div>
+  </div>
+  <div class="nav-content" style="width:100%;max-width:420px;padding:16px 20px;">
+    <div class="lb-tabs">
+      <button class="lb-tab active" onclick="lbSwitch('global',this)">🌎 Global</button>
+      <button class="lb-tab" onclick="lbSwitch('weekly',this)">📅 Weekly</button>
+      <button class="lb-tab" onclick="lbSwitch('friends',this)">👥 Friends</button>
+    </div>
+    <div id="lbContent"></div>
+  </div>
+</div>
+
+<!-- ===================== PROGRESS PAGE ===================== -->
+<div class="page" id="progressPage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Progress</div>
+    <div></div>
+  </div>
+  <div class="nav-content" style="width:100%;max-width:420px;padding:16px 20px;">
+    <div class="prog-stat-grid" id="progStatGrid"></div>
+    <div class="prog-section-title">XP EARNED — LAST 7 DAYS</div>
+    <div style="background:var(--surface);border:1px solid rgba(107,63,160,0.25);border-radius:14px;padding:16px;margin-bottom:20px;">
+      <div class="prog-xp-chart" id="progXpChart"></div>
+    </div>
+
+    <div class="sports-dropdown-wrap">
+      <button class="sports-dropdown-btn" id="sportsDropdownBtn" onclick="toggleSportsDropdown()">
+        <div class="sdb-left">
+          <span class="sdb-icon">🏅</span>
+          <span class="sdb-label">Completed Sports</span>
+          <span class="sdb-count" id="sportsCompleteCount"></span>
+        </div>
+        <span class="sdb-arrow" id="sportsDropdownArrow">▼</span>
+      </button>
+      <div class="sports-dropdown-body" id="sportsDropdownBody">
+        <div class="sports-category">PRO SPORTS</div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏀</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NBA</div>
+            <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/18 players</div>
+          </div>
+          <div class="sport-row-status" id="sdNBAStatus">—</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏈</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NFL</div>
+            <div class="sport-row-sub">Coming Soon</div>
+          </div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">⚾</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">MLB</div>
+            <div class="sport-row-sub">Coming Soon</div>
+          </div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏒</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NHL</div>
+            <div class="sport-row-sub">Coming Soon</div>
+          </div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sports-category">COLLEGE SPORTS</div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏀</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NCAA Basketball</div>
+            <div class="sport-row-sub">Coming Soon</div>
+          </div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏈</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NCAA Football</div>
+            <div class="sport-row-sub">Coming Soon</div>
+          </div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">⚾</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NCAA Baseball</div>
+            <div class="sport-row-sub">Coming Soon</div>
+          </div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">⚽</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NCAA Soccer</div>
+            <div class="sport-row-sub">Coming Soon</div>
+          </div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+      </div>
+    </div>
+    <div class="prog-section-title">RECENT DAILY PLAYERS</div>
+    <div id="progDpList"></div>
+  </div>
+</div>
+
+<!-- ===================== PROFILE PAGE ===================== -->
+<div class="page" id="profilePage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Profile</div>
+    <div></div>
+  </div>
+  <div class="nav-content" style="width:100%;max-width:420px;padding:0 20px 20px;">
+    <div class="prof-header">
+      <div class="prof-avatar">🏅</div>
+      <div class="prof-name" id="profName">SportsFan</div>
+      <div class="prof-title" id="profTitle">Rookie</div>
+      <div class="prof-xp-total" id="profXpTotal">0 Total XP</div>
+    </div>
+    <div class="prof-stats-row">
+      <div class="prof-stat">
+        <div class="prof-stat-val" id="profLevel">1</div>
+        <div class="prof-stat-label">Level</div>
+      </div>
+      <div class="prof-stat">
+        <div class="prof-stat-val" id="profStreak">0</div>
+        <div class="prof-stat-label">Day Streak</div>
+      </div>
+    </div>
+    <div class="prof-section-title" style="margin-top:8px;">SETTINGS</div>
+    <div class="settings-row" onclick="showComingSoon()">
+      <div class="sr-left"><span class="sr-icon">✏️</span><span class="sr-label">Edit Username</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+    <div class="settings-row" onclick="showComingSoon()">
+      <div class="sr-left"><span class="sr-icon">🔔</span><span class="sr-label">Notifications</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+    <div class="settings-row" onclick="showComingSoon()">
+      <div class="sr-left"><span class="sr-icon">🌙</span><span class="sr-label">Theme</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+    <div class="settings-row" onclick="xpResetConfirm()">
+      <div class="sr-left"><span class="sr-icon">🗑️</span><span class="sr-label">Reset Progress</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
