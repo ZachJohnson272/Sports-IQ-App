@@ -2325,7 +2325,19 @@
     box-shadow: 0 3px 12px rgba(61,33,88,0.4);
     animation: none;
   }
-  .home-play-btn .play-icon { font-size: 21px; }
+  .home-play-btn .play-icon { font-size: 21px; flex-shrink: 0; }
+  .play-btn-label {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .play-btn-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.45);
+    text-transform: none;
+    line-height: 1;
+  }
 
   /* Single motivational line under button */
   .home-streak-nudge {
@@ -2595,7 +2607,10 @@
       <div class="home-cta-block">
         <button class="home-play-btn" onclick="bnSwitch('learn')">
           <span class="play-icon">🏆</span>
-          PLAY TODAY'S QUIZ
+          <span class="play-btn-label">
+            PLAY TODAY'S QUIZ
+            <span class="play-btn-sub">10 quick questions</span>
+          </span>
         </button>
         <div class="home-streak-nudge" id="homeStreakNudge">
           🔥 Keep your streak alive &nbsp;·&nbsp; <span>+10 XP</span>
@@ -2643,7 +2658,7 @@
         </div>
         <div class="home-quick-right">
           <div class="home-quick-xp">+20 XP</div>
-          <div class="home-quick-tap">Tap to guess →</div>
+          <div class="home-quick-tap">Guess the player →</div>
         </div>
       </div>
 
