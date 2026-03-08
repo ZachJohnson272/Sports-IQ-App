@@ -1844,7 +1844,7 @@
   .home-avatar-row {
     display: flex;
     align-items: center;
-    gap: 14px;
+    justify-content: space-between;
     width: 100%;
     padding: 4px 0;
     animation: fadeUp 0.3s ease both;
@@ -1861,13 +1861,33 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 24px; color: #fff; line-height: 1;
   }
-  .home-avatar-section { display: flex; align-items: center; gap: 14px; flex: 1; }
+  .home-avatar-section { display: flex; align-items: center; gap: 14px; }
   .home-avatar-text { display: flex; flex-direction: column; gap: 2px; }
   .home-avatar-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
   }
   .home-avatar-sub { font-size: 12px; color: var(--jazz-sky); font-weight: 500; }
+  /* Streak pill — pinned right of welcome row */
+  .home-streak-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(245,200,66,0.08);
+    border: 1px solid rgba(245,200,66,0.32);
+    border-radius: 12px;
+    padding: 7px 12px 6px;
+    flex-shrink: 0;
+    gap: 1px;
+  }
+  .home-streak-pill-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; color: #f5c842; line-height: 1; letter-spacing: 1px;
+  }
+  .home-streak-pill-label {
+    font-size: 9px; color: rgba(245,200,66,0.65);
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
 
   /* ── Stats row ── */
   .home-stat-boxes {
@@ -1904,50 +1924,56 @@
   .home-cta-block {
     display: flex;
     flex-direction: column;
-    gap: 7px;
-    animation: fadeUp 0.4s 0.1s ease both;
+    gap: 8px;
+    animation: fadeUp 0.4s 0.15s ease both;
   }
   .home-play-btn {
     width: 100%;
-    padding: 19px 20px;
-    background: linear-gradient(135deg, #7B4FB0 0%, #5BB8D4 100%);
+    padding: 21px 20px;
+    background: linear-gradient(135deg, #7B4FB0 0%, #4aaecb 100%);
     border: none;
     border-radius: 18px;
     color: #fff;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 3px;
+    font-size: 26px;
+    letter-spacing: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 11px;
     box-shadow:
-      0 8px 28px rgba(107,63,160,0.55),
-      0 2px 8px rgba(91,184,212,0.2),
-      inset 0 1px 0 rgba(255,255,255,0.15);
+      0 10px 32px rgba(107,63,160,0.6),
+      0 3px 10px rgba(91,184,212,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.18);
     transition: transform 0.15s, box-shadow 0.15s;
     position: relative;
     overflow: hidden;
+    animation: fadeUp 0.4s 0.15s ease both, btnPulse 3s 1.5s ease-in-out infinite;
+  }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 10px 32px rgba(107,63,160,0.6), 0 3px 10px rgba(91,184,212,0.25), inset 0 1px 0 rgba(255,255,255,0.18); }
+    50%       { box-shadow: 0 10px 42px rgba(107,63,160,0.8), 0 3px 18px rgba(91,184,212,0.4),  inset 0 1px 0 rgba(255,255,255,0.18); }
   }
   .home-play-btn::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 55%);
     pointer-events: none;
   }
-  .home-play-btn:hover  {
+  .home-play-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 36px rgba(107,63,160,0.65), 0 4px 12px rgba(91,184,212,0.25);
+    box-shadow: 0 16px 40px rgba(107,63,160,0.7), 0 5px 14px rgba(91,184,212,0.3);
+    animation: none;
   }
-  .home-play-btn:active { transform: translateY(1px); box-shadow: 0 4px 14px rgba(107,63,160,0.4); }
-  .home-play-btn .play-icon { font-size: 22px; }
+  .home-play-btn:active { transform: translateY(1px); box-shadow: 0 4px 14px rgba(107,63,160,0.4); animation: none; }
+  .home-play-btn .play-icon { font-size: 24px; }
   .home-streak-nudge {
     text-align: center;
     font-size: 11px;
-    color: rgba(245,200,66,0.7);
-    letter-spacing: 0.5px;
+    color: rgba(245,200,66,0.65);
+    letter-spacing: 0.3px;
     font-weight: 500;
   }
   .home-streak-nudge span { color: #f5c842; }
@@ -2054,53 +2080,72 @@
 
   /* ── Bonus: Daily Player card ── */
   .home-quick-card {
-    background: var(--surface);
-    border: 1px solid rgba(245,200,66,0.22);
-    border-radius: 14px;
-    padding: 13px 16px;
+    background: linear-gradient(135deg, rgba(245,200,66,0.06) 0%, rgba(247,165,79,0.04) 100%);
+    border: 1px solid rgba(245,200,66,0.28);
+    border-radius: 16px;
+    padding: 14px 16px 14px 14px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 13px;
     cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
     animation: fadeUp 0.4s 0.25s ease both;
     position: relative;
+    overflow: hidden;
+  }
+  .home-quick-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(245,200,66,0.6), transparent);
   }
   .home-quick-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245,200,66,0.1);
-    border-color: rgba(245,200,66,0.4);
+    box-shadow: 0 8px 24px rgba(245,200,66,0.14);
+    border-color: rgba(245,200,66,0.5);
   }
   .home-quick-card:active { transform: translateY(0); }
   .home-quick-badge {
     position: absolute;
-    top: -8px; right: 12px;
+    top: -1px; right: 14px;
     background: linear-gradient(135deg, #f5c842, #f7a54f);
-    color: #000;
+    color: #1a1000;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 10px; letter-spacing: 1px;
-    padding: 2px 8px;
-    border-radius: 99px;
-    box-shadow: 0 2px 8px rgba(245,200,66,0.4);
+    font-size: 10px; letter-spacing: 1.5px;
+    padding: 3px 9px 2px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 3px 10px rgba(245,200,66,0.35);
   }
   .home-quick-icon {
-    width: 46px; height: 46px; border-radius: 13px;
+    width: 50px; height: 50px; border-radius: 14px;
     background: rgba(245,200,66,0.1);
-    border: 1px solid rgba(245,200,66,0.28);
+    border: 1px solid rgba(245,200,66,0.3);
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
+    font-size: 24px; flex-shrink: 0;
   }
   .home-quick-text { flex: 1; }
   .home-quick-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1;
+    font-size: 17px; letter-spacing: 1px; color: #fff; line-height: 1;
   }
-  .home-quick-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .home-quick-sub {
+    font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4;
+  }
+  .home-quick-right {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0;
+  }
   .home-quick-xp {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px; color: #f5c842; letter-spacing: 1px;
+    font-size: 15px; color: #f5c842; letter-spacing: 1px;
+    background: rgba(245,200,66,0.1);
+    border: 1px solid rgba(245,200,66,0.25);
+    border-radius: 6px;
+    padding: 2px 7px;
   }
-  .home-quick-arrow { font-size: 15px; color: rgba(245,200,66,0.6); }
+  .home-quick-arrow {
+    font-size: 14px; color: rgba(245,200,66,0.5);
+  }
 </style>
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -2163,7 +2208,7 @@
         <div class="home-brand-title">S P O R T S M I N D</div>
       </div>
 
-      <!-- Welcome -->
+      <!-- Welcome + streak pill -->
       <div class="home-avatar-row">
         <div class="home-avatar-section">
           <div class="home-avatar-circle">
@@ -2171,8 +2216,12 @@
           </div>
           <div class="home-avatar-text">
             <div class="home-avatar-name" id="homeUsername">SportsFan</div>
-            <div class="home-avatar-sub" id="homeWelcome">Welcome back, SportsFan!</div>
+            <div class="home-avatar-sub" id="homeWelcome">Welcome back!</div>
           </div>
+        </div>
+        <div class="home-streak-pill">
+          <div class="home-streak-pill-num" id="homeStreakPillNum">0</div>
+          <div class="home-streak-pill-label">🔥 Streak</div>
         </div>
       </div>
 
@@ -2192,18 +2241,7 @@
         </div>
       </div>
 
-      <!-- Primary CTA -->
-      <div class="home-cta-block">
-        <button class="home-play-btn" onclick="bnSwitch('learn')">
-          <span class="play-icon">🏆</span>
-          PLAY TODAY'S QUIZ
-        </button>
-        <div class="home-streak-nudge" id="homeStreakNudge">
-          🔥 Play today to keep your streak alive
-        </div>
-      </div>
-
-      <!-- Level progress -->
+      <!-- Level progress (above CTA) -->
       <div class="home-level-box">
         <div class="hlb-left">
           <div class="hlb-num" id="hlbNum">1</div>
@@ -2214,6 +2252,17 @@
               <div class="hlb-bar-fill" id="hlbFill" style="width:0%"></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Primary CTA -->
+      <div class="home-cta-block">
+        <button class="home-play-btn" onclick="bnSwitch('learn')">
+          <span class="play-icon">🏆</span>
+          PLAY TODAY'S QUIZ
+        </button>
+        <div class="home-streak-nudge" id="homeStreakNudge">
+          🔥 Play today to keep your streak alive
         </div>
       </div>
 
@@ -2233,15 +2282,15 @@
         <div class="xp-complete" id="xpComplete">🏆 Daily goal complete! +10 Bonus XP awarded!</div>
       </div>
 
-      <!-- Bonus: Daily Player (secondary, whole card clickable) -->
+      <!-- Bonus: Daily Player mini-game -->
       <div class="home-quick-card" onclick="dpOpen('nba')">
         <div class="home-quick-badge">BONUS</div>
         <div class="home-quick-icon">🎯</div>
         <div class="home-quick-text">
           <div class="home-quick-title">Daily Player Guess</div>
-          <div class="home-quick-sub">Guess today's mystery player</div>
+          <div class="home-quick-sub">Guess today's mystery athlete</div>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+        <div class="home-quick-right">
           <div class="home-quick-xp">+20 XP</div>
           <div class="home-quick-arrow">→</div>
         </div>
@@ -3955,7 +4004,10 @@ function refreshHome() {
   if (el('hsbXpTotal')) el('hsbXpTotal').textContent = totalXp.toLocaleString();
   if (el('hsbDailyXp')) el('hsbDailyXp').textContent = dailyXp + '/50';
 
-  // Streak nudge line near CTA
+  // Streak pill in welcome row
+  if (el('homeStreakPillNum')) el('homeStreakPillNum').textContent = streak;
+
+  // Streak nudge line below CTA
   const nudge = el('homeStreakNudge');
   if (nudge) {
     if (streak > 1) {
