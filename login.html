@@ -367,6 +367,15 @@ function showForm() {
   }
 })();
 
+// --- Auth state listener ---
+// If a user somehow lands on login.html while already logged in
+// (e.g. browser back button after login), redirect them to the app.
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' && session) {
+    window.location.href = 'index.html';
+  }
+});
+
 
 // ============================================================
 //  LOGIN
