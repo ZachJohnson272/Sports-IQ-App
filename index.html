@@ -2728,7 +2728,7 @@
       </div>
     </div>
     <div class="prof-section-title" style="margin-top:8px;">SETTINGS</div>
-    <div class="settings-row" onclick="showComingSoon()">
+    <div class="settings-row" onclick="window.location.href='username.html'">
       <div class="sr-left"><span class="sr-icon">✏️</span><span class="sr-label">Edit Username</span></div>
       <span class="sr-arrow">→</span>
     </div>
@@ -2789,7 +2789,41 @@ async function logout() {
 
 // ===============================================================
 
-// ===================== ROSTER DATA =====================
+// ===================== USERNAME LOADER =====================
+// Loads the user's real username from Supabase on every page load.
+// Falls back to localStorage cache so the UI is instant.
+
+async function sbUsernameLoad() {
+  try {
+    const { data: { session } } = await _sb.auth.getSession();
+    if (!session) return;
+
+    const { data, error } = await _sb
+      .from('user_profiles')
+      .select('username')
+      .eq('user_id', session.user.id)
+      .maybeSingle();
+
+    if (!error && data && data.username) {
+      // Update cache
+      localStorage.setItem('siq_username', data.username);
+    }
+  } catch (err) {
+    console.warn('[Username] Could not load from Supabase:', err);
+  }
+
+  // Refresh all username display spots with whatever is now in cache
+  applyUsername();
+}
+
+// Apply the cached username to every element that shows it
+function applyUsername() {
+  const username = localStorage.getItem('siq_username') || 'SportsFan';
+  const el = id => document.getElementById(id);
+  if (el('homeUsername'))        el('homeUsername').textContent        = username;
+  if (el('homeAvatarInitials'))  el('homeAvatarInitials').textContent  = username.charAt(0).toUpperCase();
+  if (el('profName'))            el('profName').textContent            = username;
+}
 const ROSTER = [
   { name:"Ace Bailey",          position:"G", age:19, height:'6\'9"',  college:"Rutgers",          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
   { name:"Mo Bamba",            position:"C", age:27, height:'7\'0"',  college:"Texas",             image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277919.png" },
@@ -3730,7 +3764,7 @@ function profRender() {
   const streak = xpGetStreak();
 
   const el = id => document.getElementById(id);
-  if (el('profName'))       el('profName').textContent       = 'SportsFan';
+  if (el('profName'))       el('profName').textContent       = localStorage.getItem('siq_username') || 'SportsFan';
   if (el('profTitle'))      el('profTitle').textContent      = level.title;
   if (el('profXpTotal'))    el('profXpTotal').textContent    = totalXp.toLocaleString() + ' Total XP';
   if (el('profLevel'))      el('profLevel').textContent      = levelNum;
@@ -3797,9 +3831,7 @@ function refreshHome() {
   renderHomeXpChart();
 
   // Username + avatar
-  const username = localStorage.getItem('siq_username') || 'SportsFan';
-  if (el('homeUsername')) el('homeUsername').textContent = username;
-  if (el('homeAvatarInitials')) el('homeAvatarInitials').textContent = username.charAt(0).toUpperCase();
+  applyUsername();
 }
 
 function xpResetConfirm() {
@@ -3866,9 +3898,10 @@ function updateSportsDropdown() {
 // ===================== INIT =====================
 updateHomeStats();
 dpUpdateBadges();
-xpRender();       // renders with 0 XP instantly (no flicker)
+xpRender();         // renders instantly with cached values
 bnUpdateHomeLevel();
-sbXpLoad();       // then loads real XP from Supabase and re-renders
+sbXpLoad();         // loads real XP from Supabase and re-renders
+sbUsernameLoad();   // loads real username from Supabase and re-renders
 </script>
 
 </body>
