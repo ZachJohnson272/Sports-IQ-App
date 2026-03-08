@@ -1818,6 +1818,9 @@
   }
 
   /* ===================== HOME STAT BOXES ===================== */
+  /* ════════════════════════════════════════
+     HOME PAGE
+  ════════════════════════════════════════ */
   .home-top {
     width: 100%;
     max-width: 390px;
@@ -1844,7 +1847,7 @@
     gap: 14px;
     width: 100%;
     padding: 4px 0;
-    animation: fadeUp 0.35s ease both;
+    animation: fadeUp 0.3s ease both;
   }
   .home-avatar-circle {
     width: 52px; height: 52px;
@@ -1866,230 +1869,12 @@
   }
   .home-avatar-sub { font-size: 12px; color: var(--jazz-sky); font-weight: 500; }
 
-  /* ── Big Play button ── */
-  .home-play-btn {
-    width: 100%;
-    padding: 17px 20px;
-    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
-    border: none;
-    border-radius: 16px;
-    color: #fff;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 6px 24px rgba(107,63,160,0.55), 0 2px 8px rgba(91,184,212,0.2);
-    transition: transform 0.15s, box-shadow 0.15s;
-    animation: fadeUp 0.4s 0.05s ease both;
-    position: relative;
-    overflow: hidden;
-  }
-  .home-play-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 60%);
-    pointer-events: none;
-  }
-  .home-play-btn:hover  { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(107,63,160,0.65); }
-  .home-play-btn:active { transform: translateY(0); }
-  .home-play-btn .play-icon { font-size: 22px; }
-
-  /* ── Level / XP bar card ── */
-  .home-level-box {
-    background: linear-gradient(135deg, rgba(107,63,160,0.3), rgba(91,184,212,0.12));
-    border: 1px solid rgba(107,63,160,0.45);
-    border-radius: 14px;
-    padding: 13px 16px;
-    animation: fadeUp 0.4s 0.1s ease both;
-  }
-  .hlb-left { display: flex; align-items: center; gap: 12px; }
-  .hlb-num {
-    width: 44px; height: 44px;
-    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
-    border-radius: 11px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(107,63,160,0.4);
-  }
-  .hlb-info { flex: 1; }
-  .hlb-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
-  }
-  .hlb-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .hlb-bar-wrap {
-    width: 100%; height: 7px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 99px; overflow: hidden;
-    margin-top: 8px;
-  }
-  .hlb-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #6B3FA0, #5BB8D4);
-    border-radius: 99px;
-    transition: width 0.6s ease;
-  }
-
-  /* ── Daily Challenge card ── */
-  .home-daily-card {
-    background: var(--surface);
-    border: 1px solid rgba(91,184,212,0.3);
-    border-radius: 14px;
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    animation: fadeUp 0.4s 0.15s ease both;
-  }
-  .home-daily-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .home-daily-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 2px; color: var(--jazz-sky);
-  }
-  .home-daily-badge {
-    font-size: 11px; font-weight: 600;
-    background: rgba(91,184,212,0.15);
-    border: 1px solid rgba(91,184,212,0.3);
-    color: var(--jazz-sky);
-    border-radius: 99px;
-    padding: 3px 9px;
-  }
-  .home-daily-xp-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 12px; color: var(--muted);
-  }
-  .home-daily-xp-nums { font-weight: 600; color: var(--text); font-size: 13px; }
-  .xp-bar-wrap {
-    width: 100%; height: 8px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 99px; overflow: hidden;
-  }
-  .xp-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
-    border-radius: 99px;
-    transition: width 0.5s ease;
-  }
-  .xp-bar-fill.done { background: linear-gradient(90deg, #3dcc7a, #5BB8D4); }
-  .home-daily-btn {
-    width: 100%;
-    padding: 11px;
-    background: rgba(91,184,212,0.12);
-    border: 1px solid rgba(91,184,212,0.4);
-    border-radius: 10px;
-    color: var(--jazz-sky);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 2px;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-  }
-  .home-daily-btn:hover { background: rgba(91,184,212,0.22); transform: translateY(-1px); }
-  .home-daily-btn.done-btn {
-    background: rgba(61,204,122,0.12);
-    border-color: rgba(61,204,122,0.4);
-    color: #3dcc7a;
-  }
-  .xp-complete {
-    display: none;
-    font-size: 12px;
-    color: #3dcc7a;
-    font-weight: 600;
-    text-align: center;
-    padding: 4px 0 0;
-  }
-  .xp-complete.show { display: block; }
-
-  /* ── Leaderboard preview ── */
-  .home-lb-card {
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.3);
-    border-radius: 14px;
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    animation: fadeUp 0.4s 0.2s ease both;
-  }
-  .home-lb-header {
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .home-lb-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 2px; color: #fff;
-  }
-  .home-lb-link {
-    font-size: 12px; color: var(--jazz-sky); font-weight: 600; cursor: pointer;
-    background: none; border: none; padding: 0;
-  }
-  .home-lb-link:hover { text-decoration: underline; }
-  .home-lb-rows { display: flex; flex-direction: column; gap: 7px; }
-  .home-lb-row {
-    display: flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 10px; padding: 8px 10px;
-  }
-  .home-lb-rank {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px; width: 24px; text-align: center; line-height: 1;
-  }
-  .home-lb-icon {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: rgba(107,63,160,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-  }
-  .home-lb-name { flex: 1; font-size: 13px; font-weight: 600; color: #fff; }
-  .home-lb-xp { font-size: 12px; color: var(--muted); font-weight: 500; }
-  .home-lb-you { background: rgba(107,63,160,0.18); border: 1px solid rgba(107,63,160,0.4); }
-  .home-lb-you .home-lb-name { color: var(--jazz-sky); }
-
-  /* ── Quick Play card ── */
-  .home-quick-card {
-    background: var(--surface);
-    border: 1px solid rgba(245,200,66,0.25);
-    border-radius: 14px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    animation: fadeUp 0.4s 0.25s ease both;
-  }
-  .home-quick-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,200,66,0.12); }
-  .home-quick-icon {
-    width: 46px; height: 46px; border-radius: 12px;
-    background: rgba(245,200,66,0.12);
-    border: 1px solid rgba(245,200,66,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
-  }
-  .home-quick-text { flex: 1; }
-  .home-quick-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1;
-  }
-  .home-quick-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-  .home-quick-arrow { font-size: 16px; color: #f5c842; }
-
   /* ── Stats row ── */
   .home-stat-boxes {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 7px;
-    animation: fadeUp 0.4s 0.3s ease both;
+    animation: fadeUp 0.35s 0.05s ease both;
   }
   .hsb {
     background: var(--surface);
@@ -2114,6 +1899,208 @@
   .hsb.xptotal .hsb-val { color: var(--jazz-sky); }
   .hsb.dailyxp { border-color: rgba(192,132,252,0.4); }
   .hsb.dailyxp .hsb-val { color: #c084fc; }
+
+  /* ── Main CTA block ── */
+  .home-cta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    animation: fadeUp 0.4s 0.1s ease both;
+  }
+  .home-play-btn {
+    width: 100%;
+    padding: 19px 20px;
+    background: linear-gradient(135deg, #7B4FB0 0%, #5BB8D4 100%);
+    border: none;
+    border-radius: 18px;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow:
+      0 8px 28px rgba(107,63,160,0.55),
+      0 2px 8px rgba(91,184,212,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .home-play-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .home-play-btn:hover  {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px rgba(107,63,160,0.65), 0 4px 12px rgba(91,184,212,0.25);
+  }
+  .home-play-btn:active { transform: translateY(1px); box-shadow: 0 4px 14px rgba(107,63,160,0.4); }
+  .home-play-btn .play-icon { font-size: 22px; }
+  .home-streak-nudge {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(245,200,66,0.7);
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+  .home-streak-nudge span { color: #f5c842; }
+
+  /* ── Level / XP bar card ── */
+  .home-level-box {
+    background: linear-gradient(135deg, rgba(107,63,160,0.28), rgba(91,184,212,0.1));
+    border: 1px solid rgba(107,63,160,0.4);
+    border-radius: 14px;
+    padding: 13px 16px;
+    animation: fadeUp 0.4s 0.15s ease both;
+  }
+  .hlb-left { display: flex; align-items: center; gap: 12px; }
+  .hlb-num {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(107,63,160,0.4);
+  }
+  .hlb-info { flex: 1; }
+  .hlb-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
+  }
+  .hlb-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .hlb-bar-wrap {
+    width: 100%; height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px; overflow: hidden;
+    margin-top: 9px;
+  }
+  .hlb-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6B3FA0, #5BB8D4);
+    border-radius: 99px;
+    transition: width 0.6s ease;
+  }
+
+  /* ── Daily Goal progress card (no button) ── */
+  .home-daily-card {
+    background: var(--surface);
+    border: 1px solid rgba(91,184,212,0.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    animation: fadeUp 0.4s 0.2s ease both;
+  }
+  .home-daily-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .home-daily-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 2px; color: var(--jazz-sky);
+  }
+  .home-daily-badge {
+    font-size: 11px; font-weight: 600;
+    background: rgba(91,184,212,0.12);
+    border: 1px solid rgba(91,184,212,0.28);
+    color: var(--jazz-sky);
+    border-radius: 99px;
+    padding: 3px 9px;
+    transition: all 0.3s;
+  }
+  .home-daily-badge.done {
+    background: rgba(61,204,122,0.15);
+    border-color: rgba(61,204,122,0.4);
+    color: #3dcc7a;
+  }
+  .home-daily-xp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+  }
+  .home-daily-xp-nums { font-weight: 600; color: var(--text); font-size: 13px; }
+  .xp-bar-wrap {
+    width: 100%; height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px; overflow: hidden;
+  }
+  .xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
+    border-radius: 99px;
+    transition: width 0.55s ease;
+  }
+  .xp-bar-fill.done { background: linear-gradient(90deg, #3dcc7a, #38c9a0); }
+  .xp-complete {
+    display: none;
+    font-size: 12px;
+    color: #3dcc7a;
+    font-weight: 600;
+    text-align: center;
+    padding: 2px 0 0;
+  }
+  .xp-complete.show { display: block; }
+
+  /* ── Bonus: Daily Player card ── */
+  .home-quick-card {
+    background: var(--surface);
+    border: 1px solid rgba(245,200,66,0.22);
+    border-radius: 14px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    animation: fadeUp 0.4s 0.25s ease both;
+    position: relative;
+  }
+  .home-quick-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245,200,66,0.1);
+    border-color: rgba(245,200,66,0.4);
+  }
+  .home-quick-card:active { transform: translateY(0); }
+  .home-quick-badge {
+    position: absolute;
+    top: -8px; right: 12px;
+    background: linear-gradient(135deg, #f5c842, #f7a54f);
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px; letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    box-shadow: 0 2px 8px rgba(245,200,66,0.4);
+  }
+  .home-quick-icon {
+    width: 46px; height: 46px; border-radius: 13px;
+    background: rgba(245,200,66,0.1);
+    border: 1px solid rgba(245,200,66,0.28);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .home-quick-text { flex: 1; }
+  .home-quick-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1;
+  }
+  .home-quick-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .home-quick-xp {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px; color: #f5c842; letter-spacing: 1px;
+  }
+  .home-quick-arrow { font-size: 15px; color: rgba(245,200,66,0.6); }
 </style>
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -2169,15 +2156,14 @@
 <!-- ============== HOME PAGE ============== -->
 <div class="page active" id="home">
   <div class="home-inner" style="padding-top:16px;justify-content:flex-start;align-items:center;width:100%;">
-
     <div class="home-top">
 
-      <!-- Brand strip -->
+      <!-- Brand -->
       <div class="home-brand">
         <div class="home-brand-title">S P O R T S M I N D</div>
       </div>
 
-      <!-- 1. Welcome row -->
+      <!-- Welcome -->
       <div class="home-avatar-row">
         <div class="home-avatar-section">
           <div class="home-avatar-circle">
@@ -2190,7 +2176,7 @@
         </div>
       </div>
 
-      <!-- 2. Stats row -->
+      <!-- Stats -->
       <div class="home-stat-boxes">
         <div class="hsb streak">
           <div class="hsb-val" id="hsbStreak">0</div>
@@ -2206,13 +2192,18 @@
         </div>
       </div>
 
-      <!-- 3. Big primary play button -->
-      <button class="home-play-btn" onclick="bnSwitch('learn')">
-        <span class="play-icon">🏆</span>
-        START TODAY'S QUIZ
-      </button>
+      <!-- Primary CTA -->
+      <div class="home-cta-block">
+        <button class="home-play-btn" onclick="bnSwitch('learn')">
+          <span class="play-icon">🏆</span>
+          PLAY TODAY'S QUIZ
+        </button>
+        <div class="home-streak-nudge" id="homeStreakNudge">
+          🔥 Play today to keep your streak alive
+        </div>
+      </div>
 
-      <!-- 4. Level / XP progress -->
+      <!-- Level progress -->
       <div class="home-level-box">
         <div class="hlb-left">
           <div class="hlb-num" id="hlbNum">1</div>
@@ -2226,35 +2217,37 @@
         </div>
       </div>
 
-      <!-- 5. Daily Challenge card -->
+      <!-- Daily Goal — progress only, no button -->
       <div class="home-daily-card">
         <div class="home-daily-header">
-          <span class="home-daily-label">⚡ DAILY CHALLENGE</span>
+          <span class="home-daily-label">⚡ DAILY GOAL</span>
           <span class="home-daily-badge" id="dailyBadge">In Progress</span>
         </div>
         <div class="home-daily-xp-row">
-          <span>XP Today</span>
+          <span>Today's XP</span>
           <span class="home-daily-xp-nums"><span id="xpCount">0</span> / 50 XP</span>
         </div>
         <div class="xp-bar-wrap">
           <div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div>
         </div>
-        <div class="xp-complete" id="xpComplete">🏆 Goal Complete! +10 Bonus XP awarded!</div>
-        <button class="home-daily-btn" id="dailyChallengeBtn" onclick="bnSwitch('learn')">START CHALLENGE →</button>
+        <div class="xp-complete" id="xpComplete">🏆 Daily goal complete! +10 Bonus XP awarded!</div>
       </div>
 
-      <!-- 6. Quick Play card -->
+      <!-- Bonus: Daily Player (secondary, whole card clickable) -->
       <div class="home-quick-card" onclick="dpOpen('nba')">
+        <div class="home-quick-badge">BONUS</div>
         <div class="home-quick-icon">🎯</div>
         <div class="home-quick-text">
-          <div class="home-quick-title">Daily Player Quiz</div>
-          <div class="home-quick-sub">Guess today's mystery player · +20 XP</div>
+          <div class="home-quick-title">Daily Player Guess</div>
+          <div class="home-quick-sub">Guess today's mystery player</div>
         </div>
-        <span class="home-quick-arrow">→</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+          <div class="home-quick-xp">+20 XP</div>
+          <div class="home-quick-arrow">→</div>
+        </div>
       </div>
 
     </div>
-
   </div>
 </div>
 
@@ -3678,7 +3671,6 @@ function xpRender() {
   const count    = document.getElementById('xpCount');
   const complete = document.getElementById('xpComplete');
   const badge    = document.getElementById('dailyBadge');
-  const btn      = document.getElementById('dailyChallengeBtn');
 
   if (!fill) return;
 
@@ -3689,18 +3681,12 @@ function xpRender() {
     if (data.done) complete.classList.add('show'); else complete.classList.remove('show');
   }
   if (badge) {
-    badge.textContent = data.done ? '✅ Complete!' : 'In Progress';
-    badge.style.background  = data.done ? 'rgba(61,204,122,0.15)' : '';
-    badge.style.borderColor = data.done ? 'rgba(61,204,122,0.4)'  : '';
-    badge.style.color       = data.done ? '#3dcc7a'                : '';
-  }
-  if (btn) {
     if (data.done) {
-      btn.textContent = '🏆 GOAL ACHIEVED!';
-      btn.classList.add('done-btn');
+      badge.textContent = '✅ Complete!';
+      badge.classList.add('done');
     } else {
-      btn.textContent = 'START CHALLENGE →';
-      btn.classList.remove('done-btn');
+      badge.textContent = 'In Progress';
+      badge.classList.remove('done');
     }
   }
 }
@@ -3969,8 +3955,17 @@ function refreshHome() {
   if (el('hsbXpTotal')) el('hsbXpTotal').textContent = totalXp.toLocaleString();
   if (el('hsbDailyXp')) el('hsbDailyXp').textContent = dailyXp + '/50';
 
-  // Leaderboard preview
-  renderHomeLb();
+  // Streak nudge line near CTA
+  const nudge = el('homeStreakNudge');
+  if (nudge) {
+    if (streak > 1) {
+      nudge.innerHTML = `🔥 You're on a <span>${streak}-day streak</span> — don't break it!`;
+    } else if (streak === 1) {
+      nudge.innerHTML = `🔥 Streak started! <span>Play again tomorrow</span> to keep it going`;
+    } else {
+      nudge.innerHTML = `🔥 Play today to <span>start your streak</span>`;
+    }
+  }
 
   // XP chart (progress page — safe no-op if element missing)
   renderHomeXpChart();
