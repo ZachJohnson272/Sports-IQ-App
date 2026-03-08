@@ -1885,8 +1885,10 @@
     line-height: 1;
   }
   .home-avatar-sub {
-    font-size: 11px;
-    color: var(--muted);
+    font-size: 13px;
+    color: var(--jazz-sky);
+    font-weight: 500;
+    margin-top: 1px;
   }
 
   /* Continue Learning — small box pinned top-right */
@@ -2098,7 +2100,7 @@
             <span class="home-avatar-initials" id="homeAvatarInitials">S</span>
           </div>
           <div class="home-avatar-name" id="homeUsername">SportsFan</div>
-          <div class="home-avatar-sub">Welcome back 👋</div>
+          <div class="home-avatar-sub" id="homeWelcome">Welcome back, SportsFan!</div>
         </div>
         <button class="continue-learning-btn" onclick="bnSwitch('learn')">
           <div class="clb-info">
@@ -2818,11 +2820,16 @@ async function sbUsernameLoad() {
 
 // Apply the cached username to every element that shows it
 function applyUsername() {
-  const username = localStorage.getItem('siq_username') || 'SportsFan';
+  const username = localStorage.getItem('siq_username') || '';
   const el = id => document.getElementById(id);
-  if (el('homeUsername'))        el('homeUsername').textContent        = username;
-  if (el('homeAvatarInitials'))  el('homeAvatarInitials').textContent  = username.charAt(0).toUpperCase();
-  if (el('profName'))            el('profName').textContent            = username;
+
+  const displayName = username || 'SportsFan';
+  const welcome     = username ? 'Welcome back, ' + username + '!' : 'Welcome back!';
+
+  if (el('homeUsername'))        el('homeUsername').textContent        = displayName;
+  if (el('homeAvatarInitials'))  el('homeAvatarInitials').textContent  = displayName.charAt(0).toUpperCase();
+  if (el('homeWelcome'))         el('homeWelcome').textContent         = welcome;
+  if (el('profName'))            el('profName').textContent            = displayName;
 }
 const ROSTER = [
   { name:"Ace Bailey",          position:"G", age:19, height:'6\'9"',  college:"Rutgers",          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
