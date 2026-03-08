@@ -2190,13 +2190,29 @@
         </div>
       </div>
 
-      <!-- 2. Big primary play button -->
+      <!-- 2. Stats row -->
+      <div class="home-stat-boxes">
+        <div class="hsb streak">
+          <div class="hsb-val" id="hsbStreak">0</div>
+          <div class="hsb-label">🔥 Streak</div>
+        </div>
+        <div class="hsb xptotal">
+          <div class="hsb-val" id="hsbXpTotal">0</div>
+          <div class="hsb-label">⚡ Total XP</div>
+        </div>
+        <div class="hsb dailyxp">
+          <div class="hsb-val" id="hsbDailyXp">0/50</div>
+          <div class="hsb-label">📅 Daily XP</div>
+        </div>
+      </div>
+
+      <!-- 3. Big primary play button -->
       <button class="home-play-btn" onclick="bnSwitch('learn')">
         <span class="play-icon">🏆</span>
         START TODAY'S QUIZ
       </button>
 
-      <!-- 3. Level / XP progress -->
+      <!-- 4. Level / XP progress -->
       <div class="home-level-box">
         <div class="hlb-left">
           <div class="hlb-num" id="hlbNum">1</div>
@@ -2210,7 +2226,7 @@
         </div>
       </div>
 
-      <!-- 4. Daily Challenge card -->
+      <!-- 5. Daily Challenge card -->
       <div class="home-daily-card">
         <div class="home-daily-header">
           <span class="home-daily-label">⚡ DAILY CHALLENGE</span>
@@ -2227,15 +2243,6 @@
         <button class="home-daily-btn" id="dailyChallengeBtn" onclick="bnSwitch('learn')">START CHALLENGE →</button>
       </div>
 
-      <!-- 5. Leaderboard preview -->
-      <div class="home-lb-card">
-        <div class="home-lb-header">
-          <span class="home-lb-title">🏅 TOP PLAYERS</span>
-          <button class="home-lb-link" onclick="bnSwitch('leaderboard')">See All →</button>
-        </div>
-        <div class="home-lb-rows" id="homeLbRows"></div>
-      </div>
-
       <!-- 6. Quick Play card -->
       <div class="home-quick-card" onclick="dpOpen('nba')">
         <div class="home-quick-icon">🎯</div>
@@ -2244,22 +2251,6 @@
           <div class="home-quick-sub">Guess today's mystery player · +20 XP</div>
         </div>
         <span class="home-quick-arrow">→</span>
-      </div>
-
-      <!-- 7. Stats — secondary info -->
-      <div class="home-stat-boxes">
-        <div class="hsb streak">
-          <div class="hsb-val" id="hsbStreak">0</div>
-          <div class="hsb-label">🔥 Streak</div>
-        </div>
-        <div class="hsb xptotal">
-          <div class="hsb-val" id="hsbXpTotal">0</div>
-          <div class="hsb-label">⚡ Total XP</div>
-        </div>
-        <div class="hsb dailyxp">
-          <div class="hsb-val" id="hsbDailyXp">0/50</div>
-          <div class="hsb-label">📅 Daily XP</div>
-        </div>
       </div>
 
     </div>
