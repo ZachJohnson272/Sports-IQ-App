@@ -300,9 +300,13 @@ async function fetchUsername(userId) {
     .from('user_profiles')
     .select('username')
     .eq('user_id', userId)
-    .maybeSingle(); // returns null (not error) when no row exists yet
-  if (error || !data || !data.username) return null;
-  return data.username;
+    .maybeSingle();
+  if (error) {
+    // Not a fatal error — user just hasn't set a username yet, or no SELECT policy
+    console.warn('[Username] fetchUsername error (non-fatal):', error.message);
+    return null;
+  }
+  return data?.username || null;
 }
 
 // ── Validation rules ─────────────────────────────────────────────
@@ -343,49 +347,51 @@ async function saveUsername() {
   btn.innerHTML = '<span class="spinner"></span>Saving…';
   clearMsg();
 
-  try {
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) { window.location.href = 'login.html'; return; }
-
-    const userId = session.user.id;
-
-    // Check if username is already taken by someone else
-    const { data: taken } = await sb
-      .from('user_profiles')
-      .select('user_id')
-      .eq('username', val)
-      .neq('user_id', userId)
-      .maybeSingle();
-
-    if (taken) {
-      showMsg('That username is already taken. Try another!', 'error');
-      btn.disabled  = false;
-      btn.innerHTML = 'Save Username';
-      return;
-    }
-
-    // Upsert: works for both brand-new users and users updating their username
-    const { error } = await sb
-      .from('user_profiles')
-      .upsert(
-        { user_id: userId, username: val, updated_at: new Date().toISOString() },
-        { onConflict: 'user_id' }
-      );
-
-    if (error) throw error;
-
-    // Cache locally so the dashboard shows the name instantly
-    localStorage.setItem('siq_username', val);
-
-    showMsg('Username saved! Loading your dashboard…', 'success');
-    setTimeout(() => { window.location.href = 'index.html'; }, 900);
-
-  } catch (err) {
-    console.error('[Username] Save error:', err);
-    showMsg('Something went wrong. Please try again.', 'error');
+  // Step 1: Get the logged-in user's session
+  const { data: sessionData, error: sessionError } = await sb.auth.getSession();
+  if (sessionError || !sessionData.session) {
+    console.error('[Username] No session:', sessionError);
+    showMsg('You are not logged in. Please go back to login.', 'error');
     btn.disabled  = false;
     btn.innerHTML = 'Save Username';
+    return;
   }
+
+  const userId = sessionData.session.user.id;
+  console.log('[Username] Saving for user_id:', userId, '| username:', val);
+
+  // Step 2: Insert the row into user_profiles
+  // Using insert (not upsert) — only the columns your table actually has
+  const { data, error } = await sb
+    .from('user_profiles')
+    .insert({ user_id: userId, username: val });
+
+  if (error) {
+    // Show the exact Supabase error so you can debug it
+    console.error('[Username] Supabase insert error:', error);
+    console.error('[Username] Error code:', error.code);
+    console.error('[Username] Error message:', error.message);
+    console.error('[Username] Error details:', error.details);
+    console.error('[Username] Error hint:', error.hint);
+
+    // Friendly message for duplicate username
+    if (error.code === '23505') {
+      showMsg('That username is already taken. Try another!', 'error');
+    } else {
+      showMsg('Error: ' + error.message, 'error');
+    }
+
+    btn.disabled  = false;
+    btn.innerHTML = 'Save Username';
+    return;
+  }
+
+  console.log('[Username] Insert successful:', data);
+
+  // Step 3: Cache locally and redirect
+  localStorage.setItem('siq_username', val);
+  showMsg('Username saved! Loading your dashboard…', 'success');
+  setTimeout(() => { window.location.href = 'index.html'; }, 900);
 }
 
 // Allow Enter key to submit
