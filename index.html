@@ -3751,7 +3751,16 @@ updateHomeStats();
 dpUpdateBadges();
 xpRender();
 bnUpdateHomeLevel();
-</script>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
+<script>
+
+const supabaseUrl = "https://cyzxoadiuhkftxpvzsxq.supabase.co"
+const supabaseKey = "sb_publishable_Nrb_gW8BWZoA-Ucwhh9xRg_4XVcy5rN"
+
+const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey)
+
+</script>
 </body>
 </html>
