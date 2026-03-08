@@ -5,21 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sports IQ — Login</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<!-- Supabase JS SDK v2 -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // ============================================================
-  // 👇 PASTE YOUR SUPABASE CREDENTIALS HERE
-  // Go to: app.supabase.com → your project → Settings → API
-  // The anon key starts with "eyJ..." NOT "sb_publishable_..."
-  // ============================================================
   const SUPABASE_URL      = 'https://cyzxoadiuhkftxpvzsxq.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5enhvYWRpdWhrZnR4cHZ6c3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MzYxNjMsImV4cCI6MjA4ODUxMjE2M30.ctQTb1YkBwyVzspLKKtrEK-qjxeYrf6mmAM7R2rHXWg';
-
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 </script>
-
 <style>
   :root {
     color-scheme: dark;
@@ -32,9 +23,7 @@
     --sky: #5BB8D4;
     --radius: 16px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
@@ -46,7 +35,6 @@
     padding: 24px 20px;
     overflow-x: hidden;
   }
-
   body::before {
     content: '';
     position: fixed;
@@ -57,8 +45,6 @@
     pointer-events: none;
     z-index: 0;
   }
-
-  /* Loading overlay */
   #loadingOverlay {
     display: flex;
     position: fixed;
@@ -83,14 +69,11 @@
     letter-spacing: 3px;
     color: var(--muted);
   }
-
-  /* Main content — hidden until session check done */
   #mainContent {
     display: none;
     width: 100%;
     justify-content: center;
   }
-
   .container {
     position: relative;
     z-index: 1;
@@ -101,14 +84,12 @@
     align-items: center;
     animation: fadeUp 0.6s ease both;
   }
-
   .brand {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 32px;
   }
-
   .brand-icon {
     width: 72px; height: 72px;
     background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
@@ -118,7 +99,6 @@
     margin-bottom: 14px;
     box-shadow: 0 8px 32px rgba(107,63,160,0.5);
   }
-
   .brand-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 44px;
@@ -126,7 +106,6 @@
     color: #fff;
     line-height: 1;
   }
-
   .brand-sub {
     font-size: 13px;
     color: var(--muted);
@@ -134,7 +113,6 @@
     letter-spacing: 1px;
     font-style: italic;
   }
-
   .card {
     width: 100%;
     background: var(--surface);
@@ -144,7 +122,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .card::before {
     content: '';
     position: absolute;
@@ -152,7 +129,6 @@
     height: 3px;
     background: linear-gradient(90deg, var(--purple), var(--sky), var(--purple));
   }
-
   .tabs {
     display: flex;
     gap: 6px;
@@ -161,7 +137,6 @@
     border-radius: 12px;
     padding: 4px;
   }
-
   .tab-btn {
     flex: 1;
     padding: 10px;
@@ -175,20 +150,17 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-
   .tab-btn.active {
     background: var(--purple);
     color: #fff;
     box-shadow: 0 2px 12px rgba(107,63,160,0.4);
   }
-
   .form-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
     margin-bottom: 14px;
   }
-
   .form-label {
     font-size: 11px;
     text-transform: uppercase;
@@ -196,7 +168,6 @@
     color: var(--muted);
     font-weight: 500;
   }
-
   .form-input {
     width: 100%;
     background: var(--surface2);
@@ -209,14 +180,11 @@
     outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
-
   .form-input:focus {
     border-color: var(--sky);
     box-shadow: 0 0 0 3px rgba(91,184,212,0.12);
   }
-
   .form-input::placeholder { color: var(--muted); }
-
   .btn-primary {
     width: 100%;
     padding: 15px;
@@ -236,11 +204,9 @@
     justify-content: center;
     gap: 8px;
   }
-
-  .btn-primary:hover   { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(107,63,160,0.6); }
-  .btn-primary:active  { transform: translateY(0); }
+  .btn-primary:hover    { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(107,63,160,0.6); }
+  .btn-primary:active   { transform: translateY(0); }
   .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
-
   .msg {
     display: none;
     margin-top: 14px;
@@ -252,11 +218,9 @@
   }
   .msg.error   { display: block; background: rgba(224,85,85,0.12);  border: 1px solid rgba(224,85,85,0.35);  color: #e05555; }
   .msg.success { display: block; background: rgba(61,204,122,0.12); border: 1px solid rgba(61,204,122,0.35); color: #3dcc7a; }
-
   .switch-hint { text-align: center; font-size: 12px; color: var(--muted); margin-top: 18px; }
   .switch-hint span { color: var(--sky); cursor: pointer; font-weight: 600; }
   .switch-hint span:hover { text-decoration: underline; }
-
   .spinner {
     width: 16px; height: 16px;
     border: 2px solid rgba(255,255,255,0.3);
@@ -265,80 +229,96 @@
     animation: spin 0.7s linear infinite;
     flex-shrink: 0;
   }
-
   @keyframes spin   { to { transform: rotate(360deg); } }
   @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
 </style>
 </head>
 <body>
 
-<!-- Shown while checking if user is already logged in -->
 <div id="loadingOverlay">
   <div class="big-spinner"></div>
   <p>Loading...</p>
 </div>
 
-<!-- Hidden until session check completes -->
 <div id="mainContent">
   <div class="container">
-
     <div class="brand">
       <div class="brand-icon">🧠</div>
       <div class="brand-title">Sports IQ</div>
       <div class="brand-sub">Test your sports knowledge</div>
     </div>
-
     <div class="card">
-
       <div class="tabs">
         <button class="tab-btn active" id="tabLogin"  onclick="switchTab('login')">Log In</button>
         <button class="tab-btn"        id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
       </div>
-
       <div class="form-group">
         <label class="form-label" for="emailInput">Email</label>
         <input class="form-input" id="emailInput" type="email"
                placeholder="you@example.com" autocomplete="email" />
       </div>
-
       <div class="form-group">
         <label class="form-label" for="passwordInput">Password</label>
         <input class="form-input" id="passwordInput" type="password"
                placeholder="••••••••" autocomplete="current-password" />
       </div>
-
       <button class="btn-primary" id="actionBtn" onclick="handleAction()">Log In</button>
-
       <div class="msg" id="msgBox"></div>
-
       <div class="switch-hint" id="switchHint">
         Don't have an account? <span onclick="switchTab('signup')">Sign Up</span>
       </div>
-
     </div>
-    <!-- /.card -->
-
   </div>
-  <!-- /.container -->
 </div>
-<!-- /#mainContent -->
 
 <script>
 // ============================================================
-//  SESSION CHECK — runs immediately on page load
+//  HELPER: Check if a user already has a username in Supabase.
+//  Returns the username string if found, or null if not.
 // ============================================================
-function showForm() {
-  console.log('[SportsIQ] Showing login form.');
-  document.getElementById('loadingOverlay').style.display = 'none';
-  document.getElementById('mainContent').style.display    = 'flex';
+async function checkExistingUsername(userId) {
+  console.log('[Login] Checking user_profiles for user_id:', userId);
+  const { data, error } = await sb
+    .from('user_profiles')
+    .select('username')
+    .eq('user_id', userId)
+    .maybeSingle();
+
+  if (error) {
+    console.warn('[Login] Could not check user_profiles:', error.message);
+    return null; // treat as "no username" on error — username.html will handle it
+  }
+
+  const username = data?.username || null;
+  console.log('[Login] Existing username found:', username);
+  return username;
 }
 
-(async () => {
-  console.log('[SportsIQ] Checking session...');
+// ============================================================
+//  HELPER: Route the user to the right page after auth.
+//  - Has username → index.html
+//  - No username  → username.html
+// ============================================================
+async function routeAfterAuth(userId) {
+  const username = await checkExistingUsername(userId);
+  if (username) {
+    localStorage.setItem('siq_username', username); // keep cache fresh
+    console.log('[Login] Username exists — going to index.html');
+    window.location.href = 'index.html';
+  } else {
+    console.log('[Login] No username — going to username.html');
+    window.location.href = 'username.html';
+  }
+}
 
-  // Failsafe: always show form after 5s no matter what
+// ============================================================
+//  SESSION CHECK — on page load, if already logged in, route them.
+// ============================================================
+(async () => {
+  console.log('[Login] Checking existing session...');
+
   const fallback = setTimeout(() => {
-    console.warn('[SportsIQ] Timeout — showing form anyway.');
+    console.warn('[Login] Timeout — showing form.');
     showForm();
   }, 5000);
 
@@ -347,38 +327,28 @@ function showForm() {
     clearTimeout(fallback);
 
     if (error) {
-      console.error('[SportsIQ] Session error:', error.message);
+      console.error('[Login] Session check error:', error.message);
       showForm();
       return;
     }
 
     if (data.session) {
-      console.log('[SportsIQ] Already logged in — checking username…');
-      window.location.href = 'username.html'; // username.html will forward to index.html if name already set
+      // Already logged in — check if they have a username, then route
+      console.log('[Login] Already logged in as:', data.session.user.id);
+      await routeAfterAuth(data.session.user.id);
     } else {
-      console.log('[SportsIQ] Not logged in — showing form.');
+      console.log('[Login] No session — showing form.');
       showForm();
     }
-
   } catch (err) {
     clearTimeout(fallback);
-    console.error('[SportsIQ] Unexpected error:', err);
+    console.error('[Login] Unexpected error:', err);
     showForm();
   }
 })();
 
-// --- Auth state listener ---
-// If a user somehow lands on login.html while already logged in
-// (e.g. browser back button after login), redirect them to the app.
-sb.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_IN' && session) {
-    window.location.href = 'username.html'; // username.html skips ahead if name already set
-  }
-});
-
-
 // ============================================================
-//  LOGIN
+//  LOG IN
 // ============================================================
 async function login() {
   const email    = document.getElementById('emailInput').value.trim();
@@ -389,19 +359,21 @@ async function login() {
   setLoading(true);
   clearMsg();
 
-  const { error } = await sb.auth.signInWithPassword({ email, password });
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
 
   if (error) {
-    console.error('[SportsIQ] Login error:', error.message);
+    console.error('[Login] Login failed:', error.message);
     showMsg(error.message, 'error');
     setLoading(false);
-  } else {
-    console.log('[SportsIQ] Login successful!');
-    showMsg('Welcome back! Redirecting…', 'success');
-    setTimeout(() => { window.location.href = 'username.html'; }, 700);
+    return;
   }
-}
 
+  console.log('[Login] Login successful for:', data.user.id);
+  showMsg('Logged in! Loading your account…', 'success');
+
+  // Check Supabase for an existing username, then route accordingly
+  await routeAfterAuth(data.user.id);
+}
 
 // ============================================================
 //  SIGN UP
@@ -416,31 +388,37 @@ async function signup() {
   setLoading(true);
   clearMsg();
 
-  const { error } = await sb.auth.signUp({ email, password });
+  const { data, error } = await sb.auth.signUp({ email, password });
 
   if (error) {
-    console.error('[SportsIQ] Signup error:', error.message);
+    console.error('[Login] Signup failed:', error.message);
     showMsg(error.message, 'error');
     setLoading(false);
+    return;
+  }
+
+  console.log('[Login] Signup successful for:', data.user?.id);
+  showMsg('Account created! Setting up your profile…', 'success');
+
+  // New users won't have a username yet, but route through the same check
+  // so the flow is consistent and handles edge cases (e.g. existing account re-signup)
+  if (data.user) {
+    await routeAfterAuth(data.user.id);
   } else {
-    console.log('[SportsIQ] Signup successful!');
-    showMsg('Account created! Setting up your profile…', 'success');
-    setTimeout(() => { window.location.href = 'username.html'; }, 900);
+    // Supabase returned no user — email confirmation may be on
+    setLoading(false);
+    showMsg('Check your email to confirm your account, then log in.', 'success');
   }
 }
 
-
 // ============================================================
-//  LOGOUT — copy this into index.html's <script> block
-//
-//  async function logout() {
-//    await sb.auth.signOut();
-//    window.location.href = 'login.html';
-//  }
+//  UI HELPERS
 // ============================================================
+function showForm() {
+  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById('mainContent').style.display    = 'flex';
+}
 
-
-// ---- Tab switching ----
 let currentTab = 'login';
 
 function switchTab(tab) {
@@ -461,7 +439,6 @@ function handleAction() {
 
 document.addEventListener('keydown', e => { if (e.key === 'Enter') handleAction(); });
 
-// ---- UI helpers ----
 function showMsg(text, type) {
   const box = document.getElementById('msgBox');
   box.textContent = text;
