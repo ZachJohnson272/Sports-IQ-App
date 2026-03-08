@@ -1826,17 +1826,17 @@
     max-width: 390px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 0 20px;
+    gap: 11px;
+    padding: 0 20px 24px;
   }
 
   /* ── Brand strip ── */
   .home-brand { text-align: center; padding: 2px 0 0; }
   .home-brand-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 7px;
-    color: rgba(255,255,255,0.3);
+    font-size: 17px;
+    letter-spacing: 8px;
+    color: rgba(255,255,255,0.22);
     line-height: 1;
   }
 
@@ -1850,47 +1850,56 @@
     animation: fadeUp 0.3s ease both;
   }
   .home-avatar-circle {
-    width: 52px; height: 52px;
+    width: 50px; height: 50px;
     border-radius: 50%;
     background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 0 3px rgba(91,184,212,0.3), 0 4px 16px rgba(107,63,160,0.45);
+    box-shadow: 0 0 0 2px rgba(91,184,212,0.25), 0 4px 14px rgba(107,63,160,0.4);
     flex-shrink: 0;
   }
   .home-avatar-initials {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px; color: #fff; line-height: 1;
+    font-size: 22px; color: #fff; line-height: 1;
   }
-  .home-avatar-section { display: flex; align-items: center; gap: 14px; }
+  .home-avatar-section { display: flex; align-items: center; gap: 13px; }
   .home-avatar-text { display: flex; flex-direction: column; gap: 2px; }
   .home-avatar-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
   }
   .home-avatar-sub { font-size: 12px; color: var(--jazz-sky); font-weight: 500; }
-  /* Streak pill — pinned right of welcome row */
+
+  /* ── Streak pill — top-right of welcome row ── */
   .home-streak-pill {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(245,200,66,0.1);
-    border: 1px solid rgba(245,200,66,0.4);
-    border-radius: 14px;
-    padding: 9px 14px 8px;
+    background: rgba(245,200,66,0.08);
+    border: 1px solid rgba(245,200,66,0.32);
+    border-radius: 13px;
+    padding: 8px 13px 7px;
     flex-shrink: 0;
-    gap: 2px;
-    box-shadow: 0 2px 12px rgba(245,200,66,0.12);
+    gap: 1px;
+    /* subtle glow that flickers */
+    animation: streakFlicker 5s 3s ease-in-out infinite;
+  }
+  @keyframes streakFlicker {
+    0%,  85%, 100% { box-shadow: 0 2px 10px rgba(245,200,66,0.08); border-color: rgba(245,200,66,0.32); }
+    88%            { box-shadow: 0 2px 16px rgba(245,200,66,0.28); border-color: rgba(245,200,66,0.6);  }
+    91%            { box-shadow: 0 2px 10px rgba(245,200,66,0.10); border-color: rgba(245,200,66,0.36); }
+    94%            { box-shadow: 0 2px 18px rgba(245,200,66,0.32); border-color: rgba(245,200,66,0.65); }
+    97%            { box-shadow: 0 2px 10px rgba(245,200,66,0.08); border-color: rgba(245,200,66,0.32); }
   }
   .home-streak-pill-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px; color: #f5c842; line-height: 1; letter-spacing: 1px;
+    font-size: 24px; color: #f5c842; line-height: 1; letter-spacing: 1px;
   }
   .home-streak-pill-label {
-    font-size: 9px; color: rgba(245,200,66,0.7);
+    font-size: 9px; color: rgba(245,200,66,0.65);
     text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600;
   }
 
-  /* ── Stats row — 2 boxes (streak lives in welcome pill) ── */
+  /* ── Stats row — 2 cards only ── */
   .home-stat-boxes {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1899,9 +1908,9 @@
   }
   .hsb {
     background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.3);
+    border: 1px solid rgba(107,63,160,0.28);
     border-radius: 12px;
-    padding: 11px 6px 9px;
+    padding: 12px 8px 10px;
     display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
   .hsb-val {
@@ -1910,132 +1919,137 @@
   }
   .hsb-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
   .hsb.worldrank {
-    background: var(--surface); border: 1px solid rgba(245,200,66,0.4);
+    background: var(--surface); border: 1px solid rgba(245,200,66,0.35);
     border-radius: 12px; padding: 10px 14px;
     display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: flex-start;
   }
-  .hsb.streak  { border-color: rgba(245,200,66,0.4); }
+  .hsb.streak  { border-color: rgba(245,200,66,0.35); }
   .hsb.streak .hsb-val  { color: #f5c842; }
-  .hsb.xptotal { border-color: rgba(91,184,212,0.4); }
+  .hsb.xptotal { border-color: rgba(91,184,212,0.35); }
   .hsb.xptotal .hsb-val { color: var(--jazz-sky); }
-  .hsb.dailyxp { border-color: rgba(192,132,252,0.4); }
+  .hsb.dailyxp { border-color: rgba(192,132,252,0.35); }
   .hsb.dailyxp .hsb-val { color: #c084fc; }
+
+  /* ── Level / XP bar card ── */
+  .home-level-box {
+    background: rgba(107,63,160,0.16);
+    border: 1px solid rgba(107,63,160,0.32);
+    border-radius: 14px;
+    padding: 13px 16px;
+    animation: fadeUp 0.38s 0.08s ease both;
+  }
+  .hlb-left { display: flex; align-items: center; gap: 12px; }
+  .hlb-num {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, #5a3080, #3a8fa8);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 21px; color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(90,48,128,0.4);
+  }
+  .hlb-info { flex: 1; }
+  .hlb-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px; letter-spacing: 2px; color: #fff; line-height: 1;
+  }
+  .hlb-sub { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+  .hlb-bar-wrap {
+    width: 100%; height: 5px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px; overflow: hidden;
+    margin-top: 8px;
+  }
+  .hlb-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #5a3080, #3a8fa8);
+    border-radius: 99px;
+    transition: width 0.65s ease;
+  }
 
   /* ── Main CTA block ── */
   .home-cta-block {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    animation: fadeUp 0.4s 0.15s ease both;
+    gap: 7px;
+    animation: fadeUp 0.4s 0.12s ease both;
   }
   .home-play-btn {
     width: 100%;
     padding: 17px 20px;
-    background: linear-gradient(140deg, #5a3080 0%, #3a8fa8 100%);
-    border: none;
-    border-radius: 18px;
+    background: linear-gradient(140deg, #3d2158 0%, #27677a 100%);
+    border: 1px solid rgba(91,184,212,0.18);
+    border-radius: 16px;
     color: #fff;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
+    font-size: 23px;
     letter-spacing: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 11px;
+    /* glow reduced ~22% vs previous */
     box-shadow:
-      0 8px 28px rgba(90,48,128,0.55),
-      0 2px 8px rgba(58,143,168,0.2),
-      inset 0 1px 0 rgba(255,255,255,0.14);
-    transition: transform 0.15s, box-shadow 0.15s;
+      0 6px 22px rgba(61,33,88,0.5),
+      0 2px 6px rgba(39,103,122,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
     position: relative;
     overflow: hidden;
-    animation: fadeUp 0.4s 0.15s ease both, btnPulse 4s 2s ease-in-out infinite;
+    animation: fadeUp 0.4s 0.12s ease both, btnPulse 5s 2.5s ease-in-out infinite;
   }
   @keyframes btnPulse {
-    0%, 100% { box-shadow: 0 8px 28px rgba(90,48,128,0.55), 0 2px 8px rgba(58,143,168,0.2), inset 0 1px 0 rgba(255,255,255,0.14); }
-    50%       { box-shadow: 0 8px 38px rgba(90,48,128,0.75), 0 2px 14px rgba(58,143,168,0.35), inset 0 1px 0 rgba(255,255,255,0.14); }
+    0%, 100% {
+      box-shadow: 0 6px 22px rgba(61,33,88,0.5), 0 2px 6px rgba(39,103,122,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    50% {
+      box-shadow: 0 6px 30px rgba(61,33,88,0.68), 0 2px 10px rgba(39,103,122,0.28), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
   }
   .home-play-btn::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 55%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 52%);
     pointer-events: none;
   }
   .home-play-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 36px rgba(90,48,128,0.7), 0 4px 12px rgba(58,143,168,0.3);
+    border-color: rgba(91,184,212,0.3);
+    box-shadow: 0 10px 30px rgba(61,33,88,0.65), 0 3px 10px rgba(39,103,122,0.25);
     animation: none;
   }
-  .home-play-btn:active { transform: translateY(1px); box-shadow: 0 4px 14px rgba(90,48,128,0.4); animation: none; }
-  .home-play-btn .play-icon { font-size: 22px; }
+  .home-play-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 12px rgba(61,33,88,0.4);
+    animation: none;
+  }
+  .home-play-btn .play-icon { font-size: 21px; }
+
+  /* Single motivational line under button */
   .home-streak-nudge {
     text-align: center;
     font-size: 11px;
-    color: rgba(200,185,230,0.55);
+    color: rgba(210,200,230,0.45);
     letter-spacing: 0.3px;
     font-weight: 500;
-    line-height: 1.6;
+    line-height: 1;
   }
-  .home-streak-nudge span { color: #f5c842; font-weight: 700; }
-  .home-nudge-xp {
-    display: block;
-    text-align: center;
-    font-size: 11px;
-    color: rgba(91,184,212,0.6);
-    letter-spacing: 0.3px;
-    font-weight: 600;
-    margin-top: -2px;
-  }
+  .home-streak-nudge span { color: rgba(245,200,66,0.8); font-weight: 600; }
+  /* hide the old second nudge line — consolidated into one */
+  .home-nudge-xp { display: none; }
 
-  /* ── Level / XP bar card ── */
-  .home-level-box {
-    background: linear-gradient(135deg, rgba(107,63,160,0.28), rgba(91,184,212,0.1));
-    border: 1px solid rgba(107,63,160,0.4);
-    border-radius: 14px;
-    padding: 13px 16px;
-    animation: fadeUp 0.4s 0.15s ease both;
-  }
-  .hlb-left { display: flex; align-items: center; gap: 12px; }
-  .hlb-num {
-    width: 44px; height: 44px;
-    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
-    border-radius: 11px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(107,63,160,0.4);
-  }
-  .hlb-info { flex: 1; }
-  .hlb-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
-  }
-  .hlb-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .hlb-bar-wrap {
-    width: 100%; height: 6px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 99px; overflow: hidden;
-    margin-top: 9px;
-  }
-  .hlb-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #6B3FA0, #5BB8D4);
-    border-radius: 99px;
-    transition: width 0.6s ease;
-  }
-
-  /* ── Daily Goal progress card (no button) ── */
+  /* ── Daily Goal progress card ── */
   .home-daily-card {
     background: var(--surface);
-    border: 1px solid rgba(91,184,212,0.25);
+    border: 1px solid rgba(91,184,212,0.2);
     border-radius: 14px;
     padding: 14px 16px;
     display: flex;
     flex-direction: column;
     gap: 9px;
-    animation: fadeUp 0.4s 0.2s ease both;
+    animation: fadeUp 0.4s 0.18s ease both;
   }
   .home-daily-header {
     display: flex;
@@ -2044,20 +2058,20 @@
   }
   .home-daily-label {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px; letter-spacing: 2px; color: var(--jazz-sky);
+    font-size: 14px; letter-spacing: 2px; color: var(--jazz-sky);
   }
   .home-daily-badge {
-    font-size: 11px; font-weight: 600;
-    background: rgba(91,184,212,0.12);
-    border: 1px solid rgba(91,184,212,0.28);
+    font-size: 10px; font-weight: 600;
+    background: rgba(91,184,212,0.1);
+    border: 1px solid rgba(91,184,212,0.25);
     color: var(--jazz-sky);
     border-radius: 99px;
     padding: 3px 9px;
-    transition: all 0.3s;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
   }
   .home-daily-badge.done {
-    background: rgba(61,204,122,0.15);
-    border-color: rgba(61,204,122,0.4);
+    background: rgba(61,204,122,0.12);
+    border-color: rgba(61,204,122,0.35);
     color: #3dcc7a;
   }
   .home-daily-xp-row {
@@ -2068,13 +2082,13 @@
   }
   .home-daily-xp-nums { font-weight: 600; color: var(--text); font-size: 13px; }
   .xp-bar-wrap {
-    width: 100%; height: 8px;
-    background: rgba(255,255,255,0.08);
+    width: 100%; height: 7px;
+    background: rgba(255,255,255,0.07);
     border-radius: 99px; overflow: hidden;
   }
   .xp-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
+    background: linear-gradient(90deg, #5a3080, #3a8fa8);
     border-radius: 99px;
     transition: width 0.55s ease;
   }
@@ -2091,73 +2105,79 @@
 
   /* ── Bonus: Daily Player card ── */
   .home-quick-card {
-    background: linear-gradient(135deg, rgba(245,200,66,0.06) 0%, rgba(247,165,79,0.04) 100%);
-    border: 1px solid rgba(245,200,66,0.28);
-    border-radius: 16px;
-    padding: 14px 16px 14px 14px;
+    background: rgba(245,200,66,0.04);
+    border: 1px solid rgba(245,200,66,0.22);
+    border-radius: 15px;
+    padding: 13px 15px 13px 13px;
     display: flex;
     align-items: center;
     gap: 13px;
     cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-    animation: fadeUp 0.4s 0.25s ease both;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    animation: fadeUp 0.4s 0.23s ease both;
     position: relative;
     overflow: hidden;
   }
+  /* thin gold top-line accent */
   .home-quick-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(245,200,66,0.6), transparent);
+    top: 0; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,200,66,0.45), transparent);
   }
   .home-quick-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(245,200,66,0.14);
-    border-color: rgba(245,200,66,0.5);
+    border-color: rgba(245,200,66,0.48);
+    box-shadow: 0 6px 20px rgba(245,200,66,0.1);
   }
-  .home-quick-card:active { transform: translateY(0); }
+  /* arrow shifts right on hover via CSS variable trick on the child */
+  .home-quick-card:hover .home-quick-tap {
+    color: rgba(245,200,66,0.85);
+    letter-spacing: 0.8px;
+  }
+  .home-quick-card:active { transform: translateY(0); box-shadow: none; }
   .home-quick-badge {
     position: absolute;
-    top: -1px; right: 14px;
-    background: linear-gradient(135deg, #f5c842, #f7a54f);
-    color: #1a1000;
+    top: -1px; right: 13px;
+    background: linear-gradient(135deg, #c9a230, #d4894a);
+    color: rgba(0,0,0,0.85);
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 10px; letter-spacing: 1.5px;
-    padding: 3px 9px 2px;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 3px 10px rgba(245,200,66,0.35);
+    font-size: 9px; letter-spacing: 1.5px;
+    padding: 3px 8px 2px;
+    border-radius: 0 0 7px 7px;
   }
   .home-quick-icon {
-    width: 50px; height: 50px; border-radius: 14px;
-    background: rgba(245,200,66,0.1);
-    border: 1px solid rgba(245,200,66,0.3);
+    width: 48px; height: 48px; border-radius: 13px;
+    background: rgba(245,200,66,0.08);
+    border: 1px solid rgba(245,200,66,0.22);
     display: flex; align-items: center; justify-content: center;
-    font-size: 24px; flex-shrink: 0;
+    font-size: 23px; flex-shrink: 0;
   }
-  .home-quick-text { flex: 1; }
+  .home-quick-text { flex: 1; min-width: 0; }
   .home-quick-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 17px; letter-spacing: 1px; color: #fff; line-height: 1;
+    font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1;
   }
   .home-quick-sub {
     font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4;
   }
   .home-quick-right {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0;
   }
   .home-quick-xp {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px; color: #f5c842; letter-spacing: 1px;
-    background: rgba(245,200,66,0.1);
-    border: 1px solid rgba(245,200,66,0.25);
+    font-size: 14px; color: #d4a832; letter-spacing: 1px;
+    background: rgba(245,200,66,0.08);
+    border: 1px solid rgba(245,200,66,0.2);
     border-radius: 6px;
     padding: 2px 7px;
   }
   .home-quick-tap {
     font-size: 10px;
-    color: rgba(245,200,66,0.55);
+    color: rgba(245,200,66,0.45);
     letter-spacing: 0.3px;
+    transition: color 0.18s, letter-spacing 0.18s;
     font-weight: 600;
     white-space: nowrap;
   }
@@ -2274,9 +2294,8 @@
           PLAY TODAY'S QUIZ
         </button>
         <div class="home-streak-nudge" id="homeStreakNudge">
-          🔥 Keep your streak alive
+          🔥 Keep your streak alive &nbsp;·&nbsp; <span>+10 XP</span>
         </div>
-        <span class="home-nudge-xp">+10 XP for completing today's quiz</span>
       </div>
 
       <!-- Daily Goal — progress only, no button -->
@@ -4020,15 +4039,13 @@ function refreshHome() {
   // Streak pill in welcome row
   if (el('homeStreakPillNum')) el('homeStreakPillNum').textContent = streak;
 
-  // Streak nudge line below CTA
+  // Single motivational line under CTA
   const nudge = el('homeStreakNudge');
   if (nudge) {
     if (streak > 1) {
-      nudge.innerHTML = `🔥 <span>${streak}-day streak</span> — keep it going · <span>+10 XP</span> today`;
-    } else if (streak === 1) {
-      nudge.innerHTML = `🔥 Streak started! Play again tomorrow · <span>+10 XP</span> for today's quiz`;
+      nudge.innerHTML = `🔥 You're on a <span>${streak}-day streak</span> &nbsp;·&nbsp; <span>+10 XP</span>`;
     } else {
-      nudge.innerHTML = `🔥 Keep your streak alive · <span>+10 XP</span> for today's quiz`;
+      nudge.innerHTML = `🔥 Keep your streak alive &nbsp;·&nbsp; <span>+10 XP</span>`;
     }
   }
 
