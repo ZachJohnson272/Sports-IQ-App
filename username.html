@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Username — SportsMind</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    color-scheme: dark;
+    --jazz-purple: #6B3FA0;
+    --jazz-sky:    #5BB8D4;
+    --bg:          #0a0a12;
+    --surface:     #13101e;
+    --surface2:    #1c1730;
+    --text:        #f0edf8;
+    --muted:       #9b8ec4;
+    --green:       #3dcc7a;
+    --red:         #e05555;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(107,63,160,0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(91,184,212,0.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.35);
+    border-radius: 24px;
+    padding: 36px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeUp 0.45s ease both;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky), var(--jazz-purple));
+    border-radius: 24px 24px 0 0;
+  }
+
+  .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 28px;
+  }
+
+  .avatar-circle {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--jazz-purple), var(--jazz-sky));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 0 4px rgba(91,184,212,0.18), 0 6px 24px rgba(107,63,160,0.4);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.55;
+    margin-bottom: 28px;
+    max-width: 270px;
+  }
+
+  .input-wrap {
+    width: 100%;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .at-sign {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--jazz-sky);
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1.5px solid rgba(107,63,160,0.4);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 14px 14px 14px 32px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input::placeholder  { color: var(--muted); font-weight: 400; }
+  input:focus         { border-color: var(--jazz-sky); box-shadow: 0 0 0 3px rgba(91,184,212,0.14); }
+  input.is-valid      { border-color: var(--green);    box-shadow: 0 0 0 3px rgba(61,204,122,0.12); }
+  input.is-invalid    { border-color: var(--red);      box-shadow: 0 0 0 3px rgba(224,85,85,0.12); }
+
+  .hints {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 18px;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: color 0.2s;
+  }
+  .hint .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+  .hint.ok  { color: var(--green); }
+  .hint.bad { color: var(--red);   }
+
+  #msg {
+    width: 100%;
+    min-height: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 16px;
+    display: none;
+  }
+  #msg.error   { color: var(--red);   display: block; }
+  #msg.success { color: var(--green); display: block; }
+
+  .btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--jazz-purple), #5a2d8f);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+    box-shadow: 0 4px 20px rgba(107,63,160,0.45);
+  }
+  .btn:hover:not(:disabled)  { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(107,63,160,0.6); }
+  .btn:active:not(:disabled) { transform: translateY(0); }
+  .btn:disabled              { opacity: 0.45; cursor: not-allowed; }
+
+  .spinner {
+    display: inline-block;
+    width: 15px; height: 15px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  #loadingOverlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 4px;
+    color: var(--muted);
+  }
+
+  @keyframes spin   { to { transform: rotate(360deg); } }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div id="loadingOverlay">LOADING…</div>
+
+<div class="card" id="mainCard" style="display:none;">
+  <div class="brand">S P O R T S M I N D</div>
+  <div class="avatar-circle">🏅</div>
+  <h1>Pick Your Username</h1>
+  <p class="subtitle">This is how you'll appear on leaderboards and across the app. Choose wisely!</p>
+
+  <div class="input-wrap">
+    <span class="at-sign">@</span>
+    <input
+      type="text"
+      id="usernameInput"
+      placeholder="e.g. Pete_King238"
+      maxlength="20"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+      oninput="onType()"
+    />
+  </div>
+
+  <div class="hints">
+    <div class="hint" id="hintLen"><span class="dot"></span>3–20 characters</div>
+    <div class="hint" id="hintChars"><span class="dot"></span>Letters, numbers, and underscores only</div>
+  </div>
+
+  <div id="msg"></div>
+
+  <button class="btn" id="saveBtn" onclick="saveUsername()" disabled>
+    Save Username
+  </button>
+</div>
+
+<script>
+// ── Supabase client — same project as the rest of the app ────────
+const sb = supabase.createClient(
+  'https://cyzxoadiuhkftxpvzsxq.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5enhvYWRpdWhrZnR4cHZ6c3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MzYxNjMsImV4cCI6MjA4ODUxMjE2M30.ctQTb1YkBwyVzspLKKtrEK-qjxeYrf6mmAM7R2rHXWg'
+);
+
+// ── Page load: verify session and check for existing username ────
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+
+  if (!session) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // If they already set a username, skip straight to the app
+  const existing = await fetchUsername(session.user.id);
+  if (existing) {
+    localStorage.setItem('siq_username', existing); // keep cache fresh
+    window.location.href = 'index.html';
+    return;
+  }
+
+  // No username yet — show the form
+  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById('mainCard').style.display       = 'flex';
+  document.getElementById('usernameInput').focus();
+})();
+
+// ── Load username from Supabase ──────────────────────────────────
+async function fetchUsername(userId) {
+  const { data, error } = await sb
+    .from('user_profiles')
+    .select('username')
+    .eq('user_id', userId)
+    .maybeSingle(); // returns null (not error) when no row exists yet
+  if (error || !data || !data.username) return null;
+  return data.username;
+}
+
+// ── Validation rules ─────────────────────────────────────────────
+function validate(val) {
+  return {
+    lenOk:   val.length >= 3 && val.length <= 20,
+    charsOk: /^[a-zA-Z0-9_]*$/.test(val),
+    get ok() { return this.lenOk && this.charsOk; }
+  };
+}
+
+// ── Live typing handler ──────────────────────────────────────────
+function onType() {
+  const val   = document.getElementById('usernameInput').value.trim();
+  const input = document.getElementById('usernameInput');
+  const v     = validate(val);
+  const typed = val.length > 0;
+
+  setHint('hintLen',   v.lenOk,   typed);
+  setHint('hintChars', v.charsOk, typed);
+
+  input.className = !typed ? '' : v.ok ? 'is-valid' : 'is-invalid';
+  document.getElementById('saveBtn').disabled = !v.ok;
+  clearMsg();
+}
+
+function setHint(id, ok, active) {
+  document.getElementById(id).className = 'hint' + (!active ? '' : ok ? ' ok' : ' bad');
+}
+
+// ── Save username ────────────────────────────────────────────────
+async function saveUsername() {
+  const val = document.getElementById('usernameInput').value.trim();
+  if (!validate(val).ok) return;
+
+  const btn = document.getElementById('saveBtn');
+  btn.disabled  = true;
+  btn.innerHTML = '<span class="spinner"></span>Saving…';
+  clearMsg();
+
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { window.location.href = 'login.html'; return; }
+
+    const userId = session.user.id;
+
+    // Check if username is already taken by someone else
+    const { data: taken } = await sb
+      .from('user_profiles')
+      .select('user_id')
+      .eq('username', val)
+      .neq('user_id', userId)
+      .maybeSingle();
+
+    if (taken) {
+      showMsg('That username is already taken. Try another!', 'error');
+      btn.disabled  = false;
+      btn.innerHTML = 'Save Username';
+      return;
+    }
+
+    // Upsert: works for both brand-new users and users updating their username
+    const { error } = await sb
+      .from('user_profiles')
+      .upsert(
+        { user_id: userId, username: val, updated_at: new Date().toISOString() },
+        { onConflict: 'user_id' }
+      );
+
+    if (error) throw error;
+
+    // Cache locally so the dashboard shows the name instantly
+    localStorage.setItem('siq_username', val);
+
+    showMsg('Username saved! Loading your dashboard…', 'success');
+    setTimeout(() => { window.location.href = 'index.html'; }, 900);
+
+  } catch (err) {
+    console.error('[Username] Save error:', err);
+    showMsg('Something went wrong. Please try again.', 'error');
+    btn.disabled  = false;
+    btn.innerHTML = 'Save Username';
+  }
+}
+
+// Allow Enter key to submit
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') saveUsername();
+});
+
+function showMsg(text, type) {
+  const el = document.getElementById('msg');
+  el.textContent = text;
+  el.className   = type;
+}
+function clearMsg() {
+  const el = document.getElementById('msg');
+  el.textContent = '';
+  el.className   = '';
+}
+</script>
+</body>
+</html>
