@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: dark;
     --jazz-navy: #6B3FA0;
     --jazz-gold: #5BB8D4;
     --jazz-note: #4a2570;
@@ -52,8 +53,8 @@
 
   /* ===================== HOME PAGE ===================== */
   #home {
-    justify-content: center;
-    padding: 40px 20px;
+    justify-content: flex-start;
+    padding: 10px 0 80px;
   }
 
   .home-inner {
@@ -74,7 +75,7 @@
 
   .logo-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 14vw, 72px);
+    font-size: 56px;
     letter-spacing: 4px;
     color: #fff;
     line-height: 0.9;
@@ -83,7 +84,7 @@
 
   .logo-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(14px, 4vw, 18px);
+    font-size: 15px;
     letter-spacing: 1px;
     color: var(--jazz-sky);
     margin-top: 8px;
@@ -296,18 +297,18 @@
   .fc-arena {
     flex: 1;
     width: 100%;
-    max-width: 480px;
+    max-width: 390px;
     margin: 0 auto;
-    padding: 32px 24px 24px;
+    padding: 16px 16px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 16px;
   }
 
   .card-scene {
     width: 100%;
-    max-width: 360px;
+    max-width: 350px;
     aspect-ratio: 3/4;
     perspective: 1000px;
     cursor: pointer;
@@ -398,7 +399,7 @@
 
   .back-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(28px, 8vw, 38px);
+    font-size: 32px;
     letter-spacing: 2px;
     line-height: 1.1;
     color: #fff;
@@ -460,7 +461,7 @@
     display: flex;
     gap: 16px;
     width: 100%;
-    max-width: 360px;
+    max-width: 350px;
   }
 
   .btn-miss {
@@ -556,7 +557,7 @@
 
   .mastery-content {
     width: 100%;
-    max-width: 480px;
+    max-width: 390px;
     margin: 0 auto;
     padding: 24px 20px 40px;
     display: flex;
@@ -721,7 +722,7 @@
   /* ===================== NAV PAGES ===================== */
   .nav-header {
     width: 100%;
-    padding: 20px 24px;
+    padding: 12px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -735,18 +736,18 @@
 
   .nav-header-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     letter-spacing: 3px;
   }
 
   .nav-content {
     width: 100%;
-    max-width: 480px;
+    max-width: 390px;
     margin: 0 auto;
-    padding: 28px 20px 40px;
+    padding: 14px 14px 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .nav-hint {
@@ -926,7 +927,7 @@
   }
 
   .front-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
-  .front-main  { font-family: 'Bebas Neue', sans-serif; font-size: clamp(26px, 7vw, 36px); letter-spacing: 2px; text-align: center; color: #fff; line-height: 1.1; }
+  .front-main  { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; text-align: center; color: #fff; line-height: 1.1; }
 
   .front-stat-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
   .front-stat-chip { background: var(--surface2); border-radius: 8px; padding: 8px 14px; text-align: center; }
@@ -967,17 +968,17 @@
     background: var(--surface);
     border: 1px solid rgba(107,63,160,0.25);
     border-radius: var(--radius);
-    padding: 16px 18px;
+    padding: 12px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     transition: all 0.2s;
   }
 
-  .league-nav-row .lnr-icon  { font-size: 28px; flex-shrink: 0; }
-  .league-nav-row .lnr-label { flex: 1; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; }
+  .league-nav-row .lnr-icon  { font-size: 22px; flex-shrink: 0; }
+  .league-nav-row .lnr-label { flex: 1; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-  .lnr-btns { display: flex; gap: 8px; flex-shrink: 0; }
+  .lnr-btns { display: flex; gap: 6px; flex-shrink: 0; }
 
   .lnr-quiz {
     background: var(--jazz-purple);
@@ -985,9 +986,9 @@
     border-radius: 8px;
     color: #fff;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 1px;
-    padding: 8px 14px;
+    padding: 7px 10px;
     cursor: pointer;
     transition: all 0.15s;
     white-space: nowrap;
@@ -1004,7 +1005,7 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 11px;
     letter-spacing: 1px;
-    padding: 5px 9px;
+    padding: 7px 8px;
     cursor: pointer;
     transition: all 0.15s;
     white-space: nowrap;
@@ -1047,7 +1048,7 @@
     border: 1px solid rgba(107,63,160,0.4);
     border-radius: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     padding: 28px 24px 24px;
     position: relative;
     animation: slideUp .25s ease;
@@ -1185,7 +1186,7 @@
     background: var(--surface);
     border: 1px solid rgba(107,63,160,0.35);
     border-radius: var(--radius);
-    padding: 18px 20px 14px;
+    padding: 14px 16px 12px;
     position: relative;
     overflow: hidden;
     animation: fadeUp 0.6s 0.15s ease both;
@@ -1247,7 +1248,7 @@
   }
   .xp-count {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 28px;
     color: #f5c842;
     line-height: 1;
     letter-spacing: 1px;
@@ -1343,6 +1344,20 @@
     letter-spacing: 0.3px;
   }
   .bn-tab.active .bn-tab-label { color: var(--jazz-sky); }
+  /* Learn button stands out */
+  #bn-learn {
+    background: linear-gradient(135deg, rgba(107,63,160,0.4), rgba(91,184,212,0.25));
+    border: 1px solid rgba(107,63,160,0.6);
+    border-radius: 14px;
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(107,63,160,0.35);
+  }
+  #bn-learn .bn-tab-icon { font-size: 24px; }
+  #bn-learn .bn-tab-label { color: var(--jazz-sky); font-weight: 700; }
+  #bn-learn.active {
+    background: linear-gradient(135deg, rgba(107,63,160,0.6), rgba(91,184,212,0.35));
+    box-shadow: 0 4px 20px rgba(107,63,160,0.5);
+  }
   .bn-tab-pip {
     position: absolute;
     top: 4px; right: 8px;
@@ -1358,7 +1373,7 @@
   #home { padding-bottom: 72px !important; }
 
   /* ===================== DASHBOARD (HOME) ===================== */
-  .dash-section { width: 100%; max-width: 420px; margin-bottom: 18px; }
+  .dash-section { width: 100%; max-width: 390px; margin-bottom: 18px; }
   .dash-section-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 13px;
@@ -1438,7 +1453,7 @@
 
   /* ===================== LEARN PAGE ===================== */
   #learnPage .nav-header { position: sticky; top: 0; z-index: 10; background: rgba(10,10,18,0.95); backdrop-filter: blur(12px); }
-  .learn-section { width: 100%; max-width: 420px; padding: 0 20px; margin-bottom: 24px; }
+  .learn-section { width: 100%; max-width: 390px; padding: 0 20px; margin-bottom: 24px; }
   .learn-section-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 13px;
@@ -1483,7 +1498,7 @@
   }
 
   /* ===================== LEADERBOARD PAGE ===================== */
-  #leaderboardPage .nav-content { width: 100%; max-width: 420px; padding: 16px 20px; }
+  #leaderboardPage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
   .lb-tabs {
     display: flex;
     gap: 8px;
@@ -1553,7 +1568,7 @@
   .lb-coming-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
 
   /* ===================== PROGRESS PAGE ===================== */
-  #progressPage .nav-content { width: 100%; max-width: 420px; padding: 16px 20px; }
+  #progressPage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
   .prog-stat-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1634,7 +1649,7 @@
   .prog-empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; }
 
   /* ===================== PROFILE PAGE ===================== */
-  #profilePage .nav-content { width: 100%; max-width: 420px; padding: 16px 20px; }
+  #profilePage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
   .prof-header {
     display: flex;
     flex-direction: column;
@@ -1810,75 +1825,157 @@
   /* ===================== HOME STAT BOXES ===================== */
   .home-top {
     width: 100%;
-    max-width: 520px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 0 16px;
+    gap: 9px;
+    padding: 0 80px;
   }
   .home-brand {
     text-align: center;
-    padding: 6px 0 2px;
+    padding: 2px 0 0;
   }
   .home-brand-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(20px, 5vw, 26px);
-    letter-spacing: 6px;
-    color: rgba(255,255,255,0.5);
+    font-size: 18px;
+    letter-spacing: 7px;
+    color: rgba(255,255,255,0.4);
     line-height: 1;
   }
-  .home-user-box {
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.35);
-    border-radius: 12px;
-    padding: 10px 16px;
+  /* Avatar row — avatar centered, button pinned top-right */
+  .home-avatar-row {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 6px 0 2px;
+  }
+
+  /* Circular avatar section */
+  .home-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 0.4s ease both;
+  }
+  .home-avatar-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    box-shadow: 0 0 0 3px rgba(91,184,212,0.3), 0 4px 20px rgba(107,63,160,0.5);
   }
-  .home-user-icon {
-    font-size: 20px;
+  .home-avatar-initials {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 1px;
   }
-  .home-user-name {
+  .home-avatar-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     color: #fff;
     line-height: 1;
   }
-  .home-user-sub {
+  .home-avatar-sub {
     font-size: 11px;
     color: var(--muted);
-    margin-top: 1px;
+  }
+
+  /* Continue Learning — small box pinned top-right */
+  .continue-learning-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: linear-gradient(135deg, rgba(107,63,160,0.5), rgba(91,184,212,0.25));
+    border: 1px solid rgba(91,184,212,0.45);
+    border-radius: 12px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    animation: fadeUp 0.4s ease both;
+    min-width: 68px;
+  }
+  .continue-learning-btn:hover {
+    border-color: var(--jazz-sky);
+    box-shadow: 0 4px 14px rgba(91,184,212,0.2);
+    transform: translateY(-1px);
+  }
+  .clb-icon { font-size: 16px; line-height: 1; }
+  .clb-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+  .clb-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--jazz-sky);
+    line-height: 1;
+  }
+  .clb-sub {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+  .clb-arrow {
+    font-size: 12px;
+    color: var(--jazz-sky);
   }
   .home-stat-boxes {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 7px;
   }
   .hsb {
     background: var(--surface);
     border: 1px solid rgba(107,63,160,0.3);
-    border-radius: 14px;
-    padding: 16px 10px 14px;
+    border-radius: 12px;
+    padding: 12px 6px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     animation: fadeUp 0.4s ease both;
   }
   .hsb-val {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 30px;
+    font-size: 24px;
     line-height: 1;
     letter-spacing: 1px;
   }
   .hsb-label {
-    font-size: 10px;
+    font-size: 9px;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
+  }
+  .hsb.worldrank {
+    background: var(--surface);
+    border: 1px solid rgba(245,200,66,0.4);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    animation: fadeUp 0.4s ease both;
   }
   .hsb.streak  { border-color: rgba(245,200,66,0.4); }
   .hsb.streak .hsb-val  { color: #f5c842; }
@@ -1889,21 +1986,21 @@
   .home-level-box {
     background: linear-gradient(135deg, rgba(107,63,160,0.35), rgba(91,184,212,0.15));
     border: 1px solid rgba(107,63,160,0.5);
-    border-radius: 14px;
-    padding: 16px 18px;
+    border-radius: 12px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     animation: fadeUp 0.4s 0.05s ease both;
   }
-  .hlb-left { display: flex; align-items: center; gap: 14px; width: 100%; }
+  .hlb-left { display: flex; align-items: center; gap: 12px; width: 100%; }
   .hlb-num {
-    width: 52px; height: 52px;
+    width: 48px; height: 48px;
     background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
-    border-radius: 13px;
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
+    font-size: 24px;
     color: #fff;
     flex-shrink: 0;
     box-shadow: 0 4px 14px rgba(107,63,160,0.4);
@@ -1911,12 +2008,12 @@
   .hlb-info { flex: 1; }
   .hlb-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     letter-spacing: 2px;
     color: #fff;
     line-height: 1;
   }
-  .hlb-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .hlb-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
   .hlb-bar-wrap {
     width: 100%;
     height: 6px;
@@ -1983,7 +2080,7 @@
 
 <!-- ============== HOME PAGE ============== -->
 <div class="page active" id="home">
-  <div class="home-inner" style="padding-top:14px;justify-content:flex-start;align-items:center;">
+  <div class="home-inner" style="padding-top:8px;justify-content:flex-start;align-items:center;width:100%;">
 
     <div class="home-top">
 
@@ -1992,13 +2089,22 @@
         <div class="home-brand-title">S P O R T S M I N D</div>
       </div>
 
-      <!-- Username box -->
-      <div class="home-user-box">
-        <div class="home-user-icon">👤</div>
-        <div>
-          <div class="home-user-name" id="homeUsername">SportsFan</div>
-          <div class="home-user-sub">Welcome back 👋</div>
+      <!-- Avatar row: avatar left, continue learning top right -->
+      <div class="home-avatar-row">
+        <div class="home-avatar-section">
+          <div class="home-avatar-circle">
+            <span class="home-avatar-initials" id="homeAvatarInitials">S</span>
+          </div>
+          <div class="home-avatar-name" id="homeUsername">SportsFan</div>
+          <div class="home-avatar-sub">Welcome back 👋</div>
         </div>
+        <button class="continue-learning-btn" onclick="bnSwitch('learn')">
+          <div class="clb-info">
+            <div class="clb-title">Continue</div>
+            <div class="clb-sub">Learning</div>
+          </div>
+          <div class="clb-arrow">→</div>
+        </button>
       </div>
 
       <!-- Level box -->
@@ -2031,13 +2137,28 @@
         </div>
       </div>
 
+      <!-- World Rank box -->
+      <div class="hsb worldrank" style="border-radius:16px;padding:18px 20px;flex-direction:row;align-items:center;gap:14px;justify-content:flex-start;">
+        <div style="font-size:28px;">🌎</div>
+        <div>
+          <div class="hsb-val" id="hsbWorldRank" style="font-size:20px;color:#f5c842;">#<span id="worldRankNum">—</span></div>
+          <div class="hsb-label" style="text-align:left;margin-top:3px;">Current World Rank</div>
+        </div>
+      </div>
+
+      <!-- XP Earned Last 7 Days -->
+      <div style="background:var(--surface);border:1px solid rgba(107,63,160,0.3);border-radius:16px;padding:16px 18px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:var(--muted);margin-bottom:12px;">⚡ XP EARNED — LAST 7 DAYS</div>
+        <div class="prog-xp-chart" id="homeXpChart"></div>
+      </div>
+
       <!-- Daily XP Goal card -->
       <div class="xp-card" id="xpCard" style="margin-bottom:0;">
         <div class="xp-header">
           <span class="xp-title">⚡ Daily Goal</span>
           <span class="xp-subtitle">Earn 50 XP today</span>
         </div>
-        <div class="xp-bar-wrap" style="height:12px;">
+        <div class="xp-bar-wrap" style="height:10px;">
           <div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div>
         </div>
         <div class="xp-row" style="margin-top:6px;">
@@ -2358,6 +2479,289 @@
   </div>
 </div>
 
+
+<!-- ===================== BOTTOM NAV ===================== -->
+<nav class="bottom-nav">
+  <button class="bn-tab active" id="bn-home" onclick="bnSwitch('home')">
+    <div class="bn-tab-icon">🏠</div>
+    <div class="bn-tab-label">Home</div>
+  </button>
+  <button class="bn-tab" id="bn-leaderboard" onclick="bnSwitch('leaderboard')">
+    <div class="bn-tab-icon">🏆</div>
+    <div class="bn-tab-label">Leaderboard</div>
+  </button>
+  <button class="bn-tab" id="bn-learn" onclick="bnSwitch('learn')">
+    <div class="bn-tab-icon">🧠</div>
+    <div class="bn-tab-label">Learn</div>
+  </button>
+  <button class="bn-tab" id="bn-progress" onclick="bnSwitch('progress')">
+    <div class="bn-tab-icon">📊</div>
+    <div class="bn-tab-label">Status</div>
+  </button>
+  <button class="bn-tab" id="bn-profile" onclick="bnSwitch('profile')">
+    <div class="bn-tab-icon">👤</div>
+    <div class="bn-tab-label">Profile</div>
+  </button>
+</nav>
+
+<!-- ===================== LEARN PAGE ===================== -->
+<div class="page" id="learnPage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Learn</div>
+    <div></div>
+  </div>
+  <div style="width:100%;max-width:390px;padding:12px 14px;">
+    <div class="learn-section-label">PRO SPORTS</div>
+    <div class="learn-card" onclick="showPage('proSports')">
+      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🏆</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">Pro Sports</div>
+        <div class="learn-card-sub">NBA, NFL, MLB, NHL</div>
+      </div>
+      <div class="learn-card-arrow">→</div>
+    </div>
+    <div class="learn-card" onclick="showPage('collegeSports')">
+      <div class="learn-card-icon" style="background:rgba(91,184,212,0.15);">🎓</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">College Sports</div>
+        <div class="learn-card-sub">NCAA Basketball, Football &amp; more</div>
+      </div>
+      <div class="learn-card-arrow">→</div>
+    </div>
+    <div class="learn-section-label" style="margin-top:8px;">DAILY CHALLENGES</div>
+    <div class="learn-card" onclick="dpOpen('nba')">
+      <div class="learn-card-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">NBA Daily Player</div>
+        <div class="learn-card-sub">Guess today's player</div>
+      </div>
+      <span class="learn-card-badge" id="learnDailyBadge">DAILY</span>
+    </div>
+    <div class="learn-section-label" style="margin-top:8px;">STUDY MODES</div>
+    <div class="learn-card" onclick="bnGoFlashcards()">
+      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🃏</div>
+      <div class="learn-card-info">
+        <div class="learn-card-title">Flashcards</div>
+        <div class="learn-card-sub">Photo → Name, Stats → Player</div>
+      </div>
+      <div class="learn-card-arrow">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LEADERBOARD PAGE ===================== -->
+<div class="page" id="leaderboardPage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Leaderboard</div>
+    <div></div>
+  </div>
+  <div class="nav-content" style="width:100%;max-width:390px;padding:12px 14px;">
+    <div class="lb-tabs">
+      <button class="lb-tab active" onclick="lbSwitch('global',this)">🌎 Global</button>
+      <button class="lb-tab" onclick="lbSwitch('weekly',this)">📅 Weekly</button>
+      <button class="lb-tab" onclick="lbSwitch('friends',this)">👥 Friends</button>
+    </div>
+    <div id="lbContent"></div>
+  </div>
+</div>
+
+<!-- ===================== PROGRESS PAGE ===================== -->
+<div class="page" id="progressPage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Status</div>
+    <div></div>
+  </div>
+  <div class="nav-content" style="width:100%;max-width:390px;padding:12px 14px;">
+
+    <!-- Completed Sports dropdown -->
+    <div class="sports-dropdown-wrap">
+      <button class="sports-dropdown-btn" id="sportsDropdownBtn" onclick="toggleSportsDropdown()">
+        <div class="sdb-left">
+          <span class="sdb-icon">🏅</span>
+          <span class="sdb-label">Completed Sports</span>
+          <span class="sdb-count" id="sportsCompleteCount"></span>
+        </div>
+        <span class="sdb-arrow" id="sportsDropdownArrow">▼</span>
+      </button>
+      <div class="sports-dropdown-body" id="sportsDropdownBody">
+        <div class="sports-category">PRO SPORTS</div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏀</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">NBA</div>
+            <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/18 players</div>
+          </div>
+          <div class="sport-row-status" id="sdNBAStatus">—</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏈</div>
+          <div class="sport-row-info"><div class="sport-row-name">NFL</div><div class="sport-row-sub">Coming Soon</div></div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">⚾</div>
+          <div class="sport-row-info"><div class="sport-row-name">MLB</div><div class="sport-row-sub">Coming Soon</div></div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏒</div>
+          <div class="sport-row-info"><div class="sport-row-name">NHL</div><div class="sport-row-sub">Coming Soon</div></div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sports-category">COLLEGE SPORTS</div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏀</div>
+          <div class="sport-row-info"><div class="sport-row-name">NCAA Basketball</div><div class="sport-row-sub">Coming Soon</div></div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">🏈</div>
+          <div class="sport-row-info"><div class="sport-row-name">NCAA Football</div><div class="sport-row-sub">Coming Soon</div></div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">⚾</div>
+          <div class="sport-row-info"><div class="sport-row-name">NCAA Baseball</div><div class="sport-row-sub">Coming Soon</div></div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+        <div class="sport-row">
+          <div class="sport-row-icon">⚽</div>
+          <div class="sport-row-info"><div class="sport-row-name">NCAA Soccer</div><div class="sport-row-sub">Coming Soon</div></div>
+          <div class="sport-row-status not-started">🔒 Locked</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rank / Levels dropdown -->
+    <div class="sports-dropdown-wrap">
+      <button class="sports-dropdown-btn" id="rankDropdownBtn" onclick="toggleRankDropdown()">
+        <div class="sdb-left">
+          <span class="sdb-icon">🏆</span>
+          <span class="sdb-label">Rank & Level System</span>
+          <span class="sdb-count" id="rankCurrentBadge"></span>
+        </div>
+        <span class="sdb-arrow" id="rankDropdownArrow">▼</span>
+      </button>
+      <div class="sports-dropdown-body" id="rankDropdownBody">
+        <div class="sports-category">8-LEVEL SYSTEM</div>
+        <div class="sport-row" id="rl-1">
+          <div class="sport-row-icon">🌱</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 1 — Rookie</div>
+            <div class="sport-row-sub">0 – 49 XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-1">—</div>
+        </div>
+        <div class="sport-row" id="rl-2">
+          <div class="sport-row-icon">🪑</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 2 — Bench Player</div>
+            <div class="sport-row-sub">50 – 149 XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-2">—</div>
+        </div>
+        <div class="sport-row" id="rl-3">
+          <div class="sport-row-icon">▶️</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 3 — Starter</div>
+            <div class="sport-row-sub">150 – 299 XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-3">—</div>
+        </div>
+        <div class="sport-row" id="rl-4">
+          <div class="sport-row-icon">6️⃣</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 4 — Sixth Man</div>
+            <div class="sport-row-sub">300 – 599 XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-4">—</div>
+        </div>
+        <div class="sport-row" id="rl-5">
+          <div class="sport-row-icon">⭐</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 5 — All-Star</div>
+            <div class="sport-row-sub">600 – 999 XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-5">—</div>
+        </div>
+        <div class="sport-row" id="rl-6">
+          <div class="sport-row-icon">🏅</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 6 — MVP</div>
+            <div class="sport-row-sub">1000 – 1599 XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-6">—</div>
+        </div>
+        <div class="sport-row" id="rl-7">
+          <div class="sport-row-icon">🎖️</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 7 — Hall of Famer</div>
+            <div class="sport-row-sub">1600 – 2499 XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-7">—</div>
+        </div>
+        <div class="sport-row" id="rl-8">
+          <div class="sport-row-icon">🐐</div>
+          <div class="sport-row-info">
+            <div class="sport-row-name">Level 8 — GOAT</div>
+            <div class="sport-row-sub">2500+ XP</div>
+          </div>
+          <div class="sport-row-status not-started" id="rls-8">—</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== PROFILE PAGE ===================== -->
+<div class="page" id="profilePage">
+  <div class="nav-header">
+    <div></div>
+    <div class="nav-header-title">Profile</div>
+    <div></div>
+  </div>
+  <div class="nav-content" style="width:100%;max-width:390px;padding:0 14px 16px;">
+    <div class="prof-header">
+      <div class="prof-avatar">🏅</div>
+      <div class="prof-name" id="profName">SportsFan</div>
+      <div class="prof-title" id="profTitle">Rookie</div>
+      <div class="prof-xp-total" id="profXpTotal">0 Total XP</div>
+    </div>
+    <div class="prof-stats-row">
+      <div class="prof-stat">
+        <div class="prof-stat-val" id="profLevel">1</div>
+        <div class="prof-stat-label">Level</div>
+      </div>
+      <div class="prof-stat">
+        <div class="prof-stat-val" id="profStreak">0</div>
+        <div class="prof-stat-label">Day Streak</div>
+      </div>
+    </div>
+    <div class="prof-section-title" style="margin-top:8px;">SETTINGS</div>
+    <div class="settings-row" onclick="showComingSoon()">
+      <div class="sr-left"><span class="sr-icon">✏️</span><span class="sr-label">Edit Username</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+    <div class="settings-row" onclick="showComingSoon()">
+      <div class="sr-left"><span class="sr-icon">🔔</span><span class="sr-label">Notifications</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+    <div class="settings-row" onclick="showComingSoon()">
+      <div class="sr-left"><span class="sr-icon">🌙</span><span class="sr-label">Theme</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+    <div class="settings-row" onclick="xpResetConfirm()">
+      <div class="sr-left"><span class="sr-icon">🗑️</span><span class="sr-label">Reset Progress</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
+  </div>
+</div>
+
+
 <script>
 // ===================== ROSTER DATA =====================
 const ROSTER = [
@@ -2429,8 +2833,16 @@ function getRandomOthers(excludeIdx, count) {
 // ===================== NAVIGATION =====================
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const page = document.getElementById(id);
+  if (page) page.classList.add('active');
   if (id === 'modeSelect') updateModeStats();
+  // Sync bottom nav highlight
+  const reverseMap = { home:'home', learnPage:'learn', leaderboardPage:'leaderboard', progressPage:'progress', profilePage:'profile' };
+  if (reverseMap[id]) {
+    document.querySelectorAll('.bn-tab').forEach(t => t.classList.remove('active'));
+    const btn = document.getElementById('bn-' + reverseMap[id]);
+    if (btn) btn.classList.add('active');
+  }
 }
 function goJazzTeam() { updateHomeStats(); showPage('jazzTeam'); }
 function showComingSoon() {
@@ -3021,15 +3433,14 @@ function xpPop(text) {
 
 // Level system
 const LEVELS = [
-  { min:0,    name:'Rookie',      title:'Just Getting Started' },
-  { min:100,  name:'Fan',         title:'Sports Enthusiast' },
-  { min:300,  name:'Follower',    title:'Regular Viewer' },
-  { min:600,  name:'Supporter',   title:'Dedicated Fan' },
-  { min:1000, name:'Analyst',     title:'Breaking It Down' },
-  { min:1500, name:'Scout',       title:'Eye for Talent' },
-  { min:2200, name:'Expert',      title:'Deep Knowledge' },
-  { min:3000, name:'Guru',        title:'Sports Sage' },
-  { min:4000, name:'Legend',      title:'Hall of Fame Mind' },
+  { min:0,    max:49,   name:'Rookie',      title:'Just Getting Started' },
+  { min:50,   max:149,  name:'Bench Player',title:'Working Your Way Up' },
+  { min:150,  max:299,  name:'Starter',     title:'Making the Starting Five' },
+  { min:300,  max:599,  name:'Sixth Man',   title:'Instant Impact Off the Bench' },
+  { min:600,  max:999,  name:'All-Star',    title:'Elite Performance' },
+  { min:1000, max:1599, name:'MVP',         title:'Most Valuable Player' },
+  { min:1600, max:2499, name:'Hall of Famer',title:'Legendary Status' },
+  { min:2500, max:null, name:'GOAT',        title:'Greatest of All Time' },
 ];
 
 function xpGetTotal() {
@@ -3096,19 +3507,6 @@ function bnGoFlashcards() {
   showPage('proSports');
 }
 
-// Make showPage keep bottom nav visible (don't hide it)
-const _origShowPage = showPage;
-function showPage(id) {
-  _origShowPage(id);
-  // If navigating to a "tab root" page, sync the bottom nav
-  const reverseMap = { home:'home', learnPage:'learn', leaderboardPage:'leaderboard', progressPage:'progress', profilePage:'profile' };
-  if (reverseMap[id]) {
-    document.querySelectorAll('.bn-tab').forEach(t => t.classList.remove('active'));
-    const btn = document.getElementById('bn-' + reverseMap[id]);
-    if (btn) btn.classList.add('active');
-  }
-}
-
 // --- Dashboard refresh ---
 function bnUpdateDash() { refreshHome(); }
 
@@ -3166,97 +3564,44 @@ function lbRender(type) {
   }).join('');
 }
 
-// --- Progress ---
+// --- Progress / Status ---
 function progRender() {
   updateSportsDropdown();
-  // Stat grid
-  let totalCorrect=0, totalAttempts=0;
-  modes.filter(m=>m!=='lineup').forEach(m=>{
-    modeData[m].forEach(p=>{ totalCorrect+=p.correct; totalAttempts+=p.attempts; });
-  });
-  const acc = totalAttempts===0 ? 0 : Math.round((totalCorrect/totalAttempts)*100);
+  updateRankDropdown();
+}
+
+// --- Rank dropdown ---
+function toggleRankDropdown() {
+  const body  = document.getElementById('rankDropdownBody');
+  const arrow = document.getElementById('rankDropdownArrow');
+  const btn   = document.getElementById('rankDropdownBtn');
+  if (!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  if (!isOpen) updateRankDropdown();
+}
+
+function updateRankDropdown() {
   const totalXp = xpGetTotal();
-  const streak = xpGetStreak();
   const { levelNum } = xpGetLevel(totalXp);
-
-  const grid = document.getElementById('progStatGrid');
-  if (grid) grid.innerHTML = `
-    <div class="prog-stat-card">
-      <div class="psc-icon">✅</div>
-      <div class="psc-val">${totalCorrect}</div>
-      <div class="psc-label">Correct Answers</div>
-    </div>
-    <div class="prog-stat-card">
-      <div class="psc-icon">🎯</div>
-      <div class="psc-val accent">${acc}%</div>
-      <div class="psc-label">Accuracy</div>
-    </div>
-    <div class="prog-stat-card">
-      <div class="psc-icon">🔥</div>
-      <div class="psc-val">${streak}</div>
-      <div class="psc-label">Day Streak</div>
-    </div>
-    <div class="prog-stat-card">
-      <div class="psc-icon">⭐</div>
-      <div class="psc-val">${levelNum}</div>
-      <div class="psc-label">Level</div>
-    </div>
-    <div class="prog-stat-card full">
-      <div class="psc-icon">⚡</div>
-      <div class="psc-val accent">${totalXp}</div>
-      <div class="psc-label">Total XP Earned</div>
-    </div>`;
-
-  // XP chart — last 7 days
-  const chart = document.getElementById('progXpChart');
-  if (chart) {
-    const days = [];
-    for (let i=6; i>=0; i--) {
-      const d = new Date(); d.setDate(d.getDate()-i);
-      const key = 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
-      let xp = 0;
-      try { xp = (JSON.parse(localStorage.getItem(key))||{}).xp||0; } catch{}
-      const labels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-      days.push({ xp, label: labels[d.getDay()] });
-    }
-    const maxXp = Math.max(...days.map(d=>d.xp), 1);
-    chart.innerHTML = days.map(d=>`
-      <div class="prog-xp-bar-wrap">
-        <div class="prog-xp-bar" style="height:${Math.max(4,Math.round((d.xp/maxXp)*68))}px"></div>
-        <div class="prog-xp-day">${d.label}</div>
-      </div>`).join('');
-  }
-
-  // Daily player history
-  const dpList = document.getElementById('progDpList');
-  if (dpList) {
-    const sports = ['nba','nfl','mlb','nhl'];
-    let entries = [];
-    sports.forEach(sport => {
-      for (let i=0; i<localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith('siq_daily_'+sport+'_')) {
-          try {
-            const d = JSON.parse(localStorage.getItem(key));
-            if (d.played) entries.push({ sport, key, ...d });
-          } catch {}
-        }
-      }
-    });
-    entries.sort((a,b) => (b.key||'').localeCompare(a.key||''));
-    entries = entries.slice(0,8);
-    if (entries.length === 0) {
-      dpList.innerHTML = '<div class="prog-empty">No daily player history yet. Play your first Daily Quiz!</div>';
+  // Update badge on button
+  const badge = document.getElementById('rankCurrentBadge');
+  if (badge) badge.textContent = '· Level ' + levelNum;
+  // Update each level row status
+  for (let i = 1; i <= 8; i++) {
+    const el = document.getElementById('rls-' + i);
+    if (!el) continue;
+    if (i < levelNum) {
+      el.className = 'sport-row-status complete';
+      el.textContent = '✅ Done';
+    } else if (i === levelNum) {
+      el.className = 'sport-row-status in-progress';
+      el.textContent = '📍 Current';
     } else {
-      dpList.innerHTML = entries.map(e=>`
-        <div class="prog-dp-row">
-          <div class="prog-dp-result">${e.won?'✅':'❌'}</div>
-          <div class="prog-dp-info">
-            <div class="prog-dp-name">${e.playerName || 'Unknown'}</div>
-            <div class="prog-dp-date">${e.sport?.toUpperCase()} · ${e.key?.replace('siq_daily_'+e.sport+'_','') || ''}</div>
-          </div>
-          <div class="prog-dp-pts">${e.won ? '+'+e.pts+'pts' : 'Missed'}</div>
-        </div>`).join('');
+      el.className = 'sport-row-status not-started';
+      el.textContent = '🔒 Locked';
     }
   }
 }
@@ -3278,6 +3623,37 @@ function profRender() {
 // Update dash level card when home loads
 function bnUpdateHomeLevel() { refreshHome(); }
 
+function getWorldRank() {
+  // Simulate a world rank based on XP relative to mock leaderboard
+  const totalXp = xpGetTotal();
+  const mockScores = [4820, 3940, 3200, 2750, 2310];
+  let rank = 1;
+  for (const score of mockScores) {
+    if (score > totalXp) rank++;
+  }
+  return rank;
+}
+
+function renderHomeXpChart() {
+  const chart = document.getElementById('homeXpChart');
+  if (!chart) return;
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const key = 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
+    let xp = 0;
+    try { xp = (JSON.parse(localStorage.getItem(key))||{}).xp||0; } catch {}
+    const labels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    days.push({ xp, label: labels[d.getDay()] });
+  }
+  const maxXp = Math.max(...days.map(d => d.xp), 1);
+  chart.innerHTML = days.map(d => `
+    <div class="prog-xp-bar-wrap">
+      <div class="prog-xp-bar" style="height:${Math.max(4, Math.round((d.xp/maxXp)*68))}px"></div>
+      <div class="prog-xp-day">${d.label}</div>
+    </div>`).join('');
+}
+
 function refreshHome() {
   const totalXp = xpGetTotal();
   const { levelNum, level, nextLevel, pct } = xpGetLevel(totalXp);
@@ -3297,8 +3673,16 @@ function refreshHome() {
   if (el('hsbXpTotal')) el('hsbXpTotal').textContent = totalXp.toLocaleString();
   if (el('hsbDailyXp')) el('hsbDailyXp').textContent = dailyXp + '/50';
 
-  // Username
-  if (el('homeUsername')) el('homeUsername').textContent = localStorage.getItem('siq_username') || 'SportsFan';
+  // World rank
+  if (el('worldRankNum')) el('worldRankNum').textContent = getWorldRank();
+
+  // XP chart
+  renderHomeXpChart();
+
+  // Username + avatar
+  const username = localStorage.getItem('siq_username') || 'SportsFan';
+  if (el('homeUsername')) el('homeUsername').textContent = username;
+  if (el('homeAvatarInitials')) el('homeAvatarInitials').textContent = username.charAt(0).toUpperCase();
 }
 
 function xpResetConfirm() {
@@ -3368,234 +3752,6 @@ dpUpdateBadges();
 xpRender();
 bnUpdateHomeLevel();
 </script>
-
-<!-- ===================== BOTTOM NAV ===================== -->
-<nav class="bottom-nav">
-  <button class="bn-tab active" id="bn-home" onclick="bnSwitch('home')">
-    <div class="bn-tab-icon">🏠</div>
-    <div class="bn-tab-label">Home</div>
-  </button>
-  <button class="bn-tab" id="bn-leaderboard" onclick="bnSwitch('leaderboard')">
-    <div class="bn-tab-icon">🏆</div>
-    <div class="bn-tab-label">Leaderboard</div>
-  </button>
-  <button class="bn-tab" id="bn-learn" onclick="bnSwitch('learn')">
-    <div class="bn-tab-icon">🧠</div>
-    <div class="bn-tab-label">Learn</div>
-  </button>
-  <button class="bn-tab" id="bn-progress" onclick="bnSwitch('progress')">
-    <div class="bn-tab-icon">📊</div>
-    <div class="bn-tab-label">Progress</div>
-  </button>
-  <button class="bn-tab" id="bn-profile" onclick="bnSwitch('profile')">
-    <div class="bn-tab-icon">👤</div>
-    <div class="bn-tab-label">Profile</div>
-  </button>
-</nav>
-
-<!-- ===================== LEARN PAGE ===================== -->
-<div class="page" id="learnPage">
-  <div class="nav-header">
-    <div></div>
-    <div class="nav-header-title">Learn</div>
-    <div></div>
-  </div>
-  <div style="width:100%;max-width:420px;padding:16px 20px;">
-    <div class="learn-section-label">PRO SPORTS</div>
-    <div class="learn-card" onclick="showPage('proSports')">
-      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🏆</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">Pro Sports</div>
-        <div class="learn-card-sub">NBA, NFL, MLB, NHL</div>
-      </div>
-      <div class="learn-card-arrow">→</div>
-    </div>
-    <div class="learn-card" onclick="showPage('collegeSports')">
-      <div class="learn-card-icon" style="background:rgba(91,184,212,0.15);">🎓</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">College Sports</div>
-        <div class="learn-card-sub">NCAA Basketball, Football &amp; more</div>
-      </div>
-      <div class="learn-card-arrow">→</div>
-    </div>
-    <div class="learn-section-label" style="margin-top:8px;">DAILY CHALLENGES</div>
-    <div class="learn-card" onclick="dpOpen('nba')">
-      <div class="learn-card-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">NBA Daily Player</div>
-        <div class="learn-card-sub">Guess today's player</div>
-      </div>
-      <span class="learn-card-badge" id="learnDailyBadge">DAILY</span>
-    </div>
-    <div class="learn-section-label" style="margin-top:8px;">STUDY MODES</div>
-    <div class="learn-card" onclick="bnGoFlashcards()">
-      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🃏</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">Flashcards</div>
-        <div class="learn-card-sub">Photo → Name, Stats → Player</div>
-      </div>
-      <div class="learn-card-arrow">→</div>
-    </div>
-  </div>
-</div>
-
-<!-- ===================== LEADERBOARD PAGE ===================== -->
-<div class="page" id="leaderboardPage">
-  <div class="nav-header">
-    <div></div>
-    <div class="nav-header-title">Leaderboard</div>
-    <div></div>
-  </div>
-  <div class="nav-content" style="width:100%;max-width:420px;padding:16px 20px;">
-    <div class="lb-tabs">
-      <button class="lb-tab active" onclick="lbSwitch('global',this)">🌎 Global</button>
-      <button class="lb-tab" onclick="lbSwitch('weekly',this)">📅 Weekly</button>
-      <button class="lb-tab" onclick="lbSwitch('friends',this)">👥 Friends</button>
-    </div>
-    <div id="lbContent"></div>
-  </div>
-</div>
-
-<!-- ===================== PROGRESS PAGE ===================== -->
-<div class="page" id="progressPage">
-  <div class="nav-header">
-    <div></div>
-    <div class="nav-header-title">Progress</div>
-    <div></div>
-  </div>
-  <div class="nav-content" style="width:100%;max-width:420px;padding:16px 20px;">
-    <div class="prog-stat-grid" id="progStatGrid"></div>
-    <div class="prog-section-title">XP EARNED — LAST 7 DAYS</div>
-    <div style="background:var(--surface);border:1px solid rgba(107,63,160,0.25);border-radius:14px;padding:16px;margin-bottom:20px;">
-      <div class="prog-xp-chart" id="progXpChart"></div>
-    </div>
-
-    <div class="sports-dropdown-wrap">
-      <button class="sports-dropdown-btn" id="sportsDropdownBtn" onclick="toggleSportsDropdown()">
-        <div class="sdb-left">
-          <span class="sdb-icon">🏅</span>
-          <span class="sdb-label">Completed Sports</span>
-          <span class="sdb-count" id="sportsCompleteCount"></span>
-        </div>
-        <span class="sdb-arrow" id="sportsDropdownArrow">▼</span>
-      </button>
-      <div class="sports-dropdown-body" id="sportsDropdownBody">
-        <div class="sports-category">PRO SPORTS</div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏀</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NBA</div>
-            <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/18 players</div>
-          </div>
-          <div class="sport-row-status" id="sdNBAStatus">—</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏈</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NFL</div>
-            <div class="sport-row-sub">Coming Soon</div>
-          </div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">⚾</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">MLB</div>
-            <div class="sport-row-sub">Coming Soon</div>
-          </div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏒</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NHL</div>
-            <div class="sport-row-sub">Coming Soon</div>
-          </div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sports-category">COLLEGE SPORTS</div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏀</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NCAA Basketball</div>
-            <div class="sport-row-sub">Coming Soon</div>
-          </div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏈</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NCAA Football</div>
-            <div class="sport-row-sub">Coming Soon</div>
-          </div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">⚾</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NCAA Baseball</div>
-            <div class="sport-row-sub">Coming Soon</div>
-          </div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">⚽</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NCAA Soccer</div>
-            <div class="sport-row-sub">Coming Soon</div>
-          </div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-      </div>
-    </div>
-    <div class="prog-section-title">RECENT DAILY PLAYERS</div>
-    <div id="progDpList"></div>
-  </div>
-</div>
-
-<!-- ===================== PROFILE PAGE ===================== -->
-<div class="page" id="profilePage">
-  <div class="nav-header">
-    <div></div>
-    <div class="nav-header-title">Profile</div>
-    <div></div>
-  </div>
-  <div class="nav-content" style="width:100%;max-width:420px;padding:0 20px 20px;">
-    <div class="prof-header">
-      <div class="prof-avatar">🏅</div>
-      <div class="prof-name" id="profName">SportsFan</div>
-      <div class="prof-title" id="profTitle">Rookie</div>
-      <div class="prof-xp-total" id="profXpTotal">0 Total XP</div>
-    </div>
-    <div class="prof-stats-row">
-      <div class="prof-stat">
-        <div class="prof-stat-val" id="profLevel">1</div>
-        <div class="prof-stat-label">Level</div>
-      </div>
-      <div class="prof-stat">
-        <div class="prof-stat-val" id="profStreak">0</div>
-        <div class="prof-stat-label">Day Streak</div>
-      </div>
-    </div>
-    <div class="prof-section-title" style="margin-top:8px;">SETTINGS</div>
-    <div class="settings-row" onclick="showComingSoon()">
-      <div class="sr-left"><span class="sr-icon">✏️</span><span class="sr-label">Edit Username</span></div>
-      <span class="sr-arrow">→</span>
-    </div>
-    <div class="settings-row" onclick="showComingSoon()">
-      <div class="sr-left"><span class="sr-icon">🔔</span><span class="sr-label">Notifications</span></div>
-      <span class="sr-arrow">→</span>
-    </div>
-    <div class="settings-row" onclick="showComingSoon()">
-      <div class="sr-left"><span class="sr-icon">🌙</span><span class="sr-label">Theme</span></div>
-      <span class="sr-arrow">→</span>
-    </div>
-    <div class="settings-row" onclick="xpResetConfirm()">
-      <div class="sr-left"><span class="sr-icon">🗑️</span><span class="sr-label">Reset Progress</span></div>
-      <span class="sr-arrow">→</span>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
