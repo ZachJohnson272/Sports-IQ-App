@@ -1492,6 +1492,205 @@
     letter-spacing: 0.5px;
   }
 
+  /* ===================== LEARN PAGE — REDESIGN ===================== */
+  .lp-wrap {
+    width: 100%; max-width: 390px;
+    padding: 12px 18px 32px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+
+  /* Step indicator */
+  .lp-steps {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; padding: 4px 0 2px;
+    animation: fadeUp 0.3s ease both;
+  }
+  .lp-step {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .lp-step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--surface);
+    border: 1.5px solid rgba(107,63,160,0.3);
+    color: var(--muted);
+    font-family: 'Bebas Neue', sans-serif; font-size: 15px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .lp-step.active .lp-step-num {
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(107,63,160,0.5);
+  }
+  .lp-step.done .lp-step-num {
+    background: rgba(61,204,122,0.2);
+    border-color: rgba(61,204,122,0.4);
+    color: #3dcc7a;
+  }
+  .lp-step-label {
+    font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .lp-step.active .lp-step-label { color: #fff; }
+  .lp-step-line {
+    flex: 1; height: 1.5px; width: 40px;
+    background: rgba(107,63,160,0.25);
+    margin: 0 6px; margin-bottom: 16px;
+  }
+
+  /* Panel */
+  .lp-panel { display: flex; flex-direction: column; gap: 8px; animation: fadeUp 0.25s ease both; }
+  .lp-panel.hidden { display: none; }
+  .lp-panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 2px; color: #fff;
+  }
+  .lp-panel-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 4px;
+  }
+  .lp-back-btn {
+    background: none; border: none; color: var(--jazz-sky);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; padding: 0; flex-shrink: 0;
+    transition: color 0.15s;
+  }
+  .lp-back-btn:hover { color: #fff; }
+  .lp-section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px; letter-spacing: 2.5px; color: rgba(255,255,255,0.3);
+    margin-top: 4px;
+  }
+
+  /* League cards */
+  .lp-league-card {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.28);
+    border-radius: 14px;
+    padding: 13px 14px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    animation: fadeUp 0.28s ease both;
+  }
+  .lp-league-card:hover {
+    border-color: rgba(107,63,160,0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(107,63,160,0.18);
+  }
+  .lp-league-card.locked { opacity: 0.55; cursor: default; }
+  .lp-league-card.locked:hover { transform: none; box-shadow: none; border-color: rgba(107,63,160,0.28); }
+  .lp-lc-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .lp-lc-info { flex: 1; }
+  .lp-lc-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; color: #fff; line-height: 1; }
+  .lp-lc-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .lp-lc-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .lp-lc-arrow { color: var(--muted); font-size: 16px; }
+  .lp-lc-tag {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.8px;
+    padding: 3px 8px; border-radius: 99px; text-transform: uppercase;
+  }
+  .lp-lc-tag.active {
+    background: rgba(61,204,122,0.15);
+    color: #3dcc7a;
+    border: 1px solid rgba(61,204,122,0.3);
+  }
+  .lp-lc-tag.soon {
+    background: rgba(155,142,196,0.1);
+    color: var(--muted);
+    border: 1px solid rgba(155,142,196,0.2);
+  }
+
+  /* Team cards */
+  .lp-team-card {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.28);
+    border-radius: 14px;
+    padding: 13px 14px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    animation: fadeUp 0.25s ease both;
+  }
+  .lp-team-card:hover {
+    border-color: rgba(107,63,160,0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(107,63,160,0.18);
+  }
+  .lp-team-card.locked { opacity: 0.5; cursor: default; }
+  .lp-team-card.locked:hover { transform: none; box-shadow: none; border-color: rgba(107,63,160,0.28); }
+  .lp-team-icon { font-size: 22px; flex-shrink: 0; }
+  .lp-team-info { flex: 1; }
+  .lp-team-name { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1; }
+  .lp-team-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .lp-team-mastery { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; min-width: 44px; }
+  .lp-mastery-pct { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: var(--jazz-sky); }
+  .lp-mastery-bar-wrap { width: 44px; height: 4px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+  .lp-mastery-bar-fill { height: 100%; background: linear-gradient(90deg, #6B3FA0, #5BB8D4); border-radius: 99px; transition: width 0.5s ease; }
+
+  /* Team summary on step 3 */
+  .lp-team-summary {
+    background: linear-gradient(135deg, rgba(90,48,128,0.3) 0%, rgba(58,143,168,0.15) 100%);
+    border: 1px solid rgba(107,63,160,0.4);
+    border-radius: 14px;
+    padding: 13px 16px;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 6px;
+    position: relative; overflow: hidden;
+  }
+  .lp-team-summary::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(107,63,160,0.6), rgba(91,184,212,0.4), transparent);
+  }
+  .lp-ts-icon { font-size: 24px; flex-shrink: 0; }
+  .lp-ts-info { flex: 1; }
+  .lp-ts-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px; color: #fff; line-height: 1; }
+  .lp-ts-sub { font-size: 11px; color: var(--jazz-sky); margin-top: 2px; }
+  .lp-ts-mastery { text-align: right; flex-shrink: 0; }
+  .lp-ts-pct { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; line-height: 1; }
+  .lp-ts-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* Mode cards */
+  .lp-mode-card {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.28);
+    border-radius: 14px;
+    padding: 13px 14px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    animation: fadeUp 0.25s ease both;
+  }
+  .lp-mode-card:hover {
+    border-color: rgba(107,63,160,0.65);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(107,63,160,0.2);
+  }
+  .lp-mode-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px; flex-shrink: 0;
+  }
+  .lp-mode-info { flex: 1; }
+  .lp-mode-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1; }
+  .lp-mode-desc { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  .lp-mode-stat {
+    font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+    color: var(--jazz-sky); letter-spacing: 0.5px;
+    background: rgba(91,184,212,0.1); border: 1px solid rgba(91,184,212,0.2);
+    border-radius: 8px; padding: 3px 8px; flex-shrink: 0;
+  }
+  .lp-daily-badge {
+    background: linear-gradient(135deg, #f7a54f, #f5c842);
+    color: #1a1200; font-size: 9px; font-weight: 700;
+    padding: 3px 8px; border-radius: 99px; letter-spacing: 0.8px;
+    flex-shrink: 0;
+  }
+
   /* ===================== LEADERBOARD PAGE ===================== */
   #leaderboardPage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
   .lb-tabs {
@@ -2991,42 +3190,198 @@
     <div class="nav-header-title">Learn</div>
     <div></div>
   </div>
-  <div style="width:100%;max-width:390px;padding:12px 14px;">
-    <div class="learn-section-label">PRO SPORTS</div>
-    <div class="learn-card" onclick="showPage('proSports')">
-      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🏆</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">Pro Sports</div>
-        <div class="learn-card-sub">NBA, NFL, MLB, NHL</div>
-      </div>
-      <div class="learn-card-arrow">→</div>
+  <div class="lp-wrap">
+
+    <!-- Step indicator -->
+    <div class="lp-steps">
+      <div class="lp-step active" id="lstep-1"><span class="lp-step-num">1</span><span class="lp-step-label">League</span></div>
+      <div class="lp-step-line"></div>
+      <div class="lp-step" id="lstep-2"><span class="lp-step-num">2</span><span class="lp-step-label">Team</span></div>
+      <div class="lp-step-line"></div>
+      <div class="lp-step" id="lstep-3"><span class="lp-step-num">3</span><span class="lp-step-label">Mode</span></div>
     </div>
-    <div class="learn-card" onclick="showPage('collegeSports')">
-      <div class="learn-card-icon" style="background:rgba(91,184,212,0.15);">🎓</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">College Sports</div>
-        <div class="learn-card-sub">NCAA Basketball, Football &amp; more</div>
+
+    <!-- ── Step 1: Choose League ── -->
+    <div class="lp-panel" id="lp-panel-1">
+      <div class="lp-panel-title">Choose a League</div>
+
+      <div class="lp-section-label">PRO SPORTS</div>
+      <div class="lp-league-card" onclick="lpSelectLeague('nba')">
+        <div class="lp-lc-icon" style="background:rgba(107,63,160,0.25);">🏀</div>
+        <div class="lp-lc-info">
+          <div class="lp-lc-name">NBA</div>
+          <div class="lp-lc-sub">National Basketball Association</div>
+        </div>
+        <div class="lp-lc-right">
+          <div class="lp-lc-tag active">Active</div>
+          <div class="lp-lc-arrow">→</div>
+        </div>
       </div>
-      <div class="learn-card-arrow">→</div>
-    </div>
-    <div class="learn-section-label" style="margin-top:8px;">DAILY CHALLENGES</div>
-    <div class="learn-card" onclick="dpOpen('nba')">
-      <div class="learn-card-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">NBA Daily Player</div>
-        <div class="learn-card-sub">Guess today's player</div>
+      <div class="lp-league-card locked" onclick="showComingSoon()">
+        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.12);">🏈</div>
+        <div class="lp-lc-info">
+          <div class="lp-lc-name">NFL</div>
+          <div class="lp-lc-sub">National Football League</div>
+        </div>
+        <div class="lp-lc-right">
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
       </div>
-      <span class="learn-card-badge" id="learnDailyBadge">DAILY</span>
-    </div>
-    <div class="learn-section-label" style="margin-top:8px;">STUDY MODES</div>
-    <div class="learn-card" onclick="bnGoFlashcards()">
-      <div class="learn-card-icon" style="background:rgba(107,63,160,0.25);">🃏</div>
-      <div class="learn-card-info">
-        <div class="learn-card-title">Flashcards</div>
-        <div class="learn-card-sub">Photo → Name, Stats → Player</div>
+      <div class="lp-league-card locked" onclick="showComingSoon()">
+        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.12);">⚾</div>
+        <div class="lp-lc-info">
+          <div class="lp-lc-name">MLB</div>
+          <div class="lp-lc-sub">Major League Baseball</div>
+        </div>
+        <div class="lp-lc-right">
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
       </div>
-      <div class="learn-card-arrow">→</div>
+      <div class="lp-league-card locked" onclick="showComingSoon()">
+        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.12);">🏒</div>
+        <div class="lp-lc-info">
+          <div class="lp-lc-name">NHL</div>
+          <div class="lp-lc-sub">National Hockey League</div>
+        </div>
+        <div class="lp-lc-right">
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
+      </div>
+
+      <div class="lp-section-label" style="margin-top:14px;">COLLEGE SPORTS</div>
+      <div class="lp-league-card locked" onclick="showComingSoon()">
+        <div class="lp-lc-icon" style="background:rgba(245,200,66,0.1);">🎓</div>
+        <div class="lp-lc-info">
+          <div class="lp-lc-name">College Football</div>
+          <div class="lp-lc-sub">NCAA FBS</div>
+        </div>
+        <div class="lp-lc-right">
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
+      </div>
+      <div class="lp-league-card locked" onclick="showComingSoon()">
+        <div class="lp-lc-icon" style="background:rgba(245,200,66,0.1);">🎓</div>
+        <div class="lp-lc-info">
+          <div class="lp-lc-name">College Basketball</div>
+          <div class="lp-lc-sub">NCAA Division I</div>
+        </div>
+        <div class="lp-lc-right">
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
+      </div>
     </div>
+
+    <!-- ── Step 2: Choose Team ── -->
+    <div class="lp-panel hidden" id="lp-panel-2">
+      <div class="lp-panel-header">
+        <button class="lp-back-btn" onclick="lpGoStep(1)">← Back</button>
+        <div class="lp-panel-title" id="lp-panel-2-title">Choose a Team</div>
+      </div>
+
+      <!-- NBA teams -->
+      <div id="lp-teams-nba">
+        <div class="lp-section-label">WESTERN CONFERENCE</div>
+        <div class="lp-team-card" onclick="lpSelectTeam('jazz','Utah Jazz','🏀','nba')">
+          <div class="lp-team-icon">🏀</div>
+          <div class="lp-team-info">
+            <div class="lp-team-name">Utah Jazz</div>
+            <div class="lp-team-sub">18 players · Active</div>
+          </div>
+          <div class="lp-team-mastery" id="lp-mastery-jazz">
+            <div class="lp-mastery-pct" id="lp-mastery-jazz-pct">0%</div>
+            <div class="lp-mastery-bar-wrap"><div class="lp-mastery-bar-fill" id="lp-mastery-jazz-fill" style="width:0%"></div></div>
+          </div>
+          <div class="lp-lc-arrow">→</div>
+        </div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Dallas Mavericks</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Denver Nuggets</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Golden State Warriors</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Los Angeles Lakers</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Oklahoma City Thunder</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-section-label" style="margin-top:12px;">EASTERN CONFERENCE</div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Boston Celtics</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Cleveland Cavaliers</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">Miami Heat</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+        <div class="lp-team-card locked" onclick="showComingSoon()"><div class="lp-team-icon">🏀</div><div class="lp-team-info"><div class="lp-team-name">New York Knicks</div><div class="lp-team-sub">Coming soon</div></div><div class="lp-lc-tag soon" style="flex-shrink:0">Soon</div></div>
+      </div>
+    </div>
+
+    <!-- ── Step 3: Choose Mode ── -->
+    <div class="lp-panel hidden" id="lp-panel-3">
+      <div class="lp-panel-header">
+        <button class="lp-back-btn" onclick="lpGoStep(2)">← Back</button>
+        <div class="lp-panel-title" id="lp-panel-3-title">Choose a Mode</div>
+      </div>
+
+      <!-- Team summary card -->
+      <div class="lp-team-summary" id="lp-team-summary">
+        <div class="lp-ts-icon" id="lp-ts-icon">🏀</div>
+        <div class="lp-ts-info">
+          <div class="lp-ts-name" id="lp-ts-name">Utah Jazz</div>
+          <div class="lp-ts-sub" id="lp-ts-sub">NBA · 18 players</div>
+        </div>
+        <div class="lp-ts-mastery">
+          <div class="lp-ts-pct" id="lp-ts-pct">0%</div>
+          <div class="lp-ts-label">Mastery</div>
+        </div>
+      </div>
+
+      <div class="lp-section-label">FLASHCARDS</div>
+      <div class="lp-mode-card" onclick="lpStartMode('photoName')">
+        <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📸</div>
+        <div class="lp-mode-info">
+          <div class="lp-mode-title">Photo → Name</div>
+          <div class="lp-mode-desc">See the face, guess the player's name & position</div>
+        </div>
+        <div class="lp-mode-stat" id="lpms-photoName">0/18</div>
+      </div>
+      <div class="lp-mode-card" onclick="lpStartMode('namePos')">
+        <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">📋</div>
+        <div class="lp-mode-info">
+          <div class="lp-mode-title">Name → Position</div>
+          <div class="lp-mode-desc">See the name, guess position & identify the photo</div>
+        </div>
+        <div class="lp-mode-stat" id="lpms-namePos">0/18</div>
+      </div>
+      <div class="lp-mode-card" onclick="lpStartMode('statsPlayer')">
+        <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
+        <div class="lp-mode-info">
+          <div class="lp-mode-title">Stats → Player</div>
+          <div class="lp-mode-desc">See height, age, college — guess who it is</div>
+        </div>
+        <div class="lp-mode-stat" id="lpms-statsPlayer">0/18</div>
+      </div>
+
+      <div class="lp-section-label" style="margin-top:14px;">QUICK QUIZ</div>
+      <div class="lp-mode-card" onclick="lpStartMode('multiChoice')">
+        <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔤</div>
+        <div class="lp-mode-info">
+          <div class="lp-mode-title">Multiple Choice</div>
+          <div class="lp-mode-desc">4 options — pick the right player from clues</div>
+        </div>
+        <div class="lp-mode-stat" id="lpms-multiChoice">0/18</div>
+      </div>
+
+      <div class="lp-section-label" style="margin-top:14px;">GUESS THE PLAYER</div>
+      <div class="lp-mode-card" onclick="lpStartMode('lineup')">
+        <div class="lp-mode-icon" style="background:rgba(61,204,122,0.15);">📝</div>
+        <div class="lp-mode-info">
+          <div class="lp-mode-title">Guess the Lineup</div>
+          <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
+        </div>
+        <div class="lp-mode-stat" id="lpms-lineup">—</div>
+      </div>
+      <div class="lp-mode-card" onclick="dpOpen('nba')">
+        <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
+        <div class="lp-mode-info">
+          <div class="lp-mode-title">Daily Player Guess</div>
+          <div class="lp-mode-desc">Identify today's mystery athlete · +20 XP</div>
+        </div>
+        <span class="lp-daily-badge" id="learnDailyBadge">DAILY</span>
+      </div>
+
+    </div>
+
   </div>
 </div>
 
@@ -4179,15 +4534,102 @@ function bnSwitch(tab) {
 
   // Refresh page data
   if (tab === 'home') { updateHomeStats(); xpRender(); refreshHome(); renderHomeLb(); }
-  if (tab === 'learn') { }
+  if (tab === 'learn') { lpGoStep(1); lpUpdateJazzMastery(); }
   if (tab === 'leaderboard') { lbRender('global'); }
   if (tab === 'progress') { progRender(); }
   if (tab === 'profile') { profRender(); }
 }
 
 function bnGoFlashcards() {
-  // Navigate into the Jazz Team then mode select
-  showPage('proSports');
+  // Legacy: go to learn tab and open to step 1
+  bnSwitch('learn');
+}
+
+// ===================== LEARN PAGE — 3-STEP FLOW =====================
+let _lpLeague = null;
+let _lpTeam   = null;
+
+function lpGoStep(n) {
+  // Update step indicators
+  for (let i = 1; i <= 3; i++) {
+    const s = document.getElementById('lstep-' + i);
+    if (!s) continue;
+    s.classList.remove('active', 'done');
+    if (i < n)  s.classList.add('done');
+    if (i === n) s.classList.add('active');
+  }
+  // Show/hide panels
+  for (let i = 1; i <= 3; i++) {
+    const p = document.getElementById('lp-panel-' + i);
+    if (!p) continue;
+    p.classList.toggle('hidden', i !== n);
+    if (i === n) {
+      p.style.animation = 'none';
+      requestAnimationFrame(() => { p.style.animation = ''; });
+    }
+  }
+}
+
+function lpSelectLeague(leagueId) {
+  _lpLeague = leagueId;
+  // Show correct team list
+  document.querySelectorAll('[id^="lp-teams-"]').forEach(el => el.style.display = 'none');
+  const teamList = document.getElementById('lp-teams-' + leagueId);
+  if (teamList) teamList.style.display = '';
+  // Update panel title
+  const titles = { nba:'NBA — Choose a Team' };
+  const t = document.getElementById('lp-panel-2-title');
+  if (t) t.textContent = titles[leagueId] || 'Choose a Team';
+  // Update Jazz mastery
+  lpUpdateJazzMastery();
+  lpGoStep(2);
+}
+
+function lpUpdateJazzMastery() {
+  const learnedSet = new Set();
+  modes.filter(m => m !== 'lineup').forEach(m => {
+    modeData[m].forEach((pd, i) => { if (isLearned(pd)) learnedSet.add(i); });
+  });
+  const pct = Math.round((learnedSet.size / 18) * 100);
+  const fillEl = document.getElementById('lp-mastery-jazz-fill');
+  const pctEl  = document.getElementById('lp-mastery-jazz-pct');
+  const tsPct  = document.getElementById('lp-ts-pct');
+  if (fillEl) fillEl.style.width = pct + '%';
+  if (pctEl)  pctEl.textContent = pct + '%';
+  if (tsPct)  tsPct.textContent = pct + '%';
+}
+
+function lpSelectTeam(teamId, teamName, teamIcon, leagueId) {
+  _lpTeam = teamId;
+  // Update team summary card
+  const nameEl = document.getElementById('lp-ts-name');
+  const subEl  = document.getElementById('lp-ts-sub');
+  const iconEl = document.getElementById('lp-ts-icon');
+  if (nameEl) nameEl.textContent = teamName;
+  if (iconEl) iconEl.textContent = teamIcon;
+  if (subEl)  subEl.textContent  = leagueId.toUpperCase() + ' · 18 players';
+  // Update panel 3 title
+  const t = document.getElementById('lp-panel-3-title');
+  if (t) t.textContent = teamName + ' — Choose Mode';
+  // Update mode stats
+  lpUpdateModeStats();
+  lpUpdateJazzMastery();
+  lpGoStep(3);
+}
+
+function lpUpdateModeStats() {
+  const statModes = ['photoName','namePos','statsPlayer','multiChoice'];
+  statModes.forEach(m => {
+    const el = document.getElementById('lpms-' + m);
+    if (!el) return;
+    const learned = getModeLearnedCount ? getModeLearnedCount(m) : 0;
+    el.textContent = learned + '/18';
+  });
+}
+
+function lpStartMode(mode) {
+  // Route into the existing flashcard engine
+  startMode(mode);
 }
 
 // --- Dashboard refresh ---
