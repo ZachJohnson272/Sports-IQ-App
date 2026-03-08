@@ -2029,6 +2029,8 @@
     transition: width 0.5s ease;
   }
 </style>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -2758,11 +2760,30 @@
       <div class="sr-left"><span class="sr-icon">🗑️</span><span class="sr-label">Reset Progress</span></div>
       <span class="sr-arrow">→</span>
     </div>
+    <div class="settings-row" onclick="logout()">
+      <div class="sr-left"><span class="sr-icon">🚪</span><span class="sr-label">Log Out</span></div>
+      <span class="sr-arrow">→</span>
+    </div>
   </div>
 </div>
 
 
 <script>
+// ===================== SUPABASE AUTH GUARD =====================
+const _sb = supabase.createClient(
+  'https://cyzxoadiuhkftxpvzsxq.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5enhvYWRpdWhrZnR4cHZ6c3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MzYxNjMsImV4cCI6MjA4ODUxMjE2M30.ctQTb1YkBwyVzspLKKtrEK-qjxeYrf6mmAM7R2rHXWg'
+);
+(async () => {
+  const { data } = await _sb.auth.getSession();
+  if (!data.session) { window.location.href = 'login.html'; }
+})();
+async function logout() {
+  await _sb.auth.signOut();
+  window.location.href = 'login.html';
+}
+// ===============================================================
+
 // ===================== ROSTER DATA =====================
 const ROSTER = [
   { name:"Ace Bailey",          position:"G", age:19, height:'6\'9"',  college:"Rutgers",          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
@@ -3751,16 +3772,7 @@ updateHomeStats();
 dpUpdateBadges();
 xpRender();
 bnUpdateHomeLevel();
-  
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script>
-
-const supabaseUrl = "https://cyzxoadiuhkftxpvzsxq.supabase.co"
-const supabaseKey = "sb_publishable_Nrb_gW8BWZoA-Ucwhh9xRg_4XVcy5rN"
-
-const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey)
-
 </script>
+
 </body>
 </html>
