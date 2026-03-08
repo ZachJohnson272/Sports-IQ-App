@@ -2059,28 +2059,61 @@
   }
 
   /* ── Welcome row ── */
+  /* ── Avatar welcome card ── */
+  .home-avatar-card {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.32);
+    border-radius: 16px;
+    padding: 14px 16px;
+    animation: fadeUp 0.3s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+  .home-avatar-card::before {
+    content: '';
+    position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(107,63,160,0.5), rgba(91,184,212,0.35), transparent);
+  }
   .home-avatar-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
-    padding: 4px 0;
-    animation: fadeUp 0.3s ease both;
+  }
+  /* Glow ring wraps the circle — pulsing border */
+  .home-avatar-glow-ring {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    box-shadow:
+      0 0 0 3px rgba(107,63,160,0.18),
+      0 0 14px rgba(107,63,160,0.45),
+      0 0 28px rgba(91,184,212,0.18);
+    flex-shrink: 0;
+    animation: avatarRingPulse 3.5s ease-in-out infinite;
+  }
+  @keyframes avatarRingPulse {
+    0%,  100% {
+      box-shadow: 0 0 0 3px rgba(107,63,160,0.18), 0 0 14px rgba(107,63,160,0.40), 0 0 26px rgba(91,184,212,0.14);
+    }
+    50% {
+      box-shadow: 0 0 0 4px rgba(107,63,160,0.30), 0 0 22px rgba(107,63,160,0.62), 0 0 40px rgba(91,184,212,0.26);
+    }
   }
   .home-avatar-circle {
-    width: 50px; height: 50px;
+    width: 100%; height: 100%;
     border-radius: 50%;
     background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 0 2px rgba(91,184,212,0.25), 0 4px 14px rgba(107,63,160,0.4);
-    flex-shrink: 0;
+    border: 2px solid rgba(10,10,18,0.6);
   }
   .home-avatar-initials {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px; color: #fff; line-height: 1;
   }
   .home-avatar-section { display: flex; align-items: center; gap: 13px; }
-  .home-avatar-text { display: flex; flex-direction: column; gap: 2px; }
+  .home-avatar-text { display: flex; flex-direction: column; gap: 3px; }
   .home-avatar-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
@@ -2512,18 +2545,21 @@
         <div class="home-brand-title">S P O R T S M I N D</div>
       </div>
 
-      <!-- Welcome + streak pill -->
-      <div class="home-avatar-row">
-        <div class="home-avatar-section">
-          <div class="home-avatar-circle">
-            <span class="home-avatar-initials" id="homeAvatarInitials">S</span>
-          </div>
-          <div class="home-avatar-text">
-            <div class="home-avatar-name" id="homeUsername">SportsFan</div>
-            <div class="home-avatar-sub" id="homeWelcome">Welcome back!</div>
+      <!-- Welcome card -->
+      <div class="home-avatar-card">
+        <div class="home-avatar-row">
+          <div class="home-avatar-section">
+            <div class="home-avatar-glow-ring">
+              <div class="home-avatar-circle">
+                <span class="home-avatar-initials" id="homeAvatarInitials">S</span>
+              </div>
+            </div>
+            <div class="home-avatar-text">
+              <div class="home-avatar-name" id="homeUsername">SportsFan</div>
+              <div class="home-avatar-sub" id="homeWelcome">Welcome back!</div>
+            </div>
           </div>
         </div>
-        <!-- streak pill removed; streak lives in stat row -->
       </div>
 
       <!-- Stats -->
