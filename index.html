@@ -3387,37 +3387,63 @@ document.getElementById('dp-guess').addEventListener('keydown', e => { if (e.key
 document.getElementById('dp-overlay').addEventListener('click', e => { if (e.target === document.getElementById('dp-overlay')) dpClose(); });
 
 
-// ===================== DAILY XP SYSTEM =====================
-const XP_GOAL = 50;
+// ===================== SUPABASE XP SYSTEM =====================
+//
+// HOW IT WORKS:
+//   - Total XP is stored in Supabase (persists across devices/sessions)
+//   - Daily XP tracking (goal, streak) stays in localStorage (fast, no lag)
+//   - On page load we fetch total_xp from Supabase and sync it locally
+//   - When XP is awarded we update Supabase AND localStorage together
+//
+// SUPABASE TABLE NEEDED:
+//   Table name : user_xp
+//   Columns    :
+//     id         uuid  (primary key, default: gen_random_uuid())
+//     user_id    uuid  (references auth.users.id, unique)
+//     total_xp   int8  (default: 0)
+//     updated_at timestamptz (default: now())
+//
+// ROW LEVEL SECURITY (RLS) — enable RLS on the table, then add these policies:
+//   SELECT : auth.uid() = user_id
+//   INSERT : auth.uid() = user_id
+//   UPDATE : auth.uid() = user_id
+//
+// ============================================================
+
+const XP_GOAL  = 50;
 const XP_BONUS = 10;
 
+// In-memory cache of total XP loaded from Supabase.
+// We use this so the UI never has to wait for a network call.
+let _cachedTotalXp = 0;
+
+// ── Daily XP key (localStorage only — resets each day) ──────
 function xpDayKey() {
   const d = new Date();
   return 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
 }
 
+// ── Load / save today's daily XP object from localStorage ───
 function xpLoad() {
   try { return JSON.parse(localStorage.getItem(xpDayKey()) || 'null') || {xp:0,done:false,bonusGiven:false}; }
   catch { return {xp:0,done:false,bonusGiven:false}; }
 }
-
 function xpSave(data) {
   localStorage.setItem(xpDayKey(), JSON.stringify(data));
 }
 
+// ── Streak (localStorage only — fast) ───────────────────────
 function xpStreakLoad() {
   try { return JSON.parse(localStorage.getItem('xp_streak') || '{}'); }
   catch { return {}; }
 }
-
 function xpStreakSave(s) { localStorage.setItem('xp_streak', JSON.stringify(s)); }
-
-function xpGetStreak() { return xpStreakLoad().count || 0; }
+function xpGetStreak()   { return xpStreakLoad().count || 0; }
 
 function xpStreakUpdate() {
   const s = xpStreakLoad();
   const today = xpDayKey();
-  if (s.lastDay === today) return; // already updated today
+  if (s.lastDay === today) return;
   const d = new Date(); d.setDate(d.getDate() - 1);
   const yesterday = 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
   s.count = (s.lastDay === yesterday) ? (s.count || 0) + 1 : 1;
@@ -3425,7 +3451,79 @@ function xpStreakUpdate() {
   xpStreakSave(s);
 }
 
+// ── SUPABASE: Load total XP for the logged-in user ───────────
+// Called once on page load. Populates _cachedTotalXp.
+async function sbXpLoad() {
+  try {
+    const { data: { session } } = await _sb.auth.getSession();
+    if (!session) return; // not logged in — auth guard will redirect
+
+    const userId = session.user.id;
+
+    const { data, error } = await _sb
+      .from('user_xp')
+      .select('total_xp')
+      .eq('user_id', userId)
+      .single();
+
+    if (error && error.code === 'PGRST116') {
+      // Row doesn't exist yet — create it with 0 XP
+      await _sb.from('user_xp').insert({ user_id: userId, total_xp: 0 });
+      _cachedTotalXp = 0;
+    } else if (error) {
+      console.warn('[XP] Could not load XP from Supabase:', error.message);
+      // Fall back to the localStorage total so the app still works offline
+      _cachedTotalXp = _xpGetTotalFromLocalStorage();
+    } else {
+      _cachedTotalXp = data.total_xp || 0;
+    }
+  } catch (err) {
+    console.warn('[XP] sbXpLoad error:', err);
+    _cachedTotalXp = _xpGetTotalFromLocalStorage();
+  }
+
+  // Refresh all UI with the loaded value
+  refreshHome();
+  xpRender();
+}
+
+// ── SUPABASE: Save total XP back to the database ─────────────
+// We use upsert so it works whether the row exists or not.
+async function sbXpSave(newTotal) {
+  try {
+    const { data: { session } } = await _sb.auth.getSession();
+    if (!session) return;
+
+    await _sb.from('user_xp').upsert(
+      { user_id: session.user.id, total_xp: newTotal, updated_at: new Date().toISOString() },
+      { onConflict: 'user_id' }
+    );
+  } catch (err) {
+    console.warn('[XP] sbXpSave error:', err);
+    // XP is still tracked locally — it will sync next time
+  }
+}
+
+// ── Returns total XP (uses in-memory cache — instant, no lag) ─
+function xpGetTotal() {
+  return _cachedTotalXp;
+}
+
+// ── Fallback: calculate total from localStorage (offline mode) ─
+function _xpGetTotalFromLocalStorage() {
+  let total = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith('xp_day_')) {
+      try { total += (JSON.parse(localStorage.getItem(key)) || {}).xp || 0; } catch {}
+    }
+  }
+  return total;
+}
+
+// ── Award XP: update both localStorage (daily) and Supabase (total) ─
 function xpAward(amount) {
+  // 1. Update today's daily XP in localStorage
   const data = xpLoad();
   if (data.done && data.bonusGiven && amount <= 0) return;
   data.xp = (data.xp || 0) + amount;
@@ -3438,6 +3536,14 @@ function xpAward(amount) {
     }
   }
   xpSave(data);
+
+  // 2. Update the in-memory cache
+  _cachedTotalXp += amount;
+
+  // 3. Persist to Supabase in the background (non-blocking)
+  sbXpSave(_cachedTotalXp);
+
+  // 4. Refresh UI and show the floating pop
   xpRender();
   xpPop('+' + amount + ' XP');
 }
@@ -3484,21 +3590,6 @@ const LEVELS = [
   { min:1600, max:2499, name:'Hall of Famer',title:'Legendary Status' },
   { min:2500, max:null, name:'GOAT',        title:'Greatest of All Time' },
 ];
-
-function xpGetTotal() {
-  let total = 0;
-  // Sum all daily XP entries from localStorage
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key && key.startsWith('xp_day_')) {
-      try {
-        const d = JSON.parse(localStorage.getItem(key));
-        total += d.xp || 0;
-      } catch {}
-    }
-  }
-  return total;
-}
 
 function xpGetLevel(totalXp) {
   let level = LEVELS[0];
@@ -3791,8 +3882,9 @@ function updateSportsDropdown() {
 // ===================== INIT =====================
 updateHomeStats();
 dpUpdateBadges();
-xpRender();
+xpRender();       // renders with 0 XP instantly (no flicker)
 bnUpdateHomeLevel();
+sbXpLoad();       // then loads real XP from Supabase and re-renders
 </script>
 
 </body>
