@@ -1898,19 +1898,27 @@
   }
   .home-streak-pill-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px; color: #f5c842; line-height: 1; letter-spacing: 1px;
+    font-size: 24px; line-height: 1; letter-spacing: 1px;
+    animation: flameNum 3s ease-in-out infinite;
+  }
+  @keyframes flameNum {
+    0%,  100% { color: #f5c842; text-shadow: none; }
+    30%        { color: #ffd966; text-shadow: 0 0 8px rgba(255,210,60,0.55); }
+    50%        { color: #f5c842; text-shadow: none; }
+    62%        { color: #ffcc33; text-shadow: 0 0 12px rgba(255,200,40,0.7); }
+    72%        { color: #f5c842; text-shadow: none; }
+    80%        { color: #ffd966; text-shadow: 0 0 6px rgba(255,210,60,0.4); }
   }
   .home-streak-pill-label {
     font-size: 9px; color: rgba(245,200,66,0.65);
     text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600;
-    animation: flameDance 1.8s ease-in-out infinite;
+    animation: flameDance 2.4s ease-in-out infinite;
   }
   @keyframes flameDance {
-    0%, 100% { transform: scaleY(1)   scaleX(1)    translateY(0);   opacity: 0.65; }
-    20%       { transform: scaleY(1.08) scaleX(0.96) translateY(-0.5px); opacity: 0.8;  }
-    45%       { transform: scaleY(0.96) scaleX(1.03) translateY(0.5px);  opacity: 0.6;  }
-    65%       { transform: scaleY(1.05) scaleX(0.97) translateY(-0.5px); opacity: 0.75; }
-    85%       { transform: scaleY(0.98) scaleX(1.01) translateY(0);      opacity: 0.65; }
+    0%,  100% { transform: translateY(0)    scaleX(1);    opacity: 0.65; }
+    25%        { transform: translateY(-1px) scaleX(0.97); opacity: 0.82; }
+    55%        { transform: translateY(0.5px) scaleX(1.02); opacity: 0.58; }
+    78%        { transform: translateY(-0.5px) scaleX(0.98); opacity: 0.74; }
   }
 
   /* ── Stats row — 2 cards only ── */
@@ -2141,14 +2149,14 @@
     background: linear-gradient(90deg, transparent, rgba(245,200,66,0.45), transparent);
   }
   .home-quick-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(245,200,66,0.48);
-    box-shadow: 0 6px 20px rgba(245,200,66,0.1);
+    transform: translateY(-3px);
+    border-color: rgba(245,200,66,0.55);
+    box-shadow: 0 8px 24px rgba(245,200,66,0.13), 0 0 0 1px rgba(245,200,66,0.08);
   }
-  /* arrow shifts right on hover via CSS variable trick on the child */
+  /* arrow shifts right, tap text brightens */
   .home-quick-card:hover .home-quick-tap {
-    color: rgba(245,200,66,0.85);
-    letter-spacing: 0.8px;
+    color: rgba(245,200,66,0.9);
+    transform: translateX(3px);
   }
   .home-quick-card:active { transform: translateY(0); box-shadow: none; }
   .home-quick-badge {
@@ -2162,11 +2170,12 @@
     border-radius: 0 0 7px 7px;
   }
   .home-quick-icon {
-    width: 48px; height: 48px; border-radius: 13px;
-    background: rgba(245,200,66,0.08);
+    width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(20,12,35,0.85);
     border: 1px solid rgba(245,200,66,0.22);
     display: flex; align-items: center; justify-content: center;
-    font-size: 23px; flex-shrink: 0;
+    flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
   }
   .home-quick-text { flex: 1; min-width: 0; }
   .home-quick-title {
@@ -2191,7 +2200,7 @@
     font-size: 10px;
     color: rgba(245,200,66,0.45);
     letter-spacing: 0.3px;
-    transition: color 0.18s, letter-spacing 0.18s;
+    transition: color 0.18s ease, transform 0.18s ease;
     font-weight: 600;
     white-space: nowrap;
   }
@@ -2301,6 +2310,9 @@
         </div>
       </div>
 
+      <!-- Subtle divider glow between level card and CTA -->
+      <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(91,184,212,0.18),rgba(107,63,160,0.22),transparent);border-radius:99px;margin:-2px 0;"></div>
+
       <!-- Primary CTA -->
       <div class="home-cta-block">
         <button class="home-play-btn" onclick="bnSwitch('learn')">
@@ -2319,7 +2331,7 @@
           <span class="home-daily-badge" id="dailyBadge">In Progress</span>
         </div>
         <div class="home-daily-xp-row">
-          <span>Earn 50 XP today</span>
+          <span>Earn 50 XP today to level up</span>
           <span class="home-daily-xp-nums"><span id="xpCount">0</span> / 50 XP</span>
         </div>
         <div class="xp-bar-wrap">
@@ -2331,7 +2343,22 @@
       <!-- Bonus: Daily Player mini-game -->
       <div class="home-quick-card" onclick="dpOpen('nba')">
         <div class="home-quick-badge">BONUS</div>
-        <div class="home-quick-icon">🫥</div>
+        <div class="home-quick-icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- shoulder fill — darkest layer for depth -->
+            <path d="M1 34 C1 23 7 19.5 17 19.5 C27 19.5 33 23 33 34Z" fill="rgba(255,255,255,0.1)"/>
+            <!-- shoulder highlight rim -->
+            <path d="M3 34 C3 24 8.5 21 17 21 C25.5 21 31 24 31 34Z" fill="rgba(255,255,255,0.2)"/>
+            <!-- neck -->
+            <rect x="14" y="16" width="6" height="5" rx="2" fill="rgba(255,255,255,0.22)"/>
+            <!-- head shadow -->
+            <ellipse cx="17" cy="11" rx="7" ry="7.5" fill="rgba(255,255,255,0.12)"/>
+            <!-- head main -->
+            <ellipse cx="17" cy="10.8" rx="6" ry="6.5" fill="rgba(255,255,255,0.26)"/>
+            <!-- ? mark -->
+            <text x="17" y="15" text-anchor="middle" font-family="'DM Sans',system-ui,sans-serif" font-weight="800" font-size="11" fill="rgba(255,255,255,0.82)">?</text>
+          </svg>
+        </div>
         <div class="home-quick-text">
           <div class="home-quick-title">Daily Player Guess</div>
           <div class="home-quick-sub">Guess today's mystery athlete</div>
@@ -4042,7 +4069,15 @@ function refreshHome() {
   // Level box
   if (el('hlbNum'))  el('hlbNum').textContent  = levelNum;
   if (el('hlbName')) el('hlbName').textContent = level.name.toUpperCase();
-  if (el('hlbSub'))  el('hlbSub').textContent  = level.title + (nextLevel ? ` · ${Math.round(nextLevel.min - totalXp)} XP to ${nextLevel.name}` : ' · MAX LEVEL');
+  if (el('hlbSub')) {
+    if (nextLevel) {
+      const xpIntoLevel = totalXp - level.min;
+      const xpNeeded    = nextLevel.min - level.min;
+      el('hlbSub').textContent = `${xpIntoLevel} / ${xpNeeded} XP to ${nextLevel.name}`;
+    } else {
+      el('hlbSub').textContent = 'Greatest of All Time · MAX LEVEL';
+    }
+  }
   if (el('hlbFill')) el('hlbFill').style.width = pct + '%';
 
   // Stat boxes
