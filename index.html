@@ -1562,8 +1562,226 @@
   .lb-coming-icon { font-size: 40px; margin-bottom: 12px; }
   .lb-coming-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
 
-  /* ===================== PROGRESS PAGE ===================== */
-  #progressPage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
+  /* ===================== PROGRESS PAGE — REDESIGN ===================== */
+  #progressPage .nav-content { width: 100%; max-width: 390px; padding: 14px 20px 32px; }
+
+  /* ── Current Level card ── */
+  .prog-level-card {
+    background: linear-gradient(135deg, rgba(90,48,128,0.35) 0%, rgba(58,143,168,0.18) 100%);
+    border: 1px solid rgba(107,63,160,0.45);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    animation: fadeUp 0.3s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+  .prog-level-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(107,63,160,0.7), rgba(91,184,212,0.5), transparent);
+  }
+  .prog-lc-top {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 12px;
+  }
+  .prog-lc-badge {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, #5a3080, #3a8fa8);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(90,48,128,0.45);
+  }
+  .prog-lc-info { flex: 1; }
+  .prog-lc-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 2px; color: #fff; line-height: 1;
+  }
+  .prog-lc-title { font-size: 12px; color: var(--jazz-sky); margin-top: 3px; font-weight: 500; }
+  .prog-lc-xp-row {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--muted); margin-bottom: 7px;
+  }
+  .prog-lc-xp-nums { font-weight: 700; color: #fff; font-size: 13px; }
+  .prog-lc-bar-wrap {
+    width: 100%; height: 7px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px; overflow: hidden;
+  }
+  .prog-lc-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #5a3080, #3a8fa8);
+    border-radius: 99px;
+    transition: width 0.65s ease;
+  }
+
+  /* ── Next Milestone card ── */
+  .prog-milestone-card {
+    background: rgba(245,200,66,0.05);
+    border: 1px solid rgba(245,200,66,0.22);
+    border-radius: 14px;
+    padding: 13px 16px;
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 18px;
+    animation: fadeUp 0.32s 0.05s ease both;
+  }
+  .prog-ms-icon {
+    width: 40px; height: 40px; border-radius: 11px;
+    background: rgba(245,200,66,0.1);
+    border: 1px solid rgba(245,200,66,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .prog-ms-info { flex: 1; }
+  .prog-ms-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px; letter-spacing: 2px; color: rgba(245,200,66,0.65);
+    margin-bottom: 2px;
+  }
+  .prog-ms-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1;
+  }
+  .prog-ms-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .prog-ms-xp {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; color: #f5c842; letter-spacing: 1px;
+    text-align: right; flex-shrink: 0;
+  }
+  .prog-ms-xp-label { font-size: 9px; color: rgba(245,200,66,0.6); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── Section heading ── */
+  .prog-section-head {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.35);
+    margin: 4px 0 10px;
+  }
+
+  /* ── Level list (always visible) ── */
+  .prog-level-list {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.28);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    animation: fadeUp 0.35s 0.08s ease both;
+  }
+  .prog-level-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 16px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.12s;
+  }
+  .prog-level-row:first-child { border-top: none; }
+  .prog-level-row.is-current {
+    background: rgba(90,48,128,0.28);
+    border-top-color: rgba(90,48,128,0.3);
+    border-bottom: 1px solid rgba(90,48,128,0.3);
+  }
+  .prog-level-row.is-next {
+    background: rgba(245,200,66,0.04);
+  }
+  .prog-level-row.is-done { opacity: 0.65; }
+  .prog-lr-icon { font-size: 18px; width: 26px; text-align: center; flex-shrink: 0; }
+  .prog-lr-info { flex: 1; }
+  .prog-lr-name { font-weight: 600; font-size: 13px; color: #fff; line-height: 1; }
+  .prog-lr-xp { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .prog-lr-badge {
+    font-size: 10px; font-weight: 700;
+    padding: 3px 9px; border-radius: 99px; flex-shrink: 0;
+  }
+  .prog-lr-badge.current {
+    background: rgba(91,184,212,0.15);
+    color: var(--jazz-sky);
+    border: 1px solid rgba(91,184,212,0.3);
+  }
+  .prog-lr-badge.next {
+    background: rgba(245,200,66,0.1);
+    color: rgba(245,200,66,0.8);
+    border: 1px solid rgba(245,200,66,0.25);
+  }
+  .prog-lr-badge.done {
+    background: rgba(61,204,122,0.12);
+    color: #3dcc7a;
+    border: 1px solid rgba(61,204,122,0.25);
+  }
+  .prog-lr-badge.locked {
+    background: rgba(155,142,196,0.08);
+    color: var(--muted);
+    border: 1px solid rgba(155,142,196,0.15);
+  }
+
+  /* ── Completed Sports section ── */
+  .prog-sports-card {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.28);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    animation: fadeUp 0.38s 0.12s ease both;
+  }
+  .prog-sports-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 16px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .prog-sports-header:hover { background: rgba(107,63,160,0.1); }
+  .prog-sports-header-left { display: flex; align-items: center; gap: 10px; }
+  .prog-sports-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 2px; color: #fff;
+  }
+  .prog-sports-count {
+    font-size: 11px; color: var(--muted);
+    background: rgba(107,63,160,0.2);
+    border: 1px solid rgba(107,63,160,0.3);
+    border-radius: 99px; padding: 2px 9px;
+  }
+  .prog-sports-arrow {
+    font-size: 12px; color: var(--muted);
+    transition: transform 0.22s ease;
+  }
+  .prog-sports-arrow.open { transform: rotate(180deg); }
+
+  /* Sport icon grid summary row */
+  .prog-sport-icons {
+    display: flex; gap: 8px; padding: 0 16px 13px; flex-wrap: wrap;
+  }
+  .prog-sport-chip {
+    display: flex; align-items: center; gap: 5px;
+    padding: 5px 10px; border-radius: 99px;
+    font-size: 11px; font-weight: 600;
+    border: 1px solid;
+  }
+  .prog-sport-chip.chip-done {
+    background: rgba(61,204,122,0.1);
+    border-color: rgba(61,204,122,0.28);
+    color: #3dcc7a;
+  }
+  .prog-sport-chip.chip-active {
+    background: rgba(245,200,66,0.1);
+    border-color: rgba(245,200,66,0.28);
+    color: #f5c842;
+  }
+  .prog-sport-chip.chip-locked {
+    background: rgba(155,142,196,0.07);
+    border-color: rgba(155,142,196,0.18);
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  /* Expanded sports body */
+  .prog-sports-body { display: none; border-top: 1px solid rgba(255,255,255,0.05); }
+  .prog-sports-body.open { display: block; }
+  .prog-sports-cat {
+    padding: 8px 16px 3px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px; letter-spacing: 2px; color: var(--muted);
+    background: rgba(107,63,160,0.07);
+  }
   .prog-stat-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2694,7 +2912,7 @@
   </button>
   <button class="bn-tab" id="bn-progress" onclick="bnSwitch('progress')">
     <div class="bn-tab-icon">📊</div>
-    <div class="bn-tab-label">Status</div>
+    <div class="bn-tab-label">Progress</div>
   </button>
   <button class="bn-tab" id="bn-profile" onclick="bnSwitch('profile')">
     <div class="bn-tab-icon">👤</div>
@@ -2769,30 +2987,143 @@
 <div class="page" id="progressPage">
   <div class="nav-header">
     <div></div>
-    <div class="nav-header-title">Status</div>
+    <div class="nav-header-title">Progress</div>
     <div></div>
   </div>
-  <div class="nav-content" style="width:100%;max-width:390px;padding:12px 14px;">
+  <div class="nav-content" style="width:100%;max-width:390px;padding:14px 20px 32px;">
 
-    <!-- Completed Sports dropdown -->
-    <div class="sports-dropdown-wrap">
-      <button class="sports-dropdown-btn" id="sportsDropdownBtn" onclick="toggleSportsDropdown()">
-        <div class="sdb-left">
-          <span class="sdb-icon">🏅</span>
-          <span class="sdb-label">Completed Sports</span>
-          <span class="sdb-count" id="sportsCompleteCount"></span>
+    <!-- 1. Current Level Card -->
+    <div class="prog-level-card">
+      <div class="prog-lc-top">
+        <div class="prog-lc-badge" id="progLcNum">1</div>
+        <div class="prog-lc-info">
+          <div class="prog-lc-name" id="progLcName">ROOKIE</div>
+          <div class="prog-lc-title" id="progLcTitle">Just Getting Started</div>
         </div>
-        <span class="sdb-arrow" id="sportsDropdownArrow">▼</span>
-      </button>
-      <div class="sports-dropdown-body" id="sportsDropdownBody">
-        <div class="sports-category">PRO SPORTS</div>
+      </div>
+      <div class="prog-lc-xp-row">
+        <span id="progLcXpLabel">Progress to next level</span>
+        <span class="prog-lc-xp-nums"><span id="progLcXpCur">0</span> / <span id="progLcXpMax">50</span> XP</span>
+      </div>
+      <div class="prog-lc-bar-wrap">
+        <div class="prog-lc-bar-fill" id="progLcBarFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- 2. Next Milestone Card -->
+    <div class="prog-milestone-card" id="progMilestoneCard">
+      <div class="prog-ms-icon">🎯</div>
+      <div class="prog-ms-info">
+        <div class="prog-ms-label">NEXT MILESTONE</div>
+        <div class="prog-ms-name" id="progMsName">BENCH PLAYER</div>
+        <div class="prog-ms-sub" id="progMsSub">Keep playing to level up</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;">
+        <div class="prog-ms-xp" id="progMsXp">50</div>
+        <div class="prog-ms-xp-label">XP left</div>
+      </div>
+    </div>
+
+    <!-- 3. Level System — always visible, no dropdown -->
+    <div class="prog-section-head">RANK &amp; LEVEL SYSTEM</div>
+    <div class="prog-level-list">
+      <div class="prog-level-row" id="prl-1">
+        <div class="prog-lr-icon">🌱</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 1 — Rookie</div>
+          <div class="prog-lr-xp">0 – 49 XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-1">🔒</div>
+      </div>
+      <div class="prog-level-row" id="prl-2">
+        <div class="prog-lr-icon">🪑</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 2 — Bench Player</div>
+          <div class="prog-lr-xp">50 – 149 XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-2">🔒</div>
+      </div>
+      <div class="prog-level-row" id="prl-3">
+        <div class="prog-lr-icon">▶️</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 3 — Starter</div>
+          <div class="prog-lr-xp">150 – 299 XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-3">🔒</div>
+      </div>
+      <div class="prog-level-row" id="prl-4">
+        <div class="prog-lr-icon">6️⃣</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 4 — Sixth Man</div>
+          <div class="prog-lr-xp">300 – 599 XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-4">🔒</div>
+      </div>
+      <div class="prog-level-row" id="prl-5">
+        <div class="prog-lr-icon">⭐</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 5 — All-Star</div>
+          <div class="prog-lr-xp">600 – 999 XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-5">🔒</div>
+      </div>
+      <div class="prog-level-row" id="prl-6">
+        <div class="prog-lr-icon">🏅</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 6 — MVP</div>
+          <div class="prog-lr-xp">1000 – 1599 XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-6">🔒</div>
+      </div>
+      <div class="prog-level-row" id="prl-7">
+        <div class="prog-lr-icon">🎖️</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 7 — Hall of Famer</div>
+          <div class="prog-lr-xp">1600 – 2499 XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-7">🔒</div>
+      </div>
+      <div class="prog-level-row" id="prl-8">
+        <div class="prog-lr-icon">🐐</div>
+        <div class="prog-lr-info">
+          <div class="prog-lr-name">Level 8 — GOAT</div>
+          <div class="prog-lr-xp">2500+ XP</div>
+        </div>
+        <div class="prog-lr-badge locked" id="prls-8">🔒</div>
+      </div>
+    </div>
+
+    <!-- 4. Completed Sports — collapsible, icon chips always visible -->
+    <div class="prog-section-head">COMPLETED SPORTS</div>
+    <div class="prog-sports-card">
+      <div class="prog-sports-header" onclick="toggleProgSports()">
+        <div class="prog-sports-header-left">
+          <div class="prog-sports-title">Sports Progress</div>
+          <div class="prog-sports-count" id="progSportsCount">0 / 8 Complete</div>
+        </div>
+        <div class="prog-sports-arrow" id="progSportsArrow">▼</div>
+      </div>
+      <!-- sport icon chips — always visible -->
+      <div class="prog-sport-icons">
+        <div class="prog-sport-chip chip-locked" id="psc-nba"><span>🏀</span> NBA</div>
+        <div class="prog-sport-chip chip-locked" id="psc-nfl"><span>🏈</span> NFL</div>
+        <div class="prog-sport-chip chip-locked" id="psc-mlb"><span>⚾</span> MLB</div>
+        <div class="prog-sport-chip chip-locked" id="psc-nhl"><span>🏒</span> NHL</div>
+        <div class="prog-sport-chip chip-locked" id="psc-ncaabb"><span>🏀</span> NCAAB</div>
+        <div class="prog-sport-chip chip-locked" id="psc-ncaafb"><span>🏈</span> NCAAF</div>
+        <div class="prog-sport-chip chip-locked" id="psc-ncaabsb"><span>⚾</span> NCAABL</div>
+        <div class="prog-sport-chip chip-locked" id="psc-ncaasoc"><span>⚽</span> NCAASO</div>
+      </div>
+      <!-- expandable detail rows -->
+      <div class="prog-sports-body" id="progSportsBody">
+        <div class="prog-sports-cat">PRO SPORTS</div>
         <div class="sport-row">
           <div class="sport-row-icon">🏀</div>
           <div class="sport-row-info">
             <div class="sport-row-name">NBA</div>
             <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/18 players</div>
           </div>
-          <div class="sport-row-status" id="sdNBAStatus">—</div>
+          <div class="sport-row-status not-started" id="sdNBAStatus">—</div>
         </div>
         <div class="sport-row">
           <div class="sport-row-icon">🏈</div>
@@ -2809,7 +3140,7 @@
           <div class="sport-row-info"><div class="sport-row-name">NHL</div><div class="sport-row-sub">Coming Soon</div></div>
           <div class="sport-row-status not-started">🔒 Locked</div>
         </div>
-        <div class="sports-category">COLLEGE SPORTS</div>
+        <div class="prog-sports-cat">COLLEGE SPORTS</div>
         <div class="sport-row">
           <div class="sport-row-icon">🏀</div>
           <div class="sport-row-info"><div class="sport-row-name">NCAA Basketball</div><div class="sport-row-sub">Coming Soon</div></div>
@@ -2833,87 +3164,9 @@
       </div>
     </div>
 
-    <!-- Rank / Levels dropdown -->
-    <div class="sports-dropdown-wrap">
-      <button class="sports-dropdown-btn" id="rankDropdownBtn" onclick="toggleRankDropdown()">
-        <div class="sdb-left">
-          <span class="sdb-icon">🏆</span>
-          <span class="sdb-label">Rank & Level System</span>
-          <span class="sdb-count" id="rankCurrentBadge"></span>
-        </div>
-        <span class="sdb-arrow" id="rankDropdownArrow">▼</span>
-      </button>
-      <div class="sports-dropdown-body" id="rankDropdownBody">
-        <div class="sports-category">8-LEVEL SYSTEM</div>
-        <div class="sport-row" id="rl-1">
-          <div class="sport-row-icon">🌱</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 1 — Rookie</div>
-            <div class="sport-row-sub">0 – 49 XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-1">—</div>
-        </div>
-        <div class="sport-row" id="rl-2">
-          <div class="sport-row-icon">🪑</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 2 — Bench Player</div>
-            <div class="sport-row-sub">50 – 149 XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-2">—</div>
-        </div>
-        <div class="sport-row" id="rl-3">
-          <div class="sport-row-icon">▶️</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 3 — Starter</div>
-            <div class="sport-row-sub">150 – 299 XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-3">—</div>
-        </div>
-        <div class="sport-row" id="rl-4">
-          <div class="sport-row-icon">6️⃣</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 4 — Sixth Man</div>
-            <div class="sport-row-sub">300 – 599 XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-4">—</div>
-        </div>
-        <div class="sport-row" id="rl-5">
-          <div class="sport-row-icon">⭐</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 5 — All-Star</div>
-            <div class="sport-row-sub">600 – 999 XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-5">—</div>
-        </div>
-        <div class="sport-row" id="rl-6">
-          <div class="sport-row-icon">🏅</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 6 — MVP</div>
-            <div class="sport-row-sub">1000 – 1599 XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-6">—</div>
-        </div>
-        <div class="sport-row" id="rl-7">
-          <div class="sport-row-icon">🎖️</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 7 — Hall of Famer</div>
-            <div class="sport-row-sub">1600 – 2499 XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-7">—</div>
-        </div>
-        <div class="sport-row" id="rl-8">
-          <div class="sport-row-icon">🐐</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">Level 8 — GOAT</div>
-            <div class="sport-row-sub">2500+ XP</div>
-          </div>
-          <div class="sport-row-status not-started" id="rls-8">—</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
+
 
 <!-- ===================== PROFILE PAGE ===================== -->
 <div class="page" id="profilePage">
@@ -3944,47 +4197,81 @@ function lbRender(type) {
   }).join('');
 }
 
-// --- Progress / Status ---
-function progRender() {
-  updateSportsDropdown();
-  updateRankDropdown();
-}
-
-// --- Rank dropdown ---
-function toggleRankDropdown() {
-  const body  = document.getElementById('rankDropdownBody');
-  const arrow = document.getElementById('rankDropdownArrow');
-  const btn   = document.getElementById('rankDropdownBtn');
+// --- Progress Page ---
+function toggleProgSports() {
+  const body  = document.getElementById('progSportsBody');
+  const arrow = document.getElementById('progSportsArrow');
   if (!body) return;
   const isOpen = body.classList.contains('open');
   body.classList.toggle('open', !isOpen);
-  arrow.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
-  if (!isOpen) updateRankDropdown();
+  if (arrow) arrow.classList.toggle('open', !isOpen);
 }
 
-function updateRankDropdown() {
+function progRender() {
   const totalXp = xpGetTotal();
-  const { levelNum } = xpGetLevel(totalXp);
-  // Update badge on button
-  const badge = document.getElementById('rankCurrentBadge');
-  if (badge) badge.textContent = '· Level ' + levelNum;
-  // Update each level row status
+  const { levelNum, level, nextLevel, pct } = xpGetLevel(totalXp);
+  const el = id => document.getElementById(id);
+
+  // ── Current Level card ──
+  if (el('progLcNum'))  el('progLcNum').textContent  = levelNum;
+  if (el('progLcName')) el('progLcName').textContent = level.name.toUpperCase();
+  if (el('progLcTitle')) el('progLcTitle').textContent = level.title;
+  if (el('progLcBarFill')) el('progLcBarFill').style.width = pct + '%';
+  if (nextLevel) {
+    const xpIntoLevel = totalXp - level.min;
+    const xpNeeded    = nextLevel.min - level.min;
+    if (el('progLcXpCur')) el('progLcXpCur').textContent = xpIntoLevel;
+    if (el('progLcXpMax')) el('progLcXpMax').textContent = xpNeeded;
+    if (el('progLcXpLabel')) el('progLcXpLabel').textContent = 'Progress to next level';
+  } else {
+    if (el('progLcXpLabel')) el('progLcXpLabel').textContent = 'MAX LEVEL REACHED';
+    if (el('progLcXpCur')) el('progLcXpCur').textContent = totalXp;
+    if (el('progLcXpMax')) el('progLcXpMax').textContent = '2500+';
+  }
+
+  // ── Next Milestone card ──
+  const ms = el('progMilestoneCard');
+  if (nextLevel) {
+    const xpLeft = nextLevel.min - totalXp;
+    if (el('progMsName')) el('progMsName').textContent = nextLevel.name.toUpperCase();
+    if (el('progMsSub'))  el('progMsSub').textContent  = `Level ${levelNum + 1} · ${nextLevel.title}`;
+    if (el('progMsXp'))   el('progMsXp').textContent   = xpLeft;
+    if (ms) ms.style.display = '';
+  } else {
+    if (ms) ms.style.display = 'none';
+  }
+
+  // ── Level list rows ──
   for (let i = 1; i <= 8; i++) {
-    const el = document.getElementById('rls-' + i);
-    if (!el) continue;
+    const row   = el('prl-' + i);
+    const badge = el('prls-' + i);
+    if (!row || !badge) continue;
+    row.classList.remove('is-current', 'is-next', 'is-done');
+    badge.classList.remove('current', 'next', 'done', 'locked');
     if (i < levelNum) {
-      el.className = 'sport-row-status complete';
-      el.textContent = '✅ Done';
+      row.classList.add('is-done');
+      badge.classList.add('done');
+      badge.textContent = '✅ Done';
     } else if (i === levelNum) {
-      el.className = 'sport-row-status in-progress';
-      el.textContent = '📍 Current';
+      row.classList.add('is-current');
+      badge.classList.add('current');
+      badge.textContent = '📍 Current';
+    } else if (i === levelNum + 1) {
+      row.classList.add('is-next');
+      badge.classList.add('next');
+      badge.textContent = '⬆️ Next';
     } else {
-      el.className = 'sport-row-status not-started';
-      el.textContent = '🔒 Locked';
+      badge.classList.add('locked');
+      badge.textContent = '🔒';
     }
   }
+
+  // ── Sports section ──
+  updateSportsDropdown();
 }
+
+// kept for compatibility — updateSportsDropdown now also updates new chip UI
+
 
 // --- Profile ---
 function profRender() {
@@ -4140,14 +4427,13 @@ function updateSportsDropdown() {
   });
   const learnedCount = learnedSet.size;
   const totalPlayers = 18;
-  const allDone = learnedCount >= totalPlayers;
+  const allDone   = learnedCount >= totalPlayers;
   const anyStarted = learnedCount > 0;
 
+  // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-
   if (subEl)    subEl.textContent = `Utah Jazz · ${learnedCount}/${totalPlayers} players learned`;
-
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
@@ -4161,9 +4447,20 @@ function updateSportsDropdown() {
     }
   }
 
-  // Count of completed sports (only NBA is unlocked for now)
-  const countEl = document.getElementById('sportsCompleteCount');
-  if (countEl) countEl.textContent = allDone ? '· 1/8 Complete' : anyStarted ? `· 0/8 Complete` : '· 0/8 Complete';
+  // Update NBA chip
+  const nbaChip = document.getElementById('psc-nba');
+  if (nbaChip) {
+    nbaChip.className = 'prog-sport-chip ' + (allDone ? 'chip-done' : anyStarted ? 'chip-active' : 'chip-locked');
+  }
+
+  // Sports count badge
+  const completedCount = allDone ? 1 : 0;
+  const countEl = document.getElementById('progSportsCount');
+  if (countEl) countEl.textContent = `${completedCount} / 8 Complete`;
+
+  // Legacy element (safe no-op if removed)
+  const legacyCount = document.getElementById('sportsCompleteCount');
+  if (legacyCount) legacyCount.textContent = allDone ? '· 1/8 Complete' : '· 0/8 Complete';
 }
 
 // ===================== INIT =====================
