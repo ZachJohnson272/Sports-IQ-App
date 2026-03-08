@@ -1217,28 +1217,29 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
+  /* xp-bar-wrap and xp-bar-fill are defined per-component now */
   .xp-bar-wrap {
-    height: 10px;
-    background: var(--surface2);
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.08);
     border-radius: 99px;
     overflow: hidden;
-    margin-bottom: 7px;
   }
   .xp-bar-fill {
     height: 100%;
     border-radius: 99px;
-    background: linear-gradient(90deg, #f7a54f, #f5c842);
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
     transition: width 0.55s cubic-bezier(0.34,1.56,0.64,1);
     position: relative;
   }
   .xp-bar-fill.done {
-    background: linear-gradient(90deg, #43e97b, #38f9d7);
+    background: linear-gradient(90deg, #3dcc7a, #5BB8D4);
   }
   .xp-bar-fill::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
     border-radius: 99px;
   }
   .xp-row {
@@ -1269,19 +1270,13 @@
   }
   .xp-complete {
     display: none;
-    margin-top: 10px;
-    background: linear-gradient(135deg, rgba(67,233,123,0.12), rgba(56,249,215,0.12));
-    border: 1px solid rgba(67,233,123,0.35);
-    border-radius: 10px;
-    padding: 8px 14px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    color: #43e97b;
-    align-items: center;
-    gap: 8px;
-    animation: fadeUp 0.3s ease both;
+    color: #3dcc7a;
+    text-align: center;
+    padding: 6px 0 2px;
   }
-  .xp-complete.show { display: flex; }
+  .xp-complete.show { display: block; }
   /* Floating XP pop */
   .xp-pop {
     position: fixed;
@@ -1828,156 +1823,290 @@
     max-width: 390px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 12px;
     padding: 0 20px;
   }
-  .home-brand {
-    text-align: center;
-    padding: 2px 0 0;
-  }
+
+  /* ── Brand strip ── */
+  .home-brand { text-align: center; padding: 2px 0 0; }
   .home-brand-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px;
     letter-spacing: 7px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.3);
     line-height: 1;
   }
-  /* Avatar row — avatar centered, button pinned top-right */
-  .home-avatar-row {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 6px 0 2px;
-  }
 
-  /* Circular avatar section */
-  .home-avatar-section {
+  /* ── Welcome row ── */
+  .home-avatar-row {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    animation: fadeUp 0.4s ease both;
+    gap: 14px;
+    width: 100%;
+    padding: 4px 0;
+    animation: fadeUp 0.35s ease both;
   }
   .home-avatar-circle {
-    width: 80px;
-    height: 80px;
+    width: 52px; height: 52px;
     border-radius: 50%;
     background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 0 3px rgba(91,184,212,0.3), 0 4px 20px rgba(107,63,160,0.5);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 3px rgba(91,184,212,0.3), 0 4px 16px rgba(107,63,160,0.45);
+    flex-shrink: 0;
   }
   .home-avatar-initials {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 34px;
-    color: #fff;
-    line-height: 1;
-    letter-spacing: 1px;
+    font-size: 24px; color: #fff; line-height: 1;
   }
+  .home-avatar-section { display: flex; align-items: center; gap: 14px; flex: 1; }
+  .home-avatar-text { display: flex; flex-direction: column; gap: 2px; }
   .home-avatar-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 3px;
-    color: #fff;
-    line-height: 1;
+    font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
   }
-  .home-avatar-sub {
-    font-size: 13px;
-    color: var(--jazz-sky);
-    font-weight: 500;
-    margin-top: 1px;
-  }
+  .home-avatar-sub { font-size: 12px; color: var(--jazz-sky); font-weight: 500; }
 
-  /* Continue Learning — small box pinned top-right */
-  .continue-learning-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
+  /* ── Big Play button ── */
+  .home-play-btn {
+    width: 100%;
+    padding: 17px 20px;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    border: none;
+    border-radius: 16px;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    background: linear-gradient(135deg, rgba(107,63,160,0.5), rgba(91,184,212,0.25));
-    border: 1px solid rgba(91,184,212,0.45);
-    border-radius: 12px;
-    padding: 8px 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    animation: fadeUp 0.4s ease both;
-    min-width: 68px;
+    gap: 10px;
+    box-shadow: 0 6px 24px rgba(107,63,160,0.55), 0 2px 8px rgba(91,184,212,0.2);
+    transition: transform 0.15s, box-shadow 0.15s;
+    animation: fadeUp 0.4s 0.05s ease both;
+    position: relative;
+    overflow: hidden;
   }
-  .continue-learning-btn:hover {
-    border-color: var(--jazz-sky);
-    box-shadow: 0 4px 14px rgba(91,184,212,0.2);
-    transform: translateY(-1px);
+  .home-play-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 60%);
+    pointer-events: none;
   }
-  .clb-icon { font-size: 16px; line-height: 1; }
-  .clb-info {
+  .home-play-btn:hover  { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(107,63,160,0.65); }
+  .home-play-btn:active { transform: translateY(0); }
+  .home-play-btn .play-icon { font-size: 22px; }
+
+  /* ── Level / XP bar card ── */
+  .home-level-box {
+    background: linear-gradient(135deg, rgba(107,63,160,0.3), rgba(91,184,212,0.12));
+    border: 1px solid rgba(107,63,160,0.45);
+    border-radius: 14px;
+    padding: 13px 16px;
+    animation: fadeUp 0.4s 0.1s ease both;
+  }
+  .hlb-left { display: flex; align-items: center; gap: 12px; }
+  .hlb-num {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(107,63,160,0.4);
+  }
+  .hlb-info { flex: 1; }
+  .hlb-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; letter-spacing: 2px; color: #fff; line-height: 1;
+  }
+  .hlb-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .hlb-bar-wrap {
+    width: 100%; height: 7px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px; overflow: hidden;
+    margin-top: 8px;
+  }
+  .hlb-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6B3FA0, #5BB8D4);
+    border-radius: 99px;
+    transition: width 0.6s ease;
+  }
+
+  /* ── Daily Challenge card ── */
+  .home-daily-card {
+    background: var(--surface);
+    border: 1px solid rgba(91,184,212,0.3);
+    border-radius: 14px;
+    padding: 14px 16px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    animation: fadeUp 0.4s 0.15s ease both;
+  }
+  .home-daily-header {
+    display: flex;
     align-items: center;
-    gap: 1px;
+    justify-content: space-between;
   }
-  .clb-title {
+  .home-daily-label {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 16px; letter-spacing: 2px; color: var(--jazz-sky);
+  }
+  .home-daily-badge {
+    font-size: 11px; font-weight: 600;
+    background: rgba(91,184,212,0.15);
+    border: 1px solid rgba(91,184,212,0.3);
     color: var(--jazz-sky);
-    line-height: 1;
+    border-radius: 99px;
+    padding: 3px 9px;
   }
-  .clb-sub {
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 0.5px;
+  .home-daily-xp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px; color: var(--muted);
   }
-  .clb-arrow {
+  .home-daily-xp-nums { font-weight: 600; color: var(--text); font-size: 13px; }
+  .xp-bar-wrap {
+    width: 100%; height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px; overflow: hidden;
+  }
+  .xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+  .xp-bar-fill.done { background: linear-gradient(90deg, #3dcc7a, #5BB8D4); }
+  .home-daily-btn {
+    width: 100%;
+    padding: 11px;
+    background: rgba(91,184,212,0.12);
+    border: 1px solid rgba(91,184,212,0.4);
+    border-radius: 10px;
+    color: var(--jazz-sky);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 2px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .home-daily-btn:hover { background: rgba(91,184,212,0.22); transform: translateY(-1px); }
+  .home-daily-btn.done-btn {
+    background: rgba(61,204,122,0.12);
+    border-color: rgba(61,204,122,0.4);
+    color: #3dcc7a;
+  }
+  .xp-complete {
+    display: none;
     font-size: 12px;
-    color: var(--jazz-sky);
+    color: #3dcc7a;
+    font-weight: 600;
+    text-align: center;
+    padding: 4px 0 0;
   }
+  .xp-complete.show { display: block; }
+
+  /* ── Leaderboard preview ── */
+  .home-lb-card {
+    background: var(--surface);
+    border: 1px solid rgba(107,63,160,0.3);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeUp 0.4s 0.2s ease both;
+  }
+  .home-lb-header {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .home-lb-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 2px; color: #fff;
+  }
+  .home-lb-link {
+    font-size: 12px; color: var(--jazz-sky); font-weight: 600; cursor: pointer;
+    background: none; border: none; padding: 0;
+  }
+  .home-lb-link:hover { text-decoration: underline; }
+  .home-lb-rows { display: flex; flex-direction: column; gap: 7px; }
+  .home-lb-row {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px; padding: 8px 10px;
+  }
+  .home-lb-rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; width: 24px; text-align: center; line-height: 1;
+  }
+  .home-lb-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(107,63,160,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .home-lb-name { flex: 1; font-size: 13px; font-weight: 600; color: #fff; }
+  .home-lb-xp { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .home-lb-you { background: rgba(107,63,160,0.18); border: 1px solid rgba(107,63,160,0.4); }
+  .home-lb-you .home-lb-name { color: var(--jazz-sky); }
+
+  /* ── Quick Play card ── */
+  .home-quick-card {
+    background: var(--surface);
+    border: 1px solid rgba(245,200,66,0.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    animation: fadeUp 0.4s 0.25s ease both;
+  }
+  .home-quick-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,200,66,0.12); }
+  .home-quick-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: rgba(245,200,66,0.12);
+    border: 1px solid rgba(245,200,66,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .home-quick-text { flex: 1; }
+  .home-quick-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 1px; color: #fff; line-height: 1;
+  }
+  .home-quick-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .home-quick-arrow { font-size: 16px; color: #f5c842; }
+
+  /* ── Stats row ── */
   .home-stat-boxes {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 7px;
+    animation: fadeUp 0.4s 0.3s ease both;
   }
   .hsb {
     background: var(--surface);
     border: 1px solid rgba(107,63,160,0.3);
     border-radius: 12px;
-    padding: 12px 6px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    animation: fadeUp 0.4s ease both;
+    padding: 11px 6px 9px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
   .hsb-val {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: 1px;
+    font-size: 22px; line-height: 1; letter-spacing: 1px;
   }
-  .hsb-label {
-    font-size: 9px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center;
-  }
+  .hsb-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
   .hsb.worldrank {
-    background: var(--surface);
-    border: 1px solid rgba(245,200,66,0.4);
-    border-radius: 12px;
-    padding: 10px 14px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    justify-content: flex-start;
-    animation: fadeUp 0.4s ease both;
+    background: var(--surface); border: 1px solid rgba(245,200,66,0.4);
+    border-radius: 12px; padding: 10px 14px;
+    display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: flex-start;
   }
   .hsb.streak  { border-color: rgba(245,200,66,0.4); }
   .hsb.streak .hsb-val  { color: #f5c842; }
@@ -1985,51 +2114,6 @@
   .hsb.xptotal .hsb-val { color: var(--jazz-sky); }
   .hsb.dailyxp { border-color: rgba(192,132,252,0.4); }
   .hsb.dailyxp .hsb-val { color: #c084fc; }
-  .home-level-box {
-    background: linear-gradient(135deg, rgba(107,63,160,0.35), rgba(91,184,212,0.15));
-    border: 1px solid rgba(107,63,160,0.5);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: fadeUp 0.4s 0.05s ease both;
-  }
-  .hlb-left { display: flex; align-items: center; gap: 12px; width: 100%; }
-  .hlb-num {
-    width: 48px; height: 48px;
-    background: linear-gradient(135deg, #6B3FA0, #5BB8D4);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    color: #fff;
-    flex-shrink: 0;
-    box-shadow: 0 4px 14px rgba(107,63,160,0.4);
-  }
-  .hlb-info { flex: 1; }
-  .hlb-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: #fff;
-    line-height: 1;
-  }
-  .hlb-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-  .hlb-bar-wrap {
-    width: 100%;
-    height: 6px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-top: 8px;
-  }
-  .hlb-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #6B3FA0, #5BB8D4);
-    border-radius: 99px;
-    transition: width 0.5s ease;
-  }
 </style>
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -2088,29 +2172,31 @@
 
     <div class="home-top">
 
-      <!-- SportsMind branding — narrow top strip -->
+      <!-- Brand strip -->
       <div class="home-brand">
         <div class="home-brand-title">S P O R T S M I N D</div>
       </div>
 
-      <!-- Avatar row: avatar left, continue learning top right -->
+      <!-- 1. Welcome row -->
       <div class="home-avatar-row">
         <div class="home-avatar-section">
           <div class="home-avatar-circle">
             <span class="home-avatar-initials" id="homeAvatarInitials">S</span>
           </div>
-          <div class="home-avatar-name" id="homeUsername">SportsFan</div>
-          <div class="home-avatar-sub" id="homeWelcome">Welcome back, SportsFan!</div>
-        </div>
-        <button class="continue-learning-btn" onclick="bnSwitch('learn')">
-          <div class="clb-info">
-            <div class="clb-title">Continue</div>
-            <div class="clb-sub">Learning →</div>
+          <div class="home-avatar-text">
+            <div class="home-avatar-name" id="homeUsername">SportsFan</div>
+            <div class="home-avatar-sub" id="homeWelcome">Welcome back, SportsFan!</div>
           </div>
-        </button>
+        </div>
       </div>
 
-      <!-- Level box -->
+      <!-- 2. Big primary play button -->
+      <button class="home-play-btn" onclick="bnSwitch('learn')">
+        <span class="play-icon">🏆</span>
+        START TODAY'S QUIZ
+      </button>
+
+      <!-- 3. Level / XP progress -->
       <div class="home-level-box">
         <div class="hlb-left">
           <div class="hlb-num" id="hlbNum">1</div>
@@ -2124,7 +2210,43 @@
         </div>
       </div>
 
-      <!-- 3 stat boxes -->
+      <!-- 4. Daily Challenge card -->
+      <div class="home-daily-card">
+        <div class="home-daily-header">
+          <span class="home-daily-label">⚡ DAILY CHALLENGE</span>
+          <span class="home-daily-badge" id="dailyBadge">In Progress</span>
+        </div>
+        <div class="home-daily-xp-row">
+          <span>XP Today</span>
+          <span class="home-daily-xp-nums"><span id="xpCount">0</span> / 50 XP</span>
+        </div>
+        <div class="xp-bar-wrap">
+          <div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div>
+        </div>
+        <div class="xp-complete" id="xpComplete">🏆 Goal Complete! +10 Bonus XP awarded!</div>
+        <button class="home-daily-btn" id="dailyChallengeBtn" onclick="bnSwitch('learn')">START CHALLENGE →</button>
+      </div>
+
+      <!-- 5. Leaderboard preview -->
+      <div class="home-lb-card">
+        <div class="home-lb-header">
+          <span class="home-lb-title">🏅 TOP PLAYERS</span>
+          <button class="home-lb-link" onclick="bnSwitch('leaderboard')">See All →</button>
+        </div>
+        <div class="home-lb-rows" id="homeLbRows"></div>
+      </div>
+
+      <!-- 6. Quick Play card -->
+      <div class="home-quick-card" onclick="dpOpen('nba')">
+        <div class="home-quick-icon">🎯</div>
+        <div class="home-quick-text">
+          <div class="home-quick-title">Daily Player Quiz</div>
+          <div class="home-quick-sub">Guess today's mystery player · +20 XP</div>
+        </div>
+        <span class="home-quick-arrow">→</span>
+      </div>
+
+      <!-- 7. Stats — secondary info -->
       <div class="home-stat-boxes">
         <div class="hsb streak">
           <div class="hsb-val" id="hsbStreak">0</div>
@@ -2138,24 +2260,6 @@
           <div class="hsb-val" id="hsbDailyXp">0/50</div>
           <div class="hsb-label">📅 Daily XP</div>
         </div>
-      </div>
-
-      <!-- Daily XP Goal card -->
-      <div class="xp-card" id="xpCard" style="margin-bottom:0;">
-        <div class="xp-header">
-          <span class="xp-title">⚡ Daily Goal</span>
-          <span class="xp-subtitle">Earn 50 XP today</span>
-        </div>
-        <div class="xp-bar-wrap" style="height:10px;">
-          <div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div>
-        </div>
-        <div class="xp-row" style="margin-top:6px;">
-          <div>
-            <span class="xp-count" id="xpCount">0</span>
-            <span class="xp-of"> / 50 XP</span>
-          </div>
-        </div>
-        <div class="xp-complete" id="xpComplete">🏆 Daily Goal Complete! +10 Bonus XP awarded!</div>
       </div>
 
     </div>
@@ -3576,19 +3680,38 @@ function xpAward(amount) {
 function xpRender() {
   refreshHome();
   const data = xpLoad();
-  const xp = data.xp || 0;
-  const pct = Math.min((xp / XP_GOAL) * 100, 100);
-  const fill = document.getElementById('xpBarFill');
-  const count = document.getElementById('xpCount');
+  const xp   = data.xp || 0;
+  const pct  = Math.min((xp / XP_GOAL) * 100, 100);
+
+  const fill     = document.getElementById('xpBarFill');
+  const count    = document.getElementById('xpCount');
   const complete = document.getElementById('xpComplete');
-  const streak = document.getElementById('xpStreakNum');
+  const badge    = document.getElementById('dailyBadge');
+  const btn      = document.getElementById('dailyChallengeBtn');
+
   if (!fill) return;
+
   fill.style.width = pct + '%';
   if (data.done) fill.classList.add('done'); else fill.classList.remove('done');
-  count.textContent = xp;
-  if (data.done) count.classList.add('done'); else count.classList.remove('done');
-  if (data.done) complete.classList.add('show'); else complete.classList.remove('show');
-  if (streak) streak.textContent = xpGetStreak();
+  if (count) count.textContent = xp;
+  if (complete) {
+    if (data.done) complete.classList.add('show'); else complete.classList.remove('show');
+  }
+  if (badge) {
+    badge.textContent = data.done ? '✅ Complete!' : 'In Progress';
+    badge.style.background  = data.done ? 'rgba(61,204,122,0.15)' : '';
+    badge.style.borderColor = data.done ? 'rgba(61,204,122,0.4)'  : '';
+    badge.style.color       = data.done ? '#3dcc7a'                : '';
+  }
+  if (btn) {
+    if (data.done) {
+      btn.textContent = '🏆 GOAL ACHIEVED!';
+      btn.classList.add('done-btn');
+    } else {
+      btn.textContent = 'START CHALLENGE →';
+      btn.classList.remove('done-btn');
+    }
+  }
 }
 
 function xpPop(text) {
@@ -3653,7 +3776,7 @@ function bnSwitch(tab) {
   if (page) page.classList.add('active');
 
   // Refresh page data
-  if (tab === 'home') { updateHomeStats(); xpRender(); refreshHome(); }
+  if (tab === 'home') { updateHomeStats(); xpRender(); refreshHome(); renderHomeLb(); }
   if (tab === 'learn') { }
   if (tab === 'leaderboard') { lbRender('global'); }
   if (tab === 'progress') { progRender(); }
@@ -3812,6 +3935,30 @@ function renderHomeXpChart() {
     </div>`).join('');
 }
 
+function renderHomeLb() {
+  const el = document.getElementById('homeLbRows');
+  if (!el) return;
+  const totalXp = xpGetTotal();
+  const myUsername = localStorage.getItem('siq_username') || 'You';
+
+  // Build top-3 list from LB_GLOBAL, injecting real XP for the user row
+  let rows = JSON.parse(JSON.stringify(LB_GLOBAL)).map(r => {
+    if (r.isMe) r.xp = totalXp;
+    return r;
+  });
+  rows.sort((a, b) => b.xp - a.xp);
+  const top3 = rows.slice(0, 3);
+
+  const rankEmojis = ['🥇','🥈','🥉'];
+  el.innerHTML = top3.map((r, i) => `
+    <div class="home-lb-row ${r.isMe ? 'home-lb-you' : ''}">
+      <div class="home-lb-rank">${rankEmojis[i]}</div>
+      <div class="home-lb-icon">${r.icon}</div>
+      <div class="home-lb-name">${r.isMe ? myUsername : r.name}</div>
+      <div class="home-lb-xp">${r.xp.toLocaleString()} XP</div>
+    </div>`).join('');
+}
+
 function refreshHome() {
   const totalXp = xpGetTotal();
   const { levelNum, level, nextLevel, pct } = xpGetLevel(totalXp);
@@ -3831,10 +3978,10 @@ function refreshHome() {
   if (el('hsbXpTotal')) el('hsbXpTotal').textContent = totalXp.toLocaleString();
   if (el('hsbDailyXp')) el('hsbDailyXp').textContent = dailyXp + '/50';
 
-  // World rank
-  if (el('worldRankNum')) el('worldRankNum').textContent = getWorldRank();
+  // Leaderboard preview
+  renderHomeLb();
 
-  // XP chart
+  // XP chart (progress page — safe no-op if element missing)
   renderHomeXpChart();
 
   // Username + avatar
@@ -3907,6 +4054,7 @@ updateHomeStats();
 dpUpdateBadges();
 xpRender();         // renders instantly with cached values
 bnUpdateHomeLevel();
+renderHomeLb();     // populate leaderboard preview on home
 sbXpLoad();         // loads real XP from Supabase and re-renders
 sbUsernameLoad();   // loads real username from Supabase and re-renders
 </script>
