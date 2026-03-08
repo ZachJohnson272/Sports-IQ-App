@@ -19,8 +19,7 @@
     --green:       #3dcc7a;
     --red:         #e05555;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
@@ -31,7 +30,6 @@
     justify-content: center;
     padding: 24px 20px;
   }
-
   body::before {
     content: '';
     position: fixed;
@@ -42,7 +40,19 @@
     pointer-events: none;
     z-index: 0;
   }
-
+  #loadingOverlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 4px;
+    color: var(--muted);
+  }
   .card {
     position: relative;
     z-index: 1;
@@ -57,7 +67,6 @@
     align-items: center;
     animation: fadeUp 0.45s ease both;
   }
-
   .card::before {
     content: '';
     position: absolute;
@@ -66,7 +75,6 @@
     background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky), var(--jazz-purple));
     border-radius: 24px 24px 0 0;
   }
-
   .brand {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 13px;
@@ -74,7 +82,6 @@
     color: rgba(255,255,255,0.25);
     margin-bottom: 28px;
   }
-
   .avatar-circle {
     width: 74px; height: 74px;
     border-radius: 50%;
@@ -84,7 +91,6 @@
     margin-bottom: 20px;
     box-shadow: 0 0 0 4px rgba(91,184,212,0.18), 0 6px 24px rgba(107,63,160,0.4);
   }
-
   h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 30px;
@@ -92,7 +98,6 @@
     text-align: center;
     margin-bottom: 8px;
   }
-
   .subtitle {
     font-size: 13px;
     color: var(--muted);
@@ -101,13 +106,11 @@
     margin-bottom: 28px;
     max-width: 270px;
   }
-
   .input-wrap {
     width: 100%;
     position: relative;
     margin-bottom: 12px;
   }
-
   .at-sign {
     position: absolute;
     left: 14px;
@@ -118,7 +121,6 @@
     color: var(--jazz-sky);
     pointer-events: none;
   }
-
   input {
     width: 100%;
     background: var(--surface2);
@@ -136,7 +138,6 @@
   input:focus        { border-color: var(--jazz-sky); box-shadow: 0 0 0 3px rgba(91,184,212,0.14); }
   input.is-valid     { border-color: var(--green);    box-shadow: 0 0 0 3px rgba(61,204,122,0.12); }
   input.is-invalid   { border-color: var(--red);      box-shadow: 0 0 0 3px rgba(224,85,85,0.12); }
-
   .hints {
     width: 100%;
     display: flex;
@@ -144,7 +145,6 @@
     gap: 5px;
     margin-bottom: 18px;
   }
-
   .hint {
     font-size: 12px;
     color: var(--muted);
@@ -161,7 +161,6 @@
   }
   .hint.ok  { color: var(--green); }
   .hint.bad { color: var(--red);   }
-
   #msg {
     width: 100%;
     min-height: 18px;
@@ -173,7 +172,6 @@
   }
   #msg.error   { color: var(--red);   display: block; }
   #msg.success { color: var(--green); display: block; }
-
   .btn {
     width: 100%;
     padding: 15px;
@@ -191,7 +189,6 @@
   .btn:hover:not(:disabled)  { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(107,63,160,0.6); }
   .btn:active:not(:disabled) { transform: translateY(0); }
   .btn:disabled              { opacity: 0.45; cursor: not-allowed; }
-
   .spinner {
     display: inline-block;
     width: 15px; height: 15px;
@@ -202,25 +199,10 @@
     vertical-align: middle;
     margin-right: 6px;
   }
-
-  #loadingOverlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px;
-    letter-spacing: 4px;
-    color: var(--muted);
-  }
-
   @keyframes spin   { to { transform: rotate(360deg); } }
   @keyframes fadeUp {
-    from { opacity:0; transform:translateY(18px); }
-    to   { opacity:1; transform:translateY(0); }
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
@@ -262,26 +244,31 @@
 </div>
 
 <script>
-// ── Supabase client ───────────────────────────────────────────────
-const sb = supabase.createClient(
+// ================================================================
+//  Supabase client
+// ================================================================
+var sb = supabase.createClient(
   'https://cyzxoadiuhkftxpvzsxq.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5enhvYWRpdWhrZnR4cHZ6c3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MzYxNjMsImV4cCI6MjA4ODUxMjE2M30.ctQTb1YkBwyVzspLKKtrEK-qjxeYrf6mmAM7R2rHXWg'
 );
 
-// ── Page load: gate this page behind session + username check ────
+// ================================================================
+//  PAGE LOAD GUARD
 //
-// FLOW:
-//   Not logged in          → login.html
-//   Logged in + has username → index.html  (skip this page entirely)
-//   Logged in + no username  → show the form
-//
-(async () => {
+//  Rules:
+//   1. No session          → login.html
+//   2. Has session + has username in user_profiles → index.html
+//   3. Has session + no username  → show form
+// ================================================================
+(async function() {
   console.log('[Username] Page loaded — checking session...');
 
-  const { data: { session }, error: sessionError } = await sb.auth.getSession();
+  var sessionResult = await sb.auth.getSession();
+  var session = sessionResult.data.session;
+  var sessionError = sessionResult.error;
 
   if (sessionError) {
-    console.error('[Username] Session error:', sessionError.message);
+    console.error('[Username] Session error — redirecting to login:', sessionError.message);
     window.location.href = 'login.html';
     return;
   }
@@ -292,52 +279,59 @@ const sb = supabase.createClient(
     return;
   }
 
-  const userId = session.user.id;
-  console.log('[Username] Session found for user_id:', userId);
+  var userId = session.user.id;
+  console.log('[Username] Session active — user_id:', userId);
+  console.log('[Username] Querying user_profiles...');
 
-  // Check if this user already has a username in user_profiles
-  console.log('[Username] Checking user_profiles for existing username...');
-  const { data: profile, error: profileError } = await sb
+  var profileResult = await sb
     .from('user_profiles')
     .select('username')
     .eq('user_id', userId)
     .maybeSingle();
 
+  var profile = profileResult.data;
+  var profileError = profileResult.error;
+
   if (profileError) {
-    // Log it but don't block the user — just show the form
-    console.warn('[Username] Could not read user_profiles (showing form anyway):', profileError.message);
+    // This usually means a missing SELECT RLS policy.
+    // We log it clearly and show the form so the user is not stuck.
+    console.error('[Username] Profile query error (check SELECT RLS policy on user_profiles):');
+    console.error('[Username] Code:', profileError.code);
+    console.error('[Username] Message:', profileError.message);
+    console.error('[Username] Hint:', profileError.hint);
+    console.warn('[Username] Showing form despite error — user may already have a username.');
   }
 
-  if (profile?.username) {
-    // Already has a username — no need to be here
-    console.log('[Username] Username already set:', profile.username, '— going to index.html');
+  if (profile && profile.username) {
+    console.log('[Username] Username already exists:', profile.username, '— redirecting to index.html');
     localStorage.setItem('siq_username', profile.username);
     window.location.href = 'index.html';
     return;
   }
 
-  // No username yet — show the form
-  console.log('[Username] No username found — showing form.');
+  console.log('[Username] No username found — showing username form.');
   document.getElementById('loadingOverlay').style.display = 'none';
-  document.getElementById('mainCard').style.display       = 'flex';
+  document.getElementById('mainCard').style.display = 'flex';
   document.getElementById('usernameInput').focus();
 })();
 
-// ── Validation ────────────────────────────────────────────────────
+// ================================================================
+//  VALIDATION
+// ================================================================
 function validate(val) {
-  return {
-    lenOk:   val.length >= 3 && val.length <= 20,
-    charsOk: /^[a-zA-Z0-9_]*$/.test(val),
-    get ok() { return this.lenOk && this.charsOk; }
-  };
+  var lenOk   = val.length >= 3 && val.length <= 20;
+  var charsOk = /^[a-zA-Z0-9_]*$/.test(val);
+  return { lenOk: lenOk, charsOk: charsOk, ok: lenOk && charsOk };
 }
 
-// ── Live typing handler ───────────────────────────────────────────
+// ================================================================
+//  LIVE TYPING HANDLER
+// ================================================================
 function onType() {
-  const val   = document.getElementById('usernameInput').value.trim();
-  const input = document.getElementById('usernameInput');
-  const v     = validate(val);
-  const typed = val.length > 0;
+  var val   = document.getElementById('usernameInput').value.trim();
+  var input = document.getElementById('usernameInput');
+  var v     = validate(val);
+  var typed = val.length > 0;
 
   setHint('hintLen',   v.lenOk,   typed);
   setHint('hintChars', v.charsOk, typed);
@@ -351,73 +345,118 @@ function setHint(id, ok, active) {
   document.getElementById(id).className = 'hint' + (!active ? '' : ok ? ' ok' : ' bad');
 }
 
-// ── Save username ─────────────────────────────────────────────────
+// ================================================================
+//  SAVE USERNAME
+//
+//  Steps:
+//   1. Re-fetch session (get fresh user id)
+//   2. Query user_profiles for this user_id
+//      - If they already have a row with any username:
+//          save to localStorage, redirect to index.html (do not re-insert)
+//   3. Check if the chosen username is taken by a DIFFERENT user
+//      - If yes: show "already taken" error
+//   4. Insert the new row
+//   5. Save to localStorage, redirect to index.html
+// ================================================================
 async function saveUsername() {
-  const val = document.getElementById('usernameInput').value.trim();
+  var val = document.getElementById('usernameInput').value.trim();
   if (!validate(val).ok) return;
 
-  const btn = document.getElementById('saveBtn');
+  var btn = document.getElementById('saveBtn');
   btn.disabled  = true;
-  btn.innerHTML = '<span class="spinner"></span>Saving…';
+  btn.innerHTML = '<span class="spinner"></span>Saving\u2026';
   clearMsg();
 
-  // Re-fetch session to get a fresh user id
-  const { data: { session }, error: sessionError } = await sb.auth.getSession();
+  // Step 1: Fresh session
+  var sessionResult = await sb.auth.getSession();
+  var session = sessionResult.data.session;
+  var sessionError = sessionResult.error;
+
   if (sessionError || !session) {
-    console.error('[Username] Lost session during save:', sessionError);
+    console.error('[Username] Session lost during save:', sessionError);
     showMsg('Your session expired. Please log in again.', 'error');
-    setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+    setTimeout(function() { window.location.href = 'login.html'; }, 1500);
     return;
   }
 
-  const userId = session.user.id;
-  console.log('[Username] Saving username for user_id:', userId, '| username:', val);
+  var userId = session.user.id;
+  console.log('[Username] saveUsername() — user_id:', userId, '| requested username:', val);
 
-  // Check if this username is already taken by a DIFFERENT user
-  // (If it belongs to the current user somehow, that's fine — we'll just overwrite)
-  const { data: takenBy, error: takenError } = await sb
+  // Step 2: Check if THIS user already has a row in user_profiles
+  // If they do, just redirect — do not try to insert again.
+  console.log('[Username] Checking if current user already has a profile row...');
+  var myProfileResult = await sb
+    .from('user_profiles')
+    .select('username')
+    .eq('user_id', userId)
+    .maybeSingle();
+
+  var myProfile = myProfileResult.data;
+  var myProfileError = myProfileResult.error;
+
+  if (myProfileError) {
+    console.warn('[Username] Could not check current user profile (proceeding):', myProfileError.message);
+  }
+
+  if (myProfile && myProfile.username) {
+    // This user already has a username — just accept it and move on
+    console.log('[Username] Current user already has username:', myProfile.username, '— redirecting without re-inserting.');
+    localStorage.setItem('siq_username', myProfile.username);
+    showMsg('You already have a username! Redirecting\u2026', 'success');
+    setTimeout(function() { window.location.href = 'index.html'; }, 900);
+    return;
+  }
+
+  // Step 3: Check if the requested username belongs to a DIFFERENT user
+  console.log('[Username] Checking if username "' + val + '" is taken by another user...');
+  var takenResult = await sb
     .from('user_profiles')
     .select('user_id')
     .eq('username', val)
     .maybeSingle();
 
+  var takenRow = takenResult.data;
+  var takenError = takenResult.error;
+
   if (takenError) {
-    console.warn('[Username] Could not check for duplicate (proceeding anyway):', takenError.message);
+    console.warn('[Username] Could not check for duplicate username (proceeding):', takenError.message);
   }
 
-  if (takenBy && takenBy.user_id !== userId) {
-    // Username belongs to someone else
-    console.log('[Username] Username taken by another user:', takenBy.user_id);
-    showMsg('That username is already taken. Try another!', 'error');
-    btn.disabled  = false;
-    btn.innerHTML = 'Save Username';
-    return;
+  if (takenRow) {
+    if (takenRow.user_id === userId) {
+      // Belongs to the current user (shouldn't normally reach here, but handle it gracefully)
+      console.log('[Username] Username belongs to current user — redirecting.');
+      localStorage.setItem('siq_username', val);
+      showMsg('Username confirmed! Loading your dashboard\u2026', 'success');
+      setTimeout(function() { window.location.href = 'index.html'; }, 900);
+      return;
+    } else {
+      // Belongs to a different user — block it
+      console.log('[Username] Username "' + val + '" is taken by user_id:', takenRow.user_id);
+      showMsg('That username is already taken. Try another!', 'error');
+      btn.disabled  = false;
+      btn.innerHTML = 'Save Username';
+      return;
+    }
   }
 
-  if (takenBy && takenBy.user_id === userId) {
-    // This user already has this username — just redirect, no need to re-save
-    console.log('[Username] Username already belongs to this user — skipping insert.');
-    localStorage.setItem('siq_username', val);
-    showMsg('Username confirmed! Loading your dashboard…', 'success');
-    setTimeout(() => { window.location.href = 'index.html'; }, 900);
-    return;
-  }
-
-  // Username is free — insert it
-  console.log('[Username] Username is available — inserting...');
-  const { data, error: insertError } = await sb
+  // Step 4: Username is free — insert it
+  console.log('[Username] Username is available — inserting into user_profiles...');
+  var insertResult = await sb
     .from('user_profiles')
     .insert({ user_id: userId, username: val });
 
+  var insertError = insertResult.error;
+
   if (insertError) {
-    console.error('[Username] Insert failed');
+    console.error('[Username] Insert failed:');
     console.error('[Username] Code:   ', insertError.code);
     console.error('[Username] Message:', insertError.message);
     console.error('[Username] Details:', insertError.details);
     console.error('[Username] Hint:   ', insertError.hint);
 
     if (insertError.code === '23505') {
-      // Unique constraint violation — race condition, someone else just grabbed it
+      // Unique constraint — race condition, someone grabbed it just now
       showMsg('That username was just taken. Please try another!', 'error');
     } else {
       showMsg('Error: ' + insertError.message, 'error');
@@ -428,25 +467,29 @@ async function saveUsername() {
     return;
   }
 
-  console.log('[Username] Insert successful:', data);
+  // Step 5: Success
+  console.log('[Username] Insert successful — username saved:', val);
   localStorage.setItem('siq_username', val);
-  showMsg('Username saved! Loading your dashboard…', 'success');
-  setTimeout(() => { window.location.href = 'index.html'; }, 900);
+  showMsg('Username saved! Loading your dashboard\u2026', 'success');
+  setTimeout(function() { window.location.href = 'index.html'; }, 900);
 }
 
-// Enter key to submit
-document.addEventListener('keydown', e => {
+// Enter key submits
+document.addEventListener('keydown', function(e) {
   if (e.key === 'Enter') saveUsername();
 });
 
-// ── UI helpers ────────────────────────────────────────────────────
+// ================================================================
+//  UI HELPERS
+// ================================================================
 function showMsg(text, type) {
-  const el = document.getElementById('msg');
+  var el = document.getElementById('msg');
   el.textContent = text;
   el.className   = type;
 }
+
 function clearMsg() {
-  const el = document.getElementById('msg');
+  var el = document.getElementById('msg');
   el.textContent = '';
   el.className   = '';
 }
