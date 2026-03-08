@@ -2916,7 +2916,7 @@
   </button>
   <button class="bn-tab" id="bn-profile" onclick="bnSwitch('profile')">
     <div class="bn-tab-icon">👤</div>
-    <div class="bn-tab-label">Profile</div>
+    <div class="bn-tab-label">Account</div>
   </button>
 </nav>
 
@@ -3172,15 +3172,15 @@
 <div class="page" id="profilePage">
   <div class="nav-header">
     <div></div>
-    <div class="nav-header-title">Profile</div>
+    <div class="nav-header-title">Account</div>
     <div></div>
   </div>
   <div class="nav-content" style="width:100%;max-width:390px;padding:0 14px 16px;">
     <div class="prof-header">
       <div class="prof-avatar">🏅</div>
       <div class="prof-name" id="profName">SportsFan</div>
-      <div class="prof-title" id="profTitle">Rookie</div>
-      <div class="prof-xp-total" id="profXpTotal">0 Total XP</div>
+      <div class="prof-title" id="profTitle">Rookie Player</div>
+      <div class="prof-xp-total" id="profXpTotal">TOTAL XP • 0</div>
     </div>
     <div class="prof-stats-row">
       <div class="prof-stat">
@@ -3192,7 +3192,7 @@
         <div class="prof-stat-label">Day Streak</div>
       </div>
     </div>
-    <div class="prof-section-title" style="margin-top:8px;">SETTINGS</div>
+    <div class="prof-section-title" style="margin-top:8px;">ACCOUNT SETTINGS</div>
     <div class="settings-row" onclick="window.location.href='username.html'">
       <div class="sr-left"><span class="sr-icon">✏️</span><span class="sr-label">Edit Username</span></div>
       <span class="sr-arrow">→</span>
@@ -4281,8 +4281,8 @@ function profRender() {
 
   const el = id => document.getElementById(id);
   if (el('profName'))       el('profName').textContent       = localStorage.getItem('siq_username') || 'SportsFan';
-  if (el('profTitle'))      el('profTitle').textContent      = level.title;
-  if (el('profXpTotal'))    el('profXpTotal').textContent    = totalXp.toLocaleString() + ' Total XP';
+  if (el('profTitle'))      el('profTitle').textContent      = level.name + ' Player';
+  if (el('profXpTotal'))    el('profXpTotal').textContent    = 'TOTAL XP • ' + totalXp.toLocaleString();
   if (el('profLevel'))      el('profLevel').textContent      = levelNum;
   if (el('profStreak'))     el('profStreak').textContent     = streak;
 }
