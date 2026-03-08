@@ -2153,6 +2153,33 @@
     padding: 12px 8px 10px;
     display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
+  /* Streak card — gold glow treatment */
+  .hsb.streak {
+    background: rgba(245,200,66,0.07);
+    border: 1px solid rgba(245,200,66,0.5);
+    animation: fadeUp 0.35s 0.05s ease both, hsbStreakGlow 2.8s 1s ease-in-out infinite;
+  }
+  @keyframes hsbStreakGlow {
+    0%,  100% { box-shadow: 0 0 8px rgba(245,200,66,0.18), 0 0 18px rgba(245,200,66,0.07); border-color: rgba(245,200,66,0.42); }
+    40%        { box-shadow: 0 0 18px rgba(245,200,66,0.42), 0 0 36px rgba(245,200,66,0.16); border-color: rgba(245,200,66,0.78); }
+    70%        { box-shadow: 0 0 10px rgba(245,200,66,0.24), 0 0 22px rgba(245,200,66,0.10); border-color: rgba(245,200,66,0.50); }
+  }
+  .hsb.streak .hsb-val {
+    animation: hsbFlameNum 3s ease-in-out infinite;
+  }
+  @keyframes hsbFlameNum {
+    0%,  100% { color: #f5c842; text-shadow: none; }
+    30%        { color: #ffd966; text-shadow: 0 0 10px rgba(255,210,60,0.65); }
+    55%        { color: #f5c842; text-shadow: none; }
+    68%        { color: #ffcc33; text-shadow: 0 0 16px rgba(255,200,40,0.80); }
+    78%        { color: #f5c842; text-shadow: none; }
+    88%        { color: #ffd966; text-shadow: 0 0 8px rgba(255,210,60,0.50); }
+  }
+  .hsb.streak .hsb-label {
+    color: rgba(245,200,66,0.75);
+    letter-spacing: 0.8px;
+    font-weight: 700;
+  }
   .hsb-val {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px; line-height: 1; letter-spacing: 1px;
@@ -2496,10 +2523,7 @@
             <div class="home-avatar-sub" id="homeWelcome">Welcome back!</div>
           </div>
         </div>
-        <div class="home-streak-pill">
-          <div class="home-streak-pill-num" id="homeStreakPillNum">0</div>
-          <div class="home-streak-pill-label">🔥 Streak</div>
-        </div>
+        <!-- streak pill removed; streak lives in stat row -->
       </div>
 
       <!-- Stats -->
