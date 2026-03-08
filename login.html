@@ -272,12 +272,15 @@
 </div>
 
 <script>
-// ============================================================
-//  HELPER: Check if a user already has a username in Supabase.
-//  Returns the username string if found, or null if not.
-// ============================================================
-async function checkExistingUsername(userId) {
-  console.log('[Login] Checking user_profiles for user_id:', userId);
+// ================================================================
+//  getUsername(userId)
+//  Queries public.user_profiles for the given user_id.
+//  Returns the username string if the row exists, or null if not.
+//  Logs clearly so you can see exactly what Supabase returns.
+// ================================================================
+async function getUsername(userId) {
+  console.log('[Login] getUsername() querying user_profiles for user_id:', userId);
+
   const { data, error } = await sb
     .from('user_profiles')
     .select('username')
@@ -285,40 +288,52 @@ async function checkExistingUsername(userId) {
     .maybeSingle();
 
   if (error) {
-    console.warn('[Login] Could not check user_profiles:', error.message);
-    return null; // treat as "no username" on error — username.html will handle it
+    // Most common cause: missing SELECT RLS policy on user_profiles.
+    // Fix: go to Supabase → Authentication → Policies → user_profiles
+    // and add a SELECT policy: auth.uid() = user_id
+    console.error('[Login] getUsername() ERROR — this is usually a missing SELECT RLS policy.');
+    console.error('[Login] Error code:', error.code);
+    console.error('[Login] Error message:', error.message);
+    console.error('[Login] Error hint:', error.hint);
+    return null;
   }
 
   const username = data?.username || null;
-  console.log('[Login] Existing username found:', username);
+  console.log('[Login] getUsername() result:', username === null ? '(no row found)' : username);
   return username;
 }
 
-// ============================================================
-//  HELPER: Route the user to the right page after auth.
-//  - Has username → index.html
-//  - No username  → username.html
-// ============================================================
+// ================================================================
+//  routeAfterAuth(userId)
+//  Called after every successful login or signup.
+//  Checks Supabase for an existing username and routes accordingly.
+//    Has username  →  save to localStorage  →  index.html
+//    No username   →  username.html
+// ================================================================
 async function routeAfterAuth(userId) {
-  const username = await checkExistingUsername(userId);
+  console.log('[Login] routeAfterAuth() called for user_id:', userId);
+  const username = await getUsername(userId);
+
   if (username) {
-    localStorage.setItem('siq_username', username); // keep cache fresh
-    console.log('[Login] Username exists — going to index.html');
+    console.log('[Login] Username found:', username, '— saving to localStorage and going to index.html');
+    localStorage.setItem('siq_username', username);
     window.location.href = 'index.html';
   } else {
-    console.log('[Login] No username — going to username.html');
+    console.log('[Login] No username found — going to username.html');
     window.location.href = 'username.html';
   }
 }
 
-// ============================================================
-//  SESSION CHECK — on page load, if already logged in, route them.
-// ============================================================
+// ================================================================
+//  PAGE LOAD SESSION CHECK
+//  If the user is already logged in when they hit login.html,
+//  route them immediately instead of showing the form.
+// ================================================================
 (async () => {
-  console.log('[Login] Checking existing session...');
+  console.log('[Login] Page loaded — checking for existing session...');
 
   const fallback = setTimeout(() => {
-    console.warn('[Login] Timeout — showing form.');
+    console.warn('[Login] Session check timed out — showing login form.');
     showForm();
   }, 5000);
 
@@ -333,32 +348,35 @@ async function routeAfterAuth(userId) {
     }
 
     if (data.session) {
-      // Already logged in — check if they have a username, then route
-      console.log('[Login] Already logged in as:', data.session.user.id);
+      console.log('[Login] Already logged in as user_id:', data.session.user.id);
       await routeAfterAuth(data.session.user.id);
     } else {
-      console.log('[Login] No session — showing form.');
+      console.log('[Login] No active session — showing login form.');
       showForm();
     }
   } catch (err) {
     clearTimeout(fallback);
-    console.error('[Login] Unexpected error:', err);
+    console.error('[Login] Unexpected error during session check:', err);
     showForm();
   }
 })();
 
-// ============================================================
-//  LOG IN
-// ============================================================
+// ================================================================
+//  LOGIN
+// ================================================================
 async function login() {
   const email    = document.getElementById('emailInput').value.trim();
   const password = document.getElementById('passwordInput').value;
 
-  if (!email || !password) { showMsg('Please enter your email and password.', 'error'); return; }
+  if (!email || !password) {
+    showMsg('Please enter your email and password.', 'error');
+    return;
+  }
 
   setLoading(true);
   clearMsg();
 
+  console.log('[Login] Attempting login for:', email);
   const { data, error } = await sb.auth.signInWithPassword({ email, password });
 
   if (error) {
@@ -368,26 +386,31 @@ async function login() {
     return;
   }
 
-  console.log('[Login] Login successful for:', data.user.id);
-  showMsg('Logged in! Loading your account…', 'success');
-
-  // Check Supabase for an existing username, then route accordingly
+  console.log('[Login] Login successful — user_id:', data.user.id);
+  showMsg('Logged in! Checking your profile…', 'success');
   await routeAfterAuth(data.user.id);
 }
 
-// ============================================================
+// ================================================================
 //  SIGN UP
-// ============================================================
+// ================================================================
 async function signup() {
   const email    = document.getElementById('emailInput').value.trim();
   const password = document.getElementById('passwordInput').value;
 
-  if (!email || !password) { showMsg('Please enter your email and password.', 'error'); return; }
-  if (password.length < 6)  { showMsg('Password must be at least 6 characters.', 'error'); return; }
+  if (!email || !password) {
+    showMsg('Please enter your email and password.', 'error');
+    return;
+  }
+  if (password.length < 6) {
+    showMsg('Password must be at least 6 characters.', 'error');
+    return;
+  }
 
   setLoading(true);
   clearMsg();
 
+  console.log('[Login] Attempting signup for:', email);
   const { data, error } = await sb.auth.signUp({ email, password });
 
   if (error) {
@@ -397,23 +420,22 @@ async function signup() {
     return;
   }
 
-  console.log('[Login] Signup successful for:', data.user?.id);
-  showMsg('Account created! Setting up your profile…', 'success');
-
-  // New users won't have a username yet, but route through the same check
-  // so the flow is consistent and handles edge cases (e.g. existing account re-signup)
-  if (data.user) {
-    await routeAfterAuth(data.user.id);
-  } else {
-    // Supabase returned no user — email confirmation may be on
+  if (!data.user) {
+    // Email confirmation is turned ON in Supabase — user must verify first
+    console.log('[Login] Signup submitted — email confirmation required.');
     setLoading(false);
     showMsg('Check your email to confirm your account, then log in.', 'success');
+    return;
   }
+
+  console.log('[Login] Signup successful — user_id:', data.user.id);
+  showMsg('Account created! Setting up your profile…', 'success');
+  await routeAfterAuth(data.user.id);
 }
 
-// ============================================================
+// ================================================================
 //  UI HELPERS
-// ============================================================
+// ================================================================
 function showForm() {
   document.getElementById('loadingOverlay').style.display = 'none';
   document.getElementById('mainContent').style.display    = 'flex';
@@ -437,21 +459,24 @@ function handleAction() {
   if (currentTab === 'login') login(); else signup();
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Enter') handleAction(); });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') handleAction();
+});
 
 function showMsg(text, type) {
-  const box = document.getElementById('msgBox');
+  var box = document.getElementById('msgBox');
   box.textContent = text;
   box.className = 'msg ' + type;
 }
 
 function clearMsg() {
-  document.getElementById('msgBox').textContent = '';
-  document.getElementById('msgBox').className = 'msg';
+  var box = document.getElementById('msgBox');
+  box.textContent = '';
+  box.className = 'msg';
 }
 
 function setLoading(on) {
-  const btn = document.getElementById('actionBtn');
+  var btn = document.getElementById('actionBtn');
   btn.disabled = on;
   btn.innerHTML = on
     ? '<div class="spinner"></div>' + (currentTab === 'login' ? 'Logging In…' : 'Creating Account…')
