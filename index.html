@@ -4277,6 +4277,8 @@ function dpSaveResult(won, pts) {
     stored.streak++;
     if (stored.streak > stored.bestStreak) stored.bestStreak = stored.streak;
     stored.totalPoints = (stored.totalPoints || 0) + pts;
+    // Trigger Supabase streak update on daily quiz win
+    sbStreakSave();
   } else {
     stored.streak = 0;
   }
@@ -4371,23 +4373,147 @@ function xpSave(data) {
   localStorage.setItem(xpDayKey(), JSON.stringify(data));
 }
 
-// ── Streak (localStorage only — fast) ───────────────────────
-function xpStreakLoad() {
-  try { return JSON.parse(localStorage.getItem('xp_streak') || '{}'); }
-  catch { return {}; }
-}
-function xpStreakSave(s) { localStorage.setItem('xp_streak', JSON.stringify(s)); }
-function xpGetStreak()   { return xpStreakLoad().count || 0; }
+// ── Streak — Supabase-backed ─────────────────────────────────
+// _cachedStreak holds the current_streak from Supabase in memory.
+// localStorage is only used as a fallback if Supabase is unreachable.
+let _cachedStreak = 0;
 
-function xpStreakUpdate() {
-  const s = xpStreakLoad();
-  const today = xpDayKey();
-  if (s.lastDay === today) return;
-  const d = new Date(); d.setDate(d.getDate() - 1);
-  const yesterday = 'xp_day_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
-  s.count = (s.lastDay === yesterday) ? (s.count || 0) + 1 : 1;
-  s.lastDay = today;
-  xpStreakSave(s);
+function xpGetStreak() { return _cachedStreak; }
+
+// Load streak from Supabase on app start
+async function sbStreakLoad() {
+  try {
+    const { data: { session } } = await _sb.auth.getSession();
+    if (!session) return;
+
+    const userId = session.user.id;
+    console.log('[Streak] Loading for user:', userId);
+
+    const { data, error } = await _sb
+      .from('user_profiles')
+      .select('current_streak, best_streak, last_quiz_completed_at')
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (error) {
+      console.warn('[Streak] Load error:', error.message);
+      _cachedStreak = parseInt(localStorage.getItem('siq_streak_fallback') || '0');
+      return;
+    }
+
+    if (!data) {
+      console.log('[Streak] No profile row found — streak stays 0');
+      _cachedStreak = 0;
+      return;
+    }
+
+    console.log('[Streak] Loaded — current_streak:', data.current_streak,
+      '| best_streak:', data.best_streak,
+      '| last_quiz_completed_at:', data.last_quiz_completed_at);
+
+    _cachedStreak = data.current_streak || 0;
+    localStorage.setItem('siq_streak_fallback', _cachedStreak);
+
+  } catch (err) {
+    console.warn('[Streak] sbStreakLoad exception:', err);
+    _cachedStreak = parseInt(localStorage.getItem('siq_streak_fallback') || '0');
+  }
+
+  // Re-render UI with loaded streak
+  refreshHome();
+  if (document.getElementById('profStreak')) profRender();
+}
+
+// Called only when the user successfully completes the Daily Player Guess
+async function sbStreakSave() {
+  try {
+    const { data: { session } } = await _sb.auth.getSession();
+    if (!session) return;
+
+    const userId = session.user.id;
+    const nowISO = new Date().toISOString();
+    const todayDate = nowISO.slice(0, 10); // "YYYY-MM-DD"
+
+    console.log('[Streak] Saving for user:', userId);
+
+    // Fetch current row
+    const { data, error } = await _sb
+      .from('user_profiles')
+      .select('current_streak, best_streak, last_quiz_completed_at')
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (error) {
+      console.warn('[Streak] Fetch before save error:', error.message);
+      return;
+    }
+
+    const prev = data || { current_streak: 0, best_streak: 0, last_quiz_completed_at: null };
+    console.log('[Streak] Previous values — current_streak:', prev.current_streak,
+      '| best_streak:', prev.best_streak,
+      '| last_quiz_completed_at:', prev.last_quiz_completed_at);
+
+    const lastDate = prev.last_quiz_completed_at
+      ? prev.last_quiz_completed_at.slice(0, 10)
+      : null;
+
+    // Guard: already completed today — don't update again
+    if (lastDate === todayDate) {
+      console.log('[Streak] Already completed today — no change');
+      return;
+    }
+
+    // Calculate yesterday's date string
+    const yest = new Date();
+    yest.setDate(yest.getDate() - 1);
+    const yesterdayDate = yest.toISOString().slice(0, 10);
+
+    let newStreak;
+    if (!lastDate) {
+      // First ever completion
+      newStreak = 1;
+      console.log('[Streak] First completion — streak → 1');
+    } else if (lastDate === yesterdayDate) {
+      // Completed yesterday — extend streak
+      newStreak = (prev.current_streak || 0) + 1;
+      console.log('[Streak] Consecutive day — streak →', newStreak);
+    } else {
+      // Gap of more than 1 day — reset
+      newStreak = 1;
+      console.log('[Streak] Gap detected (last:', lastDate, ', yesterday:', yesterdayDate, ') — streak reset → 1');
+    }
+
+    const newBest = Math.max(prev.best_streak || 0, newStreak);
+
+    console.log('[Streak] Writing — current_streak:', newStreak, '| best_streak:', newBest);
+
+    const { error: upsertErr } = await _sb
+      .from('user_profiles')
+      .update({
+        current_streak:          newStreak,
+        best_streak:             newBest,
+        last_quiz_completed_at:  nowISO,
+      })
+      .eq('user_id', userId);
+
+    if (upsertErr) {
+      console.warn('[Streak] Save error:', upsertErr.message);
+      return;
+    }
+
+    console.log('[Streak] Save successful ✅');
+
+    // Update in-memory cache and localStorage fallback
+    _cachedStreak = newStreak;
+    localStorage.setItem('siq_streak_fallback', _cachedStreak);
+
+    // Refresh UI
+    refreshHome();
+    if (document.getElementById('profStreak')) profRender();
+
+  } catch (err) {
+    console.warn('[Streak] sbStreakSave exception:', err);
+  }
 }
 
 // ── SUPABASE: Load total XP for the logged-in user ───────────
@@ -4471,7 +4597,7 @@ function xpAward(amount) {
     if (!data.bonusGiven) {
       data.bonusGiven = true;
       data.xp += XP_BONUS;
-      xpStreakUpdate();
+      // streak is driven by sbStreakSave() on daily quiz completion only
     }
   }
   xpSave(data);
@@ -5012,6 +5138,7 @@ bnUpdateHomeLevel();
 renderHomeLb();     // populate leaderboard preview on home
 sbXpLoad();         // loads real XP from Supabase and re-renders
 sbUsernameLoad();   // loads real username from Supabase and re-renders
+sbStreakLoad();     // loads real streak from Supabase and re-renders
 </script>
 
 </body>
