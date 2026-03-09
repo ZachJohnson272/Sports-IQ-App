@@ -3081,17 +3081,17 @@
       <button class="mode-card" onclick="startMode('namePos')">
         <div class="mode-icon">🪪</div>
         <div class="mode-info"><div class="mode-title">Name → Details</div><div class="mode-desc">See the name, recall position & jersey</div></div>
-        <div class="mode-stats-mini" id="modeStats_namePos">—</div>
+        <div class="mode-stats-mini" id="modeStats_namePos">0/18</div>
       </button>
       <button class="mode-card" onclick="startMode('statsPlayer')">
         <div class="mode-icon">📊</div>
         <div class="mode-info"><div class="mode-title">Stats → Player</div><div class="mode-desc">See height, age, college — guess who</div></div>
-        <div class="mode-stats-mini" id="modeStats_statsPlayer">—</div>
+        <div class="mode-stats-mini" id="modeStats_statsPlayer">0/18</div>
       </button>
       <button class="mode-card" onclick="startMode('multiChoice')">
         <div class="mode-icon">🔤</div>
         <div class="mode-info"><div class="mode-title">Multiple Choice</div><div class="mode-desc">Read the clues — pick the right player</div></div>
-        <div class="mode-stats-mini" id="modeStats_multiChoice">—</div>
+        <div class="mode-stats-mini" id="modeStats_multiChoice">0/18</div>
       </button>
       <button class="mode-card" onclick="startMode('lineup')">
         <div class="mode-icon">📝</div>
@@ -3123,8 +3123,8 @@
         </div>
         <div class="card-face card-back">
           <img class="back-photo" id="backPhoto" src="" alt="">
-          <div class="back-name" id="backName">—</div>
-          <div class="back-pos" id="backPos">—</div>
+          <div class="back-name" id="backName">0/18</div>
+          <div class="back-pos" id="backPos">0/18</div>
           <div class="back-stats" id="backStats"></div>
           <div class="card-streak" id="cardStreak">First attempt</div>
         </div>
@@ -3166,7 +3166,7 @@
       <div class="overall-details">
         <h3>Team Mastery</h3>
         <div class="progress-bar"><div class="progress-fill" id="masteryBar" style="width:0%"></div></div>
-        <p id="masteryDetail">0 of 0 players mastered</p>
+        <p id="masteryDetail">0 of 18 players mastered</p>
       </div>
     </div>
     <div class="roster-list">
@@ -3230,7 +3230,7 @@
         <div class="lp-lc-info">
           <div class="lp-lc-name">NBA</div>
           <div class="lp-lc-sub">National Basketball Association</div>
-          <div class="lp-lc-progress" id="lp-nba-progress">Roster coming soon</div>
+          <div class="lp-lc-progress" id="lp-nba-progress">0 / 18 Players Learned</div>
         </div>
         <div class="lp-lc-right">
           <div class="lp-lc-tag start">START</div>
@@ -3305,7 +3305,7 @@
           <div class="lp-team-icon">🏀</div>
           <div class="lp-team-info">
             <div class="lp-team-name">Utah Jazz</div>
-            <div class="lp-team-sub">0 players · Coming soon</div>
+            <div class="lp-team-sub">18 players · Active</div>
           </div>
           <div class="lp-team-mastery" id="lp-mastery-jazz">
             <div class="lp-mastery-pct" id="lp-mastery-jazz-pct">0%</div>
@@ -3359,7 +3359,7 @@
         <div class="lp-ts-icon" id="lp-ts-icon">🏀</div>
         <div class="lp-ts-info">
           <div class="lp-ts-name" id="lp-ts-name">Utah Jazz</div>
-          <div class="lp-ts-sub" id="lp-ts-sub">NBA · 0 players</div>
+          <div class="lp-ts-sub" id="lp-ts-sub">NBA · 18 players</div>
         </div>
         <div class="lp-ts-mastery">
           <div class="lp-ts-pct" id="lp-ts-pct">0%</div>
@@ -3374,7 +3374,7 @@
           <div class="lp-mode-title">Name → Details</div>
           <div class="lp-mode-desc">See a player's name — recall their position & jersey number</div>
         </div>
-        <div class="lp-mode-stat" id="lpms-namePos">—</div>
+        <div class="lp-mode-stat" id="lpms-namePos">0/18</div>
       </div>
       <div class="lp-mode-card" onclick="lpStartMode('statsPlayer')">
         <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
@@ -3382,7 +3382,7 @@
           <div class="lp-mode-title">Stats → Player</div>
           <div class="lp-mode-desc">See height, age, college, position — guess who it is</div>
         </div>
-        <div class="lp-mode-stat" id="lpms-statsPlayer">—</div>
+        <div class="lp-mode-stat" id="lpms-statsPlayer">0/18</div>
       </div>
 
       <div class="lp-section-label" style="margin-top:14px;">QUICK QUIZ</div>
@@ -3392,7 +3392,7 @@
           <div class="lp-mode-title">Multiple Choice</div>
           <div class="lp-mode-desc">Read the clues — pick the right player from 4 options</div>
         </div>
-        <div class="lp-mode-stat" id="lpms-multiChoice">—</div>
+        <div class="lp-mode-stat" id="lpms-multiChoice">0/18</div>
       </div>
 
       <div class="lp-section-label" style="margin-top:14px;">GAMES</div>
@@ -3559,9 +3559,9 @@
           <div class="sport-row-icon">🏀</div>
           <div class="sport-row-info">
             <div class="sport-row-name">NBA</div>
-            <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/0 players</div>
+            <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/18 players</div>
           </div>
-          <div class="sport-row-status not-started" id="sdNBAStatus">—</div>
+          <div class="sport-row-status not-started" id="sdNBAStatus">0/18</div>
         </div>
         <div class="sport-row">
           <div class="sport-row-icon">🏈</div>
@@ -3732,16 +3732,30 @@ function applyUsername() {
   if (el('homeWelcome'))         el('homeWelcome').textContent         = welcome;
   if (el('profName'))            el('profName').textContent            = displayName;
 }
-// ── Jazz roster — cleared for rebuild ──────────────────────
-// Add player objects here when ready. Each entry needs:
-//   name, position ("G"/"F"/"C"), age, height, college, jersey, image_url
-const ROSTER = [];
+const ROSTER = [
+  { name:"Ace Bailey",          position:"G", age:19, height:'6\'9"',  college:"Rutgers",          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
+  { name:"Mo Bamba",            position:"C", age:27, height:'7\'0"',  college:"Texas",             image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277919.png" },
+  { name:"Isaiah Collier",      position:"G", age:21, height:'6\'4"',  college:"USC",               image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277919.png" },
+  { name:"Kyle Filipowski",     position:"F", age:22, height:'6\'11"', college:"Duke",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
+  { name:"Keyonte George",      position:"G", age:22, height:'6\'4"',  college:"Baylor",            image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
+  { name:"Elijah Harkless",     position:"G", age:26, height:'6\'3"',  college:"UNLV",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
+  { name:"Blake Hinson",        position:"F", age:26, height:'6\'8"',  college:"Pittsburgh",        image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
+  { name:"Jaren Jackson Jr.",   position:"F", age:26, height:'6\'10"', college:"Michigan State",    image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
+  { name:"Walker Kessler",      position:"C", age:24, height:'7\'2"',  college:"Auburn",            image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
+  { name:"John Konchar",        position:"G", age:29, height:'6\'5"',  college:"Purdue Fort Wayne", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
+  { name:"Kevin Love",          position:"F", age:37, height:'6\'10"', college:"UCLA",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
+  { name:"Lauri Markkanen",     position:"F", age:28, height:'7\'1"',  college:"Arizona",           image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
+  { name:"Svi Mykhailiuk",      position:"G", age:28, height:'6\'7"',  college:"Kansas",            image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
+  { name:"Jusuf Nurkic",        position:"C", age:31, height:'6\'11"', college:"International",     image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
+  { name:"Brice Sensabaugh",    position:"F", age:22, height:'6\'6"',  college:"Ohio State",        image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
+  { name:"Oscar Tshiebwe",      position:"C", age:26, height:'6\'8"',  college:"Kentucky",          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
+  { name:"Cody Williams",       position:"F", age:21, height:'6\'8"',  college:"Colorado",          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
+  { name:"Vince Williams Jr.",  position:"G", age:25, height:'6\'4"',  college:"VCU",               image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397441.png" }
+];
 
 const posMap = { G: 'Guard', F: 'Forward', C: 'Center' };
 
-// Jazz starting lineup answers for the Guess the Lineup game.
-// Fill in player names once the roster is populated.
-const JAZZ_STARTING_LINEUP = { PG:'', SG:'', SF:'', PF:'', C:'' };
+const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Vince Williams Jr.', SF:'Cody Williams', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
 const modes = ['photoName', 'namePos', 'statsPlayer', 'multiChoice', 'lineup'];
 let modeData = {};
@@ -3825,10 +3839,9 @@ function updateHomeStats() {
 }
 
 function updateModeStats() {
-  const total = ROSTER.length;
   modes.filter(m => m !== 'lineup').forEach(m => {
     const el = document.getElementById('modeStats_' + m);
-    if (el) el.textContent = total === 0 ? '—' : getModeLearnedCount(m) + '/' + total;
+    if (el) el.textContent = getModeLearnedCount(m) + '/18';
   });
   const lineupEl = document.getElementById('modeStats_lineup');
   if (lineupEl) lineupEl.textContent = lineupAttempts > 0 ? lineupCorrect + '/' + lineupAttempts : '—';
@@ -3838,10 +3851,6 @@ function updateModeStats() {
 function startMode(mode) {
   currentMode = mode;
   if (mode === 'lineup') { startLineup(); return; }
-  if (ROSTER.length === 0) {
-    showComingSoon();
-    return;
-  }
   deck = buildDeck(mode);
   deckIndex = 0;
   document.getElementById('cardScene').style.display = '';
@@ -3996,10 +4005,6 @@ const LINEUP_POSITIONS = [
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Vince Williams Jr.', SF:'Cody Williams', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
 function startLineup() {
-  if (ROSTER.length === 0) {
-    showComingSoon();
-    return;
-  }
   document.getElementById('cardScene').style.display = 'none';
   document.getElementById('answerBtns').style.display = 'none';
   document.getElementById('mcOptions').style.display = 'none';
@@ -4061,7 +4066,7 @@ function endRound() {
   const m = getModeMastery(currentMode);
   const learned = getModeLearnedCount(currentMode);
   document.getElementById('roundComplete').classList.add('show');
-  document.getElementById('roundCompleteMsg').textContent = `Mode mastery: ${m}% · ${learned}/${ROSTER.length} players learned`;
+  document.getElementById('roundCompleteMsg').textContent = `Mode mastery: ${m}% · ${learned}/18 players learned`;
   if (m === 100) xpAward(15);
 }
 
@@ -4749,13 +4754,12 @@ function lpSelectLeague(leagueId) {
 }
 
 function lpUpdateJazzMastery() {
-  const total = ROSTER.length;
   const learnedSet = new Set();
   modes.filter(m => m !== 'lineup').forEach(m => {
     modeData[m].forEach((pd, i) => { if (isLearned(pd)) learnedSet.add(i); });
   });
   const learned = learnedSet.size;
-  const pct = total === 0 ? 0 : Math.round((learned / total) * 100);
+  const pct = Math.round((learned / 18) * 100);
   const fillEl    = document.getElementById('lp-mastery-jazz-fill');
   const pctEl     = document.getElementById('lp-mastery-jazz-pct');
   const tsPct     = document.getElementById('lp-ts-pct');
@@ -4763,7 +4767,7 @@ function lpUpdateJazzMastery() {
   if (fillEl)    fillEl.style.width  = pct + '%';
   if (pctEl)     pctEl.textContent   = pct + '%';
   if (tsPct)     tsPct.textContent   = pct + '%';
-  if (progLabel) progLabel.textContent = total === 0 ? 'Roster coming soon' : learned + ' / ' + total + ' Players Learned';
+  if (progLabel) progLabel.textContent = learned + ' / 18 Players Learned';
 }
 
 function lpSelectTeam(teamId, teamName, teamIcon, leagueId) {
@@ -4774,7 +4778,7 @@ function lpSelectTeam(teamId, teamName, teamIcon, leagueId) {
   const iconEl = document.getElementById('lp-ts-icon');
   if (nameEl) nameEl.textContent = teamName;
   if (iconEl) iconEl.textContent = teamIcon;
-  if (subEl)  subEl.textContent  = leagueId.toUpperCase() + ' · ' + ROSTER.length + ' player' + (ROSTER.length !== 1 ? 's' : '');
+  if (subEl)  subEl.textContent  = leagueId.toUpperCase() + ' · 18 players';
   // Update panel 3 title
   const t = document.getElementById('lp-panel-3-title');
   if (t) t.textContent = teamName + ' — Choose Mode';
@@ -4785,12 +4789,12 @@ function lpSelectTeam(teamId, teamName, teamIcon, leagueId) {
 }
 
 function lpUpdateModeStats() {
-  const total = ROSTER.length;
   const statModes = ['namePos','statsPlayer','multiChoice'];
   statModes.forEach(m => {
     const el = document.getElementById('lpms-' + m);
     if (!el) return;
-    el.textContent = total === 0 ? '—' : (getModeLearnedCount ? getModeLearnedCount(m) : 0) + '/' + total;
+    const learned = getModeLearnedCount ? getModeLearnedCount(m) : 0;
+    el.textContent = learned + '/18';
   });
 }
 
@@ -5085,7 +5089,7 @@ function updateSportsDropdown() {
     modeData[m].forEach((pd, i) => { if (isLearned(pd)) learnedSet.add(i); });
   });
   const learnedCount = learnedSet.size;
-  const totalPlayers = ROSTER.length;
+  const totalPlayers = 18;
   const allDone   = learnedCount >= totalPlayers;
   const anyStarted = learnedCount > 0;
 
