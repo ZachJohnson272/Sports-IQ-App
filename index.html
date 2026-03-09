@@ -1570,15 +1570,23 @@
     padding: 13px 14px;
     display: flex; align-items: center; gap: 12px;
     cursor: pointer;
-    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     animation: fadeUp 0.28s ease both;
   }
   .lp-league-card:hover {
-    border-color: rgba(107,63,160,0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(107,63,160,0.18);
+    border-color: rgba(107,63,160,0.65);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(107,63,160,0.22);
   }
-  .lp-league-card.locked { opacity: 0.55; cursor: default; }
+  .lp-league-card:hover .lp-lc-arrow {
+    transform: translateX(4px);
+    color: rgba(255,255,255,0.7);
+  }
+  .lp-league-card.locked {
+    opacity: 0.38;
+    cursor: default;
+    filter: grayscale(0.3);
+  }
   .lp-league-card.locked:hover { transform: none; box-shadow: none; border-color: rgba(107,63,160,0.28); }
   .lp-lc-icon {
     width: 44px; height: 44px; border-radius: 12px;
@@ -1588,11 +1596,23 @@
   .lp-lc-info { flex: 1; }
   .lp-lc-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; color: #fff; line-height: 1; }
   .lp-lc-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .lp-lc-progress {
+    font-size: 10px; color: var(--jazz-sky); margin-top: 5px;
+    font-weight: 600; letter-spacing: 0.2px;
+  }
   .lp-lc-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-  .lp-lc-arrow { color: var(--muted); font-size: 16px; }
+  .lp-lc-arrow {
+    color: var(--muted); font-size: 16px;
+    transition: transform 0.18s ease, color 0.18s ease;
+  }
   .lp-lc-tag {
     font-size: 9px; font-weight: 700; letter-spacing: 0.8px;
     padding: 3px 8px; border-radius: 99px; text-transform: uppercase;
+  }
+  .lp-lc-tag.start {
+    background: linear-gradient(135deg, rgba(107,63,160,0.5), rgba(91,184,212,0.35));
+    color: #fff;
+    border: 1px solid rgba(91,184,212,0.4);
   }
   .lp-lc-tag.active {
     background: rgba(61,204,122,0.15);
@@ -1600,9 +1620,13 @@
     border: 1px solid rgba(61,204,122,0.3);
   }
   .lp-lc-tag.soon {
-    background: rgba(155,142,196,0.1);
-    color: var(--muted);
-    border: 1px solid rgba(155,142,196,0.2);
+    background: rgba(155,142,196,0.08);
+    color: rgba(155,142,196,0.6);
+    border: 1px solid rgba(155,142,196,0.15);
+  }
+  .lp-panel-subtitle {
+    font-size: 12px; color: var(--muted); line-height: 1.5;
+    margin-top: -6px; margin-bottom: 2px;
   }
 
   /* Team cards */
@@ -3204,6 +3228,7 @@
     <!-- ── Step 1: Choose League ── -->
     <div class="lp-panel" id="lp-panel-1">
       <div class="lp-panel-title">Choose a League</div>
+      <div class="lp-panel-subtitle">Pick a league to start learning players, teams, numbers, and positions.</div>
 
       <div class="lp-section-label">PRO SPORTS</div>
       <div class="lp-league-card" onclick="lpSelectLeague('nba')">
@@ -3211,14 +3236,15 @@
         <div class="lp-lc-info">
           <div class="lp-lc-name">NBA</div>
           <div class="lp-lc-sub">National Basketball Association</div>
+          <div class="lp-lc-progress" id="lp-nba-progress">0 / 18 Players Learned</div>
         </div>
         <div class="lp-lc-right">
-          <div class="lp-lc-tag active">Active</div>
+          <div class="lp-lc-tag start">START</div>
           <div class="lp-lc-arrow">→</div>
         </div>
       </div>
-      <div class="lp-league-card locked" onclick="showComingSoon()">
-        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.12);">🏈</div>
+      <div class="lp-league-card locked">
+        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.08);">🏈</div>
         <div class="lp-lc-info">
           <div class="lp-lc-name">NFL</div>
           <div class="lp-lc-sub">National Football League</div>
@@ -3227,8 +3253,8 @@
           <div class="lp-lc-tag soon">Soon</div>
         </div>
       </div>
-      <div class="lp-league-card locked" onclick="showComingSoon()">
-        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.12);">⚾</div>
+      <div class="lp-league-card locked">
+        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.08);">⚾</div>
         <div class="lp-lc-info">
           <div class="lp-lc-name">MLB</div>
           <div class="lp-lc-sub">Major League Baseball</div>
@@ -3237,8 +3263,8 @@
           <div class="lp-lc-tag soon">Soon</div>
         </div>
       </div>
-      <div class="lp-league-card locked" onclick="showComingSoon()">
-        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.12);">🏒</div>
+      <div class="lp-league-card locked">
+        <div class="lp-lc-icon" style="background:rgba(91,184,212,0.08);">🏒</div>
         <div class="lp-lc-info">
           <div class="lp-lc-name">NHL</div>
           <div class="lp-lc-sub">National Hockey League</div>
@@ -3249,8 +3275,8 @@
       </div>
 
       <div class="lp-section-label" style="margin-top:14px;">COLLEGE SPORTS</div>
-      <div class="lp-league-card locked" onclick="showComingSoon()">
-        <div class="lp-lc-icon" style="background:rgba(245,200,66,0.1);">🎓</div>
+      <div class="lp-league-card locked">
+        <div class="lp-lc-icon" style="background:rgba(245,200,66,0.08);">🎓</div>
         <div class="lp-lc-info">
           <div class="lp-lc-name">College Football</div>
           <div class="lp-lc-sub">NCAA FBS</div>
@@ -3259,8 +3285,8 @@
           <div class="lp-lc-tag soon">Soon</div>
         </div>
       </div>
-      <div class="lp-league-card locked" onclick="showComingSoon()">
-        <div class="lp-lc-icon" style="background:rgba(245,200,66,0.1);">🎓</div>
+      <div class="lp-league-card locked">
+        <div class="lp-lc-icon" style="background:rgba(245,200,66,0.08);">🎓</div>
         <div class="lp-lc-info">
           <div class="lp-lc-name">College Basketball</div>
           <div class="lp-lc-sub">NCAA Division I</div>
@@ -4590,13 +4616,16 @@ function lpUpdateJazzMastery() {
   modes.filter(m => m !== 'lineup').forEach(m => {
     modeData[m].forEach((pd, i) => { if (isLearned(pd)) learnedSet.add(i); });
   });
-  const pct = Math.round((learnedSet.size / 18) * 100);
-  const fillEl = document.getElementById('lp-mastery-jazz-fill');
-  const pctEl  = document.getElementById('lp-mastery-jazz-pct');
-  const tsPct  = document.getElementById('lp-ts-pct');
-  if (fillEl) fillEl.style.width = pct + '%';
-  if (pctEl)  pctEl.textContent = pct + '%';
-  if (tsPct)  tsPct.textContent = pct + '%';
+  const learned = learnedSet.size;
+  const pct = Math.round((learned / 18) * 100);
+  const fillEl    = document.getElementById('lp-mastery-jazz-fill');
+  const pctEl     = document.getElementById('lp-mastery-jazz-pct');
+  const tsPct     = document.getElementById('lp-ts-pct');
+  const progLabel = document.getElementById('lp-nba-progress');
+  if (fillEl)    fillEl.style.width  = pct + '%';
+  if (pctEl)     pctEl.textContent   = pct + '%';
+  if (tsPct)     tsPct.textContent   = pct + '%';
+  if (progLabel) progLabel.textContent = learned + ' / 18 Players Learned';
 }
 
 function lpSelectTeam(teamId, teamName, teamIcon, leagueId) {
