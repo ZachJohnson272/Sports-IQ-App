@@ -3208,12 +3208,12 @@
     <div class="mode-grid">
       <button class="mode-card" onclick="startMode('namePos')">
         <div class="mode-icon">🪪</div>
-        <div class="mode-info"><div class="mode-title">Name → Details</div><div class="mode-desc">See the name, recall position & jersey</div></div>
+        <div class="mode-info"><div class="mode-title">Player → Info</div><div class="mode-desc">See the name, recall position & jersey</div></div>
         <div class="mode-stats-mini" id="modeStats_namePos">0/18</div>
       </button>
       <button class="mode-card" onclick="startMode('statsPlayer')">
         <div class="mode-icon">📊</div>
-        <div class="mode-info"><div class="mode-title">Stats → Player</div><div class="mode-desc">See height, age, college — guess who</div></div>
+        <div class="mode-info"><div class="mode-title">Info → Player</div><div class="mode-desc">See height, age, college — guess who</div></div>
         <div class="mode-stats-mini" id="modeStats_statsPlayer">0/18</div>
       </button>
       <button class="mode-card" onclick="startMode('multiChoice')">
@@ -3223,7 +3223,7 @@
       </button>
       <button class="mode-card" onclick="startMode('lineup')">
         <div class="mode-icon">📝</div>
-        <div class="mode-info"><div class="mode-title">Guess the Lineup</div><div class="mode-desc">Fill in the starting 5 by position</div></div>
+        <div class="mode-info"><div class="mode-title">Team → Starting 5</div><div class="mode-desc">Fill in the starting 5 by position</div></div>
         <div class="mode-stats-mini" id="modeStats_lineup">—</div>
       </button>
     </div>
@@ -3429,7 +3429,7 @@
         <div class="lp-mode-card" onclick="lpChoosePath('team','namePos')">
           <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">🪪</div>
           <div class="lp-mode-info">
-            <div class="lp-mode-title">Name → Details</div>
+            <div class="lp-mode-title">Player → Info</div>
             <div class="lp-mode-desc">See a player's name — recall their position & jersey number</div>
           </div>
           <div class="lp-mode-stat" id="lpms-namePos">0/18</div>
@@ -3437,10 +3437,34 @@
         <div class="lp-mode-card" onclick="lpChoosePath('team','statsPlayer')">
           <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
           <div class="lp-mode-info">
-            <div class="lp-mode-title">Stats → Player</div>
+            <div class="lp-mode-title">Info → Player</div>
             <div class="lp-mode-desc">See height, age, college, position — guess who it is</div>
           </div>
           <div class="lp-mode-stat" id="lpms-statsPlayer">0/18</div>
+        </div>
+        <div class="lp-mode-card" onclick="lpChoosePath('team','lineup')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.12);">🎯</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Team → Starting 5</div>
+            <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-lineup">—</div>
+        </div>
+        <div class="lp-mode-card lp-mode-card--soon">
+          <div class="lp-mode-icon" style="background:rgba(91,184,212,0.12);">📋</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Team → Roster</div>
+            <div class="lp-mode-desc">Name every player on the full team roster</div>
+          </div>
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
+        <div class="lp-mode-card lp-mode-card--soon">
+          <div class="lp-mode-icon" style="background:rgba(107,63,160,0.2);">🔁</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Starting 5 → Team</div>
+            <div class="lp-mode-desc">Guess the team from their starting lineup</div>
+          </div>
+          <div class="lp-lc-tag soon">Soon</div>
         </div>
         <div class="lp-mode-card" onclick="lpChoosePath('team','multiChoice')">
           <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔤</div>
@@ -3449,14 +3473,6 @@
             <div class="lp-mode-desc">Read the clues — pick the right player from 4 options</div>
           </div>
           <div class="lp-mode-stat" id="lpms-multiChoice">0/18</div>
-        </div>
-        <div class="lp-mode-card" onclick="lpChoosePath('team','lineup')">
-          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.12);">🎯</div>
-          <div class="lp-mode-info">
-            <div class="lp-mode-title">Guess the Lineup</div>
-            <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
-          </div>
-          <div class="lp-mode-stat" id="lpms-lineup">—</div>
         </div>
       </div>
 
@@ -3585,15 +3601,12 @@
         <div class="lp-mode-card" onclick="lpStartMode('namePos')">
           <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">🪪</div>
           <div class="lp-mode-info">
-            <div class="lp-mode-title">Name → Details</div>
-            <div class="lp-mode-desc">See a player's name — recall their position & jersey number</div>
-          </div>
-          <div class="lp-mode-stat" id="lpms2-namePos">0/18</div>
+            <div class="lp-mode-title">Player → Info</div>
         </div>
         <div class="lp-mode-card" onclick="lpStartMode('statsPlayer')">
           <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
           <div class="lp-mode-info">
-            <div class="lp-mode-title">Stats → Player</div>
+            <div class="lp-mode-title">Info → Player</div>
             <div class="lp-mode-desc">See height, age, college, position — guess who it is</div>
           </div>
           <div class="lp-mode-stat" id="lpms2-statsPlayer">0/18</div>
@@ -3613,7 +3626,7 @@
         <div class="lp-mode-card" onclick="lpStartMode('lineup')">
           <div class="lp-mode-icon" style="background:rgba(245,200,66,0.12);">🎯</div>
           <div class="lp-mode-info">
-            <div class="lp-mode-title">Guess the Lineup</div>
+            <div class="lp-mode-title">Team → Starting 5</div>
             <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
           </div>
           <div class="lp-mode-stat" id="lpms2-lineup">—</div>
