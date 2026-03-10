@@ -1777,6 +1777,35 @@
   }
   .lp-mode-card--soon::before { display: none; }
 
+  /* ── Path section (Team vs League) ── */
+  .lp-path-section {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 4px;
+  }
+  .lp-path-header {
+    display: flex; align-items: baseline; gap: 10px;
+    margin-top: 8px; margin-bottom: 2px;
+  }
+  .lp-path-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 3px; color: #fff;
+  }
+  .lp-path-sub {
+    font-size: 11px; color: var(--muted); letter-spacing: 0.3px;
+  }
+  .lp-path-section--league .lp-mode-card {
+    border-color: rgba(61,204,122,0.3);
+  }
+  .lp-path-section--league .lp-mode-card:not(.lp-mode-card--soon):hover {
+    border-color: rgba(61,204,122,0.6);
+    box-shadow: 0 8px 24px rgba(61,204,122,0.18);
+  }
+  .lp-path-divider {
+    height: 1px;
+    background: rgba(107,63,160,0.2);
+    margin: 8px 0;
+  }
+
   /* ===================== LEADERBOARD PAGE ===================== */
   #leaderboardPage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
   .lb-tabs {
@@ -3273,14 +3302,8 @@
   </div>
   <div class="lp-wrap">
 
-    <!-- Step indicator -->
-    <div class="lp-steps">
-      <div class="lp-step active" id="lstep-1"><span class="lp-step-num">1</span><span class="lp-step-label">League</span></div>
-      <div class="lp-step-line"></div>
-      <div class="lp-step" id="lstep-2"><span class="lp-step-num">2</span><span class="lp-step-label">Team</span></div>
-      <div class="lp-step-line"></div>
-      <div class="lp-step" id="lstep-3"><span class="lp-step-num">3</span><span class="lp-step-label">Mode</span></div>
-    </div>
+    <!-- Step indicator — rebuilt dynamically by lpRenderSteps() -->
+    <div class="lp-steps" id="lp-steps-wrap"></div>
 
     <!-- ── Step 1: Choose League ── -->
     <div class="lp-panel" id="lp-panel-1">
@@ -3353,11 +3376,99 @@
       </div>
     </div>
 
-    <!-- ── Step 2: Choose Team ── -->
+    <!-- ── Step 2: Choose Path ── -->
     <div class="lp-panel hidden" id="lp-panel-2">
       <div class="lp-panel-header">
         <button class="lp-back-btn" onclick="lpGoStep(1)">← Back</button>
-        <div class="lp-panel-title" id="lp-panel-2-title">Choose a Team</div>
+        <div class="lp-panel-title" id="lp-panel-2-title">Choose a Path</div>
+      </div>
+
+      <!-- TEAM MODES -->
+      <div class="lp-path-section">
+        <div class="lp-path-header">
+          <div class="lp-path-title">TEAM MODES</div>
+          <div class="lp-path-sub">Choose a team first</div>
+        </div>
+        <div class="lp-mode-card" onclick="lpChoosePath('team','namePos')">
+          <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">🪪</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Name → Details</div>
+            <div class="lp-mode-desc">See a player's name — recall their position & jersey number</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-namePos">0/18</div>
+        </div>
+        <div class="lp-mode-card" onclick="lpChoosePath('team','statsPlayer')">
+          <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Stats → Player</div>
+            <div class="lp-mode-desc">See height, age, college, position — guess who it is</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-statsPlayer">0/18</div>
+        </div>
+        <div class="lp-mode-card" onclick="lpChoosePath('team','multiChoice')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔤</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Multiple Choice</div>
+            <div class="lp-mode-desc">Read the clues — pick the right player from 4 options</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-multiChoice">0/18</div>
+        </div>
+        <div class="lp-mode-card" onclick="lpChoosePath('team','lineup')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.12);">🎯</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Guess the Lineup</div>
+            <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-lineup">—</div>
+        </div>
+      </div>
+
+      <!-- LEAGUE MODES -->
+      <div class="lp-path-section lp-path-section--league">
+        <div class="lp-path-header">
+          <div class="lp-path-title">LEAGUE MODES</div>
+          <div class="lp-path-sub">Play across the whole league</div>
+        </div>
+        <div class="lp-mode-card" onclick="lpStartLeagueMode('dpOpen')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Daily Player Guess</div>
+            <div class="lp-mode-desc">Use clues to identify today's mystery athlete · +20 XP</div>
+          </div>
+          <span class="lp-daily-badge" id="learnDailyBadge">DAILY</span>
+        </div>
+        <div class="lp-mode-card lp-mode-card--soon">
+          <div class="lp-mode-icon" style="background:rgba(61,204,122,0.12);">👤</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Player → Team</div>
+            <div class="lp-mode-desc">Identify which team a player belongs to</div>
+          </div>
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
+        <div class="lp-mode-card lp-mode-card--soon">
+          <div class="lp-mode-icon" style="background:rgba(61,204,122,0.12);">🔢</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Jersey Number</div>
+            <div class="lp-mode-desc">Match jersey numbers to players</div>
+          </div>
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
+        <div class="lp-mode-card lp-mode-card--soon">
+          <div class="lp-mode-icon" style="background:rgba(61,204,122,0.12);">🔲</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">SportsMind Grid</div>
+            <div class="lp-mode-desc">Solve the daily grid puzzle</div>
+          </div>
+          <div class="lp-lc-tag soon">Soon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Step 3: Choose Team ── -->
+    <div class="lp-panel hidden" id="lp-panel-3">
+      <div class="lp-panel-header">
+        <button class="lp-back-btn" onclick="lpGoStep(2)">← Back</button>
+        <div class="lp-panel-title" id="lp-panel-3-title">Choose a Team</div>
       </div>
 
       <!-- NBA teams -->
@@ -3409,11 +3520,11 @@
       </div>
     </div>
 
-    <!-- ── Step 3: Choose Mode ── -->
-    <div class="lp-panel hidden" id="lp-panel-3">
+    <!-- ── Step 4: Choose Mode (Team path) ── -->
+    <div class="lp-panel hidden" id="lp-panel-4">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoStep(2)">← Back</button>
-        <div class="lp-panel-title" id="lp-panel-3-title">Choose a Mode</div>
+        <button class="lp-back-btn" onclick="lpGoStep(3)">← Back</button>
+        <div class="lp-panel-title" id="lp-panel-4-title">Choose a Mode</div>
       </div>
 
       <!-- Team summary card -->
@@ -3430,14 +3541,14 @@
       </div>
 
       <div class="learn-section">
-        <div class="learn-section-label">FLASHCARDS</div>
+        <div class="learn-section-label">TEAM FLASHCARDS</div>
         <div class="lp-mode-card" onclick="lpStartMode('namePos')">
           <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">🪪</div>
           <div class="lp-mode-info">
             <div class="lp-mode-title">Name → Details</div>
             <div class="lp-mode-desc">See a player's name — recall their position & jersey number</div>
           </div>
-          <div class="lp-mode-stat" id="lpms-namePos">0/18</div>
+          <div class="lp-mode-stat" id="lpms2-namePos">0/18</div>
         </div>
         <div class="lp-mode-card" onclick="lpStartMode('statsPlayer')">
           <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
@@ -3445,19 +3556,19 @@
             <div class="lp-mode-title">Stats → Player</div>
             <div class="lp-mode-desc">See height, age, college, position — guess who it is</div>
           </div>
-          <div class="lp-mode-stat" id="lpms-statsPlayer">0/18</div>
+          <div class="lp-mode-stat" id="lpms2-statsPlayer">0/18</div>
         </div>
       </div>
 
       <div class="learn-section">
-        <div class="learn-section-label">PUZZLE MODES</div>
+        <div class="learn-section-label">TEAM PUZZLE MODES</div>
         <div class="lp-mode-card" onclick="lpStartMode('multiChoice')">
           <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔤</div>
           <div class="lp-mode-info">
             <div class="lp-mode-title">Multiple Choice</div>
             <div class="lp-mode-desc">Read the clues — pick the right player from 4 options</div>
           </div>
-          <div class="lp-mode-stat" id="lpms-multiChoice">0/18</div>
+          <div class="lp-mode-stat" id="lpms2-multiChoice">0/18</div>
         </div>
         <div class="lp-mode-card" onclick="lpStartMode('lineup')">
           <div class="lp-mode-icon" style="background:rgba(245,200,66,0.12);">🎯</div>
@@ -3465,15 +3576,7 @@
             <div class="lp-mode-title">Guess the Lineup</div>
             <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
           </div>
-          <div class="lp-mode-stat" id="lpms-lineup">—</div>
-        </div>
-        <div class="lp-mode-card" onclick="dpOpen('nba')">
-          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔲</div>
-          <div class="lp-mode-info">
-            <div class="lp-mode-title">Daily Player Guess</div>
-            <div class="lp-mode-desc">Use clues to identify today's mystery athlete · +20 XP</div>
-          </div>
-          <span class="lp-daily-badge" id="learnDailyBadge">DAILY</span>
+          <div class="lp-mode-stat" id="lpms2-lineup">—</div>
         </div>
       </div>
 
@@ -4770,7 +4873,7 @@ function bnSwitch(tab) {
 
   // Refresh page data
   if (tab === 'home') { updateHomeStats(); xpRender(); refreshHome(); renderHomeLb(); }
-  if (tab === 'learn') { lpGoStep(1); lpUpdateJazzMastery(); }
+  if (tab === 'learn') { _lpPath = null; lpGoStep(1); lpUpdateJazzMastery(); }
   if (tab === 'leaderboard') { lbRender('global'); }
   if (tab === 'progress') { progRender(); }
   if (tab === 'profile') { profRender(); }
@@ -4781,21 +4884,40 @@ function bnGoFlashcards() {
   bnSwitch('learn');
 }
 
-// ===================== LEARN PAGE — 3-STEP FLOW =====================
-let _lpLeague = null;
-let _lpTeam   = null;
+// ===================== LEARN PAGE — ADAPTIVE FLOW =====================
+let _lpLeague    = null;
+let _lpTeam      = null;
+let _lpPath      = null;  // 'team' | 'league'
+let _lpQueueMode = null;  // mode staged before team selection
+
+// Steps config per path
+const LP_STEPS_TEAM   = [{ label:'League' }, { label:'Path' }, { label:'Team' }, { label:'Mode' }];
+const LP_STEPS_LEAGUE = [{ label:'League' }, { label:'Mode' }];
+
+function lpRenderSteps(steps, activeIdx) {
+  const wrap = document.getElementById('lp-steps-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  steps.forEach((step, i) => {
+    const div = document.createElement('div');
+    div.className = 'lp-step' + (i === activeIdx ? ' active' : i < activeIdx ? ' done' : '');
+    div.id = 'lstep-dyn-' + i;
+    div.innerHTML = `<span class="lp-step-num">${i + 1}</span><span class="lp-step-label">${step.label}</span>`;
+    wrap.appendChild(div);
+    if (i < steps.length - 1) {
+      const line = document.createElement('div');
+      line.className = 'lp-step-line';
+      wrap.appendChild(line);
+    }
+  });
+}
 
 function lpGoStep(n) {
-  // Update step indicators
-  for (let i = 1; i <= 3; i++) {
-    const s = document.getElementById('lstep-' + i);
-    if (!s) continue;
-    s.classList.remove('active', 'done');
-    if (i < n)  s.classList.add('done');
-    if (i === n) s.classList.add('active');
-  }
-  // Show/hide panels
-  for (let i = 1; i <= 3; i++) {
+  // Determine which step config to use
+  const steps = (_lpPath === 'team') ? LP_STEPS_TEAM : (_lpPath === 'league') ? LP_STEPS_LEAGUE : LP_STEPS_TEAM;
+  lpRenderSteps(steps, n - 1);
+  // Show/hide panels (1–4)
+  for (let i = 1; i <= 4; i++) {
     const p = document.getElementById('lp-panel-' + i);
     if (!p) continue;
     p.classList.toggle('hidden', i !== n);
@@ -4808,17 +4930,45 @@ function lpGoStep(n) {
 
 function lpSelectLeague(leagueId) {
   _lpLeague = leagueId;
-  // Show correct team list
-  document.querySelectorAll('[id^="lp-teams-"]').forEach(el => el.style.display = 'none');
-  const teamList = document.getElementById('lp-teams-' + leagueId);
-  if (teamList) teamList.style.display = '';
-  // Update panel title
-  const titles = { nba:'NBA — Choose a Team' };
+  _lpPath   = null;
+  // Update path panel title
+  const titles = { nba: 'NBA — Choose a Path' };
   const t = document.getElementById('lp-panel-2-title');
-  if (t) t.textContent = titles[leagueId] || 'Choose a Team';
-  // Update Jazz mastery
+  if (t) t.textContent = titles[leagueId] || 'Choose a Path';
+  // Update mastery stats on path panel
   lpUpdateJazzMastery();
-  lpGoStep(2);
+  lpUpdateModeStats();
+  // Show step 2 with no path set yet (use team steps as default for rendering)
+  _lpPath = null;
+  lpRenderSteps(LP_STEPS_TEAM, 1);
+  for (let i = 1; i <= 4; i++) {
+    const p = document.getElementById('lp-panel-' + i);
+    if (p) p.classList.toggle('hidden', i !== 2);
+  }
+}
+
+function lpChoosePath(path, mode) {
+  // User tapped a Team Mode card — store mode, go to team selection
+  _lpPath = 'team';
+  _lpQueueMode = mode;
+  // Show team list for this league
+  document.querySelectorAll('[id^="lp-teams-"]').forEach(el => el.style.display = 'none');
+  const teamList = document.getElementById('lp-teams-' + _lpLeague);
+  if (teamList) teamList.style.display = '';
+  // Update team panel title
+  const t = document.getElementById('lp-panel-3-title');
+  if (t) t.textContent = (_lpLeague ? _lpLeague.toUpperCase() : 'NBA') + ' — Choose a Team';
+  lpUpdateJazzMastery();
+  lpGoStep(3);
+}
+
+function lpStartLeagueMode(mode) {
+  _lpPath = 'league';
+  if (mode === 'dpOpen') {
+    dpOpen(_lpLeague || 'nba');
+  } else {
+    lpStartMode(mode);
+  }
 }
 
 function lpUpdateJazzMastery() {
@@ -4828,46 +4978,46 @@ function lpUpdateJazzMastery() {
   });
   const learned = learnedSet.size;
   const pct = Math.round((learned / 18) * 100);
-  const fillEl    = document.getElementById('lp-mastery-jazz-fill');
-  const pctEl     = document.getElementById('lp-mastery-jazz-pct');
-  const tsPct     = document.getElementById('lp-ts-pct');
+  ['lp-mastery-jazz-fill'].forEach(id => { const el = document.getElementById(id); if (el) el.style.width = pct + '%'; });
+  ['lp-mastery-jazz-pct', 'lp-ts-pct'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = pct + '%'; });
   const progLabel = document.getElementById('lp-nba-progress');
-  if (fillEl)    fillEl.style.width  = pct + '%';
-  if (pctEl)     pctEl.textContent   = pct + '%';
-  if (tsPct)     tsPct.textContent   = pct + '%';
   if (progLabel) progLabel.textContent = learned + ' / 18 Players Learned';
 }
 
 function lpSelectTeam(teamId, teamName, teamIcon, leagueId) {
   _lpTeam = teamId;
   // Update team summary card
-  const nameEl = document.getElementById('lp-ts-name');
-  const subEl  = document.getElementById('lp-ts-sub');
-  const iconEl = document.getElementById('lp-ts-icon');
-  if (nameEl) nameEl.textContent = teamName;
-  if (iconEl) iconEl.textContent = teamIcon;
-  if (subEl)  subEl.textContent  = leagueId.toUpperCase() + ' · 18 players';
-  // Update panel 3 title
-  const t = document.getElementById('lp-panel-3-title');
+  ['lp-ts-name'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = teamName; });
+  ['lp-ts-icon'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = teamIcon; });
+  ['lp-ts-sub'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = leagueId.toUpperCase() + ' · 18 players'; });
+  // Update panel 4 title
+  const t = document.getElementById('lp-panel-4-title');
   if (t) t.textContent = teamName + ' — Choose Mode';
-  // Update mode stats
   lpUpdateModeStats();
   lpUpdateJazzMastery();
-  lpGoStep(3);
+  // If a mode was pre-selected via lpChoosePath, jump straight to it
+  if (_lpQueueMode) {
+    const m = _lpQueueMode;
+    _lpQueueMode = null;
+    lpStartMode(m);
+  } else {
+    lpGoStep(4);
+  }
 }
 
 function lpUpdateModeStats() {
   const statModes = ['namePos','statsPlayer','multiChoice'];
   statModes.forEach(m => {
-    const el = document.getElementById('lpms-' + m);
-    if (!el) return;
     const learned = getModeLearnedCount ? getModeLearnedCount(m) : 0;
-    el.textContent = learned + '/18';
+    // Update both panel-2 and panel-4 stat elements
+    ['lpms-' + m, 'lpms2-' + m].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = learned + '/18';
+    });
   });
 }
 
 function lpStartMode(mode) {
-  // Route into the existing flashcard engine
   startMode(mode);
 }
 
@@ -5200,6 +5350,7 @@ dpUpdateBadges();
 xpRender();         // renders instantly with cached values
 bnUpdateHomeLevel();
 renderHomeLb();     // populate leaderboard preview on home
+lpRenderSteps(LP_STEPS_TEAM, 0); // init learn page step indicator
 sbXpLoad();         // loads real XP from Supabase and re-renders
 sbUsernameLoad();   // loads real username from Supabase and re-renders
 sbStreakLoad();     // loads real streak from Supabase and re-renders
