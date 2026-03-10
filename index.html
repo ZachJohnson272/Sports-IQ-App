@@ -1779,19 +1779,39 @@
 
   /* ── Path section (Team vs League) ── */
   .lp-path-section {
-    display: flex; flex-direction: column; gap: 8px;
+    display: flex; flex-direction: column; gap: 10px;
     margin-bottom: 4px;
   }
   .lp-path-header {
     display: flex; align-items: baseline; gap: 10px;
-    margin-top: 8px; margin-bottom: 2px;
+    margin-top: 10px; margin-bottom: 4px;
   }
   .lp-path-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px; letter-spacing: 3px; color: #fff;
+    font-size: 16px; letter-spacing: 3px; color: #fff;
   }
   .lp-path-sub {
     font-size: 11px; color: var(--muted); letter-spacing: 0.3px;
+  }
+
+  /* Glowing section divider */
+  .lp-path-divider-glow {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(91,184,212,0.4), rgba(107,63,160,0.4), transparent);
+    margin: 14px 0 6px;
+    box-shadow: 0 0 8px rgba(91,184,212,0.15);
+  }
+
+  /* League section elevated treatment */
+  .lp-path-section--league {
+    background: rgba(61,204,122,0.03);
+    border: 1px solid rgba(61,204,122,0.12);
+    border-radius: 16px;
+    padding: 10px 10px 12px;
+    margin-top: 2px;
+  }
+  .lp-path-section--league .lp-path-header {
+    margin-top: 2px;
   }
   .lp-path-section--league .lp-mode-card {
     border-color: rgba(61,204,122,0.3);
@@ -1800,6 +1820,23 @@
     border-color: rgba(61,204,122,0.6);
     box-shadow: 0 8px 24px rgba(61,204,122,0.18);
   }
+
+  /* Daily card — stands out as the featured mode */
+  .lp-daily-card {
+    border-color: rgba(245,200,66,0.5) !important;
+    box-shadow: 0 0 12px rgba(245,200,66,0.12);
+    background: rgba(245,200,66,0.04);
+  }
+  .lp-daily-card:hover {
+    border-color: rgba(245,200,66,0.8) !important;
+    box-shadow: 0 8px 24px rgba(245,200,66,0.22) !important;
+  }
+
+  /* Slightly more padding inside all mode cards */
+  .lp-mode-card {
+    padding: 15px 14px;
+  }
+
   .lp-path-divider {
     height: 1px;
     background: rgba(107,63,160,0.2);
@@ -3380,14 +3417,14 @@
     <div class="lp-panel hidden" id="lp-panel-2">
       <div class="lp-panel-header">
         <button class="lp-back-btn" onclick="lpGoStep(1)">← Back</button>
-        <div class="lp-panel-title" id="lp-panel-2-title">Choose a Path</div>
+        <div class="lp-panel-title" id="lp-panel-2-title">NBA — SELECT MODE</div>
       </div>
 
       <!-- TEAM MODES -->
       <div class="lp-path-section">
         <div class="lp-path-header">
           <div class="lp-path-title">TEAM MODES</div>
-          <div class="lp-path-sub">Choose a team first</div>
+          <div class="lp-path-sub">Requires team selection</div>
         </div>
         <div class="lp-mode-card" onclick="lpChoosePath('team','namePos')">
           <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">🪪</div>
@@ -3423,14 +3460,17 @@
         </div>
       </div>
 
+      <!-- Section divider -->
+      <div class="lp-path-divider-glow"></div>
+
       <!-- LEAGUE MODES -->
       <div class="lp-path-section lp-path-section--league">
         <div class="lp-path-header">
-          <div class="lp-path-title">LEAGUE MODES</div>
-          <div class="lp-path-sub">Play across the whole league</div>
+          <div class="lp-path-title">🌍 LEAGUE MODES</div>
+          <div class="lp-path-sub">Play across the entire league</div>
         </div>
-        <div class="lp-mode-card" onclick="lpStartLeagueMode('dpOpen')">
-          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
+        <div class="lp-mode-card lp-daily-card" onclick="lpStartLeagueMode('dpOpen')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.22);">🔥</div>
           <div class="lp-mode-info">
             <div class="lp-mode-title">Daily Player Guess</div>
             <div class="lp-mode-desc">Use clues to identify today's mystery athlete · +20 XP</div>
@@ -4932,7 +4972,7 @@ function lpSelectLeague(leagueId) {
   _lpLeague = leagueId;
   _lpPath   = null;
   // Update path panel title
-  const titles = { nba: 'NBA — Choose a Path' };
+  const titles = { nba: 'NBA — SELECT MODE' };
   const t = document.getElementById('lp-panel-2-title');
   if (t) t.textContent = titles[leagueId] || 'Choose a Path';
   // Update mastery stats on path panel
