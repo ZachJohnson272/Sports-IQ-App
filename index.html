@@ -1715,6 +1715,68 @@
     flex-shrink: 0;
   }
 
+  /* ── Learn section grouping ── */
+  .learn-section {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 6px;
+    padding: 0;
+    width: auto; max-width: none;
+  }
+  .learn-section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 3px; color: rgba(255,255,255,0.6);
+    margin-top: 6px; margin-bottom: 2px;
+  }
+
+  /* ── Mode card game effects ── */
+  .lp-mode-card {
+    position: relative;
+    overflow: hidden;
+  }
+  .lp-mode-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(91,184,212,0.15), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+  .lp-mode-card:hover::before { opacity: 1; }
+  .lp-mode-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 8px 24px rgba(107,63,160,0.35);
+  }
+
+  /* Puzzle modes — gold border accent */
+  .learn-section:nth-of-type(2) .lp-mode-card {
+    border-color: rgba(245,200,66,0.3);
+  }
+  .learn-section:nth-of-type(2) .lp-mode-card:hover {
+    border-color: rgba(245,200,66,0.6);
+    box-shadow: 0 8px 24px rgba(245,200,66,0.2);
+  }
+
+  /* Speed modes — green border accent */
+  .learn-section:nth-of-type(3) .lp-mode-card {
+    border-color: rgba(61,204,122,0.3);
+  }
+  .learn-section:nth-of-type(3) .lp-mode-card:hover {
+    border-color: rgba(61,204,122,0.6);
+    box-shadow: 0 8px 24px rgba(61,204,122,0.18);
+  }
+
+  /* Soon / locked mode card */
+  .lp-mode-card--soon {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .lp-mode-card--soon:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .lp-mode-card--soon::before { display: none; }
+
   /* ===================== LEADERBOARD PAGE ===================== */
   #leaderboardPage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
   .lb-tabs {
@@ -3123,8 +3185,8 @@
         </div>
         <div class="card-face card-back">
           <img class="back-photo" id="backPhoto" src="" alt="">
-          <div class="back-name" id="backName">—</div>
-          <div class="back-pos" id="backPos">—</div>
+          <div class="back-name" id="backName">0/18</div>
+          <div class="back-pos" id="backPos">0/18</div>
           <div class="back-stats" id="backStats"></div>
           <div class="card-streak" id="cardStreak">First attempt</div>
         </div>
@@ -3367,50 +3429,64 @@
         </div>
       </div>
 
-      <div class="lp-section-label">FLASHCARDS</div>
-      <div class="lp-mode-card" onclick="lpStartMode('namePos')">
-        <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">🪪</div>
-        <div class="lp-mode-info">
-          <div class="lp-mode-title">Name → Details</div>
-          <div class="lp-mode-desc">See a player's name — recall their position & jersey number</div>
+      <div class="learn-section">
+        <div class="learn-section-label">FLASHCARDS</div>
+        <div class="lp-mode-card" onclick="lpStartMode('namePos')">
+          <div class="lp-mode-icon" style="background:rgba(91,184,212,0.2);">🪪</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Name → Details</div>
+            <div class="lp-mode-desc">See a player's name — recall their position & jersey number</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-namePos">0/18</div>
         </div>
-        <div class="lp-mode-stat" id="lpms-namePos">0/18</div>
-      </div>
-      <div class="lp-mode-card" onclick="lpStartMode('statsPlayer')">
-        <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
-        <div class="lp-mode-info">
-          <div class="lp-mode-title">Stats → Player</div>
-          <div class="lp-mode-desc">See height, age, college, position — guess who it is</div>
+        <div class="lp-mode-card" onclick="lpStartMode('statsPlayer')">
+          <div class="lp-mode-icon" style="background:rgba(107,63,160,0.3);">📊</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Stats → Player</div>
+            <div class="lp-mode-desc">See height, age, college, position — guess who it is</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-statsPlayer">0/18</div>
         </div>
-        <div class="lp-mode-stat" id="lpms-statsPlayer">0/18</div>
-      </div>
-
-      <div class="lp-section-label" style="margin-top:14px;">QUICK QUIZ</div>
-      <div class="lp-mode-card" onclick="lpStartMode('multiChoice')">
-        <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔤</div>
-        <div class="lp-mode-info">
-          <div class="lp-mode-title">Multiple Choice</div>
-          <div class="lp-mode-desc">Read the clues — pick the right player from 4 options</div>
-        </div>
-        <div class="lp-mode-stat" id="lpms-multiChoice">0/18</div>
       </div>
 
-      <div class="lp-section-label" style="margin-top:14px;">GAMES</div>
-      <div class="lp-mode-card" onclick="lpStartMode('lineup')">
-        <div class="lp-mode-icon" style="background:rgba(61,204,122,0.15);">📝</div>
-        <div class="lp-mode-info">
-          <div class="lp-mode-title">Guess the Lineup</div>
-          <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
+      <div class="learn-section">
+        <div class="learn-section-label">PUZZLE MODES</div>
+        <div class="lp-mode-card" onclick="lpStartMode('multiChoice')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔤</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Multiple Choice</div>
+            <div class="lp-mode-desc">Read the clues — pick the right player from 4 options</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-multiChoice">0/18</div>
         </div>
-        <div class="lp-mode-stat" id="lpms-lineup">—</div>
+        <div class="lp-mode-card" onclick="lpStartMode('lineup')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.12);">🎯</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Guess the Lineup</div>
+            <div class="lp-mode-desc">Fill in the starting 5 by position from memory</div>
+          </div>
+          <div class="lp-mode-stat" id="lpms-lineup">—</div>
+        </div>
+        <div class="lp-mode-card" onclick="dpOpen('nba')">
+          <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔲</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Daily Player Guess</div>
+            <div class="lp-mode-desc">Use clues to identify today's mystery athlete · +20 XP</div>
+          </div>
+          <span class="lp-daily-badge" id="learnDailyBadge">DAILY</span>
+        </div>
       </div>
-      <div class="lp-mode-card" onclick="dpOpen('nba')">
-        <div class="lp-mode-icon" style="background:rgba(245,200,66,0.15);">🔥</div>
-        <div class="lp-mode-info">
-          <div class="lp-mode-title">Daily Player Guess</div>
-          <div class="lp-mode-desc">Use clues to identify today's mystery athlete · +20 XP</div>
+
+      <div class="learn-section">
+        <div class="learn-section-label">SPEED MODES</div>
+        <div class="lp-mode-card lp-mode-card--soon">
+          <div class="lp-mode-icon" style="background:rgba(61,204,122,0.12);">⚡</div>
+          <div class="lp-mode-info">
+            <div class="lp-mode-title">Lightning Round</div>
+            <div class="lp-mode-desc">Rapid-fire flashcards against the clock</div>
+          </div>
+          <div class="lp-lc-tag soon">Soon</div>
         </div>
-        <span class="lp-daily-badge" id="learnDailyBadge">DAILY</span>
       </div>
 
     </div>
@@ -3561,7 +3637,7 @@
             <div class="sport-row-name">NBA</div>
             <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/18 players</div>
           </div>
-          <div class="sport-row-status not-started" id="sdNBAStatus">—</div>
+          <div class="sport-row-status not-started" id="sdNBAStatus">0/18</div>
         </div>
         <div class="sport-row">
           <div class="sport-row-icon">🏈</div>
@@ -3754,6 +3830,8 @@ const ROSTER = [
 ];
 
 const posMap = { G: 'Guard', F: 'Forward', C: 'Center' };
+
+const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Vince Williams Jr.', SF:'Cody Williams', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
 const modes = ['photoName', 'namePos', 'statsPlayer', 'multiChoice', 'lineup'];
 let modeData = {};
