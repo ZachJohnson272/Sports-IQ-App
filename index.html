@@ -3681,7 +3681,7 @@
     <!-- ── Panel 3L: League Flashcards — Difficulty ── -->
     <div class="lp-panel hidden" id="lp-panel-3-league">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel('2b')">← Back</button>
+        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
         <div class="lp-panel-title">League Flashcards</div>
       </div>
       <div class="lp-panel-sub">Choose a difficulty to begin</div>
@@ -3750,7 +3750,7 @@
     <!-- ── Panel 3T: Team Flashcards — Pick a Team ── -->
     <div class="lp-panel hidden" id="lp-panel-3-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel('2b')">← Back</button>
+        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
         <div class="lp-panel-title">Choose Your Team</div>
       </div>
       <div class="lp-panel-sub">Select a team to study</div>
@@ -5250,15 +5250,31 @@ function lpSwitchPath(path) {
   _lpPath = path;
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
-  // Return to panel 2 when switching
-  lpGoPanel(2);
+  // Determine which panel is currently visible and navigate accordingly
+  const isOnPanel3 = !document.getElementById('lp-panel-3-league').classList.contains('hidden') ||
+                     !document.getElementById('lp-panel-3-team').classList.contains('hidden');
+  if (isOnPanel3 && _lpContent === 'flashcards') {
+    if (path === 'league') {
+      lpGoPanel(3, 'league');
+    } else {
+      lpGoPanel(3, 'team');
+      lpUpdateJazzMastery();
+    }
+  } else {
+    lpGoPanel(2);
+  }
 }
 
 function lpSelectContent(contentType) {
   _lpContent = contentType;
   if (contentType === 'flashcards') {
-    // Go to flashcard hub (panel 2b) — user picks League or Team scope there
-    lpGoPanel('2b');
+    // Go directly to the right flashcard panel based on active path — no hub needed
+    if (_lpPath === 'league') {
+      lpGoPanel(3, 'league');
+    } else {
+      lpGoPanel(3, 'team');
+      lpUpdateJazzMastery();
+    }
   }
   // Quizzes and Games are coming soon — no action
 }
