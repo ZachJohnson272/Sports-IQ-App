@@ -2001,10 +2001,65 @@
   .lp-diff-dot {
     width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
   }
-  .lp-diff-easy   { background: #3dcc7a; box-shadow: 0 0 6px rgba(61,204,122,0.6); }
-  .lp-diff-medium { background: #f5c842; box-shadow: 0 0 6px rgba(245,200,66,0.6); }
-  .lp-diff-hard   { background: #f07050; box-shadow: 0 0 6px rgba(240,112,80,0.6); }
-  .lp-diff-elite  { background: linear-gradient(135deg,#b06fd8,#5bb8d4); box-shadow: 0 0 8px rgba(176,111,216,0.7); }
+  .lp-diff-easy    { background: #3dcc7a; box-shadow: 0 0 6px rgba(61,204,122,0.6); }
+  .lp-diff-medium  { background: #f5c842; box-shadow: 0 0 6px rgba(245,200,66,0.6); }
+  .lp-diff-hard    { background: #f07050; box-shadow: 0 0 6px rgba(240,112,80,0.6); }
+  .lp-diff-elite   { background: linear-gradient(135deg,#b06fd8,#5bb8d4); box-shadow: 0 0 8px rgba(176,111,216,0.7); }
+  /* New spec tier dots */
+  .lp-diff-rookie  { background: #3dcc7a; box-shadow: 0 0 6px rgba(61,204,122,0.6); }
+  .lp-diff-starter { background: #5BB8D4; box-shadow: 0 0 6px rgba(91,184,212,0.6); }
+  .lp-diff-allstar { background: #f5c842; box-shadow: 0 0 6px rgba(245,200,66,0.6); }
+  .lp-diff-hof     { background: linear-gradient(135deg,#f5a623,#e8672a); box-shadow: 0 0 8px rgba(245,166,35,0.7); }
+
+  /* ── Flashcard group label ── */
+  .lp-fc-row-group-label {
+    padding: 8px 16px 4px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--jazz-sky);
+    opacity: 0.7;
+  }
+
+  /* ── Team Info Panel (Team Mode header) ── */
+  .lp-team-info-panel {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface2);
+    border: 1px solid rgba(91,184,212,0.25);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 0;
+    position: relative; overflow: hidden;
+  }
+  .lp-team-info-panel::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(107,63,160,0.12) 0%, rgba(91,184,212,0.06) 100%);
+    pointer-events: none;
+  }
+  .lp-tip-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+  .lp-tip-logo { font-size: 28px; flex-shrink: 0; }
+  .lp-tip-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .lp-tip-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 1.5px; color: #fff; line-height: 1;
+  }
+  .lp-tip-meta { font-size: 11px; color: var(--jazz-sky); font-weight: 500; }
+  .lp-tip-right { text-align: right; flex-shrink: 0; }
+  .lp-tip-mastery-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; color: #fff; line-height: 1;
+  }
+  .lp-tip-mastery-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .lp-tip-detail-row {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin: 8px 0 0;
+  }
+  .lp-tip-detail-chip {
+    background: rgba(107,63,160,0.2);
+    border: 1px solid rgba(107,63,160,0.35);
+    border-radius: 99px;
+    padding: 4px 10px;
+    font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 500;
+    white-space: nowrap;
+  }
 
   /* ── Flashcard rows ── */
   .lp-fc-row {
@@ -3686,54 +3741,83 @@
       </div>
       <div class="lp-panel-sub">Choose a difficulty to begin</div>
 
-      <div class="lp-accordion" id="lp-acc-league-easy">
-        <div class="lp-acc-header" onclick="lpToggleAcc('league-easy')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-easy"></span><span class="lp-acc-title">Easy</span></div>
+      <!-- Rookie -->
+      <div class="lp-accordion" id="lp-acc-league-rookie">
+        <div class="lp-acc-header" onclick="lpToggleAcc('league-rookie')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-rookie"></span><span class="lp-acc-title">Rookie</span></div>
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row" onclick="lpLaunchMode('league','player-team')">Player → Team</div>
-          <div class="lp-fc-row" onclick="lpLaunchMode('league','statsPlayer')">Info → Player</div>
+          <div class="lp-fc-row-group-label">Team Cards</div>
+          <div class="lp-fc-row" onclick="lpLaunchMode('league','namePos')">Team → City</div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Conference <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Division <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Abbreviation <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Colors <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Player Cards</div>
+          <div class="lp-fc-row" onclick="lpLaunchMode('league','statsPlayer')">Player → Team</div>
           <div class="lp-fc-row" onclick="lpLaunchMode('league','namePos')">Player → Position</div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Jersey Number <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Country <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
-      <div class="lp-accordion" id="lp-acc-league-medium">
-        <div class="lp-acc-header" onclick="lpToggleAcc('league-medium')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-medium"></span><span class="lp-acc-title">Medium</span></div>
+      <!-- Starter -->
+      <div class="lp-accordion" id="lp-acc-league-starter">
+        <div class="lp-acc-header" onclick="lpToggleAcc('league-starter')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-starter"></span><span class="lp-acc-title">Starter</span></div>
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row lp-fc-row--soon">Team → Top 3 Players <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Team Cards</div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Arena <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Mascot <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Team → Head Coach <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Best Current Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Top 3 Players <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Best Defender <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Player Cards</div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Height <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Pick <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
-      <div class="lp-accordion" id="lp-acc-league-hard">
-        <div class="lp-acc-header" onclick="lpToggleAcc('league-hard')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-hard"></span><span class="lp-acc-title">Hard</span></div>
+      <!-- All-Star -->
+      <div class="lp-accordion" id="lp-acc-league-allstar">
+        <div class="lp-acc-header" onclick="lpToggleAcc('league-allstar')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-allstar"></span><span class="lp-acc-title">All-Star</span></div>
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
+          <div class="lp-fc-row-group-label">Team Cards</div>
           <div class="lp-fc-row" onclick="lpLaunchMode('league','lineup')">Team → Starting 5</div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Jersey # <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Info <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Franchise GOAT <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Championships Won <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Biggest Rival <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Player Cards</div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Hometown <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Nickname <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
-      <div class="lp-accordion" id="lp-acc-league-elite">
-        <div class="lp-acc-header" onclick="lpToggleAcc('league-elite')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-elite"></span><span class="lp-acc-title">Elite Ball Knowledge</span></div>
+      <!-- Hall of Fame -->
+      <div class="lp-accordion" id="lp-acc-league-hof">
+        <div class="lp-acc-header" onclick="lpToggleAcc('league-hof')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-hof"></span><span class="lp-acc-title">Hall of Fame</span></div>
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row lp-fc-row--soon">Team → Roster <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Info <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Coaching Staff <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Legend → Info <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Franchise History</div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Finals MVP <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Scorer <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Assist Leader <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Retired Numbers <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Player Clusters</div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Team / Position / Height / Jersey <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Country / Hometown / College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year / Pick / Team <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
@@ -3806,64 +3890,98 @@
         <button class="lp-back-btn" onclick="lpGoPanel(3,'team')">← Back</button>
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz — Flashcards</div>
       </div>
-      <div class="lp-team-summary" id="lp-team-summary">
-        <div class="lp-ts-icon" id="lp-ts-icon">🏀</div>
-        <div class="lp-ts-info">
-          <div class="lp-ts-name" id="lp-ts-name">Utah Jazz</div>
-          <div class="lp-ts-sub" id="lp-ts-sub">NBA · 18 players</div>
+
+      <!-- Team Info Panel (spec: not a flashcard, just context) -->
+      <div class="lp-team-info-panel" id="lp-team-info-panel">
+        <div class="lp-tip-left">
+          <div class="lp-tip-logo" id="lp-tip-logo">🏀</div>
+          <div class="lp-tip-text">
+            <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
+            <div class="lp-tip-meta" id="lp-tip-meta">NBA · Western · Northwest</div>
+          </div>
         </div>
-        <div class="lp-ts-mastery">
-          <div class="lp-ts-pct" id="lp-ts-pct">0%</div>
-          <div class="lp-ts-label">Mastery</div>
+        <div class="lp-tip-right">
+          <div class="lp-tip-mastery-pct" id="lp-ts-pct">0%</div>
+          <div class="lp-tip-mastery-lbl">Mastery</div>
         </div>
       </div>
-      <div class="lp-panel-sub">Choose a difficulty</div>
+      <div class="lp-tip-detail-row" id="lp-tip-detail-row">
+        <div class="lp-tip-detail-chip" id="lp-tip-arena">🏟 Delta Center</div>
+        <div class="lp-tip-detail-chip" id="lp-tip-coach">👔 Will Hardy</div>
+        <div class="lp-tip-detail-chip" id="lp-tip-players">👥 18 players</div>
+      </div>
 
-      <div class="lp-accordion" id="lp-acc-team-easy">
-        <div class="lp-acc-header" onclick="lpToggleAcc('team-easy')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-easy"></span><span class="lp-acc-title">Easy</span></div>
+      <!-- Keep legacy summary IDs alive for JS compat -->
+      <div style="display:none" id="lp-team-summary">
+        <div id="lp-ts-icon"></div>
+        <div id="lp-ts-info"><div id="lp-ts-name"></div><div id="lp-ts-sub"></div></div>
+        <div><div id="lp-ts-label"></div></div>
+      </div>
+
+      <div class="lp-panel-sub" style="margin-top:14px">Choose a difficulty</div>
+
+      <!-- Rookie -->
+      <div class="lp-accordion" id="lp-acc-team-rookie">
+        <div class="lp-acc-header" onclick="lpToggleAcc('team-rookie')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-rookie"></span><span class="lp-acc-title">Rookie</span></div>
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row" onclick="lpLaunchMode('team','statsPlayer')">Info → Player</div>
+          <div class="lp-fc-row-group-label">Roster Basics</div>
           <div class="lp-fc-row" onclick="lpLaunchMode('team','namePos')">Player → Position</div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Jersey Number <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Country <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
-      <div class="lp-accordion" id="lp-acc-team-medium">
-        <div class="lp-acc-header" onclick="lpToggleAcc('team-medium')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-medium"></span><span class="lp-acc-title">Medium</span></div>
+      <!-- Starter -->
+      <div class="lp-accordion" id="lp-acc-team-starter">
+        <div class="lp-acc-header" onclick="lpToggleAcc('team-starter')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-starter"></span><span class="lp-acc-title">Starter</span></div>
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row" onclick="lpLaunchMode('team','multiChoice')">Multiple Choice</div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Height <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        </div>
-      </div>
-
-      <div class="lp-accordion" id="lp-acc-team-hard">
-        <div class="lp-acc-header" onclick="lpToggleAcc('team-hard')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-hard"></span><span class="lp-acc-title">Hard</span></div>
-          <span class="lp-acc-chevron">›</span>
-        </div>
-        <div class="lp-acc-body hidden">
-          <div class="lp-fc-row" onclick="lpLaunchMode('team','lineup')">Team → Starting 5</div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Jersey # <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Player Profile</div>
+          <div class="lp-fc-row" onclick="lpLaunchMode('team','statsPlayer')">Player → Height</div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Hometown <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Info <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Pick <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Team <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
-      <div class="lp-accordion" id="lp-acc-team-elite">
-        <div class="lp-acc-header" onclick="lpToggleAcc('team-elite')">
-          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-elite"></span><span class="lp-acc-title">Elite Ball Knowledge</span></div>
+      <!-- All-Star -->
+      <div class="lp-accordion" id="lp-acc-team-allstar">
+        <div class="lp-acc-header" onclick="lpToggleAcc('team-allstar')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-allstar"></span><span class="lp-acc-title">All-Star</span></div>
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row lp-fc-row--soon">Team → Roster <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Coaches → Info <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Legend → Info <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Team Roles</div>
+          <div class="lp-fc-row" onclick="lpLaunchMode('team','multiChoice')">Best Current Player → Player</div>
+          <div class="lp-fc-row lp-fc-row--soon">Best Defender → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Veteran Player → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row" onclick="lpLaunchMode('team','lineup')">Starting 5 → Players</div>
+          <div class="lp-fc-row lp-fc-row--soon">Top 3 Players → Players <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        </div>
+      </div>
+
+      <!-- Hall of Fame -->
+      <div class="lp-accordion" id="lp-acc-team-hof">
+        <div class="lp-acc-header" onclick="lpToggleAcc('team-hof')">
+          <div class="lp-acc-left"><span class="lp-diff-dot lp-diff-hof"></span><span class="lp-acc-title">Hall of Fame</span></div>
+          <span class="lp-acc-chevron">›</span>
+        </div>
+        <div class="lp-acc-body hidden">
+          <div class="lp-fc-row-group-label">Franchise History</div>
+          <div class="lp-fc-row lp-fc-row--soon">Franchise GOAT → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Finals MVP → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">All-Time Leading Scorer → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">All-Time Assist Leader → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">All-Time Rebound Leader → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Retired Numbers → Number / Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Championships Won → Number <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
     </div>
@@ -5281,7 +5399,20 @@ function lpSelectContent(contentType) {
 
 function lpSelectTeamNew(teamId, teamName, leagueId) {
   _lpTeam = teamId;
-  // Update team summary in panel 4
+  // Update new Team Info Panel
+  const tipName   = document.getElementById('lp-tip-name');
+  const tipMeta   = document.getElementById('lp-tip-meta');
+  const tipArena  = document.getElementById('lp-tip-arena');
+  const tipCoach  = document.getElementById('lp-tip-coach');
+  const tipPlayers = document.getElementById('lp-tip-players');
+  const tipLogo   = document.getElementById('lp-tip-logo');
+  if (tipName)    tipName.textContent   = teamName;
+  if (tipMeta)    tipMeta.textContent   = leagueId.toUpperCase() + ' · Western · Northwest';
+  if (tipArena)   tipArena.textContent  = '🏟 Delta Center';
+  if (tipCoach)   tipCoach.textContent  = '👔 Will Hardy';
+  if (tipPlayers) tipPlayers.textContent = '👥 18 players';
+  if (tipLogo)    tipLogo.textContent   = '🏀';
+  // Legacy compat IDs
   const nameEl = document.getElementById('lp-ts-name');
   const subEl  = document.getElementById('lp-ts-sub');
   const iconEl = document.getElementById('lp-ts-icon');
