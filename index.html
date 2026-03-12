@@ -3644,8 +3644,8 @@
 
   <!-- Toggle bar: shown after panel 1 -->
   <div class="lp-toggle-bar" id="lp-toggle-bar" style="display:none;">
-    <button class="lp-toggle-btn active" id="lp-toggle-league" onclick="lpSwitchPath('league')">League</button>
-    <button class="lp-toggle-btn" id="lp-toggle-team" onclick="lpSwitchPath('team')">Team</button>
+    <button class="lp-toggle-btn active" id="lp-toggle-league" onclick="lpSwitchPath('league')">League Knowledge</button>
+    <button class="lp-toggle-btn" id="lp-toggle-team" onclick="lpSwitchPath('team')">Team Mastery</button>
   </div>
 
   <div class="lp-wrap">
@@ -3657,8 +3657,8 @@
       <div class="lp-entry-card" onclick="lpEnterPath('league')">
         <div class="lp-entry-icon">🌍</div>
         <div class="lp-entry-info">
-          <div class="lp-entry-title">LEAGUE MODE</div>
-          <div class="lp-entry-desc">Do you have elite ball knowledge of the NBA?</div>
+          <div class="lp-entry-title">LEAGUE KNOWLEDGE</div>
+          <div class="lp-entry-desc">Test your NBA IQ across all 30 teams and every player</div>
         </div>
         <div class="lp-entry-arrow">→</div>
       </div>
@@ -3666,8 +3666,8 @@
       <div class="lp-entry-card lp-entry-card--team" onclick="lpEnterPath('team')">
         <div class="lp-entry-icon">🏀</div>
         <div class="lp-entry-info">
-          <div class="lp-entry-title">TEAM MODE</div>
-          <div class="lp-entry-desc">Do you have elite ball knowledge of your favorite team?</div>
+          <div class="lp-entry-title">TEAM MASTERY</div>
+          <div class="lp-entry-desc">Go deep on one team — roster, roles, and franchise history</div>
         </div>
         <div class="lp-entry-arrow">→</div>
       </div>
@@ -3739,7 +3739,7 @@
     <div class="lp-panel hidden" id="lp-panel-3-league">
       <div class="lp-panel-header">
         <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
-        <div class="lp-panel-title">League Flashcards</div>
+        <div class="lp-panel-title">League Knowledge — Flashcards</div>
       </div>
       <div class="lp-panel-sub">Choose a difficulty to begin</div>
 
@@ -3750,17 +3750,17 @@
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row-group-label">Team Cards</div>
-          <div class="lp-fc-row" onclick="lpLaunchMode('league','namePos')">Team → City</div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Conference <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Division <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Abbreviation <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Colors <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row-group-label">Player Cards</div>
+          <div class="lp-fc-row-group-label">Players — Identity</div>
           <div class="lp-fc-row" onclick="lpLaunchMode('league','statsPlayer')">Player → Team</div>
           <div class="lp-fc-row" onclick="lpLaunchMode('league','namePos')">Player → Position</div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Jersey Number <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Country <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Teams — Identity</div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → City <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Conference <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Division <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Abbreviation <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Colors <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
@@ -3771,17 +3771,19 @@
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row-group-label">Team Cards</div>
+          <div class="lp-fc-row-group-label">Players — Attributes</div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Height <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Secondary Position <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Pick <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Team <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Teams — Structure</div>
           <div class="lp-fc-row lp-fc-row--soon">Team → Arena <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Team → Mascot <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Team → Head Coach <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Team → Best Current Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Team → Top 3 Players <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Team → Best Defender <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row-group-label">Player Cards</div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Height <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Player → Draft Pick <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
@@ -3792,15 +3794,14 @@
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row-group-label">Team Cards</div>
-          <div class="lp-fc-row" onclick="lpLaunchMode('league','lineup')">Team → Starting 5</div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Franchise GOAT <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Championships Won <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Biggest Rival <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row-group-label">Player Cards</div>
+          <div class="lp-fc-row-group-label">Players — Background</div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Hometown <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Player → College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Nickname <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Teams — Context</div>
+          <div class="lp-fc-row" onclick="lpLaunchMode('league','lineup')">Team → Starting 5</div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Rookie of the Year Winner <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Biggest Rival <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
@@ -3811,15 +3812,20 @@
           <span class="lp-acc-chevron">›</span>
         </div>
         <div class="lp-acc-body hidden">
-          <div class="lp-fc-row-group-label">Franchise History</div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Finals MVP <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Scorer <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Assist Leader <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row lp-fc-row--soon">Team → Retired Numbers <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-          <div class="lp-fc-row-group-label">Player Clusters</div>
+          <div class="lp-fc-row-group-label">Players — Profile</div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Team / Position / Height / Jersey <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Country / Hometown / College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year / Pick / Team <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row-group-label">Teams — History</div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Franchise GOAT <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Championships Won <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Last Championship Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Finals MVP <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Leading Scorer <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Assist Leader <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Rebound Leader <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Retired Jersey Numbers <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+          <div class="lp-fc-row lp-fc-row--soon">Team → Current Roster <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
         </div>
       </div>
 
@@ -5289,13 +5295,13 @@ function lpEnterPath(path) {
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
   if (path === 'team') {
-    // Team Mode: pick team first
+    // Team Mastery: pick team first
     lpGoPanel(3, 'team');
     lpUpdateJazzMastery();
   } else {
-    // League Mode: pick content type first
+    // League Knowledge: pick content type first
     const t = document.getElementById('lp-panel-2-title');
-    if (t) t.textContent = 'League Mode — Study Type';
+    if (t) t.textContent = 'League Knowledge — Study Type';
     lpGoPanel(2);
   }
 }
@@ -5306,13 +5312,13 @@ function lpSwitchPath(path) {
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
   if (path === 'team') {
-    // Switch to team: go to team picker first
+    // Switch to Team Mastery: go to team picker first
     lpGoPanel(3, 'team');
     lpUpdateJazzMastery();
   } else {
-    // Switch to league: go to content picker
+    // Switch to League Knowledge: go to content picker
     const t = document.getElementById('lp-panel-2-title');
-    if (t) t.textContent = 'League Mode — Study Type';
+    if (t) t.textContent = 'League Knowledge — Study Type';
     lpGoPanel(2);
   }
 }
@@ -5323,7 +5329,7 @@ function lpSelectContent(contentType) {
     if (_lpPath === 'league') {
       lpGoPanel(3, 'league');
     } else {
-      // Team mode: team already chosen, go straight to difficulty panel
+      // Team Mastery: team already chosen, go straight to difficulty panel
       lpGoPanel(4);
       lpUpdateJazzMastery();
     }
