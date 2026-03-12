@@ -2011,50 +2011,146 @@
   }
   .lp-acc-body.hidden { display: none; }
 
+
   /* ── Horizontal difficulty tier tabs ── */
   .lp-tier-tabs {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    margin-bottom: 0;
+    gap: 4px;
+    margin-bottom: 14px;
+    background: rgba(10,10,18,0.85);
+    border: 1px solid rgba(107,63,160,0.16);
+    border-radius: 14px;
+    padding: 5px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    backdrop-filter: blur(12px);
   }
   .lp-tier-tab {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 5px;
-    padding: 10px 4px;
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.22);
-    border-radius: 12px;
+    padding: 10px 4px 9px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
     user-select: none;
-    transition: background 0.15s, border-color 0.2s;
+    transition: background 0.15s;
   }
-  .lp-tier-tab:hover { border-color: rgba(107,63,160,0.5); background: rgba(107,63,160,0.1); }
+  .lp-tier-tab:hover { background: rgba(107,63,160,0.14); }
   .lp-tier-tab.active {
-    background: rgba(107,63,160,0.18);
-    border-color: rgba(107,63,160,0.55);
+    background: rgba(107,63,160,0.24);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 8px rgba(0,0,0,0.3);
   }
-  .lp-tier-tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .lp-tier-tab-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
   .lp-tier-tab-label {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 12px; letter-spacing: 1px; color: #fff; line-height: 1;
-    text-align: center;
+    font-size: 11px; letter-spacing: 0.8px;
+    color: rgba(255,255,255,0.45); line-height: 1;
+    text-align: center; transition: color 0.15s;
   }
-  .lp-tier-tab-chevron {
-    font-size: 13px; color: var(--jazz-sky); line-height: 1;
-    transition: transform 0.2s; display: inline-block;
-  }
-  .lp-tier-tab.active .lp-tier-tab-chevron { transform: rotate(90deg); }
+  .lp-tier-tab.active .lp-tier-tab-label { color: #fff; }
+  .lp-tier-tab-chevron { display: none; }
 
-  /* ── Tier panel (the expanded content below tabs) ── */
-  .lp-tier-panel {
-    background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.4);
-    border-radius: 14px;
-    overflow: hidden;
-    margin-top: 6px;
-  }
+  /* ── Tier panel — no card wrapper, transparent ── */
+  .lp-tier-panel { background: transparent; border: none; overflow: visible; margin-top: 0; }
   .lp-tier-panel.hidden { display: none; }
+
+  /* ── Mode grid (2-col card layout) ── */
+  .lp-mode-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    padding: 0;
+  }
+  .lp-mode-grid-label {
+    grid-column: 1 / -1;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--muted); text-transform: uppercase;
+    padding: 10px 2px 2px;
+  }
+  .lp-mode-grid-label:first-child { padding-top: 2px; }
+
+  /* ── Mode card ── */
+  .lp-mcard {
+    background: linear-gradient(155deg, rgba(26,20,44,0.98) 0%, rgba(13,15,24,0.99) 100%);
+    border: 1px solid rgba(107,63,160,0.28);
+    border-radius: 14px;
+    padding: 14px 13px 12px;
+    display: flex; flex-direction: column; gap: 3px;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+    transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+    min-height: 96px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .lp-mcard::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top left, rgba(107,63,160,0.13), transparent 60%);
+    opacity: 0; transition: opacity 0.22s; pointer-events: none; border-radius: 14px;
+  }
+  .lp-mcard:hover::after { opacity: 1; }
+  .lp-mcard:hover {
+    border-color: rgba(107,63,160,0.62);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.55), 0 0 0 1px rgba(107,63,160,0.1), 0 0 28px rgba(107,63,160,0.14);
+  }
+  .lp-mcard:active { transform: scale(0.975); transition-duration: 0.08s; }
+
+  .lp-mcard--locked {
+    opacity: 0.5; cursor: default;
+    border-color: rgba(107,63,160,0.12);
+    box-shadow: none;
+  }
+  .lp-mcard--locked:hover { transform: none !important; box-shadow: none !important; border-color: rgba(107,63,160,0.12) !important; }
+  .lp-mcard--locked:hover::after { opacity: 0 !important; }
+
+  .lp-mcard--puzzle {
+    border-color: rgba(245,200,66,0.3);
+    background: linear-gradient(155deg, rgba(36,28,8,0.98) 0%, rgba(13,15,24,0.99) 100%);
+  }
+  .lp-mcard--puzzle::after { background: radial-gradient(ellipse at top left, rgba(245,200,66,0.1), transparent 60%); }
+  .lp-mcard--puzzle:hover { border-color: rgba(245,200,66,0.62); box-shadow: 0 10px 28px rgba(0,0,0,0.55), 0 0 28px rgba(245,200,66,0.1); }
+  .lp-mcard--puzzle.lp-mcard--locked:hover { border-color: rgba(245,200,66,0.3) !important; }
+
+  .lp-mcard-icon { font-size: 18px; line-height: 1; margin-bottom: 3px; }
+  .lp-mcard-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 700; color: #fff; line-height: 1.25;
+  }
+  .lp-mcard-count {
+    font-size: 11px; color: rgba(255,255,255,0.38); font-weight: 500;
+  }
+  .lp-mcard-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: auto; padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .lp-mcard-play {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
+    color: var(--jazz-sky); text-transform: uppercase;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .lp-mcard-play::before { content: '▶'; font-size: 7px; opacity: 0.8; }
+  .lp-mcard-badge {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 99px;
+    white-space: nowrap; line-height: 1.3;
+  }
+  .lp-mcard-badge--soon {
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.3);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .lp-mcard-badge--unlock {
+    background: rgba(245,200,66,0.07);
+    color: rgba(245,200,66,0.52);
+    border: 1px solid rgba(245,200,66,0.16);
+  }
+
+
 
   /* ── Difficulty dots ── */
   .lp-diff-dot {
@@ -3869,64 +3965,221 @@
 
       <!-- Rookie panel -->
       <div class="lp-tier-panel" id="lp-lpanel-rookie">
-        <div class="lp-fc-row-group-label">Players — Identity</div>
-        <div class="lp-fc-row" onclick="lpLaunchMode('league','statsPlayer')">Player → Team</div>
-        <div class="lp-fc-row" onclick="lpLaunchMode('league','namePos')">Player → Position</div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Jersey Number <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Country <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row-group-label">Teams — Identity</div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → City <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Conference <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Division <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Abbreviation <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Colors <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">👤 Players — Identity</div>
+          <div class="lp-mcard" onclick="lpLaunchMode('league','statsPlayer')">
+            <div class="lp-mcard-icon">🏀</div>
+            <div class="lp-mcard-title">Player → Team</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-play">Play</span></div>
+          </div>
+          <div class="lp-mcard" onclick="lpLaunchMode('league','namePos')">
+            <div class="lp-mcard-icon">📍</div>
+            <div class="lp-mcard-title">Player → Position</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-play">Play</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🔢</div>
+            <div class="lp-mcard-title">Player → Jersey Number</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🌍</div>
+            <div class="lp-mcard-title">Player → Country</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">📏</div>
+            <div class="lp-mcard-title">Player → Height</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🎓</div>
+            <div class="lp-mcard-title">Player → College</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mode-grid-label">🏟 Teams — Identity</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏙️</div>
+            <div class="lp-mcard-title">Team → City</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🗺️</div>
+            <div class="lp-mcard-title">Team → Conference</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">📌</div>
+            <div class="lp-mcard-title">Team → Division</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🔤</div>
+            <div class="lp-mcard-title">Team → Abbreviation</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+        </div>
       </div>
 
       <!-- Starter panel -->
       <div class="lp-tier-panel hidden" id="lp-lpanel-starter">
-        <div class="lp-fc-row-group-label">Players — Attributes</div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Height <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Secondary Position <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Draft Pick <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Draft Team <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row-group-label">Teams — Structure</div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Arena <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Mascot <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Head Coach <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Best Current Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Top 3 Players <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Best Defender <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">👤 Players — Attributes</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏫</div>
+            <div class="lp-mcard-title">Player → Hometown</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">📅</div>
+            <div class="lp-mcard-title">Player → Draft Year</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🔢</div>
+            <div class="lp-mcard-title">Player → Draft Pick</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏀</div>
+            <div class="lp-mcard-title">Player → Draft Team</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mode-grid-label">🏟 Teams — Structure</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏟️</div>
+            <div class="lp-mcard-title">Team → Arena</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🦅</div>
+            <div class="lp-mcard-title">Team → Mascot</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🎨</div>
+            <div class="lp-mcard-title">Team → Colors</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+        </div>
       </div>
 
       <!-- All-Star panel -->
       <div class="lp-tier-panel hidden" id="lp-lpanel-allstar">
-        <div class="lp-fc-row-group-label">Players — Background</div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Hometown <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Nickname <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row-group-label">Teams — Context</div>
-        <div class="lp-fc-row" onclick="lpLaunchMode('league','lineup')">Team → Starting 5</div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Rookie of the Year Winner <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Biggest Rival <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">👤 Players — Background</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">💬</div>
+            <div class="lp-mcard-title">Player → Nickname</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🤚</div>
+            <div class="lp-mcard-title">Player → Handedness</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">↔️</div>
+            <div class="lp-mcard-title">Player → 2nd Position</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+          <div class="lp-mode-grid-label">🏟 Teams — History</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏆</div>
+            <div class="lp-mcard-title">Team → Championships</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">📅</div>
+            <div class="lp-mcard-title">Team → Last Title Year</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🎖️</div>
+            <div class="lp-mcard-title">Team → Rookie of Year</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+        </div>
       </div>
 
       <!-- Hall of Fame panel -->
       <div class="lp-tier-panel hidden" id="lp-lpanel-hof">
-        <div class="lp-fc-row-group-label">Players — Profile</div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Team / Position / Height / Jersey <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Country / Hometown / College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year / Pick / Team <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row-group-label">Teams — History</div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Franchise GOAT <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Championships Won <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Last Championship Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Finals MVP <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Leading Scorer <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Assist Leader <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → All-Time Rebound Leader <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Retired Jersey Numbers <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Team → Current Roster <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">👤 Players — Legacy</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🎓</div>
+            <div class="lp-mcard-title">College → Player</div>
+            <div class="lp-mcard-count">~450 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mode-grid-label">🏟 Teams — Legacy</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🐐</div>
+            <div class="lp-mcard-title">Team → Franchise GOAT</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏀</div>
+            <div class="lp-mcard-title">Team → All-Time Scorer</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🎯</div>
+            <div class="lp-mcard-title">Team → All-Time Assists</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">💪</div>
+            <div class="lp-mcard-title">Team → All-Time Rebounds</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">#️⃣</div>
+            <div class="lp-mcard-title">Team → Retired Jerseys</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏆</div>
+            <div class="lp-mcard-title">Team → Finals MVP</div>
+            <div class="lp-mcard-count">30 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mode-grid-label">🧩 Puzzle Mode</div>
+          <div class="lp-mcard lp-mcard--locked lp-mcard--puzzle">
+            <div class="lp-mcard-icon">🧩</div>
+            <div class="lp-mcard-title">Teammates → Player</div>
+            <div class="lp-mcard-count">~450 puzzles</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+        </div>
       </div>
 
       <div class="lp-path-divider-glow" style="margin:16px 0 8px;"></div>
@@ -4076,44 +4329,163 @@
 
       <!-- Rookie panel -->
       <div class="lp-tier-panel" id="lp-tpanel-rookie">
-        <div class="lp-fc-row-group-label">Roster Basics</div>
-        <div class="lp-fc-row" onclick="lpLaunchMode('team','namePos')">Player → Position</div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Jersey Number <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Country <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">👤 Roster Basics</div>
+          <div class="lp-mcard" onclick="lpLaunchMode('team','namePos')">
+            <div class="lp-mcard-icon">📍</div>
+            <div class="lp-mcard-title">Player → Position</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-play">Play</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🔢</div>
+            <div class="lp-mcard-title">Player → Jersey #</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🌍</div>
+            <div class="lp-mcard-title">Player → Country</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+          </div>
+        </div>
       </div>
 
       <!-- Starter panel -->
       <div class="lp-tier-panel hidden" id="lp-tpanel-starter">
-        <div class="lp-fc-row-group-label">Player Profile</div>
-        <div class="lp-fc-row" onclick="lpLaunchMode('team','statsPlayer')">Player → Height</div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Hometown <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → College <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Draft Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Draft Pick <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Player → Draft Team <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">👤 Player Profile</div>
+          <div class="lp-mcard" onclick="lpLaunchMode('team','statsPlayer')">
+            <div class="lp-mcard-icon">📏</div>
+            <div class="lp-mcard-title">Player → Height</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-play">Play</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏫</div>
+            <div class="lp-mcard-title">Player → Hometown</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🎓</div>
+            <div class="lp-mcard-title">Player → College</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">📅</div>
+            <div class="lp-mcard-title">Player → Draft Year</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🔢</div>
+            <div class="lp-mcard-title">Player → Draft Pick</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏀</div>
+            <div class="lp-mcard-title">Player → Draft Team</div>
+            <div class="lp-mcard-count">18 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+          </div>
+        </div>
       </div>
 
       <!-- All-Star panel -->
       <div class="lp-tier-panel hidden" id="lp-tpanel-allstar">
-        <div class="lp-fc-row-group-label">Team Roles</div>
-        <div class="lp-fc-row lp-fc-row--soon">Best Current Player → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Best Defender → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Veteran Player → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row" onclick="lpLaunchMode('team','lineup')">Starting 5 → Players</div>
-        <div class="lp-fc-row lp-fc-row--soon">Top 3 Players → Players <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">🏀 Team Roles</div>
+          <div class="lp-mcard" onclick="lpLaunchMode('team','lineup')">
+            <div class="lp-mcard-icon">📋</div>
+            <div class="lp-mcard-title">Starting 5 → Players</div>
+            <div class="lp-mcard-count">5 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-play">Play</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">⭐</div>
+            <div class="lp-mcard-title">Best Player → Name</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🛡️</div>
+            <div class="lp-mcard-title">Best Defender → Name</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏆</div>
+            <div class="lp-mcard-title">Top 3 → Players</div>
+            <div class="lp-mcard-count">3 cards</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+          </div>
+        </div>
       </div>
 
       <!-- Hall of Fame panel -->
       <div class="lp-tier-panel hidden" id="lp-tpanel-hof">
-        <div class="lp-fc-row-group-label">Franchise History</div>
-        <div class="lp-fc-row lp-fc-row--soon">Franchise GOAT → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Finals MVP → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">All-Time Leading Scorer → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">All-Time Assist Leader → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">All-Time Rebound Leader → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Retired Jersey Numbers → Numbers <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Championships Won → Number <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
-        <div class="lp-fc-row lp-fc-row--soon">Last Championship Year → Year <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
+        <div class="lp-mode-grid">
+          <div class="lp-mode-grid-label">🏛 Franchise History</div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🐐</div>
+            <div class="lp-mcard-title">Franchise GOAT</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏆</div>
+            <div class="lp-mcard-title">Finals MVP</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏀</div>
+            <div class="lp-mcard-title">All-Time Scorer</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🎯</div>
+            <div class="lp-mcard-title">All-Time Assists</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">💪</div>
+            <div class="lp-mcard-title">All-Time Rebounds</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">#️⃣</div>
+            <div class="lp-mcard-title">Retired Jerseys</div>
+            <div class="lp-mcard-count">varies</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">🏆</div>
+            <div class="lp-mcard-title">Championships Won</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard-icon">📅</div>
+            <div class="lp-mcard-title">Last Title Year</div>
+            <div class="lp-mcard-count">1 card</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+          <div class="lp-mode-grid-label">🧩 Puzzle Mode</div>
+          <div class="lp-mcard lp-mcard--locked lp-mcard--puzzle">
+            <div class="lp-mcard-icon">🧩</div>
+            <div class="lp-mcard-title">Teammates → Player</div>
+            <div class="lp-mcard-count">18 puzzles</div>
+            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
