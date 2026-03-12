@@ -330,11 +330,23 @@
     backface-visibility: hidden;
     border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(249,160,27,0.15);
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.03),
+      0 8px 30px rgba(0,0,0,0.6),
+      0 0 40px rgba(107,63,160,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card-face:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 14px 40px rgba(0,0,0,0.7),
+      0 0 60px rgba(107,63,160,0.14);
   }
 
   .card-front {
-    background: var(--surface);
+    background: linear-gradient(180deg, rgba(40,40,50,0.95) 0%, rgba(24,24,30,0.98) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -376,7 +388,7 @@
   }
 
   .card-back {
-    background: var(--surface);
+    background: linear-gradient(180deg, rgba(40,40,50,0.95) 0%, rgba(24,24,30,0.98) 100%);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -2021,46 +2033,91 @@
     opacity: 0.7;
   }
 
-  /* ── Team Info Panel (Team Mode header) ── */
+  /* ── Team Info Panel (Team Mastery header) ── */
+  .lp-team-header-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  .lp-team-header-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(107,63,160,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(91,184,212,0.18) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
   .lp-team-info-panel {
     display: flex; align-items: center; justify-content: space-between;
-    background: var(--surface2);
-    border: 1px solid rgba(91,184,212,0.25);
+    background: linear-gradient(135deg, rgba(28,20,48,0.97) 0%, rgba(16,24,36,0.97) 100%);
+    border: 1px solid rgba(107,63,160,0.4);
     border-radius: 16px;
-    padding: 14px 16px;
+    padding: 16px 18px;
     margin-bottom: 0;
     position: relative; overflow: hidden;
+    z-index: 1;
   }
   .lp-team-info-panel::before {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(107,63,160,0.12) 0%, rgba(91,184,212,0.06) 100%);
+    background: linear-gradient(135deg, rgba(107,63,160,0.14) 0%, rgba(91,184,212,0.06) 100%);
     pointer-events: none;
   }
   .lp-tip-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-  .lp-tip-logo { font-size: 28px; flex-shrink: 0; }
-  .lp-tip-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .lp-tip-logo { font-size: 30px; flex-shrink: 0; }
+  .lp-tip-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
   .lp-tip-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px; letter-spacing: 1.5px; color: #fff; line-height: 1;
+    font-size: 22px; letter-spacing: 1.5px; color: #fff; line-height: 1;
   }
-  .lp-tip-meta { font-size: 11px; color: var(--jazz-sky); font-weight: 500; }
+  .lp-tip-meta { font-size: 11px; color: var(--jazz-sky); font-weight: 500; letter-spacing: 0.3px; }
   .lp-tip-right { text-align: right; flex-shrink: 0; }
   .lp-tip-mastery-pct {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px; color: #fff; line-height: 1;
+    font-size: 28px; color: #fff; line-height: 1;
   }
   .lp-tip-mastery-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-  .lp-tip-detail-row {
-    display: flex; gap: 6px; flex-wrap: wrap;
-    margin: 8px 0 0;
+
+  /* ── Team Snapshot 2×2 grid ── */
+  .lp-snapshot-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--muted); text-transform: uppercase;
+    margin: 14px 0 8px;
   }
-  .lp-tip-detail-chip {
-    background: rgba(107,63,160,0.2);
-    border: 1px solid rgba(107,63,160,0.35);
-    border-radius: 99px;
-    padding: 4px 10px;
-    font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 500;
-    white-space: nowrap;
+  .lp-snapshot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .lp-snap-card {
+    background: linear-gradient(160deg, rgba(28,20,48,0.95) 0%, rgba(16,18,28,0.98) 100%);
+    border: 1px solid rgba(107,63,160,0.28);
+    border-radius: 14px;
+    padding: 14px 12px;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.02);
+    position: relative; overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .lp-snap-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at top left, rgba(107,63,160,0.1), transparent 70%);
+    pointer-events: none;
+  }
+  .lp-snap-icon { font-size: 18px; line-height: 1; margin-bottom: 2px; }
+  .lp-snap-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .lp-snap-value {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 700; color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   /* ── Flashcard rows ── */
@@ -3900,23 +3957,45 @@
       </div>
 
       <!-- Team Info Panel (spec: not a flashcard, just context) -->
-      <div class="lp-team-info-panel" id="lp-team-info-panel">
-        <div class="lp-tip-left">
-          <div class="lp-tip-logo" id="lp-tip-logo">🏀</div>
-          <div class="lp-tip-text">
-            <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
-            <div class="lp-tip-meta" id="lp-tip-meta">NBA · Western · Northwest</div>
+      <div class="lp-team-header-wrap">
+        <div class="lp-team-info-panel" id="lp-team-info-panel">
+          <div class="lp-tip-left">
+            <div class="lp-tip-logo" id="lp-tip-logo">🏀</div>
+            <div class="lp-tip-text">
+              <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
+              <div class="lp-tip-meta" id="lp-tip-meta">NBA · Western · Northwest</div>
+            </div>
+          </div>
+          <div class="lp-tip-right">
+            <div class="lp-tip-mastery-pct" id="lp-ts-pct">0%</div>
+            <div class="lp-tip-mastery-lbl">Mastery</div>
           </div>
         </div>
-        <div class="lp-tip-right">
-          <div class="lp-tip-mastery-pct" id="lp-ts-pct">0%</div>
-          <div class="lp-tip-mastery-lbl">Mastery</div>
-        </div>
       </div>
-      <div class="lp-tip-detail-row" id="lp-tip-detail-row">
-        <div class="lp-tip-detail-chip" id="lp-tip-arena">🏟 Delta Center</div>
-        <div class="lp-tip-detail-chip" id="lp-tip-coach">👔 Will Hardy</div>
-        <div class="lp-tip-detail-chip" id="lp-tip-players">👥 18 players</div>
+
+      <!-- Team Snapshot 2x2 grid -->
+      <div class="lp-snapshot-label">Team Snapshot</div>
+      <div class="lp-snapshot-grid">
+        <div class="lp-snap-card">
+          <div class="lp-snap-icon">🏟️</div>
+          <div class="lp-snap-label">Arena</div>
+          <div class="lp-snap-value" id="lp-snap-arena">Delta Center</div>
+        </div>
+        <div class="lp-snap-card">
+          <div class="lp-snap-icon">👔</div>
+          <div class="lp-snap-label">Head Coach</div>
+          <div class="lp-snap-value" id="lp-snap-coach">Will Hardy</div>
+        </div>
+        <div class="lp-snap-card">
+          <div class="lp-snap-icon">⭐</div>
+          <div class="lp-snap-label">Best Player</div>
+          <div class="lp-snap-value" id="lp-snap-best">Jaren Jackson Jr.</div>
+        </div>
+        <div class="lp-snap-card">
+          <div class="lp-snap-icon">👥</div>
+          <div class="lp-snap-label">Players</div>
+          <div class="lp-snap-value" id="lp-snap-players">18</div>
+        </div>
       </div>
 
       <!-- Keep legacy summary IDs alive for JS compat -->
@@ -5341,32 +5420,32 @@ function lpSelectContent(contentType) {
 
 function lpSelectTeamNew(teamId, teamName, leagueId) {
   _lpTeam = teamId;
-  // Store team details for later use in panel 4
   window._lpTeamName   = teamName;
   window._lpLeagueId   = leagueId;
-  // Update panel 4 info panel (populated now so it's ready when user reaches it)
+  // Update panel 4 header info panel
   const tipName    = document.getElementById('lp-tip-name');
   const tipMeta    = document.getElementById('lp-tip-meta');
-  const tipArena   = document.getElementById('lp-tip-arena');
-  const tipCoach   = document.getElementById('lp-tip-coach');
-  const tipPlayers = document.getElementById('lp-tip-players');
   const tipLogo    = document.getElementById('lp-tip-logo');
   if (tipName)    tipName.textContent    = teamName;
   if (tipMeta)    tipMeta.textContent    = leagueId.toUpperCase() + ' · Western · Northwest';
-  if (tipArena)   tipArena.textContent   = '🏟 Delta Center';
-  if (tipCoach)   tipCoach.textContent   = '👔 Will Hardy';
-  if (tipPlayers) tipPlayers.textContent = '👥 18 players';
   if (tipLogo)    tipLogo.textContent    = '🏀';
+  // Update snapshot grid
+  const snapArena   = document.getElementById('lp-snap-arena');
+  const snapCoach   = document.getElementById('lp-snap-coach');
+  const snapBest    = document.getElementById('lp-snap-best');
+  const snapPlayers = document.getElementById('lp-snap-players');
+  if (snapArena)   snapArena.textContent   = 'Delta Center';
+  if (snapCoach)   snapCoach.textContent   = 'Will Hardy';
+  if (snapBest)    snapBest.textContent    = 'Jaren Jackson Jr.';
+  if (snapPlayers) snapPlayers.textContent = '18';
+  // Legacy compat
   const nameEl = document.getElementById('lp-ts-name');
-  const subEl  = document.getElementById('lp-ts-sub');
   const iconEl = document.getElementById('lp-ts-icon');
   if (nameEl) nameEl.textContent = teamName;
   if (iconEl) iconEl.textContent = '🏀';
-  if (subEl)  subEl.textContent  = leagueId.toUpperCase() + ' · 18 players';
   const t4 = document.getElementById('lp-panel-4-title');
   if (t4) t4.textContent = teamName + ' — Flashcards';
   lpUpdateJazzMastery();
-  // Now go to content type panel (Flashcards / Quizzes / Games)
   const t2 = document.getElementById('lp-panel-2-title');
   if (t2) t2.textContent = teamName + ' — Study Type';
   lpGoPanel(2);
