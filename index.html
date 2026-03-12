@@ -1848,18 +1848,20 @@
     display: flex; gap: 0;
     background: var(--surface2);
     border-bottom: 1px solid rgba(107,63,160,0.2);
-    padding: 10px 18px 0;
+    padding: 8px 16px 0;
     position: sticky; top: 52px; z-index: 9;
     backdrop-filter: blur(12px);
     background: rgba(19,16,30,0.95);
+    justify-content: center;
   }
   .lp-toggle-btn {
-    flex: 1; padding: 8px 0 10px;
+    flex: 0 0 auto; width: 100px; padding: 7px 0 9px;
     background: none; border: none;
     font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1.5px;
     color: var(--muted); cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: color 0.2s, border-color 0.2s;
+    text-align: center;
   }
   .lp-toggle-btn.active {
     color: #fff;
@@ -3620,7 +3622,7 @@
   </button>
   <button class="bn-tab" id="bn-learn" onclick="bnSwitch('learn')">
     <div class="bn-tab-icon">🧠</div>
-    <div class="bn-tab-label">Learn NBA</div>
+    <div class="bn-tab-label">NBA IQ</div>
   </button>
   <button class="bn-tab" id="bn-progress" onclick="bnSwitch('progress')">
     <div class="bn-tab-icon">📊</div>
@@ -3636,14 +3638,14 @@
 <div class="page" id="learnPage">
   <div class="nav-header">
     <div></div>
-    <div class="nav-header-title">Learn NBA</div>
+    <div class="nav-header-title">NBA IQ</div>
     <div></div>
   </div>
 
   <!-- Toggle bar: shown after panel 1 -->
   <div class="lp-toggle-bar" id="lp-toggle-bar" style="display:none;">
-    <button class="lp-toggle-btn active" id="lp-toggle-league" onclick="lpSwitchPath('league')">🌍 League</button>
-    <button class="lp-toggle-btn" id="lp-toggle-team" onclick="lpSwitchPath('team')">🏀 Team</button>
+    <button class="lp-toggle-btn active" id="lp-toggle-league" onclick="lpSwitchPath('league')">League</button>
+    <button class="lp-toggle-btn" id="lp-toggle-team" onclick="lpSwitchPath('team')">Team</button>
   </div>
 
   <div class="lp-wrap">
@@ -3674,7 +3676,7 @@
     <!-- ── Panel 2: Content Type ── -->
     <div class="lp-panel hidden" id="lp-panel-2">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(1)">← Back</button>
+        <button class="lp-back-btn" onclick="_lpPath==='team' ? lpGoPanel(3,'team') : lpGoPanel(1)">← Back</button>
         <div class="lp-panel-title" id="lp-panel-2-title">What do you want to study?</div>
       </div>
 
@@ -3834,7 +3836,7 @@
     <!-- ── Panel 3T: Team Flashcards — Pick a Team ── -->
     <div class="lp-panel hidden" id="lp-panel-3-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
+        <button class="lp-back-btn" onclick="lpGoPanel(1)">← Back</button>
         <div class="lp-panel-title">Choose Your Team</div>
       </div>
       <div class="lp-panel-sub">Select a team to study</div>
@@ -3887,7 +3889,7 @@
     <!-- ── Panel 4T: Team Difficulty Accordion ── -->
     <div class="lp-panel hidden" id="lp-panel-4-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(3,'team')">← Back</button>
+        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz — Flashcards</div>
       </div>
 
@@ -3959,7 +3961,7 @@
         </div>
         <div class="lp-acc-body hidden">
           <div class="lp-fc-row-group-label">Team Roles</div>
-          <div class="lp-fc-row" onclick="lpLaunchMode('team','multiChoice')">Best Current Player → Player</div>
+          <div class="lp-fc-row lp-fc-row--soon">Best Current Player → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Best Defender → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row lp-fc-row--soon">Veteran Player → Player <span class="lp-lc-tag soon" style="margin-left:auto">Soon</span></div>
           <div class="lp-fc-row" onclick="lpLaunchMode('team','lineup')">Starting 5 → Players</div>
@@ -4102,79 +4104,9 @@
       </div>
     </div>
 
-    <!-- 4. Completed Sports — collapsible, icon chips always visible -->
-    <div class="prog-section-head">COMPLETED SPORTS</div>
-    <div class="prog-sports-card">
-      <div class="prog-sports-header" onclick="toggleProgSports()">
-        <div class="prog-sports-header-left">
-          <div class="prog-sports-title">Sports Progress</div>
-          <div class="prog-sports-count" id="progSportsCount">0 / 8 Complete</div>
-        </div>
-        <div class="prog-sports-arrow" id="progSportsArrow">▼</div>
-      </div>
-      <!-- sport icon chips — always visible -->
-      <div class="prog-sport-icons">
-        <div class="prog-sport-chip chip-locked" id="psc-nba"><span>🏀</span> NBA</div>
-        <div class="prog-sport-chip chip-locked" id="psc-nfl"><span>🏈</span> NFL</div>
-        <div class="prog-sport-chip chip-locked" id="psc-mlb"><span>⚾</span> MLB</div>
-        <div class="prog-sport-chip chip-locked" id="psc-nhl"><span>🏒</span> NHL</div>
-        <div class="prog-sport-chip chip-locked" id="psc-ncaabb"><span>🏀</span> NCAAB</div>
-        <div class="prog-sport-chip chip-locked" id="psc-ncaafb"><span>🏈</span> NCAAF</div>
-        <div class="prog-sport-chip chip-locked" id="psc-ncaabsb"><span>⚾</span> NCAABL</div>
-        <div class="prog-sport-chip chip-locked" id="psc-ncaasoc"><span>⚽</span> NCAASO</div>
-      </div>
-      <!-- expandable detail rows -->
-      <div class="prog-sports-body" id="progSportsBody">
-        <div class="prog-sports-cat">PRO SPORTS</div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏀</div>
-          <div class="sport-row-info">
-            <div class="sport-row-name">NBA</div>
-            <div class="sport-row-sub" id="sdNBASub">Utah Jazz · 0/18 players</div>
-          </div>
-          <div class="sport-row-status not-started" id="sdNBAStatus">0/18</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏈</div>
-          <div class="sport-row-info"><div class="sport-row-name">NFL</div><div class="sport-row-sub">Coming Soon</div></div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">⚾</div>
-          <div class="sport-row-info"><div class="sport-row-name">MLB</div><div class="sport-row-sub">Coming Soon</div></div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏒</div>
-          <div class="sport-row-info"><div class="sport-row-name">NHL</div><div class="sport-row-sub">Coming Soon</div></div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="prog-sports-cat">COLLEGE SPORTS</div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏀</div>
-          <div class="sport-row-info"><div class="sport-row-name">NCAA Basketball</div><div class="sport-row-sub">Coming Soon</div></div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">🏈</div>
-          <div class="sport-row-info"><div class="sport-row-name">NCAA Football</div><div class="sport-row-sub">Coming Soon</div></div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">⚾</div>
-          <div class="sport-row-info"><div class="sport-row-name">NCAA Baseball</div><div class="sport-row-sub">Coming Soon</div></div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-        <div class="sport-row">
-          <div class="sport-row-icon">⚽</div>
-          <div class="sport-row-info"><div class="sport-row-name">NCAA Soccer</div><div class="sport-row-sub">Coming Soon</div></div>
-          <div class="sport-row-status not-started">🔒 Locked</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
+
 
 
 <!-- ===================== PROFILE PAGE ===================== -->
@@ -5357,10 +5289,16 @@ function lpEnterPath(path) {
   if (bar) bar.style.display = 'flex';
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
-  // Update panel 2 title
-  const t = document.getElementById('lp-panel-2-title');
-  if (t) t.textContent = path === 'league' ? 'League Mode — Study Type' : 'Team Mode — Study Type';
-  lpGoPanel(2);
+  if (path === 'team') {
+    // Team Mode: pick team first
+    lpGoPanel(3, 'team');
+    lpUpdateJazzMastery();
+  } else {
+    // League Mode: pick content type first
+    const t = document.getElementById('lp-panel-2-title');
+    if (t) t.textContent = 'League Mode — Study Type';
+    lpGoPanel(2);
+  }
 }
 
 function lpSwitchPath(path) {
@@ -5368,17 +5306,14 @@ function lpSwitchPath(path) {
   _lpPath = path;
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
-  // Determine which panel is currently visible and navigate accordingly
-  const isOnPanel3 = !document.getElementById('lp-panel-3-league').classList.contains('hidden') ||
-                     !document.getElementById('lp-panel-3-team').classList.contains('hidden');
-  if (isOnPanel3 && _lpContent === 'flashcards') {
-    if (path === 'league') {
-      lpGoPanel(3, 'league');
-    } else {
-      lpGoPanel(3, 'team');
-      lpUpdateJazzMastery();
-    }
+  if (path === 'team') {
+    // Switch to team: go to team picker first
+    lpGoPanel(3, 'team');
+    lpUpdateJazzMastery();
   } else {
+    // Switch to league: go to content picker
+    const t = document.getElementById('lp-panel-2-title');
+    if (t) t.textContent = 'League Mode — Study Type';
     lpGoPanel(2);
   }
 }
@@ -5386,11 +5321,11 @@ function lpSwitchPath(path) {
 function lpSelectContent(contentType) {
   _lpContent = contentType;
   if (contentType === 'flashcards') {
-    // Go directly to the right flashcard panel based on active path — no hub needed
     if (_lpPath === 'league') {
       lpGoPanel(3, 'league');
     } else {
-      lpGoPanel(3, 'team');
+      // Team mode: team already chosen, go straight to difficulty panel
+      lpGoPanel(4);
       lpUpdateJazzMastery();
     }
   }
@@ -5399,30 +5334,35 @@ function lpSelectContent(contentType) {
 
 function lpSelectTeamNew(teamId, teamName, leagueId) {
   _lpTeam = teamId;
-  // Update new Team Info Panel
-  const tipName   = document.getElementById('lp-tip-name');
-  const tipMeta   = document.getElementById('lp-tip-meta');
-  const tipArena  = document.getElementById('lp-tip-arena');
-  const tipCoach  = document.getElementById('lp-tip-coach');
+  // Store team details for later use in panel 4
+  window._lpTeamName   = teamName;
+  window._lpLeagueId   = leagueId;
+  // Update panel 4 info panel (populated now so it's ready when user reaches it)
+  const tipName    = document.getElementById('lp-tip-name');
+  const tipMeta    = document.getElementById('lp-tip-meta');
+  const tipArena   = document.getElementById('lp-tip-arena');
+  const tipCoach   = document.getElementById('lp-tip-coach');
   const tipPlayers = document.getElementById('lp-tip-players');
-  const tipLogo   = document.getElementById('lp-tip-logo');
-  if (tipName)    tipName.textContent   = teamName;
-  if (tipMeta)    tipMeta.textContent   = leagueId.toUpperCase() + ' · Western · Northwest';
-  if (tipArena)   tipArena.textContent  = '🏟 Delta Center';
-  if (tipCoach)   tipCoach.textContent  = '👔 Will Hardy';
+  const tipLogo    = document.getElementById('lp-tip-logo');
+  if (tipName)    tipName.textContent    = teamName;
+  if (tipMeta)    tipMeta.textContent    = leagueId.toUpperCase() + ' · Western · Northwest';
+  if (tipArena)   tipArena.textContent   = '🏟 Delta Center';
+  if (tipCoach)   tipCoach.textContent   = '👔 Will Hardy';
   if (tipPlayers) tipPlayers.textContent = '👥 18 players';
-  if (tipLogo)    tipLogo.textContent   = '🏀';
-  // Legacy compat IDs
+  if (tipLogo)    tipLogo.textContent    = '🏀';
   const nameEl = document.getElementById('lp-ts-name');
   const subEl  = document.getElementById('lp-ts-sub');
   const iconEl = document.getElementById('lp-ts-icon');
   if (nameEl) nameEl.textContent = teamName;
   if (iconEl) iconEl.textContent = '🏀';
   if (subEl)  subEl.textContent  = leagueId.toUpperCase() + ' · 18 players';
-  const t = document.getElementById('lp-panel-4-title');
-  if (t) t.textContent = teamName + ' — Flashcards';
+  const t4 = document.getElementById('lp-panel-4-title');
+  if (t4) t4.textContent = teamName + ' — Flashcards';
   lpUpdateJazzMastery();
-  lpGoPanel(4);
+  // Now go to content type panel (Flashcards / Quizzes / Games)
+  const t2 = document.getElementById('lp-panel-2-title');
+  if (t2) t2.textContent = teamName + ' — Study Type';
+  lpGoPanel(2);
 }
 
 function lpLaunchMode(path, mode) {
