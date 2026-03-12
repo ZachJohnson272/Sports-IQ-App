@@ -1882,93 +1882,194 @@
 
   /* ── Entry Cards (Panel 1) ── */
   .lp-entry-label {
-    font-size: 11px; letter-spacing: 2px; color: var(--muted);
-    text-transform: uppercase; margin-bottom: 4px;
+    font-size: 10px; letter-spacing: 2.5px; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 6px; text-align: center;
+  }
+
+  /* ── Panel 1: Two big vertical path cards in a row ── */
+  .lp-entry-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
   .lp-entry-card {
-    background: var(--surface2);
-    border: 1px solid rgba(107,63,160,0.35);
-    border-radius: 18px;
-    padding: 22px 18px;
-    display: flex; align-items: center; gap: 16px;
+    background: linear-gradient(160deg, rgba(30,22,54,0.98) 0%, rgba(14,15,24,0.99) 100%);
+    border: 1px solid rgba(107,63,160,0.32);
+    border-radius: 20px;
+    padding: 28px 14px 22px;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
     cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     position: relative; overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
   }
   .lp-entry-card::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(circle at top left, rgba(91,184,212,0.12), transparent 65%);
-    opacity: 0; transition: opacity 0.25s;
+    background: radial-gradient(ellipse at top, rgba(107,63,160,0.18), transparent 65%);
+    opacity: 0.6; transition: opacity 0.25s; pointer-events: none;
   }
   .lp-entry-card:hover::before { opacity: 1; }
   .lp-entry-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(107,63,160,0.3);
-    border-color: rgba(107,63,160,0.65);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(107,63,160,0.32), 0 0 0 1px rgba(107,63,160,0.12);
+    border-color: rgba(107,63,160,0.7);
   }
+  .lp-entry-card:active { transform: scale(0.97); transition-duration: 0.08s; }
   .lp-entry-card--team {
     border-color: rgba(91,184,212,0.3);
   }
   .lp-entry-card--team::before {
-    background: radial-gradient(circle at top left, rgba(245,200,66,0.1), transparent 65%);
+    background: radial-gradient(ellipse at top, rgba(91,184,212,0.14), transparent 65%);
   }
   .lp-entry-card--team:hover {
-    border-color: rgba(91,184,212,0.65);
-    box-shadow: 0 10px 28px rgba(91,184,212,0.2);
+    border-color: rgba(91,184,212,0.7);
+    box-shadow: 0 14px 36px rgba(91,184,212,0.24), 0 0 0 1px rgba(91,184,212,0.1);
   }
   .lp-entry-icon {
-    font-size: 32px; flex-shrink: 0;
-    width: 56px; height: 56px; border-radius: 16px;
+    font-size: 38px; flex-shrink: 0;
+    width: 70px; height: 70px; border-radius: 20px;
     background: rgba(107,63,160,0.2);
+    border: 1px solid rgba(107,63,160,0.3);
     display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    position: relative; z-index: 1;
   }
-  .lp-entry-info { flex: 1; }
+  .lp-entry-card--team .lp-entry-icon {
+    background: rgba(91,184,212,0.12);
+    border-color: rgba(91,184,212,0.25);
+  }
+  .lp-entry-info { flex: 1; position: relative; z-index: 1; }
   .lp-entry-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px; letter-spacing: 2px; color: #fff; line-height: 1;
+    font-size: 18px; letter-spacing: 1.5px; color: #fff; line-height: 1;
   }
   .lp-entry-desc {
-    font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.45;
+    font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 6px; line-height: 1.45;
   }
   .lp-entry-arrow {
-    font-size: 20px; color: var(--jazz-sky); flex-shrink: 0;
+    font-size: 14px; color: var(--jazz-sky); flex-shrink: 0;
+    margin-top: 12px; position: relative; z-index: 1;
     transition: transform 0.15s;
   }
-  .lp-entry-card:hover .lp-entry-arrow { transform: translateX(4px); }
+  .lp-entry-card:hover .lp-entry-arrow { transform: translateY(2px); }
+
+  /* Entry chip stats */
+  .lp-entry-chips {
+    display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px;
+    position: relative; z-index: 1;
+  }
+  .lp-entry-chip {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; padding: 3px 7px; border-radius: 99px;
+    background: rgba(107,63,160,0.2); color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(107,63,160,0.2);
+  }
+  .lp-entry-chip--sky {
+    background: rgba(91,184,212,0.1); color: rgba(91,184,212,0.65);
+    border-color: rgba(91,184,212,0.2);
+  }
+  .lp-entry-chip--tier {
+    background: rgba(245,200,66,0.08); color: rgba(245,200,66,0.5);
+    border-color: rgba(245,200,66,0.15);
+  }
+
+  /* Daily challenge entry card on Panel 1 */
+  .lp-daily-entry-card {
+    background: linear-gradient(135deg, rgba(38,26,8,0.98) 0%, rgba(18,16,26,0.99) 100%);
+    border: 1px solid rgba(245,200,66,0.28);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    position: relative; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .lp-daily-entry-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at left, rgba(245,200,66,0.08), transparent 60%);
+    opacity: 0; transition: opacity 0.2s; pointer-events: none;
+  }
+  .lp-daily-entry-card:hover::before { opacity: 1; }
+  .lp-daily-entry-card:hover {
+    border-color: rgba(245,200,66,0.55);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245,160,30,0.18);
+  }
+  .lp-daily-entry-left { display: flex; align-items: center; gap: 10px; }
+  .lp-daily-entry-badge {
+    background: linear-gradient(135deg, #f7a54f, #f5c842);
+    color: #1a1200; font-size: 9px; font-weight: 800;
+    padding: 4px 9px; border-radius: 99px; letter-spacing: 1px;
+    flex-shrink: 0; white-space: nowrap;
+  }
+  .lp-daily-entry-info { display: flex; flex-direction: column; }
+  .lp-daily-entry-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 1.5px; color: #fff; line-height: 1;
+  }
+  .lp-daily-entry-desc {
+    font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 3px;
+  }
+  .lp-daily-entry-cta {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 1px; color: #f5c842;
+    white-space: nowrap; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+  }
+  .lp-daily-entry-cta span {
+    font-size: 10px; color: rgba(245,200,66,0.5); letter-spacing: 0.4px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+  }
 
   /* ── Content Type Cards (Panel 2) ── */
   .lp-content-card {
-    background: var(--surface);
+    background: linear-gradient(145deg, rgba(24,18,42,0.98) 0%, rgba(13,14,22,0.99) 100%);
     border: 1px solid rgba(107,63,160,0.28);
-    border-radius: 14px;
-    padding: 16px 16px;
-    display: flex; align-items: center; gap: 14px;
+    border-radius: 16px;
+    padding: 18px 16px;
+    display: flex; align-items: center; gap: 16px;
     cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    position: relative; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
   }
+  .lp-content-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at left center, rgba(107,63,160,0.12), transparent 60%);
+    opacity: 0; transition: opacity 0.22s; pointer-events: none;
+  }
+  .lp-content-card:hover::after { opacity: 1; }
   .lp-content-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(107,63,160,0.6);
-    box-shadow: 0 8px 22px rgba(107,63,160,0.25);
+    transform: translateY(-3px);
+    border-color: rgba(107,63,160,0.65);
+    box-shadow: 0 10px 28px rgba(107,63,160,0.28);
   }
+  .lp-content-card:active { transform: scale(0.98); }
   .lp-content-card--soon {
-    opacity: 0.45; cursor: default;
+    opacity: 0.42; cursor: default;
   }
   .lp-content-card--soon:hover { transform: none; box-shadow: none; }
+  .lp-content-card--soon::after { display: none; }
   .lp-content-icon {
-    font-size: 24px; width: 46px; height: 46px; border-radius: 12px;
-    background: rgba(107,63,160,0.2);
+    font-size: 26px; width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(107,63,160,0.18);
+    border: 1px solid rgba(107,63,160,0.25);
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    flex-shrink: 0; position: relative; z-index: 1;
   }
-  .lp-content-info { flex: 1; }
+  .lp-content-info { flex: 1; position: relative; z-index: 1; }
   .lp-content-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 17px; letter-spacing: 2px; color: #fff; line-height: 1;
+    font-size: 19px; letter-spacing: 2px; color: #fff; line-height: 1;
   }
   .lp-content-desc {
-    font-size: 11px; color: var(--muted); margin-top: 3px;
+    font-size: 11.5px; color: rgba(255,255,255,0.4); margin-top: 4px; line-height: 1.45;
   }
 
   /* ── Panel subtitle ── */
@@ -2040,9 +2141,14 @@
   }
   .lp-tier-tab:hover { background: rgba(107,63,160,0.14); }
   .lp-tier-tab.active {
-    background: rgba(107,63,160,0.24);
+    background: rgba(107,63,160,0.22);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 8px rgba(0,0,0,0.3);
   }
+  /* Per-tier active background tints */
+  #lp-ltab-rookie.active, #lp-ttab-rookie.active  { background: rgba(61,204,122,0.16); }
+  #lp-ltab-starter.active, #lp-ttab-starter.active { background: rgba(91,184,212,0.14); }
+  #lp-ltab-allstar.active, #lp-ttab-allstar.active { background: rgba(245,200,66,0.12); }
+  #lp-ltab-hof.active, #lp-ttab-hof.active         { background: rgba(245,100,30,0.14); }
   .lp-tier-tab-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
   .lp-tier-tab-label {
     font-family: 'Bebas Neue', sans-serif;
@@ -3852,22 +3958,44 @@
     <div class="lp-panel" id="lp-panel-1">
       <div class="lp-entry-label">Choose your path</div>
 
-      <div class="lp-entry-card" onclick="lpEnterPath('league')">
-        <div class="lp-entry-icon">🌍</div>
-        <div class="lp-entry-info">
-          <div class="lp-entry-title">LEAGUE KNOWLEDGE</div>
-          <div class="lp-entry-desc">Test your NBA IQ across all 30 teams and every player</div>
+      <div class="lp-entry-grid">
+        <div class="lp-entry-card" onclick="lpEnterPath('league')">
+          <div class="lp-entry-icon">🌍</div>
+          <div class="lp-entry-info">
+            <div class="lp-entry-title">LEAGUE KNOWLEDGE</div>
+            <div class="lp-entry-desc">All 30 teams · every player · the full NBA</div>
+            <div class="lp-entry-chips">
+              <span class="lp-entry-chip">~450 cards</span>
+              <span class="lp-entry-chip lp-entry-chip--tier">4 tiers</span>
+            </div>
+          </div>
+          <div class="lp-entry-arrow">↓</div>
         </div>
-        <div class="lp-entry-arrow">→</div>
+
+        <div class="lp-entry-card lp-entry-card--team" onclick="lpEnterPath('team')">
+          <div class="lp-entry-icon">🏀</div>
+          <div class="lp-entry-info">
+            <div class="lp-entry-title">TEAM MASTERY</div>
+            <div class="lp-entry-desc">Go deep on one team — roster, roles, history</div>
+            <div class="lp-entry-chips">
+              <span class="lp-entry-chip lp-entry-chip--sky">18 players</span>
+              <span class="lp-entry-chip lp-entry-chip--tier">4 tiers</span>
+            </div>
+          </div>
+          <div class="lp-entry-arrow">↓</div>
+        </div>
       </div>
 
-      <div class="lp-entry-card lp-entry-card--team" onclick="lpEnterPath('team')">
-        <div class="lp-entry-icon">🏀</div>
-        <div class="lp-entry-info">
-          <div class="lp-entry-title">TEAM MASTERY</div>
-          <div class="lp-entry-desc">Go deep on one team — roster, roles, and franchise history</div>
+      <!-- Daily challenge card -->
+      <div class="lp-daily-entry-card" onclick="dpOpen('nba')">
+        <div class="lp-daily-entry-left">
+          <div class="lp-daily-entry-badge">DAILY</div>
+          <div class="lp-daily-entry-info">
+            <div class="lp-daily-entry-title">Daily Player Guess</div>
+            <div class="lp-daily-entry-desc">Identify today's mystery NBA player using clues</div>
+          </div>
         </div>
-        <div class="lp-entry-arrow">→</div>
+        <div class="lp-daily-entry-cta">Play <span>+20 XP</span></div>
       </div>
     </div>
 
@@ -3879,28 +4007,28 @@
       </div>
 
       <div class="lp-content-card" onclick="lpSelectContent('flashcards')">
-        <div class="lp-content-icon">🃏</div>
+        <div class="lp-content-icon" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.3);">🃏</div>
         <div class="lp-content-info">
           <div class="lp-content-title">FLASHCARDS</div>
-          <div class="lp-content-desc">Study players, teams, stats, and rosters</div>
+          <div class="lp-content-desc">Study players, teams, stats, and rosters · flip to reveal answers</div>
         </div>
-        <div class="lp-entry-arrow">→</div>
+        <div class="lp-entry-arrow" style="font-size:18px;">→</div>
       </div>
 
       <div class="lp-content-card lp-content-card--soon">
-        <div class="lp-content-icon">❓</div>
+        <div class="lp-content-icon" style="background:rgba(91,184,212,0.1);border-color:rgba(91,184,212,0.2);">🧠</div>
         <div class="lp-content-info">
           <div class="lp-content-title">QUIZZES</div>
-          <div class="lp-content-desc">Test your knowledge with timed challenges</div>
+          <div class="lp-content-desc">Answer before seeing the answer · test your recall</div>
         </div>
         <div class="lp-lc-tag soon">Soon</div>
       </div>
 
       <div class="lp-content-card lp-content-card--soon">
-        <div class="lp-content-icon">🎮</div>
+        <div class="lp-content-icon" style="background:rgba(61,204,122,0.1);border-color:rgba(61,204,122,0.18);">⏱</div>
         <div class="lp-content-info">
-          <div class="lp-content-title">GAMES</div>
-          <div class="lp-content-desc">Competitive daily challenges and puzzles</div>
+          <div class="lp-content-title">TIMED CHALLENGE</div>
+          <div class="lp-content-desc">Race the clock · answer fast · climb the leaderboard</div>
         </div>
         <div class="lp-lc-tag soon">Soon</div>
       </div>
