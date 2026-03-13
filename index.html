@@ -2961,114 +2961,20 @@
   }
   .lp-rand-ghost-btn:hover { color: #fff; border-color: rgba(255,255,255,0.25); }
 
-  /* Progress bar */
-  .lp-rand-progress-row {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 6px;
-  }
-  .lp-rand-progress-text {
-    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
-    color: rgba(255,255,255,0.6);
-  }
-  .lp-rand-accuracy {
-    font-size: 11px; font-weight: 600; color: rgba(61,204,122,0.7);
-  }
-  .lp-rand-progress-bar-wrap {
-    height: 4px; border-radius: 99px;
-    background: rgba(255,255,255,0.06);
-    overflow: hidden; margin-bottom: 14px;
-  }
-  .lp-rand-progress-bar-fill {
-    height: 100%; border-radius: 99px;
-    background: linear-gradient(90deg, rgba(61,204,122,0.8), rgba(91,184,212,0.8));
-    transition: width 0.4s ease;
-  }
+  /* Completion summary */
+  #lp-random-complete { display: none; } /* orphan stub — no longer used */
 
-  /* Flip card */
-  .lp-rand-card {
-    perspective: 900px; width: 100%; height: 190px;
-    margin-bottom: 14px; cursor: pointer;
-  }
-  .lp-rand-card.flipped .lp-rand-card-inner { transform: rotateX(180deg); }
-  .lp-rand-card-inner {
-    width: 100%; height: 100%;
-    position: relative; transform-style: preserve-3d;
-    transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
-  }
-  .lp-rand-face {
-    position: absolute; inset: 0;
-    backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    border-radius: 18px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 6px; padding: 20px;
-  }
-  .lp-rand-front {
-    background: linear-gradient(150deg, rgba(22,16,42,0.98), rgba(12,13,22,0.99));
-    border: 1.5px solid rgba(107,63,160,0.3);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.45);
-  }
-  .lp-rand-back {
-    background: linear-gradient(150deg, rgba(16,30,24,0.98), rgba(10,18,14,0.99));
-    border: 1.5px solid rgba(61,204,122,0.35);
-    box-shadow: 0 6px 24px rgba(61,204,122,0.12);
-    transform: rotateX(180deg);
-  }
+  /* Category pill used inside random card front face */
   .lp-rand-category-tag {
+    display: inline-block;
     font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    color: rgba(107,63,160,0.7); background: rgba(107,63,160,0.12);
-    border: 1px solid rgba(107,63,160,0.2); padding: 3px 10px; border-radius: 99px;
+    color: rgba(107,63,160,0.8); background: rgba(107,63,160,0.12);
+    border: 1px solid rgba(107,63,160,0.22); padding: 3px 10px; border-radius: 99px;
   }
   .lp-rand-category-tag.tag-team {
-    color: rgba(245,200,66,0.7); background: rgba(245,200,66,0.08);
-    border-color: rgba(245,200,66,0.18);
+    color: rgba(245,200,66,0.8); background: rgba(245,200,66,0.09);
+    border-color: rgba(245,200,66,0.2);
   }
-  .lp-rand-prompt {
-    font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px;
-    color: #fff; text-align: center; line-height: 1.1;
-  }
-  .lp-rand-tap-hint {
-    font-size: 10px; color: rgba(255,255,255,0.2); margin-top: 2px;
-  }
-  .lp-rand-answer-label {
-    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    color: rgba(61,204,122,0.55);
-  }
-  .lp-rand-answer {
-    font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px;
-    color: #fff; text-align: center; line-height: 1.15;
-  }
-
-  /* Answer buttons */
-  .lp-rand-btns {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    margin-bottom: 10px;
-  }
-  .lp-rand-btns.hidden { display: none; }
-  .lp-rand-btn {
-    padding: 13px; border: none; border-radius: 14px;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
-    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .lp-rand-miss {
-    background: rgba(220,60,60,0.16); color: rgba(255,100,100,0.85);
-    border: 1.5px solid rgba(220,60,60,0.25);
-  }
-  .lp-rand-got {
-    background: rgba(61,204,122,0.14); color: rgba(61,204,122,0.9);
-    border: 1.5px solid rgba(61,204,122,0.28);
-  }
-  .lp-rand-btn:hover { transform: translateY(-2px); }
-  .lp-rand-btn:active { transform: scale(0.96); }
-  .lp-rand-skip {
-    width: 100%; background: none; border: none;
-    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
-    color: rgba(255,255,255,0.2); cursor: pointer; padding: 4px;
-    transition: color 0.15s;
-  }
-  .lp-rand-skip:hover { color: rgba(255,255,255,0.5); }
-
-  /* Completion summary */
-  #lp-random-complete { text-align: center; padding: 8px 0; }
 
   /* ── Random Mode Hub ── */
   .lp-rgen-hub {
@@ -4658,7 +4564,7 @@
     <div class="fc-streak-badge" id="fcStreakBadge">🔥 <span id="fcStreakNum">0</span></div>
     <div style="display:flex;align-items:center;gap:8px;">
       <button class="fc-reverse-btn" id="fcReverseBtn" onclick="fcToggleReverse()" title="Reverse card direction">⇄</button>
-      <button class="btn-ghost" onclick="bnSwitch('learn')">✕ Exit</button>
+      <button class="btn-ghost" id="fcExitBtn" onclick="fcExit()">✕ Exit</button>
     </div>
   </div>
   <div class="fc-progress-bar">
@@ -4697,8 +4603,8 @@
       <div id="lineupResult" style="display:none;margin-top:12px;text-align:center;"></div>
     </div>
     <div class="round-complete" id="roundComplete">
-      <div class="trophy">🏆</div>
-      <h2>Round Complete!</h2>
+      <div class="trophy" id="rcTrophy">🏆</div>
+      <h2 id="rcTitle">Round Complete!</h2>
       <div class="rc-stats-grid">
         <div class="rc-stat rc-stat--correct">
           <div class="rc-stat-icon">✅</div>
@@ -4717,9 +4623,10 @@
         </div>
       </div>
       <p id="roundCompleteMsg"></p>
+      <div id="rcDailyRow" style="display:none;font-size:12px;color:rgba(91,184,212,0.8);font-weight:600;text-align:center;"></div>
       <div class="rc-actions">
         <button class="btn-primary" style="width:100%" onclick="restartCurrentMode()">▶ &nbsp;Play Again</button>
-        <button class="btn-ghost" style="width:100%" onclick="bnSwitch('learn')">← Back to Modes</button>
+        <button class="btn-ghost" style="width:100%" id="rcBackBtn" onclick="bnSwitch('learn')">← Back to Modes</button>
       </div>
     </div>
   </div>
@@ -5223,7 +5130,7 @@
           <span class="lp-cat-section-title" style="background:rgba(61,204,122,0.15);border-color:rgba(61,204,122,0.3);color:#fff;">🎲 Random</span>
         </div>
 
-        <!-- ── Mode Hub (setup screen) ── -->
+        <!-- ── Mode Hub — only the picker lives here; gameplay enters #flashcards ── -->
         <div id="lp-random-setup">
           <div class="lp-rgen-hub">
             <p class="lp-rgen-intro">Choose a session type — each plays differently.</p>
@@ -5267,61 +5174,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- ── Active session screen (reused for all modes) ── -->
-        <div id="lp-random-session" class="hidden">
-          <div class="lp-rand-session-mode-label" id="lp-rand-mode-label">MIXED CHAOS</div>
-          <div class="lp-rand-progress-row">
-            <span class="lp-rand-progress-text" id="lp-rand-prog-text">Card 1 / 10</span>
-            <span class="lp-rand-accuracy" id="lp-rand-accuracy">0% correct</span>
-          </div>
-          <div class="lp-rand-progress-bar-wrap">
-            <div class="lp-rand-progress-bar-fill" id="lp-rand-prog-fill" style="width:0%"></div>
-          </div>
-
-          <div class="lp-rand-card" id="lp-rand-card">
-            <div class="lp-rand-card-inner" id="lp-rand-card-inner">
-              <div class="lp-rand-face lp-rand-front">
-                <div class="lp-rand-category-tag" id="lp-rand-cat-tag">PLAYER</div>
-                <div class="lp-rand-prompt" id="lp-rand-prompt">Loading...</div>
-                <div class="lp-rand-tap-hint">↕ Tap to reveal</div>
-              </div>
-              <div class="lp-rand-face lp-rand-back">
-                <div class="lp-rand-answer-label" id="lp-rand-answer-label">Team</div>
-                <div class="lp-rand-answer" id="lp-rand-answer">—</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="lp-rand-btns hidden" id="lp-rand-btns">
-            <button class="lp-rand-btn lp-rand-miss" onclick="lpRandAnswer(false)">❌ Missed</button>
-            <button class="lp-rand-btn lp-rand-got"  onclick="lpRandAnswer(true)">✅ Got it</button>
-          </div>
-          <button class="lp-rand-skip" id="lp-rand-skip" onclick="lpRandSkip()">Skip →</button>
-        </div>
-
-        <!-- ── Completion summary ── -->
-        <div id="lp-random-complete" class="hidden">
-          <div class="lp-rand-complete-trophy" id="lp-rand-trophy">🏆</div>
-          <div class="lp-rand-complete-title" id="lp-rand-complete-title">Session Complete!</div>
-          <div class="lp-rand-complete-stats">
-            <div class="lp-rand-stat">
-              <div class="lp-rand-stat-val" id="lp-rand-score">—</div>
-              <div class="lp-rand-stat-lbl">Correct</div>
-            </div>
-            <div class="lp-rand-stat">
-              <div class="lp-rand-stat-val" id="lp-rand-pct">—</div>
-              <div class="lp-rand-stat-lbl">Accuracy</div>
-            </div>
-            <div class="lp-rand-stat">
-              <div class="lp-rand-stat-val" id="lp-rand-total">—</div>
-              <div class="lp-rand-stat-lbl">Cards</div>
-            </div>
-          </div>
-          <div id="lp-rand-daily-best-row" style="display:none;text-align:center;margin-bottom:16px;font-size:12px;color:rgba(91,184,212,0.75);font-weight:600;"></div>
-          <button class="lp-rand-start-btn" onclick="lpRandomRestart()">🔄 Play Again</button>
-          <button class="lp-rand-ghost-btn" onclick="lpRandomReset()">← Choose Mode</button>
         </div>
       </div>
 
@@ -6223,6 +6075,7 @@ function startFlashSession(cards, opts) {
   // Wire UI elements
   document.getElementById('cardScene').style.display    = '';
   document.getElementById('answerBtns').style.display   = '';
+  delete document.getElementById('answerBtns').dataset.randMode; // not in random mode
   document.getElementById('mcOptions').style.display    = 'none';
   document.getElementById('lineupMode').style.display   = 'none';
   document.getElementById('roundComplete').classList.remove('show');
@@ -6457,7 +6310,23 @@ function updateModeStats() {
   if (lineupEl) lineupEl.textContent = lineupAttempts > 0 ? lineupCorrect + '/' + lineupAttempts : '—';
 }
 
-// ===================== START MODE =====================
+// ===================== SMART EXIT =====================
+// Called by the ✕ Exit button in #flashcards for ALL modes.
+// Cleans up mode-specific state, then navigates back correctly.
+function fcExit() {
+  const isRandMode = document.getElementById('answerBtns').dataset.randMode === '1';
+  const isSessionMode = !!(_sessionMode && MODE_BUILDERS[_sessionMode]);
+
+  if (isRandMode) {
+    // Random mode: clean up overrides, go to learn tab, re-open random hub
+    lpRandomReset();
+    bnSwitch('learn');
+    setTimeout(() => lpSelectLeagueCat('random'), 30);
+  } else {
+    // Standard and deck-builder modes: just go back to learn
+    bnSwitch('learn');
+  }
+}
 function startMode(mode) {
   // ── New deck-builder modes ──────────────────────────────────
   if (MODE_BUILDERS[mode]) {
@@ -6495,6 +6364,7 @@ function startMode(mode) {
   showPage('flashcards');
 }
 function restartCurrentMode() {
+  if (document.getElementById('answerBtns').dataset.randMode === '1') { lpRandomRestart(); return; }
   if (_sessionMode && MODE_BUILDERS[_sessionMode]) { restartSessionMode(); return; }
   startMode(currentMode);
 }
@@ -6502,6 +6372,7 @@ function restartCurrentMode() {
 // ===================== LOAD CARD (legacy roster-index engine) =====================
 function loadCard() {
   _sessionMode = null; // ensure answerCard routes to legacy path
+  delete document.getElementById('answerBtns').dataset.randMode; // not in random mode
   if (deckIndex >= deck.length) { endRound(); return; }
   const playerIdx = deck[deckIndex];
   const pd = ROSTER[playerIdx];
@@ -6618,6 +6489,8 @@ function flipCard() {
 }
 
 function answerCard(correct) {
+  // Route to random mode engine when active
+  if (document.getElementById('answerBtns').dataset.randMode === '1') { lpRandAnswer(correct); return; }
   // Route to session engine for deck-builder modes
   if (_sessionMode && MODE_BUILDERS[_sessionMode]) { answerSessionCard(correct); return; }
   if (cardAnswered || !isFlipped || isFlipping) return;
@@ -7888,14 +7761,6 @@ function startGeneratedMode(type) {
   const gen = RANDOM_GENERATORS[type];
   if (!gen) { console.error('Unknown generator:', type); return; }
 
-  // Daily: check if already completed today
-  if (type === 'daily') {
-    const saved = _getDailyBest();
-    if (saved && saved.date === _todayKey()) {
-      // Already completed — show result but allow replay
-    }
-  }
-
   _randGenType = type;
   const deck   = gen.fn();
   _randDeck    = deck;
@@ -7903,78 +7768,147 @@ function startGeneratedMode(type) {
   _randCorrect = 0;
   _randFlipped = false;
 
-  // Update session mode label
-  const label = document.getElementById('lp-rand-mode-label');
-  if (label) label.textContent = gen.emoji + ' ' + gen.name.toUpperCase();
+  // ── Use the standard #flashcards page shell ──────────────
+  // Reset shared session state vars so flipCard / answerCard guards behave
+  isFlipped = false; cardAnswered = false; isFlipping = false; mcSelected = null;
+  fcStreak = 0; fcBestStreak = 0; fcCorrectCount = 0;
+  _fcReversed = false;
+  const reverseBtn = document.getElementById('fcReverseBtn');
+  if (reverseBtn) reverseBtn.style.display = 'none'; // hide reverse — not applicable for random
 
-  document.getElementById('lp-random-setup').classList.add('hidden');
-  document.getElementById('lp-random-complete').classList.add('hidden');
-  document.getElementById('lp-random-session').classList.remove('hidden');
-  document.getElementById('lp-rand-daily-best-row').style.display = 'none';
+  // Set mode title in fc header
+  const gen2 = RANDOM_GENERATORS[type];
+  document.getElementById('fcModeTitle').textContent = gen2.emoji + ' ' + gen2.name;
 
+  // Hide mc/lineup modes, show card + standard answer buttons
+  document.getElementById('cardScene').style.display   = '';
+  document.getElementById('mcOptions').style.display   = 'none';
+  document.getElementById('lineupMode').style.display  = 'none';
+  document.getElementById('roundComplete').classList.remove('show');
+
+  // Wire answer buttons to lpRandAnswer instead of answerCard
+  const answerBtns = document.getElementById('answerBtns');
+  answerBtns.style.display = '';
+  // Replace onclick inline — use dataset flag instead
+  document.getElementById('answerBtns').dataset.randMode = '1';
+
+  // Update progress count
+  document.getElementById('fcTotal').textContent   = _randDeck.length;
+  document.getElementById('fcCurrent').textContent = '1';
+  document.getElementById('fcProgressBar').style.width = '0%';
+
+  // Update streak badge hidden (random doesn't track streak the same way)
+  const badge = document.getElementById('fcStreakBadge');
+  if (badge) badge.style.display = 'none';
+
+  // Navigate to the flashcards page
+  showPage('flashcards');
+
+  // Render first card
   _lpRandRenderCard();
 }
 
 // ── lpStartRandom (legacy alias — maps to mixed) ────────────
 function lpStartRandom() { startGeneratedMode('mixed'); }
 
-function _lpRandTotal() {
-  return _randDeck.length;
-}
+function _lpRandTotal() { return _randDeck.length; }
 
+// ── Render a random card into the standard flashcard elements ─
 function _lpRandRenderCard() {
+  if (_randIdx >= _lpRandTotal()) { _lpRandShowComplete(); return; }
+
+  const card = _randDeck[_randIdx];
   const total = _lpRandTotal();
-  const num   = _randIdx + 1;
-  const card  = _randDeck[_randIdx];
 
-  const prog = (num - 1) / total * 100;
-  document.getElementById('lp-rand-prog-text').textContent = `Card ${num} / ${total}`;
-  document.getElementById('lp-rand-prog-fill').style.width = Math.min(prog, 100) + '%';
-  const acc = _randIdx === 0 ? 0 : Math.round(_randCorrect / _randIdx * 100);
-  document.getElementById('lp-rand-accuracy').textContent = acc + '% correct';
+  // ── Progress (fc-header elements) ──────────────────────────
+  document.getElementById('fcCurrent').textContent  = _randIdx + 1;
+  document.getElementById('fcTotal').textContent    = total;
+  const pct = (_randIdx / total) * 100;
+  document.getElementById('fcProgressBar').style.width = pct + '%';
 
-  const catTag = document.getElementById('lp-rand-cat-tag');
-  catTag.textContent = card.tag;
-  catTag.className = 'lp-rand-category-tag' + (card.type === 'team' ? ' tag-team' : '');
-  document.getElementById('lp-rand-prompt').textContent       = card.prompt;
-  document.getElementById('lp-rand-answer-label').textContent = card.answerLabel;
-  document.getElementById('lp-rand-answer').textContent       = card.answer;
+  // ── Reset card to front face (same pattern as loadCard) ────
+  isFlipped = false; cardAnswered = false; isFlipping = false;
+  const c3d = document.getElementById('card3d');
+  c3d.style.transition = 'none';
+  c3d.classList.remove('flipped');
+  void c3d.offsetWidth;
+  c3d.style.transition = '';
 
-  _randFlipped = false;
-  const cardEl = document.getElementById('lp-rand-card');
-  cardEl.classList.remove('flipped');
-  cardEl.onclick = lpRandFlip;
+  // ── Front face: category tag + prompt ──────────────────────
+  const photoEl    = document.getElementById('playerPhoto');
+  const overlayEl  = document.getElementById('photoOverlay');
+  const frontTextEl = document.getElementById('cardFrontText');
+  photoEl.style.display    = 'none';
+  overlayEl.style.display  = 'none';
+  frontTextEl.style.display = '';
 
-  document.getElementById('lp-rand-btns').classList.add('hidden');
-  document.getElementById('lp-rand-skip').style.display = '';
+  frontTextEl.innerHTML = `
+    <div class="front-label" style="margin-bottom:4px;">
+      <span class="lp-rand-category-tag${card.type === 'team' ? ' tag-team' : ''}">${card.tag}</span>
+    </div>
+    <div class="front-main">${card.prompt}</div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:8px;letter-spacing:1.5px;text-transform:uppercase;">What is the ${card.answerLabel}?</div>`;
+
+  // ── Back face: answer ──────────────────────────────────────
+  const backPhotoEl = document.getElementById('backPhoto');
+  backPhotoEl.src = '';
+  backPhotoEl.style.display = 'none';
+  document.getElementById('backName').textContent = card.answerLabel;
+  document.getElementById('backPos').textContent  = '';
+  document.getElementById('backStats').innerHTML  = `
+    <div class="back-stat"><span class="sv">${card.answer}</span></div>`;
+  // Accuracy sub-line
+  const key  = _cardKey(card);
+  const raw  = _randStats[key] || {};
+  const att  = raw.attempts || 0;
+  const cor  = raw.correct  || 0;
+  const mPct = att > 0 ? Math.round(cor / att * 100) : null;
+  document.getElementById('cardStreak').innerHTML = `<span>${att === 0 ? 'First attempt' : cor + '/' + att + ' correct (' + mPct + '%)'}</span>`;
+
+  // ── Answer buttons: locked until flip ──────────────────────
+  const btns = document.getElementById('answerBtns');
+  btns.classList.add('answer-btns-hidden', 'answer-btns-locked');
+
+  // ── Entering animation ──────────────────────────────────────
+  const scene = document.getElementById('cardScene');
+  scene.classList.remove('entering');
+  void scene.offsetWidth;
+  scene.classList.add('entering');
 }
 
-function lpRandFlip() {
-  if (_randFlipped) return;
-  _randFlipped = true;
-  document.getElementById('lp-rand-card').classList.add('flipped');
-  document.getElementById('lp-rand-btns').classList.remove('hidden');
-  document.getElementById('lp-rand-skip').style.display = 'none';
-}
+// ── flipCard already handles the flip — it just needs to know ─
+// we're in random mode (answerBtns.dataset.randMode = '1') so   ─
+// it unlocks the right buttons. No change needed to flipCard.   ─
 
 function lpRandAnswer(correct) {
+  // Guard: only accept if card has been flipped and not already answered
+  if (!isFlipped || cardAnswered || isFlipping) return;
+  cardAnswered = true;
+
   _recordRandResult(_randDeck[_randIdx], correct);
-  if (correct) _randCorrect++;
-  _randIdx++;
-  if (_randIdx >= _lpRandTotal()) {
-    _lpRandShowComplete();
-  } else {
-    _lpRandRenderCard();
+  if (correct) { _randCorrect++; xpAward(2); }
+
+  // Accuracy feedback flash
+  const flash = document.getElementById('feedbackFlash');
+  if (flash) {
+    flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
+    setTimeout(() => { flash.className = 'feedback-flash'; }, 380);
   }
+
+  // Unflip, then advance
+  isFlipping = true;
+  document.getElementById('card3d').classList.remove('flipped');
+  _randIdx++;
+  setTimeout(() => { isFlipping = false; _lpRandRenderCard(); }, 500);
 }
 
 function lpRandSkip() {
+  if (cardAnswered || isFlipping) return;
+  cardAnswered = true;
+  isFlipping = true;
+  document.getElementById('card3d').classList.remove('flipped');
   _randIdx++;
-  if (_randIdx >= _lpRandTotal()) {
-    _lpRandShowComplete();
-  } else {
-    _lpRandRenderCard();
-  }
+  setTimeout(() => { isFlipping = false; _lpRandRenderCard(); }, 500);
 }
 
 // ── Daily persistence ───────────────────────────────────────
@@ -7994,35 +7928,50 @@ function _saveDailyBest(score, total) {
 function _lpRandShowComplete() {
   const total = _lpRandTotal();
   const pct   = total > 0 ? Math.round(_randCorrect / total * 100) : 0;
-  document.getElementById('lp-rand-score').textContent  = `${_randCorrect} / ${total}`;
-  document.getElementById('lp-rand-pct').textContent    = pct + '%';
-  document.getElementById('lp-rand-total').textContent  = total;
 
-  // Trophy/title varies by mode
-  const gen = RANDOM_GENERATORS[_randGenType] || {};
-  document.getElementById('lp-rand-trophy').textContent        = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : '💪';
-  document.getElementById('lp-rand-complete-title').textContent =
-    pct >= 90 ? 'Incredible!' : pct >= 70 ? (gen.name || 'Session') + ' Complete!' : 'Keep Training!';
+  // Hide card area, show round-complete inside #flashcards
+  document.getElementById('cardScene').style.display  = 'none';
+  document.getElementById('answerBtns').style.display = 'none';
 
-  // Daily: save best and show comparison
-  const dailyRow = document.getElementById('lp-rand-daily-best-row');
+  // Fill standard round-complete elements
+  const trophy = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : '💪';
+  const gen    = RANDOM_GENERATORS[_randGenType] || {};
+  const title  = pct >= 90 ? 'Incredible!' : pct >= 70 ? (gen.name + ' Complete!') : 'Keep Training!';
+  const msg    = pct >= 90 ? '🌟 Perfect round!' : pct >= 70 ? 'Great session — keep it up!' : 'Tough run. Try again to improve.';
+
+  document.getElementById('rcTrophy').textContent        = trophy;
+  document.getElementById('rcTitle').textContent         = title;
+  document.getElementById('rcCorrect').textContent       = `${_randCorrect} / ${total}`;
+  document.getElementById('rcAccuracy').textContent      = pct + '%';
+  document.getElementById('rcBestStreak').textContent    = '—'; // random doesn't track streak
+  document.getElementById('roundCompleteMsg').textContent = msg;
+
+  // Daily: save + show prior best
+  const dailyRow = document.getElementById('rcDailyRow');
   if (_randGenType === 'daily') {
     const prev = _getDailyBest();
     _saveDailyBest(_randCorrect, total);
-    if (prev && prev.date === _todayKey()) {
-      dailyRow.style.display = '';
-      dailyRow.textContent   = `Previous best today: ${prev.score}/${prev.total} (${prev.pct}%)`;
-    } else {
-      dailyRow.style.display = '';
-      dailyRow.textContent   = '📅 Today\'s score saved!';
-    }
-    _updateDailyHub(); // refresh hub card state
+    dailyRow.style.display = '';
+    dailyRow.textContent = prev && prev.date === _todayKey()
+      ? `Previous best today: ${prev.score}/${prev.total} (${prev.pct}%)`
+      : "📅 Today's score saved!";
+    _updateDailyHub();
   } else {
     dailyRow.style.display = 'none';
   }
 
-  document.getElementById('lp-random-session').classList.add('hidden');
-  document.getElementById('lp-random-complete').classList.remove('hidden');
+  // Back button goes to random hub
+  const backBtn = document.getElementById('rcBackBtn');
+  if (backBtn) {
+    backBtn.textContent = '← Back to Random';
+    backBtn.onclick = () => {
+      lpRandomReset();
+      bnSwitch('learn');
+      setTimeout(() => lpSelectLeagueCat('random'), 30);
+    };
+  }
+
+  document.getElementById('roundComplete').classList.add('show');
 }
 
 function lpRandomRestart() {
@@ -8030,9 +7979,30 @@ function lpRandomRestart() {
 }
 
 function lpRandomReset() {
-  document.getElementById('lp-random-setup').classList.remove('hidden');
-  document.getElementById('lp-random-session').classList.add('hidden');
-  document.getElementById('lp-random-complete').classList.add('hidden');
+  // Clean up random-mode-specific overrides on shared #flashcards elements
+  delete document.getElementById('answerBtns').dataset.randMode;
+  // Restore elements hidden by startGeneratedMode
+  const reverseBtn = document.getElementById('fcReverseBtn');
+  if (reverseBtn) reverseBtn.style.display = '';
+  const badge = document.getElementById('fcStreakBadge');
+  if (badge) badge.style.display = '';
+  // Restore cardScene and answerBtns to default visible state
+  document.getElementById('cardScene').style.display  = '';
+  document.getElementById('answerBtns').style.display = '';
+  // Remove round-complete so next standard mode starts clean
+  document.getElementById('roundComplete').classList.remove('show');
+  // Reset round-complete back button to standard behavior
+  const backBtn = document.getElementById('rcBackBtn');
+  if (backBtn) { backBtn.textContent = '← Back to Modes'; backBtn.onclick = () => bnSwitch('learn'); }
+  // Hide daily row
+  const dailyRow = document.getElementById('rcDailyRow');
+  if (dailyRow) dailyRow.style.display = 'none';
+  // Clear mode title
+  const modeTitle = document.getElementById('fcModeTitle');
+  if (modeTitle) modeTitle.textContent = '';
+  // Reset rcBestStreak display (random uses '—', restore to numeric)
+  const rcStreak = document.getElementById('rcBestStreak');
+  if (rcStreak) rcStreak.textContent = '0';
   _updateDailyHub();
 }
 
@@ -8061,7 +8031,7 @@ function _updateDailyHub() {
 }
 
 // ── Legacy compat shims ─────────────────────────────────────
-function lpRandPickLen()  { /* no-op — length is now per-generator */ }
+function lpRandPickLen() { /* no-op — length is now per-generator */ }
 
 // ============================================================
 // ================ END RANDOM MODE GENERATOR =================
