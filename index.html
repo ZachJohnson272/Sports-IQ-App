@@ -2519,6 +2519,11 @@
     display: flex; flex-direction: column; gap: 14px;
   }
   .lp-cat-section.hidden { display: none; }
+  /* When a cat section is open, hide the outer panel-level back button
+     so only the ← Back inside the toolbar is shown (correct level) */
+  .lp-panel--cat-open > .lp-panel-header > .lp-back-btn {
+    display: none;
+  }
 
   /* Toolbar card: groups breadcrumb + tier pills into one visual block */
   .lp-cat-toolbar {
@@ -2538,10 +2543,13 @@
     border-bottom: none;
     margin-bottom: 0;
   }
-  /* Hide the redundant ← Categories back button inside the toolbar */
+  /* ← Back inside toolbar — styled as nav, distinct from the outer panel back */
   .lp-cat-toolbar .lp-back-btn {
-    display: none;
+    font-size: 12px;
+    color: var(--jazz-sky);
+    opacity: 0.85;
   }
+  .lp-cat-toolbar .lp-back-btn:hover { opacity: 1; }
   .lp-cat-section-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 16px; letter-spacing: 2px;
@@ -8155,6 +8163,10 @@ function lpRandPickLen() { /* no-op — length is now per-generator */ }
 // ============================================================
 
 function lpSelectLeagueCat(cat) {
+  // Mark the panel as having a cat section open (hides outer back btn)
+  const leaguePanel = document.getElementById('lp-panel-3-league');
+  if (leaguePanel) leaguePanel.classList.add('lp-panel--cat-open');
+
   if (cat === 'random') {
     // Show random section, hide grid
     const grid = document.getElementById('lp-league-cat-grid');
@@ -8190,6 +8202,9 @@ function lpSelectLeagueCat(cat) {
 
 function lpCloseCat(scope) {
   if (scope === 'league') {
+    // Remove cat-open flag so the outer panel back button is restored
+    const leaguePanel = document.getElementById('lp-panel-3-league');
+    if (leaguePanel) leaguePanel.classList.remove('lp-panel--cat-open');
     const grid = document.getElementById('lp-league-cat-grid');
     if (grid) grid.style.display = '';
     ['players','teams','random'].forEach(s => {
@@ -8197,6 +8212,9 @@ function lpCloseCat(scope) {
       if (sec) sec.classList.add('hidden');
     });
   } else {
+    // Remove cat-open flag so the outer panel back button is restored
+    const teamPanel = document.getElementById('lp-panel-4-team');
+    if (teamPanel) teamPanel.classList.remove('lp-panel--cat-open');
     const grid = document.getElementById('lp-team-cat-grid');
     if (grid) grid.style.display = '';
     // Restore team overview sections
@@ -8217,6 +8235,10 @@ function lpCloseCat(scope) {
 }
 
 function lpSelectTeamCat(cat) {
+  // Mark the panel as having a cat section open (hides outer back btn)
+  const teamPanel = document.getElementById('lp-panel-4-team');
+  if (teamPanel) teamPanel.classList.add('lp-panel--cat-open');
+
   const grid = document.getElementById('lp-team-cat-grid');
   const sections = ['players','teaminfo','history'];
   if (grid) grid.style.display = 'none';
