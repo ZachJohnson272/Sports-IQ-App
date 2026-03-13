@@ -1554,9 +1554,18 @@
 
   /* ===================== LEARN PAGE — REDESIGN ===================== */
   .lp-wrap {
-    width: 100%; max-width: 390px;
-    padding: 12px 18px 32px;
-    display: flex; flex-direction: column; gap: 18px;
+    width: min(720px, calc(100% - 32px));
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 22px 0 48px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  /* Entry and study-type panels stay narrow — they are picker/hub screens */
+  #lp-panel-1, #lp-panel-2, #lp-panel-2b {
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
 
   /* Step indicator */
@@ -1600,14 +1609,17 @@
   }
 
   /* Panel */
-  .lp-panel { display: flex; flex-direction: column; gap: 8px; animation: fadeUp 0.25s ease both; }
+  .lp-panel { display: flex; flex-direction: column; gap: 14px; animation: fadeUp 0.25s ease both; }
   .lp-panel.hidden { display: none; }
   .lp-panel-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px; letter-spacing: 2px; color: #fff;
+    font-size: 22px; letter-spacing: 2.5px; color: #fff;
   }
   .lp-panel-header {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(107,63,160,0.13);
+    margin-bottom: 2px;
   }
   .lp-back-btn {
     background: none; border: none; color: var(--jazz-sky);
@@ -2324,11 +2336,12 @@
   }
   .lp-mode-grid-label {
     grid-column: 1 / -1;
-    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-    color: var(--muted); text-transform: uppercase;
-    padding: 10px 2px 2px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 2px;
+    color: rgba(155,142,196,0.7); text-transform: uppercase;
+    padding: 14px 2px 4px;
+    border-top: 1px solid rgba(107,63,160,0.09);
   }
-  .lp-mode-grid-label:first-child { padding-top: 2px; }
+  .lp-mode-grid-label:first-child { padding-top: 2px; border-top: none; }
 
   /* ── Mode card ── */
   .lp-mcard {
@@ -2340,7 +2353,8 @@
     cursor: pointer;
     position: relative; overflow: hidden;
     transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
-    min-height: 96px;
+    min-height: 112px;
+    justify-content: space-between;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
   }
   .lp-mcard::after {
@@ -2383,8 +2397,8 @@
   }
   .lp-mcard-footer {
     display: flex; align-items: center; justify-content: space-between;
-    margin-top: auto; padding-top: 8px;
-    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: auto; padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
   .lp-mcard-play {
     font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
@@ -2499,31 +2513,43 @@
   /* ── Category sub-section ── */
   .lp-cat-section {
     animation: fadeUp 0.22s ease both;
-    display: flex; flex-direction: column; gap: 0;
+    display: flex; flex-direction: column; gap: 16px;
   }
   .lp-cat-section.hidden { display: none; }
 
-  /* Breadcrumb nav at top of cat section */
+  /* Toolbar card: groups breadcrumb + tier pills into one visual block */
+  .lp-cat-toolbar {
+    background: rgba(13,11,24,0.75);
+    border: 1px solid rgba(107,63,160,0.16);
+    border-radius: 18px;
+    padding: 14px 16px 16px;
+    display: flex; flex-direction: column; gap: 14px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Breadcrumb nav — now lives inside lp-cat-toolbar */
   .lp-cat-section-header {
     display: flex; align-items: center; gap: 8px;
-    padding: 12px 0 10px;
-    border-bottom: 1px solid rgba(107,63,160,0.12);
-    margin-bottom: 12px;
+    padding: 0;
+    border-bottom: none;
+    margin-bottom: 0;
   }
   .lp-cat-section-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 17px; letter-spacing: 1.5px;
+    font-size: 18px; letter-spacing: 1.8px;
     color: #fff;
-    background: rgba(107,63,160,0.2);
-    border: 1px solid rgba(107,63,160,0.3);
-    padding: 3px 12px; border-radius: 99px;
+    background: rgba(107,63,160,0.22);
+    border: 1px solid rgba(107,63,160,0.38);
+    padding: 4px 14px; border-radius: 99px;
+    box-shadow: 0 2px 8px rgba(107,63,160,0.14);
   }
 
   /* ── Tier buttons inside a cat section (pill row, not frosted bar) ── */
   .lp-cat-section .lp-tier-tabs {
-    display: flex; flex-direction: row; gap: 6px;
+    display: flex; flex-direction: row; gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 14px;
+    margin-bottom: 0;
     background: none;
     border: none;
     border-radius: 0;
@@ -2577,13 +2603,17 @@
 
   /* ── Mode grid in cat section — bigger cards ── */
   .lp-cat-section .lp-mode-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 520px) {
+    .lp-cat-section .lp-mode-grid { grid-template-columns: 1fr; }
   }
   .lp-cat-section .lp-mcard {
-    min-height: 108px;
-    padding: 15px 13px 12px;
+    min-height: 124px;
+    padding: 16px 15px 13px;
     border-radius: 16px;
+    justify-content: space-between;
   }
   .lp-cat-section .lp-mcard-icon { font-size: 22px; margin-bottom: 5px; }
   .lp-cat-section .lp-mcard-title { font-size: 13.5px; line-height: 1.2; }
@@ -4851,6 +4881,7 @@
 
       <!-- ── Players category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-lsec-players">
+        <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
           <button class="lp-back-btn" onclick="lpCloseCat('league')">← Categories</button>
           <span class="lp-cat-section-title">👤 Players</span>
@@ -4872,6 +4903,7 @@
             <span class="lp-tier-tab-dot lp-diff-hof"></span>
             <span class="lp-tier-tab-label">Hall of Fame</span>
           </div>
+        </div>
         </div>
         <div class="lp-tier-panel" id="lp-lpanel-p-rookie">
           <div class="lp-mode-grid">
@@ -4983,6 +5015,7 @@
 
       <!-- ── Teams category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-lsec-teams">
+        <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
           <button class="lp-back-btn" onclick="lpCloseCat('league')">← Categories</button>
           <span class="lp-cat-section-title">🏟 Teams</span>
@@ -5004,6 +5037,7 @@
             <span class="lp-tier-tab-dot lp-diff-hof"></span>
             <span class="lp-tier-tab-label">Hall of Fame</span>
           </div>
+        </div>
         </div>
         <div class="lp-tier-panel" id="lp-lpanel-t-rookie">
           <div class="lp-mode-grid">
@@ -5125,9 +5159,11 @@
 
       <!-- ── Random category section ── -->
       <div class="lp-cat-section hidden" id="lp-lsec-random">
+        <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
           <button class="lp-back-btn" onclick="lpCloseCat('league')">← Categories</button>
           <span class="lp-cat-section-title" style="background:rgba(61,204,122,0.15);border-color:rgba(61,204,122,0.3);color:#fff;">🎲 Random</span>
+        </div>
         </div>
 
         <!-- ── Mode Hub — only the picker lives here; gameplay enters #flashcards ── -->
@@ -5273,7 +5309,7 @@
     <!-- ── Panel 4T: Team Difficulty Accordion ── -->
     <div class="lp-panel hidden" id="lp-panel-4-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(3,'team')">← Back</button>
+        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz — Flashcards</div>
       </div>
 
@@ -5392,6 +5428,7 @@
 
       <!-- ── Players category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-players">
+        <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
           <button class="lp-back-btn" onclick="lpCloseCat('team')">← Categories</button>
           <span class="lp-cat-section-title">👤 Players</span>
@@ -5413,6 +5450,7 @@
             <span class="lp-tier-tab-dot lp-diff-hof"></span>
             <span class="lp-tier-tab-label">Hall of Fame</span>
           </div>
+        </div>
         </div>
         <div class="lp-tier-panel" id="lp-tpanel-tp-rookie">
           <div class="lp-mode-grid">
@@ -5508,6 +5546,7 @@
 
       <!-- ── Team Info category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-teaminfo">
+        <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
           <button class="lp-back-btn" onclick="lpCloseCat('team')">← Categories</button>
           <span class="lp-cat-section-title">🏟 Team Info</span>
@@ -5521,6 +5560,7 @@
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
+        </div>
         </div>
         <div class="lp-tier-panel" id="lp-tpanel-ti-rookie">
           <div class="lp-mode-grid">
@@ -5585,6 +5625,7 @@
 
       <!-- ── History category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-history">
+        <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
           <button class="lp-back-btn" onclick="lpCloseCat('team')">← Categories</button>
           <span class="lp-cat-section-title">🏛 History</span>
@@ -5598,6 +5639,7 @@
             <span class="lp-tier-tab-dot lp-diff-hof"></span>
             <span class="lp-tier-tab-label">Hall of Fame</span>
           </div>
+        </div>
         </div>
         <div class="lp-tier-panel" id="lp-tpanel-th-allstar">
           <div class="lp-mode-grid">
@@ -7515,7 +7557,9 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
   const t4 = document.getElementById('lp-panel-4-title');
   if (t4) t4.textContent = teamName + ' — Flashcards';
   lpUpdateJazzMastery();
-  lpGoPanel(4);
+  const t2 = document.getElementById('lp-panel-2-title');
+  if (t2) t2.textContent = teamName + ' — Study Type';
+  lpGoPanel(2);
 }
 
 function lpLaunchMode(path, mode) {
