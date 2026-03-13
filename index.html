@@ -319,7 +319,7 @@
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    transition: transform 0.52s cubic-bezier(0.42, 0, 0.28, 1.2);
   }
 
   .card-3d.flipped { transform: rotateY(180deg); }
@@ -526,7 +526,12 @@
 
   .btn-miss:active, .btn-got:active { transform: translateY(0); }
 
-  .answer-btns-hidden { opacity: 0.3; pointer-events: none; }
+  .answer-btns-hidden { opacity: 0; pointer-events: none; }
+  /* Show buttons dimmed while waiting for flip */
+  .answer-btns-hidden.answer-btns-locked {
+    opacity: 0.22;
+    pointer-events: none;
+  }
 
   .feedback-flash {
     position: fixed;
@@ -890,17 +895,63 @@
 
   .round-complete {
     text-align: center;
-    padding: 40px 24px;
+    padding: 32px 20px 40px;
     display: none;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     animation: fadeUp 0.4s ease both;
+    width: 100%; max-width: 360px;
   }
   .round-complete.show { display: flex; }
-  .trophy { font-size: 64px; }
-  .round-complete h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; }
-  .round-complete p  { color: var(--muted); font-size: 15px; }
+  .trophy { font-size: 60px; line-height: 1; }
+  .round-complete h2 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 2px;
+    color: #fff; margin: 0;
+  }
+  .round-complete p  { color: var(--muted); font-size: 14px; margin: 0; }
+  .rc-stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    width: 100%;
+  }
+  .rc-stat {
+    background: linear-gradient(160deg, rgba(28,20,48,0.95) 0%, rgba(16,18,28,0.98) 100%);
+    border: 1px solid rgba(107,63,160,0.28); border-radius: 14px;
+    padding: 14px 10px 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    position: relative; overflow: hidden;
+  }
+  .rc-stat::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at top, rgba(107,63,160,0.1), transparent 70%);
+    pointer-events: none;
+  }
+  .rc-stat-icon { font-size: 18px; line-height: 1; }
+  .rc-stat-val {
+    font-family: 'Bebas Neue', sans-serif; font-size: 26px;
+    color: #fff; line-height: 1;
+  }
+  .rc-stat-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .rc-stat--correct .rc-stat-val { color: #3dcc7a; }
+  .rc-stat--streak  .rc-stat-val { color: var(--jazz-sky); }
+  .rc-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+
+  /* Streak badge in fc-header */
+  .fc-streak-badge {
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(91,184,212,0.1); border: 1px solid rgba(91,184,212,0.2);
+    border-radius: 8px; padding: 4px 10px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px;
+    color: var(--jazz-sky); transition: all 0.3s;
+  }
+  .fc-streak-badge.streak-fire { background: rgba(245,200,66,0.12); border-color: rgba(245,200,66,0.3); color: #f5c842; }
+
+  /* Mode title pill below header */
+  .fc-mode-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: rgba(107,63,160,0.7); text-transform: uppercase;
+    text-align: center; padding: 5px 0 0;
+  }
 
   /* ===================== MODE SELECT ===================== */
   .mode-grid { display: flex; flex-direction: column; gap: 12px; }
@@ -4516,7 +4567,7 @@
 <div class="page" id="flashcards">
   <div class="fc-header">
     <div class="fc-progress-text"><span id="fcCurrent">1</span> / <span id="fcTotal">18</span></div>
-    <div class="fc-mastery-badge" id="fcMasteryBadge">0% mastered</div>
+    <div class="fc-streak-badge" id="fcStreakBadge">🔥 <span id="fcStreakNum">0</span></div>
     <div style="display:flex;align-items:center;gap:8px;">
       <button class="fc-reverse-btn" id="fcReverseBtn" onclick="fcToggleReverse()" title="Reverse card direction">⇄</button>
       <button class="btn-ghost" onclick="bnSwitch('learn')">✕ Exit</button>
@@ -4525,6 +4576,7 @@
   <div class="fc-progress-bar">
     <div class="fc-progress-fill" id="fcProgressBar" style="width:0%"></div>
   </div>
+  <div class="fc-mode-title" id="fcModeTitle"></div>
   <div class="fc-arena">
     <div class="card-scene" id="cardScene" onclick="flipCard()">
       <div class="card-3d" id="card3d">
@@ -4543,7 +4595,7 @@
         </div>
       </div>
     </div>
-    <div class="answer-btns answer-btns-hidden" id="answerBtns">
+    <div class="answer-btns answer-btns-hidden answer-btns-locked" id="answerBtns">
       <button class="btn-miss" onclick="answerCard(false)">❌ &nbsp;Missed it</button>
       <button class="btn-got"  onclick="answerCard(true)">✅ &nbsp;Got it</button>
     </div>
@@ -4559,9 +4611,28 @@
     <div class="round-complete" id="roundComplete">
       <div class="trophy">🏆</div>
       <h2>Round Complete!</h2>
-      <p id="roundCompleteMsg">Keep going to improve your score.</p>
-      <button class="btn-primary" style="width:100%;max-width:300px" onclick="restartCurrentMode()">▶ &nbsp;Next Round</button>
-      <button class="btn-ghost" style="margin-top:8px" onclick="bnSwitch('learn')">← Change Mode</button>
+      <div class="rc-stats-grid">
+        <div class="rc-stat rc-stat--correct">
+          <div class="rc-stat-icon">✅</div>
+          <div class="rc-stat-val" id="rcCorrect">0</div>
+          <div class="rc-stat-lbl">Correct</div>
+        </div>
+        <div class="rc-stat">
+          <div class="rc-stat-icon">🎯</div>
+          <div class="rc-stat-val" id="rcAccuracy">0%</div>
+          <div class="rc-stat-lbl">Accuracy</div>
+        </div>
+        <div class="rc-stat rc-stat--streak">
+          <div class="rc-stat-icon">🔥</div>
+          <div class="rc-stat-val" id="rcBestStreak">0</div>
+          <div class="rc-stat-lbl">Best Streak</div>
+        </div>
+      </div>
+      <p id="roundCompleteMsg"></p>
+      <div class="rc-actions">
+        <button class="btn-primary" style="width:100%" onclick="restartCurrentMode()">▶ &nbsp;Play Again</button>
+        <button class="btn-ghost" style="width:100%" onclick="bnSwitch('learn')">← Back to Modes</button>
+      </div>
     </div>
   </div>
 </div>
@@ -5861,8 +5932,9 @@ let lineupAttempts = 0, lineupCorrect = 0;
 
 let currentMode = null;
 let deck = [], deckIndex = 0;
-let isFlipped = false, cardAnswered = false;
+let isFlipped = false, cardAnswered = false, isFlipping = false;
 let mcSelected = null;
+let fcStreak = 0, fcBestStreak = 0, fcCorrectCount = 0;
 
 // ===================== HELPERS =====================
 function shuffle(arr) {
@@ -5948,6 +6020,8 @@ function updateModeStats() {
 function startMode(mode) {
   currentMode = mode;
   _fcReversed = false;
+  isFlipping = false;
+  fcStreak = 0; fcBestStreak = 0; fcCorrectCount = 0;
   const reverseBtn = document.getElementById('fcReverseBtn');
   if (reverseBtn) reverseBtn.classList.remove('active');
   if (mode === 'lineup') { startLineup(); return; }
@@ -5959,6 +6033,16 @@ function startMode(mode) {
   document.getElementById('lineupMode').style.display = 'none';
   document.getElementById('roundComplete').classList.remove('show');
   document.getElementById('fcTotal').textContent = deck.length;
+  // Set mode title
+  const modeTitles = {
+    namePos: 'Player → Position & Jersey',
+    statsPlayer: 'Player Stats',
+    multiChoice: 'Multiple Choice',
+    lineup: 'Starting Lineup',
+  };
+  const titleEl = document.getElementById('fcModeTitle');
+  if (titleEl) titleEl.textContent = modeTitles[mode] || '';
+  _fcUpdateStreakBadge();
   loadCard();
   showPage('flashcards');
 }
@@ -6044,33 +6128,65 @@ function loadCard() {
   }
   document.getElementById('fcCurrent').textContent = deckIndex + 1;
   document.getElementById('fcProgressBar').style.width = ((deckIndex/deck.length)*100) + '%';
-  document.getElementById('fcMasteryBadge').textContent = getModeMastery(currentMode) + '% mastered';
   const scene = document.getElementById('cardScene');
   scene.classList.remove('entering'); void scene.offsetWidth; scene.classList.add('entering');
   if (currentMode !== 'multiChoice') {
     document.getElementById('answerBtns').classList.add('answer-btns-hidden');
+    document.getElementById('answerBtns').classList.add('answer-btns-locked');
   }
 }
 
+function _fcUpdateStreakBadge() {
+  const badge = document.getElementById('fcStreakBadge');
+  const num   = document.getElementById('fcStreakNum');
+  if (!badge || !num) return;
+  num.textContent = fcStreak;
+  badge.classList.toggle('streak-fire', fcStreak >= 3);
+}
+
 function flipCard() {
-  if (cardAnswered || currentMode === 'multiChoice') return;
-  isFlipped = !isFlipped;
-  document.getElementById('card3d').classList.toggle('flipped', isFlipped);
-  if (isFlipped) document.getElementById('answerBtns').classList.remove('answer-btns-hidden');
-  else           document.getElementById('answerBtns').classList.add('answer-btns-hidden');
+  if (cardAnswered || isFlipping || currentMode === 'multiChoice') return;
+  // Only allow one direction: front → back (locking re-flip until next card)
+  if (isFlipped) return;
+  isFlipping = true;
+  isFlipped  = true;
+  const card3d = document.getElementById('card3d');
+  card3d.classList.add('flipped');
+  // Unlock after transition completes (matches CSS 0.55s)
+  setTimeout(() => {
+    isFlipping = false;
+    const btns = document.getElementById('answerBtns');
+    btns.classList.remove('answer-btns-hidden', 'answer-btns-locked');
+  }, 560);
 }
 
 function answerCard(correct) {
-  if (cardAnswered || !isFlipped) return;
+  if (cardAnswered || !isFlipped || isFlipping) return;
   cardAnswered = true;
+
+  // Update per-player mastery data
   const playerIdx = deck[deckIndex];
   modeData[currentMode][playerIdx].attempts++;
   if (correct) { modeData[currentMode][playerIdx].correct++; xpAward(3); }
+
+  // Streak tracking
+  if (correct) {
+    fcCorrectCount++;
+    fcStreak++;
+    if (fcStreak > fcBestStreak) fcBestStreak = fcStreak;
+  } else {
+    fcStreak = 0;
+  }
+  _fcUpdateStreakBadge();
+
+  // Feedback flash
   const flash = document.getElementById('feedbackFlash');
   flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
-  setTimeout(() => { flash.className = 'feedback-flash'; }, 350);
+  setTimeout(() => { flash.className = 'feedback-flash'; }, 380);
+
+  // Advance to next card after brief pause
   deckIndex++;
-  setTimeout(loadCard, 420);
+  setTimeout(loadCard, 450);
 }
 
 // ===================== MULTIPLE CHOICE =====================
@@ -6105,6 +6221,17 @@ function submitMC() {
   const playerIdx = deck[deckIndex];
   modeData[currentMode][playerIdx].attempts++;
   if (correct) { modeData[currentMode][playerIdx].correct++; xpAward(3); }
+
+  // Streak tracking
+  if (correct) {
+    fcCorrectCount++;
+    fcStreak++;
+    if (fcStreak > fcBestStreak) fcBestStreak = fcStreak;
+  } else {
+    fcStreak = 0;
+  }
+  _fcUpdateStreakBadge();
+
   document.querySelectorAll('.mc-btn').forEach(btn => {
     if (btn.textContent === ROSTER[correctIdx].name) btn.classList.add('correct');
     else if (btn.classList.contains('selected')) btn.classList.add('wrong');
@@ -6112,7 +6239,7 @@ function submitMC() {
   setTimeout(() => { document.getElementById('card3d').classList.add('flipped'); document.getElementById('mcSubmit').style.display = 'none'; }, 600);
   const flash = document.getElementById('feedbackFlash');
   flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
-  setTimeout(() => { flash.className = 'feedback-flash'; }, 350);
+  setTimeout(() => { flash.className = 'feedback-flash'; }, 380);
   setTimeout(() => { deckIndex++; loadCard(); document.getElementById('mcGrid').innerHTML = ''; }, 1800);
 }
 
@@ -6134,7 +6261,7 @@ function startLineup() {
   document.getElementById('lineupResult').style.display = 'none';
   document.getElementById('fcCurrent').textContent = '—';
   document.getElementById('fcTotal').textContent = '—';
-  document.getElementById('fcMasteryBadge').textContent = lineupAttempts > 0 ? Math.round((lineupCorrect/lineupAttempts)*100) + '% mastered' : '0% mastered';
+  
   const grid = document.getElementById('lineupGrid');
   grid.innerHTML = '';
   LINEUP_POSITIONS.forEach(pos => {
@@ -6177,17 +6304,28 @@ function submitLineup() {
   html += `<button class="btn-ghost" style="margin-top:12px;" onclick="startLineup()">Try Again</button>`;
   resultDiv.innerHTML = html;
   document.getElementById('lineupSubmit').style.display = 'none';
-  document.getElementById('fcMasteryBadge').textContent = lineupAttempts > 0 ? Math.round((lineupCorrect/lineupAttempts)*100) + '% correct' : '0%';
+  
 }
 
 function endRound() {
   document.getElementById('cardScene').style.display = 'none';
   document.getElementById('answerBtns').style.display = 'none';
   document.getElementById('mcOptions').style.display = 'none';
-  const m = getModeMastery(currentMode);
-  const learned = getModeLearnedCount(currentMode);
+
+  const total    = deck.length;
+  const accuracy = total > 0 ? Math.round((fcCorrectCount / total) * 100) : 0;
+  const m        = getModeMastery(currentMode);
+
+  document.getElementById('rcCorrect').textContent    = fcCorrectCount + ' / ' + total;
+  document.getElementById('rcAccuracy').textContent   = accuracy + '%';
+  document.getElementById('rcBestStreak').textContent = fcBestStreak;
+  document.getElementById('roundCompleteMsg').textContent =
+    accuracy === 100 ? '🌟 Perfect round! Incredible!' :
+    accuracy >= 80   ? 'Great session — keep it up!' :
+    accuracy >= 50   ? 'Solid effort. Another round will sharpen it.' :
+                       'Tough round. Try again to improve.';
+
   document.getElementById('roundComplete').classList.add('show');
-  document.getElementById('roundCompleteMsg').textContent = `Mode mastery: ${m}% · ${learned}/18 players learned`;
   if (m === 100) xpAward(15);
 }
 
