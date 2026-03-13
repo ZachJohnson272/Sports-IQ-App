@@ -4626,7 +4626,7 @@
       <div id="rcDailyRow" style="display:none;font-size:12px;color:rgba(91,184,212,0.8);font-weight:600;text-align:center;"></div>
       <div class="rc-actions">
         <button class="btn-primary" style="width:100%" onclick="restartCurrentMode()">▶ &nbsp;Play Again</button>
-        <button class="btn-ghost" style="width:100%" id="rcBackBtn" onclick="bnSwitch('learn')">← Back to Modes</button>
+        <button class="btn-ghost" style="width:100%" id="rcBackBtn" onclick="goBackToSessionModes()">← Back to Modes</button>
       </div>
     </div>
   </div>
@@ -6315,17 +6315,13 @@ function updateModeStats() {
 // Cleans up mode-specific state, then navigates back correctly.
 function fcExit() {
   const isRandMode = document.getElementById('answerBtns').dataset.randMode === '1';
-  const isSessionMode = !!(_sessionMode && MODE_BUILDERS[_sessionMode]);
 
   if (isRandMode) {
-    // Random mode: clean up overrides, go to learn tab, re-open random hub
+    // Random mode: clean up overrides, then return to correct parent
     lpRandomReset();
-    bnSwitch('learn');
-    setTimeout(() => lpSelectLeagueCat('random'), 30);
-  } else {
-    // Standard and deck-builder modes: just go back to learn
-    bnSwitch('learn');
   }
+  // Use context-aware return navigation for all modes
+  goBackToSessionModes();
 }
 function startMode(mode) {
   // ── New deck-builder modes ──────────────────────────────────
@@ -7317,6 +7313,51 @@ function bnGoFlashcards() {
 // ===================== LEARN PAGE — REDESIGN =====================
 let _lpPath    = null;   // 'league' | 'team'
 let _lpTeam    = null;   // team slug e.g. 'jazz'
+
+// ── Session return-target system ────────────────────────────
+// Stores where the user came from before entering a flashcard session.
+// Used by both "Back to Modes" (completion screen) and Exit button.
+let _sessionReturnTarget = null;
+
+function setSessionReturnTarget(target) {
+  // target: { path, panel, leagueCat, teamCat }
+  // path: 'league' | 'team' | 'random'
+  // panel: panel id to restore (e.g. 'lp-panel-3-league', 'lp-panel-4-team')
+  // leagueCat: active league section ('players'|'teams'|'random') or null
+  // teamCat: active team section ('players'|'teaminfo'|'history') or null
+  _sessionReturnTarget = target;
+}
+
+function goBackToSessionModes() {
+  if (!_sessionReturnTarget) {
+    bnSwitch('learn');
+    return;
+  }
+  const t = _sessionReturnTarget;
+  bnSwitch('learn');
+  setTimeout(() => {
+    if (t.path === 'random') {
+      // Restore to League Knowledge > Random section
+      _lpPath = 'league';
+      document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.add('active');
+      document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.remove('active');
+      lpShowPanel('lp-panel-3-league');
+      lpSelectLeagueCat('random');
+    } else if (t.path === 'league') {
+      _lpPath = 'league';
+      document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.add('active');
+      document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.remove('active');
+      lpShowPanel('lp-panel-3-league');
+      if (t.leagueCat) lpSelectLeagueCat(t.leagueCat);
+    } else if (t.path === 'team') {
+      _lpPath = 'team';
+      document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.remove('active');
+      document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.add('active');
+      lpShowPanel('lp-panel-4-team');
+      if (t.teamCat) lpSelectTeamCat(t.teamCat);
+    }
+  }, 30);
+}
 let _lpContent = null;   // 'flashcards' | 'quizzes' | 'games'
 
 // Show/hide a named panel — supports both id strings and suffixed panel ids
@@ -7473,6 +7514,22 @@ function lpLaunchMode(path, mode) {
   if (mode === 'dpOpen') {
     dpOpen('nba');
     return;
+  }
+  // Capture which panel launched this session so we can return correctly
+  if (path === 'league') {
+    let leagueCat = null;
+    ['players','teams','random'].forEach(function(s) {
+      const sec = document.getElementById('lp-lsec-' + s);
+      if (sec && !sec.classList.contains('hidden')) leagueCat = s;
+    });
+    setSessionReturnTarget({ path: 'league', leagueCat: leagueCat });
+  } else if (path === 'team') {
+    let teamCat = null;
+    ['players','teaminfo','history'].forEach(function(s) {
+      const sec = document.getElementById('lp-tsec-' + s);
+      if (sec && !sec.classList.contains('hidden')) teamCat = s;
+    });
+    setSessionReturnTarget({ path: 'team', teamCat: teamCat });
   }
   // Map to existing startMode keys
   startMode(mode);
@@ -7758,6 +7815,8 @@ const RANDOM_GENERATORS = {
 
 // ── Main entry point ────────────────────────────────────────
 function startGeneratedMode(type) {
+  // Always store random as the return target
+  setSessionReturnTarget({ path: 'random' });
   const gen = RANDOM_GENERATORS[type];
   if (!gen) { console.error('Unknown generator:', type); return; }
 
@@ -7964,11 +8023,7 @@ function _lpRandShowComplete() {
   const backBtn = document.getElementById('rcBackBtn');
   if (backBtn) {
     backBtn.textContent = '← Back to Random';
-    backBtn.onclick = () => {
-      lpRandomReset();
-      bnSwitch('learn');
-      setTimeout(() => lpSelectLeagueCat('random'), 30);
-    };
+    backBtn.onclick = goBackToSessionModes;
   }
 
   document.getElementById('roundComplete').classList.add('show');
@@ -7993,7 +8048,7 @@ function lpRandomReset() {
   document.getElementById('roundComplete').classList.remove('show');
   // Reset round-complete back button to standard behavior
   const backBtn = document.getElementById('rcBackBtn');
-  if (backBtn) { backBtn.textContent = '← Back to Modes'; backBtn.onclick = () => bnSwitch('learn'); }
+  if (backBtn) { backBtn.textContent = '← Back to Modes'; backBtn.onclick = goBackToSessionModes; }
   // Hide daily row
   const dailyRow = document.getElementById('rcDailyRow');
   if (dailyRow) dailyRow.style.display = 'none';
