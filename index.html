@@ -2354,6 +2354,7 @@
     position: relative; overflow: hidden;
     transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
     min-height: 112px;
+    min-width: 0;
     justify-content: space-between;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
   }
@@ -2513,36 +2514,40 @@
   /* ── Category sub-section ── */
   .lp-cat-section {
     animation: fadeUp 0.22s ease both;
-    display: flex; flex-direction: column; gap: 16px;
+    display: flex; flex-direction: column; gap: 14px;
   }
   .lp-cat-section.hidden { display: none; }
 
   /* Toolbar card: groups breadcrumb + tier pills into one visual block */
   .lp-cat-toolbar {
-    background: rgba(13,11,24,0.75);
-    border: 1px solid rgba(107,63,160,0.16);
+    background: rgba(13,11,24,0.8);
+    border: 1px solid rgba(107,63,160,0.18);
     border-radius: 18px;
     padding: 14px 16px 16px;
-    display: flex; flex-direction: column; gap: 14px;
+    display: flex; flex-direction: column; gap: 12px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
 
-  /* Breadcrumb nav — now lives inside lp-cat-toolbar */
+  /* Category context label — title pill only, no back button */
   .lp-cat-section-header {
     display: flex; align-items: center; gap: 8px;
     padding: 0;
     border-bottom: none;
     margin-bottom: 0;
   }
+  /* Hide the redundant ← Categories back button inside the toolbar */
+  .lp-cat-toolbar .lp-back-btn {
+    display: none;
+  }
   .lp-cat-section-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px; letter-spacing: 1.8px;
+    font-size: 16px; letter-spacing: 2px;
     color: #fff;
-    background: rgba(107,63,160,0.22);
-    border: 1px solid rgba(107,63,160,0.38);
-    padding: 4px 14px; border-radius: 99px;
-    box-shadow: 0 2px 8px rgba(107,63,160,0.14);
+    background: linear-gradient(135deg, rgba(107,63,160,0.28), rgba(91,184,212,0.15));
+    border: 1px solid rgba(107,63,160,0.42);
+    padding: 8px 18px; border-radius: 99px;
+    box-shadow: 0 3px 12px rgba(107,63,160,0.18);
   }
 
   /* ── Tier buttons inside a cat section (pill row, not frosted bar) ── */
@@ -2606,11 +2611,12 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
-  @media (max-width: 520px) {
+  @media (max-width: 360px) {
     .lp-cat-section .lp-mode-grid { grid-template-columns: 1fr; }
   }
   .lp-cat-section .lp-mcard {
     min-height: 124px;
+    min-width: 0;
     padding: 16px 15px 13px;
     border-radius: 16px;
     justify-content: space-between;
