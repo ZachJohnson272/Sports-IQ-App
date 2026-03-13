@@ -2583,16 +2583,23 @@
   }
 
   /* ── Compact team info row (replaces big snapshot grid) ── */
-  .lp-team-inforow {
-    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-    padding: 8px 2px 4px;
-    font-size: 11.5px; color: rgba(255,255,255,0.45);
+  /* ── Team snapshot row — outlined card ── */
+  .lp-snapshot-row {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 6px 4px;
+    background: linear-gradient(135deg, rgba(20,16,36,0.97) 0%, rgba(12,13,22,0.98) 100%);
+    border: 1px solid rgba(107,63,160,0.24);
+    border-radius: 14px;
+    padding: 11px 16px;
+    font-size: 12px; color: rgba(255,255,255,0.45);
     font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
   }
   .lp-tir-item { display: flex; align-items: center; gap: 4px; }
   .lp-tir-icon { font-size: 12px; flex-shrink: 0; }
-  .lp-tir-val { color: rgba(255,255,255,0.72); font-weight: 600; }
-  .lp-tir-dot { color: rgba(255,255,255,0.18); font-size: 10px; }
+  .lp-tir-val { color: rgba(255,255,255,0.78); font-weight: 600; }
+  .lp-tir-sep { color: rgba(107,63,160,0.35); font-size: 11px; padding: 0 1px; }
+  .lp-tir-dot { color: rgba(255,255,255,0.18); font-size: 10px; } /* legacy compat */
 
   /* ── Roster dropdown ── */
   .lp-roster-drop {
@@ -5097,13 +5104,11 @@
       </div>
 
       <!-- Team Info Panel (spec: not a flashcard, just context) -->
-      <div class="lp-team-header-wrap">
+      <div class="lp-team-header-wrap" style="margin-bottom: 18px;">
         <div class="lp-team-info-panel" id="lp-team-info-panel">
           <div class="lp-tip-left">
-            <div class="lp-tip-logo" id="lp-tip-logo">🏀</div>
             <div class="lp-tip-text">
               <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
-              <div class="lp-tip-meta" id="lp-tip-meta">NBA · Western · Northwest</div>
             </div>
           </div>
           <div class="lp-tip-right">
@@ -5113,17 +5118,19 @@
         </div>
       </div>
 
-      <!-- Compact info row (replaces big snapshot cards) -->
-      <div class="lp-team-inforow" id="lp-team-inforow">
+      <!-- Snapshot row — single outlined card -->
+      <div class="lp-snapshot-row" id="lp-team-inforow" style="margin-bottom: 18px;">
         <span class="lp-tir-item"><span class="lp-tir-icon">🏟</span><span class="lp-tir-val" id="lp-snap-arena">Delta Center</span></span>
-        <span class="lp-tir-dot">·</span>
+        <span class="lp-tir-sep">•</span>
         <span class="lp-tir-item"><span class="lp-tir-icon">👔</span><span class="lp-tir-val" id="lp-snap-coach">Will Hardy</span></span>
-        <span class="lp-tir-dot">·</span>
-        <span class="lp-tir-item"><span class="lp-tir-icon">👥</span><span class="lp-tir-val" id="lp-snap-players">18</span> Players</span>
+        <span class="lp-tir-sep">•</span>
+        <span class="lp-tir-item"><span class="lp-tir-icon">🏀</span><span class="lp-tir-val" id="lp-snap-conf">West</span></span>
+        <span class="lp-tir-sep">•</span>
+        <span class="lp-tir-item"><span class="lp-tir-icon">🏆</span><span class="lp-tir-val" id="lp-snap-titles">0</span> Titles</span>
       </div>
 
       <!-- Roster dropdown -->
-      <div class="lp-roster-drop" id="lp-roster-drop">
+      <div class="lp-roster-drop" id="lp-roster-drop" style="margin-bottom: 28px;">
         <button class="lp-roster-toggle" onclick="lpToggleRoster()" id="lp-roster-toggle">
           <span id="lp-roster-chevron">▼</span> View Current Roster
         </button>
@@ -6825,20 +6832,20 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
   _lpTeam = teamId;
   window._lpTeamName   = teamName;
   window._lpLeagueId   = leagueId;
-  // Update panel 4 header info panel
-  const tipName    = document.getElementById('lp-tip-name');
-  const tipMeta    = document.getElementById('lp-tip-meta');
-  const tipLogo    = document.getElementById('lp-tip-logo');
-  if (tipName)    tipName.textContent    = teamName;
-  if (tipMeta)    tipMeta.textContent    = leagueId.toUpperCase() + ' · Western · Northwest';
-  if (tipLogo)    tipLogo.textContent    = '🏀';
-  // Update snapshot grid
-  const snapArena   = document.getElementById('lp-snap-arena');
-  const snapCoach   = document.getElementById('lp-snap-coach');
-  const snapBest    = document.getElementById('lp-snap-best');
+  // Update panel 4 header
+  const tipName = document.getElementById('lp-tip-name');
+  if (tipName) tipName.textContent = teamName;
+  // Update snapshot row
+  const snapArena  = document.getElementById('lp-snap-arena');
+  const snapCoach  = document.getElementById('lp-snap-coach');
+  const snapConf   = document.getElementById('lp-snap-conf');
+  const snapTitles = document.getElementById('lp-snap-titles');
+  const snapBest   = document.getElementById('lp-snap-best');
   const snapPlayers = document.getElementById('lp-snap-players');
   if (snapArena)   snapArena.textContent   = 'Delta Center';
   if (snapCoach)   snapCoach.textContent   = 'Will Hardy';
+  if (snapConf)    snapConf.textContent    = 'West';
+  if (snapTitles)  snapTitles.textContent  = '0';
   if (snapBest)    snapBest.textContent    = 'Jaren Jackson Jr.';
   if (snapPlayers) snapPlayers.textContent = '18';
   // Legacy compat
