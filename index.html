@@ -2641,6 +2641,109 @@
     margin-left: auto; flex-shrink: 0;
   }
 
+  /* ── Progression-style category cards (Team Mastery hub) ── */
+  .lp-prog-grid {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 2px;
+  }
+  .lp-prog-card {
+    background: linear-gradient(150deg, rgba(20,15,38,0.98) 0%, rgba(11,12,20,0.99) 100%);
+    border: 1.5px solid rgba(107,63,160,0.22);
+    border-radius: 18px;
+    padding: 16px 16px 14px;
+    display: flex; flex-direction: column; gap: 11px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative; overflow: hidden;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .lp-prog-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.22s; pointer-events: none;
+  }
+  .lp-prog-card:hover { transform: translateY(-3px); }
+  .lp-prog-card:active { transform: scale(0.975); transition-duration: 0.08s; }
+
+  /* Per-category color theming */
+  .lp-prog-card--players  { border-color: rgba(91,184,212,0.22); }
+  .lp-prog-card--players::before  { background: radial-gradient(ellipse at top left, rgba(91,184,212,0.09), transparent 65%); }
+  .lp-prog-card--players:hover  { border-color: rgba(91,184,212,0.58); box-shadow: 0 12px 34px rgba(91,184,212,0.16); }
+  .lp-prog-card--players:hover::before  { opacity: 1; }
+
+  .lp-prog-card--teaminfo { border-color: rgba(245,200,66,0.2); }
+  .lp-prog-card--teaminfo::before { background: radial-gradient(ellipse at top left, rgba(245,200,66,0.08), transparent 65%); }
+  .lp-prog-card--teaminfo:hover { border-color: rgba(245,200,66,0.52); box-shadow: 0 12px 34px rgba(245,160,30,0.14); }
+  .lp-prog-card--teaminfo:hover::before { opacity: 1; }
+
+  .lp-prog-card--history  { border-color: rgba(240,112,80,0.2); }
+  .lp-prog-card--history::before  { background: radial-gradient(ellipse at top left, rgba(240,112,80,0.08), transparent 65%); }
+  .lp-prog-card--history:hover  { border-color: rgba(240,112,80,0.52); box-shadow: 0 12px 34px rgba(240,112,80,0.14); }
+  .lp-prog-card--history:hover::before  { opacity: 1; }
+
+  /* Top row: icon + title/desc */
+  .lp-prog-top {
+    display: flex; align-items: flex-start; gap: 13px;
+    position: relative; z-index: 1;
+  }
+  .lp-prog-icon {
+    font-size: 24px; width: 50px; height: 50px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    background: rgba(107,63,160,0.18); border: 1px solid rgba(107,63,160,0.24);
+  }
+  .lp-prog-card--players  .lp-prog-icon { background: rgba(91,184,212,0.12);  border-color: rgba(91,184,212,0.22); }
+  .lp-prog-card--teaminfo .lp-prog-icon { background: rgba(245,200,66,0.1);   border-color: rgba(245,200,66,0.18); }
+  .lp-prog-card--history  .lp-prog-icon { background: rgba(240,112,80,0.1);   border-color: rgba(240,112,80,0.18); }
+  .lp-prog-body { flex: 1; min-width: 0; }
+  .lp-prog-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 1.8px; color: #fff; line-height: 1;
+    margin-bottom: 5px;
+  }
+  .lp-prog-desc {
+    font-size: 11.5px; color: rgba(255,255,255,0.38); line-height: 1.45;
+  }
+
+  /* Progress bar row */
+  .lp-prog-bar-row {
+    display: flex; align-items: center; gap: 9px;
+    position: relative; z-index: 1;
+  }
+  .lp-prog-bar-wrap {
+    flex: 1; height: 4px; border-radius: 99px;
+    background: rgba(255,255,255,0.07); overflow: hidden;
+  }
+  .lp-prog-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
+    transition: width 0.6s ease;
+  }
+  .lp-prog-bar--players  { background: linear-gradient(90deg, #3a8fa8, #5BB8D4); }
+  .lp-prog-bar--teaminfo { background: linear-gradient(90deg, #c89820, #f5c842); }
+  .lp-prog-bar--history  { background: linear-gradient(90deg, #c04a24, #f07050); }
+  .lp-prog-fraction {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+    color: rgba(255,255,255,0.35); white-space: nowrap; flex-shrink: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* Difficulty tier pill row */
+  .lp-prog-tiers {
+    display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .lp-prog-tier {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.7px;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 99px;
+    white-space: nowrap; border: 1px solid transparent;
+  }
+  .lp-prog-tier--rookie  { background: rgba(61,204,122,0.1);  color: rgba(61,204,122,0.65);  border-color: rgba(61,204,122,0.2); }
+  .lp-prog-tier--starter { background: rgba(91,184,212,0.1);  color: rgba(91,184,212,0.65);  border-color: rgba(91,184,212,0.2); }
+  .lp-prog-tier--allstar { background: rgba(245,200,66,0.08); color: rgba(245,200,66,0.6);   border-color: rgba(245,200,66,0.18); }
+  .lp-prog-tier--hof     { background: rgba(240,112,80,0.08); color: rgba(240,112,80,0.6);   border-color: rgba(240,112,80,0.18); }
+
   /* ── Flashcard rows ── */
   .lp-fc-row {
     padding: 13px 16px;
@@ -4791,47 +4894,71 @@
       <!-- Keep legacy snap-best ID alive -->
       <div style="display:none"><span id="lp-snap-best">Jaren Jackson Jr.</span></div>
 
-      <div class="lp-panel-sub" style="margin-top:14px">Master your team's players, identity, and franchise history</div>
-      <div class="lp-panel-sub" style="margin-top:2px;margin-bottom:4px;">What do you want to study?</div>
+      <!-- Progression-style category cards -->
+      <div class="lp-prog-grid" id="lp-team-cat-grid">
 
-      <!-- Category picker -->
-      <div class="lp-cat-grid" id="lp-team-cat-grid">
-        <div class="lp-cat-card lp-cat-card--players" id="lp-tcat-players" onclick="lpSelectTeamCat('players')">
-          <div class="lp-cat-icon">👤</div>
-          <div class="lp-cat-body">
-            <div class="lp-cat-title">Players</div>
-            <div class="lp-cat-desc">Roster, positions, draft info, background</div>
-            <div class="lp-cat-meta">
-              <span class="lp-cat-badge">18 cards / mode</span>
-              <span class="lp-cat-modes-count">4 difficulty tiers</span>
+        <div class="lp-prog-card lp-prog-card--players" id="lp-tcat-players" onclick="lpSelectTeamCat('players')">
+          <div class="lp-prog-top">
+            <div class="lp-prog-icon">👤</div>
+            <div class="lp-prog-body">
+              <div class="lp-prog-title">Players</div>
+              <div class="lp-prog-desc">Learn the roster, positions, jersey numbers, and player backgrounds</div>
             </div>
           </div>
-          <div class="lp-cat-arrow">›</div>
+          <div class="lp-prog-bar-row">
+            <div class="lp-prog-bar-wrap">
+              <div class="lp-prog-bar-fill lp-prog-bar--players" style="width:0%" id="lp-tprog-players"></div>
+            </div>
+            <span class="lp-prog-fraction" id="lp-tprog-players-frac">0 / 6 modes</span>
+          </div>
+          <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
+            <span class="lp-prog-tier lp-prog-tier--starter">Starter</span>
+            <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
+            <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
+          </div>
         </div>
-        <div class="lp-cat-card lp-cat-card--teams" id="lp-tcat-teaminfo" onclick="lpSelectTeamCat('teaminfo')">
-          <div class="lp-cat-icon">🏟</div>
-          <div class="lp-cat-body">
-            <div class="lp-cat-title">Team Info</div>
-            <div class="lp-cat-desc">Starting 5, best players, current roles</div>
-            <div class="lp-cat-meta">
-              <span class="lp-cat-badge">1–5 cards / mode</span>
-              <span class="lp-cat-modes-count">2 difficulty tiers</span>
+
+        <div class="lp-prog-card lp-prog-card--teaminfo" id="lp-tcat-teaminfo" onclick="lpSelectTeamCat('teaminfo')">
+          <div class="lp-prog-top">
+            <div class="lp-prog-icon">🏟</div>
+            <div class="lp-prog-body">
+              <div class="lp-prog-title">Team Info</div>
+              <div class="lp-prog-desc">Arena, conference, colors, starting lineup, and current roles</div>
             </div>
           </div>
-          <div class="lp-cat-arrow">›</div>
+          <div class="lp-prog-bar-row">
+            <div class="lp-prog-bar-wrap">
+              <div class="lp-prog-bar-fill lp-prog-bar--teaminfo" style="width:0%" id="lp-tprog-teaminfo"></div>
+            </div>
+            <span class="lp-prog-fraction" id="lp-tprog-teaminfo-frac">0 / 4 modes</span>
+          </div>
+          <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
+            <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
+          </div>
         </div>
-        <div class="lp-cat-card lp-cat-card--history" id="lp-tcat-history" onclick="lpSelectTeamCat('history')">
-          <div class="lp-cat-icon">🏛</div>
-          <div class="lp-cat-body">
-            <div class="lp-cat-title">History</div>
-            <div class="lp-cat-desc">GOAT, titles, records, retired numbers</div>
-            <div class="lp-cat-meta">
-              <span class="lp-cat-badge">1+ cards / mode</span>
-              <span class="lp-cat-modes-count">2 difficulty tiers</span>
+
+        <div class="lp-prog-card lp-prog-card--history" id="lp-tcat-history" onclick="lpSelectTeamCat('history')">
+          <div class="lp-prog-top">
+            <div class="lp-prog-icon">🏛</div>
+            <div class="lp-prog-body">
+              <div class="lp-prog-title">History</div>
+              <div class="lp-prog-desc">Championships, franchise legends, records, and retired numbers</div>
             </div>
           </div>
-          <div class="lp-cat-arrow">›</div>
+          <div class="lp-prog-bar-row">
+            <div class="lp-prog-bar-wrap">
+              <div class="lp-prog-bar-fill lp-prog-bar--history" style="width:0%" id="lp-tprog-history"></div>
+            </div>
+            <span class="lp-prog-fraction" id="lp-tprog-history-frac">0 / 8 modes</span>
+          </div>
+          <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
+            <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
+          </div>
         </div>
+
       </div>
 
       <!-- ── Players category sub-section ── -->
