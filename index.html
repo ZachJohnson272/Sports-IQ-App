@@ -3069,6 +3069,97 @@
 
   /* Completion summary */
   #lp-random-complete { text-align: center; padding: 8px 0; }
+
+  /* ── Random Mode Hub ── */
+  .lp-rgen-hub {
+    display: flex; flex-direction: column; gap: 10px;
+    padding-bottom: 4px;
+  }
+  .lp-rgen-intro {
+    font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.5;
+    margin-bottom: 4px; text-align: center;
+  }
+  .lp-rgen-card {
+    background: rgba(14,13,26,0.92);
+    border: 1.5px solid rgba(107,63,160,0.22);
+    border-radius: 18px; padding: 15px 16px;
+    cursor: pointer; transition: border-color 0.18s, box-shadow 0.18s, transform 0.15s;
+    display: flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden;
+  }
+  .lp-rgen-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 17px;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .lp-rgen-card:hover { transform: translateY(-2px); }
+  .lp-rgen-card:active { transform: scale(0.98); }
+
+  /* Mode-specific accent colours */
+  .lp-rgen-card--chaos {
+    border-color: rgba(61,204,122,0.25);
+    box-shadow: 0 4px 18px rgba(61,204,122,0.06);
+  }
+  .lp-rgen-card--chaos:hover {
+    border-color: rgba(61,204,122,0.55);
+    box-shadow: 0 8px 26px rgba(61,204,122,0.14);
+  }
+  .lp-rgen-card--weak {
+    border-color: rgba(245,140,50,0.28);
+    box-shadow: 0 4px 18px rgba(245,140,50,0.06);
+  }
+  .lp-rgen-card--weak:hover {
+    border-color: rgba(245,140,50,0.55);
+    box-shadow: 0 8px 26px rgba(245,140,50,0.15);
+  }
+  .lp-rgen-card--daily {
+    border-color: rgba(91,184,212,0.3);
+    box-shadow: 0 4px 18px rgba(91,184,212,0.07);
+  }
+  .lp-rgen-card--daily:hover {
+    border-color: rgba(91,184,212,0.55);
+    box-shadow: 0 8px 26px rgba(91,184,212,0.16);
+  }
+
+  .lp-rgen-top { display: flex; align-items: center; justify-content: space-between; }
+  .lp-rgen-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1.5px; color: #fff;
+  }
+  .lp-rgen-badge {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 99px;
+  }
+  .badge--fun    { background: rgba(61,204,122,0.15); color: rgba(61,204,122,0.9); border: 1px solid rgba(61,204,122,0.25); }
+  .badge--drill  { background: rgba(245,140,50,0.15); color: rgba(245,140,50,0.9); border: 1px solid rgba(245,140,50,0.25); }
+  .badge--daily  { background: rgba(91,184,212,0.15); color: rgba(91,184,212,0.9); border: 1px solid rgba(91,184,212,0.28); }
+
+  .lp-rgen-desc {
+    font-size: 12px; color: rgba(255,255,255,0.42); line-height: 1.45;
+  }
+  .lp-rgen-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 2px;
+  }
+  .lp-rgen-meta {
+    font-size: 10px; color: rgba(255,255,255,0.25); font-weight: 600; letter-spacing: 0.5px;
+  }
+  .lp-rgen-play {
+    font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+  }
+  .lp-rgen-card--chaos  .lp-rgen-play { color: rgba(61,204,122,0.8);  }
+  .lp-rgen-card--weak   .lp-rgen-play { color: rgba(245,140,50,0.8);  }
+  .lp-rgen-card--daily  .lp-rgen-play { color: rgba(91,184,212,0.85); }
+
+  /* Session header bar (shows mode name during play) */
+  .lp-rand-session-mode-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 10px;
+  }
+
+  /* Daily completed checkmark on card */
+  .lp-rgen-card--daily.daily-done {
+    border-color: rgba(91,184,212,0.5);
+    box-shadow: 0 4px 22px rgba(91,184,212,0.14);
+  }
   .lp-rand-complete-trophy { font-size: 48px; margin-bottom: 8px; }
   .lp-rand-complete-title {
     font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px;
@@ -5125,7 +5216,6 @@
         </div>
       </div>
 
-      <!-- ── Mixed / Puzzle category sub-section ── -->
       <!-- ── Random category section ── -->
       <div class="lp-cat-section hidden" id="lp-lsec-random">
         <div class="lp-cat-section-header">
@@ -5133,21 +5223,55 @@
           <span class="lp-cat-section-title" style="background:rgba(61,204,122,0.15);border-color:rgba(61,204,122,0.3);color:#fff;">🎲 Random</span>
         </div>
 
-        <!-- Setup screen -->
+        <!-- ── Mode Hub (setup screen) ── -->
         <div id="lp-random-setup">
-          <div class="lp-rand-desc">Practice cards drawn from all player and team modes, shuffled together into a quick session.</div>
-          <div class="lp-rand-label">Session length</div>
-          <div class="lp-rand-lengths">
-            <button class="lp-rand-len active" data-len="10" onclick="lpRandPickLen(this)">10 cards</button>
-            <button class="lp-rand-len" data-len="20" onclick="lpRandPickLen(this)">20 cards</button>
-            <button class="lp-rand-len" data-len="50" onclick="lpRandPickLen(this)">50 cards</button>
-            <button class="lp-rand-len" data-len="0" onclick="lpRandPickLen(this)">∞ Endless</button>
+          <div class="lp-rgen-hub">
+            <p class="lp-rgen-intro">Choose a session type — each plays differently.</p>
+
+            <!-- Mixed Chaos -->
+            <div class="lp-rgen-card lp-rgen-card--chaos" onclick="startGeneratedMode('mixed')">
+              <div class="lp-rgen-top">
+                <span class="lp-rgen-name">🎲 Mixed Chaos</span>
+                <span class="lp-rgen-badge badge--fun">FUN</span>
+              </div>
+              <div class="lp-rgen-desc">All categories, lightly biased toward review. Varied and energetic — great for casual play.</div>
+              <div class="lp-rgen-footer">
+                <span class="lp-rgen-meta" id="rgen-chaos-meta">20 cards · All topics</span>
+                <span class="lp-rgen-play">▶ Play</span>
+              </div>
+            </div>
+
+            <!-- Weak Spot Trainer -->
+            <div class="lp-rgen-card lp-rgen-card--weak" onclick="startGeneratedMode('weakSpots')">
+              <div class="lp-rgen-top">
+                <span class="lp-rgen-name">🎯 Weak Spot Trainer</span>
+                <span class="lp-rgen-badge badge--drill">DRILL</span>
+              </div>
+              <div class="lp-rgen-desc">Prioritizes cards you miss most. Smart review that finds your gaps, mixed with easier cards to stay sharp.</div>
+              <div class="lp-rgen-footer">
+                <span class="lp-rgen-meta" id="rgen-weak-meta">16 cards · Your weak areas</span>
+                <span class="lp-rgen-play">▶ Play</span>
+              </div>
+            </div>
+
+            <!-- Daily Challenge -->
+            <div class="lp-rgen-card lp-rgen-card--daily" id="rgen-daily-card" onclick="startGeneratedMode('daily')">
+              <div class="lp-rgen-top">
+                <span class="lp-rgen-name">📅 Daily Challenge</span>
+                <span class="lp-rgen-badge badge--daily" id="rgen-daily-badge">DAILY</span>
+              </div>
+              <div class="lp-rgen-desc">Today's fixed run — same cards for everyone. Your score is locked in for the day.</div>
+              <div class="lp-rgen-footer">
+                <span class="lp-rgen-meta" id="rgen-daily-meta">15 cards · Resets at midnight</span>
+                <span class="lp-rgen-play" id="rgen-daily-play">▶ Play</span>
+              </div>
+            </div>
           </div>
-          <button class="lp-rand-start-btn" onclick="lpStartRandom()">🎲 Start Random Session</button>
         </div>
 
-        <!-- Active session screen -->
+        <!-- ── Active session screen (reused for all modes) ── -->
         <div id="lp-random-session" class="hidden">
+          <div class="lp-rand-session-mode-label" id="lp-rand-mode-label">MIXED CHAOS</div>
           <div class="lp-rand-progress-row">
             <span class="lp-rand-progress-text" id="lp-rand-prog-text">Card 1 / 10</span>
             <span class="lp-rand-accuracy" id="lp-rand-accuracy">0% correct</span>
@@ -5177,26 +5301,27 @@
           <button class="lp-rand-skip" id="lp-rand-skip" onclick="lpRandSkip()">Skip →</button>
         </div>
 
-        <!-- Completion summary -->
+        <!-- ── Completion summary ── -->
         <div id="lp-random-complete" class="hidden">
-          <div class="lp-rand-complete-trophy">🏆</div>
-          <div class="lp-rand-complete-title">Session Complete!</div>
+          <div class="lp-rand-complete-trophy" id="lp-rand-trophy">🏆</div>
+          <div class="lp-rand-complete-title" id="lp-rand-complete-title">Session Complete!</div>
           <div class="lp-rand-complete-stats">
             <div class="lp-rand-stat">
-              <div class="lp-rand-stat-val" id="lp-rand-score">17 / 20</div>
+              <div class="lp-rand-stat-val" id="lp-rand-score">—</div>
               <div class="lp-rand-stat-lbl">Correct</div>
             </div>
             <div class="lp-rand-stat">
-              <div class="lp-rand-stat-val" id="lp-rand-pct">85%</div>
+              <div class="lp-rand-stat-val" id="lp-rand-pct">—</div>
               <div class="lp-rand-stat-lbl">Accuracy</div>
             </div>
             <div class="lp-rand-stat">
-              <div class="lp-rand-stat-val" id="lp-rand-total">20</div>
-              <div class="lp-rand-stat-lbl">Cards Studied</div>
+              <div class="lp-rand-stat-val" id="lp-rand-total">—</div>
+              <div class="lp-rand-stat-lbl">Cards</div>
             </div>
           </div>
+          <div id="lp-rand-daily-best-row" style="display:none;text-align:center;margin-bottom:16px;font-size:12px;color:rgba(91,184,212,0.75);font-weight:600;"></div>
           <button class="lp-rand-start-btn" onclick="lpRandomRestart()">🔄 Play Again</button>
-          <button class="lp-rand-ghost-btn" onclick="lpCloseCat('league')">← Back to Categories</button>
+          <button class="lp-rand-ghost-btn" onclick="lpRandomReset()">← Choose Mode</button>
         </div>
       </div>
 
@@ -7560,48 +7685,117 @@ function lpToggleRoster() {
 }
 
 // ── Random Session ──────────────────────────────────────────
-let _randLen      = 10;   // selected session length (0 = endless)
-let _randDeck     = [];   // shuffled pool of card objects
-let _randIdx      = 0;    // current position in deck
+// ============================================================
+// =================== RANDOM MODE GENERATOR ==================
+// ============================================================
+
+// -- State --
+let _randDeck     = [];
+let _randIdx      = 0;
 let _randCorrect  = 0;
 let _randFlipped  = false;
+let _randGenType  = 'mixed';   // which generator produced this session
 
-// Build the full pool of available random cards
+// ── Card pool ──────────────────────────────────────────────
+// Returns the full flat pool of all playable random cards.
+// Each card: { prompt, answerLabel, answer, tag, type, entity }
 function _buildRandPool() {
   const pool = [];
-  // Player → Team
   ROSTER.forEach(p => {
-    pool.push({ type:'player', prompt: p.name, answerLabel:'Team', answer: 'Utah Jazz', tag:'PLAYER' });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Team',      answer:'Utah Jazz',      tag:'PLAYER', cat:'team'     });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Position',  answer:getPosLabel(p),   tag:'PLAYER', cat:'position' });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Jersey #',  answer:'#'+p.jersey,     tag:'PLAYER', cat:'jersey'   });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Height',    answer:p.height,         tag:'PLAYER', cat:'height'   });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'College',   answer:p.college,        tag:'PLAYER', cat:'college'  });
   });
-  // Player → Position
-  ROSTER.forEach(p => {
-    pool.push({ type:'player', prompt: p.name, answerLabel:'Position', answer: getPosLabel(p), tag:'PLAYER' });
-  });
-  // Player → Jersey Number
-  ROSTER.forEach(p => {
-    pool.push({ type:'player', prompt: p.name, answerLabel:'Jersey #', answer: '#' + p.jersey, tag:'PLAYER' });
-  });
-  // Player → Height
-  ROSTER.forEach(p => {
-    pool.push({ type:'player', prompt: p.name, answerLabel:'Height', answer: p.height, tag:'PLAYER' });
-  });
-  // Player → College
-  ROSTER.forEach(p => {
-    pool.push({ type:'player', prompt: p.name, answerLabel:'College', answer: p.college, tag:'PLAYER' });
-  });
-  // Team cards (static for now — Jazz only live data)
   const teamCards = [
-    { prompt:'Utah Jazz', answerLabel:'Conference', answer:'Western', tag:'TEAM' },
-    { prompt:'Utah Jazz', answerLabel:'Division',   answer:'Northwest', tag:'TEAM' },
-    { prompt:'Utah Jazz', answerLabel:'Arena',      answer:'Delta Center', tag:'TEAM' },
-    { prompt:'Utah Jazz', answerLabel:'Head Coach', answer:'Will Hardy', tag:'TEAM' },
-    { prompt:'Utah Jazz', answerLabel:'Best Player',answer:'Jaren Jackson Jr.', tag:'TEAM' },
-    { prompt:'Utah Jazz', answerLabel:'Players',    answer:'18 Rostered', tag:'TEAM' },
+    { answerLabel:'Conference', answer:'Western',      cat:'teamfact' },
+    { answerLabel:'Division',   answer:'Northwest',    cat:'teamfact' },
+    { answerLabel:'Arena',      answer:'Delta Center', cat:'teamfact' },
+    { answerLabel:'Head Coach', answer:'Will Hardy',   cat:'teamfact' },
+    { answerLabel:'City',       answer:'Salt Lake City', cat:'teamfact' },
+    { answerLabel:'Mascot',     answer:'Jazz Bear',    cat:'teamfact' },
   ];
-  teamCards.forEach(c => pool.push({ type:'team', ...c }));
+  teamCards.forEach(c => pool.push({ type:'team', entity:'Utah Jazz', prompt:'Utah Jazz', tag:'TEAM', ...c }));
   return pool;
 }
 
+// ── Difficulty scoring ──────────────────────────────────────
+// cardKey = `${entity}::${answerLabel}` — lightweight id for per-card tracking
+function _cardKey(card) { return card.entity + '::' + card.answerLabel; }
+
+function _getCardDifficulty(card) {
+  const key  = _cardKey(card);
+  const raw  = _randStats[key] || {};
+  const att  = raw.attempts || 0;
+  const cor  = raw.correct  || 0;
+  const acc  = att > 0 ? cor / att : 0;
+  const missWeight  = 1 - acc;
+  const unseenBoost = att === 0 ? 0.35 : 0;
+  return missWeight + unseenBoost;
+}
+
+// Per-card stats tracked across sessions (persisted in localStorage)
+let _randStats = {};
+function _loadRandStats() {
+  try { _randStats = JSON.parse(localStorage.getItem('siq_rand_stats') || '{}'); } catch(e) { _randStats = {}; }
+}
+function _saveRandStats() {
+  try { localStorage.setItem('siq_rand_stats', JSON.stringify(_randStats)); } catch(e) {}
+}
+function _recordRandResult(card, correct) {
+  const k = _cardKey(card);
+  if (!_randStats[k]) _randStats[k] = { attempts:0, correct:0 };
+  _randStats[k].attempts++;
+  if (correct) _randStats[k].correct++;
+  _saveRandStats();
+}
+_loadRandStats();
+
+// ── Anti-repeat filter ──────────────────────────────────────
+// Ensures no same entity back-to-back and limits same-category clusters.
+function _antiRepeat(cards, entityWindow = 3, catWindow = 2) {
+  const result   = [];
+  const recentEntities = [];
+  const recentCats     = [];
+
+  const remaining = [...cards];
+  while (remaining.length > 0) {
+    // Find first card that doesn't repeat entity or cat
+    const idx = remaining.findIndex(c =>
+      !recentEntities.slice(-entityWindow).includes(c.entity) &&
+      !recentCats.slice(-catWindow).includes(c.cat)
+    );
+    const pick = idx >= 0 ? remaining.splice(idx, 1)[0] : remaining.splice(0, 1)[0];
+    result.push(pick);
+    recentEntities.push(pick.entity);
+    recentCats.push(pick.cat);
+  }
+  return result;
+}
+
+// ── Seeded RNG (for Daily Challenge) ───────────────────────
+function _seededRng(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 1664525 + 1013904223) & 0xffffffff;
+    return (s >>> 0) / 0xffffffff;
+  };
+}
+function _seededShuffle(arr, rng) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function _getDailySeed() {
+  const d = new Date();
+  return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+}
+
+// ── Shuffle helper ──────────────────────────────────────────
 function _shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -7611,42 +7805,121 @@ function _shuffle(arr) {
   return a;
 }
 
-function lpRandPickLen(btn) {
-  document.querySelectorAll('.lp-rand-len').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  _randLen = parseInt(btn.dataset.len);
-}
+// ── Generators ─────────────────────────────────────────────
 
-function lpRandomReset() {
-  const setup    = document.getElementById('lp-random-setup');
-  const session  = document.getElementById('lp-random-session');
-  const complete = document.getElementById('lp-random-complete');
-  if (setup)    setup.classList.remove('hidden');
-  if (session)  session.classList.add('hidden');
-  if (complete) complete.classList.add('hidden');
-  // Reset length buttons to 10
-  document.querySelectorAll('.lp-rand-len').forEach(b => {
-    b.classList.toggle('active', b.dataset.len === '10');
-  });
-  _randLen = 10;
-}
-
-function lpStartRandom() {
+// 1) Mixed Chaos — broad mix, lightly biased toward weak cards, anti-repeat
+function generateMixedRun() {
   const pool = _buildRandPool();
-  _randDeck    = _shuffle(pool);
+  // Light difficulty weighting: weight = 1 + difficulty * 1.5
+  const weighted = [];
+  pool.forEach(card => {
+    const w = Math.round((1 + _getCardDifficulty(card) * 1.5));
+    for (let i = 0; i < w; i++) weighted.push(card);
+  });
+  const shuffled = _shuffle(weighted);
+  // Deduplicate by key, take 20
+  const seen = new Set();
+  const deduped = [];
+  for (const c of shuffled) {
+    const k = _cardKey(c);
+    if (!seen.has(k)) { seen.add(k); deduped.push(c); }
+    if (deduped.length >= 20) break;
+  }
+  return _antiRepeat(deduped);
+}
+
+// 2) Weak Spot Trainer — sorts by difficulty desc, injects easier every 4th
+function generateWeakSpotsRun() {
+  const pool = _buildRandPool();
+  const scored = pool.map(c => ({ card:c, diff: _getCardDifficulty(c) }));
+  scored.sort((a, b) => b.diff - a.diff);
+
+  // Take top 16 hardest (deduplicated)
+  const seen = new Set();
+  const hard = [];
+  for (const { card } of scored) {
+    const k = _cardKey(card);
+    if (!seen.has(k)) { seen.add(k); hard.push(card); }
+    if (hard.length >= 16) break;
+  }
+
+  // Every 4th card, inject an "easy" (high accuracy) card for pacing
+  const easy = pool
+    .map(c => ({ card:c, diff: _getCardDifficulty(c) }))
+    .filter(x => !seen.has(_cardKey(x.card)))
+    .sort((a,b) => a.diff - b.diff)
+    .slice(0, 4)
+    .map(x => x.card);
+
+  const result = [];
+  hard.forEach((c, i) => {
+    result.push(c);
+    if ((i + 1) % 4 === 0 && easy.length) result.push(easy.shift());
+  });
+  return _antiRepeat(result, 2, 2);
+}
+
+// 3) Daily Challenge — deterministic, same run all day, score saved
+function generateDailyRun() {
+  const seed = _getDailySeed();
+  const rng  = _seededRng(seed);
+  const pool = _buildRandPool();
+  const shuffled = _seededShuffle(pool, rng);
+  // Deduplicate, take 15
+  const seen = new Set();
+  const deck = [];
+  for (const c of shuffled) {
+    const k = _cardKey(c);
+    if (!seen.has(k)) { seen.add(k); deck.push(c); }
+    if (deck.length >= 15) break;
+  }
+  return deck; // intentional order — no final shuffle
+}
+
+// ── Generator registry ──────────────────────────────────────
+const RANDOM_GENERATORS = {
+  mixed:     { fn: generateMixedRun,    name: 'Mixed Chaos',       emoji: '🎲', length: 20, color: 'chaos' },
+  weakSpots: { fn: generateWeakSpotsRun, name: 'Weak Spot Trainer', emoji: '🎯', length: 16, color: 'weak'  },
+  daily:     { fn: generateDailyRun,    name: 'Daily Challenge',   emoji: '📅', length: 15, color: 'daily' },
+};
+
+// ── Main entry point ────────────────────────────────────────
+function startGeneratedMode(type) {
+  const gen = RANDOM_GENERATORS[type];
+  if (!gen) { console.error('Unknown generator:', type); return; }
+
+  // Daily: check if already completed today
+  if (type === 'daily') {
+    const saved = _getDailyBest();
+    if (saved && saved.date === _todayKey()) {
+      // Already completed — show result but allow replay
+    }
+  }
+
+  _randGenType = type;
+  const deck   = gen.fn();
+  _randDeck    = deck;
   _randIdx     = 0;
   _randCorrect = 0;
   _randFlipped = false;
 
+  // Update session mode label
+  const label = document.getElementById('lp-rand-mode-label');
+  if (label) label.textContent = gen.emoji + ' ' + gen.name.toUpperCase();
+
   document.getElementById('lp-random-setup').classList.add('hidden');
   document.getElementById('lp-random-complete').classList.add('hidden');
   document.getElementById('lp-random-session').classList.remove('hidden');
+  document.getElementById('lp-rand-daily-best-row').style.display = 'none';
 
   _lpRandRenderCard();
 }
 
+// ── lpStartRandom (legacy alias — maps to mixed) ────────────
+function lpStartRandom() { startGeneratedMode('mixed'); }
+
 function _lpRandTotal() {
-  return _randLen === 0 ? _randDeck.length : Math.min(_randLen, _randDeck.length);
+  return _randDeck.length;
 }
 
 function _lpRandRenderCard() {
@@ -7654,23 +7927,19 @@ function _lpRandRenderCard() {
   const num   = _randIdx + 1;
   const card  = _randDeck[_randIdx];
 
-  // Progress bar + text
-  const prog = _randLen === 0 ? (num / _randDeck.length * 100) : (num / total * 100);
-  document.getElementById('lp-rand-prog-text').textContent =
-    _randLen === 0 ? `Card ${num}` : `Card ${num} / ${total}`;
-  document.getElementById('lp-rand-prog-fill').style.width = Math.min(((num-1)/total*100), 100) + '%';
+  const prog = (num - 1) / total * 100;
+  document.getElementById('lp-rand-prog-text').textContent = `Card ${num} / ${total}`;
+  document.getElementById('lp-rand-prog-fill').style.width = Math.min(prog, 100) + '%';
   const acc = _randIdx === 0 ? 0 : Math.round(_randCorrect / _randIdx * 100);
   document.getElementById('lp-rand-accuracy').textContent = acc + '% correct';
 
-  // Card content
   const catTag = document.getElementById('lp-rand-cat-tag');
   catTag.textContent = card.tag;
   catTag.className = 'lp-rand-category-tag' + (card.type === 'team' ? ' tag-team' : '');
-  document.getElementById('lp-rand-prompt').textContent      = card.prompt;
+  document.getElementById('lp-rand-prompt').textContent       = card.prompt;
   document.getElementById('lp-rand-answer-label').textContent = card.answerLabel;
   document.getElementById('lp-rand-answer').textContent       = card.answer;
 
-  // Reset flip state
   _randFlipped = false;
   const cardEl = document.getElementById('lp-rand-card');
   cardEl.classList.remove('flipped');
@@ -7689,10 +7958,10 @@ function lpRandFlip() {
 }
 
 function lpRandAnswer(correct) {
+  _recordRandResult(_randDeck[_randIdx], correct);
   if (correct) _randCorrect++;
   _randIdx++;
-  const total = _lpRandTotal();
-  if (_randIdx >= total) {
+  if (_randIdx >= _lpRandTotal()) {
     _lpRandShowComplete();
   } else {
     _lpRandRenderCard();
@@ -7701,12 +7970,25 @@ function lpRandAnswer(correct) {
 
 function lpRandSkip() {
   _randIdx++;
-  const total = _lpRandTotal();
-  if (_randIdx >= total) {
+  if (_randIdx >= _lpRandTotal()) {
     _lpRandShowComplete();
   } else {
     _lpRandRenderCard();
   }
+}
+
+// ── Daily persistence ───────────────────────────────────────
+function _todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+function _getDailyBest() {
+  try { return JSON.parse(localStorage.getItem('siq_daily_best') || 'null'); } catch(e) { return null; }
+}
+function _saveDailyBest(score, total) {
+  try {
+    localStorage.setItem('siq_daily_best', JSON.stringify({ date: _todayKey(), score, total, pct: Math.round(score/total*100) }));
+  } catch(e) {}
 }
 
 function _lpRandShowComplete() {
@@ -7716,14 +7998,74 @@ function _lpRandShowComplete() {
   document.getElementById('lp-rand-pct').textContent    = pct + '%';
   document.getElementById('lp-rand-total').textContent  = total;
 
+  // Trophy/title varies by mode
+  const gen = RANDOM_GENERATORS[_randGenType] || {};
+  document.getElementById('lp-rand-trophy').textContent        = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : '💪';
+  document.getElementById('lp-rand-complete-title').textContent =
+    pct >= 90 ? 'Incredible!' : pct >= 70 ? (gen.name || 'Session') + ' Complete!' : 'Keep Training!';
+
+  // Daily: save best and show comparison
+  const dailyRow = document.getElementById('lp-rand-daily-best-row');
+  if (_randGenType === 'daily') {
+    const prev = _getDailyBest();
+    _saveDailyBest(_randCorrect, total);
+    if (prev && prev.date === _todayKey()) {
+      dailyRow.style.display = '';
+      dailyRow.textContent   = `Previous best today: ${prev.score}/${prev.total} (${prev.pct}%)`;
+    } else {
+      dailyRow.style.display = '';
+      dailyRow.textContent   = '📅 Today\'s score saved!';
+    }
+    _updateDailyHub(); // refresh hub card state
+  } else {
+    dailyRow.style.display = 'none';
+  }
+
   document.getElementById('lp-random-session').classList.add('hidden');
   document.getElementById('lp-random-complete').classList.remove('hidden');
 }
 
 function lpRandomRestart() {
-  lpStartRandom();
+  startGeneratedMode(_randGenType);
 }
-// ────────────────────────────────────────────────────────────
+
+function lpRandomReset() {
+  document.getElementById('lp-random-setup').classList.remove('hidden');
+  document.getElementById('lp-random-session').classList.add('hidden');
+  document.getElementById('lp-random-complete').classList.add('hidden');
+  _updateDailyHub();
+}
+
+// ── Update hub card UI based on daily state ─────────────────
+function _updateDailyHub() {
+  const card  = document.getElementById('rgen-daily-card');
+  const badge = document.getElementById('rgen-daily-badge');
+  const meta  = document.getElementById('rgen-daily-meta');
+  const play  = document.getElementById('rgen-daily-play');
+  if (!card) return;
+
+  const best = _getDailyBest();
+  const doneToday = best && best.date === _todayKey();
+
+  if (doneToday) {
+    card.classList.add('daily-done');
+    if (badge) badge.textContent = '✓ DONE';
+    if (meta)  meta.textContent  = `Best today: ${best.score}/${best.total} · ${best.pct}%`;
+    if (play)  play.textContent  = '▶ Retry';
+  } else {
+    card.classList.remove('daily-done');
+    if (badge) badge.textContent = 'DAILY';
+    if (meta)  meta.textContent  = '15 cards · Resets at midnight';
+    if (play)  play.textContent  = '▶ Play';
+  }
+}
+
+// ── Legacy compat shims ─────────────────────────────────────
+function lpRandPickLen()  { /* no-op — length is now per-generator */ }
+
+// ============================================================
+// ================ END RANDOM MODE GENERATOR =================
+// ============================================================
 
 function lpSelectLeagueCat(cat) {
   if (cat === 'random') {
@@ -7735,8 +8077,9 @@ function lpSelectLeagueCat(cat) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.toggle('hidden', s !== 'random');
     });
-    // Reset random to setup screen
+    // Reset random to hub and refresh daily state
     lpRandomReset();
+    _updateDailyHub();
     return;
   }
   // Hide grid, show the right section
