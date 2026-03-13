@@ -4878,14 +4878,14 @@
         <div class="lp-tier-panel" id="lp-lpanel-p-rookie">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👤 Players — Identity</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','statsPlayer')">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','player_team')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
               <div class="lp-mcard-count">~450 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','namePos')">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','player_position')">
               <div class="lp-mcard-icon">📍</div>
               <div class="lp-mcard-title">Player → Position</div>
               <div class="lp-mcard-count">~450 cards</div>
@@ -5440,18 +5440,19 @@
         <div class="lp-tier-panel" id="lp-tpanel-tp-rookie">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👤 Roster Basics</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','namePos')">
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_position')">
               <div class="lp-mcard-icon">📍</div>
               <div class="lp-mcard-title">Player → Position</div>
               <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_jersey')">
               <div class="lp-mcard-icon">🔢</div>
               <div class="lp-mcard-title">Player → Jersey #</div>
               <div class="lp-mcard-count">16 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🌍</div>
@@ -5464,7 +5465,7 @@
         <div class="lp-tier-panel hidden" id="lp-tpanel-tp-starter">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👤 Player Profile</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','statsPlayer')">
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_height')">
               <div class="lp-mcard-icon">📏</div>
               <div class="lp-mcard-title">Player → Height</div>
               <div class="lp-mcard-count">16 cards</div>
@@ -5477,11 +5478,12 @@
               <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_college')">
               <div class="lp-mcard-icon">🎓</div>
               <div class="lp-mcard-title">Player → College</div>
               <div class="lp-mcard-count">16 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at Starter</span></div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">📅</div>
@@ -5545,24 +5547,48 @@
         </div>
         <div class="lp-tier-panel" id="lp-tpanel-ti-rookie">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏀 Current Roster Info</div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">⭐</div>
-              <div class="lp-mcard-title">Best Player → Name</div>
+            <div class="lp-mode-grid-label">🏟 Team Facts</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_city')">
+              <div class="lp-mcard-icon">🌆</div>
+              <div class="lp-mcard-title">Team → City</div>
               <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">🛡️</div>
-              <div class="lp-mcard-title">Best Defender → Name</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_conference')">
+              <div class="lp-mcard-icon">🗺️</div>
+              <div class="lp-mcard-title">Team → Conference</div>
               <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">🏆</div>
-              <div class="lp-mcard-title">Top 3 → Players</div>
-              <div class="lp-mcard-count">3 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_arena')">
+              <div class="lp-mcard-icon">🏟️</div>
+              <div class="lp-mcard-title">Team → Arena</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_mascot')">
+              <div class="lp-mcard-icon">🐻</div>
+              <div class="lp-mcard-title">Team → Mascot</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_colors')">
+              <div class="lp-mcard-icon">🎨</div>
+              <div class="lp-mcard-title">Team → Colors</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_division')">
+              <div class="lp-mcard-icon">📍</div>
+              <div class="lp-mcard-title">Team → Division</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
           </div>
         </div>
@@ -5599,17 +5625,18 @@
         <div class="lp-tier-panel" id="lp-tpanel-th-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 Franchise</div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_champs')">
               <div class="lp-mcard-icon">🏆</div>
               <div class="lp-mcard-title">Championships Won</div>
               <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">📅</div>
               <div class="lp-mcard-title">Last Title Year</div>
               <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at All-Star</span></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
             </div>
           </div>
         </div>
@@ -5941,6 +5968,279 @@ function getPosLabel(p) { return posLabelMap[p.name] || posMap[p.position] || p.
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
+// ============================================================
+// =================== DECK BUILDER SYSTEM ====================
+// ============================================================
+
+// -- Test dataset (used by MODE_BUILDERS; mirrors full ROSTER) --
+const TEST_TEAM = {
+  name: "Utah Jazz",
+  city: "Salt Lake City",
+  conference: "West",
+  division: "Northwest",
+  arena: "Delta Center",
+  mascot: "Jazz Bear",
+  colors: "Purple, Black, White",
+  championships: "0"
+};
+
+// TEST_ROSTER pulls from the live ROSTER array so they stay in sync
+// (defined as a getter so it always reflects ROSTER at call time)
+const TEST_ROSTER = new Proxy([], {
+  get(_, prop) {
+    if (prop === 'length') return ROSTER.length;
+    if (prop === Symbol.iterator) return () => ROSTER[Symbol.iterator]();
+    if (!isNaN(prop)) return ROSTER[prop] ? {
+      name:     ROSTER[prop].name,
+      team:     "Utah Jazz",
+      position: getPosLabel(ROSTER[prop]),
+      jersey:   ROSTER[prop].jersey,
+      height:   ROSTER[prop].height,
+      college:  ROSTER[prop].college,
+    } : undefined;
+    // support .map, .forEach, etc.
+    if (typeof ROSTER[prop] === 'function') {
+      return (...args) => {
+        const mapped = ROSTER.map(p => ({
+          name:     p.name,
+          team:     "Utah Jazz",
+          position: getPosLabel(p),
+          jersey:   p.jersey,
+          height:   p.height,
+          college:  p.college,
+        }));
+        return mapped[prop](...args);
+      };
+    }
+    return ROSTER[prop];
+  }
+});
+
+// -- Card factory --
+function makeCard(front, back, hint) {
+  return { front: String(front), back: String(back), hint: hint ? String(hint) : null };
+}
+
+// -- Player deck builders --
+function buildPlayerToTeamDeck(roster)     { return roster.map(p => makeCard(p.name, p.team,     'Which team does this player play for?')); }
+function buildPlayerToPositionDeck(roster) { return roster.map(p => makeCard(p.name, p.position, 'What position does this player play?')); }
+function buildPlayerToJerseyDeck(roster)   { return roster.map(p => makeCard(p.name, '#' + p.jersey, "What is this player's jersey number?")); }
+function buildPlayerToHeightDeck(roster)   { return roster.map(p => makeCard(p.name, p.height,   "How tall is this player?")); }
+function buildPlayerToCollegeDeck(roster)  { return roster.map(p => makeCard(p.name, p.college,  "Where did this player go to college?")); }
+
+// -- Team deck builders --
+function buildTeamToCityDeck(team)         { return [makeCard(team.name, team.city,         'What city does this team play in?')]; }
+function buildTeamToConferenceDeck(team)   { return [makeCard(team.name, team.conference,   'What conference is this team in?')]; }
+function buildTeamToArenaDeck(team)        { return [makeCard(team.name, team.arena,        'What arena does this team play in?')]; }
+function buildTeamToMascotDeck(team)       { return [makeCard(team.name, team.mascot,       "What is this team's mascot?")]; }
+function buildTeamToColorsDeck(team)       { return [makeCard(team.name, team.colors,       "What are this team's colors?")]; }
+function buildTeamToDivisionDeck(team)     { return [makeCard(team.name, team.division,     'What division is this team in?')]; }
+function buildTeamToChampsDeck(team)       { return [makeCard(team.name, team.championships,'How many championships has this team won?')]; }
+
+// -- Mode registry --
+const MODE_BUILDERS = {
+  // Player modes
+  player_position:   () => buildPlayerToPositionDeck(TEST_ROSTER),
+  player_jersey:     () => buildPlayerToJerseyDeck(TEST_ROSTER),
+  player_height:     () => buildPlayerToHeightDeck(TEST_ROSTER),
+  player_college:    () => buildPlayerToCollegeDeck(TEST_ROSTER),
+  player_team:       () => buildPlayerToTeamDeck(TEST_ROSTER),
+  // Team modes
+  team_city:         () => buildTeamToCityDeck(TEST_TEAM),
+  team_conference:   () => buildTeamToConferenceDeck(TEST_TEAM),
+  team_arena:        () => buildTeamToArenaDeck(TEST_TEAM),
+  team_mascot:       () => buildTeamToMascotDeck(TEST_TEAM),
+  team_colors:       () => buildTeamToColorsDeck(TEST_TEAM),
+  team_division:     () => buildTeamToDivisionDeck(TEST_TEAM),
+  team_champs:       () => buildTeamToChampsDeck(TEST_TEAM),
+};
+
+// -- Mode display titles --
+const SESSION_MODE_TITLES = {
+  player_position: 'Player → Position',
+  player_jersey:   'Player → Jersey #',
+  player_height:   'Player → Height',
+  player_college:  'Player → College',
+  player_team:     'Player → Team',
+  team_city:       'Team → City',
+  team_conference: 'Team → Conference',
+  team_arena:      'Team → Arena',
+  team_mascot:     'Team → Mascot',
+  team_colors:     'Team → Colors',
+  team_division:   'Team → Division',
+  team_champs:     'Team → Championships',
+};
+
+// -- Session state for the generic card engine --
+let _sessionDeck   = [];   // array of {front, back, hint} card objects
+let _sessionIdx    = 0;
+let _sessionMode   = null; // modeKey string from MODE_BUILDERS
+let _sessionScores = [];   // parallel array: {attempts, correct} per card
+
+// ===================== startFlashSession =====================
+// Entry point for any MODE_BUILDERS mode.
+// Builds the deck, resets session state, wires the existing flashcard UI.
+function startFlashSession(cards, opts) {
+  opts = opts || {};
+  const doShuffle = opts.shuffle !== false;
+
+  _sessionDeck   = doShuffle ? shuffleArr([...cards]) : [...cards];
+  _sessionIdx    = 0;
+  _sessionScores = _sessionDeck.map(() => ({ attempts: 0, correct: 0 }));
+
+  // Reset shared session vars
+  isFlipped = false; cardAnswered = false; isFlipping = false; mcSelected = null;
+  fcStreak = 0; fcBestStreak = 0; fcCorrectCount = 0;
+  _fcReversed = false;
+  const reverseBtn = document.getElementById('fcReverseBtn');
+  if (reverseBtn) reverseBtn.classList.remove('active');
+
+  // Wire UI elements
+  document.getElementById('cardScene').style.display    = '';
+  document.getElementById('answerBtns').style.display   = '';
+  document.getElementById('mcOptions').style.display    = 'none';
+  document.getElementById('lineupMode').style.display   = 'none';
+  document.getElementById('roundComplete').classList.remove('show');
+  document.getElementById('fcTotal').textContent        = _sessionDeck.length;
+  document.getElementById('fcModeTitle').textContent    = SESSION_MODE_TITLES[_sessionMode] || '';
+
+  _fcUpdateStreakBadge();
+  loadSessionCard();
+  showPage('flashcards');
+}
+
+function shuffleArr(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ===================== loadSessionCard =====================
+// Renders a {front, back} card object into the existing card UI.
+function loadSessionCard() {
+  if (_sessionIdx >= _sessionDeck.length) { endSessionRound(); return; }
+
+  const card   = _sessionDeck[_sessionIdx];
+  const scoreP = _sessionScores[_sessionIdx];
+
+  isFlipped = false; cardAnswered = false; isFlipping = false; mcSelected = null;
+
+  // Reset card to front face instantly
+  const c3d = document.getElementById('card3d');
+  c3d.style.transition = 'none';
+  c3d.classList.remove('flipped');
+  void c3d.offsetWidth;
+  c3d.style.transition = '';
+
+  // Front face: show the prompt text
+  const photoEl    = document.getElementById('playerPhoto');
+  const overlayEl  = document.getElementById('photoOverlay');
+  const frontTextEl = document.getElementById('cardFrontText');
+  photoEl.style.display   = 'none';
+  overlayEl.style.display = 'none';
+  frontTextEl.style.display = '';
+
+  // Show hint or generic label
+  const hint = _fcReversed ? (card.hint || 'Who is this?') : (card.hint || 'What is the answer?');
+  const displayFront = _fcReversed ? card.back  : card.front;
+  const displayBack  = _fcReversed ? card.front : card.back;
+
+  frontTextEl.innerHTML = `
+    <div class="front-label">${hint}</div>
+    <div class="front-main">${displayFront}</div>`;
+
+  // Back face
+  const backPhotoEl = document.getElementById('backPhoto');
+  backPhotoEl.src = '';
+  backPhotoEl.style.display = 'none';
+  document.getElementById('backName').textContent = displayBack;
+  document.getElementById('backPos').textContent  = '';
+  document.getElementById('backStats').innerHTML  = '';
+
+  // Streak label
+  const m = scoreP.attempts === 0 ? null : Math.round((scoreP.correct / scoreP.attempts) * 100);
+  document.getElementById('cardStreak').innerHTML = `<span>${scoreP.attempts === 0 ? 'First attempt' : scoreP.correct + '/' + scoreP.attempts + ' correct (' + m + '%)'}</span>`;
+
+  // Progress
+  document.getElementById('fcCurrent').textContent = _sessionIdx + 1;
+  document.getElementById('fcProgressBar').style.width = ((_sessionIdx / _sessionDeck.length) * 100) + '%';
+
+  // Lock answer buttons until flip
+  const btns = document.getElementById('answerBtns');
+  btns.classList.add('answer-btns-hidden', 'answer-btns-locked');
+
+  // Entering animation
+  const scene = document.getElementById('cardScene');
+  scene.classList.remove('entering');
+  void scene.offsetWidth;
+  scene.classList.add('entering');
+}
+
+// ===================== answerSessionCard =====================
+// Called by the existing ✅/❌ buttons when in a session mode.
+function answerSessionCard(correct) {
+  if (cardAnswered || !isFlipped || isFlipping) return;
+  cardAnswered = true;
+
+  const scoreP = _sessionScores[_sessionIdx];
+  scoreP.attempts++;
+  if (correct) { scoreP.correct++; xpAward(3); }
+
+  if (correct) {
+    fcCorrectCount++;
+    fcStreak++;
+    if (fcStreak > fcBestStreak) fcBestStreak = fcStreak;
+  } else {
+    fcStreak = 0;
+  }
+  _fcUpdateStreakBadge();
+
+  const flash = document.getElementById('feedbackFlash');
+  flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
+  setTimeout(() => { flash.className = 'feedback-flash'; }, 380);
+
+  isFlipping = true;
+  document.getElementById('card3d').classList.remove('flipped');
+  _sessionIdx++;
+  setTimeout(() => { isFlipping = false; loadSessionCard(); }, 500);
+}
+
+// ===================== endSessionRound =====================
+function endSessionRound() {
+  document.getElementById('cardScene').style.display  = 'none';
+  document.getElementById('answerBtns').style.display = 'none';
+  document.getElementById('mcOptions').style.display  = 'none';
+
+  const total    = _sessionScores.reduce((s, p) => s + p.attempts, 0);
+  const correct  = _sessionScores.reduce((s, p) => s + p.correct, 0);
+  const accuracy = total === 0 ? 0 : Math.round((correct / total) * 100);
+
+  document.getElementById('rcCorrect').textContent    = correct;
+  document.getElementById('rcAccuracy').textContent   = accuracy + '%';
+  document.getElementById('rcBestStreak').textContent = fcBestStreak;
+
+  const msgs = ['Keep practicing! 💪', 'Great effort! 🎯', 'Solid round! 🏀', 'Impressive! ⭐', 'Perfect round! 🏆'];
+  document.getElementById('roundCompleteMsg').textContent = accuracy >= 90 ? msgs[4] : accuracy >= 70 ? msgs[3] : accuracy >= 50 ? msgs[2] : accuracy >= 30 ? msgs[1] : msgs[0];
+
+  const rc = document.getElementById('roundComplete');
+  rc.style.display = 'flex';
+  rc.classList.add('show');
+}
+
+// ===================== restartSessionMode =====================
+function restartSessionMode() {
+  if (!_sessionMode) return;
+  const builder = MODE_BUILDERS[_sessionMode];
+  if (!builder) return;
+  startFlashSession(builder(), { shuffle: true });
+}
+
+// ============================================================
+// ================== END DECK BUILDER SYSTEM =================
+// ============================================================
+
 const modes = ['photoName', 'namePos', 'statsPlayer', 'multiChoice', 'lineup'];
 let modeData = {};
 modes.forEach(m => { modeData[m] = ROSTER.map((p, i) => ({ idx: i, correct: 0, attempts: 0 })); });
@@ -6034,6 +6334,14 @@ function updateModeStats() {
 
 // ===================== START MODE =====================
 function startMode(mode) {
+  // ── New deck-builder modes ──────────────────────────────────
+  if (MODE_BUILDERS[mode]) {
+    _sessionMode = mode;
+    const builder = MODE_BUILDERS[mode];
+    startFlashSession(builder(), { shuffle: true });
+    return;
+  }
+  // ── Legacy roster-index modes ───────────────────────────────
   currentMode = mode;
   _fcReversed = false;
   isFlipping = false;
@@ -6049,7 +6357,6 @@ function startMode(mode) {
   document.getElementById('lineupMode').style.display = 'none';
   document.getElementById('roundComplete').classList.remove('show');
   document.getElementById('fcTotal').textContent = deck.length;
-  // Set mode title
   const modeTitles = {
     namePos: 'Player → Position & Jersey',
     statsPlayer: 'Player Stats',
@@ -6062,10 +6369,14 @@ function startMode(mode) {
   loadCard();
   showPage('flashcards');
 }
-function restartCurrentMode() { startMode(currentMode); }
+function restartCurrentMode() {
+  if (_sessionMode && MODE_BUILDERS[_sessionMode]) { restartSessionMode(); return; }
+  startMode(currentMode);
+}
 
-// ===================== LOAD CARD =====================
+// ===================== LOAD CARD (legacy roster-index engine) =====================
 function loadCard() {
+  _sessionMode = null; // ensure answerCard routes to legacy path
   if (deckIndex >= deck.length) { endRound(); return; }
   const playerIdx = deck[deckIndex];
   const pd = ROSTER[playerIdx];
@@ -6166,7 +6477,8 @@ function _fcUpdateStreakBadge() {
 }
 
 function flipCard() {
-  if (cardAnswered || isFlipping || currentMode === 'multiChoice') return;
+  if (cardAnswered || isFlipping) return;
+  if (currentMode === 'multiChoice' && !_sessionMode) return;
   if (isFlipped) return;
   isFlipping = true;
   isFlipped  = true;
@@ -6181,6 +6493,8 @@ function flipCard() {
 }
 
 function answerCard(correct) {
+  // Route to session engine for deck-builder modes
+  if (_sessionMode && MODE_BUILDERS[_sessionMode]) { answerSessionCard(correct); return; }
   if (cardAnswered || !isFlipped || isFlipping) return;
   cardAnswered = true;
 
