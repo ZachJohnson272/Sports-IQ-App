@@ -5278,7 +5278,7 @@
       </div>
 
       <!-- Team Dashboard Card (header + snapshot merged) -->
-      <div class="lp-team-header-wrap" style="display:none;">
+      <div class="lp-team-header-wrap" style="margin-bottom: 16px;">
         <div class="lp-team-info-panel" id="lp-team-info-panel">
           <!-- Top row: name + mastery -->
           <div class="lp-tip-top-row">
@@ -5301,7 +5301,7 @@
       </div>
 
       <!-- Roster — feature action row -->
-      <div class="lp-roster-drop" id="lp-roster-drop" style="display:none;">
+      <div class="lp-roster-drop" id="lp-roster-drop" style="margin-bottom: 28px;">
         <button class="lp-roster-toggle" onclick="lpToggleRoster()" id="lp-roster-toggle">
           <span class="lp-roster-toggle-icon">👥</span>
           <span class="lp-roster-toggle-label">Current Roster</span>
@@ -7411,6 +7411,16 @@ function lpGoPanel(n, subtype) {
     // Reset team cat grid
     const g = document.getElementById('lp-team-cat-grid');
     if (g) g.style.display = '';
+    // Always restore team overview sections when returning to overview panel
+    const teamHeaderWrap = document.querySelector('.lp-team-header-wrap');
+    const rosterDrop = document.getElementById('lp-roster-drop');
+    if (teamHeaderWrap) teamHeaderWrap.style.display = '';
+    if (rosterDrop) rosterDrop.style.display = '';
+    // Collapse roster body so it is tidy on return
+    const rosterBody = document.getElementById('lp-roster-body');
+    const rosterChevron = document.getElementById('lp-roster-chevron');
+    if (rosterBody) rosterBody.classList.add('hidden');
+    if (rosterChevron) rosterChevron.textContent = '›';
     ['players','teaminfo','history'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
@@ -8135,6 +8145,16 @@ function lpCloseCat(scope) {
   } else {
     const grid = document.getElementById('lp-team-cat-grid');
     if (grid) grid.style.display = '';
+    // Restore team overview sections
+    const teamHeaderWrap = document.querySelector('.lp-team-header-wrap');
+    const rosterDrop = document.getElementById('lp-roster-drop');
+    if (teamHeaderWrap) teamHeaderWrap.style.display = '';
+    if (rosterDrop) rosterDrop.style.display = '';
+    // Collapse roster body so it is tidy on return
+    const rosterBody = document.getElementById('lp-roster-body');
+    const rosterChevron = document.getElementById('lp-roster-chevron');
+    if (rosterBody) rosterBody.classList.add('hidden');
+    if (rosterChevron) rosterChevron.textContent = '›';
     ['players','teaminfo','history'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
@@ -8146,6 +8166,13 @@ function lpSelectTeamCat(cat) {
   const grid = document.getElementById('lp-team-cat-grid');
   const sections = ['players','teaminfo','history'];
   if (grid) grid.style.display = 'none';
+  // Hide team overview sections — this is now a focused mode page
+  const infoPanel = document.getElementById('lp-team-info-panel');
+  const rosterDrop = document.getElementById('lp-roster-drop');
+  const teamHeaderWrap = document.querySelector('.lp-team-header-wrap');
+  if (infoPanel) infoPanel.closest('.lp-team-header-wrap') ? infoPanel.closest('.lp-team-header-wrap').style.display = 'none' : (infoPanel.style.display = 'none');
+  if (teamHeaderWrap) teamHeaderWrap.style.display = 'none';
+  if (rosterDrop) rosterDrop.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-tsec-' + s);
     if (sec) sec.classList.toggle('hidden', s !== cat);
