@@ -2613,40 +2613,51 @@
     z-index: 0;
   }
   .lp-team-info-panel {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; flex-direction: column;
     background: linear-gradient(135deg, rgba(28,20,48,0.97) 0%, rgba(16,24,36,0.97) 100%);
     border: 1px solid rgba(107,63,160,0.4);
     border-radius: 16px;
-    padding: 18px 20px;
+    padding: 16px 18px;
     margin-bottom: 0;
     position: relative; overflow: hidden;
     z-index: 1;
+    gap: 0;
   }
   .lp-team-info-panel::before {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(107,63,160,0.14) 0%, rgba(91,184,212,0.06) 100%);
     pointer-events: none;
   }
-  .lp-tip-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-  .lp-tip-logo { font-size: 30px; flex-shrink: 0; }
-  .lp-tip-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  /* Top row: name left, mastery right */
+  .lp-tip-top-row {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    position: relative; z-index: 1;
+  }
   .lp-tip-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 32px; letter-spacing: 2px; color: #fff; line-height: 1;
   }
   .lp-tip-meta { font-size: 11px; color: var(--jazz-sky); font-weight: 500; letter-spacing: 0.3px; }
-  /* Divider between name and mastery */
-  .lp-tip-divider {
-    width: 1px; align-self: stretch;
-    background: rgba(107,63,160,0.3);
-    margin: 0 18px; flex-shrink: 0;
-  }
   .lp-tip-right { text-align: right; flex-shrink: 0; }
   .lp-tip-mastery-pct {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px; color: #fff; line-height: 1;
+    font-size: 28px; color: #fff; line-height: 1;
   }
-  .lp-tip-mastery-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 3px; }
+  .lp-tip-mastery-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+  /* Thin inner divider */
+  .lp-tip-inner-divider {
+    height: 1px; background: rgba(107,63,160,0.22);
+    margin: 12px 0; position: relative; z-index: 1;
+  }
+  /* Snapshot 2×2 inside the card */
+  .lp-tip-snap-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 9px 8px;
+    position: relative; z-index: 1;
+  }
+  /* Legacy compat — keep old refs from breaking */
+  .lp-tip-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+  .lp-tip-divider { display: none; }
 
   /* ── Team Snapshot 2×2 grid ── */
   .lp-snapshot-label {
@@ -5221,41 +5232,27 @@
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz — Flashcards</div>
       </div>
 
-      <!-- Team Info Panel -->
-      <div class="lp-team-header-wrap" style="margin-bottom: 18px;">
+      <!-- Team Dashboard Card (header + snapshot merged) -->
+      <div class="lp-team-header-wrap" style="margin-bottom: 16px;">
         <div class="lp-team-info-panel" id="lp-team-info-panel">
-          <div class="lp-tip-left">
-            <div class="lp-tip-text">
-              <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
+          <!-- Top row: name + mastery -->
+          <div class="lp-tip-top-row">
+            <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
+            <div class="lp-tip-right">
+              <div class="lp-tip-mastery-pct" id="lp-ts-pct">0%</div>
+              <div class="lp-tip-mastery-lbl">Mastery</div>
             </div>
           </div>
-          <div class="lp-tip-divider"></div>
-          <div class="lp-tip-right">
-            <div class="lp-tip-mastery-pct" id="lp-ts-pct">0%</div>
-            <div class="lp-tip-mastery-lbl">Mastery</div>
+          <!-- Divider -->
+          <div class="lp-tip-inner-divider"></div>
+          <!-- Snapshot 2×2 -->
+          <div class="lp-tip-snap-grid" id="lp-team-inforow">
+            <span class="lp-tir-item"><span class="lp-tir-icon">🏟</span><span class="lp-tir-val" id="lp-snap-arena">Delta Center</span></span>
+            <span class="lp-tir-item"><span class="lp-tir-icon">👔</span><span class="lp-tir-val" id="lp-snap-coach">Will Hardy</span></span>
+            <span class="lp-tir-item"><span class="lp-tir-icon">🏀</span><span class="lp-tir-val" id="lp-snap-conf">West</span></span>
+            <span class="lp-tir-item"><span class="lp-tir-icon">🏆</span><span class="lp-tir-val" id="lp-snap-titles">0</span><span class="lp-tir-label">Titles</span></span>
           </div>
         </div>
-      </div>
-
-      <!-- Snapshot — 2×2 grid inside one outlined card -->
-      <div class="lp-snapshot-row" id="lp-team-inforow" style="margin-bottom: 18px;">
-        <span class="lp-tir-item">
-          <span class="lp-tir-icon">🏟</span>
-          <span class="lp-tir-val" id="lp-snap-arena">Delta Center</span>
-        </span>
-        <span class="lp-tir-item">
-          <span class="lp-tir-icon">👔</span>
-          <span class="lp-tir-val" id="lp-snap-coach">Will Hardy</span>
-        </span>
-        <span class="lp-tir-item">
-          <span class="lp-tir-icon">🏀</span>
-          <span class="lp-tir-val" id="lp-snap-conf">West</span>
-        </span>
-        <span class="lp-tir-item">
-          <span class="lp-tir-icon">🏆</span>
-          <span class="lp-tir-val" id="lp-snap-titles">0</span>
-          <span class="lp-tir-label">Titles</span>
-        </span>
       </div>
 
       <!-- Roster — feature action row -->
