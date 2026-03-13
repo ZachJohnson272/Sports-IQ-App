@@ -319,7 +319,8 @@
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.52s cubic-bezier(0.42, 0, 0.28, 1.2);
+    transition: transform 0.45s ease;
+    will-change: transform;
   }
 
   .card-3d.flipped { transform: rotateY(180deg); }
@@ -328,6 +329,7 @@
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid rgba(255,255,255,0.05);
@@ -335,10 +337,10 @@
       0 0 0 1px rgba(255,255,255,0.03),
       0 8px 30px rgba(0,0,0,0.6),
       0 0 40px rgba(107,63,160,0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* NO transform on hover — it breaks 3D flip */
+    transition: box-shadow 0.2s ease;
   }
   .card-face:hover {
-    transform: translateY(-2px);
     box-shadow:
       0 0 0 1px rgba(255,255,255,0.04),
       0 14px 40px rgba(0,0,0,0.7),
@@ -6054,9 +6056,14 @@ function loadCard() {
   const playerIdx = deck[deckIndex];
   const pd = ROSTER[playerIdx];
   const modePd = modeData[currentMode][playerIdx];
-  isFlipped = false; cardAnswered = false; mcSelected = null;
+  isFlipped = false; cardAnswered = false; isFlipping = false; mcSelected = null;
   const c3d = document.getElementById('card3d');
+  // Disable transition briefly so the reset to front is instant, not animated
+  c3d.style.transition = 'none';
   c3d.classList.remove('flipped');
+  // Force reflow, then re-enable transition for next flip
+  void c3d.offsetWidth;
+  c3d.style.transition = '';
   const photoEl = document.getElementById('playerPhoto');
   const overlayEl = document.getElementById('photoOverlay');
   const frontTextEl = document.getElementById('cardFrontText');
@@ -6146,18 +6153,17 @@ function _fcUpdateStreakBadge() {
 
 function flipCard() {
   if (cardAnswered || isFlipping || currentMode === 'multiChoice') return;
-  // Only allow one direction: front → back (locking re-flip until next card)
   if (isFlipped) return;
   isFlipping = true;
   isFlipped  = true;
   const card3d = document.getElementById('card3d');
   card3d.classList.add('flipped');
-  // Unlock after transition completes (matches CSS 0.55s)
+  // Unlock after CSS transition completes (matches 0.45s ease)
   setTimeout(() => {
     isFlipping = false;
     const btns = document.getElementById('answerBtns');
     btns.classList.remove('answer-btns-hidden', 'answer-btns-locked');
-  }, 560);
+  }, 460);
 }
 
 function answerCard(correct) {
@@ -6184,9 +6190,18 @@ function answerCard(correct) {
   flash.className = 'feedback-flash ' + (correct ? 'show-got' : 'show-miss');
   setTimeout(() => { flash.className = 'feedback-flash'; }, 380);
 
-  // Advance to next card after brief pause
+  // Step 1: unflip the card back to front face first
+  isFlipping = true;
+  const card3d = document.getElementById('card3d');
+  card3d.classList.remove('flipped');
+
+  // Step 2: after the unflip animation completes, advance and load new content
+  // 0.45s CSS + small buffer = 500ms
   deckIndex++;
-  setTimeout(loadCard, 450);
+  setTimeout(() => {
+    isFlipping = false;
+    loadCard();
+  }, 500);
 }
 
 // ===================== MULTIPLE CHOICE =====================
