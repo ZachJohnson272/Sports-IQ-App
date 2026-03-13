@@ -2744,6 +2744,196 @@
   .lp-prog-tier--allstar { background: rgba(245,200,66,0.08); color: rgba(245,200,66,0.6);   border-color: rgba(245,200,66,0.18); }
   .lp-prog-tier--hof     { background: rgba(240,112,80,0.08); color: rgba(240,112,80,0.6);   border-color: rgba(240,112,80,0.18); }
 
+  /* ── Random category card ── */
+  .lp-cat-card--random { border-color: rgba(61,204,122,0.22); }
+  .lp-cat-card--random::before { background: radial-gradient(ellipse at left, rgba(61,204,122,0.1), transparent 60%); }
+  .lp-cat-card--random:hover { border-color: rgba(61,204,122,0.65); box-shadow: 0 12px 32px rgba(61,204,122,0.2); }
+  .lp-cat-card--random .lp-cat-icon { background: rgba(61,204,122,0.1); border-color: rgba(61,204,122,0.2); }
+  .lp-cat-card--random .lp-cat-badge { background: rgba(61,204,122,0.08); color: rgba(61,204,122,0.55); border-color: rgba(61,204,122,0.15); }
+
+  /* ── Random session UI ── */
+  .lp-rand-desc {
+    font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .lp-rand-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); margin-bottom: 8px;
+  }
+  .lp-rand-lengths {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 7px;
+    margin-bottom: 16px;
+  }
+  .lp-rand-len {
+    background: rgba(14,13,24,0.9);
+    border: 1.5px solid rgba(61,204,122,0.18);
+    border-radius: 12px;
+    padding: 11px 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer; text-align: center;
+    transition: border-color 0.18s, background 0.18s, color 0.18s;
+  }
+  .lp-rand-len:hover { border-color: rgba(61,204,122,0.45); color: #fff; }
+  .lp-rand-len.active {
+    background: rgba(61,204,122,0.12);
+    border-color: rgba(61,204,122,0.6);
+    color: #fff;
+    box-shadow: 0 3px 14px rgba(61,204,122,0.15);
+  }
+  .lp-rand-start-btn {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, rgba(61,204,122,0.9), rgba(40,160,100,0.9));
+    border: none; border-radius: 14px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px;
+    color: #fff; cursor: pointer;
+    box-shadow: 0 6px 22px rgba(61,204,122,0.28);
+    transition: transform 0.15s, box-shadow 0.15s;
+    margin-bottom: 0;
+  }
+  .lp-rand-start-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(61,204,122,0.38); }
+  .lp-rand-start-btn:active { transform: scale(0.97); }
+  .lp-rand-ghost-btn {
+    width: 100%; padding: 11px;
+    background: none; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; margin-top: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.35); cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .lp-rand-ghost-btn:hover { color: #fff; border-color: rgba(255,255,255,0.25); }
+
+  /* Progress bar */
+  .lp-rand-progress-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 6px;
+  }
+  .lp-rand-progress-text {
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,0.6);
+  }
+  .lp-rand-accuracy {
+    font-size: 11px; font-weight: 600; color: rgba(61,204,122,0.7);
+  }
+  .lp-rand-progress-bar-wrap {
+    height: 4px; border-radius: 99px;
+    background: rgba(255,255,255,0.06);
+    overflow: hidden; margin-bottom: 14px;
+  }
+  .lp-rand-progress-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, rgba(61,204,122,0.8), rgba(91,184,212,0.8));
+    transition: width 0.4s ease;
+  }
+
+  /* Flip card */
+  .lp-rand-card {
+    perspective: 900px; width: 100%; height: 190px;
+    margin-bottom: 14px; cursor: pointer;
+  }
+  .lp-rand-card.flipped .lp-rand-card-inner { transform: rotateX(180deg); }
+  .lp-rand-card-inner {
+    width: 100%; height: 100%;
+    position: relative; transform-style: preserve-3d;
+    transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
+  }
+  .lp-rand-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: 18px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 20px;
+  }
+  .lp-rand-front {
+    background: linear-gradient(150deg, rgba(22,16,42,0.98), rgba(12,13,22,0.99));
+    border: 1.5px solid rgba(107,63,160,0.3);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+  }
+  .lp-rand-back {
+    background: linear-gradient(150deg, rgba(16,30,24,0.98), rgba(10,18,14,0.99));
+    border: 1.5px solid rgba(61,204,122,0.35);
+    box-shadow: 0 6px 24px rgba(61,204,122,0.12);
+    transform: rotateX(180deg);
+  }
+  .lp-rand-category-tag {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(107,63,160,0.7); background: rgba(107,63,160,0.12);
+    border: 1px solid rgba(107,63,160,0.2); padding: 3px 10px; border-radius: 99px;
+  }
+  .lp-rand-category-tag.tag-team {
+    color: rgba(245,200,66,0.7); background: rgba(245,200,66,0.08);
+    border-color: rgba(245,200,66,0.18);
+  }
+  .lp-rand-prompt {
+    font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px;
+    color: #fff; text-align: center; line-height: 1.1;
+  }
+  .lp-rand-tap-hint {
+    font-size: 10px; color: rgba(255,255,255,0.2); margin-top: 2px;
+  }
+  .lp-rand-answer-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(61,204,122,0.55);
+  }
+  .lp-rand-answer {
+    font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px;
+    color: #fff; text-align: center; line-height: 1.15;
+  }
+
+  /* Answer buttons */
+  .lp-rand-btns {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .lp-rand-btns.hidden { display: none; }
+  .lp-rand-btn {
+    padding: 13px; border: none; border-radius: 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .lp-rand-miss {
+    background: rgba(220,60,60,0.16); color: rgba(255,100,100,0.85);
+    border: 1.5px solid rgba(220,60,60,0.25);
+  }
+  .lp-rand-got {
+    background: rgba(61,204,122,0.14); color: rgba(61,204,122,0.9);
+    border: 1.5px solid rgba(61,204,122,0.28);
+  }
+  .lp-rand-btn:hover { transform: translateY(-2px); }
+  .lp-rand-btn:active { transform: scale(0.96); }
+  .lp-rand-skip {
+    width: 100%; background: none; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+    color: rgba(255,255,255,0.2); cursor: pointer; padding: 4px;
+    transition: color 0.15s;
+  }
+  .lp-rand-skip:hover { color: rgba(255,255,255,0.5); }
+
+  /* Completion summary */
+  #lp-random-complete { text-align: center; padding: 8px 0; }
+  .lp-rand-complete-trophy { font-size: 48px; margin-bottom: 8px; }
+  .lp-rand-complete-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px;
+    color: #fff; margin-bottom: 20px;
+  }
+  .lp-rand-complete-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px; margin-bottom: 22px;
+  }
+  .lp-rand-stat {
+    background: rgba(20,16,38,0.9);
+    border: 1px solid rgba(107,63,160,0.2);
+    border-radius: 14px; padding: 14px 8px;
+  }
+  .lp-rand-stat-val {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px;
+    color: #fff; line-height: 1;
+  }
+  .lp-rand-stat-lbl {
+    font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); margin-top: 4px;
+  }
+
   /* ── Flashcard rows ── */
   .lp-fc-row {
     padding: 13px 16px;
@@ -4473,13 +4663,13 @@
           </div>
           <div class="lp-cat-arrow">›</div>
         </div>
-        <div class="lp-cat-card lp-cat-card--mixed" id="lp-lcat-mixed" onclick="lpSelectLeagueCat('mixed')">
-          <div class="lp-cat-icon">🧩</div>
+        <div class="lp-cat-card lp-cat-card--random" id="lp-lcat-random" onclick="lpSelectLeagueCat('random')">
+          <div class="lp-cat-icon">🎲</div>
           <div class="lp-cat-body">
-            <div class="lp-cat-title">Mixed</div>
-            <div class="lp-cat-desc">Puzzle modes and cross-category trivia</div>
+            <div class="lp-cat-title">Random</div>
+            <div class="lp-cat-desc">Shuffled practice across all players and teams</div>
             <div class="lp-cat-meta">
-              <span class="lp-cat-badge">~450 puzzles</span>
+              <span class="lp-cat-badge">All modes · shuffled</span>
             </div>
           </div>
           <div class="lp-cat-arrow">›</div>
@@ -4761,19 +4951,77 @@
       </div>
 
       <!-- ── Mixed / Puzzle category sub-section ── -->
-      <div class="lp-cat-section hidden" id="lp-lsec-mixed">
+      <!-- ── Random category section ── -->
+      <div class="lp-cat-section hidden" id="lp-lsec-random">
         <div class="lp-cat-section-header">
           <button class="lp-back-btn" onclick="lpCloseCat('league')">← Categories</button>
-          <span class="lp-cat-section-title">🧩 Mixed</span>
+          <span class="lp-cat-section-title" style="background:rgba(61,204,122,0.15);border-color:rgba(61,204,122,0.3);color:#fff;">🎲 Random</span>
         </div>
-        <div class="lp-mode-grid" style="margin-top:4px">
-          <div class="lp-mode-grid-label">🧩 Puzzle Mode</div>
-          <div class="lp-mcard lp-mcard--locked lp-mcard--puzzle">
-            <div class="lp-mcard-icon">🧩</div>
-            <div class="lp-mcard-title">Teammates → Player</div>
-            <div class="lp-mcard-count">~450 puzzles</div>
-            <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+
+        <!-- Setup screen -->
+        <div id="lp-random-setup">
+          <div class="lp-rand-desc">Practice cards drawn from all player and team modes, shuffled together into a quick session.</div>
+          <div class="lp-rand-label">Session length</div>
+          <div class="lp-rand-lengths">
+            <button class="lp-rand-len active" data-len="10" onclick="lpRandPickLen(this)">10 cards</button>
+            <button class="lp-rand-len" data-len="20" onclick="lpRandPickLen(this)">20 cards</button>
+            <button class="lp-rand-len" data-len="50" onclick="lpRandPickLen(this)">50 cards</button>
+            <button class="lp-rand-len" data-len="0" onclick="lpRandPickLen(this)">∞ Endless</button>
           </div>
+          <button class="lp-rand-start-btn" onclick="lpStartRandom()">🎲 Start Random Session</button>
+        </div>
+
+        <!-- Active session screen -->
+        <div id="lp-random-session" class="hidden">
+          <div class="lp-rand-progress-row">
+            <span class="lp-rand-progress-text" id="lp-rand-prog-text">Card 1 / 10</span>
+            <span class="lp-rand-accuracy" id="lp-rand-accuracy">0% correct</span>
+          </div>
+          <div class="lp-rand-progress-bar-wrap">
+            <div class="lp-rand-progress-bar-fill" id="lp-rand-prog-fill" style="width:0%"></div>
+          </div>
+
+          <div class="lp-rand-card" id="lp-rand-card">
+            <div class="lp-rand-card-inner" id="lp-rand-card-inner">
+              <div class="lp-rand-face lp-rand-front">
+                <div class="lp-rand-category-tag" id="lp-rand-cat-tag">PLAYER</div>
+                <div class="lp-rand-prompt" id="lp-rand-prompt">Loading...</div>
+                <div class="lp-rand-tap-hint">↕ Tap to reveal</div>
+              </div>
+              <div class="lp-rand-face lp-rand-back">
+                <div class="lp-rand-answer-label" id="lp-rand-answer-label">Team</div>
+                <div class="lp-rand-answer" id="lp-rand-answer">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lp-rand-btns hidden" id="lp-rand-btns">
+            <button class="lp-rand-btn lp-rand-miss" onclick="lpRandAnswer(false)">❌ Missed</button>
+            <button class="lp-rand-btn lp-rand-got"  onclick="lpRandAnswer(true)">✅ Got it</button>
+          </div>
+          <button class="lp-rand-skip" id="lp-rand-skip" onclick="lpRandSkip()">Skip →</button>
+        </div>
+
+        <!-- Completion summary -->
+        <div id="lp-random-complete" class="hidden">
+          <div class="lp-rand-complete-trophy">🏆</div>
+          <div class="lp-rand-complete-title">Session Complete!</div>
+          <div class="lp-rand-complete-stats">
+            <div class="lp-rand-stat">
+              <div class="lp-rand-stat-val" id="lp-rand-score">17 / 20</div>
+              <div class="lp-rand-stat-lbl">Correct</div>
+            </div>
+            <div class="lp-rand-stat">
+              <div class="lp-rand-stat-val" id="lp-rand-pct">85%</div>
+              <div class="lp-rand-stat-lbl">Accuracy</div>
+            </div>
+            <div class="lp-rand-stat">
+              <div class="lp-rand-stat-val" id="lp-rand-total">20</div>
+              <div class="lp-rand-stat-lbl">Cards Studied</div>
+            </div>
+          </div>
+          <button class="lp-rand-start-btn" onclick="lpRandomRestart()">🔄 Play Again</button>
+          <button class="lp-rand-ghost-btn" onclick="lpCloseCat('league')">← Back to Categories</button>
         </div>
       </div>
 
@@ -6492,7 +6740,7 @@ function lpGoPanel(n, subtype) {
       // Reset cat grid
       const g = document.getElementById('lp-league-cat-grid');
       if (g) g.style.display = '';
-      ['players','teams','mixed'].forEach(s => {
+      ['players','teams','random'].forEach(s => {
         const sec = document.getElementById('lp-lsec-' + s);
         if (sec) sec.classList.add('hidden');
       });
@@ -6550,7 +6798,7 @@ function lpSwitchPath(path) {
     // Reset cat state
     const g = document.getElementById('lp-league-cat-grid');
     if (g) g.style.display = '';
-    ['players','teams','mixed'].forEach(s => {
+    ['players','teams','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -6685,10 +6933,185 @@ function lpToggleRoster() {
   if (chevron) chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
 }
 
+// ── Random Session ──────────────────────────────────────────
+let _randLen      = 10;   // selected session length (0 = endless)
+let _randDeck     = [];   // shuffled pool of card objects
+let _randIdx      = 0;    // current position in deck
+let _randCorrect  = 0;
+let _randFlipped  = false;
+
+// Build the full pool of available random cards
+function _buildRandPool() {
+  const pool = [];
+  // Player → Team cards (one per active player)
+  ROSTER.forEach(p => {
+    pool.push({ type:'player', prompt: p.name, answerLabel:'Team', answer: 'Utah Jazz', tag:'PLAYER' });
+  });
+  // Player → Position
+  ROSTER.forEach(p => {
+    pool.push({ type:'player', prompt: p.name, answerLabel:'Position', answer: p.position, tag:'PLAYER' });
+  });
+  // Player → Jersey Number
+  ROSTER.forEach(p => {
+    pool.push({ type:'player', prompt: p.name, answerLabel:'Jersey #', answer: '#' + p.jersey, tag:'PLAYER' });
+  });
+  // Player → Height
+  ROSTER.forEach(p => {
+    pool.push({ type:'player', prompt: p.name, answerLabel:'Height', answer: p.height, tag:'PLAYER' });
+  });
+  // Team cards (static for now — Jazz only live data)
+  const teamCards = [
+    { prompt:'Utah Jazz', answerLabel:'Conference', answer:'Western', tag:'TEAM' },
+    { prompt:'Utah Jazz', answerLabel:'Division',   answer:'Northwest', tag:'TEAM' },
+    { prompt:'Utah Jazz', answerLabel:'Arena',      answer:'Delta Center', tag:'TEAM' },
+    { prompt:'Utah Jazz', answerLabel:'Head Coach', answer:'Will Hardy', tag:'TEAM' },
+    { prompt:'Utah Jazz', answerLabel:'Best Player',answer:'Jaren Jackson Jr.', tag:'TEAM' },
+    { prompt:'Utah Jazz', answerLabel:'Players',    answer:'18 Rostered', tag:'TEAM' },
+  ];
+  teamCards.forEach(c => pool.push({ type:'team', ...c }));
+  return pool;
+}
+
+function _shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function lpRandPickLen(btn) {
+  document.querySelectorAll('.lp-rand-len').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  _randLen = parseInt(btn.dataset.len);
+}
+
+function lpRandomReset() {
+  const setup    = document.getElementById('lp-random-setup');
+  const session  = document.getElementById('lp-random-session');
+  const complete = document.getElementById('lp-random-complete');
+  if (setup)    setup.classList.remove('hidden');
+  if (session)  session.classList.add('hidden');
+  if (complete) complete.classList.add('hidden');
+  // Reset length buttons to 10
+  document.querySelectorAll('.lp-rand-len').forEach(b => {
+    b.classList.toggle('active', b.dataset.len === '10');
+  });
+  _randLen = 10;
+}
+
+function lpStartRandom() {
+  const pool = _buildRandPool();
+  _randDeck    = _shuffle(pool);
+  _randIdx     = 0;
+  _randCorrect = 0;
+  _randFlipped = false;
+
+  document.getElementById('lp-random-setup').classList.add('hidden');
+  document.getElementById('lp-random-complete').classList.add('hidden');
+  document.getElementById('lp-random-session').classList.remove('hidden');
+
+  _lpRandRenderCard();
+}
+
+function _lpRandTotal() {
+  return _randLen === 0 ? _randDeck.length : Math.min(_randLen, _randDeck.length);
+}
+
+function _lpRandRenderCard() {
+  const total = _lpRandTotal();
+  const num   = _randIdx + 1;
+  const card  = _randDeck[_randIdx];
+
+  // Progress bar + text
+  const prog = _randLen === 0 ? (num / _randDeck.length * 100) : (num / total * 100);
+  document.getElementById('lp-rand-prog-text').textContent =
+    _randLen === 0 ? `Card ${num}` : `Card ${num} / ${total}`;
+  document.getElementById('lp-rand-prog-fill').style.width = Math.min(((num-1)/total*100), 100) + '%';
+  const acc = _randIdx === 0 ? 0 : Math.round(_randCorrect / _randIdx * 100);
+  document.getElementById('lp-rand-accuracy').textContent = acc + '% correct';
+
+  // Card content
+  const catTag = document.getElementById('lp-rand-cat-tag');
+  catTag.textContent = card.tag;
+  catTag.className = 'lp-rand-category-tag' + (card.type === 'team' ? ' tag-team' : '');
+  document.getElementById('lp-rand-prompt').textContent      = card.prompt;
+  document.getElementById('lp-rand-answer-label').textContent = card.answerLabel;
+  document.getElementById('lp-rand-answer').textContent       = card.answer;
+
+  // Reset flip state
+  _randFlipped = false;
+  const cardEl = document.getElementById('lp-rand-card');
+  cardEl.classList.remove('flipped');
+  cardEl.onclick = lpRandFlip;
+
+  document.getElementById('lp-rand-btns').classList.add('hidden');
+  document.getElementById('lp-rand-skip').style.display = '';
+}
+
+function lpRandFlip() {
+  if (_randFlipped) return;
+  _randFlipped = true;
+  document.getElementById('lp-rand-card').classList.add('flipped');
+  document.getElementById('lp-rand-btns').classList.remove('hidden');
+  document.getElementById('lp-rand-skip').style.display = 'none';
+}
+
+function lpRandAnswer(correct) {
+  if (correct) _randCorrect++;
+  _randIdx++;
+  const total = _lpRandTotal();
+  if (_randIdx >= total) {
+    _lpRandShowComplete();
+  } else {
+    _lpRandRenderCard();
+  }
+}
+
+function lpRandSkip() {
+  _randIdx++;
+  const total = _lpRandTotal();
+  if (_randIdx >= total) {
+    _lpRandShowComplete();
+  } else {
+    _lpRandRenderCard();
+  }
+}
+
+function _lpRandShowComplete() {
+  const total = _lpRandTotal();
+  const pct   = total > 0 ? Math.round(_randCorrect / total * 100) : 0;
+  document.getElementById('lp-rand-score').textContent  = `${_randCorrect} / ${total}`;
+  document.getElementById('lp-rand-pct').textContent    = pct + '%';
+  document.getElementById('lp-rand-total').textContent  = total;
+
+  document.getElementById('lp-random-session').classList.add('hidden');
+  document.getElementById('lp-random-complete').classList.remove('hidden');
+}
+
+function lpRandomRestart() {
+  lpStartRandom();
+}
+// ────────────────────────────────────────────────────────────
+
 function lpSelectLeagueCat(cat) {
+  if (cat === 'random') {
+    // Show random section, hide grid
+    const grid = document.getElementById('lp-league-cat-grid');
+    const sections = ['players','teams','random'];
+    if (grid) grid.style.display = 'none';
+    sections.forEach(s => {
+      const sec = document.getElementById('lp-lsec-' + s);
+      if (sec) sec.classList.toggle('hidden', s !== 'random');
+    });
+    // Reset random to setup screen
+    lpRandomReset();
+    return;
+  }
   // Hide grid, show the right section
   const grid = document.getElementById('lp-league-cat-grid');
-  const sections = ['players','teams','mixed'];
+  const sections = ['players','teams','random'];
   if (grid) grid.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-lsec-' + s);
@@ -6698,7 +7121,6 @@ function lpSelectLeagueCat(cat) {
   const sectionId = 'lp-lsec-' + cat;
   const section = document.getElementById(sectionId);
   if (section) {
-    const firstTab = section.querySelector('.lp-tier-tab');
     const panels = section.querySelectorAll('.lp-tier-panel');
     const tabs = section.querySelectorAll('.lp-tier-tab');
     tabs.forEach((t,i) => t.classList.toggle('active', i === 0));
@@ -6710,7 +7132,7 @@ function lpCloseCat(scope) {
   if (scope === 'league') {
     const grid = document.getElementById('lp-league-cat-grid');
     if (grid) grid.style.display = '';
-    ['players','teams','mixed'].forEach(s => {
+    ['players','teams','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
