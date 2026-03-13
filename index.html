@@ -2517,7 +2517,7 @@
     background: linear-gradient(135deg, rgba(28,20,48,0.97) 0%, rgba(16,24,36,0.97) 100%);
     border: 1px solid rgba(107,63,160,0.4);
     border-radius: 16px;
-    padding: 16px 18px;
+    padding: 18px 20px;
     margin-bottom: 0;
     position: relative; overflow: hidden;
     z-index: 1;
@@ -2532,15 +2532,21 @@
   .lp-tip-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
   .lp-tip-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px; letter-spacing: 1.5px; color: #fff; line-height: 1;
+    font-size: 32px; letter-spacing: 2px; color: #fff; line-height: 1;
   }
   .lp-tip-meta { font-size: 11px; color: var(--jazz-sky); font-weight: 500; letter-spacing: 0.3px; }
+  /* Divider between name and mastery */
+  .lp-tip-divider {
+    width: 1px; align-self: stretch;
+    background: rgba(107,63,160,0.3);
+    margin: 0 18px; flex-shrink: 0;
+  }
   .lp-tip-right { text-align: right; flex-shrink: 0; }
   .lp-tip-mastery-pct {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px; color: #fff; line-height: 1;
+    font-size: 32px; color: #fff; line-height: 1;
   }
-  .lp-tip-mastery-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .lp-tip-mastery-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 3px; }
 
   /* ── Team Snapshot 2×2 grid ── */
   .lp-snapshot-label {
@@ -2549,108 +2555,90 @@
     margin: 14px 0 8px;
   }
   .lp-snapshot-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 0;
   }
   .lp-snap-card {
     background: linear-gradient(160deg, rgba(28,20,48,0.95) 0%, rgba(16,18,28,0.98) 100%);
-    border: 1px solid rgba(107,63,160,0.28);
-    border-radius: 12px;
-    padding: 9px 10px;
+    border: 1px solid rgba(107,63,160,0.28); border-radius: 12px; padding: 9px 10px;
     display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.02);
-    position: relative; overflow: hidden;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4); position: relative; overflow: hidden;
   }
   .lp-snap-card::before {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at top left, rgba(107,63,160,0.1), transparent 70%);
     pointer-events: none;
   }
   .lp-snap-icon { font-size: 14px; line-height: 1; margin-bottom: 1px; }
-  .lp-snap-label {
-    font-size: 8px; font-weight: 700; letter-spacing: 1px;
-    color: var(--muted); text-transform: uppercase;
-  }
-  .lp-snap-value {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px; font-weight: 700; color: #fff;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    max-width: 100%;
-  }
+  .lp-snap-label { font-size: 8px; font-weight: 700; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .lp-snap-value { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 
-  /* ── Compact team info row (replaces big snapshot grid) ── */
-  /* ── Team snapshot row — outlined card ── */
+  /* ── Snapshot row — 2×2 grid inside one outlined card ── */
   .lp-snapshot-row {
-    display: flex; align-items: center; justify-content: center;
-    flex-wrap: wrap; gap: 6px 4px;
     background: linear-gradient(135deg, rgba(20,16,36,0.97) 0%, rgba(12,13,22,0.98) 100%);
     border: 1px solid rgba(107,63,160,0.24);
     border-radius: 14px;
-    padding: 11px 16px;
-    font-size: 12px; color: rgba(255,255,255,0.45);
-    font-family: 'DM Sans', sans-serif;
+    padding: 14px 16px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 8px;
+    font-family: 'DM Sans', sans-serif;
   }
-  .lp-tir-item { display: flex; align-items: center; gap: 4px; }
-  .lp-tir-icon { font-size: 12px; flex-shrink: 0; }
-  .lp-tir-val { color: rgba(255,255,255,0.78); font-weight: 600; }
-  .lp-tir-sep { color: rgba(107,63,160,0.35); font-size: 11px; padding: 0 1px; }
-  .lp-tir-dot { color: rgba(255,255,255,0.18); font-size: 10px; } /* legacy compat */
+  .lp-tir-item {
+    display: flex; align-items: center; gap: 7px;
+  }
+  .lp-tir-icon { font-size: 14px; flex-shrink: 0; }
+  .lp-tir-val { font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,0.78); }
+  .lp-tir-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-left: 1px; }
+  .lp-tir-sep { display: none; } /* hidden — no separators in 2×2 layout */
+  .lp-tir-dot { display: none; } /* legacy compat — hidden */
 
-  /* ── Roster dropdown ── */
+  /* ── Roster row — feature action row ── */
   .lp-roster-drop {
-    border: 1px solid rgba(107,63,160,0.18);
-    border-radius: 12px;
+    border: 1px solid rgba(107,63,160,0.24);
+    border-radius: 14px;
     overflow: hidden;
-    margin-bottom: 4px;
+    background: linear-gradient(135deg, rgba(20,16,36,0.97) 0%, rgba(12,13,22,0.98) 100%);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
   }
   .lp-roster-toggle {
-    width: 100%; background: rgba(14,12,26,0.8); border: none;
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 14px;
-    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
-    color: rgba(155,135,200,0.7); letter-spacing: 0.3px;
+    width: 100%; background: transparent; border: none;
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.65); letter-spacing: 0.2px;
     cursor: pointer; text-align: left;
     transition: color 0.15s, background 0.15s;
   }
-  .lp-roster-toggle:hover { color: #fff; background: rgba(107,63,160,0.14); }
+  .lp-roster-toggle:hover { color: #fff; background: rgba(107,63,160,0.1); }
+  .lp-roster-toggle-icon {
+    font-size: 16px; flex-shrink: 0;
+    background: rgba(107,63,160,0.18); border: 1px solid rgba(107,63,160,0.25);
+    border-radius: 8px; width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lp-roster-toggle-label { flex: 1; }
   #lp-roster-chevron {
-    font-size: 9px; transition: transform 0.22s; display: inline-block;
+    font-size: 11px; color: rgba(107,63,160,0.55);
+    transition: transform 0.22s; display: inline-block; flex-shrink: 0;
   }
   .lp-roster-body {
     border-top: 1px solid rgba(107,63,160,0.14);
-    background: rgba(10,10,18,0.6);
-    padding: 10px 12px 12px;
+    background: rgba(10,10,18,0.5);
+    padding: 10px 12px 14px;
     animation: fadeUp 0.18s ease both;
   }
   .lp-roster-body.hidden { display: none; }
-  .lp-roster-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px;
-  }
+  .lp-roster-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
   .lp-roster-player {
     display: flex; align-items: baseline; gap: 5px;
-    padding: 4px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
     font-family: 'DM Sans', sans-serif;
   }
   .lp-roster-player:nth-last-child(-n+2) { border-bottom: none; }
-  .lp-roster-num {
-    font-size: 10px; font-weight: 700; color: rgba(107,63,160,0.65);
-    width: 20px; flex-shrink: 0; text-align: right;
-  }
-  .lp-roster-name {
-    font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,0.75);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .lp-roster-pos {
-    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
-    color: var(--jazz-sky); opacity: 0.6;
-    margin-left: auto; flex-shrink: 0;
-  }
+  .lp-roster-num { font-size: 10px; font-weight: 700; color: rgba(107,63,160,0.65); width: 20px; flex-shrink: 0; text-align: right; }
+  .lp-roster-name { font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,0.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lp-roster-pos { font-size: 9px; font-weight: 700; letter-spacing: 0.5px; color: var(--jazz-sky); opacity: 0.6; margin-left: auto; flex-shrink: 0; }
 
   /* ── Progression-style category cards (Team Mastery hub) ── */
   .lp-prog-grid {
@@ -5103,7 +5091,7 @@
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz — Flashcards</div>
       </div>
 
-      <!-- Team Info Panel (spec: not a flashcard, just context) -->
+      <!-- Team Info Panel -->
       <div class="lp-team-header-wrap" style="margin-bottom: 18px;">
         <div class="lp-team-info-panel" id="lp-team-info-panel">
           <div class="lp-tip-left">
@@ -5111,6 +5099,7 @@
               <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
             </div>
           </div>
+          <div class="lp-tip-divider"></div>
           <div class="lp-tip-right">
             <div class="lp-tip-mastery-pct" id="lp-ts-pct">0%</div>
             <div class="lp-tip-mastery-lbl">Mastery</div>
@@ -5118,21 +5107,33 @@
         </div>
       </div>
 
-      <!-- Snapshot row — single outlined card -->
+      <!-- Snapshot — 2×2 grid inside one outlined card -->
       <div class="lp-snapshot-row" id="lp-team-inforow" style="margin-bottom: 18px;">
-        <span class="lp-tir-item"><span class="lp-tir-icon">🏟</span><span class="lp-tir-val" id="lp-snap-arena">Delta Center</span></span>
-        <span class="lp-tir-sep">•</span>
-        <span class="lp-tir-item"><span class="lp-tir-icon">👔</span><span class="lp-tir-val" id="lp-snap-coach">Will Hardy</span></span>
-        <span class="lp-tir-sep">•</span>
-        <span class="lp-tir-item"><span class="lp-tir-icon">🏀</span><span class="lp-tir-val" id="lp-snap-conf">West</span></span>
-        <span class="lp-tir-sep">•</span>
-        <span class="lp-tir-item"><span class="lp-tir-icon">🏆</span><span class="lp-tir-val" id="lp-snap-titles">0</span> Titles</span>
+        <span class="lp-tir-item">
+          <span class="lp-tir-icon">🏟</span>
+          <span class="lp-tir-val" id="lp-snap-arena">Delta Center</span>
+        </span>
+        <span class="lp-tir-item">
+          <span class="lp-tir-icon">👔</span>
+          <span class="lp-tir-val" id="lp-snap-coach">Will Hardy</span>
+        </span>
+        <span class="lp-tir-item">
+          <span class="lp-tir-icon">🏀</span>
+          <span class="lp-tir-val" id="lp-snap-conf">West</span>
+        </span>
+        <span class="lp-tir-item">
+          <span class="lp-tir-icon">🏆</span>
+          <span class="lp-tir-val" id="lp-snap-titles">0</span>
+          <span class="lp-tir-label">Titles</span>
+        </span>
       </div>
 
-      <!-- Roster dropdown -->
+      <!-- Roster — feature action row -->
       <div class="lp-roster-drop" id="lp-roster-drop" style="margin-bottom: 28px;">
         <button class="lp-roster-toggle" onclick="lpToggleRoster()" id="lp-roster-toggle">
-          <span id="lp-roster-chevron">▼</span> View Current Roster
+          <span class="lp-roster-toggle-icon">👥</span>
+          <span class="lp-roster-toggle-label">Current Roster</span>
+          <span id="lp-roster-chevron">›</span>
         </button>
         <div class="lp-roster-body hidden" id="lp-roster-body">
           <div class="lp-roster-grid" id="lp-roster-grid">
@@ -6938,7 +6939,7 @@ function lpToggleRoster() {
     ).join('');
   }
   body.classList.toggle('hidden', isOpen);
-  if (chevron) chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+  if (chevron) chevron.textContent = isOpen ? '›' : '‹';
 }
 
 // ── Random Session ──────────────────────────────────────────
