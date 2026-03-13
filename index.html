@@ -2578,6 +2578,69 @@
     max-width: 100%;
   }
 
+  /* ── Compact team info row (replaces big snapshot grid) ── */
+  .lp-team-inforow {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    padding: 8px 2px 4px;
+    font-size: 11.5px; color: rgba(255,255,255,0.45);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .lp-tir-item { display: flex; align-items: center; gap: 4px; }
+  .lp-tir-icon { font-size: 12px; flex-shrink: 0; }
+  .lp-tir-val { color: rgba(255,255,255,0.72); font-weight: 600; }
+  .lp-tir-dot { color: rgba(255,255,255,0.18); font-size: 10px; }
+
+  /* ── Roster dropdown ── */
+  .lp-roster-drop {
+    border: 1px solid rgba(107,63,160,0.18);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .lp-roster-toggle {
+    width: 100%; background: rgba(14,12,26,0.8); border: none;
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+    color: rgba(155,135,200,0.7); letter-spacing: 0.3px;
+    cursor: pointer; text-align: left;
+    transition: color 0.15s, background 0.15s;
+  }
+  .lp-roster-toggle:hover { color: #fff; background: rgba(107,63,160,0.14); }
+  #lp-roster-chevron {
+    font-size: 9px; transition: transform 0.22s; display: inline-block;
+  }
+  .lp-roster-body {
+    border-top: 1px solid rgba(107,63,160,0.14);
+    background: rgba(10,10,18,0.6);
+    padding: 10px 12px 12px;
+    animation: fadeUp 0.18s ease both;
+  }
+  .lp-roster-body.hidden { display: none; }
+  .lp-roster-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px;
+  }
+  .lp-roster-player {
+    display: flex; align-items: baseline; gap: 5px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .lp-roster-player:nth-last-child(-n+2) { border-bottom: none; }
+  .lp-roster-num {
+    font-size: 10px; font-weight: 700; color: rgba(107,63,160,0.65);
+    width: 20px; flex-shrink: 0; text-align: right;
+  }
+  .lp-roster-name {
+    font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,0.75);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .lp-roster-pos {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+    color: var(--jazz-sky); opacity: 0.6;
+    margin-left: auto; flex-shrink: 0;
+  }
+
   /* ── Flashcard rows ── */
   .lp-fc-row {
     padding: 13px 16px;
@@ -4698,28 +4761,24 @@
         </div>
       </div>
 
-      <!-- Team Snapshot 2x2 grid -->
-      <div class="lp-snapshot-label">Team Snapshot</div>
-      <div class="lp-snapshot-grid">
-        <div class="lp-snap-card">
-          <div class="lp-snap-icon">🏟️</div>
-          <div class="lp-snap-label">Arena</div>
-          <div class="lp-snap-value" id="lp-snap-arena">Delta Center</div>
-        </div>
-        <div class="lp-snap-card">
-          <div class="lp-snap-icon">👔</div>
-          <div class="lp-snap-label">Head Coach</div>
-          <div class="lp-snap-value" id="lp-snap-coach">Will Hardy</div>
-        </div>
-        <div class="lp-snap-card">
-          <div class="lp-snap-icon">⭐</div>
-          <div class="lp-snap-label">Best Player</div>
-          <div class="lp-snap-value" id="lp-snap-best">Jaren Jackson Jr.</div>
-        </div>
-        <div class="lp-snap-card">
-          <div class="lp-snap-icon">👥</div>
-          <div class="lp-snap-label">Players</div>
-          <div class="lp-snap-value" id="lp-snap-players">18</div>
+      <!-- Compact info row (replaces big snapshot cards) -->
+      <div class="lp-team-inforow" id="lp-team-inforow">
+        <span class="lp-tir-item"><span class="lp-tir-icon">🏟</span><span class="lp-tir-val" id="lp-snap-arena">Delta Center</span></span>
+        <span class="lp-tir-dot">·</span>
+        <span class="lp-tir-item"><span class="lp-tir-icon">👔</span><span class="lp-tir-val" id="lp-snap-coach">Will Hardy</span></span>
+        <span class="lp-tir-dot">·</span>
+        <span class="lp-tir-item"><span class="lp-tir-icon">👥</span><span class="lp-tir-val" id="lp-snap-players">18</span> Players</span>
+      </div>
+
+      <!-- Roster dropdown -->
+      <div class="lp-roster-drop" id="lp-roster-drop">
+        <button class="lp-roster-toggle" onclick="lpToggleRoster()" id="lp-roster-toggle">
+          <span id="lp-roster-chevron">▼</span> View Current Roster
+        </button>
+        <div class="lp-roster-body hidden" id="lp-roster-body">
+          <div class="lp-roster-grid" id="lp-roster-grid">
+            <!-- populated by JS -->
+          </div>
         </div>
       </div>
 
@@ -4729,6 +4788,8 @@
         <div id="lp-ts-info"><div id="lp-ts-name"></div><div id="lp-ts-sub"></div></div>
         <div><div id="lp-ts-label"></div></div>
       </div>
+      <!-- Keep legacy snap-best ID alive -->
+      <div style="display:none"><span id="lp-snap-best">Jaren Jackson Jr.</span></div>
 
       <div class="lp-panel-sub" style="margin-top:14px">Master your team's players, identity, and franchise history</div>
       <div class="lp-panel-sub" style="margin-top:2px;margin-bottom:4px;">What do you want to study?</div>
@@ -6453,6 +6514,49 @@ function lpToggleAcc(id) {
 }
 
 // ── Category-first navigation ──
+
+// Jazz roster for the dropdown
+const JAZZ_ROSTER_DISPLAY = [
+  { name:'Ace Bailey',        num:'5',  pos:'SF' },
+  { name:'Mo Bamba',          num:'28', pos:'C'  },
+  { name:'Isaiah Collier',    num:'0',  pos:'PG' },
+  { name:'Kyle Filipowski',   num:'3',  pos:'C'  },
+  { name:'Keyonte George',    num:'3',  pos:'PG' },
+  { name:'Elijah Harkless',   num:'15', pos:'SG' },
+  { name:'Blake Hinson',      num:'9',  pos:'SF' },
+  { name:'Jaren Jackson Jr.', num:'13', pos:'PF' },
+  { name:'Walker Kessler',    num:'24', pos:'C'  },
+  { name:'John Konchar',      num:'46', pos:'SF' },
+  { name:'Kevin Love',        num:'42', pos:'PF' },
+  { name:'Lauri Markkanen',   num:'23', pos:'PF' },
+  { name:'Svi Mykhailiuk',    num:'19', pos:'SG' },
+  { name:'Jusuf Nurkic',      num:'27', pos:'C'  },
+  { name:'Brice Sensabaugh',  num:'5',  pos:'SG' },
+  { name:'Oscar Tshiebwe',    num:'22', pos:'PF' },
+  { name:'Cody Williams',     num:'5',  pos:'SF' },
+  { name:'Vince Williams Jr.',num:'5',  pos:'SG' },
+];
+
+function lpToggleRoster() {
+  const body    = document.getElementById('lp-roster-body');
+  const chevron = document.getElementById('lp-roster-chevron');
+  const grid    = document.getElementById('lp-roster-grid');
+  if (!body) return;
+  const isOpen = !body.classList.contains('hidden');
+  if (!isOpen && grid && grid.children.length === 0) {
+    // Populate on first open
+    const roster = JAZZ_ROSTER_DISPLAY;
+    grid.innerHTML = roster.map(p =>
+      `<div class="lp-roster-player">
+        <span class="lp-roster-num">#${p.num}</span>
+        <span class="lp-roster-name">${p.name}</span>
+        <span class="lp-roster-pos">${p.pos}</span>
+       </div>`
+    ).join('');
+  }
+  body.classList.toggle('hidden', isOpen);
+  if (chevron) chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
 
 function lpSelectLeagueCat(cat) {
   // Hide grid, show the right section
