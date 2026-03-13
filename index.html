@@ -5273,7 +5273,7 @@
     <!-- ── Panel 4T: Team Difficulty Accordion ── -->
     <div class="lp-panel hidden" id="lp-panel-4-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
+        <button class="lp-back-btn" onclick="lpGoPanel(3,'team')">← Back</button>
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz — Flashcards</div>
       </div>
 
@@ -7505,9 +7505,7 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
   const t4 = document.getElementById('lp-panel-4-title');
   if (t4) t4.textContent = teamName + ' — Flashcards';
   lpUpdateJazzMastery();
-  const t2 = document.getElementById('lp-panel-2-title');
-  if (t2) t2.textContent = teamName + ' — Study Type';
-  lpGoPanel(2);
+  lpGoPanel(4);
 }
 
 function lpLaunchMode(path, mode) {
