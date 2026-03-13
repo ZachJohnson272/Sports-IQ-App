@@ -1960,6 +1960,106 @@
   }
   .lp-entry-card:hover .lp-entry-arrow { transform: translateY(2px); }
 
+  /* ── Conference dropdown cards (team picker) ── */
+  .lp-conf-card {
+    background: linear-gradient(160deg, rgba(30,22,54,0.98) 0%, rgba(14,15,24,0.99) 100%);
+    border: 1px solid rgba(107,63,160,0.32);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+    margin-bottom: 12px;
+  }
+  .lp-conf-card::before {
+    content: '';
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at top left, rgba(107,63,160,0.2), transparent 60%);
+    opacity: 0.6; transition: opacity 0.25s;
+  }
+  .lp-conf-card:hover::before { opacity: 1; }
+  .lp-conf-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(107,63,160,0.65);
+    box-shadow: 0 14px 36px rgba(107,63,160,0.3), 0 0 0 1px rgba(107,63,160,0.1);
+  }
+  .lp-conf-card:active { transform: scale(0.98); transition-duration: 0.08s; }
+
+  /* East card — sky blue glow */
+  .lp-conf-card--east { border-color: rgba(91,184,212,0.28); }
+  .lp-conf-card--east::before { background: radial-gradient(ellipse at top left, rgba(91,184,212,0.16), transparent 60%); }
+  .lp-conf-card--east:hover {
+    border-color: rgba(91,184,212,0.65);
+    box-shadow: 0 14px 36px rgba(91,184,212,0.22), 0 0 0 1px rgba(91,184,212,0.08);
+  }
+
+  .lp-conf-card-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 20px;
+    position: relative; z-index: 1;
+  }
+  .lp-conf-icon {
+    font-size: 28px; width: 56px; height: 56px; border-radius: 16px;
+    background: rgba(107,63,160,0.2); border: 1px solid rgba(107,63,160,0.28);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+  }
+  .lp-conf-card--east .lp-conf-icon {
+    background: rgba(91,184,212,0.12); border-color: rgba(91,184,212,0.25);
+  }
+  .lp-conf-body { flex: 1; min-width: 0; }
+  .lp-conf-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 1.8px; color: #fff; line-height: 1;
+  }
+  .lp-conf-desc {
+    font-size: 11.5px; color: rgba(255,255,255,0.38); margin-top: 4px; line-height: 1.4;
+  }
+  .lp-conf-chevron {
+    font-size: 22px; color: rgba(107,63,160,0.5); flex-shrink: 0;
+    transition: transform 0.25s, color 0.2s;
+    position: relative; z-index: 1;
+  }
+  .lp-conf-card.open .lp-conf-chevron { transform: rotate(90deg); color: var(--jazz-sky); }
+
+  .lp-conf-teams { position: relative; z-index: 1; }
+  .lp-conf-teams.hidden { display: none; }
+  .lp-conf-divider {
+    height: 1px; margin: 0 16px;
+    background: rgba(107,63,160,0.18);
+  }
+  .lp-conf-card--east .lp-conf-divider { background: rgba(91,184,212,0.15); }
+  .lp-conf-team-list {
+    padding: 8px 12px 12px;
+    display: flex; flex-direction: column; gap: 4px;
+    animation: fadeUp 0.2s ease both;
+  }
+
+  /* Individual team row inside conference card */
+  .lp-ct {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 10px;
+    border-radius: 12px;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+  .lp-ct:hover { background: rgba(107,63,160,0.12); }
+  .lp-ct--soon { cursor: default; opacity: 0.45; }
+  .lp-ct--soon:hover { background: none; }
+  .lp-ct-info { flex: 1; min-width: 0; }
+  .lp-ct-name {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.82);
+  }
+  .lp-ct-sub {
+    font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 1px;
+  }
+  .lp-ct-arrow {
+    font-size: 14px; color: var(--jazz-sky); flex-shrink: 0;
+    opacity: 0.7;
+  }
+
   /* Entry chip stats */
   .lp-entry-chips {
     display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px;
@@ -5037,51 +5137,81 @@
         <button class="lp-back-btn" onclick="lpGoPanel(1)">← Back</button>
         <div class="lp-panel-title">Choose Your Team</div>
       </div>
-      <div class="lp-panel-sub">Select a team to study</div>
+      <div class="lp-panel-sub">Select a conference, then pick your team</div>
 
-      <div class="lp-section-label">WESTERN CONFERENCE</div>
-      <div class="lp-team-card" onclick="lpSelectTeamNew('jazz','Utah Jazz','nba')">
-        <div class="lp-team-info">
-          <div class="lp-team-name">Utah Jazz</div>
-          <div class="lp-team-sub">18 players · Active</div>
+      <!-- Western Conference dropdown card -->
+      <div class="lp-conf-card lp-conf-card--west" id="lp-conf-west" onclick="lpToggleConf('west')">
+        <div class="lp-conf-card-header">
+          <div class="lp-conf-icon">🌅</div>
+          <div class="lp-conf-body">
+            <div class="lp-conf-title">Western Conference</div>
+            <div class="lp-conf-desc">15 teams · Utah Jazz available</div>
+          </div>
+          <div class="lp-conf-chevron" id="lp-conf-west-chev">›</div>
         </div>
-        <div class="lp-team-mastery" id="lp-mastery-jazz">
-          <div class="lp-mastery-pct" id="lp-mastery-jazz-pct">0%</div>
-          <div class="lp-mastery-bar-wrap"><div class="lp-mastery-bar-fill" id="lp-mastery-jazz-fill" style="width:0%"></div></div>
+        <div class="lp-conf-teams hidden" id="lp-conf-west-teams">
+          <div class="lp-conf-divider"></div>
+          <div class="lp-conf-team-list">
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('jazz','Utah Jazz','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Utah Jazz</div>
+                <div class="lp-ct-sub">18 players · Active</div>
+              </div>
+              <div class="lp-team-mastery" id="lp-mastery-jazz">
+                <div class="lp-mastery-pct" id="lp-mastery-jazz-pct">0%</div>
+                <div class="lp-mastery-bar-wrap"><div class="lp-mastery-bar-fill" id="lp-mastery-jazz-fill" style="width:0%"></div></div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Dallas Mavericks</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Denver Nuggets</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Golden State Warriors</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Houston Rockets</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">LA Clippers</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Los Angeles Lakers</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Memphis Grizzlies</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Minnesota Timberwolves</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">New Orleans Pelicans</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Oklahoma City Thunder</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Phoenix Suns</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Portland Trail Blazers</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Sacramento Kings</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">San Antonio Spurs</div><span class="lp-lc-tag soon">Soon</span></div>
+          </div>
         </div>
-        <div class="lp-lc-arrow">→</div>
       </div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Dallas Mavericks</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Denver Nuggets</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Golden State Warriors</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Houston Rockets</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">LA Clippers</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Los Angeles Lakers</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Memphis Grizzlies</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Minnesota Timberwolves</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">New Orleans Pelicans</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Oklahoma City Thunder</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Phoenix Suns</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Portland Trail Blazers</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Sacramento Kings</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">San Antonio Spurs</div></div><div class="lp-lc-tag soon">Soon</div></div>
 
-      <div class="lp-section-label" style="margin-top:14px;">EASTERN CONFERENCE</div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Atlanta Hawks</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Boston Celtics</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Brooklyn Nets</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Charlotte Hornets</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Chicago Bulls</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Cleveland Cavaliers</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Detroit Pistons</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Indiana Pacers</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Miami Heat</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Milwaukee Bucks</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">New York Knicks</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Orlando Magic</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Philadelphia 76ers</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Toronto Raptors</div></div><div class="lp-lc-tag soon">Soon</div></div>
-      <div class="lp-team-card locked"><div class="lp-team-info"><div class="lp-team-name">Washington Wizards</div></div><div class="lp-lc-tag soon">Soon</div></div>
+      <!-- Eastern Conference dropdown card -->
+      <div class="lp-conf-card lp-conf-card--east" id="lp-conf-east" onclick="lpToggleConf('east')">
+        <div class="lp-conf-card-header">
+          <div class="lp-conf-icon">🌆</div>
+          <div class="lp-conf-body">
+            <div class="lp-conf-title">Eastern Conference</div>
+            <div class="lp-conf-desc">15 teams · Coming soon</div>
+          </div>
+          <div class="lp-conf-chevron" id="lp-conf-east-chev">›</div>
+        </div>
+        <div class="lp-conf-teams hidden" id="lp-conf-east-teams">
+          <div class="lp-conf-divider"></div>
+          <div class="lp-conf-team-list">
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Atlanta Hawks</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Boston Celtics</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Brooklyn Nets</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Charlotte Hornets</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Chicago Bulls</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Cleveland Cavaliers</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Detroit Pistons</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Indiana Pacers</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Miami Heat</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Milwaukee Bucks</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">New York Knicks</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Orlando Magic</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Philadelphia 76ers</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Toronto Raptors</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Washington Wizards</div><span class="lp-lc-tag soon">Soon</span></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ── Panel 4T: Team Difficulty Accordion ── -->
@@ -6920,6 +7050,16 @@ const JAZZ_ROSTER_DISPLAY = [
   { name:'Cody Williams',     num:'5',  pos:'SF' },
   { name:'Vince Williams Jr.',num:'5',  pos:'SG' },
 ];
+
+function lpToggleConf(conf) {
+  const teamsEl = document.getElementById('lp-conf-' + conf + '-teams');
+  const chevEl  = document.getElementById('lp-conf-' + conf + '-chev');
+  const cardEl  = document.getElementById('lp-conf-' + conf);
+  if (!teamsEl) return;
+  const isOpen = !teamsEl.classList.contains('hidden');
+  teamsEl.classList.toggle('hidden', isOpen);
+  cardEl.classList.toggle('open', !isOpen);
+}
 
 function lpToggleRoster() {
   const body    = document.getElementById('lp-roster-body');
