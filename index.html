@@ -413,6 +413,25 @@
     line-height: 1.1;
     color: #fff;
   }
+  .back-name--list {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 1.6;
+    color: #fff;
+    text-align: left;
+    white-space: pre-line;
+  }
+  .back-name--list .back-list-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--jazz-purple-light, #b490ff);
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 2px;
+  }
+  .back-name--list .back-list-heading:first-child { margin-top: 0; }
 
   .back-pos {
     display: inline-block;
@@ -4978,22 +4997,24 @@
               <div class="lp-mcard-count">30 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coaching_staff')">
               <div class="lp-mcard-icon">🧑‍💼</div>
               <div class="lp-mcard-title">Team → Coaching Staff</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
           </div>
         </div>
         <div class="lp-tier-panel hidden" id="lp-lpanel-ros-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">📋 All-Star</div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_roster')">
               <div class="lp-mcard-icon">👥</div>
               <div class="lp-mcard-title">Team → Roster</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
           </div>
         </div>
@@ -6413,8 +6434,10 @@ function buildPlayerToPastTeamsDeck(roster) {
                .map(p => makeCard(p.name, p.past_teams, "What previous NBA teams has this player been on?"));
 }
 function buildTeamToRosterDeck(team, roster) {
-  const names = Array.from(roster).map(p => p.name).join(', ');
-  return [makeCard(team.name, names, "Who are the current players on this team's roster?")];
+  const names = Array.from(roster).map(p => p.name).join('
+');
+  const answer = '<span class="back-list-heading">' + team.name.toUpperCase() + ' ROSTER</span>' + names;
+  return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
 }
 const TEAM_COACHING_STAFF = {
   "Utah Jazz": {
@@ -6425,7 +6448,9 @@ const TEAM_COACHING_STAFF = {
 function buildTeamToCoachingStaffDeck(team) {
   const staff = TEAM_COACHING_STAFF[team.name];
   if (!staff) return [makeCard(team.name, 'Coaching staff unavailable', "Who is on this team's current coaching staff?")];
-  const answer = staff.head + ' (Head Coach)\nAssistants: ' + staff.assistants.join(', ');
+  const answer = '<span class="back-list-heading">HEAD COACH</span>' + staff.head +
+    '<span class="back-list-heading">ASSISTANTS</span>' + staff.assistants.join('
+');
   return [makeCard(team.name, answer, "Who is on this team's current coaching staff?")];
 }
 function buildPlayerToHometownDeck(roster)  { return roster.filter(p => p.hometown).map(p => makeCard(p.name, p.hometown,   "What is this player's hometown?")); }
@@ -6461,6 +6486,22 @@ function buildLeagueTeamToConfDivisionDeck() {
 function buildLeagueTeamToDivisionDeck()     { return NBA_TEAMS.map(t => makeCard(t.name, t.division,     'What division is this team in?')); }
 function buildLeagueTeamToAbbreviationDeck() { return NBA_TEAMS.map(t => makeCard(t.name, t.abbreviation, 'What is the abbreviation for this team?')); }
 function buildLeagueTeamToCoachDeck()       { return NBA_TEAMS.filter(t => t.coach).map(t => makeCard(t.name, t.coach, "Who is this team's head coach?")); }
+function buildLeagueTeamToCoachingStaffDeck() {
+  return NBA_TEAMS.filter(t => TEAM_COACHING_STAFF[t.name]).map(t => {
+    const staff = TEAM_COACHING_STAFF[t.name];
+    const answer = '<span class="back-list-heading">HEAD COACH</span>' + staff.head +
+      '<span class="back-list-heading">ASSISTANTS</span>' + staff.assistants.join('\n');
+    return makeCard(t.name, answer, "Who is on this team's current coaching staff?");
+  });
+}
+function buildLeagueTeamToRosterDeck() {
+  // Jazz-only for now; expands as other teams add roster data
+  return NBA_TEAMS.filter(t => t.name === 'Utah Jazz').map(t => {
+    const names = ROSTER.map(p => p.name).join('\n');
+    const answer = '<span class="back-list-heading">' + t.name.toUpperCase() + ' ROSTER</span>' + names;
+    return makeCard(t.name, answer, "Who are the current players on this team's roster?");
+  });
+}
 
 // -- Mode registry --
 const MODE_BUILDERS = {
@@ -6501,6 +6542,8 @@ const MODE_BUILDERS = {
   league_team_conf_division:  () => buildLeagueTeamToConfDivisionDeck(),
   league_team_division:       () => buildLeagueTeamToDivisionDeck(),
   league_team_coach:          () => buildLeagueTeamToCoachDeck(),
+  league_team_coaching_staff: () => buildLeagueTeamToCoachingStaffDeck(),
+  league_team_roster:         () => buildLeagueTeamToRosterDeck(),
 };
 
 // -- Mode display titles --
@@ -6538,6 +6581,8 @@ const SESSION_MODE_TITLES = {
   league_team_conf_division:  'Team → Conference & Division',
   league_team_division:       'Team → Division',
   league_team_coach:          'Team → Head Coach',
+  league_team_coaching_staff: 'Team → Coaching Staff',
+  league_team_roster:         'Team → Roster',
 };
 
 // -- Session state for the generic card engine --
@@ -6625,7 +6670,14 @@ function loadSessionCard() {
   const backPhotoEl = document.getElementById('backPhoto');
   backPhotoEl.src = '';
   backPhotoEl.style.display = 'none';
-  document.getElementById('backName').textContent = displayBack;
+  const backNameEl = document.getElementById('backName');
+  if (displayBack && displayBack.startsWith('<')) {
+    backNameEl.className = 'back-name back-name--list';
+    backNameEl.innerHTML = displayBack;
+  } else {
+    backNameEl.className = 'back-name';
+    backNameEl.textContent = displayBack;
+  }
   document.getElementById('backPos').textContent  = '';
   document.getElementById('backStats').innerHTML  = '';
 
