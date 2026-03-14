@@ -2923,6 +2923,7 @@
   .lp-prog-bar--players  { background: linear-gradient(90deg, #3a8fa8, #5BB8D4); }
   .lp-prog-bar--teaminfo { background: linear-gradient(90deg, #c89820, #f5c842); }
   .lp-prog-bar--history  { background: linear-gradient(90deg, #c04a24, #f07050); }
+  .lp-prog-bar--current  { background: linear-gradient(90deg, #4a2070, #6B3FA0); }
   .lp-prog-fraction {
     font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
     color: rgba(255,255,255,0.35); white-space: nowrap; flex-shrink: 0;
@@ -2950,6 +2951,19 @@
   .lp-cat-card--random:hover { border-color: rgba(61,204,122,0.65); box-shadow: 0 12px 32px rgba(61,204,122,0.2); }
   .lp-cat-card--random .lp-cat-icon { background: rgba(61,204,122,0.1); border-color: rgba(61,204,122,0.2); }
   .lp-cat-card--random .lp-cat-badge { background: rgba(61,204,122,0.08); color: rgba(61,204,122,0.55); border-color: rgba(61,204,122,0.15); }
+
+  /* Current category — purple glow */
+  .lp-cat-card--current { border-color: rgba(107,63,160,0.45); box-shadow: 0 0 18px rgba(107,63,160,0.22); }
+  .lp-cat-card--current::before { background: radial-gradient(ellipse at left, rgba(107,63,160,0.18), transparent 60%); }
+  .lp-cat-card--current:hover { border-color: rgba(107,63,160,0.75); box-shadow: 0 12px 32px rgba(107,63,160,0.35), 0 0 24px rgba(107,63,160,0.25); }
+  .lp-cat-card--current .lp-cat-icon { background: rgba(107,63,160,0.18); border-color: rgba(107,63,160,0.35); }
+  .lp-cat-card--current .lp-cat-badge { background: rgba(107,63,160,0.12); color: rgba(187,143,255,0.85); border-color: rgba(107,63,160,0.3); }
+
+  .lp-prog-card--current { border-color: rgba(107,63,160,0.45); box-shadow: 0 0 18px rgba(107,63,160,0.2), 0 3px 16px rgba(0,0,0,0.38); }
+  .lp-prog-card--current::before { background: radial-gradient(ellipse at top left, rgba(107,63,160,0.18), transparent 65%); }
+  .lp-prog-card--current:hover { border-color: rgba(107,63,160,0.75); box-shadow: 0 12px 34px rgba(107,63,160,0.32), 0 0 24px rgba(107,63,160,0.22); }
+  .lp-prog-card--current:hover::before { opacity: 1; }
+  .lp-prog-card--current .lp-prog-icon { background: rgba(107,63,160,0.18); border-color: rgba(107,63,160,0.35); }
 
   /* ── Random session UI ── */
   .lp-rand-desc {
@@ -4854,6 +4868,18 @@
       </div>
       <!-- Category picker -->
       <div class="lp-cat-grid" id="lp-league-cat-grid">
+        <div class="lp-cat-card lp-cat-card--current" id="lp-lcat-current" onclick="lpSelectLeagueCat('current')">
+          <div class="lp-cat-icon">⚡</div>
+          <div class="lp-cat-body">
+            <div class="lp-cat-title">Current</div>
+            <div class="lp-cat-desc">Active rosters, current team, head coach, and live squad info</div>
+            <div class="lp-cat-meta">
+              <span class="lp-cat-badge">Live data</span>
+              <span class="lp-cat-modes-count">4 difficulty tiers</span>
+            </div>
+          </div>
+          <div class="lp-cat-arrow">›</div>
+        </div>
         <div class="lp-cat-card lp-cat-card--players" id="lp-lcat-players" onclick="lpSelectLeagueCat('players')">
           <div class="lp-cat-icon">👤</div>
           <div class="lp-cat-body">
@@ -4903,6 +4929,85 @@
         </div>
       </div>
 
+      <!-- ── Current category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-lsec-current">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">⚡ Current</span>
+        </div>
+        <div class="lp-tier-tabs">
+          <div class="lp-tier-tab active" id="lp-ltab-cur-rookie" onclick="lpSelectCatTier('lp-lsec-current','cur-rookie')">
+            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
+            <span class="lp-tier-tab-label">Rookie</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-cur-starter" onclick="lpSelectCatTier('lp-lsec-current','cur-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-cur-allstar" onclick="lpSelectCatTier('lp-lsec-current','cur-allstar')">
+            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
+            <span class="lp-tier-tab-label">All-Star</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-cur-hof" onclick="lpSelectCatTier('lp-lsec-current','cur-hof')">
+            <span class="lp-tier-tab-dot lp-diff-hof"></span>
+            <span class="lp-tier-tab-label">Hall of Fame</span>
+          </div>
+        </div>
+        </div>
+        <div class="lp-tier-panel" id="lp-lpanel-cur-rookie">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ Rookie</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
+              <div class="lp-mcard-icon">🏀</div>
+              <div class="lp-mcard-title">Player → Team</div>
+              <div class="lp-mcard-count">~70 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coach')">
+              <div class="lp-mcard-icon">👔</div>
+              <div class="lp-mcard-title">Team → Head Coach</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-cur-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ Starter</div>
+            <div class="lp-mcard lp-mcard--locked">
+              <div class="lp-mcard-icon">📋</div>
+              <div class="lp-mcard-title">Team → Starting 5</div>
+              <div class="lp-mcard-count">30 cards</div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-cur-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ All-Star</div>
+            <div class="lp-mcard lp-mcard--locked">
+              <div class="lp-mcard-icon">🧑‍💼</div>
+              <div class="lp-mcard-title">Team → Coaching Staff</div>
+              <div class="lp-mcard-count">30 cards</div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-cur-hof">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ Hall of Fame</div>
+            <div class="lp-mcard lp-mcard--locked">
+              <div class="lp-mcard-icon">👥</div>
+              <div class="lp-mcard-title">Team → Roster</div>
+              <div class="lp-mcard-count">30 cards</div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ── Players category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-lsec-players">
         <div class="lp-cat-toolbar">
@@ -4941,13 +5046,6 @@
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_height')">
               <div class="lp-mcard-icon">📏</div>
               <div class="lp-mcard-title">Player → Height</div>
-              <div class="lp-mcard-count">~70 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
-              <div class="lp-mcard-icon">🏀</div>
-              <div class="lp-mcard-title">Player → Team</div>
               <div class="lp-mcard-count">~70 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5024,21 +5122,11 @@
             <span class="lp-tier-tab-dot lp-diff-starter"></span>
             <span class="lp-tier-tab-label">Starter</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ltab-t-allstar" onclick="lpSelectCatTier('lp-lsec-teams','t-allstar')">
-            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
-            <span class="lp-tier-tab-label">All-Star</span>
-          </div>
         </div>
         </div>
         <div class="lp-tier-panel" id="lp-lpanel-t-rookie">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏟 Rookie</div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">📋</div>
-              <div class="lp-mcard-title">Starting 5 → Players</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
-            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_city')">
               <div class="lp-mcard-icon">🏙️</div>
               <div class="lp-mcard-title">Team → City</div>
@@ -5078,18 +5166,7 @@
             </div>
           </div>
         </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-t-allstar">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coach')">
-              <div class="lp-mcard-icon">👔</div>
-              <div class="lp-mcard-title">Team → Head Coach</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-          </div>
-        </div>
+
       </div>
 
       <!-- ── History category section ── -->
@@ -5373,6 +5450,28 @@
       <!-- Progression-style category cards -->
       <div class="lp-prog-grid" id="lp-team-cat-grid">
 
+        <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-current" onclick="lpSelectTeamCat('current')">
+          <div class="lp-prog-top">
+            <div class="lp-prog-icon">⚡</div>
+            <div class="lp-prog-body">
+              <div class="lp-prog-title">Current</div>
+              <div class="lp-prog-desc">Active rosters, current team, head coach, and live squad info</div>
+            </div>
+          </div>
+          <div class="lp-prog-bar-row">
+            <div class="lp-prog-bar-wrap">
+              <div class="lp-prog-bar-fill lp-prog-bar--current" style="width:0%"></div>
+            </div>
+            <span class="lp-prog-fraction">0 / 5 modes</span>
+          </div>
+          <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
+            <span class="lp-prog-tier lp-prog-tier--starter">Starter</span>
+            <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
+            <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
+          </div>
+        </div>
+
         <div class="lp-prog-card lp-prog-card--players" id="lp-tcat-players" onclick="lpSelectTeamCat('players')">
           <div class="lp-prog-top">
             <div class="lp-prog-icon">👤</div>
@@ -5454,6 +5553,88 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- ── Current category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-tsec-current">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">⚡ Current</span>
+        </div>
+        <div class="lp-tier-tabs">
+          <div class="lp-tier-tab active" id="lp-ttab-tc-rookie" onclick="lpSelectCatTier('lp-tsec-current','tc-rookie')">
+            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
+            <span class="lp-tier-tab-label">Rookie</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ttab-tc-starter" onclick="lpSelectCatTier('lp-tsec-current','tc-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ttab-tc-allstar" onclick="lpSelectCatTier('lp-tsec-current','tc-allstar')">
+            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
+            <span class="lp-tier-tab-label">All-Star</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ttab-tc-hof" onclick="lpSelectCatTier('lp-tsec-current','tc-hof')">
+            <span class="lp-tier-tab-dot lp-diff-hof"></span>
+            <span class="lp-tier-tab-label">Hall of Fame</span>
+          </div>
+        </div>
+        </div>
+        <div class="lp-tier-panel" id="lp-tpanel-tc-rookie">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ Rookie</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_team')">
+              <div class="lp-mcard-icon">🏀</div>
+              <div class="lp-mcard-title">Player → Team</div>
+              <div class="lp-mcard-count">16 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach')">
+              <div class="lp-mcard-icon">👔</div>
+              <div class="lp-mcard-title">Team → Head Coach</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tc-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ Starter</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','lineup')">
+              <div class="lp-mcard-icon">📋</div>
+              <div class="lp-mcard-title">Team → Starting 5</div>
+              <div class="lp-mcard-count">5 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tc-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ All-Star</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coaching_staff')">
+              <div class="lp-mcard-icon">🧑‍💼</div>
+              <div class="lp-mcard-title">Team → Coaching Staff</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tc-hof">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">⚡ Hall of Fame</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_roster')">
+              <div class="lp-mcard-icon">👥</div>
+              <div class="lp-mcard-title">Team → Roster</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ── Players category sub-section ── -->
@@ -5574,22 +5755,11 @@
             <span class="lp-tier-tab-dot lp-diff-starter"></span>
             <span class="lp-tier-tab-label">Starter</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ttab-ti-allstar" onclick="lpSelectCatTier('lp-tsec-teaminfo','ti-allstar')">
-            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
-            <span class="lp-tier-tab-label">All-Star</span>
-          </div>
         </div>
         </div>
         <div class="lp-tier-panel" id="lp-tpanel-ti-rookie">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏟 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','lineup')">
-              <div class="lp-mcard-icon">📋</div>
-              <div class="lp-mcard-title">Starting 5 → Players</div>
-              <div class="lp-mcard-count">5 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_city')">
               <div class="lp-mcard-icon">🌆</div>
               <div class="lp-mcard-title">Team → City</div>
@@ -5632,18 +5802,6 @@
             </div>
           </div>
         </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-ti-allstar">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach')">
-              <div class="lp-mcard-icon">👔</div>
-              <div class="lp-mcard-title">Team → Head Coach</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- ── History category sub-section ── -->
@@ -5666,6 +5824,13 @@
         <div class="lp-tier-panel" id="lp-tpanel-th-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 Franchise</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_past_teams')">
+              <div class="lp-mcard-icon">🔄</div>
+              <div class="lp-mcard-title">Player → Past Teams</div>
+              <div class="lp-mcard-count">16 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_champs')">
               <div class="lp-mcard-icon">🏆</div>
               <div class="lp-mcard-title">Championships Won</div>
@@ -6016,22 +6181,22 @@ function applyUsername() {
   if (el('profName'))            el('profName').textContent            = displayName;
 }
 const ROSTER = [
-  { name:"Lauri Markkanen",    position:"F",  jersey:"23", height:'7\'1"',  college:"Arizona",           country:"Finland",   hometown:"Vantaa, Finland",                    draft_year:"2017", draft_pick:"7",          draft_team:"Minnesota Timberwolves", image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
-  { name:"Ace Bailey",         position:"G",  jersey:"19", height:'6\'9"',  college:"Rutgers",           country:"USA",       hometown:"Chattanooga, Tennessee",              draft_year:"2025", draft_pick:"5",          draft_team:"Utah Jazz",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
-  { name:"Jaren Jackson Jr.",  position:"F",  jersey:"20", height:'6\'10"', college:"Michigan State",    country:"USA",       hometown:"Plainfield, New Jersey",              draft_year:"2018", draft_pick:"4",          draft_team:"Memphis Grizzlies",      image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
-  { name:"Cody Williams",      position:"F",  jersey:"5",  height:'6\'8"',  college:"Colorado",          country:"USA",       hometown:"San Luis Obispo, California",         draft_year:"2024", draft_pick:"10",         draft_team:"Utah Jazz",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
-  { name:"Brice Sensabaugh",   position:"F",  jersey:"28", height:'6\'6"',  college:"Ohio State",        country:"USA",       hometown:"Orlando, Florida",                    draft_year:"2023", draft_pick:"28",         draft_team:"Utah Jazz",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
-  { name:"Keyonte George",     position:"G",  jersey:"3",  height:'6\'4"',  college:"Baylor",            country:"USA",       hometown:"Lewisville, Texas",                   draft_year:"2023", draft_pick:"16",         draft_team:"Utah Jazz",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
-  { name:"John Konchar",       position:"G",  jersey:"55", height:'6\'5"',  college:"Purdue Fort Wayne", country:"USA",       hometown:"West Chicago, Illinois",              draft_year:"2019", draft_pick:"Undrafted",  draft_team:"Undrafted",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
-  { name:"Isaiah Collier",     position:"G",  jersey:"8",  height:'6\'4"',  college:"USC",               country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2024", draft_pick:"29",         draft_team:"Utah Jazz",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873165.png" },
-  { name:"Elijah Harkless",    position:"G",  jersey:"16", height:'6\'3"',  college:"UNLV",              country:"USA",       hometown:"Etiwanda, California",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
-  { name:"Svi Mykhailiuk",     position:"G",  jersey:"10", height:'6\'7"',  college:"Kansas",            country:"Ukraine",   hometown:"Cherkasy, Ukraine",                   draft_year:"2018", draft_pick:"47",         draft_team:"Los Angeles Lakers",     image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
-  { name:"Kevin Love",         position:"F",  jersey:"42", height:'6\'10"', college:"UCLA",              country:"USA",       hometown:"Santa Monica, California",            draft_year:"2008", draft_pick:"5",          draft_team:"Memphis Grizzlies",      image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
-  { name:"Walker Kessler",     position:"C",  jersey:"24", height:'7\'2"',  college:"Auburn",            country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2022", draft_pick:"22",         draft_team:"Memphis Grizzlies",      image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
-  { name:"Kyle Filipowski",    position:"F",  jersey:"22", height:'6\'11"', college:"Duke",              country:"USA",       hometown:"Middletown, New York",                draft_year:"2024", draft_pick:"32",         draft_team:"Utah Jazz",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
-  { name:"Oscar Tshiebwe",     position:"C",  jersey:"34", height:'6\'8"',  college:"Kentucky",          country:"DR Congo",  hometown:"Lubumbashi, DR Congo",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
-  { name:"Blake Hinson",       position:"F",  jersey:"2",  height:'6\'8"',  college:"Pittsburgh",        country:"USA",       hometown:"Deltona, Florida",                    draft_year:"2024", draft_pick:"Undrafted",  draft_team:"Undrafted",              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
-  { name:"Jusuf Nurkic",       position:"C",  jersey:"30", height:'6\'11"', college:"International",     country:"Bosnia",    hometown:"Živinice, Bosnia and Herzegovina",    draft_year:"2014", draft_pick:"16",         draft_team:"Chicago Bulls",          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
+  { name:"Lauri Markkanen",    position:"F",  jersey:"23", height:'7\'1"',  college:"Arizona",           country:"Finland",   hometown:"Vantaa, Finland",                    draft_year:"2017", draft_pick:"7",          draft_team:"Minnesota Timberwolves", past_teams:"Chicago Bulls",                                                                                       image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
+  { name:"Ace Bailey",         position:"G",  jersey:"19", height:'6\'9"',  college:"Rutgers",           country:"USA",       hometown:"Chattanooga, Tennessee",              draft_year:"2025", draft_pick:"5",          draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
+  { name:"Jaren Jackson Jr.",  position:"F",  jersey:"20", height:'6\'10"', college:"Michigan State",    country:"USA",       hometown:"Plainfield, New Jersey",              draft_year:"2018", draft_pick:"4",          draft_team:"Memphis Grizzlies",      past_teams:"Memphis Grizzlies",                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
+  { name:"Cody Williams",      position:"F",  jersey:"5",  height:'6\'8"',  college:"Colorado",          country:"USA",       hometown:"San Luis Obispo, California",         draft_year:"2024", draft_pick:"10",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
+  { name:"Brice Sensabaugh",   position:"F",  jersey:"28", height:'6\'6"',  college:"Ohio State",        country:"USA",       hometown:"Orlando, Florida",                    draft_year:"2023", draft_pick:"28",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
+  { name:"Keyonte George",     position:"G",  jersey:"3",  height:'6\'4"',  college:"Baylor",            country:"USA",       hometown:"Lewisville, Texas",                   draft_year:"2023", draft_pick:"16",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
+  { name:"John Konchar",       position:"G",  jersey:"55", height:'6\'5"',  college:"Purdue Fort Wayne", country:"USA",       hometown:"West Chicago, Illinois",              draft_year:"2019", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"Memphis Grizzlies, Indiana Pacers",                                                                    image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
+  { name:"Isaiah Collier",     position:"G",  jersey:"8",  height:'6\'4"',  college:"USC",               country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2024", draft_pick:"29",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873165.png" },
+  { name:"Elijah Harkless",    position:"G",  jersey:"16", height:'6\'3"',  college:"UNLV",              country:"USA",       hometown:"Etiwanda, California",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
+  { name:"Svi Mykhailiuk",     position:"G",  jersey:"10", height:'6\'7"',  college:"Kansas",            country:"Ukraine",   hometown:"Cherkasy, Ukraine",                   draft_year:"2018", draft_pick:"47",         draft_team:"Los Angeles Lakers",     past_teams:"Los Angeles Lakers, Detroit Pistons, Houston Rockets, Oklahoma City Thunder, Toronto Raptors",         image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
+  { name:"Kevin Love",         position:"F",  jersey:"42", height:'6\'10"', college:"UCLA",              country:"USA",       hometown:"Santa Monica, California",            draft_year:"2008", draft_pick:"5",          draft_team:"Memphis Grizzlies",      past_teams:"Minnesota Timberwolves, Cleveland Cavaliers, Miami Heat",                                              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
+  { name:"Walker Kessler",     position:"C",  jersey:"24", height:'7\'2"',  college:"Auburn",            country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2022", draft_pick:"22",         draft_team:"Memphis Grizzlies",      past_teams:"Memphis Grizzlies",                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
+  { name:"Kyle Filipowski",    position:"F",  jersey:"22", height:'6\'11"', college:"Duke",              country:"USA",       hometown:"Middletown, New York",                draft_year:"2024", draft_pick:"32",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
+  { name:"Oscar Tshiebwe",     position:"C",  jersey:"34", height:'6\'8"',  college:"Kentucky",          country:"DR Congo",  hometown:"Lubumbashi, DR Congo",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
+  { name:"Blake Hinson",       position:"F",  jersey:"2",  height:'6\'8"',  college:"Pittsburgh",        country:"USA",       hometown:"Deltona, Florida",                    draft_year:"2024", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
+  { name:"Jusuf Nurkic",       position:"C",  jersey:"30", height:'6\'11"', college:"International",     country:"Bosnia",    hometown:"Živinice, Bosnia and Herzegovina",    draft_year:"2014", draft_pick:"16",         draft_team:"Chicago Bulls",          past_teams:"Denver Nuggets, Portland Trail Blazers, Charlotte Hornets, Phoenix Suns",                             image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
 ];
 
 // Full display labels for positions
@@ -6093,6 +6258,7 @@ const TEST_ROSTER = new Proxy([], {
       college:    ROSTER[prop].college,
       country:    ROSTER[prop].country,
       hometown:   ROSTER[prop].hometown,
+      past_teams: ROSTER[prop].past_teams,
       draft_year: ROSTER[prop].draft_year,
       draft_pick: ROSTER[prop].draft_pick,
       draft_team: ROSTER[prop].draft_team,
@@ -6109,6 +6275,8 @@ const TEST_ROSTER = new Proxy([], {
           college:    p.college,
           country:    p.country,
           hometown:   p.hometown,
+          past_teams: p.past_teams,
+          past_teams: p.past_teams,
           draft_year: p.draft_year,
           draft_pick: p.draft_pick,
           draft_team: p.draft_team,
@@ -6272,6 +6440,17 @@ function buildPlayerToJerseyDeck(roster)   { return roster.filter(p => p.jersey)
 function buildPlayerToHeightDeck(roster)   { return roster.filter(p => p.height).map(p => makeCard(p.name, p.height,   "How tall is this player?")); }
 function buildPlayerToCollegeDeck(roster)  { return roster.filter(p => p.college).map(p => makeCard(p.name, p.college, "Where did this player go to college?")); }
 function buildPlayerToCountryDeck(roster)   { return roster.filter(p => p.country).map(p => makeCard(p.name, p.country,     "What country is this player from?")); }
+function buildPlayerToPastTeamsDeck(roster) {
+  return roster.filter(p => p.past_teams && p.past_teams !== 'None')
+               .map(p => makeCard(p.name, p.past_teams, "What previous NBA teams has this player been on?"));
+}
+function buildTeamToRosterDeck(team, roster) {
+  const names = Array.from(roster).map(p => p.name).join(', ');
+  return [makeCard(team.name, names, "Who are the current players on this team's roster?")];
+}
+function buildTeamToCoachingStaffDeck(team) {
+  return [makeCard(team.name, 'Will Hardy (Head Coach)', "Who is on this team's current coaching staff?")];
+}
 function buildPlayerToHometownDeck(roster)  { return roster.filter(p => p.hometown).map(p => makeCard(p.name, p.hometown,   "What is this player's hometown?")); }
 function buildPlayerToDraftYearPickDeck(roster) {
   return roster.filter(p => p.draft_year && p.draft_pick).map(p => {
@@ -6315,7 +6494,10 @@ const MODE_BUILDERS = {
   player_college:         () => buildPlayerToCollegeDeck(TEST_ROSTER),
   player_team:            () => buildPlayerToTeamDeck(TEST_ROSTER),
   player_country:         () => buildPlayerToCountryDeck(TEST_ROSTER),
+  player_past_teams:      () => buildPlayerToPastTeamsDeck(TEST_ROSTER),
   player_hometown:        () => buildPlayerToHometownDeck(TEST_ROSTER),
+  team_roster:            () => buildTeamToRosterDeck(TEST_TEAM, TEST_ROSTER),
+  team_coaching_staff:    () => buildTeamToCoachingStaffDeck(TEST_TEAM),
   player_draft_year_pick: () => buildPlayerToDraftYearPickDeck(TEST_ROSTER),
   player_draft_team:      () => buildPlayerToDraftTeamDeck(TEST_ROSTER),
   // Team Mastery — Team modes (Jazz)
@@ -6352,7 +6534,10 @@ const SESSION_MODE_TITLES = {
   player_college:         'Player → College',
   player_team:            'Player → Team',
   player_country:         'Player → Country',
+  player_past_teams:      'Player → Past Teams',
   player_hometown:        'Player → Hometown',
+  team_roster:            'Team → Roster',
+  team_coaching_staff:    'Team → Coaching Staff',
   player_draft_year_pick: 'Player → Draft Year & Pick',
   player_draft_team:      'Player → Draft Team',
   team_city:              'Team → City',
@@ -7757,7 +7942,7 @@ function lpGoPanel(n, subtype) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['players','teaminfo','history','random'].forEach(s => {
+    ['current','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -7801,7 +7986,7 @@ function lpSwitchPath(path) {
     // Reset cat state
     const g = document.getElementById('lp-league-cat-grid');
     if (g) g.style.display = '';
-    ['players','teams','history','random'].forEach(s => {
+    ['current','players','teams','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -7864,14 +8049,14 @@ function lpLaunchMode(path, mode) {
   // Capture which panel launched this session so we can return correctly
   if (path === 'league') {
     let leagueCat = null;
-    ['players','teams','history','random'].forEach(function(s) {
+    ['current','players','teams','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec && !sec.classList.contains('hidden')) leagueCat = s;
     });
     setSessionReturnTarget({ path: 'league', leagueCat: leagueCat });
   } else if (path === 'team') {
     let teamCat = null;
-    ['players','teaminfo','history','random'].forEach(function(s) {
+    ['current','players','teaminfo','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec && !sec.classList.contains('hidden')) teamCat = s;
     });
@@ -8446,7 +8631,7 @@ function lpSelectLeagueCat(cat) {
   if (cat === 'random') {
     // Show random section, hide grid
     const grid = document.getElementById('lp-league-cat-grid');
-    const sections = ['players','teams','history','random'];
+    const sections = ['current','players','teams','history','random'];
     if (grid) grid.style.display = 'none';
     sections.forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
@@ -8459,7 +8644,7 @@ function lpSelectLeagueCat(cat) {
   }
   // Hide grid, show the right section
   const grid = document.getElementById('lp-league-cat-grid');
-  const sections = ['players','teams','history','random'];
+  const sections = ['current','players','teams','history','random'];
   if (grid) grid.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-lsec-' + s);
@@ -8516,7 +8701,7 @@ function lpSelectTeamCat(cat) {
   if (teamPanel) teamPanel.classList.add('lp-panel--cat-open');
 
   const grid = document.getElementById('lp-team-cat-grid');
-  const sections = ['players','teaminfo','history','random'];
+  const sections = ['current','players','teaminfo','history','random'];
   if (grid) grid.style.display = 'none';
   // Hide team overview sections — this is now a focused mode page
   const infoPanel = document.getElementById('lp-team-info-panel');
