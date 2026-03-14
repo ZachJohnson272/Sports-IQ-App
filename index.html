@@ -4868,14 +4868,14 @@
       </div>
       <!-- Category picker -->
       <div class="lp-cat-grid" id="lp-league-cat-grid">
-        <div class="lp-cat-card lp-cat-card--current" id="lp-lcat-current" onclick="lpSelectLeagueCat('current')">
-          <div class="lp-cat-icon">⚡</div>
+        <div class="lp-cat-card lp-cat-card--current" id="lp-lcat-roster" onclick="lpSelectLeagueCat('roster')">
+          <div class="lp-cat-icon">📋</div>
           <div class="lp-cat-body">
-            <div class="lp-cat-title">Current</div>
+            <div class="lp-cat-title">Roster</div>
             <div class="lp-cat-desc">Active rosters, current team, head coach, and live squad info</div>
             <div class="lp-cat-meta">
               <span class="lp-cat-badge">Live data</span>
-              <span class="lp-cat-modes-count">4 difficulty tiers</span>
+              <span class="lp-cat-modes-count">3 difficulty tiers</span>
             </div>
           </div>
           <div class="lp-cat-arrow">›</div>
@@ -4929,34 +4929,30 @@
         </div>
       </div>
 
-      <!-- ── Current category sub-section ── -->
-      <div class="lp-cat-section hidden" id="lp-lsec-current">
+      <!-- ── Roster category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-lsec-roster">
         <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">⚡ Current</span>
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">📋 Roster</span>
         </div>
         <div class="lp-tier-tabs">
-          <div class="lp-tier-tab active" id="lp-ltab-cur-rookie" onclick="lpSelectCatTier('lp-lsec-current','cur-rookie')">
+          <div class="lp-tier-tab active" id="lp-ltab-ros-rookie" onclick="lpSelectCatTier('lp-lsec-roster','ros-rookie')">
             <span class="lp-tier-tab-dot lp-diff-rookie"></span>
             <span class="lp-tier-tab-label">Rookie</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ltab-cur-starter" onclick="lpSelectCatTier('lp-lsec-current','cur-starter')">
+          <div class="lp-tier-tab" id="lp-ltab-ros-starter" onclick="lpSelectCatTier('lp-lsec-roster','ros-starter')">
             <span class="lp-tier-tab-dot lp-diff-starter"></span>
             <span class="lp-tier-tab-label">Starter</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ltab-cur-allstar" onclick="lpSelectCatTier('lp-lsec-current','cur-allstar')">
+          <div class="lp-tier-tab" id="lp-ltab-ros-allstar" onclick="lpSelectCatTier('lp-lsec-roster','ros-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ltab-cur-hof" onclick="lpSelectCatTier('lp-lsec-current','cur-hof')">
-            <span class="lp-tier-tab-dot lp-diff-hof"></span>
-            <span class="lp-tier-tab-label">Hall of Fame</span>
-          </div>
         </div>
         </div>
-        <div class="lp-tier-panel" id="lp-lpanel-cur-rookie">
+        <div class="lp-tier-panel" id="lp-lpanel-ros-rookie">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ Rookie</div>
+            <div class="lp-mode-grid-label">📋 Rookie</div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
@@ -4973,20 +4969,15 @@
             </div>
           </div>
         </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-cur-starter">
+        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-starter">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ Starter</div>
+            <div class="lp-mode-grid-label">📋 Starter</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">📋</div>
               <div class="lp-mcard-title">Team → Starting 5</div>
               <div class="lp-mcard-count">30 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
             </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-cur-allstar">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ All-Star</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🧑‍💼</div>
               <div class="lp-mcard-title">Team → Coaching Staff</div>
@@ -4995,9 +4986,9 @@
             </div>
           </div>
         </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-cur-hof">
+        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-allstar">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ Hall of Fame</div>
+            <div class="lp-mode-grid-label">📋 All-Star</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">👥</div>
               <div class="lp-mcard-title">Team → Roster</div>
@@ -5450,11 +5441,11 @@
       <!-- Progression-style category cards -->
       <div class="lp-prog-grid" id="lp-team-cat-grid">
 
-        <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-current" onclick="lpSelectTeamCat('current')">
+        <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-roster" onclick="lpSelectTeamCat('roster')">
           <div class="lp-prog-top">
-            <div class="lp-prog-icon">⚡</div>
+            <div class="lp-prog-icon">📋</div>
             <div class="lp-prog-body">
-              <div class="lp-prog-title">Current</div>
+              <div class="lp-prog-title">Roster</div>
               <div class="lp-prog-desc">Active rosters, current team, head coach, and live squad info</div>
             </div>
           </div>
@@ -5468,7 +5459,6 @@
             <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
             <span class="lp-prog-tier lp-prog-tier--starter">Starter</span>
             <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
-            <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
           </div>
         </div>
 
@@ -5555,34 +5545,30 @@
 
       </div>
 
-      <!-- ── Current category sub-section ── -->
-      <div class="lp-cat-section hidden" id="lp-tsec-current">
+      <!-- ── Roster category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-tsec-roster">
         <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">⚡ Current</span>
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">📋 Roster</span>
         </div>
         <div class="lp-tier-tabs">
-          <div class="lp-tier-tab active" id="lp-ttab-tc-rookie" onclick="lpSelectCatTier('lp-tsec-current','tc-rookie')">
+          <div class="lp-tier-tab active" id="lp-ttab-ros-rookie" onclick="lpSelectCatTier('lp-tsec-roster','ros-rookie')">
             <span class="lp-tier-tab-dot lp-diff-rookie"></span>
             <span class="lp-tier-tab-label">Rookie</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ttab-tc-starter" onclick="lpSelectCatTier('lp-tsec-current','tc-starter')">
+          <div class="lp-tier-tab" id="lp-ttab-ros-starter" onclick="lpSelectCatTier('lp-tsec-roster','ros-starter')">
             <span class="lp-tier-tab-dot lp-diff-starter"></span>
             <span class="lp-tier-tab-label">Starter</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ttab-tc-allstar" onclick="lpSelectCatTier('lp-tsec-current','tc-allstar')">
+          <div class="lp-tier-tab" id="lp-ttab-ros-allstar" onclick="lpSelectCatTier('lp-tsec-roster','ros-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ttab-tc-hof" onclick="lpSelectCatTier('lp-tsec-current','tc-hof')">
-            <span class="lp-tier-tab-dot lp-diff-hof"></span>
-            <span class="lp-tier-tab-label">Hall of Fame</span>
-          </div>
         </div>
         </div>
-        <div class="lp-tier-panel" id="lp-tpanel-tc-rookie">
+        <div class="lp-tier-panel" id="lp-tpanel-ros-rookie">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ Rookie</div>
+            <div class="lp-mode-grid-label">📋 Rookie</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','player_team')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
@@ -5599,9 +5585,9 @@
             </div>
           </div>
         </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-tc-starter">
+        <div class="lp-tier-panel hidden" id="lp-tpanel-ros-starter">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ Starter</div>
+            <div class="lp-mode-grid-label">📋 Starter</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','lineup')">
               <div class="lp-mcard-icon">📋</div>
               <div class="lp-mcard-title">Team → Starting 5</div>
@@ -5609,11 +5595,6 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-tc-allstar">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ All-Star</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_coaching_staff')">
               <div class="lp-mcard-icon">🧑‍💼</div>
               <div class="lp-mcard-title">Team → Coaching Staff</div>
@@ -5623,9 +5604,9 @@
             </div>
           </div>
         </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-tc-hof">
+        <div class="lp-tier-panel hidden" id="lp-tpanel-ros-allstar">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">⚡ Hall of Fame</div>
+            <div class="lp-mode-grid-label">📋 All-Star</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_roster')">
               <div class="lp-mcard-icon">👥</div>
               <div class="lp-mcard-title">Team → Roster</div>
@@ -7942,7 +7923,7 @@ function lpGoPanel(n, subtype) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['current','players','teaminfo','history','random'].forEach(s => {
+    ['roster','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -7986,7 +7967,7 @@ function lpSwitchPath(path) {
     // Reset cat state
     const g = document.getElementById('lp-league-cat-grid');
     if (g) g.style.display = '';
-    ['current','players','teams','history','random'].forEach(s => {
+    ['roster','players','teams','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8049,14 +8030,14 @@ function lpLaunchMode(path, mode) {
   // Capture which panel launched this session so we can return correctly
   if (path === 'league') {
     let leagueCat = null;
-    ['current','players','teams','history','random'].forEach(function(s) {
+    ['roster','players','teams','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec && !sec.classList.contains('hidden')) leagueCat = s;
     });
     setSessionReturnTarget({ path: 'league', leagueCat: leagueCat });
   } else if (path === 'team') {
     let teamCat = null;
-    ['current','players','teaminfo','history','random'].forEach(function(s) {
+    ['roster','players','teaminfo','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec && !sec.classList.contains('hidden')) teamCat = s;
     });
@@ -8631,7 +8612,7 @@ function lpSelectLeagueCat(cat) {
   if (cat === 'random') {
     // Show random section, hide grid
     const grid = document.getElementById('lp-league-cat-grid');
-    const sections = ['current','players','teams','history','random'];
+    const sections = ['roster','players','teams','history','random'];
     if (grid) grid.style.display = 'none';
     sections.forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
@@ -8644,7 +8625,7 @@ function lpSelectLeagueCat(cat) {
   }
   // Hide grid, show the right section
   const grid = document.getElementById('lp-league-cat-grid');
-  const sections = ['current','players','teams','history','random'];
+  const sections = ['roster','players','teams','history','random'];
   if (grid) grid.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-lsec-' + s);
@@ -8701,7 +8682,7 @@ function lpSelectTeamCat(cat) {
   if (teamPanel) teamPanel.classList.add('lp-panel--cat-open');
 
   const grid = document.getElementById('lp-team-cat-grid');
-  const sections = ['current','players','teaminfo','history','random'];
+  const sections = ['roster','players','teaminfo','history','random'];
   if (grid) grid.style.display = 'none';
   // Hide team overview sections — this is now a focused mode page
   const infoPanel = document.getElementById('lp-team-info-panel');
