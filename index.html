@@ -4872,6 +4872,18 @@
           </div>
           <div class="lp-cat-arrow">›</div>
         </div>
+        <div class="lp-cat-card lp-cat-card--history" id="lp-lcat-history" onclick="lpSelectLeagueCat('history')">
+          <div class="lp-cat-icon">🏛</div>
+          <div class="lp-cat-body">
+            <div class="lp-cat-title">History</div>
+            <div class="lp-cat-desc">Championships, franchise legends, records, and retired numbers</div>
+            <div class="lp-cat-meta">
+              <span class="lp-cat-badge">30 cards / mode</span>
+              <span class="lp-cat-modes-count">2 difficulty tiers</span>
+            </div>
+          </div>
+          <div class="lp-cat-arrow">›</div>
+        </div>
         <div class="lp-cat-card lp-cat-card--random" id="lp-lcat-random" onclick="lpSelectLeagueCat('random')">
           <div class="lp-cat-icon">🎲</div>
           <div class="lp-cat-body">
@@ -5074,6 +5086,30 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── History category section ── -->
+      <div class="lp-cat-section hidden" id="lp-lsec-history">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title">🏛 History</span>
+        </div>
+        <div class="lp-tier-tabs">
+          <div class="lp-tier-tab active" id="lp-ltab-h-allstar" onclick="lpSelectCatTier('lp-lsec-history','h-allstar')">
+            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
+            <span class="lp-tier-tab-label">All-Star</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-h-hof" onclick="lpSelectCatTier('lp-lsec-history','h-hof')">
+            <span class="lp-tier-tab-dot lp-diff-hof"></span>
+            <span class="lp-tier-tab-label">Hall of Fame</span>
+          </div>
+        </div>
+        </div>
+        <div class="lp-tier-panel" id="lp-lpanel-h-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏛 All-Star</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🎖️</div>
               <div class="lp-mcard-title">Team → Rookies of Year</div>
@@ -5094,9 +5130,9 @@
             </div>
           </div>
         </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-t-hof">
+        <div class="lp-tier-panel hidden" id="lp-lpanel-h-hof">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 Hall of Fame</div>
+            <div class="lp-mode-grid-label">🏛 Hall of Fame</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🐐</div>
               <div class="lp-mcard-title">Team → Franchise GOAT</div>
@@ -5397,6 +5433,25 @@
           </div>
         </div>
 
+        <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="lpSelectTeamCat('random')">
+          <div class="lp-prog-top">
+            <div class="lp-prog-icon">🎲</div>
+            <div class="lp-prog-body">
+              <div class="lp-prog-title">Random</div>
+              <div class="lp-prog-desc">Mixed flashcard sessions pulled from all Team Mastery modes</div>
+            </div>
+          </div>
+          <div class="lp-prog-bar-row">
+            <div class="lp-prog-bar-wrap">
+              <div class="lp-prog-bar-fill lp-prog-bar--mixed" style="width:0%"></div>
+            </div>
+            <span class="lp-prog-fraction">All modes</span>
+          </div>
+          <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--rookie">All Tiers</span>
+          </div>
+        </div>
+
       </div>
 
       <!-- ── Players category sub-section ── -->
@@ -5657,6 +5712,61 @@
               <div class="lp-mcard-title">All-Time Rebounds</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Random category section ── -->
+      <div class="lp-cat-section hidden" id="lp-tsec-random">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title" style="background:rgba(61,204,122,0.15);border-color:rgba(61,204,122,0.3);color:#fff;">🎲 Random</span>
+        </div>
+        </div>
+
+        <!-- Reuses the same random generator as League Knowledge -->
+        <div id="lp-random-setup-team">
+          <div class="lp-rgen-hub">
+            <p class="lp-rgen-intro">Mixed sessions from your Team Mastery flashcard modes.</p>
+
+            <!-- Mixed Chaos -->
+            <div class="lp-rgen-card lp-rgen-card--chaos" onclick="startGeneratedMode('mixed')">
+              <div class="lp-rgen-top">
+                <span class="lp-rgen-name">🎲 Mixed Chaos</span>
+                <span class="lp-rgen-badge badge--fun">FUN</span>
+              </div>
+              <div class="lp-rgen-desc">All categories, lightly biased toward review. Varied and energetic — great for casual play.</div>
+              <div class="lp-rgen-footer">
+                <span class="lp-rgen-meta">20 cards · All topics</span>
+                <span class="lp-rgen-play">▶ Play</span>
+              </div>
+            </div>
+
+            <!-- Weak Spot Trainer -->
+            <div class="lp-rgen-card lp-rgen-card--weak" onclick="startGeneratedMode('weakSpots')">
+              <div class="lp-rgen-top">
+                <span class="lp-rgen-name">🎯 Weak Spot Trainer</span>
+                <span class="lp-rgen-badge badge--drill">DRILL</span>
+              </div>
+              <div class="lp-rgen-desc">Prioritizes cards you miss most. Smart review that finds your gaps, mixed with easier cards to stay sharp.</div>
+              <div class="lp-rgen-footer">
+                <span class="lp-rgen-meta">16 cards · Your weak areas</span>
+                <span class="lp-rgen-play">▶ Play</span>
+              </div>
+            </div>
+
+            <!-- Daily Challenge -->
+            <div class="lp-rgen-card lp-rgen-card--daily" onclick="startGeneratedMode('daily')">
+              <div class="lp-rgen-top">
+                <span class="lp-rgen-name">📅 Daily Challenge</span>
+                <span class="lp-rgen-badge badge--daily">DAILY</span>
+              </div>
+              <div class="lp-rgen-desc">Today's fixed run — same cards for everyone. Your score is locked in for the day.</div>
+              <div class="lp-rgen-footer">
+                <span class="lp-rgen-meta">15 cards · Resets at midnight</span>
+                <span class="lp-rgen-play">▶ Play</span>
+              </div>
             </div>
           </div>
         </div>
@@ -7645,7 +7755,7 @@ function lpGoPanel(n, subtype) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['players','teaminfo','history'].forEach(s => {
+    ['players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -7689,7 +7799,7 @@ function lpSwitchPath(path) {
     // Reset cat state
     const g = document.getElementById('lp-league-cat-grid');
     if (g) g.style.display = '';
-    ['players','teams','random'].forEach(s => {
+    ['players','teams','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -7752,14 +7862,14 @@ function lpLaunchMode(path, mode) {
   // Capture which panel launched this session so we can return correctly
   if (path === 'league') {
     let leagueCat = null;
-    ['players','teams','random'].forEach(function(s) {
+    ['players','teams','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec && !sec.classList.contains('hidden')) leagueCat = s;
     });
     setSessionReturnTarget({ path: 'league', leagueCat: leagueCat });
   } else if (path === 'team') {
     let teamCat = null;
-    ['players','teaminfo','history'].forEach(function(s) {
+    ['players','teaminfo','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec && !sec.classList.contains('hidden')) teamCat = s;
     });
@@ -8334,7 +8444,7 @@ function lpSelectLeagueCat(cat) {
   if (cat === 'random') {
     // Show random section, hide grid
     const grid = document.getElementById('lp-league-cat-grid');
-    const sections = ['players','teams','random'];
+    const sections = ['players','teams','history','random'];
     if (grid) grid.style.display = 'none';
     sections.forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
@@ -8347,7 +8457,7 @@ function lpSelectLeagueCat(cat) {
   }
   // Hide grid, show the right section
   const grid = document.getElementById('lp-league-cat-grid');
-  const sections = ['players','teams','random'];
+  const sections = ['players','teams','history','random'];
   if (grid) grid.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-lsec-' + s);
@@ -8404,7 +8514,7 @@ function lpSelectTeamCat(cat) {
   if (teamPanel) teamPanel.classList.add('lp-panel--cat-open');
 
   const grid = document.getElementById('lp-team-cat-grid');
-  const sections = ['players','teaminfo','history'];
+  const sections = ['players','teaminfo','history','random'];
   if (grid) grid.style.display = 'none';
   // Hide team overview sections — this is now a focused mode page
   const infoPanel = document.getElementById('lp-team-info-panel');
@@ -8417,6 +8527,7 @@ function lpSelectTeamCat(cat) {
     const sec = document.getElementById('lp-tsec-' + s);
     if (sec) sec.classList.toggle('hidden', s !== cat);
   });
+  if (cat === 'random') return; // random section has no tier tabs
   // Reset active tier tab in opened section
   const section = document.getElementById('lp-tsec-' + cat);
   if (section) {
