@@ -6561,7 +6561,7 @@ function startFlashSession(cards, opts) {
   delete document.getElementById('answerBtns').dataset.randMode; // not in random mode
   document.getElementById('mcOptions').style.display    = 'none';
   document.getElementById('lineupMode').style.display   = 'none';
-  document.getElementById('roundComplete').classList.remove('show');
+  const _rcEl = document.getElementById('roundComplete'); _rcEl.classList.remove('show'); _rcEl.style.display = '';
   document.getElementById('fcTotal').textContent        = _sessionDeck.length;
   document.getElementById('fcModeTitle').textContent    = SESSION_MODE_TITLES[_sessionMode] || '';
 
@@ -6686,7 +6686,6 @@ function endSessionRound() {
   document.getElementById('roundCompleteMsg').textContent = accuracy >= 90 ? msgs[4] : accuracy >= 70 ? msgs[3] : accuracy >= 50 ? msgs[2] : accuracy >= 30 ? msgs[1] : msgs[0];
 
   const rc = document.getElementById('roundComplete');
-  rc.style.display = 'flex';
   rc.classList.add('show');
 }
 
@@ -6828,7 +6827,8 @@ function startMode(mode) {
   document.getElementById('answerBtns').style.display = mode === 'multiChoice' ? 'none' : '';
   document.getElementById('mcOptions').style.display = mode === 'multiChoice' ? '' : 'none';
   document.getElementById('lineupMode').style.display = 'none';
-  document.getElementById('roundComplete').classList.remove('show');
+  const _rc = document.getElementById('roundComplete');
+  _rc.classList.remove('show'); _rc.style.display = '';
   document.getElementById('fcTotal').textContent = deck.length;
   const modeTitles = {
     namePos: 'Player → Position & Jersey',
@@ -7075,8 +7075,8 @@ const LINEUP_POSITIONS = [
 function startLineup() {
   document.getElementById('cardScene').style.display = 'none';
   document.getElementById('answerBtns').style.display = 'none';
-  document.getElementById('mcOptions').style.display = 'none';
-  document.getElementById('roundComplete').classList.remove('show');
+  const _rc = document.getElementById('roundComplete');
+  _rc.classList.remove('show'); _rc.style.display = '';
   document.getElementById('lineupMode').style.display = '';
   document.getElementById('lineupResult').style.display = 'none';
   document.getElementById('fcCurrent').textContent = '—';
@@ -8340,7 +8340,8 @@ function startGeneratedMode(type) {
 
   // Hide mc/lineup modes, show card + standard answer buttons
   document.getElementById('cardScene').style.display   = '';
-  document.getElementById('mcOptions').style.display   = 'none';
+  const _rc = document.getElementById('roundComplete');
+  _rc.classList.remove('show'); _rc.style.display = '';
   document.getElementById('lineupMode').style.display  = 'none';
   document.getElementById('roundComplete').classList.remove('show');
 
@@ -8541,7 +8542,8 @@ function lpRandomReset() {
   const badge = document.getElementById('fcStreakBadge');
   if (badge) badge.style.display = '';
   // Restore cardScene and answerBtns to default visible state
-  document.getElementById('cardScene').style.display  = '';
+  const _rc = document.getElementById('roundComplete');
+  _rc.classList.remove('show'); _rc.style.display = '';
   document.getElementById('answerBtns').style.display = '';
   // Remove round-complete so next standard mode starts clean
   document.getElementById('roundComplete').classList.remove('show');
