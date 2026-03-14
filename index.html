@@ -5617,6 +5617,13 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach')">
+              <div class="lp-mcard-icon">👔</div>
+              <div class="lp-mcard-title">Team → Head Coach</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
           </div>
         </div>
         <div class="lp-tier-panel hidden" id="lp-tpanel-ti-allstar">
@@ -6012,7 +6019,8 @@ const TEST_TEAM = {
   colors: "Purple, Black, White",
   championships: "0",
   lastTitle: "N/A — no titles yet",
-  abbreviation: "UTA"
+  abbreviation: "UTA",
+  coach: "Will Hardy"
 };
 
 // TEST_ROSTER pulls from the live ROSTER array so they stay in sync
@@ -6211,6 +6219,7 @@ function buildTeamToColorsDeck(team)       { return [makeCard(team.name, team.co
 function buildTeamToDivisionDeck(team)     { return [makeCard(team.name, team.division,     'What division is this team in?')]; }
 function buildTeamToChampsDeck(team)       { return [makeCard(team.name, team.championships,'How many championships has this team won?')]; }
 function buildTeamToLastTitleDeck(team)    { return [makeCard(team.name, team.lastTitle,    'When did this team last win a championship?')]; }
+function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
 
 // -- League-wide team deck builders (all 30 teams) --
 function buildLeagueTeamToCityDeck()         { return NBA_TEAMS.map(t => makeCard(t.name, t.city,         'What city does this team play in?')); }
@@ -6236,6 +6245,7 @@ const MODE_BUILDERS = {
   team_division:          () => buildTeamToDivisionDeck(TEST_TEAM),
   team_champs:            () => buildTeamToChampsDeck(TEST_TEAM),
   team_last_title:        () => buildTeamToLastTitleDeck(TEST_TEAM),
+  team_coach:             () => buildTeamToCoachDeck(TEST_TEAM),
   // League Knowledge — Player modes (all teams)
   league_player_jersey:   () => buildPlayerToJerseyDeck(NBA_PLAYERS),
   league_player_country:  () => buildPlayerToCountryDeck(NBA_PLAYERS),
@@ -6266,6 +6276,7 @@ const SESSION_MODE_TITLES = {
   team_division:          'Team → Division',
   team_champs:            'Team → Championships',
   team_last_title:        'Team → Last Title Year',
+  team_coach:             'Team → Head Coach',
   league_player_jersey:   'Player → Jersey Number',
   league_player_country:  'Player → Country',
   league_player_height:   'Player → Height',
