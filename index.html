@@ -6434,8 +6434,7 @@ function buildPlayerToPastTeamsDeck(roster) {
                .map(p => makeCard(p.name, p.past_teams, "What previous NBA teams has this player been on?"));
 }
 function buildTeamToRosterDeck(team, roster) {
-  const names = Array.from(roster).map(p => p.name).join('
-');
+  const names = Array.from(roster).map(p => p.name).join('\n');
   const answer = '<span class="back-list-heading">' + team.name.toUpperCase() + ' ROSTER</span>' + names;
   return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
 }
@@ -6449,8 +6448,7 @@ function buildTeamToCoachingStaffDeck(team) {
   const staff = TEAM_COACHING_STAFF[team.name];
   if (!staff) return [makeCard(team.name, 'Coaching staff unavailable', "Who is on this team's current coaching staff?")];
   const answer = '<span class="back-list-heading">HEAD COACH</span>' + staff.head +
-    '<span class="back-list-heading">ASSISTANTS</span>' + staff.assistants.join('
-');
+    '<span class="back-list-heading">ASSISTANTS</span>' + staff.assistants.join('\n');
   return [makeCard(team.name, answer, "Who is on this team's current coaching staff?")];
 }
 function buildPlayerToHometownDeck(roster)  { return roster.filter(p => p.hometown).map(p => makeCard(p.name, p.hometown,   "What is this player's hometown?")); }
