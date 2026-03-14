@@ -5125,17 +5125,6 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">🎨</div>
-              <div class="lp-mcard-title">Team → Colors</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-t-starter">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 Starter</div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_conf_division')">
               <div class="lp-mcard-icon">🗺️</div>
               <div class="lp-mcard-title">Team → Conference & Division</div>
@@ -5143,6 +5132,11 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-t-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏟 Starter</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🦅</div>
               <div class="lp-mcard-title">Team → Mascot</div>
@@ -5181,8 +5175,14 @@
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 All-Star</div>
             <div class="lp-mcard lp-mcard--locked">
+              <div class="lp-mcard-icon">🔄</div>
+              <div class="lp-mcard-title">Player → Past Teams</div>
+              <div class="lp-mcard-count">~70 cards</div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            </div>
+            <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🎖️</div>
-              <div class="lp-mcard-title">Team → Rookies of Year</div>
+              <div class="lp-mcard-title">Team → Rookies of the Year</div>
               <div class="lp-mcard-count">30 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
             </div>
@@ -5224,12 +5224,6 @@
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🎯</div>
               <div class="lp-mcard-title">Team → All-Time Assists</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
-            </div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">💪</div>
-              <div class="lp-mcard-title">Team → All-Time Rebounds</div>
               <div class="lp-mcard-count">30 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
             </div>
@@ -5748,9 +5742,9 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_colors')">
-              <div class="lp-mcard-icon">🎨</div>
-              <div class="lp-mcard-title">Team → Colors</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_conf_division')">
+              <div class="lp-mcard-icon">🗺️</div>
+              <div class="lp-mcard-title">Team → Conference & Division</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5760,13 +5754,6 @@
         <div class="lp-tier-panel hidden" id="lp-tpanel-ti-starter">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏟 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_conf_division')">
-              <div class="lp-mcard-icon">🗺️</div>
-              <div class="lp-mcard-title">Team → Conference & Division</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_mascot')">
               <div class="lp-mcard-icon">🐻</div>
               <div class="lp-mcard-title">Team → Mascot</div>
@@ -5812,6 +5799,12 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+            <div class="lp-mcard lp-mcard--locked">
+              <div class="lp-mcard-icon">🎖️</div>
+              <div class="lp-mcard-title">Team → Rookies of the Year</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_champs')">
               <div class="lp-mcard-icon">🏆</div>
               <div class="lp-mcard-title">Championships Won</div>
@@ -5852,12 +5845,6 @@
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🎯</div>
               <div class="lp-mcard-title">All-Time Assists</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
-            </div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">💪</div>
-              <div class="lp-mcard-title">All-Time Rebounds</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
             </div>
@@ -8649,7 +8636,7 @@ function lpCloseCat(scope) {
     if (leaguePanel) leaguePanel.classList.remove('lp-panel--cat-open');
     const grid = document.getElementById('lp-league-cat-grid');
     if (grid) grid.style.display = '';
-    ['players','teams','random'].forEach(s => {
+    ['roster','players','teams','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8669,7 +8656,7 @@ function lpCloseCat(scope) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['players','teaminfo','history'].forEach(s => {
+    ['roster','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
