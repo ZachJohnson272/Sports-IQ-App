@@ -5078,6 +5078,13 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coach')">
+              <div class="lp-mcard-icon">👔</div>
+              <div class="lp-mcard-title">Team → Head Coach</div>
+              <div class="lp-mcard-count">30 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
           </div>
         </div>
         <div class="lp-tier-panel hidden" id="lp-lpanel-t-starter">
@@ -6091,7 +6098,7 @@ const NBA_TEAMS = [
   { name:"Sacramento Kings",       city:"Sacramento",    conference:"West", division:"Pacific",   abbreviation:"SAC" },
   { name:"San Antonio Spurs",      city:"San Antonio",   conference:"West", division:"Southwest", abbreviation:"SAS" },
   { name:"Toronto Raptors",        city:"Toronto",       conference:"East", division:"Atlantic",  abbreviation:"TOR" },
-  { name:"Utah Jazz",              city:"Salt Lake City",conference:"West", division:"Northwest", abbreviation:"UTA" },
+  { name:"Utah Jazz",              city:"Salt Lake City",conference:"West", division:"Northwest", abbreviation:"UTA", coach:"Will Hardy" },
   { name:"Washington Wizards",     city:"Washington",    conference:"East", division:"Southeast", abbreviation:"WAS" },
 ];
 
@@ -6226,6 +6233,7 @@ function buildLeagueTeamToCityDeck()         { return NBA_TEAMS.map(t => makeCar
 function buildLeagueTeamToConferenceDeck()   { return NBA_TEAMS.map(t => makeCard(t.name, t.conference,   'What conference is this team in?')); }
 function buildLeagueTeamToDivisionDeck()     { return NBA_TEAMS.map(t => makeCard(t.name, t.division,     'What division is this team in?')); }
 function buildLeagueTeamToAbbreviationDeck() { return NBA_TEAMS.map(t => makeCard(t.name, t.abbreviation, 'What is the abbreviation for this team?')); }
+function buildLeagueTeamToCoachDeck()       { return NBA_TEAMS.filter(t => t.coach).map(t => makeCard(t.name, t.coach, "Who is this team's head coach?")); }
 
 // -- Mode registry --
 const MODE_BUILDERS = {
@@ -6258,6 +6266,7 @@ const MODE_BUILDERS = {
   league_team_conference:   () => buildLeagueTeamToConferenceDeck(),
   league_team_division:     () => buildLeagueTeamToDivisionDeck(),
   league_team_abbreviation: () => buildLeagueTeamToAbbreviationDeck(),
+  league_team_coach:        () => buildLeagueTeamToCoachDeck(),
 };
 
 // -- Mode display titles --
@@ -6287,6 +6296,7 @@ const SESSION_MODE_TITLES = {
   league_team_conference:   'Team → Conference',
   league_team_division:     'Team → Division',
   league_team_abbreviation: 'Team → Abbreviation',
+  league_team_coach:        'Team → Head Coach',
 };
 
 // -- Session state for the generic card engine --
