@@ -6416,8 +6416,17 @@ function buildTeamToRosterDeck(team, roster) {
   const names = Array.from(roster).map(p => p.name).join(', ');
   return [makeCard(team.name, names, "Who are the current players on this team's roster?")];
 }
+const TEAM_COACHING_STAFF = {
+  "Utah Jazz": {
+    head: "Will Hardy",
+    assistants: ["Chad Forcier", "Scott Morrison", "Sean Sheldon", "Jason Terry"]
+  }
+};
 function buildTeamToCoachingStaffDeck(team) {
-  return [makeCard(team.name, 'Will Hardy (Head Coach)', "Who is on this team's current coaching staff?")];
+  const staff = TEAM_COACHING_STAFF[team.name];
+  if (!staff) return [makeCard(team.name, 'Coaching staff unavailable', "Who is on this team's current coaching staff?")];
+  const answer = staff.head + ' (Head Coach)\nAssistants: ' + staff.assistants.join(', ');
+  return [makeCard(team.name, answer, "Who is on this team's current coaching staff?")];
 }
 function buildPlayerToHometownDeck(roster)  { return roster.filter(p => p.hometown).map(p => makeCard(p.name, p.hometown,   "What is this player's hometown?")); }
 function buildPlayerToDraftYearPickDeck(roster) {
