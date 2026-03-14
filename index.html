@@ -7564,8 +7564,14 @@ function goBackToSessionModes() {
     return;
   }
   const t = _sessionReturnTarget;
+  // Switch to learn page — this calls lpGoPanel(1) which hides the bar.
+  // We restore the bar and correct panel in the setTimeout below.
   bnSwitch('learn');
   setTimeout(() => {
+    // Always restore the toggle bar — bnSwitch('learn') hides it via lpGoPanel(1)
+    const bar = document.getElementById('lp-toggle-bar');
+    if (bar) bar.style.display = 'flex';
+
     if (t.path === 'random') {
       // Restore to League Knowledge > Random section
       _lpPath = 'league';
