@@ -8276,13 +8276,35 @@ function goBackToSessionModes() {
       document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.add('active');
       document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.remove('active');
       lpShowPanel('lp-panel-3-league');
-      if (t.leagueCat) lpSelectLeagueCat(t.leagueCat);
+      if (t.leagueCat) {
+        lpSelectLeagueCat(t.leagueCat);
+        // Restore the exact tier the user was on (lpSelectLeagueCat resets to index 0)
+        if (t.tierTabId) {
+          const tab = document.getElementById(t.tierTabId);
+          if (tab) {
+            const tierKey = t.tierTabId.replace(/^lp-[lt]tab-/, '');
+            const sectionId = 'lp-lsec-' + t.leagueCat;
+            lpSelectCatTier(sectionId, tierKey);
+          }
+        }
+      }
     } else if (t.path === 'team') {
       _lpPath = 'team';
       document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.remove('active');
       document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.add('active');
       lpShowPanel('lp-panel-4-team');
-      if (t.teamCat) lpSelectTeamCat(t.teamCat);
+      if (t.teamCat) {
+        lpSelectTeamCat(t.teamCat);
+        // Restore the exact tier the user was on (lpSelectTeamCat resets to index 0)
+        if (t.tierTabId) {
+          const tab = document.getElementById(t.tierTabId);
+          if (tab) {
+            const tierKey = t.tierTabId.replace(/^lp-[lt]tab-/, '');
+            const sectionId = 'lp-tsec-' + t.teamCat;
+            lpSelectCatTier(sectionId, tierKey);
+          }
+        }
+      }
     }
   }, 30);
 }
@@ -8460,14 +8482,32 @@ function lpLaunchMode(path, mode) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec && !sec.classList.contains('hidden')) leagueCat = s;
     });
-    setSessionReturnTarget({ path: 'league', leagueCat: leagueCat });
+    // Also capture the active tier tab id so we can restore it on exit
+    let tierTabId = null;
+    if (leagueCat) {
+      const sec = document.getElementById('lp-lsec-' + leagueCat);
+      if (sec) {
+        const activeTab = sec.querySelector('.lp-tier-tab.active');
+        if (activeTab) tierTabId = activeTab.id;
+      }
+    }
+    setSessionReturnTarget({ path: 'league', leagueCat: leagueCat, tierTabId: tierTabId });
   } else if (path === 'team') {
     let teamCat = null;
     ['roster','players','teaminfo','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec && !sec.classList.contains('hidden')) teamCat = s;
     });
-    setSessionReturnTarget({ path: 'team', teamCat: teamCat });
+    // Also capture the active tier tab id so we can restore it on exit
+    let tierTabId = null;
+    if (teamCat) {
+      const sec = document.getElementById('lp-tsec-' + teamCat);
+      if (sec) {
+        const activeTab = sec.querySelector('.lp-tier-tab.active');
+        if (activeTab) tierTabId = activeTab.id;
+      }
+    }
+    setSessionReturnTarget({ path: 'team', teamCat: teamCat, tierTabId: tierTabId });
   }
   // Map to existing startMode keys
   startMode(mode);
