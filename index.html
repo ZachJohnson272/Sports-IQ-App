@@ -413,62 +413,61 @@
     line-height: 1.1;
     color: #fff;
   }
+  /* Override card-back alignment/padding for list-style answers */
+  .card-back.card-back--list {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 14px 16px 12px;
+    gap: 0;
+    overflow-y: auto;
+  }
   .back-name--list {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 11.5px;
     letter-spacing: 0;
-    line-height: 1.6;
+    line-height: 1.4;
     color: #fff;
     text-align: left;
     white-space: pre-line;
+    width: 100%;
   }
   .back-name--list .back-list-heading {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 2px;
     color: var(--jazz-purple-light, #b490ff);
     display: block;
-    margin-top: 10px;
-    margin-bottom: 2px;
+    margin-top: 8px;
+    margin-bottom: 3px;
   }
   .back-name--list .back-list-heading:first-child { margin-top: 0; }
-  .back-name--list .back-roster-section {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,0.35);
-    display: block;
-    margin: 8px 0 4px;
-    text-transform: uppercase;
-  }
-  .back-name--list .back-roster-section:first-of-type { margin-top: 2px; }
   .back-roster-row {
     display: block;
-    padding: 4px 0 4px 8px;
-    margin-bottom: 1px;
+    padding: 2px 0 2px 6px;
+    margin-bottom: 0;
     border-left: 2px solid transparent;
-    line-height: 1.3;
+    line-height: 1.25;
   }
   .back-roster-row--starter {
-    border-left-color: rgba(107,63,160,0.7);
-    background: rgba(107,63,160,0.08);
-    border-radius: 0 4px 4px 0;
+    border-left-color: rgba(107,63,160,0.65);
+    background: rgba(107,63,160,0.07);
+    border-radius: 0 3px 3px 0;
   }
   .back-roster-name {
     display: block;
-    font-size: 12.5px;
+    font-size: 11.5px;
     font-weight: 600;
     color: #fff;
   }
-  .back-roster-row--starter .back-roster-name { color: #e8d8ff; }
+  .back-roster-row--starter .back-roster-name { color: #ddc8ff; }
   .back-roster-meta {
     display: block;
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: 400;
-    color: rgba(255,255,255,0.45);
-    margin-top: 1px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 0;
   }
-  .back-roster-row--starter .back-roster-meta { color: rgba(180,144,255,0.75); }
+  .back-roster-row--starter .back-roster-meta { color: rgba(170,134,255,0.7); }
 
   .back-pos {
     display: inline-block;
@@ -6730,12 +6729,15 @@ function loadSessionCard() {
   backPhotoEl.src = '';
   backPhotoEl.style.display = 'none';
   const backNameEl = document.getElementById('backName');
+  const cardBackEl = document.querySelector('.card-back');
   if (displayBack && displayBack.startsWith('<')) {
     backNameEl.className = 'back-name back-name--list';
     backNameEl.innerHTML = displayBack;
+    if (cardBackEl) cardBackEl.classList.add('card-back--list');
   } else {
     backNameEl.className = 'back-name';
     backNameEl.textContent = displayBack;
+    if (cardBackEl) cardBackEl.classList.remove('card-back--list');
   }
   document.getElementById('backPos').textContent  = '';
   document.getElementById('backStats').innerHTML  = '';
