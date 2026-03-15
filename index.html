@@ -5313,11 +5313,12 @@
               <div class="lp-mcard-count">~70 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_rookies_of_year')">
               <div class="lp-mcard-icon">🎖️</div>
               <div class="lp-mcard-title">Team → Rookies of the Year</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">🏆</div>
@@ -5932,11 +5933,12 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_rookies_of_year')">
               <div class="lp-mcard-icon">🎖️</div>
               <div class="lp-mcard-title">Team → Rookies of the Year</div>
               <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_champs')">
               <div class="lp-mcard-icon">🏆</div>
@@ -6623,6 +6625,38 @@ function buildTeamToColorsDeck(team)       { return [makeCard(team.name, team.co
 function buildTeamToDivisionDeck(team)     { return [makeCard(team.name, team.division,     'What division is this team in?')]; }
 function buildTeamToChampsDeck(team)       { return [makeCard(team.name, team.championships,'How many championships has this team won?')]; }
 function buildTeamToLastTitleDeck(team)    { return [makeCard(team.name, team.lastTitle,    'When did this team last win a championship?')]; }
+
+const TEAM_ROOKIES_OF_YEAR = {
+  "Utah Jazz": [
+    { player: "Darrell Griffith", year: 1981 },
+    { player: "Karl Malone",      year: 1986 }
+  ]
+};
+function buildTeamToRookiesOfYearDeck(team) {
+  const winners = TEAM_ROOKIES_OF_YEAR[team.name];
+  if (!winners || !winners.length) return [makeCard(team.name, 'No Rookie of the Year winners yet', "Who are this franchise's Rookie of the Year winners?")];
+  const entries = winners.map(w =>
+    '<div class="back-career-entry">' +
+      '<span class="back-career-team">' + w.player + '</span>' +
+      '<span class="back-career-dur">' + w.year + '</span>' +
+    '</div>'
+  ).join('');
+  const answer = '<div class="back-career-block">' + entries + '</div>';
+  return [makeCard(team.name, answer, "Who are this franchise's Rookie of the Year winners?")];
+}
+function buildLeagueTeamToRookiesOfYearDeck() {
+  return Object.keys(TEAM_ROOKIES_OF_YEAR).map(teamName => {
+    const winners = TEAM_ROOKIES_OF_YEAR[teamName];
+    const entries = winners.map(w =>
+      '<div class="back-career-entry">' +
+        '<span class="back-career-team">' + w.player + '</span>' +
+        '<span class="back-career-dur">' + w.year + '</span>' +
+      '</div>'
+    ).join('');
+    const answer = '<div class="back-career-block">' + entries + '</div>';
+    return makeCard(teamName, answer, "Who are this franchise's Rookie of the Year winners?");
+  });
+}
 function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
 
 // -- League-wide team deck builders (all 30 teams) --
@@ -6683,6 +6717,7 @@ const MODE_BUILDERS = {
   team_division:          () => buildTeamToDivisionDeck(TEST_TEAM),
   team_champs:            () => buildTeamToChampsDeck(TEST_TEAM),
   team_last_title:        () => buildTeamToLastTitleDeck(TEST_TEAM),
+  team_rookies_of_year:   () => buildTeamToRookiesOfYearDeck(TEST_TEAM),
   team_coach:             () => buildTeamToCoachDeck(TEST_TEAM),
   // League Knowledge — Player modes (all teams)
   league_player_jersey:   () => buildPlayerToJerseyDeck(NBA_PLAYERS),
@@ -6697,6 +6732,7 @@ const MODE_BUILDERS = {
   league_team_conf_division:  () => buildLeagueTeamToConfDivisionDeck(),
   league_team_division:       () => buildLeagueTeamToDivisionDeck(),
   league_team_coach:          () => buildLeagueTeamToCoachDeck(),
+  league_team_rookies_of_year: () => buildLeagueTeamToRookiesOfYearDeck(),
   league_team_coaching_staff: () => buildLeagueTeamToCoachingStaffDeck(),
   league_team_roster:         () => buildLeagueTeamToRosterDeck(),
 };
@@ -6724,6 +6760,7 @@ const SESSION_MODE_TITLES = {
   team_division:          'Team → Division',
   team_champs:            'Team → Championships',
   team_last_title:        'Team → Last Title Year',
+  team_rookies_of_year:   'Team → Rookies of the Year',
   team_coach:             'Team → Head Coach',
   league_player_jersey:   'Player → Jersey Number',
   league_player_country:  'Player → Country',
@@ -6736,6 +6773,7 @@ const SESSION_MODE_TITLES = {
   league_team_conf_division:  'Team → Conference & Division',
   league_team_division:       'Team → Division',
   league_team_coach:          'Team → Head Coach',
+  league_team_rookies_of_year: 'Team → Rookies of the Year',
   league_team_coaching_staff: 'Team → Coaching Staff',
   league_team_roster:         'Team → Roster',
 };
