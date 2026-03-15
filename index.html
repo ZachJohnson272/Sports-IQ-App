@@ -6580,30 +6580,27 @@ function buildPlayerToPastTeamsDeck(roster) {
   });
 }
 function _rosterRowHTML(p, starterPos) {
-  // starterPos: map of name→position-slot (PG/SG/SF/PF/C) for starters
   const pos = starterPos && starterPos[p.name];
   const isStarter = !!pos;
-  // Full position label from posLabelMap, abbreviated for the meta line
   const fullPos = posLabelMap[p.name] || posMap[p.position] || p.position;
   const meta = isStarter ? fullPos + ' \u2022 Starter' : fullPos;
-  const rowClass = isStarter ? 'back-roster-row back-roster-row--starter' : 'back-roster-row';
-  return '<div class="' + rowClass + '">' +
-    '<span class="back-roster-name">' + p.name + '</span>' +
-    '<span class="back-roster-meta">' + meta + '</span>' +
+  const nameStyle = isStarter ? 'font-size:14px;font-weight:600;color:#ddc8ff;' : 'font-size:14px;font-weight:500;';
+  return '<div class="back-career-entry">' +
+    '<span class="back-career-team" style="' + nameStyle + '">' + p.name + '</span>' +
+    '<span class="back-career-dur" style="font-size:10.5px;">' + meta + '</span>' +
     '</div>';
 }
 function _buildRosterHTML(teamName, rosterArr) {
-  const starterPos = {};  // name → slot
+  const starterPos = {};
   Object.entries(JAZZ_STARTING_LINEUP).forEach(([slot, name]) => { starterPos[name] = slot; });
   const starters = rosterArr.filter(p => starterPos[p.name]);
   const bench    = rosterArr.filter(p => !starterPos[p.name])
                             .slice().sort((a,b) => a.name.localeCompare(b.name));
-  const heading  = '<span class="back-list-heading">' + teamName.toUpperCase() + ' ROSTER</span>';
-  const starterSection = '<span class="back-roster-section">Starters</span>' +
-    starters.map(p => _rosterRowHTML(p, starterPos)).join('');
-  const benchSection = '<span class="back-roster-section">Bench</span>' +
-    bench.map(p => _rosterRowHTML(p, starterPos)).join('');
-  return heading + starterSection + benchSection;
+  const starterLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Starters</span>';
+  const benchLabel   = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Bench</span>';
+  const rows = starterLabel + starters.map(p => _rosterRowHTML(p, starterPos)).join('') +
+               benchLabel   + bench.map(p => _rosterRowHTML(p, starterPos)).join('');
+  return '<div class="back-career-block" style="gap:4px;">' + rows + '</div>';
 }
 function buildTeamToRosterDeck(team, roster) {
   const answer = _buildRosterHTML(team.name, Array.from(roster));
@@ -6618,8 +6615,15 @@ const TEAM_COACHING_STAFF = {
 function buildTeamToCoachingStaffDeck(team) {
   const staff = TEAM_COACHING_STAFF[team.name];
   if (!staff) return [makeCard(team.name, 'Coaching staff unavailable', "Who is on this team's current coaching staff?")];
-  const answer = '<span class="back-list-heading">HEAD COACH</span>' + staff.head +
-    '<span class="back-list-heading">ASSISTANTS</span>' + staff.assistants.join('\n');
+  const headRow = '<div class="back-career-entry">' +
+    '<span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span>' +
+    '<span class="back-career-dur" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;">Head Coach</span>' +
+    '</div>';
+  const assistRows = staff.assistants.map(a =>
+    '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + a + '</span></div>'
+  ).join('');
+  const divider = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
+  const answer = '<div class="back-career-block" style="gap:5px;">' + headRow + divider + assistRows + '</div>';
   return [makeCard(team.name, answer, "Who is on this team's current coaching staff?")];
 }
 function buildPlayerToHometownDeck(roster)  { return roster.filter(p => p.hometown).map(p => makeCard(p.name, p.hometown,   "What is this player's hometown?")); }
@@ -6810,8 +6814,15 @@ function buildLeagueTeamToCoachDeck()       { return NBA_TEAMS.filter(t => t.coa
 function buildLeagueTeamToCoachingStaffDeck() {
   return NBA_TEAMS.filter(t => TEAM_COACHING_STAFF[t.name]).map(t => {
     const staff = TEAM_COACHING_STAFF[t.name];
-    const answer = '<span class="back-list-heading">HEAD COACH</span>' + staff.head +
-      '<span class="back-list-heading">ASSISTANTS</span>' + staff.assistants.join('\n');
+    const headRow = '<div class="back-career-entry">' +
+      '<span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span>' +
+      '<span class="back-career-dur" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;">Head Coach</span>' +
+      '</div>';
+    const assistRows = staff.assistants.map(a =>
+      '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + a + '</span></div>'
+    ).join('');
+    const divider = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
+    const answer = '<div class="back-career-block" style="gap:5px;">' + headRow + divider + assistRows + '</div>';
     return makeCard(t.name, answer, "Who is on this team's current coaching staff?");
   });
 }
