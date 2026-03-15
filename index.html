@@ -432,34 +432,43 @@
     margin-bottom: 2px;
   }
   .back-name--list .back-list-heading:first-child { margin-top: 0; }
+  .back-name--list .back-roster-section {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.35);
+    display: block;
+    margin: 8px 0 4px;
+    text-transform: uppercase;
+  }
+  .back-name--list .back-roster-section:first-of-type { margin-top: 2px; }
   .back-roster-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 2px 0;
-    line-height: 1.4;
+    display: block;
+    padding: 4px 0 4px 8px;
+    margin-bottom: 1px;
+    border-left: 2px solid transparent;
+    line-height: 1.3;
   }
-  .back-roster-name { flex: 1; font-size: 12px; }
-  .back-pill {
-    display: inline-block;
-    padding: 1px 6px;
-    border-radius: 99px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    flex-shrink: 0;
+  .back-roster-row--starter {
+    border-left-color: rgba(107,63,160,0.7);
+    background: rgba(107,63,160,0.08);
+    border-radius: 0 4px 4px 0;
   }
-  .back-pill--pos {
-    background: rgba(107,63,160,0.25);
-    border: 1px solid rgba(107,63,160,0.45);
-    color: rgba(187,143,255,0.9);
+  .back-roster-name {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #fff;
   }
-  .back-pill--starter {
-    background: rgba(245,200,66,0.2);
-    border: 1px solid rgba(245,200,66,0.5);
-    color: rgba(245,200,66,0.95);
+  .back-roster-row--starter .back-roster-name { color: #e8d8ff; }
+  .back-roster-meta {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    margin-top: 1px;
   }
+  .back-roster-row--starter .back-roster-meta { color: rgba(180,144,255,0.75); }
 
   .back-pos {
     display: inline-block;
@@ -6461,21 +6470,34 @@ function buildPlayerToPastTeamsDeck(roster) {
   return roster.filter(p => p.past_teams && p.past_teams !== 'None')
                .map(p => makeCard(p.name, p.past_teams, "What previous NBA teams has this player been on?"));
 }
-function _rosterRowHTML(p, starterNames) {
-  // Short position abbreviation: use raw position letter(s) from ROSTER data
-  const posAbbr = p.position || 'F';  // 'G', 'F', 'C'
-  const posLabel = posAbbr === 'G' ? 'G' : posAbbr === 'C' ? 'C' : 'F';
-  const isStarter = starterNames && starterNames.has(p.name);
-  return '<div class="back-roster-row">' +
+function _rosterRowHTML(p, starterPos) {
+  // starterPos: map of name→position-slot (PG/SG/SF/PF/C) for starters
+  const pos = starterPos && starterPos[p.name];
+  const isStarter = !!pos;
+  // Full position label from posLabelMap, abbreviated for the meta line
+  const fullPos = posLabelMap[p.name] || posMap[p.position] || p.position;
+  const meta = isStarter ? fullPos + ' \u2022 Starter' : fullPos;
+  const rowClass = isStarter ? 'back-roster-row back-roster-row--starter' : 'back-roster-row';
+  return '<div class="' + rowClass + '">' +
     '<span class="back-roster-name">' + p.name + '</span>' +
-    '<span class="back-pill back-pill--pos">' + posLabel + '</span>' +
-    (isStarter ? '<span class="back-pill back-pill--starter">Starter</span>' : '') +
+    '<span class="back-roster-meta">' + meta + '</span>' +
     '</div>';
 }
+function _buildRosterHTML(teamName, rosterArr) {
+  const starterPos = {};  // name → slot
+  Object.entries(JAZZ_STARTING_LINEUP).forEach(([slot, name]) => { starterPos[name] = slot; });
+  const starters = rosterArr.filter(p => starterPos[p.name]);
+  const bench    = rosterArr.filter(p => !starterPos[p.name])
+                            .slice().sort((a,b) => a.name.localeCompare(b.name));
+  const heading  = '<span class="back-list-heading">' + teamName.toUpperCase() + ' ROSTER</span>';
+  const starterSection = '<span class="back-roster-section">Starters</span>' +
+    starters.map(p => _rosterRowHTML(p, starterPos)).join('');
+  const benchSection = '<span class="back-roster-section">Bench</span>' +
+    bench.map(p => _rosterRowHTML(p, starterPos)).join('');
+  return heading + starterSection + benchSection;
+}
 function buildTeamToRosterDeck(team, roster) {
-  const starterNames = new Set(Object.values(JAZZ_STARTING_LINEUP));
-  const rows = Array.from(roster).map(p => _rosterRowHTML(p, starterNames)).join('');
-  const answer = '<span class="back-list-heading">' + team.name.toUpperCase() + ' ROSTER</span>' + rows;
+  const answer = _buildRosterHTML(team.name, Array.from(roster));
   return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
 }
 const TEAM_COACHING_STAFF = {
@@ -6535,9 +6557,7 @@ function buildLeagueTeamToCoachingStaffDeck() {
 function buildLeagueTeamToRosterDeck() {
   // Jazz-only for now; expands as other teams add roster data
   return NBA_TEAMS.filter(t => t.name === 'Utah Jazz').map(t => {
-    const starterNames = new Set(Object.values(JAZZ_STARTING_LINEUP));
-    const rows = ROSTER.map(p => _rosterRowHTML(p, starterNames)).join('');
-    const answer = '<span class="back-list-heading">' + t.name.toUpperCase() + ' ROSTER</span>' + rows;
+    const answer = _buildRosterHTML(t.name, ROSTER);
     return makeCard(t.name, answer, "Who are the current players on this team's roster?");
   });
 }
