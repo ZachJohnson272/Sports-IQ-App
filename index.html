@@ -488,7 +488,40 @@
     margin-top: 4px;
     letter-spacing: -0.3px;
   }
-  /* Player → Past Teams stacked career list */
+  /* Records & Legacy centered stat/name card */
+  .back-legacy-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    text-align: center;
+  }
+  .back-legacy-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1.05;
+  }
+  .back-legacy-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(180,144,255,0.65);
+    line-height: 1.3;
+  }
+  .back-legacy-stat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1.5px;
+    color: rgba(245,200,66,0.9);
+    line-height: 1.05;
+    margin-top: 2px;
+  }
   .back-career-block {
     display: flex;
     flex-direction: column;
@@ -6632,7 +6665,10 @@ function buildTeamToMascotDeck(team)       { return [makeCard(team.name, team.ma
 function buildTeamToColorsDeck(team)       { return [makeCard(team.name, team.colors,       "What are this team's colors?")]; }
 function buildTeamToDivisionDeck(team)     { return [makeCard(team.name, team.division,     'What division is this team in?')]; }
 function buildTeamToChampsDeck(team)       { return [makeCard(team.name, team.championships,'How many championships has this team won?')]; }
-function buildTeamToLastTitleDeck(team)    { return [makeCard(team.name, team.lastTitle,    'When did this team last win a championship?')]; }
+function buildTeamToLastTitleDeck(team) {
+  const answer = _legacyHTML(team.lastTitle, 'Last Title Year', null);
+  return [makeCard(team.name, answer, 'When did this team last win a championship?')];
+}
 
 const TEAM_ROOKIES_OF_YEAR = {
   "Utah Jazz": [
@@ -6687,17 +6723,26 @@ const TEAM_RETIRED_JERSEYS = {
   ]
 };
 const TEAM_ALL_TIME_SCORER = {
-  "Utah Jazz": "Karl Malone — 36,374 points"
+  "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
-  "Utah Jazz": "John Stockton — 15,806 assists"
+  "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" }
 };
+
+// ── Shared helper for legacy card HTML ────────────────────────────────────────
+function _legacyHTML(mainText, subLabel, statText) {
+  return '<div class="back-legacy-block">' +
+    '<span class="back-legacy-main">' + mainText + '</span>' +
+    '<span class="back-legacy-sub">' + subLabel + '</span>' +
+    (statText ? '<span class="back-legacy-stat">' + statText + '</span>' : '') +
+    '</div>';
+}
 
 // ── Team Mastery builders ───────────────────────────────────────────────────
 function buildTeamToFranchiseGoatDeck(team) {
   const goat = TEAM_FRANCHISE_GOAT[team.name];
   if (!goat) return [];
-  return [makeCard(team.name, goat, "Who is the franchise GOAT for this team?")];
+  return [makeCard(team.name, _legacyHTML(goat, 'Franchise GOAT', null), "Who is the franchise GOAT for this team?")];
 }
 function buildTeamToRetiredJerseysDeck(team) {
   const jerseys = TEAM_RETIRED_JERSEYS[team.name];
@@ -6709,20 +6754,20 @@ function buildTeamToRetiredJerseysDeck(team) {
   return [makeCard(team.name, answer, "Which jersey numbers has this team retired?")];
 }
 function buildTeamToAllTimeScorerDeck(team) {
-  const scorer = TEAM_ALL_TIME_SCORER[team.name];
-  if (!scorer) return [];
-  return [makeCard(team.name, scorer, "Who is this team's all-time leading scorer?")];
+  const d = TEAM_ALL_TIME_SCORER[team.name];
+  if (!d) return [];
+  return [makeCard(team.name, _legacyHTML(d.name, 'All-Time Points', d.stat), "Who is this team's all-time leading scorer?")];
 }
 function buildTeamToAllTimeAssistsDeck(team) {
-  const assists = TEAM_ALL_TIME_ASSISTS[team.name];
-  if (!assists) return [];
-  return [makeCard(team.name, assists, "Who is this team's all-time assists leader?")];
+  const d = TEAM_ALL_TIME_ASSISTS[team.name];
+  if (!d) return [];
+  return [makeCard(team.name, _legacyHTML(d.name, 'All-Time Assists', d.stat), "Who is this team's all-time assists leader?")];
 }
 
 // ── League Knowledge builders (Jazz-only for now) ──────────────────────────
 function buildLeagueTeamToFranchiseGoatDeck() {
   return Object.keys(TEAM_FRANCHISE_GOAT).map(name =>
-    makeCard(name, TEAM_FRANCHISE_GOAT[name], "Who is the franchise GOAT for this team?")
+    makeCard(name, _legacyHTML(TEAM_FRANCHISE_GOAT[name], 'Franchise GOAT', null), "Who is the franchise GOAT for this team?")
   );
 }
 function buildLeagueTeamToRetiredJerseysDeck() {
@@ -6736,14 +6781,16 @@ function buildLeagueTeamToRetiredJerseysDeck() {
   });
 }
 function buildLeagueTeamToAllTimeScorerDeck() {
-  return Object.keys(TEAM_ALL_TIME_SCORER).map(name =>
-    makeCard(name, TEAM_ALL_TIME_SCORER[name], "Who is this team's all-time leading scorer?")
-  );
+  return Object.keys(TEAM_ALL_TIME_SCORER).map(name => {
+    const d = TEAM_ALL_TIME_SCORER[name];
+    return makeCard(name, _legacyHTML(d.name, 'All-Time Points', d.stat), "Who is this team's all-time leading scorer?");
+  });
 }
 function buildLeagueTeamToAllTimeAssistsDeck() {
-  return Object.keys(TEAM_ALL_TIME_ASSISTS).map(name =>
-    makeCard(name, TEAM_ALL_TIME_ASSISTS[name], "Who is this team's all-time assists leader?")
-  );
+  return Object.keys(TEAM_ALL_TIME_ASSISTS).map(name => {
+    const d = TEAM_ALL_TIME_ASSISTS[name];
+    return makeCard(name, _legacyHTML(d.name, 'All-Time Assists', d.stat), "Who is this team's all-time assists leader?");
+  });
 }
 
 // -- League-wide team deck builders (all 30 teams) --
