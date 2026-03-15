@@ -6798,8 +6798,8 @@ function buildLeagueTeamToAllTimeAssistsDeck() {
 
 // -- League Knowledge Jazz-only history builders --
 function buildLeaguePlayerPastTeamsDeck() {
-  // Reuse TM builder with NBA_PLAYERS filtered to Jazz players that have past_teams arrays
-  return buildPlayerToPastTeamsDeck(NBA_PLAYERS.filter(p => p.team === 'Utah Jazz'));
+  // Jazz-only for now — reuses same TEST_ROSTER source as Team Mastery
+  return buildPlayerToPastTeamsDeck(TEST_ROSTER);
 }
 function buildLeagueTeamToChampsDeck() {
   // Jazz-only for now — reuses TEST_TEAM data
