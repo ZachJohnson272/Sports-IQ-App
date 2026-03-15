@@ -5213,10 +5213,10 @@
         <div class="lp-tier-panel hidden" id="lp-lpanel-p-starter">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👤 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_country')">
-              <div class="lp-mcard-icon">🌍</div>
-              <div class="lp-mcard-title">Player → Country</div>
-              <div class="lp-mcard-count">~70 cards</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_past_teams')">
+              <div class="lp-mcard-icon">🔄</div>
+              <div class="lp-mcard-title">Player → Past Teams</div>
+              <div class="lp-mcard-count">7 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5250,8 +5250,8 @@
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👤 Hall of Fame</div>
             <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">🏫</div>
-              <div class="lp-mcard-title">Player → Hometown</div>
+              <div class="lp-mcard-icon">🌍</div>
+              <div class="lp-mcard-title">Player → Country & Hometown</div>
               <div class="lp-mcard-count">~70 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
             </div>
@@ -5334,13 +5334,6 @@
         <div class="lp-tier-panel" id="lp-lpanel-h-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_past_teams')">
-              <div class="lp-mcard-icon">🔄</div>
-              <div class="lp-mcard-title">Player → Past Teams</div>
-              <div class="lp-mcard-count">7 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_rookies_of_year')">
               <div class="lp-mcard-icon">🎖️</div>
               <div class="lp-mcard-title">Team → Rookies of the Year</div>
@@ -5820,10 +5813,10 @@
         <div class="lp-tier-panel hidden" id="lp-tpanel-tp-starter">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👤 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_country')">
-              <div class="lp-mcard-icon">🌍</div>
-              <div class="lp-mcard-title">Player → Country</div>
-              <div class="lp-mcard-count">16 cards</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_past_teams')">
+              <div class="lp-mcard-icon">🔄</div>
+              <div class="lp-mcard-title">Player → Past Teams</div>
+              <div class="lp-mcard-count">7 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5858,9 +5851,9 @@
         <div class="lp-tier-panel hidden" id="lp-tpanel-tp-hof">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👤 Hall of Fame</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_hometown')">
-              <div class="lp-mcard-icon">🏫</div>
-              <div class="lp-mcard-title">Player → Hometown</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_country_hometown')">
+              <div class="lp-mcard-icon">🌍</div>
+              <div class="lp-mcard-title">Player → Country & Hometown</div>
               <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5946,13 +5939,6 @@
         <div class="lp-tier-panel" id="lp-tpanel-th-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 Franchise</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_past_teams')">
-              <div class="lp-mcard-icon">🔄</div>
-              <div class="lp-mcard-title">Player → Past Teams</div>
-              <div class="lp-mcard-count">16 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_rookies_of_year')">
               <div class="lp-mcard-icon">🎖️</div>
               <div class="lp-mcard-title">Team → Rookies of the Year</div>
@@ -6567,6 +6553,17 @@ function buildPlayerToJerseyDeck(roster)   { return roster.filter(p => p.jersey)
 function buildPlayerToHeightDeck(roster)   { return roster.filter(p => p.height).map(p => makeCard(p.name, p.height,   "How tall is this player?")); }
 function buildPlayerToCollegeDeck(roster)  { return roster.filter(p => p.college).map(p => makeCard(p.name, p.college, "Where did this player go to college?")); }
 function buildPlayerToCountryDeck(roster)   { return roster.filter(p => p.country).map(p => makeCard(p.name, p.country,     "What country is this player from?")); }
+function buildPlayerToCountryHometownDeck(roster) {
+  return roster.filter(p => p.country || p.hometown).map(p => {
+    const answer = '<div class="back-conf-block">' +
+      '<span class="back-conf-label">Country</span>' +
+      '<span class="back-conf-val">' + (p.country || '—') + '</span>' +
+      '<span class="back-conf-label">Hometown</span>' +
+      '<span class="back-conf-val" style="font-size:17px;">' + (p.hometown || '—') + '</span>' +
+      '</div>';
+    return makeCard(p.name, answer, "What country is this player from and where did they grow up?");
+  });
+}
 function buildPlayerToPastTeamsDeck(roster) {
   return roster.filter(p => p.past_teams && p.past_teams !== 'None' && Array.isArray(p.past_teams)).map(p => {
     const entries = p.past_teams.map(t =>
@@ -6842,9 +6839,8 @@ const MODE_BUILDERS = {
   player_height:          () => buildPlayerToHeightDeck(TEST_ROSTER),
   player_college:         () => buildPlayerToCollegeDeck(TEST_ROSTER),
   player_team:            () => buildPlayerToTeamDeck(TEST_ROSTER),
-  player_country:         () => buildPlayerToCountryDeck(TEST_ROSTER),
+  player_country_hometown: () => buildPlayerToCountryHometownDeck(TEST_ROSTER),
   player_past_teams:      () => buildPlayerToPastTeamsDeck(TEST_ROSTER),
-  player_hometown:        () => buildPlayerToHometownDeck(TEST_ROSTER),
   team_roster:            () => buildTeamToRosterDeck(TEST_TEAM, TEST_ROSTER),
   team_coaching_staff:    () => buildTeamToCoachingStaffDeck(TEST_TEAM),
   player_draft_year_pick: () => buildPlayerToDraftYearPickDeck(TEST_ROSTER),
@@ -6868,7 +6864,7 @@ const MODE_BUILDERS = {
   // League Knowledge — Player modes (all teams)
   league_player_past_teams:   () => buildLeaguePlayerPastTeamsDeck(),
   league_player_jersey:   () => buildPlayerToJerseyDeck(NBA_PLAYERS),
-  league_player_country:  () => buildPlayerToCountryDeck(NBA_PLAYERS),
+  league_player_country_hometown: () => buildPlayerToCountryHometownDeck(NBA_PLAYERS),
   league_player_height:   () => buildPlayerToHeightDeck(NBA_PLAYERS),
   league_player_college:  () => buildPlayerToCollegeDeck(NBA_PLAYERS),
   league_player_team:     () => buildPlayerToTeamDeck(NBA_PLAYERS),
@@ -6897,9 +6893,8 @@ const SESSION_MODE_TITLES = {
   player_height:          'Player → Height',
   player_college:         'Player → College',
   player_team:            'Player → Team',
-  player_country:         'Player → Country',
+  player_country_hometown: 'Player → Country & Hometown',
   player_past_teams:      'Player → Past Teams',
-  player_hometown:        'Player → Hometown',
   team_roster:            'Team → Roster',
   team_coaching_staff:    'Team → Coaching Staff',
   player_draft_year_pick: 'Player → Draft Year & Pick',
@@ -6920,7 +6915,7 @@ const SESSION_MODE_TITLES = {
   team_all_time_assists:  'Team → All-Time Assists',
   team_coach:             'Team → Head Coach',
   league_player_jersey:   'Player → Jersey Number',
-  league_player_country:  'Player → Country',
+  league_player_country_hometown: 'Player → Country & Hometown',
   league_player_height:   'Player → Height',
   league_player_college:  'Player → College',
   league_player_team:     'Player → Team',
