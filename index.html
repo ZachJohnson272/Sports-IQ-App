@@ -460,6 +460,34 @@
     text-align: center;
     margin-bottom: 4px;
   }
+  /* Self-contained centered layout for Team → Conference & Division */
+  .back-conf-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .back-conf-block .back-conf-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(180,144,255,0.7);
+    display: block;
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+  .back-conf-block .back-conf-label:first-child { margin-top: 0; }
+  .back-conf-block .back-conf-val {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-top: 4px;
+    letter-spacing: -0.3px;
+  }
   .back-roster-row {
     display: block;
     padding: 2px 0 2px 6px;
@@ -6544,10 +6572,12 @@ function buildPlayerToDraftTeamDeck(roster) { return roster.filter(p => p.draft_
 function buildTeamToCityDeck(team)         { return [makeCard(team.name, team.city,         'What city does this team play in?')]; }
 function buildTeamToConferenceDeck(team)   { return [makeCard(team.name, team.conference,   'What conference is this team in?')]; }
 function buildTeamToConfDivisionDeck(team) {
-  const answer = '<span class="back-list-heading">Conference</span>' +
-    '<span class="back-conf-value">' + team.conference + 'ern Conference</span>' +
-    '<span class="back-list-heading">Division</span>' +
-    '<span class="back-conf-value">' + team.division + ' Division</span>';
+  const answer = '<div class="back-conf-block">' +
+    '<span class="back-conf-label">Conference</span>' +
+    '<span class="back-conf-val">' + team.conference + 'ern Conference</span>' +
+    '<span class="back-conf-label">Division</span>' +
+    '<span class="back-conf-val">' + team.division + ' Division</span>' +
+    '</div>';
   return [makeCard(team.name, answer, "What conference and division is this team in?")];
 }
 function buildTeamToArenaDeck(team)        { return [makeCard(team.name, team.arena,        'What arena does this team play in?')]; }
@@ -6563,10 +6593,12 @@ function buildLeagueTeamToCityDeck()         { return NBA_TEAMS.map(t => makeCar
 function buildLeagueTeamToConferenceDeck()   { return NBA_TEAMS.map(t => makeCard(t.name, t.conference,   'What conference is this team in?')); }
 function buildLeagueTeamToConfDivisionDeck() {
   return NBA_TEAMS.map(t => {
-    const answer = '<span class="back-list-heading">Conference</span>' +
-      '<span class="back-conf-value">' + t.conference + 'ern Conference</span>' +
-      '<span class="back-list-heading">Division</span>' +
-      '<span class="back-conf-value">' + t.division + ' Division</span>';
+    const answer = '<div class="back-conf-block">' +
+      '<span class="back-conf-label">Conference</span>' +
+      '<span class="back-conf-val">' + t.conference + 'ern Conference</span>' +
+      '<span class="back-conf-label">Division</span>' +
+      '<span class="back-conf-val">' + t.division + ' Division</span>' +
+      '</div>';
     return makeCard(t.name, answer, "What conference and division is this team in?");
   });
 }
@@ -6759,14 +6791,16 @@ function loadSessionCard() {
   const backNameEl = document.getElementById('backName');
   const cardBackEl = document.querySelector('.card-back');
   if (displayBack && displayBack.startsWith('<')) {
-    backNameEl.className = 'back-name back-name--list';
     backNameEl.innerHTML = displayBack;
-    // Use centered layout for short stacked answers (conf/division, coaching staff)
-    // Use left-aligned scrollable layout for long roster lists
     const isRosterList = displayBack.includes('back-roster-row');
-    if (cardBackEl) {
-      cardBackEl.classList.remove('card-back--list', 'card-back--centered-list');
-      cardBackEl.classList.add(isRosterList ? 'card-back--list' : 'card-back--centered-list');
+    const isConfBlock  = displayBack.includes('back-conf-block');
+    if (isRosterList) {
+      backNameEl.className = 'back-name back-name--list';
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list'); cardBackEl.classList.add('card-back--list'); }
+    } else {
+      // coaching staff, conf/division, etc. — centered, no roster sizing
+      backNameEl.className = isConfBlock ? 'back-name' : 'back-name back-name--list';
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list'); cardBackEl.classList.add('card-back--centered-list'); }
     }
   } else {
     backNameEl.className = 'back-name';
