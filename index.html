@@ -432,6 +432,34 @@
     margin-bottom: 2px;
   }
   .back-name--list .back-list-heading:first-child { margin-top: 0; }
+  .back-roster-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0;
+    line-height: 1.4;
+  }
+  .back-roster-name { flex: 1; font-size: 12px; }
+  .back-pill {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .back-pill--pos {
+    background: rgba(107,63,160,0.25);
+    border: 1px solid rgba(107,63,160,0.45);
+    color: rgba(187,143,255,0.9);
+  }
+  .back-pill--starter {
+    background: rgba(245,200,66,0.2);
+    border: 1px solid rgba(245,200,66,0.5);
+    color: rgba(245,200,66,0.95);
+  }
 
   .back-pos {
     display: inline-block;
@@ -6433,9 +6461,21 @@ function buildPlayerToPastTeamsDeck(roster) {
   return roster.filter(p => p.past_teams && p.past_teams !== 'None')
                .map(p => makeCard(p.name, p.past_teams, "What previous NBA teams has this player been on?"));
 }
+function _rosterRowHTML(p, starterNames) {
+  // Short position abbreviation: use raw position letter(s) from ROSTER data
+  const posAbbr = p.position || 'F';  // 'G', 'F', 'C'
+  const posLabel = posAbbr === 'G' ? 'G' : posAbbr === 'C' ? 'C' : 'F';
+  const isStarter = starterNames && starterNames.has(p.name);
+  return '<div class="back-roster-row">' +
+    '<span class="back-roster-name">' + p.name + '</span>' +
+    '<span class="back-pill back-pill--pos">' + posLabel + '</span>' +
+    (isStarter ? '<span class="back-pill back-pill--starter">Starter</span>' : '') +
+    '</div>';
+}
 function buildTeamToRosterDeck(team, roster) {
-  const names = Array.from(roster).map(p => p.name).join('\n');
-  const answer = '<span class="back-list-heading">' + team.name.toUpperCase() + ' ROSTER</span>' + names;
+  const starterNames = new Set(Object.values(JAZZ_STARTING_LINEUP));
+  const rows = Array.from(roster).map(p => _rosterRowHTML(p, starterNames)).join('');
+  const answer = '<span class="back-list-heading">' + team.name.toUpperCase() + ' ROSTER</span>' + rows;
   return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
 }
 const TEAM_COACHING_STAFF = {
@@ -6495,8 +6535,9 @@ function buildLeagueTeamToCoachingStaffDeck() {
 function buildLeagueTeamToRosterDeck() {
   // Jazz-only for now; expands as other teams add roster data
   return NBA_TEAMS.filter(t => t.name === 'Utah Jazz').map(t => {
-    const names = ROSTER.map(p => p.name).join('\n');
-    const answer = '<span class="back-list-heading">' + t.name.toUpperCase() + ' ROSTER</span>' + names;
+    const starterNames = new Set(Object.values(JAZZ_STARTING_LINEUP));
+    const rows = ROSTER.map(p => _rosterRowHTML(p, starterNames)).join('');
+    const answer = '<span class="back-list-heading">' + t.name.toUpperCase() + ' ROSTER</span>' + rows;
     return makeCard(t.name, answer, "Who are the current players on this team's roster?");
   });
 }
