@@ -5340,11 +5340,12 @@
         <div class="lp-tier-panel" id="lp-lpanel-h-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 All-Star</div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_past_teams')">
               <div class="lp-mcard-icon">🔄</div>
               <div class="lp-mcard-title">Player → Past Teams</div>
-              <div class="lp-mcard-count">~70 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-count">7 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_rookies_of_year')">
               <div class="lp-mcard-icon">🎖️</div>
@@ -5353,17 +5354,19 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_champs')">
               <div class="lp-mcard-icon">🏆</div>
               <div class="lp-mcard-title">Team → Championships</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard lp-mcard--locked">
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_last_title')">
               <div class="lp-mcard-icon">📅</div>
               <div class="lp-mcard-title">Team → Last Title Year</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
           </div>
         </div>
@@ -6793,6 +6796,20 @@ function buildLeagueTeamToAllTimeAssistsDeck() {
   });
 }
 
+// -- League Knowledge Jazz-only history builders --
+function buildLeaguePlayerPastTeamsDeck() {
+  // Reuse TM builder with NBA_PLAYERS filtered to Jazz players that have past_teams arrays
+  return buildPlayerToPastTeamsDeck(NBA_PLAYERS.filter(p => p.team === 'Utah Jazz'));
+}
+function buildLeagueTeamToChampsDeck() {
+  // Jazz-only for now — reuses TEST_TEAM data
+  return [makeCard(TEST_TEAM.name, TEST_TEAM.championships, 'How many championships has this team won?')];
+}
+function buildLeagueTeamToLastTitleDeck() {
+  // Jazz-only for now — reuses TEST_TEAM data with legacy HTML formatting
+  return [makeCard(TEST_TEAM.name, _legacyHTML(TEST_TEAM.lastTitle, 'Last Title Year', null), 'When did this team last win a championship?')];
+}
+
 // -- League-wide team deck builders (all 30 teams) --
 function buildLeagueTeamToCityDeck()         { return NBA_TEAMS.map(t => makeCard(t.name, t.city,         'What city does this team play in?')); }
 function buildLeagueTeamToConferenceDeck()   { return NBA_TEAMS.map(t => makeCard(t.name, t.conference,   'What conference is this team in?')); }
@@ -6858,6 +6875,7 @@ const MODE_BUILDERS = {
   team_all_time_assists:  () => buildTeamToAllTimeAssistsDeck(TEST_TEAM),
   team_coach:             () => buildTeamToCoachDeck(TEST_TEAM),
   // League Knowledge — Player modes (all teams)
+  league_player_past_teams:   () => buildLeaguePlayerPastTeamsDeck(),
   league_player_jersey:   () => buildPlayerToJerseyDeck(NBA_PLAYERS),
   league_player_country:  () => buildPlayerToCountryDeck(NBA_PLAYERS),
   league_player_height:   () => buildPlayerToHeightDeck(NBA_PLAYERS),
@@ -6870,6 +6888,8 @@ const MODE_BUILDERS = {
   league_team_conf_division:  () => buildLeagueTeamToConfDivisionDeck(),
   league_team_division:       () => buildLeagueTeamToDivisionDeck(),
   league_team_coach:          () => buildLeagueTeamToCoachDeck(),
+  league_team_champs:             () => buildLeagueTeamToChampsDeck(),
+  league_team_last_title:         () => buildLeagueTeamToLastTitleDeck(),
   league_team_rookies_of_year:   () => buildLeagueTeamToRookiesOfYearDeck(),
   league_team_franchise_goat:    () => buildLeagueTeamToFranchiseGoatDeck(),
   league_team_retired_jerseys:   () => buildLeagueTeamToRetiredJerseysDeck(),
@@ -6919,6 +6939,9 @@ const SESSION_MODE_TITLES = {
   league_team_conf_division:  'Team → Conference & Division',
   league_team_division:       'Team → Division',
   league_team_coach:          'Team → Head Coach',
+  league_player_past_teams:       'Player → Past Teams',
+  league_team_champs:             'Team → Championships',
+  league_team_last_title:         'Team → Last Title Year',
   league_team_rookies_of_year:   'Team → Rookies of the Year',
   league_team_franchise_goat:    'Team → Franchise GOAT',
   league_team_retired_jerseys:   'Team → Retired Jerseys',
