@@ -6583,7 +6583,7 @@ function _rosterRowHTML(p, starterPos) {
   const pos = starterPos && starterPos[p.name];
   const isStarter = !!pos;
   const fullPos = posLabelMap[p.name] || posMap[p.position] || p.position;
-  const meta = isStarter ? fullPos + ' \u2022 Starter' : fullPos;
+  const meta = fullPos;
   const nameStyle = isStarter ? 'font-size:14px;font-weight:600;color:#ddc8ff;' : 'font-size:14px;font-weight:500;';
   return '<div class="back-career-entry">' +
     '<span class="back-career-team" style="' + nameStyle + '">' + p.name + '</span>' +
