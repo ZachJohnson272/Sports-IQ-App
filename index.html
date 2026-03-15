@@ -620,6 +620,7 @@
   }
 
   .card-streak {
+    display: none;
     background: var(--surface2);
     border-radius: 8px;
     padding: 6px 14px;
@@ -4805,7 +4806,7 @@
           <div class="back-name" id="backName">0/16</div>
           <div class="back-pos" id="backPos">0/16</div>
           <div class="back-stats" id="backStats"></div>
-          <div class="card-streak" id="cardStreak">First attempt</div>
+          <div class="card-streak" id="cardStreak"></div>
         </div>
       </div>
     </div>
@@ -7060,7 +7061,7 @@ function loadSessionCard() {
 
   // Streak label
   const m = scoreP.attempts === 0 ? null : Math.round((scoreP.correct / scoreP.attempts) * 100);
-  document.getElementById('cardStreak').innerHTML = `<span>${scoreP.attempts === 0 ? 'First attempt' : scoreP.correct + '/' + scoreP.attempts + ' correct (' + m + '%)'}</span>`;
+  // cardStreak hidden
 
   // Progress
   document.getElementById('fcCurrent').textContent = _sessionIdx + 1;
@@ -7313,7 +7314,7 @@ function loadCard() {
   document.getElementById('backName').textContent = pd.name;
   document.getElementById('backPos').textContent = getPosLabel(pd);
   const m = getMastery(modePd);
-  document.getElementById('cardStreak').innerHTML = `<span>${modePd.attempts === 0 ? 'First attempt' : modePd.correct + '/' + modePd.attempts + ' correct (' + m + '%)'}</span>`;
+  // cardStreak hidden
   if (currentMode === 'photoName') {
     frontTextEl.style.display = '';
     frontTextEl.innerHTML = `<div class="front-label">Who plays for the Jazz?</div><div class="front-main">${pd.name}</div>`;
@@ -8860,7 +8861,7 @@ function _lpRandRenderCard() {
   const att  = raw.attempts || 0;
   const cor  = raw.correct  || 0;
   const mPct = att > 0 ? Math.round(cor / att * 100) : null;
-  document.getElementById('cardStreak').innerHTML = `<span>${att === 0 ? 'First attempt' : cor + '/' + att + ' correct (' + mPct + '%)'}</span>`;
+  // cardStreak hidden
 
   // ── Answer buttons: locked until flip ──────────────────────
   const btns = document.getElementById('answerBtns');
