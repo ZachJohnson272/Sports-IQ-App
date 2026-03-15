@@ -421,6 +421,14 @@
     gap: 0;
     overflow-y: auto;
   }
+  /* Centered variant for 2-field stacked answers (conf/division, coaching staff) */
+  .card-back.card-back--centered-list {
+    justify-content: center;
+    align-items: center;
+    padding: 28px 24px;
+    gap: 0;
+    overflow-y: auto;
+  }
   .back-name--list {
     font-family: 'DM Sans', sans-serif;
     font-size: 11.5px;
@@ -441,6 +449,17 @@
     margin-bottom: 3px;
   }
   .back-name--list .back-list-heading:first-child { margin-top: 0; }
+  .back-conf-value {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0;
+    line-height: 1.3;
+    text-align: center;
+    margin-bottom: 4px;
+  }
   .back-roster-row {
     display: block;
     padding: 2px 0 2px 6px;
@@ -6525,7 +6544,10 @@ function buildPlayerToDraftTeamDeck(roster) { return roster.filter(p => p.draft_
 function buildTeamToCityDeck(team)         { return [makeCard(team.name, team.city,         'What city does this team play in?')]; }
 function buildTeamToConferenceDeck(team)   { return [makeCard(team.name, team.conference,   'What conference is this team in?')]; }
 function buildTeamToConfDivisionDeck(team) {
-  const answer = team.conference + 'ern Conference — ' + team.division + ' Division';
+  const answer = '<span class="back-list-heading">Conference</span>' +
+    '<span class="back-conf-value">' + team.conference + 'ern Conference</span>' +
+    '<span class="back-list-heading">Division</span>' +
+    '<span class="back-conf-value">' + team.division + ' Division</span>';
   return [makeCard(team.name, answer, "What conference and division is this team in?")];
 }
 function buildTeamToArenaDeck(team)        { return [makeCard(team.name, team.arena,        'What arena does this team play in?')]; }
@@ -6540,7 +6562,13 @@ function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coa
 function buildLeagueTeamToCityDeck()         { return NBA_TEAMS.map(t => makeCard(t.name, t.city,         'What city does this team play in?')); }
 function buildLeagueTeamToConferenceDeck()   { return NBA_TEAMS.map(t => makeCard(t.name, t.conference,   'What conference is this team in?')); }
 function buildLeagueTeamToConfDivisionDeck() {
-  return NBA_TEAMS.map(t => makeCard(t.name, t.conference + 'ern Conference — ' + t.division + ' Division', "What conference and division is this team in?"));
+  return NBA_TEAMS.map(t => {
+    const answer = '<span class="back-list-heading">Conference</span>' +
+      '<span class="back-conf-value">' + t.conference + 'ern Conference</span>' +
+      '<span class="back-list-heading">Division</span>' +
+      '<span class="back-conf-value">' + t.division + ' Division</span>';
+    return makeCard(t.name, answer, "What conference and division is this team in?");
+  });
 }
 function buildLeagueTeamToDivisionDeck()     { return NBA_TEAMS.map(t => makeCard(t.name, t.division,     'What division is this team in?')); }
 function buildLeagueTeamToAbbreviationDeck() { return NBA_TEAMS.map(t => makeCard(t.name, t.abbreviation, 'What is the abbreviation for this team?')); }
@@ -6733,11 +6761,17 @@ function loadSessionCard() {
   if (displayBack && displayBack.startsWith('<')) {
     backNameEl.className = 'back-name back-name--list';
     backNameEl.innerHTML = displayBack;
-    if (cardBackEl) cardBackEl.classList.add('card-back--list');
+    // Use centered layout for short stacked answers (conf/division, coaching staff)
+    // Use left-aligned scrollable layout for long roster lists
+    const isRosterList = displayBack.includes('back-roster-row');
+    if (cardBackEl) {
+      cardBackEl.classList.remove('card-back--list', 'card-back--centered-list');
+      cardBackEl.classList.add(isRosterList ? 'card-back--list' : 'card-back--centered-list');
+    }
   } else {
     backNameEl.className = 'back-name';
     backNameEl.textContent = displayBack;
-    if (cardBackEl) cardBackEl.classList.remove('card-back--list');
+    if (cardBackEl) cardBackEl.classList.remove('card-back--list', 'card-back--centered-list');
   }
   document.getElementById('backPos').textContent  = '';
   document.getElementById('backStats').innerHTML  = '';
