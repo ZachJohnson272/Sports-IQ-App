@@ -6506,7 +6506,7 @@ const TEST_TEAM = {
   lastTitle: "N/A — no titles yet",
   abbreviation: "UTA",
   coach: "Will Hardy",
-  coachPrevTeam: "None (first HC job)",
+  coachPrevTeam: { team: "Boston Celtics", role: "Assistant Coach" },
   coachSince: "2022"
 };
 
@@ -6589,7 +6589,7 @@ const NBA_TEAMS = [
   { name:"Sacramento Kings",       city:"Sacramento",    conference:"West", division:"Pacific",   abbreviation:"SAC" },
   { name:"San Antonio Spurs",      city:"San Antonio",   conference:"West", division:"Southwest", abbreviation:"SAS" },
   { name:"Toronto Raptors",        city:"Toronto",       conference:"East", division:"Atlantic",  abbreviation:"TOR" },
-  { name:"Utah Jazz",              city:"Salt Lake City",conference:"West", division:"Northwest", abbreviation:"UTA", coach:"Will Hardy", coachPrevTeam:"None (first HC job)", coachSince:"2022" },
+  { name:"Utah Jazz",              city:"Salt Lake City",conference:"West", division:"Northwest", abbreviation:"UTA", coach:"Will Hardy", coachPrevTeam:{ team:"Boston Celtics", role:"Assistant Coach" }, coachSince:"2022" },
   { name:"Washington Wizards",     city:"Washington",    conference:"East", division:"Southeast", abbreviation:"WAS" },
 ];
 
@@ -6848,8 +6848,16 @@ function buildLeagueTeamToRookiesOfYearDeck() {
 }
 function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
 function buildTeamToCoachPrevTeamDeck(team) {
-  const answer = team.coachPrevTeam || 'N/A';
-  return [makeCard(team.coach || team.name, answer, "What was this head coach's previous team?")];
+  const prev = team.coachPrevTeam;
+  let answer;
+  if (!prev || (prev.team && prev.team === 'None') || prev === 'None') {
+    answer = 'None (First NBA coaching job)';
+  } else if (typeof prev === 'object' && prev.team) {
+    answer = prev.team + ' (' + prev.role + ')';
+  } else {
+    answer = String(prev);
+  }
+  return [makeCard(team.coach || team.name, answer, "What was this head coach's most recent previous NBA team?")];
 }
 function buildTeamToCoachSinceDeck(team) {
   const answer = team.coachSince ? 'Since ' + team.coachSince : 'N/A';
@@ -6978,9 +6986,18 @@ function buildLeagueTeamToDivisionDeck()     { return NBA_TEAMS.map(t => makeCar
 function buildLeagueTeamToAbbreviationDeck() { return NBA_TEAMS.map(t => makeCard(t.name, t.abbreviation, 'What is the abbreviation for this team?')); }
 function buildLeagueTeamToCoachDeck()       { return NBA_TEAMS.filter(t => t.coach).map(t => makeCard(t.name, t.coach, "Who is this team's head coach?")); }
 function buildLeagueTeamToCoachPrevTeamDeck() {
-  return NBA_TEAMS.filter(t => t.coach && t.coachPrevTeam).map(t =>
-    makeCard(t.coach, t.coachPrevTeam, "What was this head coach's previous team?")
-  );
+  return NBA_TEAMS.filter(t => t.coach).map(t => {
+    const prev = t.coachPrevTeam;
+    let answer;
+    if (!prev || (prev.team && prev.team === 'None') || prev === 'None') {
+      answer = 'None (First NBA coaching job)';
+    } else if (typeof prev === 'object' && prev.team) {
+      answer = prev.team + ' (' + prev.role + ')';
+    } else {
+      answer = String(prev);
+    }
+    return makeCard(t.coach, answer, "What was this head coach's most recent previous NBA team?");
+  });
 }
 function buildLeagueTeamToCoachSinceDeck() {
   return NBA_TEAMS.filter(t => t.coach && t.coachSince).map(t =>
