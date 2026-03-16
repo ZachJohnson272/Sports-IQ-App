@@ -5034,13 +5034,23 @@
       <!-- Category picker -->
       <div class="lp-cat-grid" id="lp-league-cat-grid">
         <div class="lp-cat-card lp-cat-card--current" id="lp-lcat-roster" onclick="lpSelectLeagueCat('roster')">
-          <div class="lp-cat-icon">📋</div>
+          <div class="lp-cat-icon">👥</div>
           <div class="lp-cat-body">
-            <div class="lp-cat-title">Roster & Coaches</div>
-            <div class="lp-cat-desc">Active rosters, current team, head coach, and live squad info</div>
+            <div class="lp-cat-title">Roster</div>
+            <div class="lp-cat-desc">Active rosters, player teams, and starting lineup</div>
             <div class="lp-cat-meta">
-              <span class="lp-cat-badge">Live data</span>
-              <span class="lp-cat-modes-count">3 difficulty tiers</span>
+              <span class="lp-cat-badge">2 difficulty tiers</span>
+            </div>
+          </div>
+          <div class="lp-cat-arrow">›</div>
+        </div>
+        <div class="lp-cat-card lp-cat-card--current" id="lp-lcat-coaches" onclick="lpSelectLeagueCat('coaches')">
+          <div class="lp-cat-icon">👔</div>
+          <div class="lp-cat-body">
+            <div class="lp-cat-title">Coaches</div>
+            <div class="lp-cat-desc">Head coaches and full coaching staff</div>
+            <div class="lp-cat-meta">
+              <span class="lp-cat-badge">2 difficulty tiers</span>
             </div>
           </div>
           <div class="lp-cat-arrow">›</div>
@@ -5098,7 +5108,7 @@
       <div class="lp-cat-section hidden" id="lp-lsec-roster">
         <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">📋 Roster & Coaches</span>
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">👥 Roster</span>
         </div>
         <div class="lp-tier-tabs">
           <div class="lp-tier-tab active" id="lp-ltab-ros-allstar" onclick="lpSelectCatTier('lp-lsec-roster','ros-allstar')">
@@ -5113,18 +5123,11 @@
         </div>
         <div class="lp-tier-panel" id="lp-lpanel-ros-allstar">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 All-Star</div>
+            <div class="lp-mode-grid-label">👥 All-Star</div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
               <div class="lp-mcard-count">~70 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coach')">
-              <div class="lp-mcard-icon">👔</div>
-              <div class="lp-mcard-title">Team → Head Coach</div>
-              <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5138,7 +5141,7 @@
         </div>
         <div class="lp-tier-panel hidden" id="lp-lpanel-ros-hof">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 Hall of Fame</div>
+            <div class="lp-mode-grid-label">👥 Hall of Fame</div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_roster')">
               <div class="lp-mcard-icon">👥</div>
               <div class="lp-mcard-title">Team → Roster</div>
@@ -5146,6 +5149,42 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Coaches category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-lsec-coaches">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">👔 Coaches</span>
+        </div>
+        <div class="lp-tier-tabs">
+          <div class="lp-tier-tab active" id="lp-ltab-coa-allstar" onclick="lpSelectCatTier('lp-lsec-coaches','coa-allstar')">
+            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
+            <span class="lp-tier-tab-label">All-Star</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-coa-hof" onclick="lpSelectCatTier('lp-lsec-coaches','coa-hof')">
+            <span class="lp-tier-tab-dot lp-diff-hof"></span>
+            <span class="lp-tier-tab-label">Hall of Fame</span>
+          </div>
+        </div>
+        </div>
+        <div class="lp-tier-panel" id="lp-lpanel-coa-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">👔 All-Star</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coach')">
+              <div class="lp-mcard-icon">👔</div>
+              <div class="lp-mcard-title">Team → Head Coach</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-coa-hof">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">👔 Hall of Fame</div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coaching_staff')">
               <div class="lp-mcard-icon">🧑‍💼</div>
               <div class="lp-mcard-title">Team → Coaching Staff</div>
@@ -5589,22 +5628,41 @@
 
         <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-roster" onclick="lpSelectTeamCat('roster')">
           <div class="lp-prog-top">
-            <div class="lp-prog-icon">📋</div>
+            <div class="lp-prog-icon">👥</div>
             <div class="lp-prog-body">
-              <div class="lp-prog-title">Roster & Coaches</div>
-              <div class="lp-prog-desc">Active rosters, current team, head coach, and live squad info</div>
+              <div class="lp-prog-title">Roster</div>
+              <div class="lp-prog-desc">Active roster, player teams, and starting lineup</div>
             </div>
           </div>
           <div class="lp-prog-bar-row">
             <div class="lp-prog-bar-wrap">
               <div class="lp-prog-bar-fill lp-prog-bar--current" style="width:0%"></div>
             </div>
-            <span class="lp-prog-fraction">0 / 4 modes</span>
+            <span class="lp-prog-fraction">0 / 2 modes</span>
           </div>
           <div class="lp-prog-tiers">
-            <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
-            <span class="lp-prog-tier lp-prog-tier--starter">Starter</span>
             <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
+            <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
+          </div>
+        </div>
+
+        <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-coaches" onclick="lpSelectTeamCat('coaches')">
+          <div class="lp-prog-top">
+            <div class="lp-prog-icon">👔</div>
+            <div class="lp-prog-body">
+              <div class="lp-prog-title">Coaches</div>
+              <div class="lp-prog-desc">Head coach and full coaching staff</div>
+            </div>
+          </div>
+          <div class="lp-prog-bar-row">
+            <div class="lp-prog-bar-wrap">
+              <div class="lp-prog-bar-fill lp-prog-bar--current" style="width:0%"></div>
+            </div>
+            <span class="lp-prog-fraction">0 / 2 modes</span>
+          </div>
+          <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
+            <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
           </div>
         </div>
 
@@ -5695,7 +5753,7 @@
       <div class="lp-cat-section hidden" id="lp-tsec-roster">
         <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">📋 Roster & Coaches</span>
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">👥 Roster</span>
         </div>
         <div class="lp-tier-tabs">
           <div class="lp-tier-tab active" id="lp-ttab-tros-allstar" onclick="lpSelectCatTier('lp-tsec-roster','tros-allstar')">
@@ -5710,14 +5768,7 @@
         </div>
         <div class="lp-tier-panel" id="lp-tpanel-tros-allstar">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach')">
-              <div class="lp-mcard-icon">👔</div>
-              <div class="lp-mcard-title">Team → Head Coach</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
+            <div class="lp-mode-grid-label">👥 All-Star</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','lineup')">
               <div class="lp-mcard-icon">📋</div>
               <div class="lp-mcard-title">Team → Starting 5</div>
@@ -5729,7 +5780,7 @@
         </div>
         <div class="lp-tier-panel hidden" id="lp-tpanel-tros-hof">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 Hall of Fame</div>
+            <div class="lp-mode-grid-label">👥 Hall of Fame</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_roster')">
               <div class="lp-mcard-icon">👥</div>
               <div class="lp-mcard-title">Team → Roster</div>
@@ -5737,6 +5788,42 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Coaches category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-tsec-coaches">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">👔 Coaches</span>
+        </div>
+        <div class="lp-tier-tabs">
+          <div class="lp-tier-tab active" id="lp-ttab-tcoa-allstar" onclick="lpSelectCatTier('lp-tsec-coaches','tcoa-allstar')">
+            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
+            <span class="lp-tier-tab-label">All-Star</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ttab-tcoa-hof" onclick="lpSelectCatTier('lp-tsec-coaches','tcoa-hof')">
+            <span class="lp-tier-tab-dot lp-diff-hof"></span>
+            <span class="lp-tier-tab-label">Hall of Fame</span>
+          </div>
+        </div>
+        </div>
+        <div class="lp-tier-panel" id="lp-tpanel-tcoa-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">👔 All-Star</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach')">
+              <div class="lp-mcard-icon">👔</div>
+              <div class="lp-mcard-title">Team → Head Coach</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tcoa-hof">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">👔 Hall of Fame</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_coaching_staff')">
               <div class="lp-mcard-icon">🧑‍💼</div>
               <div class="lp-mcard-title">Team → Coaching Staff</div>
@@ -8345,7 +8432,7 @@ function lpGoPanel(n, subtype) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['roster','players','teaminfo','history','random'].forEach(s => {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8389,7 +8476,7 @@ function lpSwitchPath(path) {
     // Reset cat state
     const g = document.getElementById('lp-league-cat-grid');
     if (g) g.style.display = '';
-    ['roster','players','teams','history','random'].forEach(s => {
+    ['roster','coaches','players','teams','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8452,7 +8539,7 @@ function lpLaunchMode(path, mode) {
   // Capture which panel launched this session so we can return correctly
   if (path === 'league') {
     let leagueCat = null;
-    ['roster','players','teams','history','random'].forEach(function(s) {
+    ['roster','coaches','players','teams','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec && !sec.classList.contains('hidden')) leagueCat = s;
     });
@@ -8468,7 +8555,7 @@ function lpLaunchMode(path, mode) {
     setSessionReturnTarget({ path: 'league', leagueCat: leagueCat, tierTabId: tierTabId });
   } else if (path === 'team') {
     let teamCat = null;
-    ['roster','players','teaminfo','history','random'].forEach(function(s) {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec && !sec.classList.contains('hidden')) teamCat = s;
     });
@@ -9054,7 +9141,7 @@ function lpSelectLeagueCat(cat) {
   if (cat === 'random') {
     // Show random section, hide grid
     const grid = document.getElementById('lp-league-cat-grid');
-    const sections = ['roster','players','teams','history','random'];
+    const sections = ['roster','coaches','players','teams','history','random'];
     if (grid) grid.style.display = 'none';
     sections.forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
@@ -9067,7 +9154,7 @@ function lpSelectLeagueCat(cat) {
   }
   // Hide grid, show the right section
   const grid = document.getElementById('lp-league-cat-grid');
-  const sections = ['roster','players','teams','history','random'];
+  const sections = ['roster','coaches','players','teams','history','random'];
   if (grid) grid.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-lsec-' + s);
@@ -9091,7 +9178,7 @@ function lpCloseCat(scope) {
     if (leaguePanel) leaguePanel.classList.remove('lp-panel--cat-open');
     const grid = document.getElementById('lp-league-cat-grid');
     if (grid) grid.style.display = '';
-    ['roster','players','teams','history','random'].forEach(s => {
+    ['roster','coaches','players','teams','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -9111,7 +9198,7 @@ function lpCloseCat(scope) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['roster','players','teaminfo','history','random'].forEach(s => {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -9124,7 +9211,7 @@ function lpSelectTeamCat(cat) {
   if (teamPanel) teamPanel.classList.add('lp-panel--cat-open');
 
   const grid = document.getElementById('lp-team-cat-grid');
-  const sections = ['roster','players','teaminfo','history','random'];
+  const sections = ['roster','coaches','players','teaminfo','history','random'];
   if (grid) grid.style.display = 'none';
   // Hide team overview sections — this is now a focused mode page
   const infoPanel = document.getElementById('lp-team-info-panel');
