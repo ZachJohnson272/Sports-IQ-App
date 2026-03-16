@@ -6900,12 +6900,21 @@ function buildPlayerToStarterBenchDeck(roster) {
   });
 }
 function buildTeamToStartingPosDeck(roster) {
-  // One card per player: front = name, back = position slot (PG/SG/SF/PF/C) or "Bench"
   const posMap = {};
   Object.entries(JAZZ_STARTING_LINEUP).forEach(([slot, name]) => { posMap[name] = slot; });
+  const fullPos = { PG:'Point Guard', SG:'Shooting Guard', SF:'Small Forward', PF:'Power Forward', C:'Center' };
   return Array.from(roster).filter(p => p && p.name).map(p => {
-    const pos = posMap[p.name] || 'Bench';
-    return makeCard(p.name, pos, "What is this player's starting position, or are they bench?");
+    const slot = posMap[p.name];
+    let answer;
+    if (slot) {
+      answer = '<div class="back-conf-block">' +
+        '<span class="back-conf-label" style="font-size:10px;letter-spacing:3px;">Starting</span>' +
+        '<span class="back-conf-val">' + fullPos[slot] + '</span>' +
+        '</div>';
+    } else {
+      answer = 'Bench';
+    }
+    return makeCard(p.name, answer, "What is this player's starting position, or are they bench?");
   });
 }
 function buildLeagueTeamToStartingPosDeck() {
