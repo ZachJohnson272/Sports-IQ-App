@@ -5125,10 +5125,6 @@
             <span class="lp-tier-tab-dot lp-diff-rookie"></span>
             <span class="lp-tier-tab-label">Rookie</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ltab-ros-starter" onclick="lpSelectCatTier('lp-lsec-roster','ros-starter')">
-            <span class="lp-tier-tab-dot lp-diff-starter"></span>
-            <span class="lp-tier-tab-label">Starter</span>
-          </div>
           <div class="lp-tier-tab" id="lp-ltab-ros-allstar" onclick="lpSelectCatTier('lp-lsec-roster','ros-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
@@ -5146,18 +5142,6 @@
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
               <div class="lp-mcard-count">~70 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-starter">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">👥 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_starting_pos')">
-              <div class="lp-mcard-icon">📍</div>
-              <div class="lp-mcard-title">Team → Starting Position</div>
-              <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5827,10 +5811,6 @@
             <span class="lp-tier-tab-dot lp-diff-rookie"></span>
             <span class="lp-tier-tab-label">Rookie</span>
           </div>
-          <div class="lp-tier-tab" id="lp-ttab-tros-starter" onclick="lpSelectCatTier('lp-tsec-roster','tros-starter')">
-            <span class="lp-tier-tab-dot lp-diff-starter"></span>
-            <span class="lp-tier-tab-label">Starter</span>
-          </div>
           <div class="lp-tier-tab" id="lp-ttab-tros-allstar" onclick="lpSelectCatTier('lp-tsec-roster','tros-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
@@ -5847,18 +5827,6 @@
             <div class="lp-mcard" onclick="lpLaunchMode('team','player_starter_bench')">
               <div class="lp-mcard-icon">🔀</div>
               <div class="lp-mcard-title">Player → Starter/Bench</div>
-              <div class="lp-mcard-count">16 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-tros-starter">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">👥 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_starting_pos')">
-              <div class="lp-mcard-icon">📍</div>
-              <div class="lp-mcard-title">Team → Starting Position</div>
               <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -6893,21 +6861,11 @@ function buildLeagueTeamToRookiesOfYearDeck() {
   });
 }
 function buildPlayerToStarterBenchDeck(roster) {
-  const posMap = {};
-  Object.entries(JAZZ_STARTING_LINEUP).forEach(([slot, name]) => { posMap[name] = slot; });
-  const fullPos = { PG:'Point Guard', SG:'Shooting Guard', SF:'Small Forward', PF:'Power Forward', C:'Center' };
+  const starterNames = new Set(Object.values(JAZZ_STARTING_LINEUP));
+  const teamName = 'Utah Jazz';
   return Array.from(roster).filter(p => p && p.name).map(p => {
-    const slot = posMap[p.name];
-    let answer;
-    if (slot) {
-      answer = '<div class="back-conf-block">' +
-        '<span class="back-conf-label" style="font-size:14px;letter-spacing:3px;">Starter</span>' +
-        '<span class="back-conf-val" style="font-size:28px;">' + fullPos[slot] + '</span>' +
-        '</div>';
-    } else {
-      answer = 'Bench';
-    }
-    return makeCard(p.name, answer, 'Is this player a starter or bench player?');
+    const status = starterNames.has(p.name) ? 'Starter' : 'Bench';
+    return makeCard(teamName, status, 'Is ' + p.name + ' a starter or bench player?');
   });
 }
 function buildTeamToStartingPosDeck(roster) {
