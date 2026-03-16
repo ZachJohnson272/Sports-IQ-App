@@ -6773,15 +6773,13 @@ const TEAM_COACHING_STAFF = {
 function buildTeamToCoachingStaffDeck(team) {
   const staff = TEAM_COACHING_STAFF[team.name];
   if (!staff) return [makeCard(team.name, 'Coaching staff unavailable', "Who is on this team's current coaching staff?")];
-  const headRow = '<div class="back-career-entry">' +
-    '<span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span>' +
-    '<span class="back-career-dur" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;">Head Coach</span>' +
-    '</div>';
+  const headLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Head Coach</span>';
+  const headRow = '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span></div>';
+  const assistLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
   const assistRows = staff.assistants.map(a =>
     '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + a + '</span></div>'
   ).join('');
-  const divider = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
-  const answer = '<div class="back-career-block" style="gap:5px;">' + headRow + divider + assistRows + '</div>';
+  const answer = '<div class="back-career-block" style="gap:5px;">' + headLabel + headRow + assistLabel + assistRows + '</div>';
   return [makeCard(team.name, answer, "Who is on this team's current coaching staff?")];
 }
 function buildPlayerToHometownDeck(roster)  { return roster.filter(p => p.hometown).map(p => makeCard(p.name, p.hometown,   "What is this player's hometown?")); }
@@ -7007,15 +7005,13 @@ function buildLeagueTeamToCoachSinceDeck() {
 function buildLeagueTeamToCoachingStaffDeck() {
   return NBA_TEAMS.filter(t => TEAM_COACHING_STAFF[t.name]).map(t => {
     const staff = TEAM_COACHING_STAFF[t.name];
-    const headRow = '<div class="back-career-entry">' +
-      '<span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span>' +
-      '<span class="back-career-dur" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;">Head Coach</span>' +
-      '</div>';
+    const headLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Head Coach</span>';
+    const headRow = '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span></div>';
+    const assistLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
     const assistRows = staff.assistants.map(a =>
       '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + a + '</span></div>'
     ).join('');
-    const divider = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
-    const answer = '<div class="back-career-block" style="gap:5px;">' + headRow + divider + assistRows + '</div>';
+    const answer = '<div class="back-career-block" style="gap:5px;">' + headLabel + headRow + assistLabel + assistRows + '</div>';
     return makeCard(t.name, answer, "Who is on this team's current coaching staff?");
   });
 }
