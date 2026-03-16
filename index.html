@@ -5207,7 +5207,7 @@
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_past_teams')">
               <div class="lp-mcard-icon">🔄</div>
               <div class="lp-mcard-title">Player → Past Teams</div>
-              <div class="lp-mcard-count">7 cards</div>
+              <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5798,7 +5798,7 @@
             <div class="lp-mcard" onclick="lpLaunchMode('team','player_past_teams')">
               <div class="lp-mcard-icon">🔄</div>
               <div class="lp-mcard-title">Player → Past Teams</div>
-              <div class="lp-mcard-count">7 cards</div>
+              <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -6547,14 +6547,21 @@ function buildPlayerToCountryHometownDeck(roster) {
   });
 }
 function buildPlayerToPastTeamsDeck(roster) {
-  return roster.filter(p => p.past_teams && p.past_teams !== 'None' && Array.isArray(p.past_teams)).map(p => {
-    const entries = p.past_teams.map(t =>
-      '<div class="back-career-entry">' +
-        '<span class="back-career-team">' + t.team + '</span>' +
-        '<span class="back-career-dur">' + t.dur + '</span>' +
-      '</div>'
-    ).join('');
-    const answer = '<div class="back-career-block">' + entries + '</div>';
+  return roster.filter(p => p && p.name).map(p => {
+    const hasPastTeams = Array.isArray(p.past_teams) && p.past_teams.length > 0;
+    const answer = hasPastTeams
+      ? '<div class="back-career-block">' + p.past_teams.map(t =>
+          '<div class="back-career-entry">' +
+            '<span class="back-career-team">' + t.team + '</span>' +
+            '<span class="back-career-dur">' + t.dur + '</span>' +
+          '</div>'
+        ).join('') + '</div>'
+      : '<div class="back-career-block">' +
+          '<div class="back-career-entry">' +
+            '<span class="back-career-team">Utah Jazz</span>' +
+            '<span class="back-career-dur">No previous NBA teams</span>' +
+          '</div>' +
+        '</div>';
     return makeCard(p.name, answer, "What previous NBA teams has this player been on?");
   });
 }
