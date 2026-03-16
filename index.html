@@ -5049,7 +5049,7 @@
             <div class="lp-cat-title">Roster</div>
             <div class="lp-cat-desc">Active rosters, player teams, and starting lineup</div>
             <div class="lp-cat-meta">
-              <span class="lp-cat-badge">2 difficulty tiers</span>
+              <span class="lp-cat-badge">3 difficulty tiers</span>
             </div>
           </div>
           <div class="lp-cat-arrow">›</div>
@@ -5121,7 +5121,11 @@
           <span class="lp-cat-section-title" style="background:rgba(107,63,160,0.22);border-color:rgba(107,63,160,0.45);">👥 Roster</span>
         </div>
         <div class="lp-tier-tabs">
-          <div class="lp-tier-tab active" id="lp-ltab-ros-allstar" onclick="lpSelectCatTier('lp-lsec-roster','ros-allstar')">
+          <div class="lp-tier-tab active" id="lp-ltab-ros-starter" onclick="lpSelectCatTier('lp-lsec-roster','ros-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-ros-allstar" onclick="lpSelectCatTier('lp-lsec-roster','ros-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
@@ -5131,9 +5135,9 @@
           </div>
         </div>
         </div>
-        <div class="lp-tier-panel" id="lp-lpanel-ros-allstar">
+        <div class="lp-tier-panel" id="lp-lpanel-ros-starter">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">👥 All-Star</div>
+            <div class="lp-mode-grid-label">👥 Starter</div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
@@ -5141,6 +5145,11 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">👥 All-Star</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">📋</div>
               <div class="lp-mcard-title">Team → Starting 5</div>
