@@ -5125,6 +5125,10 @@
             <span class="lp-tier-tab-dot lp-diff-rookie"></span>
             <span class="lp-tier-tab-label">Rookie</span>
           </div>
+          <div class="lp-tier-tab" id="lp-ltab-ros-starter" onclick="lpSelectCatTier('lp-lsec-roster','ros-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
           <div class="lp-tier-tab" id="lp-ltab-ros-allstar" onclick="lpSelectCatTier('lp-lsec-roster','ros-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
@@ -5142,6 +5146,18 @@
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
               <div class="lp-mcard-count">~70 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">👥 Starter</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_starter_bench')">
+              <div class="lp-mcard-icon">🔀</div>
+              <div class="lp-mcard-title">Player → Starter/Bench</div>
+              <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -6865,7 +6881,7 @@ function buildPlayerToStarterBenchDeck(roster) {
   const teamName = 'Utah Jazz';
   return Array.from(roster).filter(p => p && p.name).map(p => {
     const status = starterNames.has(p.name) ? 'Starter' : 'Bench';
-    return makeCard(teamName, status, 'Is ' + p.name + ' a starter or bench player?');
+    return makeCard(p.name + '\n' + teamName, status, 'Is this player a starter or bench player?');
   });
 }
 function buildTeamToStartingPosDeck(roster) {
@@ -7152,6 +7168,7 @@ const MODE_BUILDERS = {
   league_team_coaching_staff: () => buildLeagueTeamToCoachingStaffDeck(),
   league_team_roster:         () => buildLeagueTeamToRosterDeck(),
   league_team_starting_pos:   () => buildLeagueTeamToStartingPosDeck(),
+  league_player_starter_bench: () => buildPlayerToStarterBenchDeck(ROSTER),
 };
 
 // -- Mode display titles --
@@ -7210,6 +7227,7 @@ const SESSION_MODE_TITLES = {
   league_team_coaching_staff: 'Team → Coaching Staff',
   league_team_roster:         'Team → Roster',
   league_team_starting_pos:   'Team → Starting Position',
+  league_player_starter_bench: 'Player → Starter/Bench',
 };
 
 // -- Session state for the generic card engine --
