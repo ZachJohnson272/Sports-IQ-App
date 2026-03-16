@@ -3088,6 +3088,7 @@
   .lp-prog-bar--players  { background: linear-gradient(90deg, #3a8fa8, #5BB8D4); }
   .lp-prog-bar--teaminfo { background: linear-gradient(90deg, #c89820, #f5c842); }
   .lp-prog-bar--history  { background: linear-gradient(90deg, #c04a24, #f07050); }
+  .lp-prog-bar--coaches  { background: linear-gradient(90deg, #1f9e8e, #38BDB0); }
   .lp-prog-bar--current  { background: linear-gradient(90deg, #4a2070, #6B3FA0); }
   .lp-prog-fraction {
     font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
@@ -3118,12 +3119,21 @@
   .lp-cat-card--random .lp-cat-badge { background: rgba(61,204,122,0.08); color: rgba(61,204,122,0.55); border-color: rgba(61,204,122,0.15); }
 
   /* Current category — purple glow */
+  .lp-cat-card--coaches { border-color: rgba(56,189,175,0.3); box-shadow: 0 0 18px rgba(56,189,175,0.15); }
+  .lp-cat-card--coaches::before { background: radial-gradient(ellipse at left, rgba(56,189,175,0.1), transparent 60%); }
+  .lp-cat-card--coaches:hover { border-color: rgba(56,189,175,0.65); box-shadow: 0 12px 32px rgba(56,189,175,0.22), 0 0 24px rgba(56,189,175,0.15); }
+  .lp-cat-card--coaches .lp-cat-icon { background: rgba(56,189,175,0.14); border-color: rgba(56,189,175,0.28); }
+  .lp-cat-card--coaches .lp-cat-badge { background: rgba(56,189,175,0.1); color: rgba(56,189,175,0.8); border-color: rgba(56,189,175,0.2); }
   .lp-cat-card--current { border-color: rgba(107,63,160,0.45); box-shadow: 0 0 18px rgba(107,63,160,0.22); }
   .lp-cat-card--current::before { background: radial-gradient(ellipse at left, rgba(107,63,160,0.18), transparent 60%); }
   .lp-cat-card--current:hover { border-color: rgba(107,63,160,0.75); box-shadow: 0 12px 32px rgba(107,63,160,0.35), 0 0 24px rgba(107,63,160,0.25); }
   .lp-cat-card--current .lp-cat-icon { background: rgba(107,63,160,0.18); border-color: rgba(107,63,160,0.35); }
   .lp-cat-card--current .lp-cat-badge { background: rgba(107,63,160,0.12); color: rgba(187,143,255,0.85); border-color: rgba(107,63,160,0.3); }
 
+  .lp-prog-card--coaches { border-color: rgba(56,189,175,0.28); box-shadow: 0 0 18px rgba(56,189,175,0.12), 0 3px 16px rgba(0,0,0,0.38); }
+  .lp-prog-card--coaches::before { background: radial-gradient(ellipse at top left, rgba(56,189,175,0.1), transparent 65%); }
+  .lp-prog-card--coaches:hover { border-color: rgba(56,189,175,0.62); box-shadow: 0 12px 34px rgba(56,189,175,0.2), 0 0 24px rgba(56,189,175,0.14); }
+  .lp-prog-card--coaches .lp-prog-icon { background: rgba(56,189,175,0.14); border-color: rgba(56,189,175,0.28); }
   .lp-prog-card--current { border-color: rgba(107,63,160,0.45); box-shadow: 0 0 18px rgba(107,63,160,0.2), 0 3px 16px rgba(0,0,0,0.38); }
   .lp-prog-card--current::before { background: radial-gradient(ellipse at top left, rgba(107,63,160,0.18), transparent 65%); }
   .lp-prog-card--current:hover { border-color: rgba(107,63,160,0.75); box-shadow: 0 12px 34px rgba(107,63,160,0.32), 0 0 24px rgba(107,63,160,0.22); }
@@ -5044,7 +5054,7 @@
           </div>
           <div class="lp-cat-arrow">›</div>
         </div>
-        <div class="lp-cat-card lp-cat-card--current" id="lp-lcat-coaches" onclick="lpSelectLeagueCat('coaches')">
+        <div class="lp-cat-card lp-cat-card--coaches" id="lp-lcat-coaches" onclick="lpSelectLeagueCat('coaches')">
           <div class="lp-cat-icon">👔</div>
           <div class="lp-cat-body">
             <div class="lp-cat-title">Coaches</div>
@@ -5636,7 +5646,7 @@
           </div>
           <div class="lp-prog-bar-row">
             <div class="lp-prog-bar-wrap">
-              <div class="lp-prog-bar-fill lp-prog-bar--current" style="width:0%"></div>
+              <div class="lp-prog-bar-fill lp-prog-bar--coaches" style="width:0%"></div>
             </div>
             <span class="lp-prog-fraction">0 / 2 modes</span>
           </div>
@@ -5646,7 +5656,7 @@
           </div>
         </div>
 
-        <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-coaches" onclick="lpSelectTeamCat('coaches')">
+        <div class="lp-prog-card lp-prog-card--coaches" id="lp-tcat-coaches" onclick="lpSelectTeamCat('coaches')">
           <div class="lp-prog-top">
             <div class="lp-prog-icon">👔</div>
             <div class="lp-prog-body">
