@@ -5113,11 +5113,27 @@
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
+          <div class="lp-tier-tab" id="lp-ltab-ros-hof" onclick="lpSelectCatTier('lp-lsec-roster','ros-hof')">
+            <span class="lp-tier-tab-dot lp-diff-hof"></span>
+            <span class="lp-tier-tab-label">Hall of Fame</span>
+          </div>
         </div>
         </div>
         <div class="lp-tier-panel" id="lp-lpanel-ros-rookie">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">📋 Rookie</div>
+            <p style="color:rgba(255,255,255,0.35);font-size:12px;text-align:center;padding:16px 0;width:100%;">No modes at this tier</p>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">📋 Starter</div>
+            <p style="color:rgba(255,255,255,0.35);font-size:12px;text-align:center;padding:16px 0;width:100%;">No modes at this tier</p>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">📋 All-Star</div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Player → Team</div>
@@ -5132,32 +5148,27 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-starter">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 Starter</div>
             <div class="lp-mcard lp-mcard--locked">
               <div class="lp-mcard-icon">📋</div>
               <div class="lp-mcard-title">Team → Starting 5</div>
               <div class="lp-mcard-count">30 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
             </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coaching_staff')">
-              <div class="lp-mcard-icon">🧑‍💼</div>
-              <div class="lp-mcard-title">Team → Coaching Staff</div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-hof">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">📋 Hall of Fame</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_roster')">
+              <div class="lp-mcard-icon">👥</div>
+              <div class="lp-mcard-title">Team → Roster</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-ros-allstar">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_roster')">
-              <div class="lp-mcard-icon">👥</div>
-              <div class="lp-mcard-title">Team → Roster</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coaching_staff')">
+              <div class="lp-mcard-icon">🧑‍💼</div>
+              <div class="lp-mcard-title">Team → Coaching Staff</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5719,11 +5730,27 @@
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
+          <div class="lp-tier-tab" id="lp-ttab-tros-hof" onclick="lpSelectCatTier('lp-tsec-roster','tros-hof')">
+            <span class="lp-tier-tab-dot lp-diff-hof"></span>
+            <span class="lp-tier-tab-label">Hall of Fame</span>
+          </div>
         </div>
         </div>
         <div class="lp-tier-panel" id="lp-tpanel-tros-rookie">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">📋 Rookie</div>
+            <p style="color:rgba(255,255,255,0.35);font-size:12px;text-align:center;padding:16px 0;width:100%;">No modes at this tier</p>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tros-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">📋 Starter</div>
+            <p style="color:rgba(255,255,255,0.35);font-size:12px;text-align:center;padding:16px 0;width:100%;">No modes at this tier</p>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tros-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">📋 All-Star</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach')">
               <div class="lp-mcard-icon">👔</div>
               <div class="lp-mcard-title">Team → Head Coach</div>
@@ -5731,11 +5758,6 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-tros-starter">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 Starter</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','lineup')">
               <div class="lp-mcard-icon">📋</div>
               <div class="lp-mcard-title">Team → Starting 5</div>
@@ -5743,21 +5765,21 @@
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coaching_staff')">
-              <div class="lp-mcard-icon">🧑‍💼</div>
-              <div class="lp-mcard-title">Team → Coaching Staff</div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tros-hof">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">📋 Hall of Fame</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_roster')">
+              <div class="lp-mcard-icon">👥</div>
+              <div class="lp-mcard-title">Team → Roster</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-tros-allstar">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">📋 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_roster')">
-              <div class="lp-mcard-icon">👥</div>
-              <div class="lp-mcard-title">Team → Roster</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coaching_staff')">
+              <div class="lp-mcard-icon">🧑‍💼</div>
+              <div class="lp-mcard-title">Team → Coaching Staff</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
