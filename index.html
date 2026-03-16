@@ -5142,10 +5142,10 @@
         <div class="lp-tier-panel" id="lp-lpanel-ros-rookie">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👥 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
-              <div class="lp-mcard-icon">🏀</div>
-              <div class="lp-mcard-title">Player → Team</div>
-              <div class="lp-mcard-count">~70 cards</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_starter_bench')">
+              <div class="lp-mcard-icon">🔀</div>
+              <div class="lp-mcard-title">Player → Starter/Bench</div>
+              <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5154,10 +5154,10 @@
         <div class="lp-tier-panel hidden" id="lp-lpanel-ros-starter">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👥 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_starter_bench')">
-              <div class="lp-mcard-icon">🔀</div>
-              <div class="lp-mcard-title">Player → Starter/Bench</div>
-              <div class="lp-mcard-count">16 cards</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
+              <div class="lp-mcard-icon">🏀</div>
+              <div class="lp-mcard-title">Player → Team</div>
+              <div class="lp-mcard-count">~70 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5827,6 +5827,10 @@
             <span class="lp-tier-tab-dot lp-diff-rookie"></span>
             <span class="lp-tier-tab-label">Rookie</span>
           </div>
+          <div class="lp-tier-tab" id="lp-ttab-tros-starter" onclick="lpSelectCatTier('lp-tsec-roster','tros-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
           <div class="lp-tier-tab" id="lp-ttab-tros-allstar" onclick="lpSelectCatTier('lp-tsec-roster','tros-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
@@ -5843,6 +5847,18 @@
             <div class="lp-mcard" onclick="lpLaunchMode('team','player_starter_bench')">
               <div class="lp-mcard-icon">🔀</div>
               <div class="lp-mcard-title">Player → Starter/Bench</div>
+              <div class="lp-mcard-count">16 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-tros-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">👥 Starter</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','player_years_on_team')">
+              <div class="lp-mcard-icon">📅</div>
+              <div class="lp-mcard-title">Player → Years on Team</div>
               <div class="lp-mcard-count">16 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -6478,22 +6494,22 @@ function applyUsername() {
   if (el('profName'))            el('profName').textContent            = displayName;
 }
 const ROSTER = [
-  { name:"Lauri Markkanen",    position:"F",  jersey:"23", height:'7\'1"',  college:"Arizona",           country:"Finland",   hometown:"Vantaa, Finland",                    draft_year:"2017", draft_pick:"7",          draft_team:"Minnesota Timberwolves", past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                       image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
-  { name:"Ace Bailey",         position:"G",  jersey:"19", height:'6\'9"',  college:"Rutgers",           country:"USA",       hometown:"Chattanooga, Tennessee",              draft_year:"2025", draft_pick:"5",          draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
-  { name:"Jaren Jackson Jr.",  position:"F",  jersey:"20", height:'6\'10"', college:"Michigan State",    country:"USA",       hometown:"Plainfield, New Jersey",              draft_year:"2018", draft_pick:"4",          draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"6 seasons"}],                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
-  { name:"Cody Williams",      position:"F",  jersey:"5",  height:'6\'8"',  college:"Colorado",          country:"USA",       hometown:"San Luis Obispo, California",         draft_year:"2024", draft_pick:"10",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
-  { name:"Brice Sensabaugh",   position:"F",  jersey:"28", height:'6\'6"',  college:"Ohio State",        country:"USA",       hometown:"Orlando, Florida",                    draft_year:"2023", draft_pick:"28",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
-  { name:"Keyonte George",     position:"G",  jersey:"3",  height:'6\'4"',  college:"Baylor",            country:"USA",       hometown:"Lewisville, Texas",                   draft_year:"2023", draft_pick:"16",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
-  { name:"John Konchar",       position:"G",  jersey:"55", height:'6\'5"',  college:"Purdue Fort Wayne", country:"USA",       hometown:"West Chicago, Illinois",              draft_year:"2019", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:[{team:"Memphis Grizzlies",dur:"4 seasons"},{team:"Indiana Pacers",dur:"1 season"}],                                                                    image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
-  { name:"Isaiah Collier",     position:"G",  jersey:"8",  height:'6\'4"',  college:"USC",               country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2024", draft_pick:"29",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873165.png" },
-  { name:"Elijah Harkless",    position:"G",  jersey:"16", height:'6\'3"',  college:"UNLV",              country:"USA",       hometown:"Etiwanda, California",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
-  { name:"Svi Mykhailiuk",     position:"G",  jersey:"10", height:'6\'7"',  college:"Kansas",            country:"Ukraine",   hometown:"Cherkasy, Ukraine",                   draft_year:"2018", draft_pick:"47",         draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"1 season"},{team:"Detroit Pistons",dur:"3 seasons"},{team:"Houston Rockets",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Toronto Raptors",dur:"1 season"}],         image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
-  { name:"Kevin Love",         position:"F",  jersey:"42", height:'6\'10"', college:"UCLA",              country:"USA",       hometown:"Santa Monica, California",            draft_year:"2008", draft_pick:"5",          draft_team:"Memphis Grizzlies",      past_teams:[{team:"Minnesota Timberwolves",dur:"6 seasons"},{team:"Cleveland Cavaliers",dur:"9 seasons"},{team:"Miami Heat",dur:"1 season"}],                                              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
-  { name:"Walker Kessler",     position:"C",  jersey:"24", height:'7\'2"',  college:"Auburn",            country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2022", draft_pick:"22",         draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"traded (never played)"}],                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
-  { name:"Kyle Filipowski",    position:"F",  jersey:"22", height:'6\'11"', college:"Duke",              country:"USA",       hometown:"Middletown, New York",                draft_year:"2024", draft_pick:"32",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
-  { name:"Oscar Tshiebwe",     position:"C",  jersey:"34", height:'6\'8"',  college:"Kentucky",          country:"DR Congo",  hometown:"Lubumbashi, DR Congo",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
-  { name:"Blake Hinson",       position:"F",  jersey:"2",  height:'6\'8"',  college:"Pittsburgh",        country:"USA",       hometown:"Deltona, Florida",                    draft_year:"2024", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
-  { name:"Jusuf Nurkic",       position:"C",  jersey:"30", height:'6\'11"', college:"International",     country:"Bosnia",    hometown:"Živinice, Bosnia and Herzegovina",    draft_year:"2014", draft_pick:"16",         draft_team:"Chicago Bulls",          past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"Portland Trail Blazers",dur:"7 seasons"},{team:"Charlotte Hornets",dur:"1 season"},{team:"Phoenix Suns",dur:"1 season"}],                             image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
+  { name:"Lauri Markkanen", jazz_years:"3 seasons",    position:"F",  jersey:"23", height:'7\'1"',  college:"Arizona",           country:"Finland",   hometown:"Vantaa, Finland",                    draft_year:"2017", draft_pick:"7",          draft_team:"Minnesota Timberwolves", past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                       image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
+  { name:"Ace Bailey", jazz_years:"1 season",         position:"G",  jersey:"19", height:'6\'9"',  college:"Rutgers",           country:"USA",       hometown:"Chattanooga, Tennessee",              draft_year:"2025", draft_pick:"5",          draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
+  { name:"Jaren Jackson Jr.", jazz_years:"1 season",  position:"F",  jersey:"20", height:'6\'10"', college:"Michigan State",    country:"USA",       hometown:"Plainfield, New Jersey",              draft_year:"2018", draft_pick:"4",          draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"6 seasons"}],                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
+  { name:"Cody Williams", jazz_years:"1 season",      position:"F",  jersey:"5",  height:'6\'8"',  college:"Colorado",          country:"USA",       hometown:"San Luis Obispo, California",         draft_year:"2024", draft_pick:"10",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
+  { name:"Brice Sensabaugh", jazz_years:"2 seasons",   position:"F",  jersey:"28", height:'6\'6"',  college:"Ohio State",        country:"USA",       hometown:"Orlando, Florida",                    draft_year:"2023", draft_pick:"28",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
+  { name:"Keyonte George", jazz_years:"2 seasons",     position:"G",  jersey:"3",  height:'6\'4"',  college:"Baylor",            country:"USA",       hometown:"Lewisville, Texas",                   draft_year:"2023", draft_pick:"16",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
+  { name:"John Konchar", jazz_years:"1 season",       position:"G",  jersey:"55", height:'6\'5"',  college:"Purdue Fort Wayne", country:"USA",       hometown:"West Chicago, Illinois",              draft_year:"2019", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:[{team:"Memphis Grizzlies",dur:"4 seasons"},{team:"Indiana Pacers",dur:"1 season"}],                                                                    image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
+  { name:"Isaiah Collier", jazz_years:"1 season",     position:"G",  jersey:"8",  height:'6\'4"',  college:"USC",               country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2024", draft_pick:"29",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873165.png" },
+  { name:"Elijah Harkless", jazz_years:"1 season",    position:"G",  jersey:"16", height:'6\'3"',  college:"UNLV",              country:"USA",       hometown:"Etiwanda, California",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
+  { name:"Svi Mykhailiuk", jazz_years:"1 season",     position:"G",  jersey:"10", height:'6\'7"',  college:"Kansas",            country:"Ukraine",   hometown:"Cherkasy, Ukraine",                   draft_year:"2018", draft_pick:"47",         draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"1 season"},{team:"Detroit Pistons",dur:"3 seasons"},{team:"Houston Rockets",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Toronto Raptors",dur:"1 season"}],         image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
+  { name:"Kevin Love", jazz_years:"1 season",         position:"F",  jersey:"42", height:'6\'10"', college:"UCLA",              country:"USA",       hometown:"Santa Monica, California",            draft_year:"2008", draft_pick:"5",          draft_team:"Memphis Grizzlies",      past_teams:[{team:"Minnesota Timberwolves",dur:"6 seasons"},{team:"Cleveland Cavaliers",dur:"9 seasons"},{team:"Miami Heat",dur:"1 season"}],                                              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
+  { name:"Walker Kessler", jazz_years:"3 seasons",     position:"C",  jersey:"24", height:'7\'2"',  college:"Auburn",            country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2022", draft_pick:"22",         draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"traded (never played)"}],                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
+  { name:"Kyle Filipowski", jazz_years:"1 season",    position:"F",  jersey:"22", height:'6\'11"', college:"Duke",              country:"USA",       hometown:"Middletown, New York",                draft_year:"2024", draft_pick:"32",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
+  { name:"Oscar Tshiebwe", jazz_years:"2 seasons",     position:"C",  jersey:"34", height:'6\'8"',  college:"Kentucky",          country:"DR Congo",  hometown:"Lubumbashi, DR Congo",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
+  { name:"Blake Hinson", jazz_years:"1 season",       position:"F",  jersey:"2",  height:'6\'8"',  college:"Pittsburgh",        country:"USA",       hometown:"Deltona, Florida",                    draft_year:"2024", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
+  { name:"Jusuf Nurkic", jazz_years:"1 season",       position:"C",  jersey:"30", height:'6\'11"', college:"International",     country:"Bosnia",    hometown:"Živinice, Bosnia and Herzegovina",    draft_year:"2014", draft_pick:"16",         draft_team:"Chicago Bulls",          past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"Portland Trail Blazers",dur:"7 seasons"},{team:"Charlotte Hornets",dur:"1 season"},{team:"Phoenix Suns",dur:"1 season"}],                             image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
 ];
 
 // Full display labels for positions
@@ -6876,6 +6892,11 @@ function buildLeagueTeamToRookiesOfYearDeck() {
     return makeCard(teamName, answer, "Who are this franchise's Rookie of the Year winners?");
   });
 }
+function buildPlayerToYearsOnTeamDeck(roster) {
+  return Array.from(roster).filter(p => p && p.name && p.jazz_years).map(p =>
+    makeCard(p.name, p.jazz_years, 'How many seasons has this player been with the Jazz?')
+  );
+}
 function buildPlayerToStarterBenchDeck(roster) {
   const starterNames = new Set(Object.values(JAZZ_STARTING_LINEUP));
   const teamName = 'Utah Jazz';
@@ -7123,6 +7144,7 @@ const MODE_BUILDERS = {
   player_past_teams:      () => buildPlayerToPastTeamsDeck(TEST_ROSTER),
   team_roster:            () => buildTeamToRosterDeck(TEST_TEAM, TEST_ROSTER),
   player_starter_bench:   () => buildPlayerToStarterBenchDeck(TEST_ROSTER),
+  player_years_on_team:   () => buildPlayerToYearsOnTeamDeck(TEST_ROSTER),
   team_starting_pos:      () => buildTeamToStartingPosDeck(TEST_ROSTER),
   team_coaching_staff:    () => buildTeamToCoachingStaffDeck(TEST_TEAM),
   player_draft_year_pick: () => buildPlayerToDraftYearPickDeck(TEST_ROSTER),
@@ -7185,6 +7207,7 @@ const SESSION_MODE_TITLES = {
   player_past_teams:      'Player → Past Teams',
   team_roster:            'Team → Roster',
   player_starter_bench:   'Player → Starter/Bench',
+  player_years_on_team:   'Player → Years on Team',
   team_starting_pos:      'Team → Starting Position',
   team_coaching_staff:    'Team → Coaching Staff',
   player_draft_year_pick: 'Player → Draft Year & Pick',
