@@ -6774,12 +6774,12 @@ function buildTeamToCoachingStaffDeck(team) {
   const staff = TEAM_COACHING_STAFF[team.name];
   if (!staff) return [makeCard(team.name, 'Coaching staff unavailable', "Who is on this team's current coaching staff?")];
   const headLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Head Coach</span>';
-  const headRow = '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span></div>';
+  const headRow = '<div class="back-career-entry"><span class="back-career-team" style="font-size:20px;font-weight:600;">' + staff.head + '</span></div>';
   const assistLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
   const assistRows = staff.assistants.map(a =>
-    '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + a + '</span></div>'
+    '<div class="back-career-entry"><span class="back-career-team" style="font-size:18px;font-weight:500;">' + a + '</span></div>'
   ).join('');
-  const answer = '<div class="back-career-block" style="gap:5px;">' + headLabel + headRow + assistLabel + assistRows + '</div>';
+  const answer = '<div class="back-career-block" style="gap:6px;">' + headLabel + headRow + assistLabel + assistRows + '</div>';
   return [makeCard(team.name, answer, "Who is on this team's current coaching staff?")];
 }
 function buildPlayerToHometownDeck(roster)  { return roster.filter(p => p.hometown).map(p => makeCard(p.name, p.hometown,   "What is this player's hometown?")); }
@@ -6849,16 +6849,26 @@ function buildTeamToCoachPrevTeamDeck(team) {
   const prev = team.coachPrevTeam;
   let answer;
   if (!prev || (prev.team && prev.team === 'None') || prev === 'None') {
-    answer = 'None (First NBA coaching job)';
+    answer = '<div class="back-career-block"><div class="back-career-entry"><span class="back-career-team" style="font-size:22px;font-weight:700;">None</span><span class="back-career-dur" style="font-size:10px;opacity:0.6;color:rgba(56,189,175,0.75);">First NBA coaching job</span></div></div>';
   } else if (typeof prev === 'object' && prev.team) {
-    answer = prev.team + ' (' + prev.role + ')';
+    answer = '<div class="back-career-block"><div class="back-career-entry">' +
+      '<span class="back-career-team" style="font-size:22px;font-weight:700;">' + prev.team + '</span>' +
+      '<span class="back-career-dur" style="font-size:10px;opacity:0.6;color:rgba(56,189,175,0.75);">' + prev.role + '</span>' +
+      '</div></div>';
   } else {
-    answer = String(prev);
+    answer = '<div class="back-career-block"><div class="back-career-entry"><span class="back-career-team" style="font-size:22px;font-weight:700;">' + String(prev) + '</span></div></div>';
   }
   return [makeCard(team.coach || team.name, answer, "What was this head coach's most recent previous NBA team?")];
 }
 function buildTeamToCoachSinceDeck(team) {
-  const answer = team.coachSince ? 'Since ' + team.coachSince : 'N/A';
+  const answer = team.coachSince
+    ? '<div class="back-conf-block">' +
+        '<span class="back-conf-label">Current Team</span>' +
+        '<span class="back-conf-val">' + team.name + '</span>' +
+        '<span class="back-conf-label">Head Coach Since</span>' +
+        '<span class="back-conf-val" style="font-size:28px;">' + team.coachSince + '</span>' +
+      '</div>'
+    : 'N/A';
   return [makeCard(team.coach || team.name, answer, "What year did this head coach join this team?")];
 }
 
@@ -6988,30 +6998,39 @@ function buildLeagueTeamToCoachPrevTeamDeck() {
     const prev = t.coachPrevTeam;
     let answer;
     if (!prev || (prev.team && prev.team === 'None') || prev === 'None') {
-      answer = 'None (First NBA coaching job)';
+      answer = '<div class="back-career-block"><div class="back-career-entry"><span class="back-career-team" style="font-size:22px;font-weight:700;">None</span><span class="back-career-dur" style="font-size:10px;opacity:0.6;color:rgba(56,189,175,0.75);">First NBA coaching job</span></div></div>';
     } else if (typeof prev === 'object' && prev.team) {
-      answer = prev.team + ' (' + prev.role + ')';
+      answer = '<div class="back-career-block"><div class="back-career-entry">' +
+        '<span class="back-career-team" style="font-size:22px;font-weight:700;">' + prev.team + '</span>' +
+        '<span class="back-career-dur" style="font-size:10px;opacity:0.6;color:rgba(56,189,175,0.75);">' + prev.role + '</span>' +
+        '</div></div>';
     } else {
-      answer = String(prev);
+      answer = '<div class="back-career-block"><div class="back-career-entry"><span class="back-career-team" style="font-size:22px;font-weight:700;">' + String(prev) + '</span></div></div>';
     }
     return makeCard(t.coach, answer, "What was this head coach's most recent previous NBA team?");
   });
 }
 function buildLeagueTeamToCoachSinceDeck() {
-  return NBA_TEAMS.filter(t => t.coach && t.coachSince).map(t =>
-    makeCard(t.coach, 'Since ' + t.coachSince, "What year did this head coach join their current team?")
-  );
+  return NBA_TEAMS.filter(t => t.coach && t.coachSince).map(t => {
+    const answer = '<div class="back-conf-block">' +
+      '<span class="back-conf-label">Current Team</span>' +
+      '<span class="back-conf-val">' + t.name + '</span>' +
+      '<span class="back-conf-label">Head Coach Since</span>' +
+      '<span class="back-conf-val" style="font-size:28px;">' + t.coachSince + '</span>' +
+      '</div>';
+    return makeCard(t.coach, answer, "What year did this head coach join their current team?");
+  });
 }
 function buildLeagueTeamToCoachingStaffDeck() {
   return NBA_TEAMS.filter(t => TEAM_COACHING_STAFF[t.name]).map(t => {
     const staff = TEAM_COACHING_STAFF[t.name];
     const headLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Head Coach</span>';
-    const headRow = '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:600;">' + staff.head + '</span></div>';
+    const headRow = '<div class="back-career-entry"><span class="back-career-team" style="font-size:20px;font-weight:600;">' + staff.head + '</span></div>';
     const assistLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
     const assistRows = staff.assistants.map(a =>
-      '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + a + '</span></div>'
+      '<div class="back-career-entry"><span class="back-career-team" style="font-size:18px;font-weight:500;">' + a + '</span></div>'
     ).join('');
-    const answer = '<div class="back-career-block" style="gap:5px;">' + headLabel + headRow + assistLabel + assistRows + '</div>';
+    const answer = '<div class="back-career-block" style="gap:6px;">' + headLabel + headRow + assistLabel + assistRows + '</div>';
     return makeCard(t.name, answer, "Who is on this team's current coaching staff?");
   });
 }
