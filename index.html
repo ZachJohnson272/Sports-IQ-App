@@ -6881,7 +6881,10 @@ function buildPlayerToStarterBenchDeck(roster) {
   const teamName = 'Utah Jazz';
   return Array.from(roster).filter(p => p && p.name).map(p => {
     const status = starterNames.has(p.name) ? 'Starter' : 'Bench';
-    return makeCard(p.name + '\n' + teamName, status, 'Is this player a starter or bench player?');
+    const front = p.name +
+      '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-top:4px;text-transform:none;">' +
+      teamName + '</div>';
+    return makeCard(front, status, 'Is this player a starter or bench player?');
   });
 }
 function buildTeamToStartingPosDeck(roster) {
