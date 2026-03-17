@@ -7863,7 +7863,7 @@ function lpGoPanel(n, subtype) {
       // Reset cat grid
       const g = document.getElementById('lp-league-cat-grid');
       if (g) g.style.display = '';
-      ['players','random'].forEach(s => {
+      ['roster','coaches','players','history','random'].forEach(s => {
         const sec = document.getElementById('lp-lsec-' + s);
         if (sec) sec.classList.add('hidden');
       });
