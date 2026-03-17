@@ -4976,7 +4976,7 @@
     <!-- ── Panel 2: Content Type ── -->
     <div class="lp-panel hidden" id="lp-panel-2">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(1)">← Back</button>
+        <button class="lp-back-btn" onclick="_lpPath==='team' ? lpGoPanel(3,'team') : lpGoPanel(1)">← Back</button>
         <div class="lp-panel-title" id="lp-panel-2-title">What do you want to study?</div>
       </div>
 
@@ -5072,6 +5072,18 @@
             <div class="lp-cat-desc">College, past teams, draft info and history</div>
             <div class="lp-cat-meta">
               <span class="lp-cat-badge">4 difficulty tiers</span>
+            </div>
+          </div>
+          <div class="lp-cat-arrow">›</div>
+        </div>
+        <div class="lp-cat-card lp-cat-card--teams" id="lp-lcat-teams" onclick="lpSelectLeagueCat('teams')">
+          <div class="lp-cat-icon">🏟</div>
+          <div class="lp-cat-body">
+            <div class="lp-cat-title">Franchise identity</div>
+            <div class="lp-cat-desc">City, arena, colors, history, legacy</div>
+            <div class="lp-cat-meta">
+              <span class="lp-cat-badge">30 cards / mode</span>
+              <span class="lp-cat-modes-count">4 difficulty tiers</span>
             </div>
           </div>
           <div class="lp-cat-arrow">›</div>
@@ -5464,41 +5476,48 @@
     <!-- ── Panel 4: Team Mastery ── -->
     <div class="lp-panel hidden" id="lp-panel-3-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
-        <div class="lp-panel-title">Team Mastery — Choose a Team</div>
+        <button class="lp-back-btn" onclick="lpGoPanel(1)">← Back</button>
+        <div class="lp-panel-title">Team Mastery</div>
       </div>
-      <div class="lp-panel-sub">Select your team</div>
-      <div style="padding:0 4px;">
-        <div class="lp-mode-grid-label" style="margin-bottom:8px;">🏀 Western Conference</div>
-        <button class="team-row-btn active-team-btn" style="width:100%;margin-bottom:6px;" onclick="lpJazzSelected()">🏀 Utah Jazz <span class="active-tag">Active</span></button>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Dallas Mavericks <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Denver Nuggets <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Golden State Warriors <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Houston Rockets <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Los Angeles Lakers <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Memphis Grizzlies <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Minnesota Timberwolves <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Oklahoma City Thunder <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Phoenix Suns <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Portland Trail Blazers <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Sacramento Kings <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:16px;">San Antonio Spurs <span class="cs-tag">Soon</span></div>
-        <div class="lp-mode-grid-label" style="margin-bottom:8px;">🏀 Eastern Conference</div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Boston Celtics <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Chicago Bulls <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Cleveland Cavaliers <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Miami Heat <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Milwaukee Bucks <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">New York Knicks <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Philadelphia 76ers <span class="cs-tag">Soon</span></div>
-        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Toronto Raptors <span class="cs-tag">Soon</span></div>
+      <div class="lp-panel-sub">Choose your team</div>
+
+      <div style="margin-bottom:10px;">
+        <div class="lp-hub-section-label" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;padding-left:2px;">🌎 Western Conference</div>
+        <div class="lp-hub-card lp-hub-card--team" onclick="lpJazzSelected()" style="margin-bottom:8px;">
+          <div class="lp-hub-icon" style="background:rgba(91,184,212,0.18);">🏀</div>
+          <div class="lp-hub-info">
+            <div class="lp-hub-title">UTAH JAZZ</div>
+            <div class="lp-hub-desc">Salt Lake City · Northwest Division</div>
+          </div>
+          <div class="lp-entry-arrow">→</div>
+        </div>
+        <div class="lp-hub-card" style="margin-bottom:6px;opacity:0.45;cursor:default;">
+          <div class="lp-hub-icon">🏀</div>
+          <div class="lp-hub-info">
+            <div class="lp-hub-title" style="font-size:13px;">Dallas · Denver · Golden State · Houston</div>
+            <div class="lp-hub-desc">LA Clippers · Lakers · Memphis · Minnesota · OKC · Phoenix · Portland · Sacramento · San Antonio</div>
+          </div>
+          <span style="font-size:11px;background:rgba(107,63,160,0.25);color:rgba(180,144,255,0.8);border-radius:6px;padding:3px 8px;white-space:nowrap;">Soon</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="lp-hub-section-label" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;padding-left:2px;">🌍 Eastern Conference</div>
+        <div class="lp-hub-card" style="opacity:0.45;cursor:default;">
+          <div class="lp-hub-icon">🏀</div>
+          <div class="lp-hub-info">
+            <div class="lp-hub-title" style="font-size:13px;">Atlanta · Boston · Brooklyn · Charlotte · Chicago</div>
+            <div class="lp-hub-desc">Cleveland · Detroit · Indiana · Miami · Milwaukee · New York · Orlando · Philadelphia · Toronto · Washington</div>
+          </div>
+          <span style="font-size:11px;background:rgba(107,63,160,0.25);color:rgba(180,144,255,0.8);border-radius:6px;padding:3px 8px;white-space:nowrap;">Soon</span>
+        </div>
       </div>
     </div>
 
     <!-- ── Panel 4: Team Mastery ── -->
-    <div class="lp-panel hidden" id="lp-panel-4-team">
+    id="lp-panel-4-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="document.getElementById('lp-panel-4-team').classList.contains('lp-panel--cat-open') ? lpCloseCat('team') : lpGoPanel(3,'team')">← Back</button>
+        <button class="lp-back-btn" onclick="document.getElementById('lp-panel-4-team').classList.contains('lp-panel--cat-open') ? lpCloseCat('team') : lpGoPanel(2)">← Back</button>
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz</div>
       </div>
 
@@ -5589,6 +5608,26 @@
             <span class="lp-prog-tier lp-prog-tier--starter">Starter</span>
             <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
             <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
+          </div>
+        </div>
+
+        <div class="lp-prog-card lp-prog-card--teaminfo" id="lp-tcat-teaminfo" onclick="lpSelectTeamCat('teaminfo')">
+          <div class="lp-prog-top">
+            <div class="lp-prog-icon">🏟</div>
+            <div class="lp-prog-body">
+              <div class="lp-prog-title">Franchise identity</div>
+              <div class="lp-prog-desc">Arena, conference, division, and team branding</div>
+            </div>
+          </div>
+          <div class="lp-prog-bar-row">
+            <div class="lp-prog-bar-wrap">
+              <div class="lp-prog-bar-fill lp-prog-bar--teaminfo" style="width:0%" id="lp-tprog-teaminfo"></div>
+            </div>
+            <span class="lp-prog-fraction" id="lp-tprog-teaminfo-frac">0 / 3 modes</span>
+          </div>
+          <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
+            <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
           </div>
         </div>
 
@@ -5852,6 +5891,104 @@
               <div class="lp-mcard-title">Player → Draft Year & Pick</div>
               <div class="lp-mcard-count">~70 cards</div>
               <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--unlock">Unlock at HoF</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Teams category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-lsec-teams">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title">🏟 Franchise identity</span>
+        </div>
+        <div class="lp-tier-tabs">
+          <div class="lp-tier-tab active" id="lp-ltab-t-rookie" onclick="lpSelectCatTier('lp-lsec-teams','t-rookie')">
+            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
+            <span class="lp-tier-tab-label">Rookie</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-t-starter" onclick="lpSelectCatTier('lp-lsec-teams','t-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
+        </div>
+        </div>
+        <div class="lp-tier-panel" id="lp-lpanel-t-rookie">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏟 Rookie</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_conf_division')">
+              <div class="lp-mcard-icon">🗺️</div>
+              <div class="lp-mcard-title">Team → Conference & Division</div>
+              <div class="lp-mcard-count">30 cards</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-t-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏟 Starter</div>
+            <div class="lp-mcard lp-mcard--locked">
+              <div class="lp-mcard-icon">🏟</div>
+              <div class="lp-mcard-title">Team → Arena</div>
+              <div class="lp-mcard-count">30 cards</div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            </div>
+            <div class="lp-mcard lp-mcard--locked">
+              <div class="lp-mcard-icon">🐻</div>
+              <div class="lp-mcard-title">Team → Mascot</div>
+              <div class="lp-mcard-count">30 cards</div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Team Info category sub-section ── -->
+      <div class="lp-cat-section hidden" id="lp-tsec-teaminfo">
+        <div class="lp-cat-toolbar">
+        <div class="lp-cat-section-header">
+          <span class="lp-cat-section-title">🏟 Franchise identity</span>
+        </div>
+        <div class="lp-tier-tabs">
+          <div class="lp-tier-tab active" id="lp-ttab-ti-rookie" onclick="lpSelectCatTier('lp-tsec-teaminfo','ti-rookie')">
+            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
+            <span class="lp-tier-tab-label">Rookie</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ttab-ti-allstar" onclick="lpSelectCatTier('lp-tsec-teaminfo','ti-allstar')">
+            <span class="lp-tier-tab-dot lp-diff-allstar"></span>
+            <span class="lp-tier-tab-label">All-Star</span>
+          </div>
+        </div>
+        </div>
+        <div class="lp-tier-panel" id="lp-tpanel-ti-rookie">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏟 Rookie</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_conf_division')">
+              <div class="lp-mcard-icon">🗺️</div>
+              <div class="lp-mcard-title">Team → Conference & Division</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-ti-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏟 All-Star</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_arena')">
+              <div class="lp-mcard-icon">🏟</div>
+              <div class="lp-mcard-title">Team → Arena</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_mascot')">
+              <div class="lp-mcard-icon">🐻</div>
+              <div class="lp-mcard-title">Team → Mascot</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
           </div>
         </div>
@@ -8395,7 +8532,7 @@ function lpGoPanel(n, subtype) {
       // Reset cat grid
       const g = document.getElementById('lp-league-cat-grid');
       if (g) g.style.display = '';
-      ['roster','coaches','players','history','random'].forEach(s => {
+      ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
         const sec = document.getElementById('lp-lsec-' + s);
         if (sec) sec.classList.add('hidden');
       });
@@ -8413,7 +8550,7 @@ function lpGoPanel(n, subtype) {
       const rosterChevron2 = document.getElementById('lp-roster-chevron');
       if (rosterBody2) rosterBody2.classList.add('hidden');
       if (rosterChevron2) rosterChevron2.textContent = '›';
-      ['roster','coaches','players','history','random'].forEach(s => {
+      ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
         const sec = document.getElementById('lp-tsec-' + s);
         if (sec) sec.classList.add('hidden');
       });
@@ -8436,7 +8573,7 @@ function lpGoPanel(n, subtype) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['roster','coaches','players','history','random'].forEach(s => {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8453,10 +8590,8 @@ function lpEnterPath(path) {
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
   if (path === 'team') {
-    // Team Mastery: show mode picker first
-    const t = document.getElementById('lp-panel-2-title');
-    if (t) t.textContent = 'Team Mastery — Choose a Mode';
-    lpGoPanel(2);
+    // Team Mastery: show team picker first
+    lpGoPanel(3, 'team');
   } else {
     // League Knowledge: pick content type first
     const t = document.getElementById('lp-panel-2-title');
@@ -8471,10 +8606,8 @@ function lpSwitchPath(path) {
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
   if (path === 'team') {
-    // Switch to Team Mastery: show mode picker first
-    const t2 = document.getElementById('lp-panel-2-title');
-    if (t2) t2.textContent = 'Team Mastery — Choose a Mode';
-    lpGoPanel(2);
+    // Switch to Team Mastery: show team picker first
+    lpGoPanel(3, 'team');
   } else {
     // Switch to League Knowledge: go to content picker
     const t = document.getElementById('lp-panel-2-title');
@@ -8482,7 +8615,7 @@ function lpSwitchPath(path) {
     // Reset cat state
     const g = document.getElementById('lp-league-cat-grid');
     if (g) g.style.display = '';
-    ['roster','coaches','players','history','random'].forEach(s => {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8496,19 +8629,21 @@ function lpSelectContent(contentType) {
     if (_lpPath === 'league') {
       lpGoPanel(3, 'league');
     } else {
-      // Team Mastery: show team picker
-      lpGoPanel(3, 'team');
+      // Team Mastery: team already selected, go to categories
+      lpGoPanel(4);
+      lpUpdateJazzMastery();
     }
   }
   // Quizzes and Games are coming soon — no action
 }
 
 function lpJazzSelected() {
-  // Utah Jazz selected — go to Jazz Team Mastery categories
+  // Utah Jazz selected — set team, then show mode picker
   const title = document.getElementById('lp-panel-4-title');
   if (title) title.textContent = 'Utah Jazz';
-  lpGoPanel(4);
-  lpUpdateJazzMastery();
+  const t = document.getElementById('lp-panel-2-title');
+  if (t) t.textContent = 'Team Mastery — Choose a Mode';
+  lpGoPanel(2);
 }
 function lpSelectTeamNew(teamId, teamName, leagueId) {
   _lpTeam = teamId;
@@ -8551,7 +8686,7 @@ function lpLaunchMode(path, mode) {
   // Capture which panel launched this session so we can return correctly
   if (path === 'league') {
     let leagueCat = null;
-    ['roster','coaches','players','history','random'].forEach(function(s) {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec && !sec.classList.contains('hidden')) leagueCat = s;
     });
@@ -8567,7 +8702,7 @@ function lpLaunchMode(path, mode) {
     setSessionReturnTarget({ path: 'league', leagueCat: leagueCat, tierTabId: tierTabId });
   } else if (path === 'team') {
     let teamCat = null;
-    ['roster','coaches','players','history','random'].forEach(function(s) {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec && !sec.classList.contains('hidden')) teamCat = s;
     });
@@ -9153,7 +9288,7 @@ function lpSelectLeagueCat(cat) {
   if (cat === 'random') {
     // Show random section, hide grid
     const grid = document.getElementById('lp-league-cat-grid');
-    const sections = ['roster','coaches','players','history','random'];
+    const sections = ['roster','coaches','players','teaminfo','history','random'];
     if (grid) grid.style.display = 'none';
     sections.forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
@@ -9166,7 +9301,7 @@ function lpSelectLeagueCat(cat) {
   }
   // Hide grid, show the right section
   const grid = document.getElementById('lp-league-cat-grid');
-  const sections = ['roster','coaches','players','history','random'];
+  const sections = ['roster','coaches','players','teaminfo','history','random'];
   if (grid) grid.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-lsec-' + s);
@@ -9190,7 +9325,7 @@ function lpCloseCat(scope) {
     if (leaguePanel) leaguePanel.classList.remove('lp-panel--cat-open');
     const grid = document.getElementById('lp-league-cat-grid');
     if (grid) grid.style.display = '';
-    ['roster','coaches','players','history','random'].forEach(s => {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -9210,7 +9345,7 @@ function lpCloseCat(scope) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['roster','coaches','players','history','random'].forEach(s => {
+    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -9223,7 +9358,7 @@ function lpSelectTeamCat(cat) {
   if (teamPanel) teamPanel.classList.add('lp-panel--cat-open');
 
   const grid = document.getElementById('lp-team-cat-grid');
-  const sections = ['roster','coaches','players','history','random'];
+  const sections = ['roster','coaches','players','teaminfo','history','random'];
   if (grid) grid.style.display = 'none';
   // Hide team overview sections — this is now a focused mode page
   const infoPanel = document.getElementById('lp-team-info-panel');
