@@ -5153,9 +5153,9 @@
         <div class="lp-tier-panel hidden" id="lp-lpanel-ros-starter">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👥 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_team')">
-              <div class="lp-mcard-icon">🏀</div>
-              <div class="lp-mcard-title">Player → Team</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_player_position')">
+              <div class="lp-mcard-icon">📍</div>
+              <div class="lp-mcard-title">Player → Position</div>
               <div class="lp-mcard-count">~70 cards</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5165,10 +5165,10 @@
         <div class="lp-tier-panel hidden" id="lp-lpanel-ros-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👥 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_starting_pos')">
-              <div class="lp-mcard-icon">⭐</div>
-              <div class="lp-mcard-title">Team → Starting Position</div>
-              <div class="lp-mcard-count">5 cards</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_starting_5')">
+              <div class="lp-mcard-icon">📋</div>
+              <div class="lp-mcard-title">Team → Starting 5</div>
+              <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -5842,10 +5842,10 @@
         <div class="lp-tier-panel hidden" id="lp-tpanel-tros-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">👥 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_starting_pos')">
-              <div class="lp-mcard-icon">⭐</div>
-              <div class="lp-mcard-title">Team → Starting Position</div>
-              <div class="lp-mcard-count">5 cards</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_starting_5')">
+              <div class="lp-mcard-icon">📋</div>
+              <div class="lp-mcard-title">Team → Starting 5</div>
+              <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
@@ -6865,6 +6865,24 @@ function buildLeagueTeamToStartingPosDeck() {
     makeCard('Utah Jazz — Starting ' + slot, playerName, 'Who is the ' + slot + ' starter for this team?')
   );
 }
+function buildTeamToStarting5Deck(team) {
+  const posOrder = ['PG','SG','SF','PF','C'];
+  const rows = posOrder.map(slot => {
+    const name = JAZZ_STARTING_LINEUP[slot] || '—';
+    return '<div class="back-career-entry">' +
+      '<span class="back-career-team" style="font-size:15px;font-weight:500;">' +
+        '<span style="color:rgba(180,144,255,0.8);font-size:12px;letter-spacing:1px;margin-right:8px;">' + slot + '</span>' +
+        name +
+      '</span></div>';
+  }).join('');
+  const front = team.name +
+    '<div style="font-family:sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-top:4px;">Starting 5</div>';
+  const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
+  return [makeCard(front, answer, "Who are the starters for this team?")];
+}
+function buildLeagueTeamToStarting5Deck() {
+  return buildTeamToStarting5Deck({ name: 'Utah Jazz' });
+}
 function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
 function buildTeamToCoachPrevTeamDeck(team) {
   const prev = team.coachPrevTeam;
@@ -7077,6 +7095,7 @@ const MODE_BUILDERS = {
   player_starter_bench:   () => buildPlayerToStarterBenchDeck(TEST_ROSTER),
   player_years_on_team:   () => buildPlayerToYearsOnTeamDeck(TEST_ROSTER),
   team_starting_pos:      () => buildTeamToStartingPosDeck(TEST_TEAM.name),
+  team_starting_5:        () => buildTeamToStarting5Deck(TEST_TEAM),
   team_coaching_staff:    () => buildTeamToCoachingStaffDeck(TEST_TEAM),
   player_draft_year_pick: () => buildPlayerToDraftYearPickDeck(TEST_ROSTER),
   player_draft_team:      () => buildPlayerToDraftTeamDeck(TEST_ROSTER),
@@ -7124,6 +7143,7 @@ const MODE_BUILDERS = {
   league_team_coaching_staff: () => buildLeagueTeamToCoachingStaffDeck(),
   league_team_roster:         () => buildLeagueTeamToRosterDeck(),
   league_team_starting_pos:   () => buildLeagueTeamToStartingPosDeck(),
+  league_team_starting_5:     () => buildLeagueTeamToStarting5Deck(),
   league_player_starter_bench: () => buildPlayerToStarterBenchDeck(ROSTER),
 };
 
@@ -7140,6 +7160,7 @@ const SESSION_MODE_TITLES = {
   player_starter_bench:   'Player → Starter/Bench',
   player_years_on_team:   'Player → Years on Team',
   team_starting_pos:      'Team → Starting Position',
+  team_starting_5:        'Team → Starting 5',
   team_coaching_staff:    'Team → Coaching Staff',
   player_draft_year_pick: 'Player → Draft Year & Pick',
   player_draft_team:      'Player → Draft Team',
@@ -7184,6 +7205,7 @@ const SESSION_MODE_TITLES = {
   league_team_coaching_staff: 'Team → Coaching Staff',
   league_team_roster:         'Team → Roster',
   league_team_starting_pos:   'Team → Starting Position',
+  league_team_starting_5:     'Team → Starting 5',
   league_player_starter_bench: 'Player → Starter/Bench',
 };
 
