@@ -4976,7 +4976,7 @@
     <!-- ── Panel 2: Content Type ── -->
     <div class="lp-panel hidden" id="lp-panel-2">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="_lpPath==='team' ? lpGoPanel(3,'team') : lpGoPanel(1)">← Back</button>
+        <button class="lp-back-btn" onclick="lpGoPanel(1)">← Back</button>
         <div class="lp-panel-title" id="lp-panel-2-title">What do you want to study?</div>
       </div>
 
@@ -5465,14 +5465,40 @@
     <div class="lp-panel hidden" id="lp-panel-3-team">
       <div class="lp-panel-header">
         <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
-        <div class="lp-panel-title">Choose a Team</div>
+        <div class="lp-panel-title">Team Mastery — Choose a Team</div>
+      </div>
+      <div class="lp-panel-sub">Select your team</div>
+      <div style="padding:0 4px;">
+        <div class="lp-mode-grid-label" style="margin-bottom:8px;">🏀 Western Conference</div>
+        <button class="team-row-btn active-team-btn" style="width:100%;margin-bottom:6px;" onclick="lpJazzSelected()">🏀 Utah Jazz <span class="active-tag">Active</span></button>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Dallas Mavericks <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Denver Nuggets <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Golden State Warriors <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Houston Rockets <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Los Angeles Lakers <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Memphis Grizzlies <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Minnesota Timberwolves <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Oklahoma City Thunder <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Phoenix Suns <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Portland Trail Blazers <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Sacramento Kings <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:16px;">San Antonio Spurs <span class="cs-tag">Soon</span></div>
+        <div class="lp-mode-grid-label" style="margin-bottom:8px;">🏀 Eastern Conference</div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Boston Celtics <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Chicago Bulls <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Cleveland Cavaliers <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Miami Heat <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Milwaukee Bucks <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">New York Knicks <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Philadelphia 76ers <span class="cs-tag">Soon</span></div>
+        <div class="team-row-btn coming-soon-btn" style="width:100%;margin-bottom:4px;">Toronto Raptors <span class="cs-tag">Soon</span></div>
       </div>
     </div>
 
     <!-- ── Panel 4: Team Mastery ── -->
     <div class="lp-panel hidden" id="lp-panel-4-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="document.getElementById('lp-panel-4-team').classList.contains('lp-panel--cat-open') ? lpCloseCat('team') : lpGoPanel(2)">← Back</button>
+        <button class="lp-back-btn" onclick="document.getElementById('lp-panel-4-team').classList.contains('lp-panel--cat-open') ? lpCloseCat('team') : lpGoPanel(3,'team')">← Back</button>
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz</div>
       </div>
 
@@ -8391,7 +8417,7 @@ function lpGoPanel(n, subtype) {
         const sec = document.getElementById('lp-tsec-' + s);
         if (sec) sec.classList.add('hidden');
       });
-      lpShowPanel('lp-panel-4-team');
+      lpShowPanel('lp-panel-3-team');
     }
     return;
   }
@@ -8427,9 +8453,10 @@ function lpEnterPath(path) {
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
   if (path === 'team') {
-    // Team Mastery: pick team first
-    lpGoPanel(3, 'team');
-    lpUpdateJazzMastery();
+    // Team Mastery: show mode picker first
+    const t = document.getElementById('lp-panel-2-title');
+    if (t) t.textContent = 'Team Mastery — Choose a Mode';
+    lpGoPanel(2);
   } else {
     // League Knowledge: pick content type first
     const t = document.getElementById('lp-panel-2-title');
@@ -8444,9 +8471,10 @@ function lpSwitchPath(path) {
   document.getElementById('lp-toggle-league').classList.toggle('active', path === 'league');
   document.getElementById('lp-toggle-team').classList.toggle('active', path === 'team');
   if (path === 'team') {
-    // Switch to Team Mastery: go to team picker first
-    lpGoPanel(3, 'team');
-    lpUpdateJazzMastery();
+    // Switch to Team Mastery: show mode picker first
+    const t2 = document.getElementById('lp-panel-2-title');
+    if (t2) t2.textContent = 'Team Mastery — Choose a Mode';
+    lpGoPanel(2);
   } else {
     // Switch to League Knowledge: go to content picker
     const t = document.getElementById('lp-panel-2-title');
@@ -8468,14 +8496,20 @@ function lpSelectContent(contentType) {
     if (_lpPath === 'league') {
       lpGoPanel(3, 'league');
     } else {
-      // Team Mastery: team already chosen, go straight to difficulty panel
-      lpGoPanel(4);
-      lpUpdateJazzMastery();
+      // Team Mastery: show team picker
+      lpGoPanel(3, 'team');
     }
   }
   // Quizzes and Games are coming soon — no action
 }
 
+function lpJazzSelected() {
+  // Utah Jazz selected — go to Jazz Team Mastery categories
+  const title = document.getElementById('lp-panel-4-title');
+  if (title) title.textContent = 'Utah Jazz';
+  lpGoPanel(4);
+  lpUpdateJazzMastery();
+}
 function lpSelectTeamNew(teamId, teamName, leagueId) {
   _lpTeam = teamId;
   window._lpTeamName   = teamName;
