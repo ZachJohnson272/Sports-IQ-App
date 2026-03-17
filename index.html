@@ -5472,13 +5472,8 @@
     <!-- ── Panel 4: Team Mastery ── -->
     <div class="lp-panel hidden" id="lp-panel-4-team">
       <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(3,'team')">← Back</button>
+        <button class="lp-back-btn" onclick="document.getElementById('lp-panel-4-team').classList.contains('lp-panel--cat-open') ? lpCloseCat('team') : lpGoPanel(2)">← Back</button>
         <div class="lp-panel-title" id="lp-panel-4-title">Utah Jazz</div>
-      </div>
-
-      <div class="lp-panel-header">
-        <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
-        <div class="lp-panel-title" id="lp-panel-3-title">Utah Jazz</div>
       </div>
 
       <!-- Team header snapshot row -->
@@ -8380,7 +8375,24 @@ function lpGoPanel(n, subtype) {
       });
       lpShowPanel('lp-panel-3-league');
     }
-    else lpShowPanel('lp-panel-3-team');
+    else {
+      // Team Mastery: only one team (Jazz), skip team-picker and go straight to category panel
+      const g2 = document.getElementById('lp-team-cat-grid');
+      if (g2) g2.style.display = '';
+      const teamHeaderWrap2 = document.querySelector('.lp-team-header-wrap');
+      const rosterDrop2 = document.getElementById('lp-roster-drop');
+      if (teamHeaderWrap2) teamHeaderWrap2.style.display = '';
+      if (rosterDrop2) rosterDrop2.style.display = '';
+      const rosterBody2 = document.getElementById('lp-roster-body');
+      const rosterChevron2 = document.getElementById('lp-roster-chevron');
+      if (rosterBody2) rosterBody2.classList.add('hidden');
+      if (rosterChevron2) rosterChevron2.textContent = '›';
+      ['roster','coaches','players','history','random'].forEach(s => {
+        const sec = document.getElementById('lp-tsec-' + s);
+        if (sec) sec.classList.add('hidden');
+      });
+      lpShowPanel('lp-panel-4-team');
+    }
     return;
   }
   if (n === 4) {
