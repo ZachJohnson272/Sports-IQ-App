@@ -488,7 +488,7 @@
     margin-top: 4px;
     letter-spacing: -0.3px;
   }
-  /* Records & Legacy centered stat/name card */
+  /* Franchise Records centered stat/name card */
   .back-legacy-block {
     display: flex;
     flex-direction: column;
@@ -5068,11 +5068,11 @@
         <div class="lp-cat-card lp-cat-card--history" id="lp-lcat-history" onclick="lpSelectLeagueCat('history')">
           <div class="lp-cat-icon">🏛</div>
           <div class="lp-cat-body">
-            <div class="lp-cat-title">Records & legacy</div>
-            <div class="lp-cat-desc">Championships, franchise legends, records, and retired numbers</div>
+            <div class="lp-cat-title">Franchise Records</div>
+            <div class="lp-cat-desc">All-time statistical leaders across every franchise</div>
             <div class="lp-cat-meta">
               <span class="lp-cat-badge">30 cards / mode</span>
-              <span class="lp-cat-modes-count">2 difficulty tiers</span>
+              <span class="lp-cat-modes-count">4 difficulty tiers</span>
             </div>
           </div>
           <div class="lp-cat-arrow">›</div>
@@ -5318,10 +5318,18 @@
       <div class="lp-cat-section hidden" id="lp-lsec-history">
         <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title">🏛 Records & legacy</span>
+          <span class="lp-cat-section-title">🏛 Franchise Records</span>
         </div>
         <div class="lp-tier-tabs">
-          <div class="lp-tier-tab active" id="lp-ltab-h-allstar" onclick="lpSelectCatTier('lp-lsec-history','h-allstar')">
+          <div class="lp-tier-tab active" id="lp-ltab-h-rookie" onclick="lpSelectCatTier('lp-lsec-history','h-rookie')">
+            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
+            <span class="lp-tier-tab-label">Rookie</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-h-starter" onclick="lpSelectCatTier('lp-lsec-history','h-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ltab-h-allstar" onclick="lpSelectCatTier('lp-lsec-history','h-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
@@ -5331,26 +5339,36 @@
           </div>
         </div>
         </div>
-        <div class="lp-tier-panel" id="lp-lpanel-h-allstar">
+        <div class="lp-tier-panel" id="lp-lpanel-h-rookie">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏛 Rookie</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_all_time_defensive_leader')">
+              <div class="lp-mcard-icon">🛡️</div>
+              <div class="lp-mcard-title">Team → All-Time Defensive Leader</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-h-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏛 Starter</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_all_time_rebounds_leader')">
+              <div class="lp-mcard-icon">💪</div>
+              <div class="lp-mcard-title">Team → All-Time Rebounds Leader</div>
+              <div class="lp-mcard-count">1 card</div>
+              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
+              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-lpanel-h-allstar">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_rookies_of_year')">
-              <div class="lp-mcard-icon">🎖️</div>
-              <div class="lp-mcard-title">Team → Rookies of the Year</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_champs')">
-              <div class="lp-mcard-icon">🏆</div>
-              <div class="lp-mcard-title">Team → Championships</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_last_title')">
-              <div class="lp-mcard-icon">📅</div>
-              <div class="lp-mcard-title">Team → Last Title Year</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_all_time_assists')">
+              <div class="lp-mcard-icon">🎯</div>
+              <div class="lp-mcard-title">Team → All-Time Assists Leader</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5360,30 +5378,9 @@
         <div class="lp-tier-panel hidden" id="lp-lpanel-h-hof">
           <div class="lp-mode-grid">
             <div class="lp-mode-grid-label">🏛 Hall of Fame</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_franchise_goat')">
-              <div class="lp-mcard-icon">🐐</div>
-              <div class="lp-mcard-title">Team → Franchise GOAT</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_retired_jerseys')">
-              <div class="lp-mcard-icon">#️⃣</div>
-              <div class="lp-mcard-title">Team → Retired Jerseys</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
             <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_all_time_scorer')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">Team → All-Time Scorer</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_all_time_assists')">
-              <div class="lp-mcard-icon">🎯</div>
-              <div class="lp-mcard-title">Team → All-Time Assists</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5663,17 +5660,19 @@
           <div class="lp-prog-top">
             <div class="lp-prog-icon">🏛</div>
             <div class="lp-prog-body">
-              <div class="lp-prog-title">Records & legacy</div>
-              <div class="lp-prog-desc">Championships, franchise legends, records, and retired numbers</div>
+              <div class="lp-prog-title">Franchise Records</div>
+              <div class="lp-prog-desc">All-time statistical leaders across franchise history</div>
             </div>
           </div>
           <div class="lp-prog-bar-row">
             <div class="lp-prog-bar-wrap">
               <div class="lp-prog-bar-fill lp-prog-bar--history" style="width:0%" id="lp-tprog-history"></div>
             </div>
-            <span class="lp-prog-fraction" id="lp-tprog-history-frac">0 / 7 modes</span>
+            <span class="lp-prog-fraction" id="lp-tprog-history-frac">0 / 4 modes</span>
           </div>
           <div class="lp-prog-tiers">
+            <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
+            <span class="lp-prog-tier lp-prog-tier--starter">Starter</span>
             <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
             <span class="lp-prog-tier lp-prog-tier--hof">Hall of Fame</span>
           </div>
@@ -5930,10 +5929,18 @@
       <div class="lp-cat-section hidden" id="lp-tsec-history">
         <div class="lp-cat-toolbar">
         <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title">🏛 Records & legacy</span>
+          <span class="lp-cat-section-title">🏛 Franchise Records</span>
         </div>
         <div class="lp-tier-tabs">
-          <div class="lp-tier-tab active" id="lp-ttab-th-allstar" onclick="lpSelectCatTier('lp-tsec-history','th-allstar')">
+          <div class="lp-tier-tab active" id="lp-ttab-th-rookie" onclick="lpSelectCatTier('lp-tsec-history','th-rookie')">
+            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
+            <span class="lp-tier-tab-label">Rookie</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ttab-th-starter" onclick="lpSelectCatTier('lp-tsec-history','th-starter')">
+            <span class="lp-tier-tab-dot lp-diff-starter"></span>
+            <span class="lp-tier-tab-label">Starter</span>
+          </div>
+          <div class="lp-tier-tab" id="lp-ttab-th-allstar" onclick="lpSelectCatTier('lp-tsec-history','th-allstar')">
             <span class="lp-tier-tab-dot lp-diff-allstar"></span>
             <span class="lp-tier-tab-label">All-Star</span>
           </div>
@@ -5943,26 +5950,36 @@
           </div>
         </div>
         </div>
-        <div class="lp-tier-panel" id="lp-tpanel-th-allstar">
+        <div class="lp-tier-panel" id="lp-tpanel-th-rookie">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏛 Franchise</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_rookies_of_year')">
-              <div class="lp-mcard-icon">🎖️</div>
-              <div class="lp-mcard-title">Team → Rookies of the Year</div>
+            <div class="lp-mode-grid-label">🏛 Rookie</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_defensive_leader')">
+              <div class="lp-mcard-icon">🛡️</div>
+              <div class="lp-mcard-title">All-Time Defensive Leader</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_champs')">
-              <div class="lp-mcard-icon">🏆</div>
-              <div class="lp-mcard-title">Championships Won</div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-th-starter">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏛 Starter</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_rebounds_leader')">
+              <div class="lp-mcard-icon">💪</div>
+              <div class="lp-mcard-title">All-Time Rebounds Leader</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
             </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_last_title')">
-              <div class="lp-mcard-icon">📅</div>
-              <div class="lp-mcard-title">Last Title Year</div>
+          </div>
+        </div>
+        <div class="lp-tier-panel hidden" id="lp-tpanel-th-allstar">
+          <div class="lp-mode-grid">
+            <div class="lp-mode-grid-label">🏛 All-Star</div>
+            <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_assists')">
+              <div class="lp-mcard-icon">🎯</div>
+              <div class="lp-mcard-title">All-Time Assists Leader</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -5971,31 +5988,10 @@
         </div>
         <div class="lp-tier-panel hidden" id="lp-tpanel-th-hof">
           <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏛 Franchise History</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_franchise_goat')">
-              <div class="lp-mcard-icon">🐐</div>
-              <div class="lp-mcard-title">Franchise GOAT</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_retired_jerseys')">
-              <div class="lp-mcard-icon">#️⃣</div>
-              <div class="lp-mcard-title">Retired Jerseys</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
+            <div class="lp-mode-grid-label">🏛 Hall of Fame</div>
             <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_scorer')">
               <div class="lp-mcard-icon">🏀</div>
               <div class="lp-mcard-title">All-Time Scorer</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_assists')">
-              <div class="lp-mcard-icon">🎯</div>
-              <div class="lp-mcard-title">All-Time Assists</div>
               <div class="lp-mcard-count">1 card</div>
               <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
               <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
@@ -6761,24 +6757,12 @@ function buildTeamToCoachSinceDeck(team) {
   return [makeCard(team.coach || team.name, answer, "What year did this head coach join this team?")];
 }
 
-// ── Records & Legacy data ───────────────────────────────────────────────────
-const TEAM_FRANCHISE_GOAT = {
-  "Utah Jazz": "Karl Malone"
+// ── Franchise Records data ───────────────────────────────────────────────────
+const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
+  "Utah Jazz": { name: "Mark Eaton", stat: "3,064 blk" }
 };
-const TEAM_RETIRED_JERSEYS = {
-  "Utah Jazz": [
-    "1 — Frank Layden",
-    "4 — Adrian Dantley",
-    "7 — Pete Maravich",
-    "9 — Larry Miller",
-    "11 — Rod Hundley",
-    "12 — John Stockton",
-    "14 — Jeff Hornacek",
-    "32 — Karl Malone",
-    "35 — Darrell Griffith",
-    "53 — Mark Eaton",
-    "122 — Jerry Sloan"
-  ]
+const TEAM_ALL_TIME_REBOUNDS_LEADER = {
+  "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" }
@@ -6797,19 +6781,15 @@ function _legacyHTML(mainText, subLabel, statText) {
 }
 
 // ── Team Mastery builders ───────────────────────────────────────────────────
-function buildTeamToFranchiseGoatDeck(team) {
-  const goat = TEAM_FRANCHISE_GOAT[team.name];
-  if (!goat) return [];
-  return [makeCard(team.name, _legacyHTML(goat, 'Franchise GOAT', null), "Who is the franchise GOAT for this team?")];
+function buildTeamToAllTimeDefensiveLeaderDeck(team) {
+  const d = TEAM_ALL_TIME_DEFENSIVE_LEADER[team.name];
+  if (!d) return [];
+  return [makeCard(team.name, _legacyHTML(d.name, 'All-Time Defensive Leader', d.stat), "Who is this team's all-time defensive leader?")];
 }
-function buildTeamToRetiredJerseysDeck(team) {
-  const jerseys = TEAM_RETIRED_JERSEYS[team.name];
-  if (!jerseys || !jerseys.length) return [];
-  const rows = jerseys.map(j =>
-    '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + j + '</span></div>'
-  ).join('');
-  const answer = '<div class="back-career-block" style="gap:5px;">' + rows + '</div>';
-  return [makeCard(team.name, answer, "Which jersey numbers has this team retired?")];
+function buildTeamToAllTimeReboundsLeaderDeck(team) {
+  const d = TEAM_ALL_TIME_REBOUNDS_LEADER[team.name];
+  if (!d) return [];
+  return [makeCard(team.name, _legacyHTML(d.name, 'All-Time Rebounds', d.stat), "Who is this team's all-time rebounds leader?")];
 }
 function buildTeamToAllTimeScorerDeck(team) {
   const d = TEAM_ALL_TIME_SCORER[team.name];
@@ -6823,19 +6803,16 @@ function buildTeamToAllTimeAssistsDeck(team) {
 }
 
 // ── League Knowledge builders (Jazz-only for now) ──────────────────────────
-function buildLeagueTeamToFranchiseGoatDeck() {
-  return Object.keys(TEAM_FRANCHISE_GOAT).map(name =>
-    makeCard(name, _legacyHTML(TEAM_FRANCHISE_GOAT[name], 'Franchise GOAT', null), "Who is the franchise GOAT for this team?")
-  );
+function buildLeagueTeamToAllTimeDefensiveLeaderDeck() {
+  return Object.keys(TEAM_ALL_TIME_DEFENSIVE_LEADER).map(name => {
+    const d = TEAM_ALL_TIME_DEFENSIVE_LEADER[name];
+    return makeCard(name, _legacyHTML(d.name, 'All-Time Defensive Leader', d.stat), "Who is this team's all-time defensive leader?");
+  });
 }
-function buildLeagueTeamToRetiredJerseysDeck() {
-  return Object.keys(TEAM_RETIRED_JERSEYS).map(name => {
-    const jerseys = TEAM_RETIRED_JERSEYS[name];
-    const rows = jerseys.map(j =>
-      '<div class="back-career-entry"><span class="back-career-team" style="font-size:14px;font-weight:500;">' + j + '</span></div>'
-    ).join('');
-    const answer = '<div class="back-career-block" style="gap:5px;">' + rows + '</div>';
-    return makeCard(name, answer, "Which jersey numbers has this team retired?");
+function buildLeagueTeamToAllTimeReboundsLeaderDeck() {
+  return Object.keys(TEAM_ALL_TIME_REBOUNDS_LEADER).map(name => {
+    const d = TEAM_ALL_TIME_REBOUNDS_LEADER[name];
+    return makeCard(name, _legacyHTML(d.name, 'All-Time Rebounds', d.stat), "Who is this team's all-time rebounds leader?");
   });
 }
 function buildLeagueTeamToAllTimeScorerDeck() {
@@ -6946,10 +6923,10 @@ const MODE_BUILDERS = {
   team_champs:            () => buildTeamToChampsDeck(TEST_TEAM),
   team_last_title:        () => buildTeamToLastTitleDeck(TEST_TEAM),
   team_rookies_of_year:   () => buildTeamToRookiesOfYearDeck(TEST_TEAM),
-  team_franchise_goat:    () => buildTeamToFranchiseGoatDeck(TEST_TEAM),
-  team_retired_jerseys:   () => buildTeamToRetiredJerseysDeck(TEST_TEAM),
-  team_all_time_scorer:   () => buildTeamToAllTimeScorerDeck(TEST_TEAM),
-  team_all_time_assists:  () => buildTeamToAllTimeAssistsDeck(TEST_TEAM),
+  team_all_time_defensive_leader: () => buildTeamToAllTimeDefensiveLeaderDeck(TEST_TEAM),
+  team_all_time_rebounds_leader:  () => buildTeamToAllTimeReboundsLeaderDeck(TEST_TEAM),
+  team_all_time_scorer:           () => buildTeamToAllTimeScorerDeck(TEST_TEAM),
+  team_all_time_assists:          () => buildTeamToAllTimeAssistsDeck(TEST_TEAM),
   team_coach:             () => buildTeamToCoachDeck(TEST_TEAM),
   team_coach_prev_team:   () => buildTeamToCoachPrevTeamDeck(TEST_TEAM),
   team_coach_since:       () => buildTeamToCoachSinceDeck(TEST_TEAM),
@@ -6971,10 +6948,10 @@ const MODE_BUILDERS = {
   league_team_champs:             () => buildLeagueTeamToChampsDeck(),
   league_team_last_title:         () => buildLeagueTeamToLastTitleDeck(),
   league_team_rookies_of_year:   () => buildLeagueTeamToRookiesOfYearDeck(),
-  league_team_franchise_goat:    () => buildLeagueTeamToFranchiseGoatDeck(),
-  league_team_retired_jerseys:   () => buildLeagueTeamToRetiredJerseysDeck(),
-  league_team_all_time_scorer:   () => buildLeagueTeamToAllTimeScorerDeck(),
-  league_team_all_time_assists:  () => buildLeagueTeamToAllTimeAssistsDeck(),
+  league_team_all_time_defensive_leader: () => buildLeagueTeamToAllTimeDefensiveLeaderDeck(),
+  league_team_all_time_rebounds_leader:  () => buildLeagueTeamToAllTimeReboundsLeaderDeck(),
+  league_team_all_time_scorer:           () => buildLeagueTeamToAllTimeScorerDeck(),
+  league_team_all_time_assists:          () => buildLeagueTeamToAllTimeAssistsDeck(),
   league_team_coaching_staff: () => buildLeagueTeamToCoachingStaffDeck(),
   league_team_roster:         () => buildLeagueTeamToRosterDeck(),
   league_team_starting_pos:   () => buildLeagueTeamToStartingPosDeck(),
@@ -7006,10 +6983,10 @@ const SESSION_MODE_TITLES = {
   team_champs:            'Team → Championships',
   team_last_title:        'Team → Last Title Year',
   team_rookies_of_year:   'Team → Rookies of the Year',
-  team_franchise_goat:    'Team → Franchise GOAT',
-  team_retired_jerseys:   'Team → Retired Jerseys',
-  team_all_time_scorer:   'Team → All-Time Scorer',
-  team_all_time_assists:  'Team → All-Time Assists',
+  team_all_time_defensive_leader: 'Team → All-Time Defensive Leader',
+  team_all_time_rebounds_leader:  'Team → All-Time Rebounds Leader',
+  team_all_time_scorer:           'Team → All-Time Scorer',
+  team_all_time_assists:          'Team → All-Time Assists Leader',
   team_coach:             'Team → Head Coach',
   team_coach_prev_team:   'Head Coach → Previous Team',
   team_coach_since:       'Head Coach → Team Since',
@@ -7029,10 +7006,10 @@ const SESSION_MODE_TITLES = {
   league_team_champs:             'Team → Championships',
   league_team_last_title:         'Team → Last Title Year',
   league_team_rookies_of_year:   'Team → Rookies of the Year',
-  league_team_franchise_goat:    'Team → Franchise GOAT',
-  league_team_retired_jerseys:   'Team → Retired Jerseys',
-  league_team_all_time_scorer:   'Team → All-Time Scorer',
-  league_team_all_time_assists:  'Team → All-Time Assists',
+  league_team_all_time_defensive_leader: 'Team → All-Time Defensive Leader',
+  league_team_all_time_rebounds_leader:  'Team → All-Time Rebounds Leader',
+  league_team_all_time_scorer:           'Team → All-Time Scorer',
+  league_team_all_time_assists:          'Team → All-Time Assists Leader',
   league_team_coaching_staff: 'Team → Coaching Staff',
   league_team_roster:         'Team → Roster',
   league_team_starting_pos:   'Team → Starting Position',
