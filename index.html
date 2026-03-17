@@ -2624,9 +2624,6 @@
   .lp-cat-card--players { border-color: rgba(91,184,212,0.22); }
   .lp-cat-card--players::before { background: radial-gradient(ellipse at left, rgba(91,184,212,0.1), transparent 60%); }
   .lp-cat-card--players:hover { border-color: rgba(91,184,212,0.65); box-shadow: 0 12px 32px rgba(91,184,212,0.2); }
-  .lp-cat-card--teams { border-color: rgba(245,200,66,0.2); }
-  .lp-cat-card--teams::before { background: radial-gradient(ellipse at left, rgba(245,200,66,0.08), transparent 60%); }
-  .lp-cat-card--teams:hover { border-color: rgba(245,200,66,0.55); box-shadow: 0 12px 32px rgba(245,160,30,0.18); }
   .lp-cat-card--history { border-color: rgba(240,112,80,0.2); }
   .lp-cat-card--history::before { background: radial-gradient(ellipse at left, rgba(240,112,80,0.08), transparent 60%); }
   .lp-cat-card--history:hover { border-color: rgba(240,112,80,0.55); box-shadow: 0 12px 32px rgba(240,112,80,0.18); }
@@ -2640,7 +2637,6 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   .lp-cat-card--players .lp-cat-icon { background: rgba(91,184,212,0.14); border-color: rgba(91,184,212,0.25); }
-  .lp-cat-card--teams .lp-cat-icon   { background: rgba(245,200,66,0.1);  border-color: rgba(245,200,66,0.2); }
   .lp-cat-card--history .lp-cat-icon { background: rgba(240,112,80,0.1);  border-color: rgba(240,112,80,0.2); }
   .lp-cat-card--mixed .lp-cat-icon   { background: rgba(61,204,122,0.1);  border-color: rgba(61,204,122,0.2); }
 
@@ -2663,7 +2659,6 @@
     white-space: nowrap;
   }
   .lp-cat-card--players .lp-cat-badge { background: rgba(91,184,212,0.1); color: rgba(91,184,212,0.65); border-color: rgba(91,184,212,0.18); }
-  .lp-cat-card--teams .lp-cat-badge   { background: rgba(245,200,66,0.08); color: rgba(245,200,66,0.55); border-color: rgba(245,200,66,0.15); }
   .lp-cat-card--history .lp-cat-badge { background: rgba(240,112,80,0.08); color: rgba(240,112,80,0.55); border-color: rgba(240,112,80,0.15); }
   .lp-cat-card--mixed .lp-cat-badge   { background: rgba(61,204,122,0.08); color: rgba(61,204,122,0.55); border-color: rgba(61,204,122,0.15); }
   .lp-cat-modes-count {
@@ -3030,10 +3025,6 @@
   .lp-prog-card--players:hover  { border-color: rgba(91,184,212,0.58); box-shadow: 0 12px 34px rgba(91,184,212,0.16); }
   .lp-prog-card--players:hover::before  { opacity: 1; }
 
-  .lp-prog-card--teaminfo { border-color: rgba(245,200,66,0.2); }
-  .lp-prog-card--teaminfo::before { background: radial-gradient(ellipse at top left, rgba(245,200,66,0.08), transparent 65%); }
-  .lp-prog-card--teaminfo:hover { border-color: rgba(245,200,66,0.52); box-shadow: 0 12px 34px rgba(245,160,30,0.14); }
-  .lp-prog-card--teaminfo:hover::before { opacity: 1; }
 
   .lp-prog-card--history  { border-color: rgba(240,112,80,0.2); }
   .lp-prog-card--history::before  { background: radial-gradient(ellipse at top left, rgba(240,112,80,0.08), transparent 65%); }
@@ -3058,7 +3049,6 @@
     background: rgba(107,63,160,0.18); border: 1px solid rgba(107,63,160,0.24);
   }
   .lp-prog-card--players  .lp-prog-icon { background: rgba(91,184,212,0.12);  border-color: rgba(91,184,212,0.22); }
-  .lp-prog-card--teaminfo .lp-prog-icon { background: rgba(245,200,66,0.1);   border-color: rgba(245,200,66,0.18); }
   .lp-prog-card--history  .lp-prog-icon { background: rgba(240,112,80,0.1);   border-color: rgba(240,112,80,0.18); }
   .lp-prog-card--mixed    .lp-prog-icon { background: rgba(61,204,122,0.1);   border-color: rgba(61,204,122,0.2); }
   .lp-prog-body { flex: 1; min-width: 0; }
@@ -3086,7 +3076,6 @@
     transition: width 0.6s ease;
   }
   .lp-prog-bar--players  { background: linear-gradient(90deg, #3a8fa8, #5BB8D4); }
-  .lp-prog-bar--teaminfo { background: linear-gradient(90deg, #c89820, #f5c842); }
   .lp-prog-bar--history  { background: linear-gradient(90deg, #c04a24, #f07050); }
   .lp-prog-bar--coaches  { background: linear-gradient(90deg, #1f9e8e, #38BDB0); }
   .lp-prog-bar--current  { background: linear-gradient(90deg, #4a2070, #6B3FA0); }
@@ -5076,18 +5065,6 @@
           </div>
           <div class="lp-cat-arrow">›</div>
         </div>
-        <div class="lp-cat-card lp-cat-card--teams" id="lp-lcat-teams" onclick="lpSelectLeagueCat('teams')">
-          <div class="lp-cat-icon">🏟</div>
-          <div class="lp-cat-body">
-            <div class="lp-cat-title">Franchise identity</div>
-            <div class="lp-cat-desc">City, arena, colors, history, legacy</div>
-            <div class="lp-cat-meta">
-              <span class="lp-cat-badge">30 cards / mode</span>
-              <span class="lp-cat-modes-count">4 difficulty tiers</span>
-            </div>
-          </div>
-          <div class="lp-cat-arrow">›</div>
-        </div>
         <div class="lp-cat-card lp-cat-card--history" id="lp-lcat-history" onclick="lpSelectLeagueCat('history')">
           <div class="lp-cat-icon">🏛</div>
           <div class="lp-cat-body">
@@ -5336,54 +5313,6 @@
         </div>
       </div>
 
-      <!-- ── Teams category sub-section ── -->
-      <div class="lp-cat-section hidden" id="lp-lsec-teams">
-        <div class="lp-cat-toolbar">
-        <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title">🏟 Franchise identity</span>
-        </div>
-        <div class="lp-tier-tabs">
-          <div class="lp-tier-tab active" id="lp-ltab-t-rookie" onclick="lpSelectCatTier('lp-lsec-teams','t-rookie')">
-            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
-            <span class="lp-tier-tab-label">Rookie</span>
-          </div>
-          <div class="lp-tier-tab" id="lp-ltab-t-starter" onclick="lpSelectCatTier('lp-lsec-teams','t-starter')">
-            <span class="lp-tier-tab-dot lp-diff-starter"></span>
-            <span class="lp-tier-tab-label">Starter</span>
-          </div>
-        </div>
-        </div>
-        <div class="lp-tier-panel" id="lp-lpanel-t-rookie">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_conf_division')">
-              <div class="lp-mcard-icon">🗺️</div>
-              <div class="lp-mcard-title">Team → Conference & Division</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-lpanel-t-starter">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 Starter</div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">🦅</div>
-              <div class="lp-mcard-title">Team → Mascot</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
-            </div>
-            <div class="lp-mcard lp-mcard--locked">
-              <div class="lp-mcard-icon">🏟️</div>
-              <div class="lp-mcard-title">Team → Arena</div>
-              <div class="lp-mcard-count">30 cards</div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-badge lp-mcard-badge--soon">Soon</span></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
 
       <!-- ── History category section ── -->
       <div class="lp-cat-section hidden" id="lp-lsec-history">
@@ -5729,25 +5658,6 @@
           </div>
         </div>
 
-        <div class="lp-prog-card lp-prog-card--teaminfo" id="lp-tcat-teaminfo" onclick="lpSelectTeamCat('teaminfo')">
-          <div class="lp-prog-top">
-            <div class="lp-prog-icon">🏟</div>
-            <div class="lp-prog-body">
-              <div class="lp-prog-title">Franchise identity</div>
-              <div class="lp-prog-desc">Arena, conference, division, and team branding</div>
-            </div>
-          </div>
-          <div class="lp-prog-bar-row">
-            <div class="lp-prog-bar-wrap">
-              <div class="lp-prog-bar-fill lp-prog-bar--teaminfo" style="width:0%" id="lp-tprog-teaminfo"></div>
-            </div>
-            <span class="lp-prog-fraction" id="lp-tprog-teaminfo-frac">0 / 3 modes</span>
-          </div>
-          <div class="lp-prog-tiers">
-            <span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span>
-            <span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span>
-          </div>
-        </div>
 
         <div class="lp-prog-card lp-prog-card--history" id="lp-tcat-history" onclick="lpSelectTeamCat('history')">
           <div class="lp-prog-top">
@@ -6015,55 +5925,6 @@
         </div>
       </div>
 
-      <!-- ── Team Info category sub-section ── -->
-      <div class="lp-cat-section hidden" id="lp-tsec-teaminfo">
-        <div class="lp-cat-toolbar">
-        <div class="lp-cat-section-header">
-          <span class="lp-cat-section-title">🏟 Franchise identity</span>
-        </div>
-        <div class="lp-tier-tabs">
-          <div class="lp-tier-tab active" id="lp-ttab-ti-rookie" onclick="lpSelectCatTier('lp-tsec-teaminfo','ti-rookie')">
-            <span class="lp-tier-tab-dot lp-diff-rookie"></span>
-            <span class="lp-tier-tab-label">Rookie</span>
-          </div>
-          <div class="lp-tier-tab" id="lp-ttab-ti-starter" onclick="lpSelectCatTier('lp-tsec-teaminfo','ti-starter')">
-            <span class="lp-tier-tab-dot lp-diff-starter"></span>
-            <span class="lp-tier-tab-label">Starter</span>
-          </div>
-        </div>
-        </div>
-        <div class="lp-tier-panel" id="lp-tpanel-ti-rookie">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_conf_division')">
-              <div class="lp-mcard-icon">🗺️</div>
-              <div class="lp-mcard-title">Team → Conference & Division</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="lp-tier-panel hidden" id="lp-tpanel-ti-starter">
-          <div class="lp-mode-grid">
-            <div class="lp-mode-grid-label">🏟 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_mascot')">
-              <div class="lp-mcard-icon">🐻</div>
-              <div class="lp-mcard-title">Team → Mascot</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_arena')">
-              <div class="lp-mcard-icon">🏟️</div>
-              <div class="lp-mcard-title">Team → Arena</div>
-              <div class="lp-mcard-count">1 card</div>
-              <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-              <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- ── History category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-history">
@@ -6788,17 +6649,6 @@ function buildPlayerToDraftTeamDeck(roster) { return roster.filter(p => p.draft_
 // -- Team deck builders (single-team: Jazz) --
 function buildTeamToCityDeck(team)         { return [makeCard(team.name, team.city,         'What city does this team play in?')]; }
 function buildTeamToConferenceDeck(team)   { return [makeCard(team.name, team.conference,   'What conference is this team in?')]; }
-function buildTeamToConfDivisionDeck(team) {
-  const answer = '<div class="back-conf-block">' +
-    '<span class="back-conf-label">Conference</span>' +
-    '<span class="back-conf-val">' + team.conference + 'ern Conference</span>' +
-    '<span class="back-conf-label">Division</span>' +
-    '<span class="back-conf-val">' + team.division + ' Division</span>' +
-    '</div>';
-  return [makeCard(team.name, answer, "What conference and division is this team in?")];
-}
-function buildTeamToArenaDeck(team)        { return [makeCard(team.name, team.arena,        'What arena does this team play in?')]; }
-function buildTeamToMascotDeck(team)       { return [makeCard(team.name, team.mascot,       "What is this team's mascot?")]; }
 function buildTeamToColorsDeck(team)       { return [makeCard(team.name, team.colors,       "What are this team's colors?")]; }
 function buildTeamToDivisionDeck(team)     { return [makeCard(team.name, team.division,     'What division is this team in?')]; }
 function buildTeamToChampsDeck(team)       { return [makeCard(team.name, team.championships,'How many championships has this team won?')]; }
@@ -7018,17 +6868,6 @@ function buildLeagueTeamToLastTitleDeck() {
 // -- League-wide team deck builders (all 30 teams) --
 function buildLeagueTeamToCityDeck()         { return NBA_TEAMS.map(t => makeCard(t.name, t.city,         'What city does this team play in?')); }
 function buildLeagueTeamToConferenceDeck()   { return NBA_TEAMS.map(t => makeCard(t.name, t.conference,   'What conference is this team in?')); }
-function buildLeagueTeamToConfDivisionDeck() {
-  return NBA_TEAMS.map(t => {
-    const answer = '<div class="back-conf-block">' +
-      '<span class="back-conf-label">Conference</span>' +
-      '<span class="back-conf-val">' + t.conference + 'ern Conference</span>' +
-      '<span class="back-conf-label">Division</span>' +
-      '<span class="back-conf-val">' + t.division + ' Division</span>' +
-      '</div>';
-    return makeCard(t.name, answer, "What conference and division is this team in?");
-  });
-}
 function buildLeagueTeamToDivisionDeck()     { return NBA_TEAMS.map(t => makeCard(t.name, t.division,     'What division is this team in?')); }
 function buildLeagueTeamToAbbreviationDeck() { return NBA_TEAMS.map(t => makeCard(t.name, t.abbreviation, 'What is the abbreviation for this team?')); }
 function buildLeagueTeamToCoachDeck()       { return NBA_TEAMS.filter(t => t.coach).map(t => makeCard(t.name, t.coach, "Who is this team's head coach?")); }
@@ -7102,9 +6941,6 @@ const MODE_BUILDERS = {
   // Team Mastery — Team modes (Jazz)
   team_city:              () => buildTeamToCityDeck(TEST_TEAM),
   team_conference:        () => buildTeamToConferenceDeck(TEST_TEAM),
-  team_conf_division:     () => buildTeamToConfDivisionDeck(TEST_TEAM),
-  team_arena:             () => buildTeamToArenaDeck(TEST_TEAM),
-  team_mascot:            () => buildTeamToMascotDeck(TEST_TEAM),
   team_colors:            () => buildTeamToColorsDeck(TEST_TEAM),
   team_division:          () => buildTeamToDivisionDeck(TEST_TEAM),
   team_champs:            () => buildTeamToChampsDeck(TEST_TEAM),
@@ -7128,7 +6964,6 @@ const MODE_BUILDERS = {
   // League Knowledge — Team modes (all 30 teams)
   league_team_city:           () => buildLeagueTeamToCityDeck(),
   league_team_conference:     () => buildLeagueTeamToConferenceDeck(),
-  league_team_conf_division:  () => buildLeagueTeamToConfDivisionDeck(),
   league_team_division:       () => buildLeagueTeamToDivisionDeck(),
   league_team_coach:          () => buildLeagueTeamToCoachDeck(),
   league_team_coach_prev_team: () => buildLeagueTeamToCoachPrevTeamDeck(),
@@ -7166,9 +7001,6 @@ const SESSION_MODE_TITLES = {
   player_draft_team:      'Player → Draft Team',
   team_city:              'Team → City',
   team_conference:        'Team → Conference',
-  team_conf_division:     'Team → Conference & Division',
-  team_arena:             'Team → Arena',
-  team_mascot:            'Team → Mascot',
   team_colors:            'Team → Colors',
   team_division:          'Team → Division',
   team_champs:            'Team → Championships',
@@ -7189,7 +7021,6 @@ const SESSION_MODE_TITLES = {
   league_player_position: 'Player → Position',
   league_team_city:         'Team → City',
   league_team_conference:     'Team → Conference',
-  league_team_conf_division:  'Team → Conference & Division',
   league_team_division:       'Team → Division',
   league_team_coach:           'Team → Head Coach',
   league_team_coach_prev_team: 'Head Coach → Previous Team',
@@ -8502,8 +8333,8 @@ function setSessionReturnTarget(target) {
   // target: { path, panel, leagueCat, teamCat }
   // path: 'league' | 'team' | 'random'
   // panel: panel id to restore (e.g. 'lp-panel-3-league', 'lp-panel-4-team')
-  // leagueCat: active league section ('players'|'teams'|'random') or null
-  // teamCat: active team section ('players'|'teaminfo'|'history') or null
+  // leagueCat: active league section ('players'|'random') or null
+  // teamCat: active team section ('players'|'history') or null
   _sessionReturnTarget = target;
 }
 
@@ -8604,7 +8435,7 @@ function lpGoPanel(n, subtype) {
       // Reset cat grid
       const g = document.getElementById('lp-league-cat-grid');
       if (g) g.style.display = '';
-      ['players','teams','random'].forEach(s => {
+      ['players','random'].forEach(s => {
         const sec = document.getElementById('lp-lsec-' + s);
         if (sec) sec.classList.add('hidden');
       });
@@ -8628,7 +8459,7 @@ function lpGoPanel(n, subtype) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
+    ['roster','coaches','players','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8672,7 +8503,7 @@ function lpSwitchPath(path) {
     // Reset cat state
     const g = document.getElementById('lp-league-cat-grid');
     if (g) g.style.display = '';
-    ['roster','coaches','players','teams','history','random'].forEach(s => {
+    ['roster','coaches','players','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -8735,7 +8566,7 @@ function lpLaunchMode(path, mode) {
   // Capture which panel launched this session so we can return correctly
   if (path === 'league') {
     let leagueCat = null;
-    ['roster','coaches','players','teams','history','random'].forEach(function(s) {
+    ['roster','coaches','players','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec && !sec.classList.contains('hidden')) leagueCat = s;
     });
@@ -8751,7 +8582,7 @@ function lpLaunchMode(path, mode) {
     setSessionReturnTarget({ path: 'league', leagueCat: leagueCat, tierTabId: tierTabId });
   } else if (path === 'team') {
     let teamCat = null;
-    ['roster','coaches','players','teaminfo','history','random'].forEach(function(s) {
+    ['roster','coaches','players','history','random'].forEach(function(s) {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec && !sec.classList.contains('hidden')) teamCat = s;
     });
@@ -9337,7 +9168,7 @@ function lpSelectLeagueCat(cat) {
   if (cat === 'random') {
     // Show random section, hide grid
     const grid = document.getElementById('lp-league-cat-grid');
-    const sections = ['roster','coaches','players','teams','history','random'];
+    const sections = ['roster','coaches','players','history','random'];
     if (grid) grid.style.display = 'none';
     sections.forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
@@ -9350,7 +9181,7 @@ function lpSelectLeagueCat(cat) {
   }
   // Hide grid, show the right section
   const grid = document.getElementById('lp-league-cat-grid');
-  const sections = ['roster','coaches','players','teams','history','random'];
+  const sections = ['roster','coaches','players','history','random'];
   if (grid) grid.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-lsec-' + s);
@@ -9374,7 +9205,7 @@ function lpCloseCat(scope) {
     if (leaguePanel) leaguePanel.classList.remove('lp-panel--cat-open');
     const grid = document.getElementById('lp-league-cat-grid');
     if (grid) grid.style.display = '';
-    ['roster','coaches','players','teams','history','random'].forEach(s => {
+    ['roster','coaches','players','history','random'].forEach(s => {
       const sec = document.getElementById('lp-lsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -9394,7 +9225,7 @@ function lpCloseCat(scope) {
     const rosterChevron = document.getElementById('lp-roster-chevron');
     if (rosterBody) rosterBody.classList.add('hidden');
     if (rosterChevron) rosterChevron.textContent = '›';
-    ['roster','coaches','players','teaminfo','history','random'].forEach(s => {
+    ['roster','coaches','players','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
     });
@@ -9407,7 +9238,7 @@ function lpSelectTeamCat(cat) {
   if (teamPanel) teamPanel.classList.add('lp-panel--cat-open');
 
   const grid = document.getElementById('lp-team-cat-grid');
-  const sections = ['roster','coaches','players','teaminfo','history','random'];
+  const sections = ['roster','coaches','players','history','random'];
   if (grid) grid.style.display = 'none';
   // Hide team overview sections — this is now a focused mode page
   const infoPanel = document.getElementById('lp-team-info-panel');
