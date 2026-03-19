@@ -5528,7 +5528,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Memphis Grizzlies</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('grizzlies','Memphis Grizzlies','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Memphis Grizzlies</div>
+                <div class="lp-ct-sub">18 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Minnesota Timberwolves</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">New Orleans Pelicans</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Oklahoma City Thunder</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -6629,6 +6635,46 @@ const LAKERS_ROSTER = [
   { name:"Maxi Kleber",       position:"C", jersey:"42", height:"6ft 10in", college:"None",          country:"Germany",    hometown:"Wurzburg, Germany",           draft_year:"2014", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Dallas Mavericks",dur:"7 seasons"}],                                                                                                               jazz_years:"1 season" },
 ];
 
+const GRIZZLIES_TEAM = {
+  name: "Memphis Grizzlies",
+  city: "Memphis",
+  conference: "West",
+  division: "Southwest",
+  arena: "FedExForum",
+  mascot: "Grizz",
+  colors: "Navy, Gold, Turquoise",
+  championships: "0",
+  lastTitle: "N/A",
+  abbreviation: "MEM",
+  coach: "Taylor Jenkins",
+  coachPrevTeam: { team: "Atlanta Hawks", role: "Assistant Coach" },
+  coachSince: "2019"
+};
+
+const GRIZZLIES_STARTING_LINEUP = { PG:"Ja Morant", SG:"Jaylen Wells", SF:"GG Jackson II", PF:"Taylor Hendricks", C:"Zach Edey" };
+
+const GRIZZLIES_ROSTER = [
+  { name:"Ja Morant",                    position:"G", jersey:"12", height:"6ft 3in",  college:"Murray State",    country:"USA",      hometown:"Dalzell, South Carolina",      draft_year:"2019", draft_pick:"2",         draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Ty Jerome",                    position:"G", jersey:"10", height:"6ft 5in",  college:"Virginia",        country:"USA",      hometown:"Bronxville, New York",         draft_year:"2019", draft_pick:"24",        draft_team:"Phoenix Suns",          past_teams:[{team:"Phoenix Suns",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Golden State Warriors",dur:"1 season"},{team:"Cleveland Cavaliers",dur:"3 seasons"}], jazz_years:"1 season" },
+  { name:"Scotty Pippen Jr.",            position:"G", jersey:"1",  height:"6ft 3in",  college:"Vanderbilt",      country:"USA",      hometown:"Los Angeles, California",      draft_year:"2022", draft_pick:"45",        draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Javon Small",                  position:"G", jersey:"5",  height:"6ft 2in",  college:"West Virginia",   country:"USA",      hometown:"Clarksburg, West Virginia",    draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Cam Spencer",                  position:"G", jersey:"2",  height:"6ft 4in",  college:"Connecticut",     country:"USA",      hometown:"Brookfield, Connecticut",      draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Brooklyn Nets",dur:"1 season"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Cedric Coward",                position:"G", jersey:"19", height:"6ft 6in",  college:"Washington State",country:"USA",      hometown:"Sacramento, California",       draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Walter Clayton Jr.",           position:"G", jersey:"11", height:"6ft 3in",  college:"Florida",         country:"USA",      hometown:"Queens, New York",             draft_year:"2024", draft_pick:"32",        draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Taylor Hendricks",             position:"F", jersey:"0",  height:"6ft 9in",  college:"UCF",             country:"USA",      hometown:"Boynton Beach, Florida",       draft_year:"2023", draft_pick:"9",         draft_team:"Utah Jazz",             past_teams:[{team:"Utah Jazz",dur:"1 season"}],                                                                                                        jazz_years:"1 season" },
+  { name:"GG Jackson II",               position:"F", jersey:"45", height:"6ft 9in",  college:"South Carolina",  country:"USA",      hometown:"Columbia, South Carolina",     draft_year:"2023", draft_pick:"45",        draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jaylen Wells",                 position:"F", jersey:"0",  height:"6ft 6in",  college:"Washington State",country:"USA",      hometown:"Renton, Washington",           draft_year:"2024", draft_pick:"39",        draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jahmai Mashack",               position:"F", jersey:"4",  height:"6ft 5in",  college:"Tennessee",       country:"USA",      hometown:"Houston, Texas",               draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Olivier-Maxence Prosper",      position:"F", jersey:"13", height:"6ft 8in",  college:"Marquette",       country:"Canada",   hometown:"Montreal, Canada",             draft_year:"2023", draft_pick:"21",        draft_team:"Dallas Mavericks",      past_teams:[{team:"Dallas Mavericks",dur:"1 season"}],                                                                                                 jazz_years:"1 season" },
+  { name:"Rayan Rupert",                 position:"F", jersey:"8",  height:"6ft 7in",  college:"None",            country:"France",   hometown:"Paris, France",                draft_year:"2023", draft_pick:"43",        draft_team:"New York Knicks",       past_teams:[{team:"New York Knicks",dur:"1 season"}],                                                                                                  jazz_years:"1 season" },
+  { name:"Kyle Anderson",                position:"F", jersey:"1",  height:"6ft 9in",  college:"UCLA",            country:"USA",      hometown:"East Brunswick, New Jersey",   draft_year:"2014", draft_pick:"30",        draft_team:"San Antonio Spurs",     past_teams:[{team:"San Antonio Spurs",dur:"5 seasons"},{team:"Memphis Grizzlies",dur:"2 seasons"},{team:"Minnesota Timberwolves",dur:"2 seasons"},{team:"Golden State Warriors",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Taj Gibson",                   position:"F", jersey:"67", height:"6ft 9in",  college:"USC",             country:"USA",      hometown:"Brooklyn, New York",           draft_year:"2009", draft_pick:"26",        draft_team:"Chicago Bulls",         past_teams:[{team:"Chicago Bulls",dur:"7 seasons"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Minnesota Timberwolves",dur:"2 seasons"},{team:"New York Knicks",dur:"2 seasons"},{team:"Washington Wizards",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Zach Edey",                    position:"C", jersey:"14", height:"7ft 4in",  college:"Purdue",          country:"Canada",   hometown:"Toronto, Canada",              draft_year:"2024", draft_pick:"9",         draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Santi Aldama",                 position:"C", jersey:"7",  height:"6ft 11in", college:"Loyola Maryland", country:"Spain",    hometown:"Las Palmas, Spain",            draft_year:"2021", draft_pick:"30",        draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Brandon Clarke",               position:"C", jersey:"15", height:"6ft 8in",  college:"Gonzaga",         country:"Canada",   hometown:"Calgary, Canada",              draft_year:"2019", draft_pick:"21",        draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -6917,6 +6963,10 @@ const TEAM_COACHING_STAFF = {
   "Los Angeles Lakers": {
     head: "JJ Redick",
     assistants: ["Scott Brooks", "Nate McMillan", "Jordan Ott", "Phil Handy"]
+  },
+  "Memphis Grizzlies": {
+    head: "Taylor Jenkins",
+    assistants: ["Rex Walters", "Miles Simon", "Brad Jones", "Niele Ivey"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7063,7 +7113,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Houston Rockets": { name: "Hakeem Olajuwon", stat: "3,740 blk" },
   "Golden State Warriors": { name: "Nate Thurmond", stat: "1,171 blk" },
   "LA Clippers": { name: "DeAndre Jordan", stat: "1,172 blk" },
-  "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "2,694 blk" }
+  "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "2,694 blk" },
+  "Memphis Grizzlies": { name: "Marc Gasol", stat: "1,040 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7072,7 +7123,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Houston Rockets": { name: "Hakeem Olajuwon", stat: "13,382 reb" },
   "Golden State Warriors": { name: "Nate Thurmond", stat: "12,771 reb" },
   "LA Clippers": { name: "DeAndre Jordan", stat: "8,901 reb" },
-  "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "17,440 reb" }
+  "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "17,440 reb" },
+  "Memphis Grizzlies": { name: "Marc Gasol", stat: "6,108 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -7081,7 +7133,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Houston Rockets": { name: "Hakeem Olajuwon", stat: "26,511 pts" },
   "Golden State Warriors": { name: "Wilt Chamberlain", stat: "17,783 pts" },
   "LA Clippers": { name: "Randy Smith", stat: "12,735 pts" },
-  "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "33,643 pts" }
+  "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "33,643 pts" },
+  "Memphis Grizzlies": { name: "Zach Randolph", stat: "12,535 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -7090,7 +7143,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Houston Rockets": { name: "Calvin Murphy", stat: "4,402 ast" },
   "Golden State Warriors": { name: "Guy Rodgers", stat: "4,855 ast" },
   "LA Clippers": { name: "Gary Grant", stat: "3,008 ast" },
-  "Los Angeles Lakers": { name: "Magic Johnson", stat: "10,141 ast" }
+  "Los Angeles Lakers": { name: "Magic Johnson", stat: "10,141 ast" },
+  "Memphis Grizzlies": { name: "Mike Conley", stat: "4,979 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -8858,6 +8912,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = LAKERS_TEAM;
     _activeRoster = LAKERS_ROSTER;
     _activeLineup = LAKERS_STARTING_LINEUP;
+  } else if (teamId === 'grizzlies') {
+    _activeTeam   = GRIZZLIES_TEAM;
+    _activeRoster = GRIZZLIES_ROSTER;
+    _activeLineup = GRIZZLIES_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
