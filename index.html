@@ -6666,6 +6666,10 @@ const TEAM_COACHING_STAFF = {
   "Utah Jazz": {
     head: "Will Hardy",
     assistants: ["Chad Forcier", "Scott Morrison", "Sean Sheldon", "Jason Terry"]
+  },
+  "Dallas Mavericks": {
+    head: "Jason Kidd",
+    assistants: ["Jared Dudley", "Sean Sweeney", "Jamahl Mosley", "Igor Kokoskov"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -6806,16 +6810,20 @@ function buildTeamToCoachSinceDeck(team) {
 
 // ── Franchise Records data ───────────────────────────────────────────────────
 const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
-  "Utah Jazz": { name: "Mark Eaton", stat: "3,064 blk" }
+  "Utah Jazz": { name: "Mark Eaton", stat: "3,064 blk" },
+  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "1,281 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
-  "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" }
+  "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
+  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "11,489 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
-  "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" }
+  "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
+  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "31,560 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
-  "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" }
+  "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
+  "Dallas Mavericks": { name: "Jason Kidd", stat: "5,027 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -8704,16 +8712,17 @@ function lpToggleRoster() {
   const grid    = document.getElementById('lp-roster-grid');
   if (!body) return;
   const isOpen = !body.classList.contains('hidden');
-  if (!isOpen && grid && grid.children.length === 0) {
-    // Populate on first open
-    const roster = JAZZ_ROSTER_DISPLAY;
-    grid.innerHTML = roster.map(p =>
+  if (!isOpen && grid) {
+    // Always repopulate so it reflects active team
+    const rosterSrc = (typeof _activeRoster !== 'undefined') ? _activeRoster : JAZZ_ROSTER_DISPLAY;
+    const items = Array.from(rosterSrc).filter(p => p && p.name).map(p =>
       `<div class="lp-roster-player">
-        <span class="lp-roster-num">#${p.num}</span>
+        <span class="lp-roster-num">#${p.jersey || p.num || ''}</span>
         <span class="lp-roster-name">${p.name}</span>
-        <span class="lp-roster-pos">${p.pos}</span>
+        <span class="lp-roster-pos">${p.position || p.pos || ''}</span>
        </div>`
-    ).join('');
+    );
+    grid.innerHTML = items.join('');
   }
   body.classList.toggle('hidden', isOpen);
   if (chevron) chevron.textContent = isOpen ? '›' : '‹';
@@ -8736,22 +8745,24 @@ let _randGenType  = 'mixed';   // which generator produced this session
 // Each card: { prompt, answerLabel, answer, tag, type, entity }
 function _buildRandPool() {
   const pool = [];
-  ROSTER.forEach(p => {
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Team',      answer:'Utah Jazz',      tag:'PLAYER', cat:'team'     });
+  const activeRoster = (typeof _activeRoster !== 'undefined') ? Array.from(_activeRoster) : Array.from(ROSTER);
+  const activeTeam   = (typeof _activeTeam   !== 'undefined') ? _activeTeam : TEST_TEAM;
+  activeRoster.filter(p => p && p.name).forEach(p => {
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Team',      answer:activeTeam.name,  tag:'PLAYER', cat:'team'     });
     pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Position',  answer:getPosLabel(p),   tag:'PLAYER', cat:'position' });
     pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Jersey #',  answer:'#'+p.jersey,     tag:'PLAYER', cat:'jersey'   });
     pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Height',    answer:p.height,         tag:'PLAYER', cat:'height'   });
     pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'College',   answer:p.college,        tag:'PLAYER', cat:'college'  });
   });
   const teamCards = [
-    { answerLabel:'Conference', answer:'Western',      cat:'teamfact' },
-    { answerLabel:'Division',   answer:'Northwest',    cat:'teamfact' },
-    { answerLabel:'Arena',      answer:'Delta Center', cat:'teamfact' },
-    { answerLabel:'Head Coach', answer:'Will Hardy',   cat:'teamfact' },
-    { answerLabel:'City',       answer:'Salt Lake City', cat:'teamfact' },
-    { answerLabel:'Mascot',     answer:'Jazz Bear',    cat:'teamfact' },
+    { answerLabel:'Conference', answer:activeTeam.conference, cat:'teamfact' },
+    { answerLabel:'Division',   answer:activeTeam.division,   cat:'teamfact' },
+    { answerLabel:'Arena',      answer:activeTeam.arena,      cat:'teamfact' },
+    { answerLabel:'Head Coach', answer:activeTeam.coach,      cat:'teamfact' },
+    { answerLabel:'City',       answer:activeTeam.city,       cat:'teamfact' },
+    { answerLabel:'Mascot',     answer:activeTeam.mascot,     cat:'teamfact' },
   ];
-  teamCards.forEach(c => pool.push({ type:'team', entity:'Utah Jazz', prompt:'Utah Jazz', tag:'TEAM', ...c }));
+  teamCards.forEach(tc => pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, tag:'TEAM', ...tc }));
   return pool;
 }
 
