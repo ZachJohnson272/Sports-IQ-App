@@ -5535,7 +5535,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Minnesota Timberwolves</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('twolves','Minnesota Timberwolves','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Minnesota Timberwolves</div>
+                <div class="lp-ct-sub">17 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">New Orleans Pelicans</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Oklahoma City Thunder</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Phoenix Suns</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -6674,6 +6680,45 @@ const GRIZZLIES_ROSTER = [
   { name:"Brandon Clarke",               position:"C", jersey:"15", height:"6ft 8in",  college:"Gonzaga",         country:"Canada",   hometown:"Calgary, Canada",              draft_year:"2019", draft_pick:"21",        draft_team:"Memphis Grizzlies",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
 ];
 
+const TWOLVES_TEAM = {
+  name: "Minnesota Timberwolves",
+  city: "Minneapolis",
+  conference: "West",
+  division: "Northwest",
+  arena: "Target Center",
+  mascot: "Crunch",
+  colors: "Blue, Green, Silver",
+  championships: "0",
+  lastTitle: "N/A",
+  abbreviation: "MIN",
+  coach: "Chris Finch",
+  coachPrevTeam: { team: "Houston Rockets", role: "Assistant Coach" },
+  coachSince: "2021"
+};
+
+const TWOLVES_STARTING_LINEUP = { PG:"Mike Conley", SG:"Anthony Edwards", SF:"Jaden McDaniels", PF:"Julius Randle", C:"Rudy Gobert" };
+
+const TWOLVES_ROSTER = [
+  { name:"Anthony Edwards",      position:"G", jersey:"5",  height:"6ft 4in",  college:"Georgia",         country:"USA",      hometown:"Atlanta, Georgia",             draft_year:"2020", draft_pick:"1",         draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Donte DiVincenzo",     position:"G", jersey:"0",  height:"6ft 4in",  college:"Villanova",       country:"USA",      hometown:"Wilmington, Delaware",         draft_year:"2018", draft_pick:"17",        draft_team:"Milwaukee Bucks",        past_teams:[{team:"Milwaukee Bucks",dur:"3 seasons"},{team:"Sacramento Kings",dur:"1 season"},{team:"Golden State Warriors",dur:"1 season"},{team:"New York Knicks",dur:"2 seasons"}], jazz_years:"1 season" },
+  { name:"Bones Hyland",         position:"G", jersey:"3",  height:"6ft 3in",  college:"VCU",             country:"USA",      hometown:"Wilmington, Delaware",         draft_year:"2021", draft_pick:"26",        draft_team:"Denver Nuggets",         past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"LA Clippers",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}],                              jazz_years:"1 season" },
+  { name:"Ayo Dosunmu",          position:"G", jersey:"12", height:"6ft 5in",  college:"Illinois",        country:"USA",      hometown:"Chicago, Illinois",            draft_year:"2021", draft_pick:"38",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"3 seasons"}],                                                                                                          jazz_years:"1 season" },
+  { name:"Mike Conley",          position:"G", jersey:"10", height:"6ft 1in",  college:"Ohio State",      country:"USA",      hometown:"Indianapolis, Indiana",        draft_year:"2007", draft_pick:"4",         draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"12 seasons"},{team:"Utah Jazz",dur:"2 seasons"}],                                                                   jazz_years:"1 season" },
+  { name:"Jaylen Clark",         position:"G", jersey:"5",  height:"6ft 5in",  college:"UCLA",            country:"USA",      hometown:"Inglewood, California",        draft_year:"2023", draft_pick:"36",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Zyon Pullin",          position:"G", jersey:"22", height:"6ft 3in",  college:"UC Riverside",    country:"USA",      hometown:"Los Angeles, California",      draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jaden McDaniels",      position:"F", jersey:"3",  height:"6ft 9in",  college:"Washington",      country:"USA",      hometown:"Federal Way, Washington",      draft_year:"2020", draft_pick:"28",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Julius Randle",        position:"F", jersey:"30", height:"6ft 9in",  college:"Kentucky",        country:"USA",      hometown:"Dallas, Texas",                draft_year:"2014", draft_pick:"7",         draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"4 seasons"},{team:"New Orleans Pelicans",dur:"1 season"},{team:"New York Knicks",dur:"5 seasons"}],              jazz_years:"1 season" },
+  { name:"Kyle Anderson",        position:"F", jersey:"1",  height:"6ft 9in",  college:"UCLA",            country:"USA",      hometown:"East Brunswick, New Jersey",   draft_year:"2014", draft_pick:"30",        draft_team:"San Antonio Spurs",      past_teams:[{team:"San Antonio Spurs",dur:"5 seasons"},{team:"Memphis Grizzlies",dur:"2 seasons"},{team:"Golden State Warriors",dur:"1 season"}],             jazz_years:"1 season" },
+  { name:"Terrence Shannon Jr.", position:"F", jersey:"0",  height:"6ft 6in",  college:"Illinois",        country:"USA",      hometown:"Harvey, Illinois",             draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
+  { name:"Julian Phillips",      position:"F", jersey:"13", height:"6ft 8in",  college:"Tennessee",       country:"USA",      hometown:"Rock Hill, South Carolina",    draft_year:"2023", draft_pick:"35",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
+  { name:"Rudy Gobert",          position:"C", jersey:"27", height:"7ft 1in",  college:"None",            country:"France",   hometown:"Saint-Quentin, France",        draft_year:"2013", draft_pick:"27",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"9 seasons"}],                                                                                                               jazz_years:"1 season" },
+  { name:"Naz Reid",             position:"C", jersey:"11", height:"6ft 9in",  college:"LSU",             country:"USA",      hometown:"Asbury Park, New Jersey",      draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Joan Beringer",        position:"C", jersey:"17", height:"7ft 1in",  college:"None",            country:"Spain",    hometown:"Manresa, Spain",               draft_year:"2024", draft_pick:"28",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Rocco Zikarsky",       position:"C", jersey:"55", height:"7ft 3in",  college:"None",            country:"Australia",hometown:"Brisbane, Australia",          draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Enrique Freeman",      position:"C", jersey:"25", height:"6ft 8in",  college:"Akron",           country:"USA",      hometown:"Baltimore, Maryland",          draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Indiana Pacers",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -6967,6 +7012,10 @@ const TEAM_COACHING_STAFF = {
   "Memphis Grizzlies": {
     head: "Taylor Jenkins",
     assistants: ["Rex Walters", "Miles Simon", "Brad Jones", "Niele Ivey"]
+  },
+  "Minnesota Timberwolves": {
+    head: "Chris Finch",
+    assistants: ["Pablo Prigioni", "Micah Nori", "Darius Songaila", "Kris Benson"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7114,7 +7163,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Golden State Warriors": { name: "Nate Thurmond", stat: "1,171 blk" },
   "LA Clippers": { name: "DeAndre Jordan", stat: "1,172 blk" },
   "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "2,694 blk" },
-  "Memphis Grizzlies": { name: "Marc Gasol", stat: "1,040 blk" }
+  "Memphis Grizzlies": { name: "Marc Gasol", stat: "1,040 blk" },
+  "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "1,821 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7124,7 +7174,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Golden State Warriors": { name: "Nate Thurmond", stat: "12,771 reb" },
   "LA Clippers": { name: "DeAndre Jordan", stat: "8,901 reb" },
   "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "17,440 reb" },
-  "Memphis Grizzlies": { name: "Marc Gasol", stat: "6,108 reb" }
+  "Memphis Grizzlies": { name: "Marc Gasol", stat: "6,108 reb" },
+  "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "14,662 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -7134,7 +7185,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Golden State Warriors": { name: "Wilt Chamberlain", stat: "17,783 pts" },
   "LA Clippers": { name: "Randy Smith", stat: "12,735 pts" },
   "Los Angeles Lakers": { name: "Kareem Abdul-Jabbar", stat: "33,643 pts" },
-  "Memphis Grizzlies": { name: "Zach Randolph", stat: "12,535 pts" }
+  "Memphis Grizzlies": { name: "Zach Randolph", stat: "12,535 pts" },
+  "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "19,201 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -7144,7 +7196,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Golden State Warriors": { name: "Guy Rodgers", stat: "4,855 ast" },
   "LA Clippers": { name: "Gary Grant", stat: "3,008 ast" },
   "Los Angeles Lakers": { name: "Magic Johnson", stat: "10,141 ast" },
-  "Memphis Grizzlies": { name: "Mike Conley", stat: "4,979 ast" }
+  "Memphis Grizzlies": { name: "Mike Conley", stat: "4,979 ast" },
+  "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "5,445 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -8916,6 +8969,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = GRIZZLIES_TEAM;
     _activeRoster = GRIZZLIES_ROSTER;
     _activeLineup = GRIZZLIES_STARTING_LINEUP;
+  } else if (teamId === 'twolves') {
+    _activeTeam   = TWOLVES_TEAM;
+    _activeRoster = TWOLVES_ROSTER;
+    _activeLineup = TWOLVES_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
