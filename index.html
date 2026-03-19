@@ -5468,7 +5468,7 @@
           <div class="lp-conf-icon">🌅</div>
           <div class="lp-conf-body">
             <div class="lp-conf-title">Western Conference</div>
-            <div class="lp-conf-desc">15 teams · Utah Jazz &amp; Dallas Mavericks available</div>
+            <div class="lp-conf-desc">15 teams · Utah Jazz, Dallas Mavericks &amp; Denver Nuggets available</div>
           </div>
           <div class="lp-conf-chevron" id="lp-conf-west-chev">›</div>
         </div>
@@ -5493,7 +5493,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Denver Nuggets</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('nuggets','Denver Nuggets','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Denver Nuggets</div>
+                <div class="lp-ct-sub">17 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Golden State Warriors</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Houston Rockets</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">LA Clippers</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -6407,6 +6413,45 @@ const MAVS_ROSTER = [
   { name:"Moussa Cisse",           position:"C", jersey:"33", height:"7'0",  college:"Memphis",         country:"Guinea", hometown:"Conakry, Guinea",             draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
 ];
 
+const NUGGETS_TEAM = {
+  name: "Denver Nuggets",
+  city: "Denver",
+  conference: "West",
+  division: "Northwest",
+  arena: "Ball Arena",
+  mascot: "Rocky",
+  colors: "Gold, Blue, Red",
+  championships: "1",
+  lastTitle: "2023",
+  abbreviation: "DEN",
+  coach: "David Adelman",
+  coachPrevTeam: { team: "San Antonio Spurs", role: "Assistant Coach" },
+  coachSince: "2024"
+};
+
+const NUGGETS_STARTING_LINEUP = { PG:"Jamal Murray", SG:"Christian Braun", SF:"Aaron Gordon", PF:"Cameron Johnson", C:"Nikola Jokic" };
+
+const NUGGETS_ROSTER = [
+  { name:"Jamal Murray",        position:"G", jersey:"27", height:"6ft 5in",  college:"Kentucky",      country:"Canada",    hometown:"Kitchener, Ontario",       draft_year:"2016", draft_pick:"7",         draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"Tyus Jones",          position:"G", jersey:"21", height:"6ft 0in",  college:"Duke",           country:"USA",      hometown:"Apple Valley, Minnesota",  draft_year:"2015", draft_pick:"24",        draft_team:"Minnesota Timberwolves", past_teams:[{team:"Minnesota Timberwolves",dur:"2 seasons"},{team:"Memphis Grizzlies",dur:"4 seasons"},{team:"Washington Wizards",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Christian Braun",     position:"G", jersey:"0",  height:"6ft 6in",  college:"Kansas",         country:"USA",      hometown:"Burlington, Kansas",       draft_year:"2022", draft_pick:"21",        draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"Bruce Brown",         position:"G", jersey:"11", height:"6ft 4in",  college:"Miami",          country:"USA",      hometown:"Boston, Massachusetts",    draft_year:"2018", draft_pick:"42",        draft_team:"Detroit Pistons",        past_teams:[{team:"Detroit Pistons",dur:"2 seasons"},{team:"Brooklyn Nets",dur:"2 seasons"},{team:"Denver Nuggets",dur:"1 season"},{team:"Indiana Pacers",dur:"1 season"},{team:"Toronto Raptors",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Jalen Pickett",       position:"G", jersey:"8",  height:"6ft 2in",  college:"Penn State",     country:"USA",      hometown:"Syracuse, New York",       draft_year:"2023", draft_pick:"32",        draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"Curtis Jones",        position:"G", jersey:"5",  height:"6ft 5in",  college:"Iowa",           country:"USA",      hometown:"Cedar Rapids, Iowa",       draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Golden State Warriors",dur:"1 season"}],                                                                                                                 jazz_years:"1 season" },
+  { name:"Tamar Bates",         position:"G", jersey:"30", height:"6ft 5in",  college:"Texas",          country:"USA",      hometown:"Indianapolis, Indiana",    draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Indiana Pacers",dur:"2 seasons"}],                                                                                                                        jazz_years:"1 season" },
+  { name:"Aaron Gordon",        position:"F", jersey:"50", height:"6ft 8in",  college:"Arizona",        country:"USA",      hometown:"San Jose, California",     draft_year:"2014", draft_pick:"4",         draft_team:"Orlando Magic",          past_teams:[{team:"Orlando Magic",dur:"7 seasons"}],                                                                                                                        jazz_years:"1 season" },
+  { name:"Cameron Johnson",     position:"F", jersey:"23", height:"6ft 8in",  college:"North Carolina", country:"USA",      hometown:"Pittsburgh, Pennsylvania", draft_year:"2019", draft_pick:"11",        draft_team:"Phoenix Suns",           past_teams:[{team:"Phoenix Suns",dur:"4 seasons"},{team:"Brooklyn Nets",dur:"1 season"}],                                                                                    jazz_years:"1 season" },
+  { name:"Tim Hardaway Jr.",    position:"F", jersey:"10", height:"6ft 5in",  college:"Michigan",       country:"USA",      hometown:"Miami, Florida",           draft_year:"2013", draft_pick:"24",        draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"1 season"},{team:"Atlanta Hawks",dur:"3 seasons"},{team:"New York Knicks",dur:"2 seasons"},{team:"Dallas Mavericks",dur:"5 seasons"}], jazz_years:"1 season" },
+  { name:"Julian Strawther",    position:"F", jersey:"3",  height:"6ft 7in",  college:"Gonzaga",        country:"USA",      hometown:"Las Vegas, Nevada",        draft_year:"2023", draft_pick:"29",        draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"Peyton Watson",       position:"F", jersey:"9",  height:"6ft 8in",  college:"UCLA",           country:"USA",      hometown:"Concord, California",      draft_year:"2022", draft_pick:"30",        draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"Spencer Jones",       position:"F", jersey:"16", height:"6ft 8in",  college:"Stanford",       country:"USA",      hometown:"Washington, D.C.",         draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"Nikola Jokic",        position:"C", jersey:"15", height:"6ft 11in", college:"None",           country:"Serbia",   hometown:"Sombor, Serbia",           draft_year:"2014", draft_pick:"41",        draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"Jonas Valanciunas",   position:"C", jersey:"17", height:"6ft 11in", college:"None",           country:"Lithuania",hometown:"Utena, Lithuania",         draft_year:"2011", draft_pick:"5",         draft_team:"Toronto Raptors",        past_teams:[{team:"Toronto Raptors",dur:"7 seasons"},{team:"Memphis Grizzlies",dur:"2 seasons"},{team:"New Orleans Pelicans",dur:"3 seasons"},{team:"Washington Wizards",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Zeke Nnaji",          position:"C", jersey:"22", height:"6ft 11in", college:"Arizona",        country:"USA",      hometown:"Woodbury, Minnesota",      draft_year:"2020", draft_pick:"22",        draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+  { name:"DaRon Holmes II",     position:"C", jersey:"4",  height:"6ft 10in", college:"Dayton",         country:"USA",      hometown:"Riverside, California",    draft_year:"2024", draft_pick:"22",        draft_team:"Denver Nuggets",        past_teams:"None",                                                                                                                                                         jazz_years:"1 season" },
+];
+
+
 
 // TEST_ROSTER pulls from the live ROSTER array so they stay in sync
 // (defined as a getter so it always reflects ROSTER at call time)
@@ -6670,6 +6715,10 @@ const TEAM_COACHING_STAFF = {
   "Dallas Mavericks": {
     head: "Jason Kidd",
     assistants: ["Jared Dudley", "Sean Sweeney", "Jamahl Mosley", "Igor Kokoskov"]
+  },
+  "Denver Nuggets": {
+    head: "David Adelman",
+    assistants: ["Ognjen Stojakovic", "Micah Nori", "Ryan Saunders", "Jeff Bzdelik"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -6811,19 +6860,23 @@ function buildTeamToCoachSinceDeck(team) {
 // ── Franchise Records data ───────────────────────────────────────────────────
 const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Utah Jazz": { name: "Mark Eaton", stat: "3,064 blk" },
-  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "1,281 blk" }
+  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "1,281 blk" },
+  "Denver Nuggets": { name: "Dikembe Mutombo", stat: "1,706 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
-  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "11,489 reb" }
+  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "11,489 reb" },
+  "Denver Nuggets": { name: "Dikembe Mutombo", stat: "7,686 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
-  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "31,560 pts" }
+  "Dallas Mavericks": { name: "Dirk Nowitzki", stat: "31,560 pts" },
+  "Denver Nuggets": { name: "Alex English", stat: "21,645 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
-  "Dallas Mavericks": { name: "Jason Kidd", stat: "5,027 ast" }
+  "Dallas Mavericks": { name: "Jason Kidd", stat: "5,027 ast" },
+  "Denver Nuggets": { name: "Fat Lever", stat: "3,208 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -8571,6 +8624,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = MAVS_TEAM;
     _activeRoster = MAVS_ROSTER;
     _activeLineup = MAVS_STARTING_LINEUP;
+  } else if (teamId === 'nuggets') {
+    _activeTeam   = NUGGETS_TEAM;
+    _activeRoster = NUGGETS_ROSTER;
+    _activeLineup = NUGGETS_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
