@@ -5594,7 +5594,7 @@
           <div class="lp-conf-icon">🌆</div>
           <div class="lp-conf-body">
             <div class="lp-conf-title">Eastern Conference</div>
-            <div class="lp-conf-desc">15 teams · Atlanta Hawks &amp; Boston Celtics available</div>
+            <div class="lp-conf-desc">15 teams · Atlanta Hawks, Boston Celtics &amp; Brooklyn Nets available</div>
           </div>
           <div class="lp-conf-chevron" id="lp-conf-east-chev">›</div>
         </div>
@@ -5615,7 +5615,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Brooklyn Nets</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('nets','Brooklyn Nets','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Brooklyn Nets</div>
+                <div class="lp-ct-sub">16 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Charlotte Hornets</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Chicago Bulls</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Cleveland Cavaliers</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -7060,6 +7066,44 @@ const CELTICS_ROSTER = [
   { name:"Charles Bassey",     position:"C", jersey:"28", height:"6ft 10in", college:"Western Kentucky",country:"Nigeria",   hometown:"Lagos, Nigeria",               draft_year:"2021", draft_pick:"53",        draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"1 season"},{team:"Philadelphia 76ers",dur:"1 season"},{team:"Houston Rockets",dur:"1 season"},{team:"San Antonio Spurs",dur:"1 season"}], jazz_years:"1 season" },
 ];
 
+const NETS_TEAM = {
+  name: "Brooklyn Nets",
+  city: "Brooklyn",
+  conference: "East",
+  division: "Atlantic",
+  arena: "Barclays Center",
+  mascot: "BrooklyKnight",
+  colors: "Black, White, Gray",
+  championships: "0",
+  lastTitle: "N/A",
+  abbreviation: "BKN",
+  coach: "Jordi Fernandez",
+  coachPrevTeam: { team: "Sacramento Kings", role: "Assistant Coach" },
+  coachSince: "2024"
+};
+
+const NETS_STARTING_LINEUP = { PG:"Nolan Traore", SG:"Terance Mann", SF:"Ziaire Williams", PF:"Michael Porter Jr.", C:"Nic Claxton" };
+
+const NETS_ROSTER = [
+  { name:"Nolan Traore",       position:"G", jersey:"1",  height:"6ft 4in",  college:"None",            country:"France",    hometown:"Saint-Maurice, France",        draft_year:"2025", draft_pick:"2",         draft_team:"Brooklyn Nets",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Ben Saraf",          position:"G", jersey:"10", height:"6ft 5in",  college:"None",            country:"Israel",    hometown:"Hadera, Israel",               draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Tyson Etienne",      position:"G", jersey:"0",  height:"6ft 3in",  college:"Wichita State",   country:"USA",       hometown:"Brooklyn, New York",           draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Philadelphia 76ers",dur:"1 season"}],                                                      jazz_years:"1 season" },
+  { name:"Terance Mann",       position:"G", jersey:"14", height:"6ft 5in",  college:"Florida State",   country:"USA",       hometown:"Milton, Massachusetts",        draft_year:"2019", draft_pick:"48",        draft_team:"LA Clippers",            past_teams:[{team:"LA Clippers",dur:"5 seasons"}],                                                                                                          jazz_years:"1 season" },
+  { name:"Drake Powell",       position:"G", jersey:"21", height:"6ft 6in",  college:"North Carolina",  country:"USA",       hometown:"Sanford, North Carolina",      draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Michael Porter Jr.", position:"F", jersey:"1",  height:"6ft 10in", college:"Missouri",        country:"USA",       hometown:"Columbia, Missouri",           draft_year:"2018", draft_pick:"14",        draft_team:"Denver Nuggets",         past_teams:[{team:"Denver Nuggets",dur:"6 seasons"}],                                                                                                       jazz_years:"1 season" },
+  { name:"Ziaire Williams",    position:"F", jersey:"10", height:"6ft 8in",  college:"Stanford",        country:"USA",       hometown:"Los Angeles, California",      draft_year:"2021", draft_pick:"10",        draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"3 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Ochai Agbaji",       position:"F", jersey:"13", height:"6ft 5in",  college:"Kansas",          country:"USA",       hometown:"Kansas City, Missouri",        draft_year:"2022", draft_pick:"14",        draft_team:"Cleveland Cavaliers",    past_teams:[{team:"Cleveland Cavaliers",dur:"1 season"},{team:"Toronto Raptors",dur:"1 season"},{team:"Utah Jazz",dur:"1 season"}],                        jazz_years:"1 season" },
+  { name:"Jalen Wilson",       position:"F", jersey:"22", height:"6ft 7in",  college:"Kansas",          country:"USA",       hometown:"Denton, Texas",                draft_year:"2023", draft_pick:"51",        draft_team:"Brooklyn Nets",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Josh Minott",        position:"F", jersey:"5",  height:"6ft 7in",  college:"Memphis",         country:"Jamaica",   hometown:"Kingston, Jamaica",            draft_year:"2022", draft_pick:"45",        draft_team:"Minnesota Timberwolves", past_teams:[{team:"Minnesota Timberwolves",dur:"2 seasons"}],                                                                                                jazz_years:"1 season" },
+  { name:"E.J. Liddell",       position:"F", jersey:"4",  height:"6ft 7in",  college:"Ohio State",      country:"USA",       hometown:"Belleville, Illinois",         draft_year:"2022", draft_pick:"41",        draft_team:"New Orleans Pelicans",   past_teams:[{team:"New Orleans Pelicans",dur:"2 seasons"}],                                                                                                  jazz_years:"1 season" },
+  { name:"Chaney Johnson",     position:"F", jersey:"23", height:"6ft 9in",  college:"Arizona",         country:"USA",       hometown:"Las Vegas, Nevada",            draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Nic Claxton",        position:"C", jersey:"33", height:"6ft 11in", college:"Georgia",         country:"USA",       hometown:"Conway, South Carolina",       draft_year:"2019", draft_pick:"31",        draft_team:"Brooklyn Nets",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Day'Ron Sharpe",     position:"C", jersey:"20", height:"6ft 11in", college:"North Carolina",  country:"USA",       hometown:"Sumter, South Carolina",       draft_year:"2021", draft_pick:"29",        draft_team:"Brooklyn Nets",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Noah Clowney",       position:"C", jersey:"21", height:"6ft 10in", college:"Alabama",         country:"USA",       hometown:"Rock Hill, South Carolina",    draft_year:"2023", draft_pick:"21",        draft_team:"Brooklyn Nets",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Danny Wolf",         position:"C", jersey:"16", height:"7ft 1in",  college:"Michigan",        country:"USA",       hometown:"Westport, Connecticut",        draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7398,6 +7442,10 @@ const TEAM_COACHING_STAFF = {
   "Boston Celtics": {
     head: "Joe Mazzulla",
     assistants: ["Charles Lee", "Damon Stoudamire", "Sam Cassell", "Ben Sullivan"]
+  },
+  "Brooklyn Nets": {
+    head: "Jordi Fernandez",
+    assistants: ["Will Hardy", "Royal Ivey", "Rasheed Wallace", "Aleksandar Dzikic"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7554,7 +7602,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Sacramento Kings": { name: "Domantas Sabonis", stat: "382 blk" },
   "San Antonio Spurs": { name: "David Robinson", stat: "2,954 blk" },
   "Atlanta Hawks": { name: "Dikembe Mutombo", stat: "1,334 blk" },
-  "Boston Celtics": { name: "Robert Parish", stat: "1,703 blk" }
+  "Boston Celtics": { name: "Robert Parish", stat: "1,703 blk" },
+  "Brooklyn Nets": { name: "Brook Lopez", stat: "1,268 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7573,7 +7622,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Sacramento Kings": { name: "Domantas Sabonis", stat: "5,765 reb" },
   "San Antonio Spurs": { name: "Tim Duncan", stat: "15,091 reb" },
   "Atlanta Hawks": { name: "Bob Pettit", stat: "12,849 reb" },
-  "Boston Celtics": { name: "Robert Parish", stat: "14,715 reb" }
+  "Boston Celtics": { name: "Robert Parish", stat: "14,715 reb" },
+  "Brooklyn Nets": { name: "Buck Williams", stat: "7,576 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -7592,7 +7642,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Sacramento Kings": { name: "Oscar Robertson", stat: "22,009 pts" },
   "San Antonio Spurs": { name: "Tim Duncan", stat: "26,496 pts" },
   "Atlanta Hawks": { name: "Dominique Wilkins", stat: "23,292 pts" },
-  "Boston Celtics": { name: "John Havlicek", stat: "26,395 pts" }
+  "Boston Celtics": { name: "John Havlicek", stat: "26,395 pts" },
+  "Brooklyn Nets": { name: "Brook Lopez", stat: "10,859 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -7611,7 +7662,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Sacramento Kings": { name: "Oscar Robertson", stat: "7,731 ast" },
   "San Antonio Spurs": { name: "Tony Parker", stat: "6,212 ast" },
   "Atlanta Hawks": { name: "Mookie Blaylock", stat: "5,557 ast" },
-  "Boston Celtics": { name: "Bob Cousy", stat: "6,945 ast" }
+  "Boston Celtics": { name: "Bob Cousy", stat: "6,945 ast" },
+  "Brooklyn Nets": { name: "Jason Kidd", stat: "4,620 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -9428,6 +9480,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = CELTICS_TEAM;
     _activeRoster = CELTICS_ROSTER;
     _activeLineup = CELTICS_STARTING_LINEUP;
+  } else if (teamId === 'nets') {
+    _activeTeam   = NETS_TEAM;
+    _activeRoster = NETS_ROSTER;
+    _activeLineup = NETS_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
