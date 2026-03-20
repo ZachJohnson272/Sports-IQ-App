@@ -6080,7 +6080,7 @@
             <p class="lp-rgen-intro">Mixed sessions from your Team Mastery flashcard modes.</p>
 
             <!-- Mixed Chaos -->
-            <div class="lp-rgen-card lp-rgen-card--chaos" onclick="startGeneratedMode('mixed')">
+            <div class="lp-rgen-card lp-rgen-card--chaos" onclick="startGeneratedMode('mixed','team')">
               <div class="lp-rgen-top">
                 <span class="lp-rgen-name">🎲 Mixed Chaos</span>
                 <span class="lp-rgen-badge badge--fun">FUN</span>
@@ -6093,7 +6093,7 @@
             </div>
 
             <!-- Weak Spot Trainer -->
-            <div class="lp-rgen-card lp-rgen-card--weak" onclick="startGeneratedMode('weakSpots')">
+            <div class="lp-rgen-card lp-rgen-card--weak" onclick="startGeneratedMode('weakSpots','team')">
               <div class="lp-rgen-top">
                 <span class="lp-rgen-name">🎯 Weak Spot Trainer</span>
                 <span class="lp-rgen-badge badge--drill">DRILL</span>
@@ -6106,7 +6106,7 @@
             </div>
 
             <!-- Daily Challenge -->
-            <div class="lp-rgen-card lp-rgen-card--daily" onclick="startGeneratedMode('daily')">
+            <div class="lp-rgen-card lp-rgen-card--daily" onclick="startGeneratedMode('daily','team')">
               <div class="lp-rgen-top">
                 <span class="lp-rgen-name">📅 Daily Challenge</span>
                 <span class="lp-rgen-badge badge--daily">DAILY</span>
@@ -8919,12 +8919,21 @@ function goBackToSessionModes() {
     if (bar) bar.style.display = 'flex';
 
     if (t.path === 'random') {
-      // Restore to League Knowledge > Random section
-      _lpPath = 'league';
-      document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.add('active');
-      document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.remove('active');
-      lpShowPanel('lp-panel-3-league');
-      lpSelectLeagueCat('random');
+      if (t.fromPath === 'team') {
+        // Return to Team Mastery > Random section
+        _lpPath = 'team';
+        document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.remove('active');
+        document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.add('active');
+        lpShowPanel('lp-panel-4-team');
+        lpSelectTeamCat('random');
+      } else {
+        // Return to League Knowledge > Random section
+        _lpPath = 'league';
+        document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.add('active');
+        document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.remove('active');
+        lpShowPanel('lp-panel-3-league');
+        lpSelectLeagueCat('random');
+      }
     } else if (t.path === 'league') {
       _lpPath = 'league';
       document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.add('active');
@@ -9499,9 +9508,10 @@ const RANDOM_GENERATORS = {
 };
 
 // ── Main entry point ────────────────────────────────────────
-function startGeneratedMode(type) {
-  // Always store random as the return target
-  setSessionReturnTarget({ path: 'random' });
+function startGeneratedMode(type, fromPath) {
+  // Store return target with originating path so exit goes back to correct section
+  const returnPath = fromPath || 'league';
+  setSessionReturnTarget({ path: 'random', fromPath: returnPath });
   const gen = RANDOM_GENERATORS[type];
   if (!gen) { console.error('Unknown generator:', type); return; }
 
@@ -9554,7 +9564,7 @@ function startGeneratedMode(type) {
 }
 
 // ── lpStartRandom (legacy alias — maps to mixed) ────────────
-function lpStartRandom() { startGeneratedMode('mixed'); }
+function lpStartRandom() { startGeneratedMode('mixed','team'); }
 
 function _lpRandTotal() { return _randDeck.length; }
 
