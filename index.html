@@ -5577,7 +5577,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">San Antonio Spurs</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('spurs','San Antonio Spurs','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">San Antonio Spurs</div>
+                <div class="lp-ct-sub">14 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
           </div>
         </div>
       </div>
@@ -6934,6 +6940,42 @@ const KINGS_ROSTER = [
   { name:"Dylan Cardwell",       position:"C", jersey:"15", height:"6ft 10in", college:"Auburn",          country:"USA",       hometown:"Huntsville, Alabama",          draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
 ];
 
+const SPURS_TEAM = {
+  name: "San Antonio Spurs",
+  city: "San Antonio",
+  conference: "West",
+  division: "Southwest",
+  arena: "Frost Bank Center",
+  mascot: "The Coyote",
+  colors: "Black, Silver, White",
+  championships: "5",
+  lastTitle: "2014",
+  abbreviation: "SAS",
+  coach: "Mitch Johnson",
+  coachPrevTeam: { team: "San Antonio Spurs", role: "Interim Head Coach" },
+  coachSince: "2024"
+};
+
+const SPURS_STARTING_LINEUP = { PG:"De'Aaron Fox", SG:"Stephon Castle", SF:"Devin Vassell", PF:"Harrison Barnes", C:"Victor Wembanyama" };
+
+const SPURS_ROSTER = [
+  { name:"De'Aaron Fox",        position:"G", jersey:"4",  height:"6ft 3in",  college:"Kentucky",        country:"USA",       hometown:"Cypress, Texas",               draft_year:"2017", draft_pick:"5",         draft_team:"Sacramento Kings",      past_teams:[{team:"Sacramento Kings",dur:"7 seasons"}],                                                                                                        jazz_years:"1 season" },
+  { name:"Stephon Castle",      position:"G", jersey:"5",  height:"6ft 6in",  college:"Connecticut",     country:"USA",       hometown:"Douglasville, Georgia",        draft_year:"2024", draft_pick:"4",         draft_team:"San Antonio Spurs",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Dylan Harper",        position:"G", jersey:"14", height:"6ft 6in",  college:"Rutgers",         country:"USA",       hometown:"Teaneck, New Jersey",          draft_year:"2025", draft_pick:"2",         draft_team:"San Antonio Spurs",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jordan McLaughlin",   position:"G", jersey:"7",  height:"6ft 0in",  college:"USC",             country:"USA",       hometown:"Temecula, California",         draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Minnesota Timberwolves",dur:"3 seasons"},{team:"Cleveland Cavaliers",dur:"1 season"}],                                                      jazz_years:"1 season" },
+  { name:"Devin Vassell",       position:"F", jersey:"24", height:"6ft 6in",  college:"Florida State",   country:"USA",       hometown:"Boynton Beach, Florida",       draft_year:"2020", draft_pick:"11",        draft_team:"San Antonio Spurs",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Keldon Johnson",      position:"F", jersey:"3",  height:"6ft 5in",  college:"Kentucky",        country:"USA",       hometown:"Asheboro, North Carolina",     draft_year:"2019", draft_pick:"29",        draft_team:"San Antonio Spurs",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Harrison Barnes",     position:"F", jersey:"40", height:"6ft 8in",  college:"North Carolina",  country:"USA",       hometown:"Ames, Iowa",                   draft_year:"2012", draft_pick:"7",         draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"4 seasons"},{team:"Dallas Mavericks",dur:"3 seasons"},{team:"Sacramento Kings",dur:"5 seasons"}],              jazz_years:"1 season" },
+  { name:"Julian Champagnie",   position:"F", jersey:"30", height:"6ft 8in",  college:"St. John's",      country:"USA",       hometown:"Brooklyn, New York",           draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Toronto Raptors",dur:"1 season"},{team:"Philadelphia 76ers",dur:"1 season"}],                                                              jazz_years:"1 season" },
+  { name:"Carter Bryant",       position:"F", jersey:"17", height:"6ft 9in",  college:"Arizona",         country:"USA",       hometown:"Gilbert, Arizona",             draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Victor Wembanyama",   position:"C", jersey:"1",  height:"7ft 4in",  college:"None",            country:"France",    hometown:"Le Chesnay, France",           draft_year:"2023", draft_pick:"1",         draft_team:"San Antonio Spurs",     past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Kelly Olynyk",        position:"F", jersey:"13", height:"7ft 0in",  college:"Gonzaga",         country:"Canada",    hometown:"Kamloops, British Columbia",   draft_year:"2013", draft_pick:"13",        draft_team:"Boston Celtics",         past_teams:[{team:"Boston Celtics",dur:"4 seasons"},{team:"Miami Heat",dur:"1 season"},{team:"Houston Rockets",dur:"2 seasons"},{team:"Detroit Pistons",dur:"1 season"},{team:"Utah Jazz",dur:"1 season"},{team:"Cleveland Cavaliers",dur:"1 season"},{team:"Portland Trail Blazers",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Luke Kornet",         position:"C", jersey:"2",  height:"7ft 1in",  college:"Vanderbilt",      country:"USA",       hometown:"Nashville, Tennessee",         draft_year:"2017", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"New York Knicks",dur:"2 seasons"},{team:"Chicago Bulls",dur:"1 season"},{team:"Cleveland Cavaliers",dur:"1 season"},{team:"Boston Celtics",dur:"3 seasons"}], jazz_years:"1 season" },
+  { name:"Bismack Biyombo",     position:"C", jersey:"8",  height:"6ft 9in",  college:"None",            country:"DR Congo",  hometown:"Lubumbashi, DR Congo",         draft_year:"2011", draft_pick:"7",         draft_team:"Sacramento Kings",      past_teams:[{team:"Charlotte Bobcats",dur:"2 seasons"},{team:"Toronto Raptors",dur:"2 seasons"},{team:"Orlando Magic",dur:"2 seasons"},{team:"Charlotte Hornets",dur:"1 season"},{team:"Phoenix Suns",dur:"1 season"},{team:"Indiana Pacers",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Mason Plumlee",       position:"C", jersey:"44", height:"6ft 11in", college:"Duke",            country:"USA",       hometown:"Warsaw, Indiana",              draft_year:"2013", draft_pick:"22",        draft_team:"Brooklyn Nets",         past_teams:[{team:"Brooklyn Nets",dur:"2 seasons"},{team:"Portland Trail Blazers",dur:"2 seasons"},{team:"Denver Nuggets",dur:"3 seasons"},{team:"Detroit Pistons",dur:"2 seasons"},{team:"Charlotte Hornets",dur:"2 seasons"},{team:"Los Angeles Clippers",dur:"1 season"},{team:"Milwaukee Bucks",dur:"1 season"}], jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7257,6 +7299,10 @@ const TEAM_COACHING_STAFF = {
   "Sacramento Kings": {
     head: "Doug Christie",
     assistants: ["Jordi Fernandez", "Nate Tibbetts", "Rex Kalamian", "Bobby Jackson"]
+  },
+  "San Antonio Spurs": {
+    head: "Mitch Johnson",
+    assistants: ["Will Hardy", "Becky Hammon", "Tim Duncan", "Sean Marks"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7410,7 +7456,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Oklahoma City Thunder": { name: "Serge Ibaka", stat: "1,131 blk" },
   "Phoenix Suns": { name: "Alvan Adams", stat: "518 blk" },
   "Portland Trail Blazers": { name: "Mychal Thompson", stat: "762 blk" },
-  "Sacramento Kings": { name: "Domantas Sabonis", stat: "382 blk" }
+  "Sacramento Kings": { name: "Domantas Sabonis", stat: "382 blk" },
+  "San Antonio Spurs": { name: "David Robinson", stat: "2,954 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7426,7 +7473,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Oklahoma City Thunder": { name: "Kevin Durant", stat: "5,427 reb" },
   "Phoenix Suns": { name: "Amar'e Stoudemire", stat: "5,765 reb" },
   "Portland Trail Blazers": { name: "Bill Walton", stat: "4,177 reb" },
-  "Sacramento Kings": { name: "Domantas Sabonis", stat: "5,765 reb" }
+  "Sacramento Kings": { name: "Domantas Sabonis", stat: "5,765 reb" },
+  "San Antonio Spurs": { name: "Tim Duncan", stat: "15,091 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -7442,7 +7490,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Oklahoma City Thunder": { name: "Kevin Durant", stat: "17,566 pts" },
   "Phoenix Suns": { name: "Walter Davis", stat: "15,666 pts" },
   "Portland Trail Blazers": { name: "Clyde Drexler", stat: "18,040 pts" },
-  "Sacramento Kings": { name: "Oscar Robertson", stat: "22,009 pts" }
+  "Sacramento Kings": { name: "Oscar Robertson", stat: "22,009 pts" },
+  "San Antonio Spurs": { name: "Tim Duncan", stat: "26,496 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -7458,7 +7507,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Oklahoma City Thunder": { name: "Russell Westbrook", stat: "6,812 ast" },
   "Phoenix Suns": { name: "Steve Nash", stat: "6,997 ast" },
   "Portland Trail Blazers": { name: "Terry Porter", stat: "5,319 ast" },
-  "Sacramento Kings": { name: "Oscar Robertson", stat: "7,731 ast" }
+  "Sacramento Kings": { name: "Oscar Robertson", stat: "7,731 ast" },
+  "San Antonio Spurs": { name: "Tony Parker", stat: "6,212 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -9263,6 +9313,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = KINGS_TEAM;
     _activeRoster = KINGS_ROSTER;
     _activeLineup = KINGS_STARTING_LINEUP;
+  } else if (teamId === 'spurs') {
+    _activeTeam   = SPURS_TEAM;
+    _activeRoster = SPURS_ROSTER;
+    _activeLineup = SPURS_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
