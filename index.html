@@ -5556,7 +5556,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Phoenix Suns</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('suns','Phoenix Suns','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Phoenix Suns</div>
+                <div class="lp-ct-sub">14 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Portland Trail Blazers</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Sacramento Kings</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">San Antonio Spurs</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -6805,6 +6811,42 @@ const OKC_ROSTER = [
   { name:"Branden Carlson",         position:"C", jersey:"1",  height:"7ft 1in",  college:"Utah",            country:"USA",       hometown:"Long Beach, California",       draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Utah Jazz",dur:"2 seasons"}],                                                                                                               jazz_years:"1 season" },
 ];
 
+const SUNS_TEAM = {
+  name: "Phoenix Suns",
+  city: "Phoenix",
+  conference: "West",
+  division: "Pacific",
+  arena: "Footprint Center",
+  mascot: "Go",
+  colors: "Purple, Orange, Black",
+  championships: "0",
+  lastTitle: "N/A",
+  abbreviation: "PHX",
+  coach: "Mike Budenholzer",
+  coachPrevTeam: { team: "Milwaukee Bucks", role: "Head Coach" },
+  coachSince: "2023"
+};
+
+const SUNS_STARTING_LINEUP = { PG:"Devin Booker", SG:"Jalen Green", SF:"Dillon Brooks", PF:"Royce O'Neale", C:"Mark Williams" };
+
+const SUNS_ROSTER = [
+  { name:"Devin Booker",      position:"G", jersey:"1",  height:"6ft 5in",  college:"Kentucky",       country:"USA",      hometown:"Grand Rapids, Michigan",       draft_year:"2015", draft_pick:"13",        draft_team:"Phoenix Suns",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jalen Green",       position:"G", jersey:"14", height:"6ft 4in",  college:"None",            country:"USA",      hometown:"Fresno, California",           draft_year:"2021", draft_pick:"2",         draft_team:"Houston Rockets",        past_teams:[{team:"Houston Rockets",dur:"4 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Grayson Allen",     position:"G", jersey:"8",  height:"6ft 4in",  college:"Duke",            country:"USA",      hometown:"Jacksonville, Florida",        draft_year:"2018", draft_pick:"21",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"1 season"},{team:"Memphis Grizzlies",dur:"1 season"},{team:"Milwaukee Bucks",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Collin Gillespie",  position:"G", jersey:"7",  height:"6ft 3in",  college:"Villanova",       country:"USA",      hometown:"Philadelphia, Pennsylvania",   draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Toronto Raptors",dur:"1 season"},{team:"Los Angeles Lakers",dur:"1 season"}],                                                          jazz_years:"1 season" },
+  { name:"Jordan Goodwin",    position:"G", jersey:"4",  height:"6ft 3in",  college:"Saint Louis",     country:"USA",      hometown:"St. Louis, Missouri",          draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Washington Wizards",dur:"1 season"},{team:"Houston Rockets",dur:"1 season"},{team:"Memphis Grizzlies",dur:"1 season"}],                  jazz_years:"1 season" },
+  { name:"Jamaree Bouyea",    position:"G", jersey:"5",  height:"6ft 2in",  college:"San Francisco",   country:"USA",      hometown:"San Diego, California",        draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Golden State Warriors",dur:"1 season"},{team:"Portland Trail Blazers",dur:"1 season"}],                                                  jazz_years:"1 season" },
+  { name:"Koby Brea",         position:"G", jersey:"10", height:"6ft 6in",  college:"Dayton",          country:"Ivory Coast",hometown:"Abidjan, Ivory Coast",       draft_year:"2024", draft_pick:"27",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"1 season"}],                                                                                                            jazz_years:"1 season" },
+  { name:"Dillon Brooks",     position:"F", jersey:"9",  height:"6ft 7in",  college:"Oregon",          country:"Canada",   hometown:"Mississauga, Ontario",         draft_year:"2017", draft_pick:"45",        draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"6 seasons"},{team:"Houston Rockets",dur:"1 season"}],                                                            jazz_years:"1 season" },
+  { name:"Royce O'Neale",     position:"F", jersey:"0",  height:"6ft 5in",  college:"Baylor",          country:"USA",      hometown:"Cedar Hill, Texas",            draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Utah Jazz",dur:"4 seasons"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Houston Rockets",dur:"2 seasons"}],                              jazz_years:"1 season" },
+  { name:"Amir Coffey",       position:"F", jersey:"6",  height:"6ft 7in",  college:"Minnesota",       country:"USA",      hometown:"Burnsville, Minnesota",        draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"LA Clippers",dur:"4 seasons"},{team:"Houston Rockets",dur:"1 season"}],                                                                   jazz_years:"1 season" },
+  { name:"Ryan Dunn",         position:"F", jersey:"13", height:"6ft 7in",  college:"Virginia",        country:"USA",      hometown:"White Plains, New York",       draft_year:"2024", draft_pick:"28",        draft_team:"Phoenix Suns",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Rasheer Fleming",   position:"F", jersey:"20", height:"6ft 8in",  college:"Saint Joseph's",  country:"USA",      hometown:"Philadelphia, Pennsylvania",   draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Mark Williams",     position:"C", jersey:"5",  height:"7ft 0in",  college:"Duke",            country:"USA",      hometown:"Lake Norman, North Carolina",  draft_year:"2022", draft_pick:"15",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"2 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Khaman Maluach",    position:"C", jersey:"6",  height:"7ft 2in",  college:"Duke",            country:"South Sudan",hometown:"Wau, South Sudan",           draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7113,6 +7155,10 @@ const TEAM_COACHING_STAFF = {
   "Oklahoma City Thunder": {
     head: "Mark Daigneault",
     assistants: ["Chip Engelland", "Dave Bliss", "Mike Wilks", "Mitch Johnson"]
+  },
+  "Phoenix Suns": {
+    head: "Mike Budenholzer",
+    assistants: ["Kevin Young", "Nate Tibbetts", "David Fizdale", "Roy Rogers"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7263,7 +7309,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Memphis Grizzlies": { name: "Marc Gasol", stat: "1,040 blk" },
   "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "1,821 blk" },
   "New Orleans Pelicans": { name: "Anthony Davis", stat: "827 blk" },
-  "Oklahoma City Thunder": { name: "Serge Ibaka", stat: "1,131 blk" }
+  "Oklahoma City Thunder": { name: "Serge Ibaka", stat: "1,131 blk" },
+  "Phoenix Suns": { name: "Alvan Adams", stat: "518 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7276,7 +7323,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Memphis Grizzlies": { name: "Marc Gasol", stat: "6,108 reb" },
   "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "14,662 reb" },
   "New Orleans Pelicans": { name: "Anthony Davis", stat: "5,765 reb" },
-  "Oklahoma City Thunder": { name: "Kevin Durant", stat: "5,427 reb" }
+  "Oklahoma City Thunder": { name: "Kevin Durant", stat: "5,427 reb" },
+  "Phoenix Suns": { name: "Amar'e Stoudemire", stat: "5,765 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -7289,7 +7337,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Memphis Grizzlies": { name: "Zach Randolph", stat: "12,535 pts" },
   "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "19,201 pts" },
   "New Orleans Pelicans": { name: "Anthony Davis", stat: "14,062 pts" },
-  "Oklahoma City Thunder": { name: "Kevin Durant", stat: "17,566 pts" }
+  "Oklahoma City Thunder": { name: "Kevin Durant", stat: "17,566 pts" },
+  "Phoenix Suns": { name: "Walter Davis", stat: "15,666 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -7302,7 +7351,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Memphis Grizzlies": { name: "Mike Conley", stat: "4,979 ast" },
   "Minnesota Timberwolves": { name: "Kevin Garnett", stat: "5,445 ast" },
   "New Orleans Pelicans": { name: "Rajon Rondo", stat: "2,169 ast" },
-  "Oklahoma City Thunder": { name: "Russell Westbrook", stat: "6,812 ast" }
+  "Oklahoma City Thunder": { name: "Russell Westbrook", stat: "6,812 ast" },
+  "Phoenix Suns": { name: "Steve Nash", stat: "6,997 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -9086,6 +9136,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = OKC_TEAM;
     _activeRoster = OKC_ROSTER;
     _activeLineup = OKC_STARTING_LINEUP;
+  } else if (teamId === 'suns') {
+    _activeTeam   = SUNS_TEAM;
+    _activeRoster = SUNS_ROSTER;
+    _activeLineup = SUNS_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
