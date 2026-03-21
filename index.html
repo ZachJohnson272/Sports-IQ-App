@@ -5650,7 +5650,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Indiana Pacers</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('pacers','Indiana Pacers','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Indiana Pacers</div>
+                <div class="lp-ct-sub">18 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Miami Heat</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Milwaukee Bucks</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">New York Knicks</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -7276,6 +7282,46 @@ const PISTONS_ROSTER = [
   { name:"Duncan Robinson",      position:"G", jersey:"55", height:"6ft 7in",  college:"Michigan",         country:"USA",       hometown:"Williamstown, Massachusetts",  draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Miami Heat",dur:"5 seasons"}],                                                                                                                 jazz_years:"1 season" },
 ];
 
+const PACERS_TEAM = {
+  name: "Indiana Pacers",
+  city: "Indianapolis",
+  conference: "East",
+  division: "Central",
+  arena: "Gainbridge Fieldhouse",
+  mascot: "Boomer",
+  colors: "Gold, Blue, White",
+  championships: "0",
+  lastTitle: "N/A",
+  abbreviation: "IND",
+  coach: "Rick Carlisle",
+  coachPrevTeam: { team: "Dallas Mavericks", role: "Head Coach" },
+  coachSince: "2021"
+};
+
+const PACERS_STARTING_LINEUP = { PG:"Tyrese Haliburton", SG:"Andrew Nembhard", SF:"Aaron Nesmith", PF:"Pascal Siakam", C:"Ivica Zubac" };
+
+const PACERS_ROSTER = [
+  { name:"Tyrese Haliburton",  position:"G", jersey:"0",  height:"6ft 5in",  college:"Iowa State",      country:"USA",       hometown:"Oshkosh, Wisconsin",           draft_year:"2020", draft_pick:"12",        draft_team:"Sacramento Kings",       past_teams:[{team:"Sacramento Kings",dur:"1 season"}],                                                                                                     jazz_years:"1 season" },
+  { name:"Andrew Nembhard",    position:"G", jersey:"2",  height:"6ft 5in",  college:"Gonzaga",         country:"Canada",    hometown:"Orlando, Florida",             draft_year:"2022", draft_pick:"31",        draft_team:"Indiana Pacers",         past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"T.J. McConnell",     position:"G", jersey:"9",  height:"6ft 1in",  college:"Arizona",         country:"USA",       hometown:"Pittsburgh, Pennsylvania",     draft_year:"2015", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Philadelphia 76ers",dur:"3 seasons"}],                                                                                                  jazz_years:"1 season" },
+  { name:"Ben Sheppard",       position:"G", jersey:"26", height:"6ft 6in",  college:"Belmont",         country:"USA",       hometown:"Zionsville, Indiana",          draft_year:"2023", draft_pick:"26",        draft_team:"Indiana Pacers",         past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Ethan Thompson",     position:"G", jersey:"8",  height:"6ft 5in",  college:"Oregon State",    country:"Canada",    hometown:"Mississauga, Ontario, Canada", draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Charlotte Hornets",dur:"1 season"},{team:"Brooklyn Nets",dur:"1 season"}],                                                               jazz_years:"1 season" },
+  { name:"Pascal Siakam",      position:"F", jersey:"43", height:"6ft 9in",  college:"New Mexico State",country:"Cameroon",  hometown:"Douala, Cameroon",             draft_year:"2016", draft_pick:"27",        draft_team:"Toronto Raptors",        past_teams:[{team:"Toronto Raptors",dur:"7 seasons"}],                                                                                                     jazz_years:"1 season" },
+  { name:"Aaron Nesmith",      position:"F", jersey:"23", height:"6ft 6in",  college:"Vanderbilt",      country:"USA",       hometown:"Charlotte, North Carolina",    draft_year:"2020", draft_pick:"14",        draft_team:"Boston Celtics",         past_teams:[{team:"Boston Celtics",dur:"2 seasons"}],                                                                                                      jazz_years:"1 season" },
+  { name:"Jarace Walker",      position:"F", jersey:"5",  height:"6ft 8in",  college:"Houston",         country:"USA",       hometown:"New York, New York",           draft_year:"2023", draft_pick:"8",         draft_team:"Indiana Pacers",         past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Obi Toppin",         position:"F", jersey:"1",  height:"6ft 9in",  college:"Dayton",          country:"USA",       hometown:"Brooklyn, New York",           draft_year:"2020", draft_pick:"8",         draft_team:"New York Knicks",        past_teams:[{team:"New York Knicks",dur:"3 seasons"}],                                                                                                     jazz_years:"1 season" },
+  { name:"Kobe Brown",         position:"F", jersey:"0",  height:"6ft 7in",  college:"Missouri",        country:"USA",       hometown:"Rock Hill, South Carolina",    draft_year:"2023", draft_pick:"49",        draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"1 season"},{team:"Milwaukee Bucks",dur:"1 season"}],                                                           jazz_years:"1 season" },
+  { name:"Johnny Furphy",      position:"F", jersey:"12", height:"6ft 8in",  college:"Kansas",          country:"Australia", hometown:"Melbourne, Australia",         draft_year:"2024", draft_pick:"28",        draft_team:"Indiana Pacers",         past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Quenton Jackson",    position:"F", jersey:"0",  height:"6ft 5in",  college:"Texas A&M",       country:"USA",       hometown:"Fort Worth, Texas",            draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Los Angeles Lakers",dur:"1 season"},{team:"Memphis Grizzlies",dur:"1 season"}],                                                          jazz_years:"1 season" },
+  { name:"Kam Jones",          position:"G", jersey:"7",  height:"6ft 5in",  college:"Marquette",       country:"USA",       hometown:"Milwaukee, Wisconsin",         draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Ivica Zubac",        position:"C", jersey:"40", height:"7ft 0in",  college:"None",            country:"Croatia",   hometown:"Mostar, Bosnia",               draft_year:"2016", draft_pick:"32",        draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"2 seasons"},{team:"LA Clippers",dur:"6 seasons"}],                                                              jazz_years:"1 season" },
+  { name:"James Huff",         position:"C", jersey:"15", height:"7ft 1in",  college:"High Point",      country:"USA",       hometown:"Charlotte, North Carolina",    draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Tony Bradley",       position:"C", jersey:"13", height:"6ft 10in", college:"North Carolina",  country:"USA",       hometown:"Bartow, Florida",              draft_year:"2017", draft_pick:"28",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"2 seasons"},{team:"Philadelphia 76ers",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Charlotte Hornets",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Micah Potter",       position:"C", jersey:"20", height:"6ft 10in", college:"Ohio State",      country:"USA",       hometown:"Maumee, Ohio",                 draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Milwaukee Bucks",dur:"1 season"},{team:"Chicago Bulls",dur:"1 season"}],                                                                   jazz_years:"1 season" },
+  { name:"Jalen Slawson",      position:"C", jersey:"17", height:"6ft 9in",  college:"Furman",          country:"USA",       hometown:"Travelers Rest, South Carolina",draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7639,6 +7685,10 @@ const TEAM_COACHING_STAFF = {
   "Detroit Pistons": {
     head: "JB Bickerstaff",
     assistants: ["Rex Kalamian", "Mike Longabardi", "Sam Mitchell", "Lamont Evans"]
+  },
+  "Indiana Pacers": {
+    head: "Rick Carlisle",
+    assistants: ["Dan Burke", "Greg Foster", "Bill Bayno", "Brendan Suhr"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7800,7 +7850,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Charlotte Hornets": { name: "Alonzo Mourning", stat: "684 blk" },
   "Chicago Bulls": { name: "Artis Gilmore", stat: "1,029 blk" },
   "Cleveland Cavaliers": { name: "Zydrunas Ilgauskas", stat: "1,269 blk" },
-  "Detroit Pistons": { name: "Ben Wallace", stat: "1,448 blk" }
+  "Detroit Pistons": { name: "Ben Wallace", stat: "1,448 blk" },
+  "Indiana Pacers": { name: "Mel Daniels", stat: "969 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7824,7 +7875,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Charlotte Hornets": { name: "Emeka Okafor", stat: "4,477 reb" },
   "Chicago Bulls": { name: "Artis Gilmore", stat: "8,982 reb" },
   "Cleveland Cavaliers": { name: "Zydrunas Ilgauskas", stat: "8,055 reb" },
-  "Detroit Pistons": { name: "Bill Laimbeer", stat: "9,430 reb" }
+  "Detroit Pistons": { name: "Bill Laimbeer", stat: "9,430 reb" },
+  "Indiana Pacers": { name: "Mel Daniels", stat: "7,643 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -7848,7 +7900,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Charlotte Hornets": { name: "Dell Curry", stat: "9,839 pts" },
   "Chicago Bulls": { name: "Michael Jordan", stat: "21,541 pts" },
   "Cleveland Cavaliers": { name: "LeBron James", stat: "23,119 pts" },
-  "Detroit Pistons": { name: "Isiah Thomas", stat: "18,822 pts" }
+  "Detroit Pistons": { name: "Isiah Thomas", stat: "18,822 pts" },
+  "Indiana Pacers": { name: "Reggie Miller", stat: "18,041 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -7872,7 +7925,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Charlotte Hornets": { name: "Muggsy Bogues", stat: "5,557 ast" },
   "Chicago Bulls": { name: "Michael Jordan", stat: "5,012 ast" },
   "Cleveland Cavaliers": { name: "LeBron James", stat: "7,825 ast" },
-  "Detroit Pistons": { name: "Isiah Thomas", stat: "9,061 ast" }
+  "Detroit Pistons": { name: "Isiah Thomas", stat: "9,061 ast" },
+  "Indiana Pacers": { name: "Reggie Miller", stat: "4,141 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -9709,6 +9763,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = PISTONS_TEAM;
     _activeRoster = PISTONS_ROSTER;
     _activeLineup = PISTONS_STARTING_LINEUP;
+  } else if (teamId === 'pacers') {
+    _activeTeam   = PACERS_TEAM;
+    _activeRoster = PACERS_ROSTER;
+    _activeLineup = PACERS_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
