@@ -5678,7 +5678,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Orlando Magic</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('magic','Orlando Magic','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Orlando Magic</div>
+                <div class="lp-ct-sub">18 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Philadelphia 76ers</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Toronto Raptors</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Washington Wizards</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -7455,6 +7461,46 @@ const KNICKS_ROSTER = [
   { name:"Trey Jemison III",     position:"C", jersey:"7",  height:"7ft 0in",  college:"Pittsburgh",      country:"USA",       hometown:"Birmingham, Alabama",          draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"New Orleans Pelicans",dur:"1 season"}],                                                                                                 jazz_years:"1 season" },
 ];
 
+const MAGIC_TEAM = {
+  name: "Orlando Magic",
+  city: "Orlando",
+  conference: "East",
+  division: "Southeast",
+  arena: "Kia Center",
+  mascot: "Stuff the Magic Dragon",
+  colors: "Blue, Black, Silver",
+  championships: "0",
+  lastTitle: "N/A",
+  abbreviation: "ORL",
+  coach: "Jamahl Mosley",
+  coachPrevTeam: { team: "Dallas Mavericks", role: "Assistant Coach" },
+  coachSince: "2021"
+};
+
+const MAGIC_STARTING_LINEUP = { PG:"Jalen Suggs", SG:"Desmond Bane", SF:"Franz Wagner", PF:"Paolo Banchero", C:"Wendell Carter Jr." };
+
+const MAGIC_ROSTER = [
+  { name:"Jalen Suggs",          position:"G", jersey:"4",  height:"6ft 4in",  college:"Gonzaga",         country:"USA",       hometown:"Minneapolis, Minnesota",       draft_year:"2021", draft_pick:"5",         draft_team:"Orlando Magic",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Anthony Black",        position:"G", jersey:"0",  height:"6ft 7in",  college:"Arkansas",        country:"USA",       hometown:"Coppell, Texas",               draft_year:"2023", draft_pick:"6",         draft_team:"Orlando Magic",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Tyus Jones",           position:"G", jersey:"21", height:"6ft 0in",  college:"Duke",            country:"USA",       hometown:"Apple Valley, Minnesota",      draft_year:"2015", draft_pick:"24",        draft_team:"Minnesota Timberwolves", past_teams:[{team:"Minnesota Timberwolves",dur:"2 seasons"},{team:"Memphis Grizzlies",dur:"4 seasons"},{team:"Washington Wizards",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"},{team:"Denver Nuggets",dur:"1 season"},{team:"Charlotte Hornets",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Jevon Carter",         position:"G", jersey:"5",  height:"6ft 2in",  college:"West Virginia",   country:"USA",       hometown:"Maywood, Illinois",            draft_year:"2018", draft_pick:"32",        draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"1 season"},{team:"Phoenix Suns",dur:"1 season"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Milwaukee Bucks",dur:"2 seasons"},{team:"Miami Heat",dur:"1 season"},{team:"Chicago Bulls",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Jase Richardson",      position:"G", jersey:"3",  height:"6ft 2in",  college:"Michigan State",  country:"USA",       hometown:"Malibu, California",           draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Alex Morales",         position:"G", jersey:"9",  height:"6ft 6in",  college:"North Carolina",  country:"Dominican Republic",hometown:"Santo Domingo, Dominican Republic", draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Paolo Banchero",       position:"F", jersey:"5",  height:"6ft 10in", college:"Duke",            country:"USA",       hometown:"Seattle, Washington",          draft_year:"2022", draft_pick:"1",         draft_team:"Orlando Magic",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Franz Wagner",         position:"F", jersey:"21", height:"6ft 10in", college:"Michigan",        country:"Germany",   hometown:"Berlin, Germany",              draft_year:"2021", draft_pick:"8",         draft_team:"Orlando Magic",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Desmond Bane",         position:"F", jersey:"22", height:"6ft 6in",  college:"TCU",             country:"USA",       hometown:"Richmond, Indiana",            draft_year:"2020", draft_pick:"30",        draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"4 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Jonathan Isaac",       position:"F", jersey:"1",  height:"6ft 11in", college:"Florida State",   country:"USA",       hometown:"Longwood, Florida",            draft_year:"2017", draft_pick:"6",         draft_team:"Orlando Magic",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Tristan da Silva",     position:"F", jersey:"31", height:"6ft 8in",  college:"Colorado",        country:"Brazil",    hometown:"Sao Paulo, Brazil",            draft_year:"2024", draft_pick:"18",        draft_team:"Orlando Magic",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jett Howard",          position:"F", jersey:"13", height:"6ft 6in",  college:"Michigan",        country:"USA",       hometown:"Missoula, Montana",            draft_year:"2023", draft_pick:"11",        draft_team:"Orlando Magic",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Noah Penda",           position:"F", jersey:"17", height:"6ft 8in",  college:"None",            country:"France",    hometown:"Rouen, France",                draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jamal Cain",           position:"F", jersey:"10", height:"6ft 7in",  college:"Oakland",         country:"USA",       hometown:"Detroit, Michigan",            draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Golden State Warriors",dur:"1 season"},{team:"Houston Rockets",dur:"1 season"}],                                                           jazz_years:"1 season" },
+  { name:"Wendell Carter Jr.",   position:"C", jersey:"34", height:"6ft 10in", college:"Duke",            country:"USA",       hometown:"Atlanta, Georgia",             draft_year:"2018", draft_pick:"7",         draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"3 seasons"}],                                                                                                       jazz_years:"1 season" },
+  { name:"Goga Bitadze",         position:"C", jersey:"88", height:"7ft 0in",  college:"None",            country:"Georgia",   hometown:"Tbilisi, Georgia",             draft_year:"2019", draft_pick:"18",        draft_team:"Indiana Pacers",         past_teams:[{team:"Indiana Pacers",dur:"3 seasons"}],                                                                                                       jazz_years:"1 season" },
+  { name:"Moritz Wagner",        position:"C", jersey:"21", height:"6ft 11in", college:"Michigan",        country:"Germany",   hometown:"Berlin, Germany",              draft_year:"2018", draft_pick:"25",        draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"1 season"},{team:"Washington Wizards",dur:"2 seasons"}],                                                         jazz_years:"1 season" },
+  { name:"Orlando Robinson",     position:"C", jersey:"50", height:"6ft 11in", college:"Fresno State",    country:"USA",       hometown:"Philadelphia, Pennsylvania",   draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Miami Heat",dur:"2 seasons"}],                                                                                                           jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7838,6 +7884,10 @@ const TEAM_COACHING_STAFF = {
   "New York Knicks": {
     head: "Tom Thibodeau",
     assistants: ["Johnnie Bryant", "Royal Ivey", "Howard Eisley", "Greg St. Jean"]
+  },
+  "Orlando Magic": {
+    head: "Jamahl Mosley",
+    assistants: ["Nate Tibbetts", "Tyrone Corbin", "Charles Lee", "Keith Smart"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -8003,7 +8053,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Indiana Pacers": { name: "Mel Daniels", stat: "969 blk" },
   "Miami Heat": { name: "Alonzo Mourning", stat: "1,625 blk" },
   "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "2,199 blk" },
-  "New York Knicks": { name: "Patrick Ewing", stat: "2,758 blk" }
+  "New York Knicks": { name: "Patrick Ewing", stat: "2,758 blk" },
+  "Orlando Magic": { name: "Dwight Howard", stat: "1,344 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -8031,7 +8082,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Indiana Pacers": { name: "Mel Daniels", stat: "7,643 reb" },
   "Miami Heat": { name: "Bam Adebayo", stat: "5,765 reb" },
   "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "7,161 reb" },
-  "New York Knicks": { name: "Patrick Ewing", stat: "10,759 reb" }
+  "New York Knicks": { name: "Patrick Ewing", stat: "10,759 reb" },
+  "Orlando Magic": { name: "Dwight Howard", stat: "8,072 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -8059,7 +8111,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Indiana Pacers": { name: "Reggie Miller", stat: "18,041 pts" },
   "Miami Heat": { name: "Dwyane Wade", stat: "21,556 pts" },
   "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "14,211 pts" },
-  "New York Knicks": { name: "Patrick Ewing", stat: "23,665 pts" }
+  "New York Knicks": { name: "Patrick Ewing", stat: "23,665 pts" },
+  "Orlando Magic": { name: "Shaquille O'Neal", stat: "8,204 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -8087,7 +8140,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Indiana Pacers": { name: "Reggie Miller", stat: "4,141 ast" },
   "Miami Heat": { name: "Dwyane Wade", stat: "5,765 ast" },
   "Milwaukee Bucks": { name: "Oscar Robertson", stat: "4,621 ast" },
-  "New York Knicks": { name: "Walt Frazier", stat: "4,791 ast" }
+  "New York Knicks": { name: "Walt Frazier", stat: "4,791 ast" },
+  "Orlando Magic": { name: "Anfernee Hardaway", stat: "2,480 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -9940,6 +9994,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = KNICKS_TEAM;
     _activeRoster = KNICKS_ROSTER;
     _activeLineup = KNICKS_STARTING_LINEUP;
+  } else if (teamId === 'magic') {
+    _activeTeam   = MAGIC_TEAM;
+    _activeRoster = MAGIC_ROSTER;
+    _activeLineup = MAGIC_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
