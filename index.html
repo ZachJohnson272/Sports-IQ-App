@@ -4393,6 +4393,129 @@
     white-space: nowrap;
   }
   .home-quick-arrow { font-size: 14px; color: rgba(245,200,66,0.5); }
+
+  /* ── League Knowledge upgraded UI ───────────────────────────────────── */
+  .lp-lk-hero {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, rgba(91,184,212,0.08) 0%, rgba(107,63,160,0.12) 100%);
+    border: 1px solid rgba(91,184,212,0.18);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  .lp-lk-hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 3px;
+    color: #fff;
+    line-height: 1;
+    background: linear-gradient(90deg, #5BB8D4, #a78bfa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .lp-lk-hero-sub {
+    font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 500;
+    letter-spacing: 0.5px; margin-top: 4px;
+  }
+  .lp-lk-hero-stats {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .lp-lk-hero-stat {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .lp-lk-hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    color: var(--jazz-sky); line-height: 1;
+  }
+  .lp-lk-hero-stat-lbl {
+    font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; margin-top: 2px;
+  }
+  .lp-lk-hero-stat-div {
+    width: 1px; height: 28px;
+    background: rgba(255,255,255,0.12);
+  }
+  .lp-lk-modelist {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 4px;
+  }
+  .lp-lk-modecard {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, rgba(18,14,32,0.98) 0%, rgba(10,10,18,0.99) 100%);
+    border: 1px solid rgba(107,63,160,0.22);
+    border-radius: 13px;
+    padding: 13px 14px;
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+    position: relative; overflow: hidden;
+    border-left-width: 3px;
+  }
+  .lp-lk-modecard:hover { transform: translateY(-2px); }
+  .lp-lk-modecard:active { transform: scale(0.975); transition-duration: 0.08s; }
+  .lp-lk-modecard--blue  { border-left-color: rgba(59,130,246,0.7);  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(10,10,18,0.99) 60%); }
+  .lp-lk-modecard--blue:hover  { border-left-color: rgba(59,130,246,1);  box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 18px rgba(59,130,246,0.12); }
+  .lp-lk-modecard--purple { border-left-color: rgba(139,92,246,0.7); background: linear-gradient(135deg, rgba(139,92,246,0.06) 0%, rgba(10,10,18,0.99) 60%); }
+  .lp-lk-modecard--purple:hover { border-left-color: rgba(139,92,246,1); box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 18px rgba(139,92,246,0.12); }
+  .lp-lk-modecard--gold  { border-left-color: rgba(251,191,36,0.7);  background: linear-gradient(135deg, rgba(251,191,36,0.05) 0%, rgba(10,10,18,0.99) 60%); }
+  .lp-lk-modecard--gold:hover  { border-left-color: rgba(251,191,36,1);  box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 18px rgba(251,191,36,0.1); }
+  .lp-lk-modecard--green { border-left-color: rgba(34,197,94,0.7);   background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(10,10,18,0.99) 60%); }
+  .lp-lk-modecard--green:hover { border-left-color: rgba(34,197,94,1);   box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 18px rgba(34,197,94,0.1); }
+  .lp-lk-modecard--mixed {
+    border-left-color: rgba(168,85,247,0.8);
+    background: linear-gradient(135deg, rgba(107,63,160,0.14) 0%, rgba(91,184,212,0.06) 50%, rgba(10,10,18,0.99) 100%);
+    border-color: rgba(107,63,160,0.4);
+    box-shadow: 0 0 0 1px rgba(107,63,160,0.1), 0 4px 20px rgba(107,63,160,0.15);
+  }
+  .lp-lk-modecard--mixed:hover {
+    border-color: rgba(107,63,160,0.7);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.55), 0 0 24px rgba(107,63,160,0.22);
+  }
+  .lp-lk-modecard-left {
+    display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
+  }
+  .lp-lk-modecard-icon {
+    font-size: 20px; flex-shrink: 0; line-height: 1;
+  }
+  .lp-lk-modecard-info { min-width: 0; }
+  .lp-lk-modecard-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2;
+  }
+  .lp-lk-modecard-desc {
+    font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .lp-lk-modecard-right {
+    display: flex; flex-direction: column; align-items: flex-end;
+    gap: 6px; flex-shrink: 0; margin-left: 12px;
+  }
+  .lp-lk-modecard-tag {
+    font-size: 9px; font-weight: 800; letter-spacing: 1.2px;
+    padding: 2px 7px; border-radius: 6px; text-transform: uppercase;
+  }
+  .lp-lk-tag--blue   { background: rgba(59,130,246,0.18);  color: rgb(147,197,253); }
+  .lp-lk-tag--purple { background: rgba(139,92,246,0.18);  color: rgb(196,181,253); }
+  .lp-lk-tag--gold   { background: rgba(251,191,36,0.15);  color: rgb(253,224,132); }
+  .lp-lk-tag--green  { background: rgba(34,197,94,0.15);   color: rgb(134,239,172); }
+  .lp-lk-tag--mixed  { background: linear-gradient(90deg, rgba(107,63,160,0.35), rgba(91,184,212,0.25)); color: #c4b5fd; }
+  .lp-lk-modecard-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; color: rgba(255,255,255,0.28); line-height: 1;
+  }
+  .lp-lk-modecard-count--mixed {
+    color: var(--jazz-sky);
+    font-size: 22px;
+  }
+  .lp-lk-featured-divider {
+    display: flex; align-items: center; gap: 10px;
+    margin: 6px 0 2px;
+  }
+  .lp-lk-featured-divider-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(107,63,160,0.3), transparent);
+  }
+  .lp-lk-featured-divider-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: rgba(164,122,252,0.6); text-transform: uppercase;
+  }
 </style>
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -5028,54 +5151,105 @@
     <div class="lp-panel hidden" id="lp-panel-3-league">
       <div class="lp-panel-header">
         <button class="lp-back-btn" onclick="lpGoPanel(2)">← Back</button>
-        <div class="lp-panel-title">League Knowledge — Flashcards</div>
+        <div class="lp-panel-title">League Knowledge</div>
       </div>
 
-      <div class="lp-mode-grid lp-lk-flat-grid" id="lp-lk-flat-grid">
+      <!-- Hero section -->
+      <div class="lp-lk-hero">
+        <div class="lp-lk-hero-titles">
+          <div class="lp-lk-hero-title">LEAGUE KNOWLEDGE</div>
+          <div class="lp-lk-hero-sub">Train across all 30 teams</div>
+        </div>
+        <div class="lp-lk-hero-stats">
+          <div class="lp-lk-hero-stat"><span class="lp-lk-hero-stat-num">240</span><span class="lp-lk-hero-stat-lbl">Cards</span></div>
+          <div class="lp-lk-hero-stat-div"></div>
+          <div class="lp-lk-hero-stat"><span class="lp-lk-hero-stat-num">5</span><span class="lp-lk-hero-stat-lbl">Modes</span></div>
+        </div>
+      </div>
+
+      <!-- Mode list -->
+      <div class="lp-lk-modelist">
 
         <!-- Player → Team -->
-        <div class="lp-mcard" onclick="lpLaunchMode('league','league_starter_player_team')">
-          <div class="lp-mcard-icon">👤</div>
-          <div class="lp-mcard-title">Player → Team</div>
-          <div class="lp-mcard-count">150 cards</div>
-          <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-          <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+        <div class="lp-lk-modecard lp-lk-modecard--blue" onclick="lpLaunchMode('league','league_starter_player_team')">
+          <div class="lp-lk-modecard-left">
+            <div class="lp-lk-modecard-icon">🏀</div>
+            <div class="lp-lk-modecard-info">
+              <div class="lp-lk-modecard-name">Player → Team</div>
+              <div class="lp-lk-modecard-desc">Name the team for each starter</div>
+            </div>
+          </div>
+          <div class="lp-lk-modecard-right">
+            <div class="lp-lk-modecard-tag lp-lk-tag--blue">CORE</div>
+            <div class="lp-lk-modecard-count">150</div>
+          </div>
         </div>
 
         <!-- Team → Starting 5 -->
-        <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_starting_5')">
-          <div class="lp-mcard-icon">📋</div>
-          <div class="lp-mcard-title">Team → Starting 5</div>
-          <div class="lp-mcard-count">30 cards</div>
-          <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-          <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+        <div class="lp-lk-modecard lp-lk-modecard--purple" onclick="lpLaunchMode('league','league_team_starting_5')">
+          <div class="lp-lk-modecard-left">
+            <div class="lp-lk-modecard-icon">📋</div>
+            <div class="lp-lk-modecard-info">
+              <div class="lp-lk-modecard-name">Team → Starting 5</div>
+              <div class="lp-lk-modecard-desc">Name all five starters per team</div>
+            </div>
+          </div>
+          <div class="lp-lk-modecard-right">
+            <div class="lp-lk-modecard-tag lp-lk-tag--purple">STARTERS</div>
+            <div class="lp-lk-modecard-count">30</div>
+          </div>
         </div>
 
         <!-- Team → Roster -->
-        <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_roster')">
-          <div class="lp-mcard-icon">👥</div>
-          <div class="lp-mcard-title">Team → Roster</div>
-          <div class="lp-mcard-count">30 cards</div>
-          <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-          <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+        <div class="lp-lk-modecard lp-lk-modecard--gold" onclick="lpLaunchMode('league','league_team_roster')">
+          <div class="lp-lk-modecard-left">
+            <div class="lp-lk-modecard-icon">👥</div>
+            <div class="lp-lk-modecard-info">
+              <div class="lp-lk-modecard-name">Team → Roster</div>
+              <div class="lp-lk-modecard-desc">Recall the full active roster</div>
+            </div>
+          </div>
+          <div class="lp-lk-modecard-right">
+            <div class="lp-lk-modecard-tag lp-lk-tag--gold">FULL SQUAD</div>
+            <div class="lp-lk-modecard-count">30</div>
+          </div>
         </div>
 
         <!-- Team → Head Coach -->
-        <div class="lp-mcard" onclick="lpLaunchMode('league','league_team_coach')">
-          <div class="lp-mcard-icon">👔</div>
-          <div class="lp-mcard-title">Team → Head Coach</div>
-          <div class="lp-mcard-count">30 cards</div>
-          <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-          <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+        <div class="lp-lk-modecard lp-lk-modecard--green" onclick="lpLaunchMode('league','league_team_coach')">
+          <div class="lp-lk-modecard-left">
+            <div class="lp-lk-modecard-icon">👔</div>
+            <div class="lp-lk-modecard-info">
+              <div class="lp-lk-modecard-name">Team → Head Coach</div>
+              <div class="lp-lk-modecard-desc">Match each team to their coach</div>
+            </div>
+          </div>
+          <div class="lp-lk-modecard-right">
+            <div class="lp-lk-modecard-tag lp-lk-tag--green">COACHES</div>
+            <div class="lp-lk-modecard-count">30</div>
+          </div>
         </div>
 
-        <!-- Mixed Mode -->
-        <div class="lp-mcard lp-mcard--mixed" style="grid-column: span 2;" onclick="lpLaunchMode('league','league_mixed')">
-          <div class="lp-mcard-icon">🎲</div>
-          <div class="lp-mcard-title">Mixed Mode</div>
-          <div class="lp-mcard-count">240 cards</div>
-          <div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div>
-          <div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div>
+        <!-- Divider before featured -->
+        <div class="lp-lk-featured-divider">
+          <span class="lp-lk-featured-divider-line"></span>
+          <span class="lp-lk-featured-divider-label">FEATURED</span>
+          <span class="lp-lk-featured-divider-line"></span>
+        </div>
+
+        <!-- Mixed Mode — featured -->
+        <div class="lp-lk-modecard lp-lk-modecard--mixed" onclick="lpLaunchMode('league','league_mixed')">
+          <div class="lp-lk-modecard-left">
+            <div class="lp-lk-modecard-icon">🎲</div>
+            <div class="lp-lk-modecard-info">
+              <div class="lp-lk-modecard-name">Mixed Mode</div>
+              <div class="lp-lk-modecard-desc">All modes shuffled into one chaos run</div>
+            </div>
+          </div>
+          <div class="lp-lk-modecard-right">
+            <div class="lp-lk-modecard-tag lp-lk-tag--mixed">BEST MODE</div>
+            <div class="lp-lk-modecard-count lp-lk-modecard-count--mixed">240</div>
+          </div>
         </div>
 
       </div>
