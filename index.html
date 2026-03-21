@@ -5657,7 +5657,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Miami Heat</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('heat','Miami Heat','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Miami Heat</div>
+                <div class="lp-ct-sub">17 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Milwaukee Bucks</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">New York Knicks</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Orlando Magic</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -7321,6 +7327,45 @@ const PACERS_ROSTER = [
   { name:"Jalen Slawson",      position:"C", jersey:"17", height:"6ft 9in",  college:"Furman",          country:"USA",       hometown:"Travelers Rest, South Carolina",draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
 ];
 
+const HEAT_TEAM = {
+  name: "Miami Heat",
+  city: "Miami",
+  conference: "East",
+  division: "Southeast",
+  arena: "Kaseya Center",
+  mascot: "Burnie",
+  colors: "Red, Black, Gold",
+  championships: "3",
+  lastTitle: "2013",
+  abbreviation: "MIA",
+  coach: "Erik Spoelstra",
+  coachPrevTeam: { team: "Miami Heat", role: "Assistant Coach" },
+  coachSince: "2008"
+};
+
+const HEAT_STARTING_LINEUP = { PG:"Terry Rozier", SG:"Tyler Herro", SF:"Andrew Wiggins", PF:"Jaime Jaquez Jr.", C:"Bam Adebayo" };
+
+const HEAT_ROSTER = [
+  { name:"Tyler Herro",            position:"G", jersey:"14", height:"6ft 5in",  college:"Kentucky",        country:"USA",       hometown:"Pewaukee, Wisconsin",          draft_year:"2019", draft_pick:"13",        draft_team:"Miami Heat",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Davion Mitchell",        position:"G", jersey:"45", height:"6ft 2in",  college:"Baylor",          country:"USA",       hometown:"Hinesville, Georgia",          draft_year:"2021", draft_pick:"9",         draft_team:"Sacramento Kings",       past_teams:[{team:"Sacramento Kings",dur:"2 seasons"},{team:"Toronto Raptors",dur:"1 season"},{team:"New Orleans Pelicans",dur:"1 season"}],                jazz_years:"1 season" },
+  { name:"Terry Rozier",           position:"G", jersey:"2",  height:"6ft 2in",  college:"Louisville",      country:"USA",       hometown:"Youngstown, Ohio",             draft_year:"2015", draft_pick:"16",        draft_team:"Boston Celtics",         past_teams:[{team:"Boston Celtics",dur:"4 seasons"},{team:"Charlotte Hornets",dur:"4 seasons"}],                                                            jazz_years:"1 season" },
+  { name:"Norman Powell",          position:"G", jersey:"24", height:"6ft 4in",  college:"UCLA",            country:"USA",       hometown:"San Diego, California",        draft_year:"2015", draft_pick:"46",        draft_team:"Toronto Raptors",        past_teams:[{team:"Toronto Raptors",dur:"5 seasons"},{team:"Portland Trail Blazers",dur:"1 season"},{team:"LA Clippers",dur:"3 seasons"}],                   jazz_years:"1 season" },
+  { name:"Dru Smith",              position:"G", jersey:"10", height:"6ft 4in",  college:"Missouri",        country:"USA",       hometown:"Anderson, Indiana",            draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Indiana Pacers",dur:"1 season"}],                                                                                                          jazz_years:"1 season" },
+  { name:"Kasparas Jakucionis",    position:"G", jersey:"11", height:"6ft 5in",  college:"Illinois",        country:"Lithuania", hometown:"Prienai, Lithuania",           draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Pelle Larsson",          position:"G", jersey:"4",  height:"6ft 5in",  college:"Arizona",         country:"Sweden",    hometown:"Gothenburg, Sweden",           draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jahmir Young",           position:"G", jersey:"3",  height:"6ft 1in",  college:"Charlotte",       country:"USA",       hometown:"Baltimore, Maryland",          draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Charlotte Hornets",dur:"1 season"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Andrew Wiggins",         position:"F", jersey:"22", height:"6ft 7in",  college:"Kansas",          country:"Canada",    hometown:"Thornhill, Ontario, Canada",   draft_year:"2014", draft_pick:"1",         draft_team:"Cleveland Cavaliers",    past_teams:[{team:"Minnesota Timberwolves",dur:"6 seasons"},{team:"Golden State Warriors",dur:"4 seasons"}],                                                jazz_years:"1 season" },
+  { name:"Jaime Jaquez Jr.",       position:"F", jersey:"11", height:"6ft 7in",  college:"UCLA",            country:"USA",       hometown:"Camarillo, California",        draft_year:"2023", draft_pick:"18",        draft_team:"Miami Heat",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Simone Fontecchio",      position:"F", jersey:"16", height:"6ft 8in",  college:"None",            country:"Italy",     hometown:"Rome, Italy",                  draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Utah Jazz",dur:"1 season"},{team:"Detroit Pistons",dur:"1 season"}],                                                                    jazz_years:"1 season" },
+  { name:"Nikola Jovic",           position:"F", jersey:"5",  height:"6ft 10in", college:"None",            country:"Serbia",    hometown:"Sombor, Serbia",               draft_year:"2022", draft_pick:"27",        draft_team:"Miami Heat",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Keshad Johnson",         position:"F", jersey:"18", height:"6ft 7in",  college:"Arizona",         country:"USA",       hometown:"San Diego, California",        draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Myron Gardner",          position:"F", jersey:"6",  height:"6ft 7in",  college:"Alabama",         country:"USA",       hometown:"Memphis, Tennessee",           draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Bam Adebayo",            position:"C", jersey:"13", height:"6ft 9in",  college:"Kentucky",        country:"USA",       hometown:"Newark, New Jersey",           draft_year:"2017", draft_pick:"14",        draft_team:"Miami Heat",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Kel'el Ware",            position:"C", jersey:"7",  height:"7ft 1in",  college:"Indiana",         country:"USA",       hometown:"Junction City, Arkansas",      draft_year:"2024", draft_pick:"15",        draft_team:"Miami Heat",             past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Vladislav Goldin",       position:"C", jersey:"17", height:"7ft 1in",  college:"TCU",             country:"Russia",    hometown:"Saint Petersburg, Russia",     draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7689,6 +7734,10 @@ const TEAM_COACHING_STAFF = {
   "Indiana Pacers": {
     head: "Rick Carlisle",
     assistants: ["Dan Burke", "Greg Foster", "Bill Bayno", "Brendan Suhr"]
+  },
+  "Miami Heat": {
+    head: "Erik Spoelstra",
+    assistants: ["Chris Quinn", "Caron Butler", "Malik Allen", "Dan Craig"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7851,7 +7900,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Chicago Bulls": { name: "Artis Gilmore", stat: "1,029 blk" },
   "Cleveland Cavaliers": { name: "Zydrunas Ilgauskas", stat: "1,269 blk" },
   "Detroit Pistons": { name: "Ben Wallace", stat: "1,448 blk" },
-  "Indiana Pacers": { name: "Mel Daniels", stat: "969 blk" }
+  "Indiana Pacers": { name: "Mel Daniels", stat: "969 blk" },
+  "Miami Heat": { name: "Alonzo Mourning", stat: "1,625 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7876,7 +7926,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Chicago Bulls": { name: "Artis Gilmore", stat: "8,982 reb" },
   "Cleveland Cavaliers": { name: "Zydrunas Ilgauskas", stat: "8,055 reb" },
   "Detroit Pistons": { name: "Bill Laimbeer", stat: "9,430 reb" },
-  "Indiana Pacers": { name: "Mel Daniels", stat: "7,643 reb" }
+  "Indiana Pacers": { name: "Mel Daniels", stat: "7,643 reb" },
+  "Miami Heat": { name: "Bam Adebayo", stat: "5,765 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -7901,7 +7952,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Chicago Bulls": { name: "Michael Jordan", stat: "21,541 pts" },
   "Cleveland Cavaliers": { name: "LeBron James", stat: "23,119 pts" },
   "Detroit Pistons": { name: "Isiah Thomas", stat: "18,822 pts" },
-  "Indiana Pacers": { name: "Reggie Miller", stat: "18,041 pts" }
+  "Indiana Pacers": { name: "Reggie Miller", stat: "18,041 pts" },
+  "Miami Heat": { name: "Dwyane Wade", stat: "21,556 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -7926,7 +7978,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Chicago Bulls": { name: "Michael Jordan", stat: "5,012 ast" },
   "Cleveland Cavaliers": { name: "LeBron James", stat: "7,825 ast" },
   "Detroit Pistons": { name: "Isiah Thomas", stat: "9,061 ast" },
-  "Indiana Pacers": { name: "Reggie Miller", stat: "4,141 ast" }
+  "Indiana Pacers": { name: "Reggie Miller", stat: "4,141 ast" },
+  "Miami Heat": { name: "Dwyane Wade", stat: "5,765 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -9767,6 +9820,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = PACERS_TEAM;
     _activeRoster = PACERS_ROSTER;
     _activeLineup = PACERS_STARTING_LINEUP;
+  } else if (teamId === 'heat') {
+    _activeTeam   = HEAT_TEAM;
+    _activeRoster = HEAT_ROSTER;
+    _activeLineup = HEAT_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
