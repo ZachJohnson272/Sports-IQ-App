@@ -7711,37 +7711,38 @@ const TEST_ROSTER = new Proxy([], {
 
 // All 30 NBA teams with the fields needed for League Knowledge modes
 const NBA_TEAMS = [
-  { name:"Atlanta Hawks",          city:"Atlanta",       conference:"East", division:"Southeast", abbreviation:"ATL" },
-  { name:"Boston Celtics",         city:"Boston",        conference:"East", division:"Atlantic",  abbreviation:"BOS" },
-  { name:"Brooklyn Nets",          city:"Brooklyn",      conference:"East", division:"Atlantic",  abbreviation:"BKN" },
-  { name:"Charlotte Hornets",      city:"Charlotte",     conference:"East", division:"Southeast", abbreviation:"CHA" },
-  { name:"Chicago Bulls",          city:"Chicago",       conference:"East", division:"Central",   abbreviation:"CHI" },
-  { name:"Cleveland Cavaliers",    city:"Cleveland",     conference:"East", division:"Central",   abbreviation:"CLE" },
-  { name:"Dallas Mavericks",       city:"Dallas",        conference:"West", division:"Southwest", abbreviation:"DAL" },
-  { name:"Denver Nuggets",         city:"Denver",        conference:"West", division:"Northwest", abbreviation:"DEN" },
-  { name:"Detroit Pistons",        city:"Detroit",       conference:"East", division:"Central",   abbreviation:"DET" },
-  { name:"Golden State Warriors",  city:"San Francisco", conference:"West", division:"Pacific",   abbreviation:"GSW" },
-  { name:"Houston Rockets",        city:"Houston",       conference:"West", division:"Southwest", abbreviation:"HOU" },
-  { name:"Indiana Pacers",         city:"Indianapolis",  conference:"East", division:"Central",   abbreviation:"IND" },
-  { name:"LA Clippers",            city:"Los Angeles",   conference:"West", division:"Pacific",   abbreviation:"LAC" },
-  { name:"Los Angeles Lakers",     city:"Los Angeles",   conference:"West", division:"Pacific",   abbreviation:"LAL" },
-  { name:"Memphis Grizzlies",      city:"Memphis",       conference:"West", division:"Southwest", abbreviation:"MEM" },
-  { name:"Miami Heat",             city:"Miami",         conference:"East", division:"Southeast", abbreviation:"MIA" },
-  { name:"Milwaukee Bucks",        city:"Milwaukee",     conference:"East", division:"Central",   abbreviation:"MIL" },
-  { name:"Minnesota Timberwolves", city:"Minneapolis",   conference:"West", division:"Northwest", abbreviation:"MIN" },
-  { name:"New Orleans Pelicans",   city:"New Orleans",   conference:"West", division:"Southwest", abbreviation:"NOP" },
-  { name:"New York Knicks",        city:"New York",      conference:"East", division:"Atlantic",  abbreviation:"NYK" },
-  { name:"Oklahoma City Thunder",  city:"Oklahoma City", conference:"West", division:"Northwest", abbreviation:"OKC" },
-  { name:"Orlando Magic",          city:"Orlando",       conference:"East", division:"Southeast", abbreviation:"ORL" },
-  { name:"Philadelphia 76ers",     city:"Philadelphia",  conference:"East", division:"Atlantic",  abbreviation:"PHI" },
-  { name:"Phoenix Suns",           city:"Phoenix",       conference:"West", division:"Pacific",   abbreviation:"PHX" },
-  { name:"Portland Trail Blazers", city:"Portland",      conference:"West", division:"Northwest", abbreviation:"POR" },
-  { name:"Sacramento Kings",       city:"Sacramento",    conference:"West", division:"Pacific",   abbreviation:"SAC" },
-  { name:"San Antonio Spurs",      city:"San Antonio",   conference:"West", division:"Southwest", abbreviation:"SAS" },
-  { name:"Toronto Raptors",        city:"Toronto",       conference:"East", division:"Atlantic",  abbreviation:"TOR" },
-  { name:"Utah Jazz",              city:"Salt Lake City",conference:"West", division:"Northwest", abbreviation:"UTA", coach:"Will Hardy", coachPrevTeam:{ team:"Boston Celtics", role:"Assistant Coach" }, coachSince:"2022" },
-  { name:"Washington Wizards",     city:"Washington",    conference:"East", division:"Southeast", abbreviation:"WAS" },
+  { name:"Atlanta Hawks",          city:"Atlanta",        conference:"East", division:"Southeast", abbreviation:"ATL", coach:"Quin Snyder",        coachPrevTeam:{ team:"Utah Jazz", role:"Head Coach" },                     coachSince:"2023", championships:"1",  lastTitle:"1958" },
+  { name:"Boston Celtics",         city:"Boston",         conference:"East", division:"Atlantic",  abbreviation:"BOS", coach:"Joe Mazzulla",        coachPrevTeam:{ team:"Boston Celtics", role:"Interim Head Coach" },        coachSince:"2022", championships:"18", lastTitle:"2024" },
+  { name:"Brooklyn Nets",          city:"Brooklyn",       conference:"East", division:"Atlantic",  abbreviation:"BKN", coach:"Jordi Fernandez",     coachPrevTeam:{ team:"Sacramento Kings", role:"Assistant Coach" },         coachSince:"2024", championships:"0",  lastTitle:"N/A" },
+  { name:"Charlotte Hornets",      city:"Charlotte",      conference:"East", division:"Southeast", abbreviation:"CHA", coach:"Charles Lee",         coachPrevTeam:{ team:"Boston Celtics", role:"Assistant Coach" },           coachSince:"2024", championships:"0",  lastTitle:"N/A" },
+  { name:"Chicago Bulls",          city:"Chicago",        conference:"East", division:"Central",   abbreviation:"CHI", coach:"Billy Donovan",       coachPrevTeam:{ team:"Oklahoma City Thunder", role:"Head Coach" },        coachSince:"2020", championships:"6",  lastTitle:"1998" },
+  { name:"Cleveland Cavaliers",    city:"Cleveland",      conference:"East", division:"Central",   abbreviation:"CLE", coach:"Kenny Atkinson",      coachPrevTeam:{ team:"Golden State Warriors", role:"Assistant Coach" },    coachSince:"2023", championships:"1",  lastTitle:"2016" },
+  { name:"Dallas Mavericks",       city:"Dallas",         conference:"West", division:"Southwest", abbreviation:"DAL", coach:"Jason Kidd",          coachPrevTeam:{ team:"Los Angeles Lakers", role:"Head Coach" },            coachSince:"2021", championships:"1",  lastTitle:"2011" },
+  { name:"Denver Nuggets",         city:"Denver",         conference:"West", division:"Northwest", abbreviation:"DEN", coach:"David Adelman",       coachPrevTeam:{ team:"San Antonio Spurs", role:"Assistant Coach" },        coachSince:"2024", championships:"1",  lastTitle:"2023" },
+  { name:"Detroit Pistons",        city:"Detroit",        conference:"East", division:"Central",   abbreviation:"DET", coach:"JB Bickerstaff",      coachPrevTeam:{ team:"Cleveland Cavaliers", role:"Head Coach" },          coachSince:"2023", championships:"3",  lastTitle:"2004" },
+  { name:"Golden State Warriors",  city:"San Francisco",  conference:"West", division:"Pacific",   abbreviation:"GSW", coach:"Steve Kerr",          coachPrevTeam:{ team:"None", role:"First HC job" },                      coachSince:"2014", championships:"4",  lastTitle:"2022" },
+  { name:"Houston Rockets",        city:"Houston",        conference:"West", division:"Southwest", abbreviation:"HOU", coach:"Ime Udoka",           coachPrevTeam:{ team:"Boston Celtics", role:"Head Coach" },               coachSince:"2022", championships:"2",  lastTitle:"1995" },
+  { name:"Indiana Pacers",         city:"Indianapolis",   conference:"East", division:"Central",   abbreviation:"IND", coach:"Rick Carlisle",       coachPrevTeam:{ team:"Dallas Mavericks", role:"Head Coach" },             coachSince:"2021", championships:"0",  lastTitle:"N/A" },
+  { name:"LA Clippers",            city:"Los Angeles",    conference:"West", division:"Pacific",   abbreviation:"LAC", coach:"Tyronn Lue",          coachPrevTeam:{ team:"Cleveland Cavaliers", role:"Head Coach" },          coachSince:"2020", championships:"0",  lastTitle:"N/A" },
+  { name:"Los Angeles Lakers",     city:"Los Angeles",    conference:"West", division:"Pacific",   abbreviation:"LAL", coach:"JJ Redick",           coachPrevTeam:{ team:"None", role:"First HC job" },                      coachSince:"2024", championships:"17", lastTitle:"2020" },
+  { name:"Memphis Grizzlies",      city:"Memphis",        conference:"West", division:"Southwest", abbreviation:"MEM", coach:"Taylor Jenkins",      coachPrevTeam:{ team:"Atlanta Hawks", role:"Assistant Coach" },           coachSince:"2019", championships:"0",  lastTitle:"N/A" },
+  { name:"Miami Heat",             city:"Miami",          conference:"East", division:"Southeast", abbreviation:"MIA", coach:"Erik Spoelstra",      coachPrevTeam:{ team:"Miami Heat", role:"Assistant Coach" },              coachSince:"2008", championships:"3",  lastTitle:"2013" },
+  { name:"Milwaukee Bucks",        city:"Milwaukee",      conference:"East", division:"Central",   abbreviation:"MIL", coach:"Doc Rivers",          coachPrevTeam:{ team:"Philadelphia 76ers", role:"Head Coach" },           coachSince:"2023", championships:"2",  lastTitle:"2021" },
+  { name:"Minnesota Timberwolves", city:"Minneapolis",    conference:"West", division:"Northwest", abbreviation:"MIN", coach:"Chris Finch",         coachPrevTeam:{ team:"Houston Rockets", role:"Assistant Coach" },         coachSince:"2021", championships:"0",  lastTitle:"N/A" },
+  { name:"New Orleans Pelicans",   city:"New Orleans",    conference:"West", division:"Southwest", abbreviation:"NOP", coach:"Willie Green",        coachPrevTeam:{ team:"Golden State Warriors", role:"Assistant Coach" },   coachSince:"2021", championships:"0",  lastTitle:"N/A" },
+  { name:"New York Knicks",        city:"New York",       conference:"East", division:"Atlantic",  abbreviation:"NYK", coach:"Tom Thibodeau",       coachPrevTeam:{ team:"Minnesota Timberwolves", role:"Head Coach" },       coachSince:"2020", championships:"2",  lastTitle:"1973" },
+  { name:"Oklahoma City Thunder",  city:"Oklahoma City",  conference:"West", division:"Northwest", abbreviation:"OKC", coach:"Mark Daigneault",     coachPrevTeam:{ team:"OKC Blue (G League)", role:"Head Coach" },         coachSince:"2020", championships:"1",  lastTitle:"1979" },
+  { name:"Orlando Magic",          city:"Orlando",        conference:"East", division:"Southeast", abbreviation:"ORL", coach:"Jamahl Mosley",       coachPrevTeam:{ team:"Dallas Mavericks", role:"Assistant Coach" },        coachSince:"2021", championships:"0",  lastTitle:"N/A" },
+  { name:"Philadelphia 76ers",     city:"Philadelphia",   conference:"East", division:"Atlantic",  abbreviation:"PHI", coach:"Nick Nurse",          coachPrevTeam:{ team:"Toronto Raptors", role:"Head Coach" },             coachSince:"2023", championships:"3",  lastTitle:"1983" },
+  { name:"Phoenix Suns",           city:"Phoenix",        conference:"West", division:"Pacific",   abbreviation:"PHX", coach:"Mike Budenholzer",    coachPrevTeam:{ team:"Milwaukee Bucks", role:"Head Coach" },             coachSince:"2023", championships:"0",  lastTitle:"N/A" },
+  { name:"Portland Trail Blazers", city:"Portland",       conference:"West", division:"Northwest", abbreviation:"POR", coach:"Chauncey Billups",    coachPrevTeam:{ team:"LA Clippers", role:"Assistant Coach" },            coachSince:"2021", championships:"1",  lastTitle:"1977" },
+  { name:"Sacramento Kings",       city:"Sacramento",     conference:"West", division:"Pacific",   abbreviation:"SAC", coach:"Doug Christie",       coachPrevTeam:{ team:"Sacramento Kings", role:"Interim Head Coach" },    coachSince:"2025", championships:"1",  lastTitle:"1951" },
+  { name:"San Antonio Spurs",      city:"San Antonio",    conference:"West", division:"Southwest", abbreviation:"SAS", coach:"Mitch Johnson",       coachPrevTeam:{ team:"San Antonio Spurs", role:"Interim Head Coach" },   coachSince:"2024", championships:"5",  lastTitle:"2014" },
+  { name:"Toronto Raptors",        city:"Toronto",        conference:"East", division:"Atlantic",  abbreviation:"TOR", coach:"Jordi Fernandez",     coachPrevTeam:{ team:"Sacramento Kings", role:"Assistant Coach" },        coachSince:"2024", championships:"1",  lastTitle:"2019" },
+  { name:"Utah Jazz",              city:"Salt Lake City", conference:"West", division:"Northwest", abbreviation:"UTA", coach:"Will Hardy",          coachPrevTeam:{ team:"Boston Celtics", role:"Assistant Coach" },          coachSince:"2022", championships:"0",  lastTitle:"N/A" },
+  { name:"Washington Wizards",     city:"Washington",     conference:"East", division:"Southeast", abbreviation:"WAS", coach:"Brian Keefe",         coachPrevTeam:{ team:"Washington Wizards", role:"Interim Head Coach" },  coachSince:"2024", championships:"1",  lastTitle:"1978" },
 ];
+
 
 // League-wide player pool for League Knowledge modes
 // Sourced from the Jazz roster + representative players from all 30 teams
@@ -8069,11 +8070,38 @@ function buildTeamToLastTitleDeck(team) {
 }
 
 const TEAM_ROOKIES_OF_YEAR = {
-  "Utah Jazz": [
-    { player: "Darrell Griffith", year: 1981 },
-    { player: "Karl Malone",      year: 1986 }
-  ]
+  "Utah Jazz":                [ { player:"Darrell Griffith", year:1981 }, { player:"Karl Malone", year:1986 } ],
+  "Dallas Mavericks":         [ { player:"Jason Kidd", year:1995 } ],
+  "Denver Nuggets":           [],
+  "Houston Rockets":          [ { player:"Steve Francis", year:2000 }, { player:"Yao Ming", year:2003 } ],
+  "Golden State Warriors":    [ { player:"Alvan Adams", year:1976 } ],
+  "LA Clippers":              [ { player:"Terry Cummings", year:1983 } ],
+  "Los Angeles Lakers":       [ { player:"Elgin Baylor", year:1959 }, { player:"Kareem Abdul-Jabbar", year:1970 } ],
+  "Memphis Grizzlies":        [ { player:"Ja Morant", year:2020 } ],
+  "Minnesota Timberwolves":   [ { player:"Isaiah Rider", year:1994 }, { player:"Kevin Love", year:2009 } ],
+  "New Orleans Pelicans":     [ { player:"David West", year:2004 }, { player:"Tyreke Evans", year:2010 } ],
+  "Oklahoma City Thunder":    [ { player:"Kevin Durant", year:2008 } ],
+  "Phoenix Suns":             [ { player:"Connie Hawkins", year:1970 } ],
+  "Portland Trail Blazers":   [ { player:"Geoff Petrie", year:1971 }, { player:"Sidney Wicks", year:1972 } ],
+  "Sacramento Kings":         [ { player:"Mitch Richmond", year:1989 } ],
+  "San Antonio Spurs":        [ { player:"David Robinson", year:1990 } ],
+  "Atlanta Hawks":            [ { player:"Bob Pettit", year:1955 }, { player:"Dikembe Mutombo", year:1992 } ],
+  "Boston Celtics":           [ { player:"Tom Heinsohn", year:1957 }, { player:"Dave Cowens", year:1971 } ],
+  "Brooklyn Nets":            [],
+  "Charlotte Hornets":        [ { player:"Larry Johnson", year:1992 } ],
+  "Chicago Bulls":            [ { player:"Michael Jordan", year:1985 } ],
+  "Cleveland Cavaliers":      [ { player:"LeBron James", year:2004 } ],
+  "Detroit Pistons":          [],
+  "Indiana Pacers":           [],
+  "Miami Heat":               [ { player:"Dwyane Wade", year:2004 } ],
+  "Milwaukee Bucks":          [ { player:"Kareem Abdul-Jabbar", year:1970 }, { player:"Bob Dandridge", year:1970 } ],
+  "New York Knicks":          [ { player:"Willis Reed", year:1965 }, { player:"Patrick Ewing", year:1986 } ],
+  "Orlando Magic":            [ { player:"Shaquille O'Neal", year:1993 } ],
+  "Philadelphia 76ers":       [ { player:"Wilt Chamberlain", year:1960 }, { player:"Allen Iverson", year:1997 } ],
+  "Toronto Raptors":          [ { player:"Damon Stoudamire", year:1996 }, { player:"Vince Carter", year:1999 } ],
+  "Washington Wizards":       [ { player:"Wes Unseld", year:1969 } ],
 };
+
 function buildTeamToRookiesOfYearDeck(team) {
   const winners = TEAM_ROOKIES_OF_YEAR[team.name];
   if (!winners || !winners.length) return [makeCard(team.name, 'No Rookie of the Year winners yet', "Who are this franchise's Rookie of the Year winners?")];
@@ -8087,7 +8115,7 @@ function buildTeamToRookiesOfYearDeck(team) {
   return [makeCard(team.name, answer, "Who are this franchise's Rookie of the Year winners?")];
 }
 function buildLeagueTeamToRookiesOfYearDeck() {
-  return Object.keys(TEAM_ROOKIES_OF_YEAR).map(teamName => {
+  return Object.keys(TEAM_ROOKIES_OF_YEAR).filter(k => TEAM_ROOKIES_OF_YEAR[k].length > 0).map(teamName => {
     const winners = TEAM_ROOKIES_OF_YEAR[teamName];
     const entries = winners.map(w =>
       '<div class="back-career-entry">' +
@@ -8122,9 +8150,14 @@ function buildTeamToStartingPosDeck(teamName) {
   );
 }
 function buildLeagueTeamToStartingPosDeck() {
-  return Object.entries(JAZZ_STARTING_LINEUP).map(([slot, playerName]) =>
-    makeCard('Utah Jazz — Starting ' + slot, playerName, 'Who is the ' + slot + ' starter for this team?')
-  );
+  const cards = [];
+  NBA_TEAMS.filter(t => LEAGUE_LINEUPS[t.name]).forEach(t => {
+    const lineup = LEAGUE_LINEUPS[t.name];
+    Object.entries(lineup).forEach(([slot, playerName]) => {
+      cards.push(makeCard(t.name + ' — Starting ' + slot, playerName, 'Who is the ' + slot + ' starter for this team?'));
+    });
+  });
+  return cards;
 }
 function buildTeamToStarting5Deck(team) {
   const posOrder = ['PG','SG','SF','PF','C'];
@@ -8142,7 +8175,21 @@ function buildTeamToStarting5Deck(team) {
   return [makeCard(front, answer, "Who are the starters for this team?")];
 }
 function buildLeagueTeamToStarting5Deck() {
-  return buildTeamToStarting5Deck({ name: 'Utah Jazz' });
+  const posOrder = ['PG','SG','SF','PF','C'];
+  return NBA_TEAMS.filter(t => LEAGUE_LINEUPS[t.name]).map(t => {
+    const lineup = LEAGUE_LINEUPS[t.name];
+    const rows = posOrder.map(slot => {
+      const name = lineup[slot] || '—';
+      return '<div class="back-career-entry">' +
+        '<span class="back-career-team" style="font-size:15px;font-weight:500;">' +
+          '<span style="color:rgba(180,144,255,0.8);font-size:12px;letter-spacing:1px;margin-right:8px;">' + slot + '</span>' +
+          name +
+        '</span></div>';
+    }).join('');
+    const front = t.name + '<div style="font-family:sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-top:4px;">Starting 5</div>';
+    const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
+    return makeCard(front, answer, "Who are the starters for this team?");
+  });
 }
 function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
 function buildTeamToCoachPrevTeamDeck(team) {
@@ -8365,12 +8412,14 @@ function buildLeaguePlayerPastTeamsDeck() {
   return buildPlayerToPastTeamsDeck(TEST_ROSTER);
 }
 function buildLeagueTeamToChampsDeck() {
-  // Jazz-only for now — reuses TEST_TEAM data
-  return [makeCard(TEST_TEAM.name, TEST_TEAM.championships, 'How many championships has this team won?')];
+  return NBA_TEAMS.map(t =>
+    makeCard(t.name, t.championships || '0', 'How many championships has this team won?')
+  );
 }
 function buildLeagueTeamToLastTitleDeck() {
-  // Jazz-only for now — reuses TEST_TEAM data with legacy HTML formatting
-  return [makeCard(TEST_TEAM.name, _legacyHTML(TEST_TEAM.lastTitle, 'Last Title Year', null), 'When did this team last win a championship?')];
+  return NBA_TEAMS.map(t =>
+    makeCard(t.name, _legacyHTML(t.lastTitle || 'N/A', 'Last Title Year', null), 'When did this team last win a championship?')
+  );
 }
 
 // -- League-wide team deck builders (all 30 teams) --
@@ -8421,11 +8470,102 @@ function buildLeagueTeamToCoachingStaffDeck() {
   });
 }
 function buildLeagueTeamToRosterDeck() {
-  // Jazz-only for now; expands as other teams add roster data
-  return NBA_TEAMS.filter(t => t.name === 'Utah Jazz').map(t => {
-    const answer = _buildRosterHTML(t.name, ROSTER);
+  return NBA_TEAMS.filter(t => LEAGUE_ROSTERS[t.name]).map(t => {
+    const rosterArr = LEAGUE_ROSTERS[t.name];
+    const lineup    = LEAGUE_LINEUPS[t.name] || {};
+    const starterPos = {};
+    Object.entries(lineup).forEach(([slot, name]) => { starterPos[name] = slot; });
+    const starters = rosterArr.filter(p => p && starterPos[p.name]);
+    const bench    = rosterArr.filter(p => p && !starterPos[p.name]).sort((a,b) => a.name.localeCompare(b.name));
+    const starterLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Starters</span>';
+    const benchLabel   = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Bench</span>';
+    const rows = starterLabel + starters.map(p => _rosterRowHTML(p, starterPos)).join('') +
+                 benchLabel   + bench.map(p => _rosterRowHTML(p, starterPos)).join('');
+    const answer = '<div class="back-career-block" style="gap:4px;">' + rows + '</div>';
     return makeCard(t.name, answer, "Who are the current players on this team's roster?");
   });
+}
+
+// ── League-wide roster + lineup maps (for League Knowledge builders) ─────────
+const LEAGUE_ROSTERS = {
+  "Utah Jazz":                Array.from(TEST_ROSTER),
+  "Dallas Mavericks":         MAVS_ROSTER,
+  "Denver Nuggets":           NUGGETS_ROSTER,
+  "Houston Rockets":          ROCKETS_ROSTER,
+  "Golden State Warriors":    GSW_ROSTER,
+  "LA Clippers":              CLIPPERS_ROSTER,
+  "Los Angeles Lakers":       LAKERS_ROSTER,
+  "Memphis Grizzlies":        GRIZZLIES_ROSTER,
+  "Minnesota Timberwolves":   TWOLVES_ROSTER,
+  "New Orleans Pelicans":     PELICANS_ROSTER,
+  "Oklahoma City Thunder":    OKC_ROSTER,
+  "Phoenix Suns":             SUNS_ROSTER,
+  "Portland Trail Blazers":   BLAZERS_ROSTER,
+  "Sacramento Kings":         KINGS_ROSTER,
+  "San Antonio Spurs":        SPURS_ROSTER,
+  "Atlanta Hawks":            HAWKS_ROSTER,
+  "Boston Celtics":           CELTICS_ROSTER,
+  "Brooklyn Nets":            NETS_ROSTER,
+  "Charlotte Hornets":        HORNETS_ROSTER,
+  "Chicago Bulls":            BULLS_ROSTER,
+  "Cleveland Cavaliers":      CAVS_ROSTER,
+  "Detroit Pistons":          PISTONS_ROSTER,
+  "Indiana Pacers":           PACERS_ROSTER,
+  "Miami Heat":               HEAT_ROSTER,
+  "Milwaukee Bucks":          BUCKS_ROSTER,
+  "New York Knicks":          KNICKS_ROSTER,
+  "Orlando Magic":            MAGIC_ROSTER,
+  "Philadelphia 76ers":       SIXERS_ROSTER,
+  "Toronto Raptors":          RAPTORS_ROSTER,
+  "Washington Wizards":       WIZARDS_ROSTER,
+};
+
+const LEAGUE_LINEUPS = {
+  "Utah Jazz":                JAZZ_STARTING_LINEUP,
+  "Dallas Mavericks":         MAVS_STARTING_LINEUP,
+  "Denver Nuggets":           NUGGETS_STARTING_LINEUP,
+  "Houston Rockets":          ROCKETS_STARTING_LINEUP,
+  "Golden State Warriors":    GSW_STARTING_LINEUP,
+  "LA Clippers":              CLIPPERS_STARTING_LINEUP,
+  "Los Angeles Lakers":       LAKERS_STARTING_LINEUP,
+  "Memphis Grizzlies":        GRIZZLIES_STARTING_LINEUP,
+  "Minnesota Timberwolves":   TWOLVES_STARTING_LINEUP,
+  "New Orleans Pelicans":     PELICANS_STARTING_LINEUP,
+  "Oklahoma City Thunder":    OKC_STARTING_LINEUP,
+  "Phoenix Suns":             SUNS_STARTING_LINEUP,
+  "Portland Trail Blazers":   BLAZERS_STARTING_LINEUP,
+  "Sacramento Kings":         KINGS_STARTING_LINEUP,
+  "San Antonio Spurs":        SPURS_STARTING_LINEUP,
+  "Atlanta Hawks":            HAWKS_STARTING_LINEUP,
+  "Boston Celtics":           CELTICS_STARTING_LINEUP,
+  "Brooklyn Nets":            NETS_STARTING_LINEUP,
+  "Charlotte Hornets":        HORNETS_STARTING_LINEUP,
+  "Chicago Bulls":            BULLS_STARTING_LINEUP,
+  "Cleveland Cavaliers":      CAVS_STARTING_LINEUP,
+  "Detroit Pistons":          PISTONS_STARTING_LINEUP,
+  "Indiana Pacers":           PACERS_STARTING_LINEUP,
+  "Miami Heat":               HEAT_STARTING_LINEUP,
+  "Milwaukee Bucks":          BUCKS_STARTING_LINEUP,
+  "New York Knicks":          KNICKS_STARTING_LINEUP,
+  "Orlando Magic":            MAGIC_STARTING_LINEUP,
+  "Philadelphia 76ers":       SIXERS_STARTING_LINEUP,
+  "Toronto Raptors":          RAPTORS_STARTING_LINEUP,
+  "Washington Wizards":       WIZARDS_STARTING_LINEUP,
+};
+
+function buildLeaguePlayerStarterBenchDeck() {
+  const cards = [];
+  NBA_TEAMS.filter(t => LEAGUE_ROSTERS[t.name] && LEAGUE_LINEUPS[t.name]).forEach(t => {
+    const lineup   = LEAGUE_LINEUPS[t.name];
+    const starterNames = new Set(Object.values(lineup));
+    const roster   = LEAGUE_ROSTERS[t.name];
+    Array.from(roster).filter(p => p && p.name).forEach(p => {
+      const label  = starterNames.has(p.name) ? 'Starter' : 'Bench';
+      const answer = label + ' — ' + t.name;
+      cards.push(makeCard(p.name, answer, 'Is this player a starter or bench player?'));
+    });
+  });
+  return cards;
 }
 
 // Active team switcher — set by lpSelectTeamNew
@@ -8492,7 +8632,7 @@ const MODE_BUILDERS = {
   league_team_roster:         () => buildLeagueTeamToRosterDeck(),
   league_team_starting_pos:   () => buildLeagueTeamToStartingPosDeck(),
   league_team_starting_5:     () => buildLeagueTeamToStarting5Deck(),
-  league_player_starter_bench: () => buildPlayerToStarterBenchDeck(ROSTER),
+  league_player_starter_bench: () => buildLeaguePlayerStarterBenchDeck(),
 };
 
 // -- Mode display titles --
