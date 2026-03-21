@@ -5692,7 +5692,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Toronto Raptors</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('raptors','Toronto Raptors','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">Toronto Raptors</div>
+                <div class="lp-ct-sub">16 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Washington Wizards</div><span class="lp-lc-tag soon">Soon</span></div>
           </div>
         </div>
@@ -7545,6 +7551,44 @@ const SIXERS_ROSTER = [
   { name:"Johni Broome",         position:"C", jersey:"3",  height:"6ft 10in", college:"Auburn",          country:"USA",       hometown:"West Palm Beach, Florida",     draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
 ];
 
+const RAPTORS_TEAM = {
+  name: "Toronto Raptors",
+  city: "Toronto",
+  conference: "East",
+  division: "Atlantic",
+  arena: "Scotiabank Arena",
+  mascot: "The Raptor",
+  colors: "Red, Black, Gold",
+  championships: "1",
+  lastTitle: "2019",
+  abbreviation: "TOR",
+  coach: "Jordi Fernandez",
+  coachPrevTeam: { team: "Sacramento Kings", role: "Assistant Coach" },
+  coachSince: "2024"
+};
+
+const RAPTORS_STARTING_LINEUP = { PG:"Immanuel Quickley", SG:"Gradey Dick", SF:"RJ Barrett", PF:"Scottie Barnes", C:"Jakob Poeltl" };
+
+const RAPTORS_ROSTER = [
+  { name:"Immanuel Quickley",       position:"G", jersey:"5",  height:"6ft 3in",  college:"Kentucky",        country:"USA",       hometown:"Hoover, Alabama",              draft_year:"2020", draft_pick:"25",        draft_team:"New York Knicks",        past_teams:[{team:"New York Knicks",dur:"3 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Ja'Kobe Walter",          position:"G", jersey:"1",  height:"6ft 5in",  college:"Baylor",          country:"USA",       hometown:"Little Rock, Arkansas",        draft_year:"2024", draft_pick:"19",        draft_team:"Toronto Raptors",        past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Gradey Dick",             position:"G", jersey:"1",  height:"6ft 6in",  college:"Kansas",          country:"USA",       hometown:"Wichita, Kansas",              draft_year:"2023", draft_pick:"13",        draft_team:"Toronto Raptors",        past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jamal Shead",             position:"G", jersey:"3",  height:"6ft 1in",  college:"Houston",         country:"Canada",    hometown:"Brampton, Ontario, Canada",    draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Chucky Hepburn",          position:"G", jersey:"3",  height:"6ft 2in",  college:"Wisconsin",       country:"USA",       hometown:"Omaha, Nebraska",              draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Boston Celtics",dur:"1 season"}],                                                                                                      jazz_years:"1 season" },
+  { name:"A.J. Lawson",             position:"G", jersey:"16", height:"6ft 7in",  college:"South Carolina",  country:"Canada",    hometown:"Pickering, Ontario, Canada",   draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Dallas Mavericks",dur:"1 season"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Scottie Barnes",          position:"F", jersey:"4",  height:"6ft 8in",  college:"Florida State",   country:"Canada",    hometown:"West Palm Beach, Florida",     draft_year:"2021", draft_pick:"4",         draft_team:"Toronto Raptors",        past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"RJ Barrett",              position:"F", jersey:"9",  height:"6ft 7in",  college:"Duke",            country:"Canada",    hometown:"Mississauga, Ontario, Canada", draft_year:"2019", draft_pick:"3",         draft_team:"New York Knicks",        past_teams:[{team:"New York Knicks",dur:"4 seasons"}],                                                                                                     jazz_years:"1 season" },
+  { name:"Brandon Ingram",          position:"F", jersey:"14", height:"6ft 8in",  college:"Duke",            country:"USA",       hometown:"Kinston, North Carolina",      draft_year:"2016", draft_pick:"2",         draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"3 seasons"},{team:"New Orleans Pelicans",dur:"5 seasons"}],                                                   jazz_years:"1 season" },
+  { name:"Jamison Battle",          position:"F", jersey:"21", height:"6ft 7in",  college:"Ohio State",      country:"USA",       hometown:"Manassas, Virginia",           draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"New York Knicks",dur:"1 season"}],                                                                                                      jazz_years:"1 season" },
+  { name:"Jonathan Mogbo",          position:"F", jersey:"15", height:"6ft 8in",  college:"Connecticut",     country:"USA",       hometown:"Memphis, Tennessee",           draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Collin Murray-Boyles",    position:"F", jersey:"0",  height:"6ft 7in",  college:"South Carolina",  country:"USA",       hometown:"Charlotte, North Carolina",    draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Alijah Martin",           position:"F", jersey:"8",  height:"6ft 4in",  college:"Florida Atlantic",country:"USA",       hometown:"Gainesville, Florida",         draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Miami Heat",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
+  { name:"Jakob Poeltl",            position:"C", jersey:"19", height:"7ft 1in",  college:"Utah",            country:"Austria",   hometown:"Vienna, Austria",              draft_year:"2016", draft_pick:"9",         draft_team:"Toronto Raptors",        past_teams:[{team:"San Antonio Spurs",dur:"5 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Sandro Mamukelashvili",   position:"C", jersey:"54", height:"6ft 11in", college:"Seton Hall",      country:"Georgia",   hometown:"Tbilisi, Georgia",             draft_year:"2021", draft_pick:"54",        draft_team:"Milwaukee Bucks",        past_teams:[{team:"Milwaukee Bucks",dur:"2 seasons"},{team:"San Antonio Spurs",dur:"1 season"},{team:"Indiana Pacers",dur:"1 season"}],                   jazz_years:"1 season" },
+  { name:"Trayce Jackson-Davis",    position:"C", jersey:"32", height:"6ft 9in",  college:"Indiana",         country:"USA",       hometown:"Greenwood, Indiana",           draft_year:"2023", draft_pick:"57",        draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"1 season"}],                                                                                                jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7938,6 +7982,10 @@ const TEAM_COACHING_STAFF = {
   "Philadelphia 76ers": {
     head: "Nick Nurse",
     assistants: ["Dave Joerger", "Sam Cassell", "Kevin Young", "Octavio De La Grana"]
+  },
+  "Toronto Raptors": {
+    head: "Jordi Fernandez",
+    assistants: ["Will Hardy", "Nate Bjorkgren", "Patrick Mutombo", "Juan Mendez"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -8105,7 +8153,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "2,199 blk" },
   "New York Knicks": { name: "Patrick Ewing", stat: "2,758 blk" },
   "Orlando Magic": { name: "Dwight Howard", stat: "1,344 blk" },
-  "Philadelphia 76ers": { name: "Joel Embiid", stat: "1,564 blk" }
+  "Philadelphia 76ers": { name: "Joel Embiid", stat: "1,564 blk" },
+  "Toronto Raptors": { name: "Serge Ibaka", stat: "670 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -8135,7 +8184,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "7,161 reb" },
   "New York Knicks": { name: "Patrick Ewing", stat: "10,759 reb" },
   "Orlando Magic": { name: "Dwight Howard", stat: "8,072 reb" },
-  "Philadelphia 76ers": { name: "Dolph Schayes", stat: "11,256 reb" }
+  "Philadelphia 76ers": { name: "Dolph Schayes", stat: "11,256 reb" },
+  "Toronto Raptors": { name: "Chris Bosh", stat: "5,039 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -8165,7 +8215,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "14,211 pts" },
   "New York Knicks": { name: "Patrick Ewing", stat: "23,665 pts" },
   "Orlando Magic": { name: "Shaquille O'Neal", stat: "8,204 pts" },
-  "Philadelphia 76ers": { name: "Hal Greer", stat: "21,586 pts" }
+  "Philadelphia 76ers": { name: "Hal Greer", stat: "21,586 pts" },
+  "Toronto Raptors": { name: "DeMar DeRozan", stat: "16,024 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -8195,7 +8246,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Milwaukee Bucks": { name: "Oscar Robertson", stat: "4,621 ast" },
   "New York Knicks": { name: "Walt Frazier", stat: "4,791 ast" },
   "Orlando Magic": { name: "Anfernee Hardaway", stat: "2,480 ast" },
-  "Philadelphia 76ers": { name: "Maurice Cheeks", stat: "6,212 ast" }
+  "Philadelphia 76ers": { name: "Maurice Cheeks", stat: "6,212 ast" },
+  "Toronto Raptors": { name: "Kyle Lowry", stat: "4,761 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -10056,6 +10108,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = SIXERS_TEAM;
     _activeRoster = SIXERS_ROSTER;
     _activeLineup = SIXERS_STARTING_LINEUP;
+  } else if (teamId === 'raptors') {
+    _activeTeam   = RAPTORS_TEAM;
+    _activeRoster = RAPTORS_ROSTER;
+    _activeLineup = RAPTORS_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
