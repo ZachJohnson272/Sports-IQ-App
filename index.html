@@ -5671,7 +5671,13 @@
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
-            <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">New York Knicks</div><span class="lp-lc-tag soon">Soon</span></div>
+            <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('knicks','New York Knicks','nba')">
+              <div class="lp-ct-info">
+                <div class="lp-ct-name">New York Knicks</div>
+                <div class="lp-ct-sub">17 players · Active</div>
+              </div>
+              <div class="lp-ct-arrow">→</div>
+            </div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Orlando Magic</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Philadelphia 76ers</div><span class="lp-lc-tag soon">Soon</span></div>
             <div class="lp-ct lp-ct--soon"><div class="lp-ct-name">Toronto Raptors</div><span class="lp-lc-tag soon">Soon</span></div>
@@ -7411,6 +7417,45 @@ const BUCKS_ROSTER = [
   { name:"Pete Nance",                 position:"C", jersey:"8",  height:"6ft 10in", college:"Northwestern",    country:"USA",       hometown:"Madison, Wisconsin",           draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Charlotte Hornets",dur:"1 season"},{team:"Boston Celtics",dur:"1 season"}],                                                             jazz_years:"1 season" },
 ];
 
+const KNICKS_TEAM = {
+  name: "New York Knicks",
+  city: "New York",
+  conference: "East",
+  division: "Atlantic",
+  arena: "Madison Square Garden",
+  mascot: "Spike",
+  colors: "Blue, Orange, White",
+  championships: "2",
+  lastTitle: "1973",
+  abbreviation: "NYK",
+  coach: "Tom Thibodeau",
+  coachPrevTeam: { team: "Minnesota Timberwolves", role: "Head Coach" },
+  coachSince: "2020"
+};
+
+const KNICKS_STARTING_LINEUP = { PG:"Jalen Brunson", SG:"Miles McBride", SF:"Mikal Bridges", PF:"OG Anunoby", C:"Karl-Anthony Towns" };
+
+const KNICKS_ROSTER = [
+  { name:"Jalen Brunson",        position:"G", jersey:"11", height:"6ft 1in",  college:"Villanova",       country:"USA",       hometown:"Lincolnshire, Illinois",       draft_year:"2018", draft_pick:"33",        draft_team:"Dallas Mavericks",       past_teams:[{team:"Dallas Mavericks",dur:"4 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Jordan Clarkson",      position:"G", jersey:"0",  height:"6ft 5in",  college:"Missouri",        country:"Philippines",hometown:"San Antonio, Texas",           draft_year:"2014", draft_pick:"46",        draft_team:"Washington Wizards",     past_teams:[{team:"Los Angeles Lakers",dur:"4 seasons"},{team:"Cleveland Cavaliers",dur:"1 season"},{team:"Utah Jazz",dur:"5 seasons"}],                jazz_years:"1 season" },
+  { name:"Jose Alvarado",        position:"G", jersey:"15", height:"6ft 0in",  college:"Georgia Tech",    country:"USA",       hometown:"Brooklyn, New York",           draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"New Orleans Pelicans",dur:"3 seasons"}],                                                                                                jazz_years:"1 season" },
+  { name:"Miles McBride",        position:"G", jersey:"2",  height:"6ft 2in",  college:"West Virginia",   country:"USA",       hometown:"Cincinnati, Ohio",             draft_year:"2021", draft_pick:"36",        draft_team:"New York Knicks",        past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Tyler Kolek",          position:"G", jersey:"2",  height:"6ft 3in",  college:"Marquette",       country:"USA",       hometown:"Putnam, Connecticut",          draft_year:"2024", draft_pick:"34",        draft_team:"New York Knicks",        past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Landry Shamet",        position:"G", jersey:"20", height:"6ft 4in",  college:"Wichita State",   country:"USA",       hometown:"Kansas City, Missouri",        draft_year:"2018", draft_pick:"26",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"1 season"},{team:"LA Clippers",dur:"1 season"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Phoenix Suns",dur:"2 seasons"},{team:"Washington Wizards",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Mikal Bridges",        position:"F", jersey:"25", height:"6ft 7in",  college:"Villanova",       country:"USA",       hometown:"Villanova, Pennsylvania",      draft_year:"2018", draft_pick:"10",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Phoenix Suns",dur:"5 seasons"},{team:"Brooklyn Nets",dur:"1 season"}],                                                                  jazz_years:"1 season" },
+  { name:"OG Anunoby",           position:"F", jersey:"8",  height:"6ft 7in",  college:"Indiana",         country:"England",   hometown:"London, England",             draft_year:"2017", draft_pick:"23",        draft_team:"Toronto Raptors",        past_teams:[{team:"Toronto Raptors",dur:"6 seasons"}],                                                                                                     jazz_years:"1 season" },
+  { name:"Josh Hart",            position:"F", jersey:"3",  height:"6ft 5in",  college:"Villanova",       country:"USA",       hometown:"Washington, D.C.",             draft_year:"2017", draft_pick:"30",        draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"2 seasons"},{team:"New Orleans Pelicans",dur:"1 season"},{team:"Portland Trail Blazers",dur:"2 seasons"}],  jazz_years:"1 season" },
+  { name:"Pacome Dadiet",        position:"F", jersey:"13", height:"6ft 8in",  college:"None",            country:"France",    hometown:"Paris, France",                draft_year:"2024", draft_pick:"25",        draft_team:"New York Knicks",        past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Mohamed Diawara",      position:"F", jersey:"10", height:"6ft 7in",  college:"None",            country:"France",    hometown:"Paris, France",                draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Kevin McCullar Jr.",   position:"F", jersey:"1",  height:"6ft 6in",  college:"Kansas",          country:"USA",       hometown:"San Antonio, Texas",           draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jeremy Sochan",        position:"F", jersey:"10", height:"6ft 9in",  college:"Baylor",          country:"Poland",    hometown:"Guildford, England",           draft_year:"2022", draft_pick:"9",         draft_team:"San Antonio Spurs",      past_teams:[{team:"San Antonio Spurs",dur:"2 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Karl-Anthony Towns",   position:"C", jersey:"32", height:"7ft 0in",  college:"Kentucky",        country:"Dominican Republic",hometown:"Piscataway, New Jersey", draft_year:"2015", draft_pick:"1",        draft_team:"Minnesota Timberwolves", past_teams:[{team:"Minnesota Timberwolves",dur:"9 seasons"}],                                                                                                jazz_years:"1 season" },
+  { name:"Mitchell Robinson",    position:"C", jersey:"23", height:"7ft 1in",  college:"None",            country:"USA",       hometown:"Pensacola, Florida",           draft_year:"2018", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Ariel Hukporti",       position:"C", jersey:"19", height:"7ft 1in",  college:"None",            country:"Germany",   hometown:"Krefeld, Germany",             draft_year:"2023", draft_pick:"40",        draft_team:"New York Knicks",        past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Trey Jemison III",     position:"C", jersey:"7",  height:"7ft 0in",  college:"Pittsburgh",      country:"USA",       hometown:"Birmingham, Alabama",          draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"New Orleans Pelicans",dur:"1 season"}],                                                                                                 jazz_years:"1 season" },
+];
+
+
 
 
 
@@ -7789,6 +7834,10 @@ const TEAM_COACHING_STAFF = {
   "Milwaukee Bucks": {
     head: "Doc Rivers",
     assistants: ["Charles Lee", "Darvin Ham", "Terry Stotts", "Kevin Young"]
+  },
+  "New York Knicks": {
+    head: "Tom Thibodeau",
+    assistants: ["Johnnie Bryant", "Royal Ivey", "Howard Eisley", "Greg St. Jean"]
   }
 };
 function buildTeamToCoachingStaffDeck(team) {
@@ -7953,7 +8002,8 @@ const TEAM_ALL_TIME_DEFENSIVE_LEADER = {
   "Detroit Pistons": { name: "Ben Wallace", stat: "1,448 blk" },
   "Indiana Pacers": { name: "Mel Daniels", stat: "969 blk" },
   "Miami Heat": { name: "Alonzo Mourning", stat: "1,625 blk" },
-  "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "2,199 blk" }
+  "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "2,199 blk" },
+  "New York Knicks": { name: "Patrick Ewing", stat: "2,758 blk" }
 };
 const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Utah Jazz": { name: "Karl Malone", stat: "14,601 reb" },
@@ -7980,7 +8030,8 @@ const TEAM_ALL_TIME_REBOUNDS_LEADER = {
   "Detroit Pistons": { name: "Bill Laimbeer", stat: "9,430 reb" },
   "Indiana Pacers": { name: "Mel Daniels", stat: "7,643 reb" },
   "Miami Heat": { name: "Bam Adebayo", stat: "5,765 reb" },
-  "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "7,161 reb" }
+  "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "7,161 reb" },
+  "New York Knicks": { name: "Patrick Ewing", stat: "10,759 reb" }
 };
 const TEAM_ALL_TIME_SCORER = {
   "Utah Jazz": { name: "Karl Malone", stat: "36,374 pts" },
@@ -8007,7 +8058,8 @@ const TEAM_ALL_TIME_SCORER = {
   "Detroit Pistons": { name: "Isiah Thomas", stat: "18,822 pts" },
   "Indiana Pacers": { name: "Reggie Miller", stat: "18,041 pts" },
   "Miami Heat": { name: "Dwyane Wade", stat: "21,556 pts" },
-  "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "14,211 pts" }
+  "Milwaukee Bucks": { name: "Kareem Abdul-Jabbar", stat: "14,211 pts" },
+  "New York Knicks": { name: "Patrick Ewing", stat: "23,665 pts" }
 };
 const TEAM_ALL_TIME_ASSISTS = {
   "Utah Jazz": { name: "John Stockton", stat: "15,806 ast" },
@@ -8034,7 +8086,8 @@ const TEAM_ALL_TIME_ASSISTS = {
   "Detroit Pistons": { name: "Isiah Thomas", stat: "9,061 ast" },
   "Indiana Pacers": { name: "Reggie Miller", stat: "4,141 ast" },
   "Miami Heat": { name: "Dwyane Wade", stat: "5,765 ast" },
-  "Milwaukee Bucks": { name: "Oscar Robertson", stat: "4,621 ast" }
+  "Milwaukee Bucks": { name: "Oscar Robertson", stat: "4,621 ast" },
+  "New York Knicks": { name: "Walt Frazier", stat: "4,791 ast" }
 };
 
 // ── Shared helper for legacy card HTML ────────────────────────────────────────
@@ -9883,6 +9936,10 @@ function lpSelectTeamNew(teamId, teamName, leagueId) {
     _activeTeam   = BUCKS_TEAM;
     _activeRoster = BUCKS_ROSTER;
     _activeLineup = BUCKS_STARTING_LINEUP;
+  } else if (teamId === 'knicks') {
+    _activeTeam   = KNICKS_TEAM;
+    _activeRoster = KNICKS_ROSTER;
+    _activeLineup = KNICKS_STARTING_LINEUP;
   } else {
     _activeTeam   = TEST_TEAM;
     _activeRoster = TEST_ROSTER;
