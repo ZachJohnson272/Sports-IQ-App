@@ -4470,17 +4470,18 @@
   .lp-lk-modecard--gold:hover     { border-color: rgba(251,191,36,0.6);   box-shadow: 0 12px 34px rgba(251,191,36,0.16),  0 0 22px rgba(251,191,36,0.12); }
   .lp-lk-modecard--gold:hover::before   { opacity: 1; }
 
-  .lp-lk-modecard--green  { border-color: rgba(34,197,94,0.24);   box-shadow: 0 0 14px rgba(34,197,94,0.08),   0 3px 14px rgba(0,0,0,0.38); }
-  .lp-lk-modecard--green::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.09),   transparent 65%); }
-  .lp-lk-modecard--green:hover    { border-color: rgba(34,197,94,0.62);   box-shadow: 0 12px 34px rgba(34,197,94,0.18),   0 0 22px rgba(34,197,94,0.14); }
-  .lp-lk-modecard--green:hover::before  { opacity: 1; }
+  .lp-lk-modecard--cyan   { border-color: rgba(6,182,212,0.28);   box-shadow: 0 0 14px rgba(6,182,212,0.1),    0 3px 14px rgba(0,0,0,0.38); }
+  .lp-lk-modecard--cyan::before   { background: radial-gradient(ellipse at top left, rgba(6,182,212,0.1),    transparent 65%); }
+  .lp-lk-modecard--cyan:hover     { border-color: rgba(6,182,212,0.68);  box-shadow: 0 12px 34px rgba(6,182,212,0.2),    0 0 22px rgba(6,182,212,0.15); }
+  .lp-lk-modecard--cyan:hover::before   { opacity: 1; }
 
   .lp-lk-modecard--mixed  {
-    border-color: rgba(139,92,246,0.45);
-    box-shadow: 0 0 18px rgba(139,92,246,0.2), 0 3px 16px rgba(0,0,0,0.38);
+    border-color: rgba(34,197,94,0.52);
+    box-shadow: 0 0 22px rgba(34,197,94,0.22), 0 3px 18px rgba(0,0,0,0.45);
+    background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(16,185,129,0.06) 40%, rgba(10,10,18,0.99) 100%);
   }
-  .lp-lk-modecard--mixed::before  { background: radial-gradient(ellipse at top left, rgba(139,92,246,0.18), transparent 65%); }
-  .lp-lk-modecard--mixed:hover    { border-color: rgba(139,92,246,0.75); box-shadow: 0 12px 34px rgba(139,92,246,0.32), 0 0 24px rgba(139,92,246,0.22); }
+  .lp-lk-modecard--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.2), transparent 60%); }
+  .lp-lk-modecard--mixed:hover    { border-color: rgba(34,197,94,0.82); box-shadow: 0 14px 40px rgba(34,197,94,0.28), 0 0 28px rgba(34,197,94,0.22); transform: translateY(-4px); }
   .lp-lk-modecard--mixed:hover::before  { opacity: 1; }
   .lp-lk-modecard-left {
     display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
@@ -4508,15 +4509,17 @@
   .lp-lk-tag--blue   { background: rgba(59,130,246,0.18);  color: rgb(147,197,253); }
   .lp-lk-tag--purple { background: rgba(139,92,246,0.18);  color: rgb(196,181,253); }
   .lp-lk-tag--gold   { background: rgba(251,191,36,0.15);  color: rgb(253,224,132); }
+  .lp-lk-tag--cyan   { background: rgba(6,182,212,0.15);   color: rgb(103,232,249); }
   .lp-lk-tag--green  { background: rgba(34,197,94,0.15);   color: rgb(134,239,172); }
-  .lp-lk-tag--mixed  { background: linear-gradient(90deg, rgba(107,63,160,0.35), rgba(91,184,212,0.25)); color: #c4b5fd; }
+  .lp-lk-tag--mixed  { background: rgba(34,197,94,0.18); color: rgb(134,239,172); }
   .lp-lk-modecard-count {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px; color: rgba(255,255,255,0.28); line-height: 1;
   }
   .lp-lk-modecard-count--mixed {
-    color: var(--jazz-sky);
+    color: rgb(74,222,128);
     font-size: 22px;
+    text-shadow: 0 0 12px rgba(34,197,94,0.5);
   }
   .lp-lk-featured-divider {
     display: flex; align-items: center; gap: 10px;
@@ -5230,7 +5233,7 @@
         </div>
 
         <!-- Team → Head Coach -->
-        <div class="lp-lk-modecard lp-lk-modecard--green" onclick="lpLaunchMode('league','league_team_coach')">
+        <div class="lp-lk-modecard lp-lk-modecard--cyan" onclick="lpLaunchMode('league','league_team_coach')">
           <div class="lp-lk-modecard-left">
             <div class="lp-lk-modecard-icon">👔</div>
             <div class="lp-lk-modecard-info">
@@ -5239,7 +5242,7 @@
             </div>
           </div>
           <div class="lp-lk-modecard-right">
-            <div class="lp-lk-modecard-tag lp-lk-tag--green">COACHES</div>
+            <div class="lp-lk-modecard-tag lp-lk-tag--cyan">COACHES</div>
             <div class="lp-lk-modecard-count">30</div>
           </div>
         </div>
