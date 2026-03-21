@@ -9844,12 +9844,12 @@ function goBackToSessionModes() {
 
     if (t.path === 'random') {
       if (t.fromPath === 'team') {
-        // Return to Team Mastery > Random section
+        // Return to Team Mastery category grid
         _lpPath = 'team';
         document.getElementById('lp-toggle-league') && document.getElementById('lp-toggle-league').classList.remove('active');
         document.getElementById('lp-toggle-team') && document.getElementById('lp-toggle-team').classList.add('active');
         lpShowPanel('lp-panel-4-team');
-        lpSelectTeamCat('random');
+        lpCloseCat('team');
       } else {
         // Return to League Knowledge flat panel
         _lpPath = 'league';
