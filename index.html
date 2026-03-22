@@ -1155,6 +1155,9 @@
 
   .front-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
   .front-main  { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; text-align: center; color: #fff; line-height: 1.1; }
+  /* Starting 5 title polish */
+  .lineup-title { display: inline-flex; align-items: baseline; gap: 6px; }
+  .lineup-sub { font-size: 0.75em; opacity: 0.65; font-weight: 400; letter-spacing: 1px; white-space: nowrap; color: rgba(155,142,196,0.8); }
 
   .front-stat-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
   .front-stat-chip { background: var(--surface2); border-radius: 8px; padding: 8px 14px; text-align: center; }
@@ -5063,10 +5066,6 @@
       <button class="btn-primary" id="mcSubmit" onclick="submitMC()" style="margin-top:14px;display:none;">Submit Answer</button>
     </div>
     <div id="lineupMode" style="display:none;width:100%;max-width:420px;">
-      <div style="display:flex;align-items:flex-start;gap:9px;background:rgba(91,184,212,0.08);border:1px solid rgba(91,184,212,0.25);border-radius:10px;padding:10px 13px;margin-bottom:14px;">
-        <span style="font-size:15px;flex-shrink:0;margin-top:1px;">💡</span>
-        <span style="font-size:12px;color:rgba(91,184,212,0.9);line-height:1.5;font-style:italic;">Ideal starting 5 — assumes full health. Actual nightly lineups may differ due to injuries or rest.</span>
-      </div>
       <div class="lineup-grid" id="lineupGrid"></div>
       <button class="btn-primary" id="lineupSubmit" onclick="submitLineup()" style="margin-top:14px;">Check Lineup</button>
       <div id="lineupResult" style="display:none;margin-top:12px;text-align:center;"></div>
@@ -7992,9 +7991,9 @@ function buildTeamToStarting5Deck(team) {
       '</span></div>';
   }).join('');
   const front = team.name +
-    '<div style="font-family:sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-top:4px;">Starting 5</div>';
+    '<div class="front-main" style="margin-top:6px;"><span class="lineup-title">IDEAL STARTING 5<span class="lineup-sub">— FULLY HEALTHY</span></span></div>';
   const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
-  return [makeCard(front, answer, "Who are the starters for this team?")];
+  return [makeCard(front, answer, null)];
 }
 function buildLeagueTeamToStarting5Deck() {
   const posOrder = ['PG','SG','SF','PF','C'];
@@ -8008,9 +8007,10 @@ function buildLeagueTeamToStarting5Deck() {
           name +
         '</span></div>';
     }).join('');
-    const front = t.name + '<div style="font-family:sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-top:4px;">Starting 5</div><div style="font-size:11px;font-style:italic;color:rgba(91,184,212,0.75);margin-top:6px;letter-spacing:0;">💡 Ideal lineup — assumes full health</div>';
+    const front = t.name +
+      '<div class="front-main" style="margin-top:6px;"><span class="lineup-title">IDEAL STARTING 5<span class="lineup-sub">— FULLY HEALTHY</span></span></div>';
     const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
-    return makeCard(front, answer, "Who are the starters for this team?");
+    return makeCard(front, answer, null);
   });
 }
 function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
@@ -9143,7 +9143,7 @@ function startLineup() {
   document.getElementById('lineupResult').style.display = 'none';
   document.getElementById('fcCurrent').textContent = '—';
   document.getElementById('fcTotal').textContent = '—';
-  document.getElementById('fcModeTitle').innerHTML = 'Team &rarr; Starting 5 &nbsp;·&nbsp; <span style="font-style:italic;font-weight:400;color:rgba(91,184,212,0.8);text-transform:none;letter-spacing:0;">Ideal lineup — assumes full health</span>';
+
 
   const allNames = ROSTER.map(p => p.name).sort();
   const grid = document.getElementById('lineupGrid');
