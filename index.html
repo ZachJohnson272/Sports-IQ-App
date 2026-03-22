@@ -4535,11 +4535,91 @@
     font-size: 9px; font-weight: 800; letter-spacing: 2px;
     color: rgba(164,122,252,0.6); text-transform: uppercase;
   }
-  /* ── Team Mastery: all-tiers-visible layout ─── */
-  .lp-tm-all-tiers { display: flex; flex-direction: column; gap: 0; }
-  .lp-diff-label-rookie  { color: rgba(134,239,172,0.88) !important; }
-  .lp-diff-label-starter { color: rgba(147,197,253,0.88) !important; }
-  .lp-diff-label-allstar { color: rgba(253,224,132,0.88) !important; }
+  /* ── Team Mastery: diff-stack mobile layout ─── */
+  .lp-tm-diff-stack { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Difficulty block — one per tier, full-width */
+  .lp-diff-block {
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden;
+    background: rgba(12,10,22,0.55);
+  }
+
+  /* Difficulty header pill */
+  .lp-diff-header {
+    display: flex; align-items: center; gap: 9px;
+    padding: 10px 16px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .lp-diff-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .lp-diff-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px; letter-spacing: 2.5px; font-weight: 400;
+  }
+
+  /* Rookie — green */
+  .lp-diff-block--rookie { border-color: rgba(134,239,172,0.14); }
+  .lp-diff-header--rookie { background: rgba(134,239,172,0.07); }
+  .lp-diff-header--rookie .lp-diff-dot { background: rgba(134,239,172,0.85); box-shadow: 0 0 7px rgba(134,239,172,0.55); }
+  .lp-diff-header--rookie .lp-diff-name { color: rgba(134,239,172,0.92); }
+
+  /* Starter — blue */
+  .lp-diff-block--starter { border-color: rgba(147,197,253,0.14); }
+  .lp-diff-header--starter { background: rgba(147,197,253,0.07); }
+  .lp-diff-header--starter .lp-diff-dot { background: rgba(147,197,253,0.85); box-shadow: 0 0 7px rgba(147,197,253,0.55); }
+  .lp-diff-header--starter .lp-diff-name { color: rgba(147,197,253,0.92); }
+
+  /* All-Star — gold */
+  .lp-diff-block--allstar { border-color: rgba(253,224,132,0.14); }
+  .lp-diff-header--allstar { background: rgba(253,224,132,0.07); }
+  .lp-diff-header--allstar .lp-diff-dot { background: rgba(253,224,132,0.85); box-shadow: 0 0 7px rgba(253,224,132,0.55); }
+  .lp-diff-header--allstar .lp-diff-name { color: rgba(253,224,132,0.92); }
+
+  /* Cards container */
+  .lp-diff-cards { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  /* Team Mastery mode card — full-width horizontal row */
+  .lp-tmcard {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, rgba(26,20,44,0.9) 0%, rgba(13,15,24,0.95) 100%);
+    border: 1px solid rgba(107,63,160,0.22);
+    border-radius: 12px;
+    padding: 13px 14px;
+    cursor: pointer;
+    transition: border-color 0.17s, box-shadow 0.17s, transform 0.14s;
+    position: relative; overflow: hidden;
+  }
+  .lp-tmcard::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at left center, rgba(107,63,160,0.09), transparent 65%);
+    opacity: 0; transition: opacity 0.2s; pointer-events: none;
+  }
+  .lp-tmcard:hover::before { opacity: 1; }
+  .lp-tmcard:hover {
+    border-color: rgba(107,63,160,0.55);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 18px rgba(107,63,160,0.1);
+    transform: translateY(-1px);
+  }
+  .lp-tmcard:active { transform: scale(0.98); transition-duration: 0.07s; }
+  .lp-tmcard-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+  .lp-tmcard-icon { font-size: 22px; flex-shrink: 0; width: 36px; text-align: center; }
+  .lp-tmcard-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .lp-tmcard-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .lp-tmcard-count { font-size: 11px; color: rgba(255,255,255,0.38); font-weight: 500; }
+  .lp-tmcard-play {
+    font-size: 13px; color: rgba(180,144,255,0.7);
+    font-weight: 700; flex-shrink: 0; padding-left: 10px;
+    transition: color 0.15s;
+  }
+  .lp-tmcard:hover .lp-tmcard-play { color: rgba(180,144,255,1); }
 
   /* ── Player Info category card style (new) ─── */
   .lp-prog-card--info { border-color: rgba(56,189,248,0.24); }
@@ -5620,82 +5700,327 @@
         </div>
       </div>
 
-      <!-- ── Roster category sub-section ── -->
+<!-- ── Roster category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-roster">
-        <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title" style="background:rgba(139,92,246,0.22);border-color:rgba(139,92,246,0.45);">👥 Roster</span></div></div>
-        <div class="lp-tm-all-tiers">
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-rookie">🟢 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_best_player')"><div class="lp-mcard-icon">⭐</div><div class="lp-mcard-title">Team → Best Player</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        <div class="lp-cat-toolbar">
+          <div class="lp-cat-section-header">
+            <span class="lp-cat-section-title" style="background:rgba(139,92,246,0.22);border-color:rgba(139,92,246,0.45);">👥 Roster</span>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-starter">🔵 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_starting_5')"><div class="lp-mcard-icon">📋</div><div class="lp-mcard-title">Team → Starting 5</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        </div>
+        <div class="lp-tm-diff-stack">
+<div class="lp-diff-block lp-diff-block--rookie">
+            <div class="lp-diff-header lp-diff-header--rookie">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Rookie</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_best_player')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">⭐</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Team → Best Player</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-allstar">⭐ All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_roster')"><div class="lp-mcard-icon">👥</div><div class="lp-mcard-title">Team → Roster</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+<div class="lp-diff-block lp-diff-block--starter">
+            <div class="lp-diff-header lp-diff-header--starter">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Starter</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_starting_5')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">📋</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Team → Starting 5</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
+          </div>
+<div class="lp-diff-block lp-diff-block--allstar">
+            <div class="lp-diff-header lp-diff-header--allstar">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">All-Star</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_roster')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">👥</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Team → Roster</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
         </div>
       </div>
-
+      
       <!-- ── Coaches category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-coaches">
-        <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title" style="background:rgba(6,182,212,0.22);border-color:rgba(6,182,212,0.45);">👔 Coaches</span></div></div>
-        <div class="lp-tm-all-tiers">
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-rookie">🟢 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach')"><div class="lp-mcard-icon">👔</div><div class="lp-mcard-title">Team → Head Coach</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        <div class="lp-cat-toolbar">
+          <div class="lp-cat-section-header">
+            <span class="lp-cat-section-title" style="background:rgba(6,182,212,0.22);border-color:rgba(6,182,212,0.45);">👔 Coaches</span>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-starter">🔵 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coach_since')"><div class="lp-mcard-icon">📅</div><div class="lp-mcard-title">Head Coach → Team Since</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        </div>
+        <div class="lp-tm-diff-stack">
+<div class="lp-diff-block lp-diff-block--rookie">
+            <div class="lp-diff-header lp-diff-header--rookie">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Rookie</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_coach')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">👔</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Team → Head Coach</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-allstar">⭐ All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_coaching_staff')"><div class="lp-mcard-icon">🧑‍💼</div><div class="lp-mcard-title">Team → Coaching Staff</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+<div class="lp-diff-block lp-diff-block--starter">
+            <div class="lp-diff-header lp-diff-header--starter">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Starter</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_coach_since')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">📅</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Head Coach → Team Since</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
+          </div>
+<div class="lp-diff-block lp-diff-block--allstar">
+            <div class="lp-diff-header lp-diff-header--allstar">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">All-Star</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_coaching_staff')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">🧑‍💼</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Team → Coaching Staff</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
         </div>
       </div>
-
+      
       <!-- ── Player Info category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-info">
-        <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title" style="background:rgba(56,189,248,0.18);border-color:rgba(56,189,248,0.38);">📊 Player Info</span></div></div>
-        <div class="lp-tm-all-tiers">
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-rookie">🟢 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_position')"><div class="lp-mcard-icon">📍</div><div class="lp-mcard-title">Player → Position</div><div class="lp-mcard-count" id="lp-info-count-pos">— cards</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        <div class="lp-cat-toolbar">
+          <div class="lp-cat-section-header">
+            <span class="lp-cat-section-title" style="background:rgba(56,189,248,0.18);border-color:rgba(56,189,248,0.38);">📊 Player Info</span>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-starter">🔵 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_height')"><div class="lp-mcard-icon">📏</div><div class="lp-mcard-title">Player → Height</div><div class="lp-mcard-count" id="lp-info-count-height">— cards</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        </div>
+        <div class="lp-tm-diff-stack">
+<div class="lp-diff-block lp-diff-block--rookie">
+            <div class="lp-diff-header lp-diff-header--rookie">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Rookie</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','player_position')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">📍</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Player → Position</div>
+                  <div class="lp-mcard-count" id="lp-info-count-pos">— cards</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-allstar">⭐ All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_jersey')"><div class="lp-mcard-icon">🔢</div><div class="lp-mcard-title">Player → Jersey #</div><div class="lp-mcard-count" id="lp-info-count-jersey">— cards</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+<div class="lp-diff-block lp-diff-block--starter">
+            <div class="lp-diff-header lp-diff-header--starter">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Starter</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','player_height')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">📏</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Player → Height</div>
+                  <div class="lp-mcard-count" id="lp-info-count-height">— cards</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
+          </div>
+<div class="lp-diff-block lp-diff-block--allstar">
+            <div class="lp-diff-header lp-diff-header--allstar">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">All-Star</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','player_jersey')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">🔢</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Player → Jersey #</div>
+                  <div class="lp-mcard-count" id="lp-info-count-jersey">— cards</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
         </div>
       </div>
-
+      
       <!-- ── Player Career category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-players">
-        <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title">🏀 Player Career</span></div></div>
-        <div class="lp-tm-all-tiers">
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-rookie">🟢 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_past_teams')"><div class="lp-mcard-icon">🔄</div><div class="lp-mcard-title">Player → Past Teams</div><div class="lp-mcard-count" id="lp-career-count-past">— cards</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        <div class="lp-cat-toolbar">
+          <div class="lp-cat-section-header">
+            <span class="lp-cat-section-title">🏀 Player Career</span>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-starter">🔵 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_college')"><div class="lp-mcard-icon">🎓</div><div class="lp-mcard-title">Player → College</div><div class="lp-mcard-count" id="lp-career-count-college">— cards</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        </div>
+        <div class="lp-tm-diff-stack">
+<div class="lp-diff-block lp-diff-block--rookie">
+            <div class="lp-diff-header lp-diff-header--rookie">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Rookie</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','player_past_teams')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">🔄</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Player → Past Teams</div>
+                  <div class="lp-mcard-count" id="lp-career-count-past">— cards</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-allstar">⭐ All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','player_draft_info')"><div class="lp-mcard-icon">📅</div><div class="lp-mcard-title">Player → Draft Info</div><div class="lp-mcard-count" id="lp-career-count-draft">— cards</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+<div class="lp-diff-block lp-diff-block--starter">
+            <div class="lp-diff-header lp-diff-header--starter">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Starter</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','player_college')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">🎓</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Player → College</div>
+                  <div class="lp-mcard-count" id="lp-career-count-college">— cards</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
+          </div>
+<div class="lp-diff-block lp-diff-block--allstar">
+            <div class="lp-diff-header lp-diff-header--allstar">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">All-Star</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','player_draft_info')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">📅</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">Player → Draft Info</div>
+                  <div class="lp-mcard-count" id="lp-career-count-draft">— cards</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- ── History category sub-section ── -->
+      
+      <!-- ── History (Franchise Records) category sub-section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-history">
-        <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title">🏛 Franchise Records</span></div></div>
-        <div class="lp-tm-all-tiers">
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-rookie">🟢 Rookie</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_rebounds_leader')"><div class="lp-mcard-icon">💪</div><div class="lp-mcard-title">All-Time Rebounds Leader</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        <div class="lp-cat-toolbar">
+          <div class="lp-cat-section-header">
+            <span class="lp-cat-section-title">🏛 Franchise Records</span>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-starter">🔵 Starter</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_assists')"><div class="lp-mcard-icon">🎯</div><div class="lp-mcard-title">All-Time Assists Leader</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+        </div>
+        <div class="lp-tm-diff-stack">
+<div class="lp-diff-block lp-diff-block--rookie">
+            <div class="lp-diff-header lp-diff-header--rookie">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Rookie</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_all_time_rebounds_leader')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">💪</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">All-Time Rebounds Leader</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
-          <div class="lp-mode-grid"><div class="lp-mode-grid-label lp-diff-label-allstar">⭐ All-Star</div>
-            <div class="lp-mcard" onclick="lpLaunchMode('team','team_all_time_scorer')"><div class="lp-mcard-icon">🏀</div><div class="lp-mcard-title">All-Time Scorer</div><div class="lp-mcard-count">1 card</div><div class="lp-mcard-progress"><div class="lp-mcard-progress-fill" style="width:0%"></div></div><div class="lp-mcard-footer"><span class="lp-mcard-play">▶ Play</span></div></div>
+<div class="lp-diff-block lp-diff-block--starter">
+            <div class="lp-diff-header lp-diff-header--starter">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">Starter</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_all_time_assists')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">🎯</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">All-Time Assists Leader</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
+          </div>
+<div class="lp-diff-block lp-diff-block--allstar">
+            <div class="lp-diff-header lp-diff-header--allstar">
+              <span class="lp-diff-dot"></span>
+              <span class="lp-diff-name">All-Star</span>
+            </div>
+            <div class="lp-diff-cards">
+              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_all_time_scorer')">
+              <div class="lp-tmcard-left">
+                <span class="lp-tmcard-icon">🏀</span>
+                <div class="lp-tmcard-info">
+                  <div class="lp-tmcard-title">All-Time Scorer</div>
+                  <div class="lp-mcard-count">1 card</div>
+                </div>
+              </div>
+              <span class="lp-tmcard-play">▶</span>
+            </div>
+            </div>
           </div>
         </div>
       </div>
