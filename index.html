@@ -1134,6 +1134,17 @@
     color: var(--text);
   }
   .mode-card:hover { border-color: var(--jazz-purple); background: rgba(107,63,160,0.1); transform: translateY(-2px); }
+  /* Jazz Roster standalone mode cards */
+  .mode-list { display: flex; flex-direction: column; gap: 14px; }
+  .mode-card--roster { position: relative; background: var(--surface); border: 1px solid rgba(107,63,160,0.22); border-radius: 16px; padding: 16px 18px; transition: all 0.2s ease; cursor: pointer; }
+  .mode-card--roster:hover { transform: translateY(-2px); border-color: rgba(107,63,160,0.48); background: rgba(107,63,160,0.08); }
+  .mode-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+  .mode-card--roster .mode-title { font-size: 18px; font-weight: 600; color: #fff; }
+  .mode-card--roster .mode-subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .mode-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: rgba(155,142,196,0.75); font-size: 16px; }
+  .mode-card--rookie .mode-badge { color: #7ee2a8; }
+  .mode-card--starter .mode-badge { color: #7fc8ff; }
+  .mode-card--allstar .mode-badge { color: #f3d36a; }
   .mode-icon  { font-size: 26px; flex-shrink: 0; }
   .mode-info  { flex: 1; }
   .mode-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; line-height: 1.1; }
@@ -5721,60 +5732,24 @@
             <span class="lp-cat-section-title" style="background:rgba(139,92,246,0.22);border-color:rgba(139,92,246,0.45);">👥 Roster</span>
           </div>
         </div>
-        <div class="lp-tm-diff-stack">
-<div class="lp-diff-block lp-diff-block--rookie">
-            <div class="lp-diff-header lp-diff-header--rookie">
-              <span class="lp-diff-dot"></span>
-              <span class="lp-diff-name">Rookie</span>
-            </div>
-            <div class="lp-diff-cards">
-              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_best_player')">
-              <div class="lp-tmcard-left">
-                <span class="lp-tmcard-icon">⭐</span>
-                <div class="lp-tmcard-info">
-                  <div class="lp-tmcard-title">Team → Best Player</div>
-                  <div class="lp-mcard-count">1 card</div>
-                </div>
-              </div>
-              <span class="lp-tmcard-play">▶</span>
-            </div>
-            </div>
+        <div class="mode-list">
+          <div class="mode-card--roster mode-card--rookie" onclick="lpLaunchMode('team','team_best_player')">
+            <div class="mode-badge">⭐ Rookie</div>
+            <div class="mode-title">Team → Best Player</div>
+            <div class="mode-subtitle">Identify the Jazz's top player — 1 card</div>
+            <span class="mode-arrow">›</span>
           </div>
-<div class="lp-diff-block lp-diff-block--starter">
-            <div class="lp-diff-header lp-diff-header--starter">
-              <span class="lp-diff-dot"></span>
-              <span class="lp-diff-name">Starter</span>
-            </div>
-            <div class="lp-diff-cards">
-              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_starting_5')">
-              <div class="lp-tmcard-left">
-                <span class="lp-tmcard-icon">📋</span>
-                <div class="lp-tmcard-info">
-                  <div class="lp-tmcard-title">Team → Starting 5</div>
-                  <div class="lp-mcard-count">1 card</div>
-                </div>
-              </div>
-              <span class="lp-tmcard-play">▶</span>
-            </div>
-            </div>
+          <div class="mode-card--roster mode-card--starter" onclick="lpLaunchMode('team','team_starting_5')">
+            <div class="mode-badge">📋 Starter</div>
+            <div class="mode-title">Team → Starting 5</div>
+            <div class="mode-subtitle">Name the ideal fully healthy starting lineup — 1 card</div>
+            <span class="mode-arrow">›</span>
           </div>
-<div class="lp-diff-block lp-diff-block--allstar">
-            <div class="lp-diff-header lp-diff-header--allstar">
-              <span class="lp-diff-dot"></span>
-              <span class="lp-diff-name">All-Star</span>
-            </div>
-            <div class="lp-diff-cards">
-              <div class="lp-tmcard" onclick="lpLaunchMode('team','team_roster')">
-              <div class="lp-tmcard-left">
-                <span class="lp-tmcard-icon">👥</span>
-                <div class="lp-tmcard-info">
-                  <div class="lp-tmcard-title">Team → Roster</div>
-                  <div class="lp-mcard-count">1 card</div>
-                </div>
-              </div>
-              <span class="lp-tmcard-play">▶</span>
-            </div>
-            </div>
+          <div class="mode-card--roster mode-card--allstar" onclick="lpLaunchMode('team','team_roster')">
+            <div class="mode-badge">👥 All-Star</div>
+            <div class="mode-title">Team → Roster</div>
+            <div class="mode-subtitle">Recall the full Jazz roster — 1 card</div>
+            <span class="mode-arrow">›</span>
           </div>
         </div>
       </div>
