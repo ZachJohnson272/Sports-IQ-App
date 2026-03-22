@@ -1136,15 +1136,21 @@
   .mode-card:hover { border-color: var(--jazz-purple); background: rgba(107,63,160,0.1); transform: translateY(-2px); }
   /* Jazz Roster standalone mode cards */
   .mode-list { display: flex; flex-direction: column; gap: 14px; }
-  .mode-card--roster { position: relative; background: var(--surface); border: 1px solid rgba(107,63,160,0.22); border-radius: 16px; padding: 16px 18px; transition: all 0.2s ease; cursor: pointer; }
-  .mode-card--roster:hover { transform: translateY(-2px); border-color: rgba(107,63,160,0.48); background: rgba(107,63,160,0.08); }
-  .mode-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
-  .mode-card--roster .mode-title { font-size: 18px; font-weight: 600; color: #fff; }
+  .mode-card--roster { position: relative; background: var(--surface); border: 1px solid rgba(107,63,160,0.22); border-radius: 16px; padding: 16px 18px; transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1); cursor: pointer; overflow: hidden; }
+  .mode-card--roster::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%); opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
+  .mode-card--roster:hover { transform: translateY(-3px); border-color: rgba(107,63,160,0.5); background: rgba(107,63,160,0.10); }
+  .mode-card--roster:hover::after { opacity: 1; }
+  .mode-card--roster:hover .mode-arrow { transform: translateY(-50%) translateX(4px); opacity: 0.9; }
+  .mode-badge { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; opacity: 0.95; margin-bottom: 10px; }
+  .mode-card--roster .mode-title { font-size: 16px; font-weight: 500; letter-spacing: 0.5px; color: rgba(255,255,255,0.9); }
   .mode-card--roster .mode-subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
-  .mode-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: rgba(155,142,196,0.75); font-size: 16px; }
-  .mode-card--rookie .mode-badge { color: #7ee2a8; }
-  .mode-card--starter .mode-badge { color: #7fc8ff; }
-  .mode-card--allstar .mode-badge { color: #f3d36a; }
+  .mode-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: rgba(155,142,196,0.75); font-size: 16px; opacity: 0.6; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .mode-card--rookie .mode-badge { color: #7ee2a8; text-shadow: 0 0 6px rgba(126,226,168,0.35); }
+  .mode-card--starter .mode-badge { color: #7fc8ff; text-shadow: 0 0 6px rgba(127,200,255,0.35); }
+  .mode-card--allstar .mode-badge { color: #f3d36a; text-shadow: 0 0 6px rgba(243,211,106,0.35); }
+  .mode-card--rookie { box-shadow: inset 0 1px 0 rgba(126,226,168,0.15); }
+  .mode-card--starter { box-shadow: inset 0 1px 0 rgba(127,200,255,0.15); }
+  .mode-card--allstar { box-shadow: inset 0 1px 0 rgba(243,211,106,0.15); }
   .mode-icon  { font-size: 26px; flex-shrink: 0; }
   .mode-info  { flex: 1; }
   .mode-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; line-height: 1.1; }
