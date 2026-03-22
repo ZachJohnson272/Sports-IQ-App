@@ -1158,6 +1158,8 @@
   /* Starting 5 title polish */
   .lineup-title { display: inline-flex; align-items: baseline; gap: 6px; }
   .lineup-sub { font-size: 0.75em; opacity: 0.65; font-weight: 400; letter-spacing: 1px; white-space: nowrap; color: rgba(155,142,196,0.8); }
+  .front-label--lineup { font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; color: rgba(155,142,196,0.78); margin-bottom: 10px; }
+  .front-main--team { font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 1.02; letter-spacing: 1.5px; text-align: center; color: #fff; }
 
   .front-stat-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
   .front-stat-chip { background: var(--surface2); border-radius: 8px; padding: 8px 14px; text-align: center; }
@@ -7990,10 +7992,9 @@ function buildTeamToStarting5Deck(team) {
         name +
       '</span></div>';
   }).join('');
-  const front = team.name +
-    '<div class="front-main" style="margin-top:6px;"><span class="lineup-title">IDEAL STARTING 5<span class="lineup-sub">— FULLY HEALTHY</span></span></div>';
+  const front = team.name;
   const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
-  return [makeCard(front, answer, null)];
+  return [makeCard(front, answer, '__LINEUP__')];
 }
 function buildLeagueTeamToStarting5Deck() {
   const posOrder = ['PG','SG','SF','PF','C'];
@@ -8007,10 +8008,9 @@ function buildLeagueTeamToStarting5Deck() {
           name +
         '</span></div>';
     }).join('');
-    const front = t.name +
-      '<div class="front-main" style="margin-top:6px;"><span class="lineup-title">IDEAL STARTING 5<span class="lineup-sub">— FULLY HEALTHY</span></span></div>';
+    const front = t.name;
     const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
-    return makeCard(front, answer, null);
+    return makeCard(front, answer, '__LINEUP__');
   });
 }
 function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
@@ -8652,9 +8652,15 @@ function loadSessionCard() {
   const displayFront = _fcReversed ? card.back  : card.front;
   const displayBack  = _fcReversed ? card.front : card.back;
 
-  frontTextEl.innerHTML = `
-    <div class="front-label">${hint}</div>
-    <div class="front-main">${displayFront}</div>`;
+  if (hint === '__LINEUP__') {
+    frontTextEl.innerHTML = `
+      <div class="front-label front-label--lineup">IDEAL STARTING 5 — FULLY HEALTHY</div>
+      <div class="front-main front-main--team">${displayFront}</div>`;
+  } else {
+    frontTextEl.innerHTML = `
+      <div class="front-label">${hint}</div>
+      <div class="front-main">${displayFront}</div>`;
+  }
 
   // Back face
   const backPhotoEl = document.getElementById('backPhoto');
