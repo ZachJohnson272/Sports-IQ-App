@@ -8008,7 +8008,7 @@ function buildLeagueTeamToStarting5Deck() {
           name +
         '</span></div>';
     }).join('');
-    const front = t.name + '<div style="font-family:sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-top:4px;">Starting 5</div>';
+    const front = t.name + '<div style="font-family:sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-top:4px;">Starting 5</div><div style="font-size:11px;font-style:italic;color:rgba(91,184,212,0.75);margin-top:6px;letter-spacing:0;">💡 Ideal lineup — assumes full health</div>';
     const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
     return makeCard(front, answer, "Who are the starters for this team?");
   });
@@ -9143,6 +9143,7 @@ function startLineup() {
   document.getElementById('lineupResult').style.display = 'none';
   document.getElementById('fcCurrent').textContent = '—';
   document.getElementById('fcTotal').textContent = '—';
+  document.getElementById('fcModeTitle').innerHTML = 'Team &rarr; Starting 5 &nbsp;·&nbsp; <span style="font-style:italic;font-weight:400;color:rgba(91,184,212,0.8);text-transform:none;letter-spacing:0;">Ideal lineup — assumes full health</span>';
 
   const allNames = ROSTER.map(p => p.name).sort();
   const grid = document.getElementById('lineupGrid');
