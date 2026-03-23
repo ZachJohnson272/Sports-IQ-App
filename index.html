@@ -3060,9 +3060,9 @@
   .lp-prog-card--history:hover  { border-color: rgba(250,204,21,0.52); box-shadow: 0 12px 34px rgba(250,204,21,0.14); }
   .lp-prog-card--history:hover::before  { opacity: 1; }
 
-  .lp-prog-card--mixed  { border-color: rgba(34,197,94,0.42); background: rgba(34,197,94,0.06); box-shadow: inset 0 1px 0 rgba(34,197,94,0.2), 0 0 18px rgba(34,197,94,0.10); }
-  .lp-prog-card--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.15), transparent 65%); }
-  .lp-prog-card--mixed:hover  { border-color: rgba(34,197,94,0.72); background: rgba(34,197,94,0.11); box-shadow: inset 0 1px 0 rgba(34,197,94,0.3), 0 12px 34px rgba(34,197,94,0.22); }
+  .lp-prog-card--mixed  { border-color: rgba(34,197,94,0.22); }
+  .lp-prog-card--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.1), transparent 65%); }
+  .lp-prog-card--mixed:hover  { border-color: rgba(34,197,94,0.58); box-shadow: 0 12px 34px rgba(34,197,94,0.2); }
   .lp-prog-card--mixed:hover::before  { opacity: 1; }
 
   /* Top row: icon + title/desc */
@@ -3079,8 +3079,7 @@
   }
   .lp-prog-card--players  .lp-prog-icon { background: rgba(249,115,22,0.12);  border-color: rgba(249,115,22,0.22); }
   .lp-prog-card--history  .lp-prog-icon { background: rgba(250,204,21,0.1);   border-color: rgba(250,204,21,0.18); }
-  .lp-prog-card--mixed    .lp-prog-icon { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.35); }
-  .lp-prog-card--mixed    .lp-prog-title { color: #7ee2a8; text-shadow: 0 0 8px rgba(126,226,168,0.35); }
+  .lp-prog-card--mixed    .lp-prog-icon { background: rgba(34,197,94,0.1);   border-color: rgba(34,197,94,0.2); }
   .lp-prog-body { flex: 1; min-width: 0; }
   .lp-prog-title {
     font-family: 'Bebas Neue', sans-serif;
@@ -4662,12 +4661,12 @@
   .lp-tmcard:hover .lp-tmcard-play { color: rgba(180,144,255,1); }
 
   /* ── Player Info category card style (new) ─── */
-  .lp-prog-card--info { border-color: rgba(239,68,68,0.28); }
-  .lp-prog-card--info::before { background: radial-gradient(ellipse at top left, rgba(239,68,68,0.12), transparent 65%); }
-  .lp-prog-card--info:hover { border-color: rgba(239,68,68,0.70); box-shadow: 0 12px 34px rgba(239,68,68,0.22), 0 0 24px rgba(239,68,68,0.18); }
+  .lp-prog-card--info { border-color: rgba(56,189,248,0.24); }
+  .lp-prog-card--info::before { background: radial-gradient(ellipse at top left, rgba(56,189,248,0.09), transparent 65%); }
+  .lp-prog-card--info:hover { border-color: rgba(56,189,248,0.62); box-shadow: 0 12px 34px rgba(56,189,248,0.18), 0 0 24px rgba(56,189,248,0.14); }
   .lp-prog-card--info:hover::before { opacity: 1; }
-  .lp-prog-card--info .lp-prog-icon { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.28); }
-  .lp-prog-bar--info { background: linear-gradient(90deg, rgba(239,68,68,0.8), rgba(185,28,28,0.5)); }
+  .lp-prog-card--info .lp-prog-icon { background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.24); }
+  .lp-prog-bar--info { background: linear-gradient(90deg, rgba(56,189,248,0.7), rgba(14,165,233,0.4)); }
 
 </style>
 <!-- Supabase SDK -->
@@ -5733,7 +5732,7 @@
           <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--history" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes</span></div>
           <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
         </div>
-        <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="startGeneratedMode('mixed','team')" style="margin-top:18px;">
+        <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="startGeneratedMode('mixed','team')">
           <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title">🎲 Random/Mixed</div><div class="lp-prog-desc">Mixed flashcard sessions from all Team Mastery modes</div></div></div>
           <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--mixed" style="width:0%"></div></div><span class="lp-prog-fraction">All modes</span></div>
           <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">All Tiers</span></div>
@@ -8264,9 +8263,41 @@ function buildLeagueMixedDeck() {
 }
 
 // ── New Team Mastery builder functions ──────────────────────────────────────
+const TEAM_BEST_PLAYER = {
+  "Phoenix Suns":              "Devin Booker",
+  "Oklahoma City Thunder":     "Shai Gilgeous-Alexander",
+  "Brooklyn Nets":             "Michael Porter Jr.",
+  "Denver Nuggets":            "Nikola Jokic",
+  "Portland Trail Blazers":    "Damian Lillard",
+  "Orlando Magic":             "Paolo Banchero",
+  "San Antonio Spurs":         "Victor Wembanyama",
+  "Minnesota Timberwolves":    "Anthony Edwards",
+  "Memphis Grizzlies":         "Ja Morant",
+  "Cleveland Cavaliers":       "Donovan Mitchell",
+  "Detroit Pistons":           "Cade Cunningham",
+  "Atlanta Hawks":             "Jalen Johnson",
+  "Indiana Pacers":            "Tyrese Haliburton",
+  "Charlotte Hornets":         "LaMelo Ball",
+  "LA Clippers":               "Kawhi Leonard",
+  "New Orleans Pelicans":      "Zion Williamson",
+  "Toronto Raptors":           "Scottie Barnes",
+  "Philadelphia 76ers":        "Tyrese Maxey",
+  "Dallas Mavericks":          "Cooper Flagg",
+  "Boston Celtics":            "Jaylen Brown",
+  "Houston Rockets":           "Kevin Durant",
+  "Los Angeles Lakers":        "Luka Doncic",
+  "Washington Wizards":        "Anthony Davis",
+  "Utah Jazz":                 "Jaren Jackson Jr.",
+  "Milwaukee Bucks":           "Giannis Antetokounmpo",
+  "Golden State Warriors":     "Stephen Curry",
+  "Miami Heat":                "Bam Adebayo",
+  "New York Knicks":           "Jalen Brunson",
+  "Sacramento Kings":          "Domantas Sabonis",
+  "Chicago Bulls":             "Josh Giddey",
+};
+
 function buildTeamToBestPlayerDeck(team, lineup) {
-  const vals = Object.values(lineup || _activeLineup);
-  const best = vals[2] || vals[0] || 'N/A';
+  const best = TEAM_BEST_PLAYER[team.name] || Object.values(lineup || _activeLineup)[0] || 'N/A';
   return [makeCard(team.name, best, "Who is this team's best player?")];
 }
 function buildPlayerToDraftInfoDeck(roster) {
