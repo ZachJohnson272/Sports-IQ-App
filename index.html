@@ -1154,6 +1154,8 @@
   .mode-card--rookie:hover { border-color: rgba(126,226,168,0.65); background: rgba(126,226,168,0.10); }
   .mode-card--starter:hover { border-color: rgba(127,200,255,0.65); background: rgba(127,200,255,0.10); }
   .mode-card--allstar:hover { border-color: rgba(243,211,106,0.65); background: rgba(243,211,106,0.10); }
+  .mode-card--random { border-color: rgba(61,204,122,0.38); background: rgba(61,204,122,0.05); box-shadow: inset 0 1px 0 rgba(61,204,122,0.2); }
+  .mode-card--random:hover { border-color: rgba(61,204,122,0.65); background: rgba(61,204,122,0.10); }
   .mode-icon  { font-size: 26px; flex-shrink: 0; }
   .mode-info  { flex: 1; }
   .mode-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; line-height: 1.1; }
@@ -5877,16 +5879,14 @@
       </div>
 
       <!-- ── Random category section ── -->
-      <div class="lp-cat-section hidden" id="lp-tsec-random" style="margin-top:12px;">
+      <div class="lp-cat-section hidden" id="lp-tsec-random">
         <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#fff;">🎲 Random/Mixed</span></div></div>
         <div id="lp-random-setup-team">
-          <div class="lp-rgen-hub">
-            <p class="lp-rgen-intro">Mixed sessions from your Team Mastery flashcard modes.</p>
-            <div class="lp-rgen-card lp-rgen-card--chaos" onclick="startGeneratedMode('mixed','team')">
-              <div class="lp-rgen-top"><span class="lp-rgen-name">🎲 Mixed Chaos</span><span class="lp-rgen-badge badge--fun">FUN</span></div>
-              <div class="lp-rgen-desc">All categories, lightly biased toward review. Varied and energetic — great for casual play.</div>
-              <div class="lp-rgen-footer"><span class="lp-rgen-meta">20 cards · All topics</span><span class="lp-rgen-play">▶ Play</span></div>
-            </div>
+          <div class="mode-card--roster mode-card--random" onclick="startGeneratedMode('mixed','team')" style="margin-top:20px;">
+            <div class="mode-badge" style="color:#7ee2a8;text-shadow:0 0 6px rgba(126,226,168,0.4);">🎲 Mixed Chaos</div>
+            <div class="mode-title">All Categories · Random Mix</div>
+            <div class="mode-subtitle" style="display:block;font-size:12px;color:rgba(255,255,255,0.38);margin-top:4px;">20 cards · All topics · Great for casual play</div>
+            <span class="mode-arrow">›</span>
           </div>
         </div>
       </div>
