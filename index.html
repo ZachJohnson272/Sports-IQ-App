@@ -5318,7 +5318,7 @@
           <div class="lp-lk-hero-sub">Train across all 30 teams</div>
         </div>
         <div class="lp-lk-hero-stats">
-          <div class="lp-lk-hero-stat"><span class="lp-lk-hero-stat-num">240</span><span class="lp-lk-hero-stat-lbl">Cards</span></div>
+          <div class="lp-lk-hero-stat"><span class="lp-lk-hero-stat-num">270</span><span class="lp-lk-hero-stat-lbl">Cards</span></div>
           <div class="lp-lk-hero-stat-div"></div>
           <div class="lp-lk-hero-stat"><span class="lp-lk-hero-stat-num">5</span><span class="lp-lk-hero-stat-lbl">Modes</span></div>
         </div>
@@ -5420,7 +5420,7 @@
           </div>
           <div class="lp-lk-modecard-right">
             <div class="lp-lk-modecard-tag lp-lk-tag--mixed">BEST MODE</div>
-            <div class="lp-lk-modecard-count lp-lk-modecard-count--mixed">240</div>
+            <div class="lp-lk-modecard-count lp-lk-modecard-count--mixed">270</div>
           </div>
         </div>
 
@@ -8269,12 +8269,13 @@ function buildLeagueStarterPlayerTeamDeck() {
 }
 
 function buildLeagueMixedDeck() {
-  // 240 cards: all 4 modes combined and shuffled
+  // 270 cards: all 5 modes combined and shuffled
   const deck = [
     ...buildLeagueStarterPlayerTeamDeck(),   // 150
     ...buildLeagueTeamToStarting5Deck(),      // 30
     ...buildLeagueTeamToRosterDeck(),         // 30
     ...buildLeagueTeamToCoachDeck(),          // 30
+    ...buildLeagueTeamToBestPlayerDeck(),     // 30
   ];
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
