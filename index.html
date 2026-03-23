@@ -3248,12 +3248,14 @@
 
   /* Mode-specific accent colours */
   .lp-rgen-card--chaos {
-    border-color: rgba(61,204,122,0.25);
-    box-shadow: 0 4px 18px rgba(61,204,122,0.06);
+    border-color: rgba(61,204,122,0.38);
+    background: rgba(61,204,122,0.05);
+    box-shadow: inset 0 1px 0 rgba(61,204,122,0.2), 0 4px 18px rgba(61,204,122,0.10);
   }
   .lp-rgen-card--chaos:hover {
-    border-color: rgba(61,204,122,0.55);
-    box-shadow: 0 8px 26px rgba(61,204,122,0.14);
+    border-color: rgba(61,204,122,0.65);
+    background: rgba(61,204,122,0.10);
+    box-shadow: inset 0 1px 0 rgba(61,204,122,0.25), 0 8px 26px rgba(61,204,122,0.20);
   }
   .lp-rgen-card--weak {
     border-color: rgba(245,140,50,0.28);
@@ -3299,6 +3301,7 @@
     color: rgba(255,255,255,0.5);
   }
   .lp-rgen-card--chaos  .lp-rgen-play { color: rgba(61,204,122,0.8);  }
+  .lp-rgen-card--chaos  .lp-rgen-name { color: #7ee2a8; text-shadow: 0 0 8px rgba(126,226,168,0.4); }
   .lp-rgen-card--weak   .lp-rgen-play { color: rgba(245,140,50,0.8);  }
   .lp-rgen-card--daily  .lp-rgen-play { color: rgba(91,184,212,0.85); }
 
@@ -5874,7 +5877,7 @@
       </div>
 
       <!-- ── Random category section ── -->
-      <div class="lp-cat-section hidden" id="lp-tsec-random">
+      <div class="lp-cat-section hidden" id="lp-tsec-random" style="margin-top:12px;">
         <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#fff;">🎲 Random/Mixed</span></div></div>
         <div id="lp-random-setup-team">
           <div class="lp-rgen-hub">
