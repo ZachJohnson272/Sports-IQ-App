@@ -430,6 +430,59 @@
     gap: 0;
     overflow-y: auto;
   }
+  /* Draft pick list — custom centered premium layout */
+  .card-back.card-back--draft {
+    justify-content: center;
+    align-items: center;
+    padding: 14px 10px 14px;
+    gap: 0;
+    overflow-y: auto;
+  }
+  .draft-pick-list {
+    width: 100%;
+    max-width: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin: 0 auto;
+  }
+  .draft-pick-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  .draft-pick-main {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    line-height: 1.15;
+  }
+  .draft-pick-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: rgba(180,144,255,0.9);
+    flex-shrink: 0;
+    width: 26px;
+    text-align: right;
+    line-height: 1;
+  }
+  .draft-pick-player {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.1px;
+  }
+  .draft-pick-team {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.38);
+    padding-left: 34px;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+  }
   .back-name--list {
     font-family: 'DM Sans', sans-serif;
     font-size: 11.5px;
@@ -7914,17 +7967,20 @@ const DRAFT_YEAR_TOP_10 = [
 function buildLeagueDraftYearTop10Deck() {
   const cards = DRAFT_YEAR_TOP_10.map(d => {
     const rows = d.picks.map(pick => {
-      // Split "N. Name – Team" into name and team parts
-      const m = pick.match(/^(\d+)\.\s+(.+?)\s+–\s+(.+)$/);
+      // Split "N. Name – Team" into pick num, player name, team
+      const m = pick.match(/^(\d+)\.\s+(.+?)\s+\u2013\s+(.+)$/);
       if (m) {
-        return '<div class="back-roster-row">' +
-          '<span class="back-roster-name">' + m[2] + '</span>' +
-          '<span class="back-roster-meta">' + m[1] + '. ' + m[3] + '</span>' +
+        return '<div class="draft-pick-row">' +
+          '<div class="draft-pick-main">' +
+            '<span class="draft-pick-num">' + m[1] + '</span>' +
+            '<span class="draft-pick-player">' + m[2] + '</span>' +
+          '</div>' +
+          '<div class="draft-pick-team">' + m[3] + '</div>' +
         '</div>';
       }
-      return '<div class="back-roster-row"><span class="back-roster-name">' + pick + '</span></div>';
+      return '<div class="draft-pick-row"><div class="draft-pick-main"><span class="draft-pick-player">' + pick + '</span></div></div>';
     }).join('');
-    const answer = '<div style="width:100%">' + rows + '</div>';
+    const answer = '<div class="draft-pick-list">' + rows + '</div>';
     return makeCard(d.year, answer, '🎟️ Top 10 picks from this draft class?');
   });
   // Shuffle
@@ -8631,18 +8687,26 @@ function loadSessionCard() {
     backNameEl.innerHTML = displayBack;
     const isRosterList = displayBack.includes('back-roster-row');
     const isConfBlock  = displayBack.includes('back-conf-block');
-    if (isRosterList) {
+    const isDraftList  = displayBack.includes('draft-pick-list');
+    if (isDraftList) {
+      backNameEl.className = 'back-name';
+      backNameEl.style.width = '100%';
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list'); cardBackEl.classList.add('card-back--draft'); }
+    } else if (isRosterList) {
       backNameEl.className = 'back-name back-name--list';
-      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list'); cardBackEl.classList.add('card-back--list'); }
+      backNameEl.style.width = '';
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft'); cardBackEl.classList.add('card-back--list'); }
     } else {
       // coaching staff, conf/division, etc. — centered, no roster sizing
       backNameEl.className = isConfBlock ? 'back-name' : 'back-name back-name--list';
-      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list'); cardBackEl.classList.add('card-back--centered-list'); }
+      backNameEl.style.width = '';
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft'); cardBackEl.classList.add('card-back--centered-list'); }
     }
   } else {
     backNameEl.className = 'back-name';
+    backNameEl.style.width = '';
     backNameEl.textContent = displayBack;
-    if (cardBackEl) cardBackEl.classList.remove('card-back--list', 'card-back--centered-list');
+    if (cardBackEl) cardBackEl.classList.remove('card-back--list', 'card-back--centered-list', 'card-back--draft');
   }
   document.getElementById('backPos').textContent  = '';
   document.getElementById('backStats').innerHTML  = '';
