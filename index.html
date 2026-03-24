@@ -4510,6 +4510,10 @@
   .lp-lk-modecard--orange::before { background: radial-gradient(ellipse at top left, rgba(249,115,22,0.12),  transparent 65%); }
   .lp-lk-modecard--orange:hover   { border-color: rgba(249,115,22,0.70);  box-shadow: 0 12px 34px rgba(249,115,22,0.22),  0 0 22px rgba(249,115,22,0.18); }
   .lp-lk-modecard--orange:hover::before { opacity: 1; }
+  .lp-lk-modecard--magenta { border-color: rgba(236,72,153,0.32);  box-shadow: 0 0 14px rgba(236,72,153,0.14),  0 3px 14px rgba(0,0,0,0.38); }
+  .lp-lk-modecard--magenta::before { background: radial-gradient(ellipse at top left, rgba(236,72,153,0.14),  transparent 65%); }
+  .lp-lk-modecard--magenta:hover   { border-color: rgba(236,72,153,0.75);  box-shadow: 0 12px 34px rgba(236,72,153,0.26),  0 0 24px rgba(236,72,153,0.20); transform: translateY(-3px); }
+  .lp-lk-modecard--magenta:hover::before { opacity: 1; }
 
   .lp-lk-modecard--mixed  {
     border-color: rgba(34,197,94,0.52);
@@ -4547,7 +4551,8 @@
   .lp-lk-tag--gold   { background: rgba(251,191,36,0.15);  color: rgb(253,224,132); }
   .lp-lk-tag--cyan   { background: rgba(6,182,212,0.15);   color: rgb(103,232,249); }
   .lp-lk-tag--green  { background: rgba(34,197,94,0.15);   color: rgb(134,239,172); }
-  .lp-lk-tag--orange { background: rgba(249,115,22,0.16);  color: rgb(253,186,116); }
+  .lp-lk-tag--orange  { background: rgba(249,115,22,0.16);  color: rgb(253,186,116); }
+  .lp-lk-tag--magenta { background: rgba(236,72,153,0.18);  color: rgb(249,168,212); }
   .lp-lk-tag--mixed  { background: rgba(34,197,94,0.18); color: rgb(134,239,172); }
   .lp-lk-modecard-count {
     font-family: 'Bebas Neue', sans-serif;
@@ -5399,6 +5404,21 @@
           <div class="lp-lk-modecard-right">
             <div class="lp-lk-modecard-tag lp-lk-tag--orange">STARS</div>
             <div class="lp-lk-modecard-count">30</div>
+          </div>
+        </div>
+
+        <!-- Draft Year → Top 10 Picks -->
+        <div class="lp-lk-modecard lp-lk-modecard--magenta" onclick="lpLaunchMode('league','league_draft_top10')">
+          <div class="lp-lk-modecard-left">
+            <div class="lp-lk-modecard-icon">🎟️</div>
+            <div class="lp-lk-modecard-info">
+              <div class="lp-lk-modecard-name">Draft Year → Top 10 Picks</div>
+              <div class="lp-lk-modecard-desc">2010–2025 · Randomized each session</div>
+            </div>
+          </div>
+          <div class="lp-lk-modecard-right">
+            <div class="lp-lk-modecard-tag lp-lk-tag--magenta">DRAFT</div>
+            <div class="lp-lk-modecard-count">16</div>
           </div>
         </div>
 
@@ -7871,6 +7891,50 @@ function buildLeagueTeamToBestPlayerDeck() {
     makeCard(t.name, TEAM_BEST_PLAYER[t.name], "Who is this team's best player?")
   );
 }
+// ── Draft Year Top 10 dataset ───────────────────────────────────────────────
+const DRAFT_YEAR_TOP_10 = [
+  { year:'2010', picks:['1. John Wall – Washington Wizards','2. Evan Turner – Philadelphia 76ers','3. Derrick Favors – New Jersey Nets','4. Wesley Johnson – Minnesota Timberwolves','5. DeMarcus Cousins – Sacramento Kings','6. Ekpe Udoh – Golden State Warriors','7. Greg Monroe – Detroit Pistons','8. Al-Farouq Aminu – Los Angeles Clippers','9. Gordon Hayward – Utah Jazz','10. Paul George – Indiana Pacers'] },
+  { year:'2011', picks:['1. Kyrie Irving – Cleveland Cavaliers','2. Derrick Williams – Minnesota Timberwolves','3. Enes Kanter – Utah Jazz','4. Tristan Thompson – Cleveland Cavaliers','5. Jonas Valanciunas – Toronto Raptors','6. Jan Vesely – Washington Wizards','7. Bismack Biyombo – Sacramento Kings','8. Brandon Knight – Detroit Pistons','9. Kemba Walker – Charlotte Bobcats','10. Jimmer Fredette – Milwaukee Bucks'] },
+  { year:'2012', picks:['1. Anthony Davis – New Orleans Hornets','2. Michael Kidd-Gilchrist – Charlotte Bobcats','3. Bradley Beal – Washington Wizards','4. Dion Waiters – Cleveland Cavaliers','5. Thomas Robinson – Sacramento Kings','6. Damian Lillard – Portland Trail Blazers','7. Harrison Barnes – Golden State Warriors','8. Terrence Ross – Toronto Raptors','9. Andre Drummond – Detroit Pistons','10. Austin Rivers – New Orleans Hornets'] },
+  { year:'2013', picks:['1. Anthony Bennett – Cleveland Cavaliers','2. Victor Oladipo – Orlando Magic','3. Otto Porter Jr. – Washington Wizards','4. Cody Zeller – Charlotte Bobcats','5. Alex Len – Phoenix Suns','6. Nerlens Noel – New Orleans Pelicans','7. Ben McLemore – Sacramento Kings','8. Kentavious Caldwell-Pope – Detroit Pistons','9. Trey Burke – Minnesota Timberwolves','10. CJ McCollum – Portland Trail Blazers'] },
+  { year:'2014', picks:['1. Andrew Wiggins – Cleveland Cavaliers','2. Jabari Parker – Milwaukee Bucks','3. Joel Embiid – Philadelphia 76ers','4. Aaron Gordon – Orlando Magic','5. Dante Exum – Utah Jazz','6. Marcus Smart – Boston Celtics','7. Julius Randle – Los Angeles Lakers','8. Nik Stauskas – Sacramento Kings','9. Noah Vonleh – Charlotte Hornets','10. Elfrid Payton – Philadelphia 76ers'] },
+  { year:'2015', picks:['1. Karl-Anthony Towns – Minnesota Timberwolves','2. D’Angelo Russell – Los Angeles Lakers','3. Jahlil Okafor – Philadelphia 76ers','4. Kristaps Porzingis – New York Knicks','5. Mario Hezonja – Orlando Magic','6. Willie Cauley-Stein – Sacramento Kings','7. Emmanuel Mudiay – Denver Nuggets','8. Stanley Johnson – Detroit Pistons','9. Frank Kaminsky – Charlotte Hornets','10. Justise Winslow – Miami Heat'] },
+  { year:'2016', picks:['1. Ben Simmons – Philadelphia 76ers','2. Brandon Ingram – Los Angeles Lakers','3. Jaylen Brown – Boston Celtics','4. Dragan Bender – Phoenix Suns','5. Kris Dunn – Minnesota Timberwolves','6. Buddy Hield – New Orleans Pelicans','7. Jamal Murray – Denver Nuggets','8. Marquese Chriss – Sacramento Kings','9. Jakob Poeltl – Toronto Raptors','10. Thon Maker – Milwaukee Bucks'] },
+  { year:'2017', picks:['1. Markelle Fultz – Philadelphia 76ers','2. Lonzo Ball – Los Angeles Lakers','3. Jayson Tatum – Boston Celtics','4. Josh Jackson – Phoenix Suns','5. De’Aaron Fox – Sacramento Kings','6. Jonathan Isaac – Orlando Magic','7. Lauri Markkanen – Minnesota Timberwolves','8. Frank Ntilikina – New York Knicks','9. Dennis Smith Jr. – Dallas Mavericks','10. Zach Collins – Sacramento Kings'] },
+  { year:'2018', picks:['1. Deandre Ayton – Phoenix Suns','2. Marvin Bagley III – Sacramento Kings','3. Luka Doncic – Atlanta Hawks','4. Jaren Jackson Jr. – Memphis Grizzlies','5. Trae Young – Dallas Mavericks','6. Mo Bamba – Orlando Magic','7. Wendell Carter Jr. – Chicago Bulls','8. Collin Sexton – Cleveland Cavaliers','9. Kevin Knox – New York Knicks','10. Mikal Bridges – Philadelphia 76ers'] },
+  { year:'2019', picks:['1. Zion Williamson – New Orleans Pelicans','2. Ja Morant – Memphis Grizzlies','3. RJ Barrett – New York Knicks','4. De’Andre Hunter – Los Angeles Lakers','5. Darius Garland – Cleveland Cavaliers','6. Jarrett Culver – Phoenix Suns','7. Coby White – Chicago Bulls','8. Jaxson Hayes – Atlanta Hawks','9. Rui Hachimura – Washington Wizards','10. Cam Reddish – Atlanta Hawks'] },
+  { year:'2020', picks:['1. Anthony Edwards – Minnesota Timberwolves','2. James Wiseman – Golden State Warriors','3. LaMelo Ball – Charlotte Hornets','4. Patrick Williams – Chicago Bulls','5. Isaac Okoro – Cleveland Cavaliers','6. Onyeka Okongwu – Atlanta Hawks','7. Killian Hayes – Detroit Pistons','8. Obi Toppin – New York Knicks','9. Deni Avdija – Washington Wizards','10. Jalen Smith – Phoenix Suns'] },
+  { year:'2021', picks:['1. Cade Cunningham – Detroit Pistons','2. Jalen Green – Houston Rockets','3. Evan Mobley – Cleveland Cavaliers','4. Scottie Barnes – Toronto Raptors','5. Jalen Suggs – Orlando Magic','6. Josh Giddey – Oklahoma City Thunder','7. Jonathan Kuminga – Golden State Warriors','8. Franz Wagner – Orlando Magic','9. Davion Mitchell – Sacramento Kings','10. Ziaire Williams – Memphis Grizzlies'] },
+  { year:'2022', picks:['1. Paolo Banchero – Orlando Magic','2. Chet Holmgren – Oklahoma City Thunder','3. Jabari Smith Jr. – Houston Rockets','4. Keegan Murray – Sacramento Kings','5. Jaden Ivey – Detroit Pistons','6. Bennedict Mathurin – Indiana Pacers','7. Shaedon Sharpe – Portland Trail Blazers','8. Dyson Daniels – New Orleans Pelicans','9. Jeremy Sochan – San Antonio Spurs','10. Johnny Davis – Washington Wizards'] },
+  { year:'2023', picks:['1. Victor Wembanyama – San Antonio Spurs','2. Brandon Miller – Charlotte Hornets','3. Scoot Henderson – Portland Trail Blazers','4. Amen Thompson – Houston Rockets','5. Ausar Thompson – Detroit Pistons','6. Anthony Black – Orlando Magic','7. Bilal Coulibaly – Indiana Pacers','8. Jarace Walker – Washington Wizards','9. Taylor Hendricks – Utah Jazz','10. Cason Wallace – Dallas Mavericks'] },
+  { year:'2024', picks:['1. Zaccharie Risacher – Atlanta Hawks','2. Alex Sarr – Washington Wizards','3. Reed Sheppard – Houston Rockets','4. Stephon Castle – San Antonio Spurs','5. Ron Holland II – Detroit Pistons','6. Tidjane Salaun – Charlotte Hornets','7. Donovan Clingan – Portland Trail Blazers','8. Rob Dillingham – San Antonio Spurs','9. Zach Edey – Memphis Grizzlies','10. Cody Williams – Utah Jazz'] },
+  { year:'2025', picks:['1. Cooper Flagg – Dallas Mavericks','2. Dylan Harper – San Antonio Spurs','3. VJ Edgecombe – Philadelphia 76ers','4. Kon Knueppel – Charlotte Hornets','5. Ace Bailey – Utah Jazz','6. Tre Johnson – Washington Wizards','7. Jeremiah Fears – New Orleans Pelicans','8. Egor Demin – Brooklyn Nets','9. Collin Murray-Boyles – Toronto Raptors','10. Khaman Maluach – Houston Rockets'] }
+];
+
+function buildLeagueDraftYearTop10Deck() {
+  const cards = DRAFT_YEAR_TOP_10.map(d => {
+    const rows = d.picks.map(pick => {
+      // Split "N. Name – Team" into name and team parts
+      const m = pick.match(/^(\d+)\.\s+(.+?)\s+–\s+(.+)$/);
+      if (m) {
+        return '<div class="back-roster-row">' +
+          '<span class="back-roster-name">' + m[2] + '</span>' +
+          '<span class="back-roster-meta">' + m[1] + '. ' + m[3] + '</span>' +
+        '</div>';
+      }
+      return '<div class="back-roster-row"><span class="back-roster-name">' + pick + '</span></div>';
+    }).join('');
+    const answer = '<div style="width:100%">' + rows + '</div>';
+    return makeCard(d.year, answer, '🎟️ Top 10 picks from this draft class?');
+  });
+  // Shuffle
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  return cards;
+}
+
 function buildTeamToCoachDeck(team)       { return [makeCard(team.name, team.coach,        "Who is this team's head coach?")]; }
 function buildTeamToCoachPrevTeamDeck(team) {
   const prev = team.coachPrevTeam;
@@ -8402,6 +8466,7 @@ const MODE_BUILDERS = {
   league_team_starting_pos:   () => buildLeagueTeamToStartingPosDeck(),
   league_team_starting_5:     () => buildLeagueTeamToStarting5Deck(),
   league_team_best_player:    () => buildLeagueTeamToBestPlayerDeck(),
+  league_draft_top10:         () => buildLeagueDraftYearTop10Deck(),
   league_player_starter_bench: () => buildLeaguePlayerStarterBenchDeck(),
 };
 
@@ -8465,6 +8530,7 @@ const SESSION_MODE_TITLES = {
   league_team_starting_pos:   'Team → Starting Position',
   league_team_starting_5:     'Team → Starting 5',
   league_team_best_player:    'Team → Best Player',
+  league_draft_top10:         '🎟️ Draft Year → Top 10 Picks',
   league_player_starter_bench: 'Player → Starter/Bench',
 };
 
