@@ -488,6 +488,69 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  /* Top 10 Players list — Jazz team mastery mode */
+  .card-back.card-back--top10 {
+    justify-content: center;
+    align-items: center;
+    padding: 14px 10px 14px;
+    gap: 0;
+    overflow-y: auto;
+  }
+  .top10-list {
+    width: 100%;
+    max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 0 auto;
+  }
+  .top10-header-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: rgba(180,144,255,0.35);
+    text-align: center;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .top10-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .top10-main {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    line-height: 1.2;
+  }
+  .top10-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: rgba(180,144,255,0.9);
+    flex-shrink: 0;
+    width: 26px;
+    text-align: right;
+    line-height: 1;
+  }
+  .top10-player {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.1px;
+  }
+  .top10-pos {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.38);
+    padding-left: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
   .draft-pick-year-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 13px;
@@ -5868,8 +5931,8 @@
           </div>
           <div class="mode-card--roster mode-card--allstar" onclick="lpLaunchMode('team','team_roster')">
             <div class="mode-badge">All-Star</div>
-            <div class="mode-title">Team → Roster</div>
-            <div class="mode-subtitle">Recall the full Jazz roster — 1 card</div>
+            <div class="mode-title">Top 10 Players</div>
+            <div class="mode-subtitle">Rank the top 10 Jazz players — 1 card</div>
             <span class="mode-arrow">›</span>
           </div>
         </div>
@@ -7674,9 +7737,43 @@ function _buildRosterHTML(teamName, rosterArr) {
                benchLabel   + bench.map(p => _rosterRowHTML(p, starterPos)).join('');
   return '<div class="back-career-block" style="gap:4px;">' + rows + '</div>';
 }
+const JAZZ_TOP_10_CURRENT = [
+  '1. Keyonte George — PG',
+  '2. Ace Bailey — SG',
+  '3. Lauri Markkanen — SF',
+  '4. Jaren Jackson Jr. — PF',
+  '5. Walker Kessler — C',
+  '6. Isaiah Collier — PG',
+  '7. Brice Sensabaugh — SG',
+  '8. Svi Mykhailiuk — SF',
+  '9. Kyle Filipowski — PF',
+  '10. Jusuf Nurkic — C'
+];
+
 function buildTeamToRosterDeck(team, roster) {
-  const answer = _buildRosterHTML(team.name, Array.from(roster));
-  return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
+  // For Jazz (or any team without a custom top-10), fall back to full roster
+  if (team.name !== 'Utah Jazz') {
+    const answer = _buildRosterHTML(team.name, Array.from(roster));
+    return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
+  }
+  // Jazz: Top 10 Players mode
+  const rows = JAZZ_TOP_10_CURRENT.map(entry => {
+    const m = entry.match(/^(\d+)\.\s+(.+?)\s+—\s+(.+)$/);
+    if (m) {
+      return '<div class="top10-row">' +
+        '<div class="top10-main">' +
+          '<span class="top10-num">' + m[1] + '</span>' +
+          '<span class="top10-player">' + m[2] + '</span>' +
+        '</div>' +
+        '<div class="top10-pos">' + m[3] + '</div>' +
+      '</div>';
+    }
+    return '<div class="top10-row"><div class="top10-main"><span class="top10-player">' + entry + '</span></div></div>';
+  }).join('');
+  const answer = '<div class="top10-list">' +
+    '<div class="top10-header-label">Utah Jazz — Top 10</div>' +
+    rows + '</div>';
+  return [makeCard(team.name, answer, "Who are the Top 10 Jazz players right now?")];
 }
 const TEAM_COACHING_STAFF = {
   "Utah Jazz": {
@@ -8549,7 +8646,7 @@ const SESSION_MODE_TITLES = {
   player_team:            'Player → Team',
   player_country_hometown: 'Player → Country & Hometown',
   player_past_teams:      'Player → Past Teams',
-  team_roster:            'Team → Roster',
+  team_roster:            'Top 10 Players',
   player_starter_bench:   'Player → Starter/Bench',
   player_years_on_team:   'Player → Years on Team',
   team_starting_pos:      'Team → Starting Position',
@@ -8702,25 +8799,30 @@ function loadSessionCard() {
     const isRosterList = displayBack.includes('back-roster-row');
     const isConfBlock  = displayBack.includes('back-conf-block');
     const isDraftList  = displayBack.includes('draft-pick-list');
+    const isTop10List  = displayBack.includes('top10-list');
     if (isDraftList) {
       backNameEl.className = 'back-name';
       backNameEl.style.width = '100%';
-      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list'); cardBackEl.classList.add('card-back--draft'); }
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--top10'); cardBackEl.classList.add('card-back--draft'); }
+    } else if (isTop10List) {
+      backNameEl.className = 'back-name';
+      backNameEl.style.width = '100%';
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft'); cardBackEl.classList.add('card-back--top10'); }
     } else if (isRosterList) {
       backNameEl.className = 'back-name back-name--list';
       backNameEl.style.width = '';
-      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft'); cardBackEl.classList.add('card-back--list'); }
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10'); cardBackEl.classList.add('card-back--list'); }
     } else {
       // coaching staff, conf/division, etc. — centered, no roster sizing
       backNameEl.className = isConfBlock ? 'back-name' : 'back-name back-name--list';
       backNameEl.style.width = '';
-      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft'); cardBackEl.classList.add('card-back--centered-list'); }
+      if (cardBackEl) { cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10'); cardBackEl.classList.add('card-back--centered-list'); }
     }
   } else {
     backNameEl.className = 'back-name';
     backNameEl.style.width = '';
     backNameEl.textContent = displayBack;
-    if (cardBackEl) cardBackEl.classList.remove('card-back--list', 'card-back--centered-list', 'card-back--draft');
+    if (cardBackEl) cardBackEl.classList.remove('card-back--list', 'card-back--centered-list', 'card-back--draft', 'card-back--top10');
   }
   document.getElementById('backPos').textContent  = '';
   document.getElementById('backStats').innerHTML  = '';
