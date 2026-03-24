@@ -448,14 +448,16 @@
   }
   .draft-pick-row {
     display: flex;
-    flex-direction: column;
-    gap: 0px;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
   }
   .draft-pick-main {
     display: flex;
     align-items: baseline;
     gap: 8px;
-    line-height: 1.15;
+    flex: 1;
+    min-width: 0;
   }
   .draft-pick-num {
     font-family: 'Bebas Neue', sans-serif;
@@ -473,15 +475,18 @@
     color: #fff;
     line-height: 1.2;
     letter-spacing: -0.1px;
+    flex-shrink: 0;
   }
   .draft-pick-team {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     font-weight: 400;
     color: rgba(255,255,255,0.38);
-    padding-left: 34px;
     line-height: 1.2;
     letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .back-name--list {
     font-family: 'DM Sans', sans-serif;
@@ -7971,11 +7976,9 @@ function buildLeagueDraftYearTop10Deck() {
       const m = pick.match(/^(\d+)\.\s+(.+?)\s+\u2013\s+(.+)$/);
       if (m) {
         return '<div class="draft-pick-row">' +
-          '<div class="draft-pick-main">' +
-            '<span class="draft-pick-num">' + m[1] + '</span>' +
-            '<span class="draft-pick-player">' + m[2] + '</span>' +
-          '</div>' +
-          '<div class="draft-pick-team">' + m[3] + '</div>' +
+          '<span class="draft-pick-num">' + m[1] + '</span>' +
+          '<span class="draft-pick-player">' + m[2] + '</span>' +
+          '<span class="draft-pick-team">' + m[3] + '</span>' +
         '</div>';
       }
       return '<div class="draft-pick-row"><div class="draft-pick-main"><span class="draft-pick-player">' + pick + '</span></div></div>';
