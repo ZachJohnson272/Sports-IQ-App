@@ -3097,51 +3097,7 @@
   .lp-tir-dot { display: none; } /* legacy compat — hidden */
 
   /* ── Roster row — feature action row ── */
-  .lp-roster-drop {
-    border: 1px solid rgba(107,63,160,0.24);
-    border-radius: 14px;
-    overflow: hidden;
-    background: linear-gradient(135deg, rgba(20,16,36,0.97) 0%, rgba(12,13,22,0.98) 100%);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-  }
-  .lp-roster-toggle {
-    width: 100%; background: transparent; border: none;
-    display: flex; align-items: center; gap: 10px;
-    padding: 14px 16px;
-    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
-    color: rgba(255,255,255,0.65); letter-spacing: 0.2px;
-    cursor: pointer; text-align: left;
-    transition: color 0.15s, background 0.15s;
-  }
-  .lp-roster-toggle:hover { color: #fff; background: rgba(107,63,160,0.1); }
-  .lp-roster-toggle-icon {
-    font-size: 16px; flex-shrink: 0;
-    background: rgba(107,63,160,0.18); border: 1px solid rgba(107,63,160,0.25);
-    border-radius: 8px; width: 32px; height: 32px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .lp-roster-toggle-label { flex: 1; }
-  #lp-roster-chevron {
-    font-size: 11px; color: rgba(107,63,160,0.55);
-    transition: transform 0.22s; display: inline-block; flex-shrink: 0;
-  }
-  .lp-roster-body {
-    border-top: 1px solid rgba(107,63,160,0.14);
-    background: rgba(10,10,18,0.5);
-    padding: 10px 12px 14px;
-    animation: fadeUp 0.18s ease both;
-  }
-  .lp-roster-body.hidden { display: none; }
-  .lp-roster-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
-  .lp-roster-player {
-    display: flex; align-items: baseline; gap: 5px;
-    padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-    font-family: 'DM Sans', sans-serif;
-  }
-  .lp-roster-player:nth-last-child(-n+2) { border-bottom: none; }
-  .lp-roster-num { font-size: 10px; font-weight: 700; color: rgba(107,63,160,0.65); width: 20px; flex-shrink: 0; text-align: right; }
-  .lp-roster-name { font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,0.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .lp-roster-pos { font-size: 9px; font-weight: 700; letter-spacing: 0.5px; color: var(--jazz-sky); opacity: 0.6; margin-left: auto; flex-shrink: 0; }
+
 
   /* ── Progression-style category cards (Team Mastery hub) ── */
   .lp-prog-grid {
@@ -5846,16 +5802,6 @@
             <span class="lp-tir-item"><span class="lp-tir-icon">🏀</span><span class="lp-tir-val" id="lp-snap-conf">West</span></span>
             <span class="lp-tir-item"><span class="lp-tir-icon">🏆</span><span class="lp-tir-val" id="lp-snap-titles">0</span><span class="lp-tir-label">Titles</span></span>
           </div>
-        </div>
-      </div>
-      <div class="lp-roster-drop" id="lp-roster-drop" style="margin-bottom: 28px;">
-        <button class="lp-roster-toggle" onclick="lpToggleRoster()" id="lp-roster-toggle">
-          <span class="lp-roster-toggle-icon">👥</span>
-          <span class="lp-roster-toggle-label">Current Roster</span>
-          <span id="lp-roster-chevron">›</span>
-        </button>
-        <div class="lp-roster-body hidden" id="lp-roster-body">
-          <div class="lp-roster-grid" id="lp-roster-grid"></div>
         </div>
       </div>
       <div style="display:none" id="lp-team-summary">
@@ -10118,14 +10064,7 @@ function lpGoPanel(n, subtype) {
     if (g) g.style.display = '';
     // Always restore team overview sections when returning to overview panel
     const teamHeaderWrap = document.querySelector('.lp-team-header-wrap');
-    const rosterDrop = document.getElementById('lp-roster-drop');
     if (teamHeaderWrap) teamHeaderWrap.style.display = '';
-    if (rosterDrop) rosterDrop.style.display = '';
-    // Collapse roster body so it is tidy on return
-    const rosterBody = document.getElementById('lp-roster-body');
-    const rosterChevron = document.getElementById('lp-roster-chevron');
-    if (rosterBody) rosterBody.classList.add('hidden');
-    if (rosterChevron) rosterChevron.textContent = '›';
     ['roster','coaches','info','players','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
@@ -10446,28 +10385,6 @@ function lpToggleConf(conf) {
   const isOpen = !teamsEl.classList.contains('hidden');
   teamsEl.classList.toggle('hidden', isOpen);
   cardEl.classList.toggle('open', !isOpen);
-}
-
-function lpToggleRoster() {
-  const body    = document.getElementById('lp-roster-body');
-  const chevron = document.getElementById('lp-roster-chevron');
-  const grid    = document.getElementById('lp-roster-grid');
-  if (!body) return;
-  const isOpen = !body.classList.contains('hidden');
-  if (!isOpen && grid) {
-    // Always repopulate so it reflects active team
-    const rosterSrc = (typeof _activeRoster !== 'undefined') ? _activeRoster : JAZZ_ROSTER_DISPLAY;
-    const items = Array.from(rosterSrc).filter(p => p && p.name).map(p =>
-      `<div class="lp-roster-player">
-        <span class="lp-roster-num">#${p.jersey || p.num || ''}</span>
-        <span class="lp-roster-name">${p.name}</span>
-        <span class="lp-roster-pos">${p.position || p.pos || ''}</span>
-       </div>`
-    );
-    grid.innerHTML = items.join('');
-  }
-  body.classList.toggle('hidden', isOpen);
-  if (chevron) chevron.textContent = isOpen ? '›' : '‹';
 }
 
 // ── Random Session ──────────────────────────────────────────
@@ -10997,14 +10914,7 @@ function lpCloseCat(scope) {
     if (grid) grid.style.display = '';
     // Restore team overview sections
     const teamHeaderWrap = document.querySelector('.lp-team-header-wrap');
-    const rosterDrop = document.getElementById('lp-roster-drop');
     if (teamHeaderWrap) teamHeaderWrap.style.display = '';
-    if (rosterDrop) rosterDrop.style.display = '';
-    // Collapse roster body so it is tidy on return
-    const rosterBody = document.getElementById('lp-roster-body');
-    const rosterChevron = document.getElementById('lp-roster-chevron');
-    if (rosterBody) rosterBody.classList.add('hidden');
-    if (rosterChevron) rosterChevron.textContent = '›';
     ['roster','coaches','info','players','history','random'].forEach(s => {
       const sec = document.getElementById('lp-tsec-' + s);
       if (sec) sec.classList.add('hidden');
@@ -11022,11 +10932,9 @@ function lpSelectTeamCat(cat) {
   if (grid) grid.style.display = 'none';
   // Hide team overview sections — this is now a focused mode page
   const infoPanel = document.getElementById('lp-team-info-panel');
-  const rosterDrop = document.getElementById('lp-roster-drop');
   const teamHeaderWrap = document.querySelector('.lp-team-header-wrap');
   if (infoPanel) infoPanel.closest('.lp-team-header-wrap') ? infoPanel.closest('.lp-team-header-wrap').style.display = 'none' : (infoPanel.style.display = 'none');
   if (teamHeaderWrap) teamHeaderWrap.style.display = 'none';
-  if (rosterDrop) rosterDrop.style.display = 'none';
   sections.forEach(s => {
     const sec = document.getElementById('lp-tsec-' + s);
     if (sec) sec.classList.toggle('hidden', s !== cat);
