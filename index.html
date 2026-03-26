@@ -1264,6 +1264,7 @@
   .mode-card--roster .mode-title { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.95); }
   .mode-card--roster .mode-subtitle { display: none; }
   .mode-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: rgba(155,142,196,0.75); font-size: 16px; opacity: 0.6; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .mode-card-count { position: absolute; right: 34px; top: 50%; transform: translateY(-50%); font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; color: rgba(155,142,196,0.55); pointer-events: none; }
   .mode-card--rookie .mode-badge { color: #7ee2a8; text-shadow: 0 0 6px rgba(126,226,168,0.35); }
   .mode-card--starter .mode-badge { color: #7fc8ff; text-shadow: 0 0 6px rgba(127,200,255,0.35); }
   .mode-card--allstar .mode-badge { color: #f3d36a; text-shadow: 0 0 6px rgba(243,211,106,0.35); }
@@ -5854,18 +5855,21 @@
             <div class="mode-badge">Rookie</div>
             <div class="mode-title">Team → Best Player</div>
             <div class="mode-subtitle">Identify the Jazz's top player — 1 card</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--starter" onclick="lpLaunchMode('team','team_starting_5')">
             <div class="mode-badge">Starter</div>
             <div class="mode-title">Team → Starting 5</div>
             <div class="mode-subtitle">Name the ideal fully healthy starting lineup — 1 card</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--allstar" onclick="lpLaunchMode('team','team_roster')">
             <div class="mode-badge">All-Star</div>
             <div class="mode-title">Team → Rotation (10)</div>
             <div class="mode-subtitle">Starters & bench by position — 1 card</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
         </div>
@@ -5882,16 +5886,19 @@
           <div class="mode-card--roster mode-card--rookie" onclick="lpLaunchMode('team','team_coach')">
             <div class="mode-badge">Rookie</div>
             <div class="mode-title">Team → Head Coach</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--starter" onclick="lpLaunchMode('team','team_coach_since')">
             <div class="mode-badge">Starter</div>
             <div class="mode-title">Head Coach → Team Since</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--allstar" onclick="lpLaunchMode('team','team_coaching_staff')">
             <div class="mode-badge">All-Star</div>
             <div class="mode-title">Team → Coaching Staff</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
         </div>
@@ -5909,18 +5916,21 @@
             <div class="mode-badge">Rookie</div>
             <div class="mode-title">Player → Position</div>
             <div class="mode-subtitle" id="lp-info-count-pos">— cards</div>
+            <span class="mode-card-count">10</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--starter" onclick="lpLaunchMode('team','player_height')">
             <div class="mode-badge">Starter</div>
             <div class="mode-title">Player → Height</div>
             <div class="mode-subtitle" id="lp-info-count-height">— cards</div>
+            <span class="mode-card-count">10</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--allstar" onclick="lpLaunchMode('team','player_jersey')">
             <div class="mode-badge">All-Star</div>
             <div class="mode-title">Player → Jersey #</div>
             <div class="mode-subtitle" id="lp-info-count-jersey">— cards</div>
+            <span class="mode-card-count">10</span>
             <span class="mode-arrow">›</span>
           </div>
         </div>
@@ -5938,18 +5948,21 @@
             <div class="mode-badge">Rookie</div>
             <div class="mode-title">Player → Past Teams</div>
             <div class="mode-subtitle" id="lp-career-count-past">— cards</div>
+            <span class="mode-card-count">10</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--starter" onclick="lpLaunchMode('team','player_college')">
             <div class="mode-badge">Starter</div>
             <div class="mode-title">Player → College</div>
             <div class="mode-subtitle" id="lp-career-count-college">— cards</div>
+            <span class="mode-card-count">10</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--allstar" onclick="lpLaunchMode('team','player_draft_info')">
             <div class="mode-badge">All-Star</div>
             <div class="mode-title">Player → Draft Info</div>
             <div class="mode-subtitle" id="lp-career-count-draft">— cards</div>
+            <span class="mode-card-count">10</span>
             <span class="mode-arrow">›</span>
           </div>
         </div>
@@ -5966,16 +5979,19 @@
           <div class="mode-card--roster mode-card--rookie" onclick="lpLaunchMode('team','team_all_time_rebounds_leader')">
             <div class="mode-badge">Rookie</div>
             <div class="mode-title">All-Time Rebounds Leader</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--starter" onclick="lpLaunchMode('team','team_all_time_assists')">
             <div class="mode-badge">Starter</div>
             <div class="mode-title">All-Time Assists Leader</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
           <div class="mode-card--roster mode-card--allstar" onclick="lpLaunchMode('team','team_all_time_scorer')">
             <div class="mode-badge">All-Star</div>
             <div class="mode-title">All-Time Scorer</div>
+            <span class="mode-card-count">1</span>
             <span class="mode-arrow">›</span>
           </div>
         </div>
