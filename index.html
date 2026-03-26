@@ -6264,22 +6264,24 @@ const ROSTER = [
   { name:"Jusuf Nurkic",      jazz_years:"1 season",   position:"C",  jersey:"30", height:'6\'11"', college:"International",  country:"Bosnia",  hometown:"Živinice, Bosnia and Herzegovina",   draft_year:"2014", draft_pick:"16", draft_team:"Chicago Bulls",          past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"Portland Trail Blazers",dur:"7 seasons"},{team:"Charlotte Hornets",dur:"1 season"},{team:"Phoenix Suns",dur:"1 season"}],                     image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
 ];
 
-// Full display labels for positions
+// Full display labels for positions (used by non-Jazz players)
 const posMap = { G: 'Guard', F: 'Forward', C: 'Center' };
-// Extended position labels used in flashcards
-const posLabelMap = {
-  "Keyonte George":    "Guard",
-  "Ace Bailey":        "Guard / Forward",
-  "Lauri Markkanen":   "Forward",
-  "Jaren Jackson Jr.": "Forward / Center",
-  "Walker Kessler":    "Center",
-  "Isaiah Collier":    "Guard",
-  "Brice Sensabaugh":  "Forward",
-  "Svi Mykhailiuk":    "Guard / Forward",
-  "Kyle Filipowski":   "Forward / Center",
-  "Jusuf Nurkic":      "Center",
+// Jazz-only source of truth: precise multi-position labels for all 10 rotation players.
+// Used by: player_position flashcard mode AND Team -> Rotation (10) mode.
+const JAZZ_POSITIONS = {
+  "Keyonte George":    "PG/SG",
+  "Ace Bailey":        "SG/SF",
+  "Lauri Markkanen":   "SF/PF",
+  "Jaren Jackson Jr.": "PF/C",
+  "Walker Kessler":    "C",
+  "Isaiah Collier":    "PG",
+  "Brice Sensabaugh":  "SG/SF",
+  "Svi Mykhailiuk":    "SF/SG",
+  "Kyle Filipowski":   "PF/C",
+  "Jusuf Nurkic":      "C",
 };
-function getPosLabel(p) { return posLabelMap[p.name] || posMap[p.position] || p.position; }
+// getPosLabel: Jazz players use JAZZ_POSITIONS; all other players fall back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -7657,7 +7659,7 @@ function buildPlayerToPastTeamsDeck(roster) {
 function _rosterRowHTML(p, starterPos) {
   const pos = starterPos && starterPos[p.name];
   const isStarter = !!pos;
-  const fullPos = posLabelMap[p.name] || posMap[p.position] || p.position;
+  const fullPos = getPosLabel(p);
   const meta = fullPos;
   const nameStyle = isStarter ? 'font-size:14px;font-weight:600;color:#ddc8ff;' : 'font-size:14px;font-weight:500;';
   return '<div class="back-career-entry">' +
@@ -7679,18 +7681,18 @@ function _buildRosterHTML(teamName, rosterArr) {
 }
 const JAZZ_ROTATION = {
   starters: [
-    { pos:'PG', name:'Keyonte George' },
-    { pos:'SG', name:'Ace Bailey' },
-    { pos:'SF', name:'Lauri Markkanen' },
-    { pos:'PF', name:'Jaren Jackson Jr.' },
-    { pos:'C',  name:'Walker Kessler' },
+    { pos:'PG/SG', name:'Keyonte George' },
+    { pos:'SG/SF', name:'Ace Bailey' },
+    { pos:'SF/PF', name:'Lauri Markkanen' },
+    { pos:'PF/C',  name:'Jaren Jackson Jr.' },
+    { pos:'C',     name:'Walker Kessler' },
   ],
   bench: [
-    { pos:'PG', name:'Isaiah Collier' },
-    { pos:'SG', name:'Brice Sensabaugh' },
-    { pos:'SF', name:'Svi Mykhailiuk' },
-    { pos:'PF', name:'Kyle Filipowski' },
-    { pos:'C',  name:'Jusuf Nurkic' },
+    { pos:'PG',    name:'Isaiah Collier' },
+    { pos:'SG/SF', name:'Brice Sensabaugh' },
+    { pos:'SF/SG', name:'Svi Mykhailiuk' },
+    { pos:'PF/C',  name:'Kyle Filipowski' },
+    { pos:'C',     name:'Jusuf Nurkic' },
   ]
 };
 
