@@ -8740,8 +8740,8 @@ function loadSessionCard() {
   overlayEl.style.display = 'none';
   frontTextEl.style.display = '';
 
-  // Show hint or generic label
-  const hint = _fcReversed ? (card.hint || 'Who is this?') : (card.hint || 'What is the answer?');
+  // Show hint — in reversed mode the front shows the answer, so prompt for the name
+  const hint = _fcReversed ? 'Which player is this?' : (card.hint || 'What is the answer?');
   const displayFront = _fcReversed ? card.back  : card.front;
   const displayBack  = _fcReversed ? card.front : card.back;
 
@@ -11019,8 +11019,19 @@ function fcToggleReverse() {
   _fcReversed = !_fcReversed;
   const btn = document.getElementById('fcReverseBtn');
   if (btn) btn.classList.toggle('active', _fcReversed);
-  // Reload current card with reversed presentation
-  if (typeof loadCard === 'function') loadCard();
+  // Reload current card with reversed presentation.
+  // Session-engine modes (player_jersey, player_college, player_draft_info) use
+  // loadSessionCard(); legacy roster-index modes use loadCard().
+  if (_sessionMode && typeof loadSessionCard === 'function') {
+    // Reset flip state so the card shows the front face of the new orientation
+    isFlipped = false;
+    cardAnswered = false;
+    const c3d = document.getElementById('card3d');
+    if (c3d) { c3d.style.transition = 'none'; c3d.classList.remove('flipped'); void c3d.offsetWidth; c3d.style.transition = ''; }
+    loadSessionCard();
+  } else if (typeof loadCard === 'function') {
+    loadCard();
+  }
 }
 
 
