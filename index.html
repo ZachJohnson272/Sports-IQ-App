@@ -8496,11 +8496,32 @@ function buildTeamToBestPlayerDeck(team, lineup) {
   const best = TEAM_BEST_PLAYER[team.name] || Object.values(lineup || _activeLineup)[0] || 'N/A';
   return [makeCard(team.name, best, "Who is this team's best player?")];
 }
+// Maps full team names → nickname only, for compact draft info display.
+// Covers all 30 NBA teams so this works for any future roster additions.
+const TEAM_NICKNAME_MAP = {
+  "Atlanta Hawks":"Hawks","Boston Celtics":"Celtics","Brooklyn Nets":"Nets",
+  "Charlotte Hornets":"Hornets","Chicago Bulls":"Bulls","Cleveland Cavaliers":"Cavaliers",
+  "Dallas Mavericks":"Mavericks","Denver Nuggets":"Nuggets","Detroit Pistons":"Pistons",
+  "Golden State Warriors":"Warriors","Houston Rockets":"Rockets","Indiana Pacers":"Pacers",
+  "LA Clippers":"Clippers","Los Angeles Clippers":"Clippers","Los Angeles Lakers":"Lakers",
+  "Memphis Grizzlies":"Grizzlies","Miami Heat":"Heat","Milwaukee Bucks":"Bucks",
+  "Minnesota Timberwolves":"Timberwolves","New Jersey Nets":"Nets",
+  "New Orleans Pelicans":"Pelicans","New York Knicks":"Knicks",
+  "Oklahoma City Thunder":"Thunder","Orlando Magic":"Magic",
+  "Philadelphia 76ers":"76ers","Phoenix Suns":"Suns",
+  "Portland Trail Blazers":"Trail Blazers","Sacramento Kings":"Kings",
+  "San Antonio Spurs":"Spurs","Seattle SuperSonics":"SuperSonics",
+  "Toronto Raptors":"Raptors","Utah Jazz":"Jazz","Washington Wizards":"Wizards",
+};
+function getDraftTeamNickname(fullName) {
+  return TEAM_NICKNAME_MAP[fullName] || fullName;
+}
+
 function buildPlayerToDraftInfoDeck(roster) {
   return Array.from(roster).filter(p => p && p.name && p.draft_year).map(p => {
     const answer = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
       ? 'Undrafted'
-      : p.draft_year + ' · ' + p.draft_pick + ' · ' + p.draft_team;
+      : p.draft_year + ' · ' + p.draft_pick + ' · ' + getDraftTeamNickname(p.draft_team);
     return makeCard(p.name, answer, "What are this player's draft year, pick, and drafting team?");
   });
 }
@@ -10424,7 +10445,7 @@ function _buildRandPool() {
     pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Past Teams', answer:pastAns, tag:'PLAYER', cat:'past_teams' });
     if (p.draft_year) {
       const draftAns = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
-        ? 'Undrafted' : p.draft_year + ' · ' + p.draft_pick + ' · ' + p.draft_team;
+        ? 'Undrafted' : p.draft_year + ' · ' + p.draft_pick + ' · ' + getDraftTeamNickname(p.draft_team);
       pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Draft Info', answer:draftAns, tag:'PLAYER', cat:'draft' });
     }
   });
