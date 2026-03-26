@@ -5081,7 +5081,7 @@
         </svg></div>
         <div class="team-info">
           <h2>Utah Jazz</h2>
-          <p>2024–25 Roster · 16 Players</p>
+          <p>2024–25 Rotation · 10 Players</p>
         </div>
       </div>
       <div class="mastery-section">
@@ -5116,17 +5116,17 @@
       <button class="mode-card" onclick="startMode('namePos')">
         <div class="mode-icon">🪪</div>
         <div class="mode-info"><div class="mode-title">Player → Info</div><div class="mode-desc">See the name, recall position & jersey</div></div>
-        <div class="mode-stats-mini" id="modeStats_namePos">0/16</div>
+        <div class="mode-stats-mini" id="modeStats_namePos">0/10</div>
       </button>
       <button class="mode-card" onclick="startMode('statsPlayer')">
         <div class="mode-icon">📊</div>
         <div class="mode-info"><div class="mode-title">Info → Player</div><div class="mode-desc">See height, age, college — guess who</div></div>
-        <div class="mode-stats-mini" id="modeStats_statsPlayer">0/16</div>
+        <div class="mode-stats-mini" id="modeStats_statsPlayer">0/10</div>
       </button>
       <button class="mode-card" onclick="startMode('multiChoice')">
         <div class="mode-icon">🔤</div>
         <div class="mode-info"><div class="mode-title">Multiple Choice</div><div class="mode-desc">Read the clues — pick the right player</div></div>
-        <div class="mode-stats-mini" id="modeStats_multiChoice">0/16</div>
+        <div class="mode-stats-mini" id="modeStats_multiChoice">0/10</div>
       </button>
       <button class="mode-card" onclick="startMode('lineup')">
         <div class="mode-icon">📝</div>
@@ -5225,7 +5225,7 @@
       <div class="overall-details">
         <h3>Team Mastery</h3>
         <div class="progress-bar"><div class="progress-fill" id="masteryBar" style="width:0%"></div></div>
-        <p id="masteryDetail">0 of 16 players mastered</p>
+        <p id="masteryDetail">0 of 10 players mastered</p>
       </div>
     </div>
     <div class="roster-list">
@@ -5301,7 +5301,7 @@
             <div class="lp-entry-title">TEAM MASTERY</div>
             <div class="lp-entry-desc">Go deep on one team — roster, roles, history</div>
             <div class="lp-entry-chips">
-              <span class="lp-entry-chip lp-entry-chip--sky">16 players</span>
+              <span class="lp-entry-chip lp-entry-chip--sky">10 players</span>
               <span class="lp-entry-chip lp-entry-chip--tier">4 tiers</span>
             </div>
           </div>
@@ -5547,9 +5547,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('jazz','Utah Jazz','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Utah Jazz</div>
-                <div class="lp-ct-sub">16 players · Active</div>
-              </div>
-              <div class="lp-team-mastery" id="lp-mastery-jazz">
+                <div class="lp-ct-sub">10 players · Active</div>
                 <div class="lp-mastery-pct" id="lp-mastery-jazz-pct">0%</div>
                 <div class="lp-mastery-bar-wrap"><div class="lp-mastery-bar-fill" id="lp-mastery-jazz-fill" style="width:0%"></div></div>
               </div>
@@ -6234,44 +6232,35 @@ function applyUsername() {
   if (el('homeWelcome'))         el('homeWelcome').textContent         = welcome;
   if (el('profName'))            el('profName').textContent            = displayName;
 }
+// Jazz 10-player rotation — the single source of truth for all Jazz flashcard modes.
+// Starters: Keyonte George, Ace Bailey, Lauri Markkanen, Jaren Jackson Jr., Walker Kessler
+// Bench:    Isaiah Collier, Brice Sensabaugh, Svi Mykhailiuk, Kyle Filipowski, Jusuf Nurkic
 const ROSTER = [
-  { name:"Lauri Markkanen", jazz_years:"3 seasons",    position:"F",  jersey:"23", height:'7\'1"',  college:"Arizona",           country:"Finland",   hometown:"Vantaa, Finland",                    draft_year:"2017", draft_pick:"7",          draft_team:"Minnesota Timberwolves", past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                       image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
-  { name:"Ace Bailey", jazz_years:"1 season",         position:"G",  jersey:"19", height:'6\'9"',  college:"Rutgers",           country:"USA",       hometown:"Chattanooga, Tennessee",              draft_year:"2025", draft_pick:"5",          draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
-  { name:"Jaren Jackson Jr.", jazz_years:"1 season",  position:"F",  jersey:"20", height:'6\'10"', college:"Michigan State",    country:"USA",       hometown:"Plainfield, New Jersey",              draft_year:"2018", draft_pick:"4",          draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"6 seasons"}],                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
-  { name:"Cody Williams", jazz_years:"1 season",      position:"F",  jersey:"5",  height:'6\'8"',  college:"Colorado",          country:"USA",       hometown:"San Luis Obispo, California",         draft_year:"2024", draft_pick:"10",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433101.png" },
-  { name:"Brice Sensabaugh", jazz_years:"2 seasons",   position:"F",  jersey:"28", height:'6\'6"',  college:"Ohio State",        country:"USA",       hometown:"Orlando, Florida",                    draft_year:"2023", draft_pick:"28",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
-  { name:"Keyonte George", jazz_years:"2 seasons",     position:"G",  jersey:"3",  height:'6\'4"',  college:"Baylor",            country:"USA",       hometown:"Lewisville, Texas",                   draft_year:"2023", draft_pick:"16",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
-  { name:"John Konchar", jazz_years:"1 season",       position:"G",  jersey:"55", height:'6\'5"',  college:"Purdue Fort Wayne", country:"USA",       hometown:"West Chicago, Illinois",              draft_year:"2019", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:[{team:"Memphis Grizzlies",dur:"4 seasons"},{team:"Indiana Pacers",dur:"1 season"}],                                                                    image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134948.png" },
-  { name:"Isaiah Collier", jazz_years:"1 season",     position:"G",  jersey:"8",  height:'6\'4"',  college:"USC",               country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2024", draft_pick:"29",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873165.png" },
-  { name:"Elijah Harkless", jazz_years:"1 season",    position:"G",  jersey:"16", height:'6\'3"',  college:"UNLV",              country:"USA",       hometown:"Etiwanda, California",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4397449.png" },
-  { name:"Svi Mykhailiuk", jazz_years:"1 season",     position:"G",  jersey:"10", height:'6\'7"',  college:"Kansas",            country:"Ukraine",   hometown:"Cherkasy, Ukraine",                   draft_year:"2018", draft_pick:"47",         draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"1 season"},{team:"Detroit Pistons",dur:"3 seasons"},{team:"Houston Rockets",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Toronto Raptors",dur:"1 season"}],         image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
-  { name:"Kevin Love", jazz_years:"1 season",         position:"F",  jersey:"42", height:'6\'10"', college:"UCLA",              country:"USA",       hometown:"Santa Monica, California",            draft_year:"2008", draft_pick:"5",          draft_team:"Memphis Grizzlies",      past_teams:[{team:"Minnesota Timberwolves",dur:"6 seasons"},{team:"Cleveland Cavaliers",dur:"9 seasons"},{team:"Miami Heat",dur:"1 season"}],                                              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/2851.png" },
-  { name:"Walker Kessler", jazz_years:"3 seasons",     position:"C",  jersey:"24", height:'7\'2"',  college:"Auburn",            country:"USA",       hometown:"Atlanta, Georgia",                    draft_year:"2022", draft_pick:"22",         draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"traded (never played)"}],                                                                                   image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
-  { name:"Kyle Filipowski", jazz_years:"1 season",    position:"F",  jersey:"22", height:'6\'11"', college:"Duke",              country:"USA",       hometown:"Middletown, New York",                draft_year:"2024", draft_pick:"32",         draft_team:"Utah Jazz",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
-  { name:"Oscar Tshiebwe", jazz_years:"2 seasons",     position:"C",  jersey:"34", height:'6\'8"',  college:"Kentucky",          country:"DR Congo",  hometown:"Lubumbashi, DR Congo",                draft_year:"2023", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4895758.png" },
-  { name:"Blake Hinson", jazz_years:"1 season",       position:"F",  jersey:"2",  height:'6\'8"',  college:"Pittsburgh",        country:"USA",       hometown:"Deltona, Florida",                    draft_year:"2024", draft_pick:"Undrafted",  draft_team:"Undrafted",              past_teams:"None",                                                                                                image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4432827.png" },
-  { name:"Jusuf Nurkic", jazz_years:"1 season",       position:"C",  jersey:"30", height:'6\'11"', college:"International",     country:"Bosnia",    hometown:"Živinice, Bosnia and Herzegovina",    draft_year:"2014", draft_pick:"16",         draft_team:"Chicago Bulls",          past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"Portland Trail Blazers",dur:"7 seasons"},{team:"Charlotte Hornets",dur:"1 season"},{team:"Phoenix Suns",dur:"1 season"}],                             image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
+  { name:"Keyonte George",    jazz_years:"2 seasons",  position:"G",  jersey:"3",  height:'6\'4"',  college:"Baylor",         country:"USA",     hometown:"Lewisville, Texas",                 draft_year:"2023", draft_pick:"16", draft_team:"Utah Jazz",              past_teams:"None",                                                                                                                                                                                 image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4433627.png" },
+  { name:"Ace Bailey",        jazz_years:"1 season",   position:"G",  jersey:"19", height:'6\'9"',  college:"Rutgers",        country:"USA",     hometown:"Chattanooga, Tennessee",             draft_year:"2025", draft_pick:"5",  draft_team:"Utah Jazz",              past_teams:"None",                                                                                                                                                                                 image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873138.png" },
+  { name:"Lauri Markkanen",   jazz_years:"3 seasons",  position:"F",  jersey:"23", height:'7\'1"',  college:"Arizona",        country:"Finland", hometown:"Vantaa, Finland",                   draft_year:"2017", draft_pick:"7",  draft_team:"Minnesota Timberwolves", past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                                                                               image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3926432.png" },
+  { name:"Jaren Jackson Jr.", jazz_years:"1 season",   position:"F",  jersey:"20", height:'6\'10"', college:"Michigan State", country:"USA",     hometown:"Plainfield, New Jersey",             draft_year:"2018", draft_pick:"4",  draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"6 seasons"}],                                                                                                                                          image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4277961.png" },
+  { name:"Walker Kessler",    jazz_years:"3 seasons",  position:"C",  jersey:"24", height:'7\'2"',  college:"Auburn",         country:"USA",     hometown:"Atlanta, Georgia",                   draft_year:"2022", draft_pick:"22", draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"traded (never played)"}],                                                                                                                              image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4396997.png" },
+  { name:"Isaiah Collier",    jazz_years:"1 season",   position:"G",  jersey:"8",  height:'6\'4"',  college:"USC",            country:"USA",     hometown:"Atlanta, Georgia",                   draft_year:"2024", draft_pick:"29", draft_team:"Utah Jazz",              past_teams:"None",                                                                                                                                                                                 image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4873165.png" },
+  { name:"Brice Sensabaugh",  jazz_years:"2 seasons",  position:"F",  jersey:"28", height:'6\'6"',  college:"Ohio State",     country:"USA",     hometown:"Orlando, Florida",                   draft_year:"2023", draft_pick:"28", draft_team:"Utah Jazz",              past_teams:"None",                                                                                                                                                                                 image_url:"https://a.espncdn.com/i/headshots/nba/players/full/5105839.png" },
+  { name:"Svi Mykhailiuk",    jazz_years:"1 season",   position:"G",  jersey:"10", height:'6\'7"',  college:"Kansas",         country:"Ukraine", hometown:"Cherkasy, Ukraine",                  draft_year:"2018", draft_pick:"47", draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"1 season"},{team:"Detroit Pistons",dur:"3 seasons"},{team:"Houston Rockets",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Toronto Raptors",dur:"1 season"}], image_url:"https://a.espncdn.com/i/headshots/nba/players/full/3134903.png" },
+  { name:"Kyle Filipowski",   jazz_years:"1 season",   position:"F",  jersey:"22", height:'6\'11"', college:"Duke",           country:"USA",     hometown:"Middletown, New York",               draft_year:"2024", draft_pick:"32", draft_team:"Utah Jazz",              past_teams:"None",                                                                                                                                                                                 image_url:"https://a.espncdn.com/i/headshots/nba/players/full/4684793.png" },
+  { name:"Jusuf Nurkic",      jazz_years:"1 season",   position:"C",  jersey:"30", height:'6\'11"', college:"International",  country:"Bosnia",  hometown:"Živinice, Bosnia and Herzegovina",   draft_year:"2014", draft_pick:"16", draft_team:"Chicago Bulls",          past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"Portland Trail Blazers",dur:"7 seasons"},{team:"Charlotte Hornets",dur:"1 season"},{team:"Phoenix Suns",dur:"1 season"}],                     image_url:"https://a.espncdn.com/i/headshots/nba/players/full/6430.png" },
 ];
 
 // Full display labels for positions
 const posMap = { G: 'Guard', F: 'Forward', C: 'Center' };
 // Extended position labels used in flashcards
 const posLabelMap = {
-  "Lauri Markkanen":   "Forward",
-  "Ace Bailey":        "Guard / Forward",
-  "Jaren Jackson Jr.": "Forward / Center",
-  "Cody Williams":     "Forward",
-  "Brice Sensabaugh":  "Forward",
   "Keyonte George":    "Guard",
-  "John Konchar":      "Guard",
-  "Isaiah Collier":    "Guard",
-  "Elijah Harkless":   "Guard",
-  "Svi Mykhailiuk":    "Guard / Forward",
-  "Kevin Love":        "Forward",
+  "Ace Bailey":        "Guard / Forward",
+  "Lauri Markkanen":   "Forward",
+  "Jaren Jackson Jr.": "Forward / Center",
   "Walker Kessler":    "Center",
+  "Isaiah Collier":    "Guard",
+  "Brice Sensabaugh":  "Forward",
+  "Svi Mykhailiuk":    "Guard / Forward",
   "Kyle Filipowski":   "Forward / Center",
-  "Oscar Tshiebwe":    "Center",
-  "Blake Hinson":      "Forward",
   "Jusuf Nurkic":      "Center",
 };
 function getPosLabel(p) { return posLabelMap[p.name] || posMap[p.position] || p.position; }
@@ -8929,7 +8918,7 @@ function updateHomeStats() {
 function updateModeStats() {
   modes.filter(m => m !== 'lineup').forEach(m => {
     const el = document.getElementById('modeStats_' + m);
-    if (el) el.textContent = getModeLearnedCount(m) + '/16';
+    if (el) el.textContent = getModeLearnedCount(m) + '/10';
   });
   const lineupEl = document.getElementById('modeStats_lineup');
   if (lineupEl) lineupEl.textContent = lineupAttempts > 0 ? lineupCorrect + '/' + lineupAttempts : '—';
@@ -10359,22 +10348,16 @@ function lpToggleAcc(id) {
 
 // Jazz roster for the dropdown
 const JAZZ_ROSTER_DISPLAY = [
-  { name:'Lauri Markkanen',    num:'23', pos:'SF' },
-  { name:'Ace Bailey',         num:'19', pos:'G/F' },
-  { name:'Jaren Jackson Jr.',  num:'20', pos:'F/C' },
-  { name:'Cody Williams',      num:'5',  pos:'SF' },
-  { name:'Brice Sensabaugh',   num:'28', pos:'SF' },
-  { name:'Keyonte George',     num:'3',  pos:'PG' },
-  { name:'John Konchar',       num:'55', pos:'G'  },
-  { name:'Isaiah Collier',     num:'8',  pos:'PG' },
-  { name:'Elijah Harkless',    num:'16', pos:'SG' },
-  { name:'Svi Mykhailiuk',     num:'10', pos:'G/F' },
-  { name:'Kevin Love',         num:'42', pos:'PF' },
-  { name:'Walker Kessler',     num:'24', pos:'C'  },
-  { name:'Kyle Filipowski',    num:'22', pos:'F/C' },
-  { name:'Oscar Tshiebwe',     num:'34', pos:'C'  },
-  { name:'Blake Hinson',       num:'2',  pos:'SF' },
-  { name:'Jusuf Nurkic',       num:'30', pos:'C'  },
+  { name:'Keyonte George',    num:'3',  pos:'PG'  },
+  { name:'Ace Bailey',        num:'19', pos:'G/F'  },
+  { name:'Lauri Markkanen',   num:'23', pos:'SF'  },
+  { name:'Jaren Jackson Jr.', num:'20', pos:'F/C' },
+  { name:'Walker Kessler',    num:'24', pos:'C'   },
+  { name:'Isaiah Collier',    num:'8',  pos:'PG'  },
+  { name:'Brice Sensabaugh',  num:'28', pos:'SF'  },
+  { name:'Svi Mykhailiuk',    num:'10', pos:'G/F' },
+  { name:'Kyle Filipowski',   num:'22', pos:'F/C' },
+  { name:'Jusuf Nurkic',      num:'30', pos:'C'   },
 ];
 
 function lpToggleConf(conf) {
@@ -10979,7 +10962,7 @@ function lpUpdateJazzMastery() {
     if (fillEl)    fillEl.style.width   = pct + '%';
     if (pctEl)     pctEl.textContent    = pct + '%';
     if (tsPct)     tsPct.textContent    = pct + '%';
-    if (progLabel) progLabel.textContent = learned + ' / 16 Players Learned';
+    if (progLabel) progLabel.textContent = learned + ' / 10 Players Learned';
   } catch(e) {}
 }
 
@@ -11283,7 +11266,7 @@ function updateSportsDropdown() {
     modeData[m].forEach((pd, i) => { if (isLearned(pd)) learnedSet.add(i); });
   });
   const learnedCount = learnedSet.size;
-  const totalPlayers = 16;
+  const totalPlayers = 10;
   const allDone   = learnedCount >= totalPlayers;
   const anyStarted = learnedCount > 0;
 
