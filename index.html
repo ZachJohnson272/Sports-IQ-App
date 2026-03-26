@@ -8500,7 +8500,7 @@ function buildPlayerToDraftInfoDeck(roster) {
   return Array.from(roster).filter(p => p && p.name && p.draft_year).map(p => {
     const answer = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
       ? 'Undrafted'
-      : p.draft_year + ' · Pick #' + p.draft_pick + ' · ' + p.draft_team;
+      : p.draft_year + ' · ' + p.draft_pick + ' · ' + p.draft_team;
     return makeCard(p.name, answer, "What are this player's draft year, pick, and drafting team?");
   });
 }
@@ -8667,6 +8667,9 @@ function startFlashSession(cards, opts) {
   _fcReversed = false;
   const reverseBtn = document.getElementById('fcReverseBtn');
   if (reverseBtn) reverseBtn.classList.remove('active');
+  // Show flip button only for modes that support it
+  const FLIP_ALLOWED_MODES = new Set(['player_jersey', 'player_college', 'player_draft_info']);
+  if (reverseBtn) reverseBtn.style.display = FLIP_ALLOWED_MODES.has(_sessionMode) ? '' : 'none';
 
   // Wire UI elements
   document.getElementById('cardScene').style.display    = '';
@@ -8969,7 +8972,7 @@ function startMode(mode) {
   isFlipping = false;
   fcStreak = 0; fcBestStreak = 0; fcCorrectCount = 0;
   const reverseBtn = document.getElementById('fcReverseBtn');
-  if (reverseBtn) reverseBtn.classList.remove('active');
+  if (reverseBtn) { reverseBtn.classList.remove('active'); reverseBtn.style.display = 'none'; }
   if (mode === 'lineup') { startLineup(); return; }
   deck = buildDeck(mode);
   deckIndex = 0;
@@ -10421,7 +10424,7 @@ function _buildRandPool() {
     pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Past Teams', answer:pastAns, tag:'PLAYER', cat:'past_teams' });
     if (p.draft_year) {
       const draftAns = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
-        ? 'Undrafted' : p.draft_year + ' · Pick #' + p.draft_pick + ' · ' + p.draft_team;
+        ? 'Undrafted' : p.draft_year + ' · ' + p.draft_pick + ' · ' + p.draft_team;
       pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Draft Info', answer:draftAns, tag:'PLAYER', cat:'draft' });
     }
   });
