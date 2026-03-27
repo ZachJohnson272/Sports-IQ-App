@@ -6311,8 +6311,23 @@ const JAZZ_POSITIONS = {
   "Kyle Filipowski":   "PF/C",
   "Jusuf Nurkic":      "C",
 };
-// getPosLabel: Jazz players use JAZZ_POSITIONS; all other players fall back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || posMap[p.position] || p.position; }
+
+// Mavericks 10-player rotation positions
+const MAVS_POSITIONS = {
+  "Kyrie Irving":     "PG/SG",
+  "Max Christie":     "SG/SF",
+  "Cooper Flagg":     "SF/PF",
+  "P.J. Washington":  "PF/C",
+  "Dereck Lively II": "C",
+  "D'Angelo Russell": "PG/SG",
+  "Klay Thompson":    "SG/SF",
+  "Naji Marshall":    "SF/PF",
+  "Khris Middleton":  "SF/PF",
+  "Daniel Gafford":   "C",
+};
+
+// getPosLabel: Jazz players use JAZZ_POSITIONS; Mavs players use MAVS_POSITIONS; all other players fall back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -10770,7 +10785,7 @@ function _lpRandRenderCard() {
       'Starting 5':               `What is the <em>${name}</em> starting lineup?`,
       'Rotation':                 `What is the <em>${name}</em> 10-player rotation?`,
       'Head Coach':               `Who is the head coach of the <em>${name}</em>?`,
-      'Coach Since':              `What year did Will Hardy start coaching the Jazz?`,
+      'Coach Since':              `What year did ${(typeof _activeTeam !== 'undefined' ? _activeTeam.coach : 'the head coach')} start coaching the ${(typeof _activeTeam !== 'undefined' ? _activeTeam.name.split(' ').pop() : 'team')}?`,
       'Coaching Staff':           `Who are the <em>${name}</em> coaching staff?`,
       'All-Time Rebounds Leader': `Who is the <em>${name}</em> all-time rebounds leader?`,
       'All-Time Assists Leader':  `Who is the <em>${name}</em> all-time assists leader?`,
