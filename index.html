@@ -8756,8 +8756,8 @@ function loadSessionCard() {
   overlayEl.style.display = 'none';
   frontTextEl.style.display = '';
 
-  // Show hint — in reversed mode the front shows the answer, so prompt for the player name
-  const hint = _fcReversed ? 'Which player is this?' : (card.hint || 'What is the answer?');
+  // Show hint or generic label
+  const hint = _fcReversed ? (card.hint || 'Who is this?') : (card.hint || 'What is the answer?');
   const displayFront = _fcReversed ? card.back  : card.front;
   const displayBack  = _fcReversed ? card.front : card.back;
 
@@ -10447,51 +10447,48 @@ function _buildRandPool() {
   const pool = [];
   const activeRoster = (typeof _activeRoster !== 'undefined') ? Array.from(_activeRoster) : Array.from(ROSTER);
   const activeTeam   = (typeof _activeTeam   !== 'undefined') ? _activeTeam : TEST_TEAM;
-  activeRoster.filter(p => p && p.name).forEach(p => {
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Team',      answer:activeTeam.name,  tag:'PLAYER', cat:'team'     });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Position',  answer:getPosLabel(p),   tag:'PLAYER', cat:'position' });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Jersey #',  answer:'#'+p.jersey,     tag:'PLAYER', cat:'jersey'   });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Height',    answer:p.height,         tag:'PLAYER', cat:'height'   });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'College',   answer:p.college,        tag:'PLAYER', cat:'college'  });
-  });
-  // Player Career cards for all TM modes
-  activeRoster.filter(p => p && p.name).forEach(p => {
-    const hasPast = Array.isArray(p.past_teams) && p.past_teams.length > 0;
-    const pastAns = hasPast ? p.past_teams.map(t => t.team).join(', ') : 'None';
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Past Teams', answer:pastAns, tag:'PLAYER', cat:'past_teams' });
-    if (p.draft_year) {
-      const draftAns = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
-        ? 'Undrafted' : p.draft_year + ' · ' + p.draft_pick + ' · ' + getDraftTeamNickname(p.draft_team);
-      pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Draft Info', answer:draftAns, tag:'PLAYER', cat:'draft' });
-    }
-  });
-  // Team-level cards from all TM categories
-  const lineupVals = Object.values(_activeLineup || {});
-  const bestPlayer = lineupVals[2] || lineupVals[0] || 'N/A';
-  const teamCards = [
-    { answerLabel:'Conference', answer:activeTeam.conference, cat:'teamfact' },
-    { answerLabel:'Division',   answer:activeTeam.division,   cat:'teamfact' },
-    { answerLabel:'Arena',      answer:activeTeam.arena,      cat:'teamfact' },
-    { answerLabel:'Head Coach', answer:activeTeam.coach,      cat:'coaches' },
-    { answerLabel:'City',       answer:activeTeam.city,       cat:'teamfact' },
-    { answerLabel:'Mascot',     answer:activeTeam.mascot,     cat:'teamfact' },
-    { answerLabel:'Best Player', answer:bestPlayer,           cat:'roster' },
-    { answerLabel:'Coach Since', answer:activeTeam.coachSince || 'N/A', cat:'coaches' },
-  ];
-  // Franchise Records
-  if (typeof TEAM_ALL_TIME_REBOUNDS_LEADER !== 'undefined' && TEAM_ALL_TIME_REBOUNDS_LEADER[activeTeam.name]) {
-    const r = TEAM_ALL_TIME_REBOUNDS_LEADER[activeTeam.name];
-    teamCards.push({ answerLabel:'All-Time Rebounds Leader', answer:r.name + ' (' + r.stat + ')', cat:'history' });
+
+  // Helper: push a makeCard-style {front,back,hint} card into the rand pool format
+  function addCards(cards, answerLabel, cat, type) {
+    cards.forEach(card => {
+      const isTeamCard = type === 'team' || (!type && card.front === activeTeam.name);
+      pool.push({
+        type:        isTeamCard ? 'team' : 'player',
+        entity:      card.front,
+        prompt:      card.front,
+        answerLabel: answerLabel,
+        answer:      card.back,
+        tag:         isTeamCard ? 'TEAM' : 'PLAYER',
+        cat:         cat,
+      });
+    });
   }
-  if (typeof TEAM_ALL_TIME_ASSISTS !== 'undefined' && TEAM_ALL_TIME_ASSISTS[activeTeam.name]) {
-    const r = TEAM_ALL_TIME_ASSISTS[activeTeam.name];
-    teamCards.push({ answerLabel:'All-Time Assists Leader', answer:r.name + ' (' + r.stat + ')', cat:'history' });
-  }
-  if (typeof TEAM_ALL_TIME_SCORER !== 'undefined' && TEAM_ALL_TIME_SCORER[activeTeam.name]) {
-    const r = TEAM_ALL_TIME_SCORER[activeTeam.name];
-    teamCards.push({ answerLabel:'All-Time Scorer', answer:r.name + ' (' + r.stat + ')', cat:'history' });
-  }
-  teamCards.forEach(tc => pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, tag:'TEAM', ...tc }));
+
+  // ── ROSTER (3 cards) ────────────────────────────────────────
+  addCards(buildTeamToBestPlayerDeck(activeTeam, _activeLineup), 'Best Player', 'roster', 'team');
+  addCards(buildTeamToStarting5Deck(activeTeam),                 'Starting 5',  'roster', 'team');
+  addCards(buildTeamToRosterDeck(activeTeam, _activeRoster),     'Rotation',    'roster', 'team');
+
+  // ── COACHES (3 cards) ───────────────────────────────────────
+  addCards(buildTeamToCoachDeck(activeTeam),         'Head Coach',     'coaches', 'team');
+  addCards(buildTeamToCoachSinceDeck(activeTeam),    'Coach Since',    'coaches', 'team');
+  addCards(buildTeamToCoachingStaffDeck(activeTeam), 'Coaching Staff', 'coaches', 'team');
+
+  // ── PLAYER INFO (30 cards: 10 per mode) ────────────────────
+  addCards(buildPlayerToPositionDeck(_activeRoster), 'Position', 'info', 'player');
+  addCards(buildPlayerToHeightDeck(_activeRoster),   'Height',   'info', 'player');
+  addCards(buildPlayerToJerseyDeck(_activeRoster),   'Jersey #', 'info', 'player');
+
+  // ── PLAYER CAREER (30 cards: 10 per mode) ──────────────────
+  addCards(buildPlayerToPastTeamsDeck(_activeRoster), 'Past Teams', 'players', 'player');
+  addCards(buildPlayerToCollegeDeck(_activeRoster),   'College',    'players', 'player');
+  addCards(buildPlayerToDraftInfoDeck(_activeRoster), 'Draft Info', 'players', 'player');
+
+  // ── FRANCHISE RECORDS (3 cards) ─────────────────────────────
+  addCards(buildTeamToAllTimeReboundsLeaderDeck(activeTeam), 'All-Time Rebounds Leader', 'history', 'team');
+  addCards(buildTeamToAllTimeAssistsDeck(activeTeam),        'All-Time Assists Leader',  'history', 'team');
+  addCards(buildTeamToAllTimeScorerDeck(activeTeam),         'All-Time Scorer',          'history', 'team');
+
   return pool;
 }
 
@@ -10582,7 +10579,7 @@ function _shuffle(arr) {
 
 // ── Generators ─────────────────────────────────────────────
 
-// 1) Mixed Chaos — broad mix, lightly biased toward weak cards, anti-repeat
+// 1) Mixed Chaos — all cards from pool, shuffled, biased toward weak cards
 function generateMixedRun() {
   const pool = _buildRandPool();
   // Light difficulty weighting: weight = 1 + difficulty * 1.5
@@ -10592,13 +10589,12 @@ function generateMixedRun() {
     for (let i = 0; i < w; i++) weighted.push(card);
   });
   const shuffled = _shuffle(weighted);
-  // Deduplicate by key, take 20
+  // Deduplicate by key — take all unique cards (full pool)
   const seen = new Set();
   const deduped = [];
   for (const c of shuffled) {
     const k = _cardKey(c);
     if (!seen.has(k)) { seen.add(k); deduped.push(c); }
-    if (deduped.length >= 20) break;
   }
   return _antiRepeat(deduped);
 }
@@ -10653,7 +10649,7 @@ function generateDailyRun() {
 
 // ── Generator registry ──────────────────────────────────────
 const RANDOM_GENERATORS = {
-  mixed:     { fn: generateMixedRun,    name: 'Mixed Chaos',       emoji: '🎲', length: 20, color: 'chaos' },
+  mixed:     { fn: generateMixedRun,    name: 'Mixed Chaos',       emoji: '🎲', length: 69, color: 'chaos' },
   weakSpots: { fn: generateWeakSpotsRun, name: 'Weak Spot Trainer', emoji: '🎯', length: 16, color: 'weak'  },
   daily:     { fn: generateDailyRun,    name: 'Daily Challenge',   emoji: '📅', length: 15, color: 'daily' },
 };
@@ -10732,7 +10728,7 @@ function _lpRandRenderCard() {
   const pct = (_randIdx / total) * 100;
   document.getElementById('fcProgressBar').style.width = pct + '%';
 
-  // ── Reset card to front face (same pattern as loadCard) ────
+  // ── Reset card to front face ────────────────────────────────
   isFlipped = false; cardAnswered = false; isFlipping = false;
   const c3d = document.getElementById('card3d');
   c3d.style.transition = 'none';
@@ -10748,31 +10744,27 @@ function _lpRandRenderCard() {
   overlayEl.style.display  = 'none';
   frontTextEl.style.display = '';
 
-  // Build a natural question that bakes the entity name in
-  const name = card.entity;
+  const name  = card.entity;
   const label = card.answerLabel;
   let question;
   if (card.type === 'player') {
     const playerQ = {
-      'Team':        `Which team does <em>${name}</em> play for?`,
       'Position':    `What position does <em>${name}</em> play?`,
-      'Jersey #':    `What is <em>${name}'s</em> jersey number?`,
       'Height':      `How tall is <em>${name}</em>?`,
-      'College':     `Where did <em>${name}</em> go to college?`,
+      'Jersey #':    `What is <em>${name}'s</em> jersey number?`,
       'Past Teams':  `What teams did <em>${name}</em> play for before the Jazz?`,
+      'College':     `Where did <em>${name}</em> go to college?`,
       'Draft Info':  `When and where was <em>${name}</em> drafted?`,
     };
     question = playerQ[label] || `What is <em>${name}'s</em> ${label}?`;
   } else {
     const teamQ = {
-      'Conference':               `What conference are the <em>${name}</em> in?`,
-      'Division':                 `What division are the <em>${name}</em> in?`,
-      'Arena':                    `What arena do the <em>${name}</em> play in?`,
-      'Head Coach':               `Who is the head coach of the <em>${name}</em>?`,
-      'City':                     `What city do the <em>${name}</em> play in?`,
-      'Mascot':                   `What is the <em>${name}</em> mascot?`,
       'Best Player':              `Who is the best player on the <em>${name}</em>?`,
+      'Starting 5':               `What is the <em>${name}</em> starting lineup?`,
+      'Rotation':                 `What is the <em>${name}</em> 10-player rotation?`,
+      'Head Coach':               `Who is the head coach of the <em>${name}</em>?`,
       'Coach Since':              `What year did the <em>${name}</em> head coach take over?`,
+      'Coaching Staff':           `Who are the <em>${name}</em> coaching staff?`,
       'All-Time Rebounds Leader': `Who is the <em>${name}</em> all-time rebounds leader?`,
       'All-Time Assists Leader':  `Who is the <em>${name}</em> all-time assists leader?`,
       'All-Time Scorer':          `Who is the <em>${name}</em> all-time leading scorer?`,
@@ -10782,18 +10774,39 @@ function _lpRandRenderCard() {
 
   frontTextEl.innerHTML = `<div class="rand-front-question">${question}</div>`;
 
-  // ── Back face: just the answer, big and clean ───────────────
+  // ── Back face: answer — plain text big, HTML answers use list styling ──
   const backPhotoEl = document.getElementById('backPhoto');
   backPhotoEl.src = '';
   backPhotoEl.style.display = 'none';
-  const backNameEl  = document.getElementById('backName');
-  const cardBackEl  = document.querySelector('.card-back');
-  backNameEl.className   = 'back-name';
-  backNameEl.style.width = '';
-  backNameEl.innerHTML   = `<div class="rand-back-answer">${card.answer}</div>`;
-  if (cardBackEl) cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
-  document.getElementById('backPos').textContent  = '';
-  document.getElementById('backStats').innerHTML  = '';
+  const backNameEl = document.getElementById('backName');
+  const cardBackEl = document.querySelector('.card-back');
+  document.getElementById('backPos').textContent = '';
+  document.getElementById('backStats').innerHTML = '';
+
+  const ans = card.answer;
+  const isHTML = typeof ans === 'string' && ans.startsWith('<');
+  if (isHTML) {
+    // HTML answers (past teams list, rotation list, coaching staff, starting 5, etc.)
+    backNameEl.className   = 'back-name back-name--list';
+    backNameEl.style.width = '';
+    backNameEl.innerHTML   = ans;
+    const isTop10   = ans.includes('top10-list');
+    const isDraft   = ans.includes('draft-pick-list');
+    const isConf    = ans.includes('back-conf-block');
+    if (cardBackEl) {
+      cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
+      if (isTop10)       cardBackEl.classList.add('card-back--top10');
+      else if (isDraft)  cardBackEl.classList.add('card-back--draft');
+      else if (isConf)   cardBackEl.classList.add('card-back--centered-list');
+      else               cardBackEl.classList.add('card-back--list');
+    }
+  } else {
+    // Plain text answer — show big and centred
+    backNameEl.className   = 'back-name';
+    backNameEl.style.width = '';
+    backNameEl.innerHTML   = `<div class="rand-back-answer">${ans}</div>`;
+    if (cardBackEl) cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
+  }
 
   // ── Answer buttons: locked until flip ──────────────────────
   const btns = document.getElementById('answerBtns');
@@ -11059,23 +11072,8 @@ function fcToggleReverse() {
   _fcReversed = !_fcReversed;
   const btn = document.getElementById('fcReverseBtn');
   if (btn) btn.classList.toggle('active', _fcReversed);
-  // Reload the current card with the new orientation.
-  // player_jersey / player_college / player_draft_info use the session engine;
-  // legacy modes (namePos, statsPlayer, etc.) use loadCard().
-  if (_sessionMode && typeof loadSessionCard === 'function') {
-    isFlipped = false;
-    cardAnswered = false;
-    const c3d = document.getElementById('card3d');
-    if (c3d) {
-      c3d.style.transition = 'none';
-      c3d.classList.remove('flipped');
-      void c3d.offsetWidth;
-      c3d.style.transition = '';
-    }
-    loadSessionCard();
-  } else if (typeof loadCard === 'function') {
-    loadCard();
-  }
+  // Reload current card with reversed presentation
+  if (typeof loadCard === 'function') loadCard();
 }
 
 
