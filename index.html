@@ -7734,27 +7734,56 @@ const JAZZ_ROTATION = {
   ]
 };
 
+const MAVS_ROTATION = {
+  starters: [
+    { pos:'PG/SG', name:'Kyrie Irving' },
+    { pos:'SG/SF', name:'Max Christie' },
+    { pos:'SF/PF', name:'Cooper Flagg' },
+    { pos:'PF/C',  name:'P.J. Washington' },
+    { pos:'C',     name:'Dereck Lively II' },
+  ],
+  bench: [
+    { pos:'PG/SG', name:"D'Angelo Russell" },
+    { pos:'SG/SF', name:'Klay Thompson' },
+    { pos:'SF/PF', name:'Naji Marshall' },
+    { pos:'SF/PF', name:'Khris Middleton' },
+    { pos:'C',     name:'Daniel Gafford' },
+  ]
+};
+
 function buildTeamToRosterDeck(team, roster) {
-  // Non-Jazz teams: fall back to full roster HTML
-  if (team.name !== 'Utah Jazz') {
-    const answer = _buildRosterHTML(team.name, Array.from(roster));
-    return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
-  }
-  // Jazz: Team Rotation (10 Players)
   const makeRows = (players) => players.map(p =>
     '<div class="top10-row">' +
       '<span class="top10-pos">' + p.pos + '</span>' +
       '<span class="top10-player">' + p.name + '</span>' +
     '</div>'
   ).join('');
-  const answer =
-    '<div class="top10-list">' +
-      '<div class="top10-section-label">Starters</div>' +
-      makeRows(JAZZ_ROTATION.starters) +
-      '<div class="top10-section-label">Bench</div>' +
-      makeRows(JAZZ_ROTATION.bench) +
-    '</div>';
-  return [makeCard(team.name, answer, "What is the Jazz team rotation?")];
+
+  if (team.name === 'Utah Jazz') {
+    const answer =
+      '<div class="top10-list">' +
+        '<div class="top10-section-label">Starters</div>' +
+        makeRows(JAZZ_ROTATION.starters) +
+        '<div class="top10-section-label">Bench</div>' +
+        makeRows(JAZZ_ROTATION.bench) +
+      '</div>';
+    return [makeCard(team.name, answer, "What is the Jazz team rotation?")];
+  }
+
+  if (team.name === 'Dallas Mavericks') {
+    const answer =
+      '<div class="top10-list">' +
+        '<div class="top10-section-label">Starters</div>' +
+        makeRows(MAVS_ROTATION.starters) +
+        '<div class="top10-section-label">Bench</div>' +
+        makeRows(MAVS_ROTATION.bench) +
+      '</div>';
+    return [makeCard(team.name, answer, "What is the Mavericks team rotation?")];
+  }
+
+  // All other teams: standard roster HTML
+  const answer = _buildRosterHTML(team.name, Array.from(roster));
+  return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
 }
 const TEAM_COACHING_STAFF = {
   "Utah Jazz": {
