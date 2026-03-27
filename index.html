@@ -430,6 +430,21 @@
     gap: 0;
     overflow-y: auto;
   }
+  /* Jazz random mode — forces all backs to be fully centred regardless of content type */
+  .card-back.card-back--rand-center {
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 20px 20px !important;
+    overflow-y: auto;
+  }
+  .card-back.card-back--rand-center .back-career-block,
+  .card-back.card-back--rand-center .back-career-entry,
+  .card-back.card-back--rand-center .top10-list,
+  .card-back.card-back--rand-center .top10-row {
+    text-align: center;
+    justify-content: center;
+  }
   /* Draft pick list — custom centered premium layout */
   .card-back.card-back--draft {
     justify-content: center;
@@ -10774,7 +10789,7 @@ function _lpRandRenderCard() {
 
   frontTextEl.innerHTML = `<div class="rand-front-question">${question}</div>`;
 
-  // ── Back face: answer — plain text big, HTML answers use list styling ──
+  // ── Back face: always centred in random mode ────────────────
   const backPhotoEl = document.getElementById('backPhoto');
   backPhotoEl.src = '';
   backPhotoEl.style.display = 'none';
@@ -10783,29 +10798,22 @@ function _lpRandRenderCard() {
   document.getElementById('backPos').textContent = '';
   document.getElementById('backStats').innerHTML = '';
 
+  // Always apply rand-center — overrides all list/alignment modifiers
+  if (cardBackEl) {
+    cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
+    cardBackEl.classList.add('card-back--rand-center');
+  }
+
   const ans = card.answer;
   const isHTML = typeof ans === 'string' && ans.startsWith('<');
   if (isHTML) {
-    // HTML answers (past teams list, rotation list, coaching staff, starting 5, etc.)
-    backNameEl.className   = 'back-name back-name--list';
-    backNameEl.style.width = '';
+    backNameEl.className   = 'back-name';
+    backNameEl.style.width = '100%';
     backNameEl.innerHTML   = ans;
-    const isTop10   = ans.includes('top10-list');
-    const isDraft   = ans.includes('draft-pick-list');
-    const isConf    = ans.includes('back-conf-block');
-    if (cardBackEl) {
-      cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
-      if (isTop10)       cardBackEl.classList.add('card-back--top10');
-      else if (isDraft)  cardBackEl.classList.add('card-back--draft');
-      else if (isConf)   cardBackEl.classList.add('card-back--centered-list');
-      else               cardBackEl.classList.add('card-back--list');
-    }
   } else {
-    // Plain text answer — show big and centred
     backNameEl.className   = 'back-name';
     backNameEl.style.width = '';
     backNameEl.innerHTML   = `<div class="rand-back-answer">${ans}</div>`;
-    if (cardBackEl) cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
   }
 
   // ── Answer buttons: locked until flip ──────────────────────
@@ -10920,6 +10928,9 @@ function lpRandomRestart() {
 function lpRandomReset() {
   // Clean up random-mode-specific overrides on shared #flashcards elements
   delete document.getElementById('answerBtns').dataset.randMode;
+  // Remove rand-center class so other modes are unaffected
+  const cardBackEl = document.querySelector('.card-back');
+  if (cardBackEl) cardBackEl.classList.remove('card-back--rand-center');
   // Restore elements hidden by startGeneratedMode
   const reverseBtn = document.getElementById('fcReverseBtn');
   if (reverseBtn) reverseBtn.style.display = '';
