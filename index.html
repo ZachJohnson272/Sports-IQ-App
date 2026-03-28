@@ -234,13 +234,11 @@
   #flashcards {
     padding: 0;
     justify-content: flex-start;
-    height: 100dvh;
-    overflow: hidden;
   }
 
   .fc-header {
     width: 100%;
-    padding: 10px 24px 10px;
+    padding: 20px 24px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -250,7 +248,6 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    flex-shrink: 0;
   }
 
   .fc-progress-text {
@@ -289,7 +286,6 @@
     width: 100%;
     height: 3px;
     background: var(--surface2);
-    flex-shrink: 0;
   }
 
   .fc-progress-fill {
@@ -303,19 +299,17 @@
     width: 100%;
     max-width: 390px;
     margin: 0 auto;
-    padding: 8px 16px 10px;
+    padding: 16px 16px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    min-height: 0;
+    gap: 16px;
   }
 
   .card-scene {
     width: 100%;
     max-width: 350px;
-    flex: 1;
-    min-height: 0;
+    aspect-ratio: 3/4;
     perspective: 1000px;
     cursor: pointer;
   }
@@ -436,21 +430,6 @@
     gap: 0;
     overflow-y: auto;
   }
-  /* Jazz random mode — forces all backs to be fully centred regardless of content type */
-  .card-back.card-back--rand-center {
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-    padding: 20px 20px !important;
-    overflow-y: auto;
-  }
-  .card-back.card-back--rand-center .back-career-block,
-  .card-back.card-back--rand-center .back-career-entry,
-  .card-back.card-back--rand-center .top10-list,
-  .card-back.card-back--rand-center .top10-row {
-    text-align: center;
-    justify-content: center;
-  }
   /* Draft pick list — custom centered premium layout */
   .card-back.card-back--draft {
     justify-content: center;
@@ -518,7 +497,7 @@
     overflow-y: auto;
   }
   .top10-list {
-    width: fit-content;
+    width: 100%;
     max-width: 240px;
     display: flex;
     flex-direction: column;
@@ -535,15 +514,12 @@
     margin-bottom: 7px;
     border-bottom: 1px solid rgba(180,144,255,0.15);
     padding-bottom: 4px;
-    text-align: center;
-    width: 100%;
   }
   .top10-section-label:first-child { margin-top: 0; }
   .top10-row {
-    display: grid;
-    grid-template-columns: 44px 1fr;
+    display: flex;
     align-items: baseline;
-    gap: 0;
+    gap: 9px;
     padding: 4px 0;
   }
   .top10-pos {
@@ -551,9 +527,8 @@
     font-size: 14px;
     color: rgba(180,144,255,0.7);
     flex-shrink: 0;
-    width: 44px;
+    width: 28px;
     text-align: right;
-    padding-right: 9px;
     line-height: 1;
     letter-spacing: 0.5px;
   }
@@ -564,7 +539,6 @@
     color: #fff;
     line-height: 1.3;
     letter-spacing: -0.1px;
-    text-align: left;
   }
   .draft-pick-year-label {
     font-family: 'Bebas Neue', sans-serif;
@@ -782,12 +756,11 @@
     gap: 16px;
     width: 100%;
     max-width: 350px;
-    flex-shrink: 0;
   }
 
   .btn-miss {
     flex: 1;
-    padding: 13px;
+    padding: 18px;
     background: rgba(220,60,60,0.12);
     border: 1.5px solid rgba(220,60,60,0.35);
     color: #e05555;
@@ -801,7 +774,6 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    flex-shrink: 0;
   }
 
   .btn-miss:hover {
@@ -812,7 +784,7 @@
 
   .btn-got {
     flex: 1;
-    padding: 13px;
+    padding: 18px;
     background: rgba(30,160,80,0.12);
     border: 1.5px solid rgba(30,160,80,0.35);
     color: #3dcc7a;
@@ -826,7 +798,6 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    flex-shrink: 0;
   }
 
   .btn-got:hover {
@@ -1261,8 +1232,7 @@
   .fc-mode-title {
     font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
     color: rgba(107,63,160,0.7); text-transform: uppercase;
-    text-align: center; padding: 2px 0 0;
-    flex-shrink: 0;
+    text-align: center; padding: 5px 0 0;
   }
 
   /* ===================== MODE SELECT ===================== */
@@ -3235,69 +3205,12 @@
   .lp-prog-tier--allstar { background: rgba(245,200,66,0.08); color: rgba(245,200,66,0.6);   border-color: rgba(245,200,66,0.18); }
   .lp-prog-tier--hof     { background: rgba(240,112,80,0.08); color: rgba(240,112,80,0.6);   border-color: rgba(240,112,80,0.18); }
 
-  /* ── Team Mastery category grid — compact league-style layout ── */
-  #lp-team-cat-grid { gap: 8px; }
-
-  #lp-team-cat-grid .lp-prog-card {
-    padding: 13px 14px;
-    gap: 0;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 13px;
-  }
-
-  #lp-team-cat-grid .lp-prog-top {
-    flex: 1; min-width: 0;
-    gap: 12px;
-    align-items: center;
-  }
-
-  #lp-team-cat-grid .lp-prog-icon {
-    width: 40px; height: 40px;
-    font-size: 20px;
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
-
-  #lp-team-cat-grid .lp-prog-title {
-    font-size: 15px;
-    letter-spacing: 1px;
-    margin-bottom: 0;
-  }
-
-  #lp-team-cat-grid .lp-prog-desc { display: none; }
-
-  #lp-team-cat-grid .lp-prog-bar-row { display: none; }
-
-  #lp-team-cat-grid .lp-prog-tiers { display: none; }
-
-  /* Right-side fraction label — modes · cards */
-  #lp-team-cat-grid .lp-prog-fraction-wrap {
-    display: flex; flex-direction: column; align-items: flex-end;
-    flex-shrink: 0; margin-left: 10px; gap: 1px;
-  }
-  #lp-team-cat-grid .lp-prog-fraction {
-    font-size: 10px; font-weight: 700;
-    color: rgba(255,255,255,0.3);
-    white-space: nowrap;
-  }
+  /* ── Random category card ── */
   .lp-cat-card--random { border-color: rgba(34,197,94,0.22); }
   .lp-cat-card--random::before { background: radial-gradient(ellipse at left, rgba(34,197,94,0.1), transparent 60%); }
   .lp-cat-card--random:hover { border-color: rgba(34,197,94,0.65); box-shadow: 0 12px 32px rgba(34,197,94,0.2); }
   .lp-cat-card--random .lp-cat-icon { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.2); }
   .lp-cat-card--random .lp-cat-badge { background: rgba(34,197,94,0.08); color: rgba(34,197,94,0.7); border-color: rgba(34,197,94,0.15); }
-
-  /* Team mastery random card — full card glow to stand out */
-  #lp-team-cat-grid .lp-prog-card--mixed {
-    border-color: rgba(34,197,94,0.55) !important;
-    background: linear-gradient(135deg, rgba(34,197,94,0.14) 0%, rgba(16,185,129,0.08) 50%, rgba(10,10,18,0.98) 100%) !important;
-    box-shadow: 0 0 28px rgba(34,197,94,0.3), 0 4px 20px rgba(0,0,0,0.45) !important;
-  }
-  #lp-team-cat-grid .lp-prog-card--mixed .lp-prog-icon {
-    background: rgba(34,197,94,0.22) !important;
-    border-color: rgba(34,197,94,0.4) !important;
-    box-shadow: 0 0 12px rgba(34,197,94,0.35) !important;
-  }
 
   /* Current category — purple glow */
   .lp-cat-card--coaches { border-color: rgba(6,182,212,0.3); box-shadow: 0 0 18px rgba(6,182,212,0.15); }
@@ -4695,13 +4608,12 @@
   .lp-lk-modecard--magenta:hover::before { opacity: 1; }
 
   .lp-lk-modecard--mixed  {
-    border-color: rgba(34,197,94,0.55);
-    box-shadow: 0 0 32px rgba(34,197,94,0.32), 0 4px 20px rgba(0,0,0,0.45);
-    background: linear-gradient(135deg, rgba(34,197,94,0.14) 0%, rgba(16,185,129,0.08) 40%, rgba(10,10,18,0.99) 100%);
-    margin-top: 10px;
+    border-color: rgba(34,197,94,0.52);
+    box-shadow: 0 0 22px rgba(34,197,94,0.22), 0 3px 18px rgba(0,0,0,0.45);
+    background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(16,185,129,0.06) 40%, rgba(10,10,18,0.99) 100%);
   }
-  .lp-lk-modecard--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.22), transparent 60%); }
-  .lp-lk-modecard--mixed:hover    { border-color: rgba(34,197,94,0.85); box-shadow: 0 0 42px rgba(34,197,94,0.42), 0 14px 40px rgba(0,0,0,0.5); transform: translateY(-4px); }
+  .lp-lk-modecard--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.2), transparent 60%); }
+  .lp-lk-modecard--mixed:hover    { border-color: rgba(34,197,94,0.82); box-shadow: 0 14px 40px rgba(34,197,94,0.28), 0 0 28px rgba(34,197,94,0.22); transform: translateY(-4px); }
   .lp-lk-modecard--mixed:hover::before  { opacity: 1; }
   .lp-lk-modecard-left {
     display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
@@ -5614,7 +5526,7 @@
           <div class="lp-lk-modecard-left">
             <div class="lp-lk-modecard-icon">🎲</div>
             <div class="lp-lk-modecard-info">
-              <div class="lp-lk-modecard-name">Random</div>
+              <div class="lp-lk-modecard-name">Mixed Mode</div>
               <div class="lp-lk-modecard-desc">All modes shuffled into one chaos run</div>
             </div>
           </div>
@@ -5653,13 +5565,15 @@
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Utah Jazz</div>
                 <div class="lp-ct-sub">10 players · Active</div>
+                <div class="lp-mastery-pct" id="lp-mastery-jazz-pct">0%</div>
+                <div class="lp-mastery-bar-wrap"><div class="lp-mastery-bar-fill" id="lp-mastery-jazz-fill" style="width:0%"></div></div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('mavs','Dallas Mavericks','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Dallas Mavericks</div>
-                <div class="lp-ct-sub">10 players · Active</div>
+                <div class="lp-ct-sub">19 players · Active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -5914,33 +5828,34 @@
 
       <div class="lp-prog-grid" id="lp-team-cat-grid">
         <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-roster" onclick="lpSelectTeamCat('roster')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">👥</div><div class="lp-prog-body"><div class="lp-prog-title">Roster</div></div></div>
-          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
+          <div class="lp-prog-top"><div class="lp-prog-icon">👥</div><div class="lp-prog-body"><div class="lp-prog-title">👥 Roster</div><div class="lp-prog-desc">Best player, starting 5, and full team roster</div></div></div>
+          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--coaches" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span></div>
+          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
         </div>
         <div class="lp-prog-card lp-prog-card--coaches" id="lp-tcat-coaches" onclick="lpSelectTeamCat('coaches')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">👔</div><div class="lp-prog-body"><div class="lp-prog-title">Coaches</div></div></div>
-          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
+          <div class="lp-prog-top"><div class="lp-prog-icon">👔</div><div class="lp-prog-body"><div class="lp-prog-title">👔 Coaches</div><div class="lp-prog-desc">Head coach, tenure, and full coaching staff</div></div></div>
+          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--current" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span></div>
+          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
         </div>
         <div class="lp-prog-card lp-prog-card--info" id="lp-tcat-info" onclick="lpSelectTeamCat('info')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">📊</div><div class="lp-prog-body"><div class="lp-prog-title">Player Info</div></div></div>
-          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span>
+          <div class="lp-prog-top"><div class="lp-prog-icon">📊</div><div class="lp-prog-body"><div class="lp-prog-title">📊 Player Info</div><div class="lp-prog-desc">Position, height, and jersey number</div></div></div>
+          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--info" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span></div>
+          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
         </div>
         <div class="lp-prog-card lp-prog-card--players" id="lp-tcat-players" onclick="lpSelectTeamCat('players')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🏀</div><div class="lp-prog-body"><div class="lp-prog-title">Player Career</div></div></div>
-          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🏀</div><div class="lp-prog-body"><div class="lp-prog-title">🏀 Player Career</div><div class="lp-prog-desc">Past teams, college, and draft info</div></div></div>
+          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--players" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span></div>
+          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
         </div>
         <div class="lp-prog-card lp-prog-card--history" id="lp-tcat-history" onclick="lpSelectTeamCat('history')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🏛</div><div class="lp-prog-body"><div class="lp-prog-title">Franchise Records</div></div></div>
-          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
-        </div>
-        <div class="lp-lk-featured-divider">
-          <span class="lp-lk-featured-divider-line"></span>
-          <span class="lp-lk-featured-divider-label">FEATURED</span>
-          <span class="lp-lk-featured-divider-line"></span>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🏛</div><div class="lp-prog-body"><div class="lp-prog-title">🏛 Franchise Records</div><div class="lp-prog-desc">All-time statistical leaders across franchise history</div></div></div>
+          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--history" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span></div>
+          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
         </div>
         <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="startGeneratedMode('mixed','team')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title" style="color:rgb(134,239,172);letter-spacing:2px;">Random</div></div></div>
-          <span class="lp-prog-fraction" style="color:rgb(134,239,172);opacity:0.9;">All modes <span style="opacity:0.5;margin:0 2px;">·</span> <span>69 cards</span></span>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title">🎲 Random/Mixed</div><div class="lp-prog-desc">Mixed flashcard sessions from all Team Mastery modes</div></div></div>
+          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--mixed" style="width:0%"></div></div><span class="lp-prog-fraction">All modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">69 cards</span></span></div>
+          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">All Tiers</span></div>
         </div>
       </div>
 
@@ -6100,7 +6015,7 @@
 
       <!-- ── Random category section ── -->
       <div class="lp-cat-section hidden" id="lp-tsec-random">
-        <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#fff;">🎲 Random</span></div></div>
+        <div class="lp-cat-toolbar"><div class="lp-cat-section-header"><span class="lp-cat-section-title" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#fff;">🎲 Random/Mixed</span></div></div>
         <div id="lp-random-setup-team">
           <div class="mode-card--roster mode-card--random" onclick="startGeneratedMode('mixed','team')" style="margin-top:20px;">
             <div class="mode-badge" style="color:#7ee2a8;text-shadow:0 0 6px rgba(126,226,168,0.4);">🎲 Mixed Chaos</div>
@@ -6111,6 +6026,8 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 <!-- ===================== LEADERBOARD PAGE ===================== -->
 <div class="page" id="leaderboardPage">
@@ -6381,23 +6298,8 @@ const JAZZ_POSITIONS = {
   "Kyle Filipowski":   "PF/C",
   "Jusuf Nurkic":      "C",
 };
-
-// Mavericks 10-player rotation positions
-const MAVS_POSITIONS = {
-  "Kyrie Irving":     "PG/SG",
-  "Max Christie":     "SG/SF",
-  "Cooper Flagg":     "SF/PF",
-  "P.J. Washington":  "PF/C",
-  "Dereck Lively II": "C",
-  "D'Angelo Russell": "PG/SG",
-  "Klay Thompson":    "SG/SF",
-  "Naji Marshall":    "SF/PF",
-  "Khris Middleton":  "SF/PF",
-  "Daniel Gafford":   "C",
-};
-
-// getPosLabel: Jazz players use JAZZ_POSITIONS; Mavs players use MAVS_POSITIONS; all other players fall back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// getPosLabel: Jazz players use JAZZ_POSITIONS; all other players fall back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -6441,16 +6343,25 @@ const MAVS_TEAM = {
 const MAVS_STARTING_LINEUP = { PG:"Kyrie Irving", SG:"Max Christie", SF:"Cooper Flagg", PF:"P.J. Washington", C:"Dereck Lively II" };
 
 const MAVS_ROSTER = [
-  { name:"Kyrie Irving",     position:"G", jersey:"11", height:"6'2",  college:"Duke",          country:"USA",    hometown:"Melbourne, Australia",       draft_year:"2011", draft_pick:"1",         draft_team:"Cleveland Cavaliers",  past_teams:[{team:"Cleveland Cavaliers",dur:"4 seasons"},{team:"Boston Celtics",dur:"1 season"},{team:"Brooklyn Nets",dur:"2 seasons"}],                jazz_years:"1 season" },
-  { name:"Max Christie",     position:"G", jersey:"0",  height:"6'6",  college:"Michigan State",country:"USA",    hometown:"Northbrook, Illinois",       draft_year:"2022", draft_pick:"35",        draft_team:"Los Angeles Lakers",   past_teams:[{team:"Los Angeles Lakers",dur:"3 seasons"}],                                                                                 jazz_years:"1 season" },
-  { name:"Cooper Flagg",     position:"F", jersey:"2",  height:"6'9",  college:"Duke",          country:"USA",    hometown:"Newport, Maine",             draft_year:"2025", draft_pick:"1",         draft_team:"Dallas Mavericks",     past_teams:"None",                                                                                                                        jazz_years:"1 season" },
-  { name:"P.J. Washington",  position:"F", jersey:"25", height:"6'7",  college:"Kentucky",      country:"USA",    hometown:"Las Vegas, Nevada",          draft_year:"2019", draft_pick:"12",        draft_team:"Charlotte Hornets",    past_teams:[{team:"Charlotte Hornets",dur:"4 seasons"}],                                                                                  jazz_years:"1 season" },
-  { name:"Dereck Lively II", position:"C", jersey:"2",  height:"7'1",  college:"Duke",          country:"USA",    hometown:"Philadelphia, Pennsylvania", draft_year:"2023", draft_pick:"12",        draft_team:"Dallas Mavericks",     past_teams:"None",                                                                                                                        jazz_years:"1 season" },
-  { name:"D'Angelo Russell", position:"G", jersey:"1",  height:"6'4",  college:"Ohio State",    country:"USA",    hometown:"Louisville, Kentucky",       draft_year:"2015", draft_pick:"2",         draft_team:"Los Angeles Lakers",   past_teams:[{team:"Los Angeles Lakers",dur:"2 seasons"},{team:"Brooklyn Nets",dur:"2 seasons"},{team:"Minnesota Timberwolves",dur:"3 seasons"},{team:"Los Angeles Lakers",dur:"2 seasons"}], jazz_years:"1 season" },
-  { name:"Klay Thompson",    position:"G", jersey:"31", height:"6'6",  college:"Washington State",country:"USA",  hometown:"Los Angeles, California",    draft_year:"2011", draft_pick:"11",        draft_team:"Golden State Warriors", past_teams:[{team:"Golden State Warriors",dur:"13 seasons"},{team:"Los Angeles Lakers",dur:"1 season"}],                               jazz_years:"1 season" },
-  { name:"Naji Marshall",    position:"F", jersey:"10", height:"6'7",  college:"Xavier",        country:"USA",    hometown:"New Orleans, Louisiana",     draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",            past_teams:[{team:"New Orleans Pelicans",dur:"3 seasons"}],                                                                               jazz_years:"1 season" },
-  { name:"Khris Middleton",  position:"F", jersey:"22", height:"6'8",  college:"Texas A&M",     country:"USA",    hometown:"Charleston, South Carolina", draft_year:"2012", draft_pick:"39",        draft_team:"Detroit Pistons",      past_teams:[{team:"Detroit Pistons",dur:"1 season"},{team:"Milwaukee Bucks",dur:"11 seasons"}],                                            jazz_years:"1 season" },
-  { name:"Daniel Gafford",   position:"C", jersey:"12", height:"6'11", college:"Arkansas",      country:"USA",    hometown:"El Dorado, Arkansas",        draft_year:"2019", draft_pick:"38",        draft_team:"Chicago Bulls",        past_teams:[{team:"Chicago Bulls",dur:"1 season"},{team:"Washington Wizards",dur:"3 seasons"}],                                          jazz_years:"1 season" },
+  { name:"Kyrie Irving",           position:"G", jersey:"11", height:"6'2",  college:"Duke",            country:"USA",    hometown:"Melbourne, Australia",        draft_year:"2011", draft_pick:"1",         draft_team:"Cleveland Cavaliers",   past_teams:[{team:"Cleveland Cavaliers",dur:"4 seasons"},{team:"Boston Celtics",dur:"1 season"},{team:"Brooklyn Nets",dur:"2 seasons"}],                                    jazz_years:"1 season" },
+  { name:"Klay Thompson",          position:"G", jersey:"31", height:"6'6",  college:"Washington State",country:"USA",    hometown:"Los Angeles, California",    draft_year:"2011", draft_pick:"11",        draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"13 seasons"},{team:"Los Angeles Lakers",dur:"1 season"}],                                                          jazz_years:"1 season" },
+  { name:"Max Christie",           position:"G", jersey:"0",  height:"6'6",  college:"Michigan State",  country:"USA",    hometown:"Northbrook, Illinois",        draft_year:"2022", draft_pick:"35",        draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"3 seasons"}],                                                                                                        jazz_years:"1 season" },
+  { name:"A.J. Johnson",           position:"G", jersey:"6",  height:"6'4",  college:"Arkansas",        country:"USA",    hometown:"Houston, Texas",              draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Ryan Nembhard",          position:"G", jersey:"1",  height:"6'1",  college:"Gonzaga",         country:"Canada", hometown:"Aurora, Ontario, Canada",     draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Brandon Williams",       position:"G", jersey:"14", height:"6'2",  college:"Arizona",         country:"USA",    hometown:"Phoenix, Arizona",            draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"John Poulakidas",        position:"G", jersey:"5",  height:"6'5",  college:"Northwestern",    country:"USA",    hometown:"Lincolnwood, Illinois",       draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Cooper Flagg",           position:"F", jersey:"2",  height:"6'9",  college:"Duke",            country:"USA",    hometown:"Newport, Maine",              draft_year:"2025", draft_pick:"1",         draft_team:"Dallas Mavericks",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Naji Marshall",          position:"F", jersey:"10", height:"6'7",  college:"Xavier",          country:"USA",    hometown:"New Orleans, Louisiana",      draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"New Orleans Pelicans",dur:"3 seasons"}],                                                                                                   jazz_years:"1 season" },
+  { name:"Caleb Martin",           position:"F", jersey:"16", height:"6'5",  college:"Nevada",          country:"USA",    hometown:"Beckley, West Virginia",      draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Charlotte Hornets",dur:"2 seasons"},{team:"Miami Heat",dur:"3 seasons"}],                                                                  jazz_years:"1 season" },
+  { name:"Khris Middleton",        position:"F", jersey:"22", height:"6'8",  college:"Texas A&M",       country:"USA",    hometown:"Charleston, South Carolina",  draft_year:"2012", draft_pick:"39",        draft_team:"Detroit Pistons",        past_teams:[{team:"Detroit Pistons",dur:"1 season"},{team:"Milwaukee Bucks",dur:"11 seasons"}],                                                               jazz_years:"1 season" },
+  { name:"P.J. Washington",        position:"F", jersey:"25", height:"6'7",  college:"Kentucky",        country:"USA",    hometown:"Las Vegas, Nevada",           draft_year:"2019", draft_pick:"12",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"4 seasons"}],                                                                                                    jazz_years:"1 season" },
+  { name:"Marvin Bagley III",      position:"F", jersey:"35", height:"6'11", college:"Duke",            country:"USA",    hometown:"Phoenix, Arizona",            draft_year:"2018", draft_pick:"2",         draft_team:"Sacramento Kings",       past_teams:[{team:"Sacramento Kings",dur:"4 seasons"},{team:"Detroit Pistons",dur:"2 seasons"}],                                                             jazz_years:"1 season" },
+  { name:"Tyler Smith",            position:"F", jersey:"4",  height:"6'7",  college:"None",            country:"USA",    hometown:"Houston, Texas",              draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Jeremiah Robinson-Earl", position:"F", jersey:"50", height:"6'9",  college:"Villanova",       country:"USA",    hometown:"Wichita, Kansas",             draft_year:"2021", draft_pick:"22",        draft_team:"Oklahoma City Thunder",  past_teams:[{team:"Oklahoma City Thunder",dur:"2 seasons"},{team:"Portland Trail Blazers",dur:"1 season"},{team:"Denver Nuggets",dur:"1 season"},{team:"New York Knicks",dur:"1 season"}], jazz_years:"1 season" },
+  { name:"Dereck Lively II",       position:"C", jersey:"2",  height:"7'1",  college:"Duke",            country:"USA",    hometown:"Philadelphia, Pennsylvania",  draft_year:"2023", draft_pick:"12",        draft_team:"Dallas Mavericks",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Daniel Gafford",         position:"C", jersey:"12", height:"6'11", college:"Arkansas",        country:"USA",    hometown:"El Dorado, Arkansas",         draft_year:"2019", draft_pick:"38",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"1 season"},{team:"Washington Wizards",dur:"3 seasons"}],                                                             jazz_years:"1 season" },
+  { name:"Moussa Cisse",           position:"C", jersey:"33", height:"7'0",  college:"Memphis",         country:"Guinea", hometown:"Conakry, Guinea",             draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Dwight Powell",          position:"C", jersey:"7",  height:"6'10",  college:"Stanford",        country:"Canada", hometown:"Calgary, Canada",             draft_year:"2014", draft_pick:"45",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"1 season"},{team:"Boston Celtics",dur:"1 season"},{team:"Cleveland Cavaliers",dur:"1 season"}],                   jazz_years:"1 season" },
 ];
 
 const NUGGETS_TEAM = {
@@ -7646,9 +7557,8 @@ const NBA_PLAYERS = [
   { name:"Evan Mobley",          team:"Cleveland Cavaliers",    jersey:"4",  height:'7\'0"',  college:"USC",            country:"USA",          position:"Center" },
   { name:"Darius Garland",       team:"Cleveland Cavaliers",    jersey:"10", height:'6\'1"',  college:"Vanderbilt",     country:"USA",          position:"Guard" },
   // Dallas Mavericks
-  { name:"Kyrie Irving",     team:"Dallas Mavericks", jersey:"11", height:'6\'2"', college:"Duke",           country:"USA",      position:"Guard" },
-  { name:"D'Angelo Russell", team:"Dallas Mavericks", jersey:"1",  height:'6\'4"', college:"Ohio State",     country:"USA",      position:"Guard" },
-  { name:"Cooper Flagg",     team:"Dallas Mavericks", jersey:"2",  height:'6\'9"', college:"Duke",           country:"USA",      position:"Forward" },
+  { name:"Luka Dončić",          team:"Dallas Mavericks",       jersey:"77", height:'6\'7"',  college:"None",           country:"Slovenia",     position:"Guard / Forward" },
+  { name:"Kyrie Irving",         team:"Dallas Mavericks",       jersey:"11", height:'6\'2"',  college:"Duke",           country:"USA",          position:"Guard" },
   // Denver Nuggets
   { name:"Nikola Jokić",         team:"Denver Nuggets",         jersey:"15", height:'6\'11"', college:"None",           country:"Serbia",       position:"Center" },
   { name:"Jamal Murray",         team:"Denver Nuggets",         jersey:"27", height:'6\'5"',  college:"Kentucky",       country:"Canada",       position:"Guard" },
@@ -7729,7 +7639,7 @@ function makeCard(front, back, hint) {
 
 // -- Player deck builders (filter out blank/undefined answers) --
 function buildPlayerToTeamDeck(roster)     { return roster.filter(p => p.team).map(p => makeCard(p.name, p.team,       'Which team does this player play for?')); }
-function buildPlayerToPositionDeck(roster) { return roster.filter(p => p.position).map(p => makeCard(p.name, getPosLabel(p),'What position does this player play?')); }
+function buildPlayerToPositionDeck(roster) { return roster.filter(p => p.position).map(p => makeCard(p.name, p.position,'What position does this player play?')); }
 function buildPlayerToJerseyDeck(roster)   { return roster.filter(p => p.jersey).map(p => makeCard(p.name, '#' + p.jersey, "What is this player's jersey number?")); }
 function buildPlayerToHeightDeck(roster)   { return roster.filter(p => p.height).map(p => makeCard(p.name, p.height,   "How tall is this player?")); }
 function buildPlayerToCollegeDeck(roster)  { return roster.filter(p => p.college).map(p => makeCard(p.name, p.college, "Where did this player go to college?")); }
@@ -7748,7 +7658,6 @@ function buildPlayerToCountryHometownDeck(roster) {
 function buildPlayerToPastTeamsDeck(roster) {
   return roster.filter(p => p && p.name).map(p => {
     const hasPastTeams = Array.isArray(p.past_teams) && p.past_teams.length > 0;
-    const currentTeam = (typeof _activeTeam !== 'undefined') ? _activeTeam.name : 'Utah Jazz';
     const answer = hasPastTeams
       ? '<div class="back-career-block">' + p.past_teams.map(t =>
           '<div class="back-career-entry">' +
@@ -7758,7 +7667,7 @@ function buildPlayerToPastTeamsDeck(roster) {
         ).join('') + '</div>'
       : '<div class="back-career-block">' +
           '<div class="back-career-entry">' +
-            '<span class="back-career-team">' + currentTeam + '</span>' +
+            '<span class="back-career-team">Utah Jazz</span>' +
             '<span class="back-career-dur">No previous NBA teams</span>' +
           '</div>' +
         '</div>';
@@ -7805,56 +7714,27 @@ const JAZZ_ROTATION = {
   ]
 };
 
-const MAVS_ROTATION = {
-  starters: [
-    { pos:'PG/SG', name:'Kyrie Irving' },
-    { pos:'SG/SF', name:'Max Christie' },
-    { pos:'SF/PF', name:'Cooper Flagg' },
-    { pos:'PF/C',  name:'P.J. Washington' },
-    { pos:'C',     name:'Dereck Lively II' },
-  ],
-  bench: [
-    { pos:'PG/SG', name:"D'Angelo Russell" },
-    { pos:'SG/SF', name:'Klay Thompson' },
-    { pos:'SF/PF', name:'Naji Marshall' },
-    { pos:'SF/PF', name:'Khris Middleton' },
-    { pos:'C',     name:'Daniel Gafford' },
-  ]
-};
-
 function buildTeamToRosterDeck(team, roster) {
+  // Non-Jazz teams: fall back to full roster HTML
+  if (team.name !== 'Utah Jazz') {
+    const answer = _buildRosterHTML(team.name, Array.from(roster));
+    return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
+  }
+  // Jazz: Team Rotation (10 Players)
   const makeRows = (players) => players.map(p =>
     '<div class="top10-row">' +
       '<span class="top10-pos">' + p.pos + '</span>' +
       '<span class="top10-player">' + p.name + '</span>' +
     '</div>'
   ).join('');
-
-  if (team.name === 'Utah Jazz') {
-    const answer =
-      '<div class="top10-list">' +
-        '<div class="top10-section-label">Starters</div>' +
-        makeRows(JAZZ_ROTATION.starters) +
-        '<div class="top10-section-label">Bench</div>' +
-        makeRows(JAZZ_ROTATION.bench) +
-      '</div>';
-    return [makeCard(team.name, answer, "What is the Jazz team rotation?")];
-  }
-
-  if (team.name === 'Dallas Mavericks') {
-    const answer =
-      '<div class="top10-list">' +
-        '<div class="top10-section-label">Starters</div>' +
-        makeRows(MAVS_ROTATION.starters) +
-        '<div class="top10-section-label">Bench</div>' +
-        makeRows(MAVS_ROTATION.bench) +
-      '</div>';
-    return [makeCard(team.name, answer, "What is the Mavericks team rotation?")];
-  }
-
-  // All other teams: standard roster HTML
-  const answer = _buildRosterHTML(team.name, Array.from(roster));
-  return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
+  const answer =
+    '<div class="top10-list">' +
+      '<div class="top10-section-label">Starters</div>' +
+      makeRows(JAZZ_ROTATION.starters) +
+      '<div class="top10-section-label">Bench</div>' +
+      makeRows(JAZZ_ROTATION.bench) +
+    '</div>';
+  return [makeCard(team.name, answer, "What is the Jazz team rotation?")];
 }
 const TEAM_COACHING_STAFF = {
   "Utah Jazz": {
@@ -8104,13 +7984,15 @@ function buildTeamToStarting5Deck(team) {
   const posOrder = ['PG','SG','SF','PF','C'];
   const rows = posOrder.map(slot => {
     const name = _activeLineup[slot] || '—';
-    return '<div class="top10-row">' +
-      '<span class="top10-pos">' + slot + '</span>' +
-      '<span class="top10-player">' + name + '</span>' +
-    '</div>';
+    return '<div class="back-career-entry">' +
+      '<span class="back-career-team" style="font-size:15px;font-weight:500;">' +
+        '<span style="color:rgba(180,144,255,0.8);font-size:12px;letter-spacing:1px;margin-right:8px;">' + slot + '</span>' +
+        name +
+      '</span></div>';
   }).join('');
-  const answer = '<div class="top10-list"><div class="top10-section-label">Starting 5</div>' + rows + '</div>';
-  return [makeCard(team.name, answer, '__LINEUP__')];
+  const front = team.name;
+  const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
+  return [makeCard(front, answer, '__LINEUP__')];
 }
 function buildLeagueTeamToStarting5Deck() {
   const posOrder = ['PG','SG','SF','PF','C'];
@@ -8118,13 +8000,15 @@ function buildLeagueTeamToStarting5Deck() {
     const lineup = LEAGUE_LINEUPS[t.name];
     const rows = posOrder.map(slot => {
       const name = lineup[slot] || '—';
-      return '<div class="top10-row">' +
-        '<span class="top10-pos">' + slot + '</span>' +
-        '<span class="top10-player">' + name + '</span>' +
-      '</div>';
+      return '<div class="back-career-entry">' +
+        '<span class="back-career-team" style="font-size:15px;font-weight:500;">' +
+          '<span style="color:rgba(180,144,255,0.8);font-size:12px;letter-spacing:1px;margin-right:8px;">' + slot + '</span>' +
+          name +
+        '</span></div>';
     }).join('');
-    const answer = '<div class="top10-list"><div class="top10-section-label">Starting 5</div>' + rows + '</div>';
-    return makeCard(t.name, answer, '__LINEUP__');
+    const front = t.name;
+    const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
+    return makeCard(front, answer, '__LINEUP__');
   });
 }
 function buildLeagueTeamToBestPlayerDeck() {
@@ -8196,7 +8080,14 @@ function buildTeamToCoachPrevTeamDeck(team) {
   return [makeCard(team.coach || team.name, answer, "What was this head coach's most recent previous NBA team?")];
 }
 function buildTeamToCoachSinceDeck(team) {
-  const answer = team.coachSince || 'N/A';
+  const answer = team.coachSince
+    ? '<div class="back-conf-block">' +
+        '<span class="back-conf-label">Current Team</span>' +
+        '<span class="back-conf-val">' + team.name + '</span>' +
+        '<span class="back-conf-label">Head Coach Since</span>' +
+        '<span class="back-conf-val" style="font-size:28px;">' + team.coachSince + '</span>' +
+      '</div>'
+    : 'N/A';
   return [makeCard(team.coach || team.name, answer, "What year did this head coach join this team?")];
 }
 
@@ -8867,8 +8758,8 @@ function loadSessionCard() {
   overlayEl.style.display = 'none';
   frontTextEl.style.display = '';
 
-  // Show hint — in reversed mode the front shows the answer, so prompt for the player name
-  const hint = _fcReversed ? 'Which player is this?' : (card.hint || 'What is the answer?');
+  // Show hint or generic label
+  const hint = _fcReversed ? (card.hint || 'Who is this?') : (card.hint || 'What is the answer?');
   const displayFront = _fcReversed ? card.back  : card.front;
   const displayBack  = _fcReversed ? card.front : card.back;
 
@@ -10558,48 +10449,51 @@ function _buildRandPool() {
   const pool = [];
   const activeRoster = (typeof _activeRoster !== 'undefined') ? Array.from(_activeRoster) : Array.from(ROSTER);
   const activeTeam   = (typeof _activeTeam   !== 'undefined') ? _activeTeam : TEST_TEAM;
-
-  // Helper: push a makeCard-style {front,back,hint} card into the rand pool format
-  function addCards(cards, answerLabel, cat, type) {
-    cards.forEach(card => {
-      const isTeamCard = type === 'team' || (!type && card.front === activeTeam.name);
-      pool.push({
-        type:        isTeamCard ? 'team' : 'player',
-        entity:      card.front,
-        prompt:      card.front,
-        answerLabel: answerLabel,
-        answer:      card.back,
-        tag:         isTeamCard ? 'TEAM' : 'PLAYER',
-        cat:         cat,
-      });
-    });
+  activeRoster.filter(p => p && p.name).forEach(p => {
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Team',      answer:activeTeam.name,  tag:'PLAYER', cat:'team'     });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Position',  answer:getPosLabel(p),   tag:'PLAYER', cat:'position' });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Jersey #',  answer:'#'+p.jersey,     tag:'PLAYER', cat:'jersey'   });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Height',    answer:p.height,         tag:'PLAYER', cat:'height'   });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'College',   answer:p.college,        tag:'PLAYER', cat:'college'  });
+  });
+  // Player Career cards for all TM modes
+  activeRoster.filter(p => p && p.name).forEach(p => {
+    const hasPast = Array.isArray(p.past_teams) && p.past_teams.length > 0;
+    const pastAns = hasPast ? p.past_teams.map(t => t.team).join(', ') : 'None';
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Past Teams', answer:pastAns, tag:'PLAYER', cat:'past_teams' });
+    if (p.draft_year) {
+      const draftAns = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
+        ? 'Undrafted' : p.draft_year + ' · ' + p.draft_pick + ' · ' + getDraftTeamNickname(p.draft_team);
+      pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Draft Info', answer:draftAns, tag:'PLAYER', cat:'draft' });
+    }
+  });
+  // Team-level cards from all TM categories
+  const lineupVals = Object.values(_activeLineup || {});
+  const bestPlayer = lineupVals[2] || lineupVals[0] || 'N/A';
+  const teamCards = [
+    { answerLabel:'Conference', answer:activeTeam.conference, cat:'teamfact' },
+    { answerLabel:'Division',   answer:activeTeam.division,   cat:'teamfact' },
+    { answerLabel:'Arena',      answer:activeTeam.arena,      cat:'teamfact' },
+    { answerLabel:'Head Coach', answer:activeTeam.coach,      cat:'coaches' },
+    { answerLabel:'City',       answer:activeTeam.city,       cat:'teamfact' },
+    { answerLabel:'Mascot',     answer:activeTeam.mascot,     cat:'teamfact' },
+    { answerLabel:'Best Player', answer:bestPlayer,           cat:'roster' },
+    { answerLabel:'Coach Since', answer:activeTeam.coachSince || 'N/A', cat:'coaches' },
+  ];
+  // Franchise Records
+  if (typeof TEAM_ALL_TIME_REBOUNDS_LEADER !== 'undefined' && TEAM_ALL_TIME_REBOUNDS_LEADER[activeTeam.name]) {
+    const r = TEAM_ALL_TIME_REBOUNDS_LEADER[activeTeam.name];
+    teamCards.push({ answerLabel:'All-Time Rebounds Leader', answer:r.name + ' (' + r.stat + ')', cat:'history' });
   }
-
-  // ── ROSTER (3 cards) ────────────────────────────────────────
-  addCards(buildTeamToBestPlayerDeck(activeTeam, _activeLineup), 'Best Player', 'roster', 'team');
-  addCards(buildTeamToStarting5Deck(activeTeam),                 'Starting 5',  'roster', 'team');
-  addCards(buildTeamToRosterDeck(activeTeam, _activeRoster),     'Rotation',    'roster', 'team');
-
-  // ── COACHES (3 cards) ───────────────────────────────────────
-  addCards(buildTeamToCoachDeck(activeTeam),         'Head Coach',     'coaches', 'team');
-  addCards(buildTeamToCoachSinceDeck(activeTeam),    'Coach Since',    'coaches', 'team');
-  addCards(buildTeamToCoachingStaffDeck(activeTeam), 'Coaching Staff', 'coaches', 'team');
-
-  // ── PLAYER INFO (30 cards: 10 per mode) ────────────────────
-  addCards(buildPlayerToPositionDeck(_activeRoster), 'Position', 'info', 'player');
-  addCards(buildPlayerToHeightDeck(_activeRoster),   'Height',   'info', 'player');
-  addCards(buildPlayerToJerseyDeck(_activeRoster),   'Jersey #', 'info', 'player');
-
-  // ── PLAYER CAREER (30 cards: 10 per mode) ──────────────────
-  addCards(buildPlayerToPastTeamsDeck(_activeRoster), 'Past Teams', 'players', 'player');
-  addCards(buildPlayerToCollegeDeck(_activeRoster),   'College',    'players', 'player');
-  addCards(buildPlayerToDraftInfoDeck(_activeRoster), 'Draft Info', 'players', 'player');
-
-  // ── FRANCHISE RECORDS (3 cards) ─────────────────────────────
-  addCards(buildTeamToAllTimeReboundsLeaderDeck(activeTeam), 'All-Time Rebounds Leader', 'history', 'team');
-  addCards(buildTeamToAllTimeAssistsDeck(activeTeam),        'All-Time Assists Leader',  'history', 'team');
-  addCards(buildTeamToAllTimeScorerDeck(activeTeam),         'All-Time Scorer',          'history', 'team');
-
+  if (typeof TEAM_ALL_TIME_ASSISTS !== 'undefined' && TEAM_ALL_TIME_ASSISTS[activeTeam.name]) {
+    const r = TEAM_ALL_TIME_ASSISTS[activeTeam.name];
+    teamCards.push({ answerLabel:'All-Time Assists Leader', answer:r.name + ' (' + r.stat + ')', cat:'history' });
+  }
+  if (typeof TEAM_ALL_TIME_SCORER !== 'undefined' && TEAM_ALL_TIME_SCORER[activeTeam.name]) {
+    const r = TEAM_ALL_TIME_SCORER[activeTeam.name];
+    teamCards.push({ answerLabel:'All-Time Scorer', answer:r.name + ' (' + r.stat + ')', cat:'history' });
+  }
+  teamCards.forEach(tc => pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, tag:'TEAM', ...tc }));
   return pool;
 }
 
@@ -10690,7 +10584,7 @@ function _shuffle(arr) {
 
 // ── Generators ─────────────────────────────────────────────
 
-// 1) Mixed Chaos — all cards from pool, shuffled, biased toward weak cards
+// 1) Mixed Chaos — broad mix, lightly biased toward weak cards, anti-repeat
 function generateMixedRun() {
   const pool = _buildRandPool();
   // Light difficulty weighting: weight = 1 + difficulty * 1.5
@@ -10700,12 +10594,13 @@ function generateMixedRun() {
     for (let i = 0; i < w; i++) weighted.push(card);
   });
   const shuffled = _shuffle(weighted);
-  // Deduplicate by key — take all unique cards (full pool)
+  // Deduplicate by key, take 20
   const seen = new Set();
   const deduped = [];
   for (const c of shuffled) {
     const k = _cardKey(c);
     if (!seen.has(k)) { seen.add(k); deduped.push(c); }
+    if (deduped.length >= 20) break;
   }
   return _antiRepeat(deduped);
 }
@@ -10760,7 +10655,7 @@ function generateDailyRun() {
 
 // ── Generator registry ──────────────────────────────────────
 const RANDOM_GENERATORS = {
-  mixed:     { fn: generateMixedRun,    name: 'Mixed Chaos',       emoji: '🎲', length: 69, color: 'chaos' },
+  mixed:     { fn: generateMixedRun,    name: 'Mixed Chaos',       emoji: '🎲', length: 20, color: 'chaos' },
   weakSpots: { fn: generateWeakSpotsRun, name: 'Weak Spot Trainer', emoji: '🎯', length: 16, color: 'weak'  },
   daily:     { fn: generateDailyRun,    name: 'Daily Challenge',   emoji: '📅', length: 15, color: 'daily' },
 };
@@ -10839,7 +10734,7 @@ function _lpRandRenderCard() {
   const pct = (_randIdx / total) * 100;
   document.getElementById('fcProgressBar').style.width = pct + '%';
 
-  // ── Reset card to front face ────────────────────────────────
+  // ── Reset card to front face (same pattern as loadCard) ────
   isFlipped = false; cardAnswered = false; isFlipping = false;
   const c3d = document.getElementById('card3d');
   c3d.style.transition = 'none';
@@ -10855,27 +10750,31 @@ function _lpRandRenderCard() {
   overlayEl.style.display  = 'none';
   frontTextEl.style.display = '';
 
-  const name  = card.entity;
+  // Build a natural question that bakes the entity name in
+  const name = card.entity;
   const label = card.answerLabel;
   let question;
   if (card.type === 'player') {
     const playerQ = {
+      'Team':        `Which team does <em>${name}</em> play for?`,
       'Position':    `What position does <em>${name}</em> play?`,
-      'Height':      `How tall is <em>${name}</em>?`,
       'Jersey #':    `What is <em>${name}'s</em> jersey number?`,
-      'Past Teams':  `What teams did <em>${name}</em> play for before the ${(typeof _activeTeam !== 'undefined' ? _activeTeam.name.split(' ').pop() : 'Jazz')}?`,
+      'Height':      `How tall is <em>${name}</em>?`,
       'College':     `Where did <em>${name}</em> go to college?`,
-      'Draft Info':  `What were <em>${name}'s</em> draft year, pick, and team?`,
+      'Past Teams':  `What teams did <em>${name}</em> play for before the Jazz?`,
+      'Draft Info':  `When and where was <em>${name}</em> drafted?`,
     };
     question = playerQ[label] || `What is <em>${name}'s</em> ${label}?`;
   } else {
     const teamQ = {
-      'Best Player':              `Who is the best player on the <em>${name}</em>?`,
-      'Starting 5':               `What is the <em>${name}</em> starting lineup?`,
-      'Rotation':                 `What is the <em>${name}</em> 10-player rotation?`,
+      'Conference':               `What conference are the <em>${name}</em> in?`,
+      'Division':                 `What division are the <em>${name}</em> in?`,
+      'Arena':                    `What arena do the <em>${name}</em> play in?`,
       'Head Coach':               `Who is the head coach of the <em>${name}</em>?`,
-      'Coach Since':              `What year did ${(typeof _activeTeam !== 'undefined' ? _activeTeam.coach : 'the head coach')} start coaching the ${(typeof _activeTeam !== 'undefined' ? _activeTeam.name.split(' ').pop() : 'team')}?`,
-      'Coaching Staff':           `Who are the <em>${name}</em> coaching staff?`,
+      'City':                     `What city do the <em>${name}</em> play in?`,
+      'Mascot':                   `What is the <em>${name}</em> mascot?`,
+      'Best Player':              `Who is the best player on the <em>${name}</em>?`,
+      'Coach Since':              `What year did the <em>${name}</em> head coach take over?`,
       'All-Time Rebounds Leader': `Who is the <em>${name}</em> all-time rebounds leader?`,
       'All-Time Assists Leader':  `Who is the <em>${name}</em> all-time assists leader?`,
       'All-Time Scorer':          `Who is the <em>${name}</em> all-time leading scorer?`,
@@ -10885,32 +10784,18 @@ function _lpRandRenderCard() {
 
   frontTextEl.innerHTML = `<div class="rand-front-question">${question}</div>`;
 
-  // ── Back face: always centred in random mode ────────────────
+  // ── Back face: just the answer, big and clean ───────────────
   const backPhotoEl = document.getElementById('backPhoto');
   backPhotoEl.src = '';
   backPhotoEl.style.display = 'none';
-  const backNameEl = document.getElementById('backName');
-  const cardBackEl = document.querySelector('.card-back');
-  document.getElementById('backPos').textContent = '';
-  document.getElementById('backStats').innerHTML = '';
-
-  // Always apply rand-center — overrides all list/alignment modifiers
-  if (cardBackEl) {
-    cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
-    cardBackEl.classList.add('card-back--rand-center');
-  }
-
-  const ans = card.answer;
-  const isHTML = typeof ans === 'string' && ans.startsWith('<');
-  if (isHTML) {
-    backNameEl.className   = 'back-name';
-    backNameEl.style.width = '100%';
-    backNameEl.innerHTML   = ans;
-  } else {
-    backNameEl.className   = 'back-name';
-    backNameEl.style.width = '';
-    backNameEl.innerHTML   = `<div class="rand-back-answer">${ans}</div>`;
-  }
+  const backNameEl  = document.getElementById('backName');
+  const cardBackEl  = document.querySelector('.card-back');
+  backNameEl.className   = 'back-name';
+  backNameEl.style.width = '';
+  backNameEl.innerHTML   = `<div class="rand-back-answer">${card.answer}</div>`;
+  if (cardBackEl) cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
+  document.getElementById('backPos').textContent  = '';
+  document.getElementById('backStats').innerHTML  = '';
 
   // ── Answer buttons: locked until flip ──────────────────────
   const btns = document.getElementById('answerBtns');
@@ -11024,9 +10909,6 @@ function lpRandomRestart() {
 function lpRandomReset() {
   // Clean up random-mode-specific overrides on shared #flashcards elements
   delete document.getElementById('answerBtns').dataset.randMode;
-  // Remove rand-center class so other modes are unaffected
-  const cardBackEl = document.querySelector('.card-back');
-  if (cardBackEl) cardBackEl.classList.remove('card-back--rand-center');
   // Restore elements hidden by startGeneratedMode
   const reverseBtn = document.getElementById('fcReverseBtn');
   if (reverseBtn) reverseBtn.style.display = '';
@@ -11179,22 +11061,8 @@ function fcToggleReverse() {
   _fcReversed = !_fcReversed;
   const btn = document.getElementById('fcReverseBtn');
   if (btn) btn.classList.toggle('active', _fcReversed);
-  // Session-engine modes (player_jersey, player_college, player_draft_info) use
-  // loadSessionCard(); legacy roster-index modes use loadCard().
-  if (_sessionMode && typeof loadSessionCard === 'function') {
-    isFlipped = false;
-    cardAnswered = false;
-    const c3d = document.getElementById('card3d');
-    if (c3d) {
-      c3d.style.transition = 'none';
-      c3d.classList.remove('flipped');
-      void c3d.offsetWidth;
-      c3d.style.transition = '';
-    }
-    loadSessionCard();
-  } else if (typeof loadCard === 'function') {
-    loadCard();
-  }
+  // Reload current card with reversed presentation
+  if (typeof loadCard === 'function') loadCard();
 }
 
 
