@@ -4673,7 +4673,40 @@
   }
   /* ── Team Mastery category card min-height matches LK mode cards ── */
   #lp-team-cat-grid .lp-prog-card {
-    min-height: 90px;
+    padding: 13px 14px;
+    gap: 0;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 13px;
+    min-height: unset;
+  }
+  #lp-team-cat-grid .lp-prog-top {
+    flex: 1; min-width: 0;
+    gap: 12px;
+    align-items: center;
+  }
+  #lp-team-cat-grid .lp-prog-icon {
+    width: 40px; height: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  #lp-team-cat-grid .lp-prog-title {
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+  }
+  #lp-team-cat-grid .lp-prog-desc { display: none; }
+  #lp-team-cat-grid .lp-prog-bar-row { display: none; }
+  #lp-team-cat-grid .lp-prog-tiers { display: none; }
+  #lp-team-cat-grid .lp-prog-fraction-wrap {
+    display: flex; flex-direction: column; align-items: flex-end;
+    flex-shrink: 0; margin-left: 10px; gap: 1px;
+  }
+  #lp-team-cat-grid .lp-prog-fraction {
+    font-size: 10px; font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    white-space: nowrap;
   }
 
   /* ── Team Mastery: diff-stack mobile layout ─── */
@@ -10457,54 +10490,107 @@ let _randGenType  = 'mixed';   // which generator produced this session
 // Returns the full flat pool of all playable random cards.
 // Each card: { prompt, answerLabel, answer, tag, type, entity }
 function _buildRandPool() {
+  // Produces exactly 69 cards matching all 5 Team Mastery categories:
+  //   Roster (3) + Coaches (3) + Player Info (30) + Player Career (30) + Franchise Records (3)
   const pool = [];
   const activeRoster = (typeof _activeRoster !== 'undefined') ? Array.from(_activeRoster) : Array.from(ROSTER);
-  const activeTeam   = (typeof _activeTeam   !== 'undefined') ? _activeTeam : TEST_TEAM;
+  const activeTeam   = (typeof _activeTeam   !== 'undefined') ? _activeTeam   : TEST_TEAM;
+  const activeLineup = (typeof _activeLineup  !== 'undefined') ? _activeLineup  : JAZZ_STARTING_LINEUP;
+
+  // ── PLAYER INFO (30 cards: Position × 10, Height × 10, Jersey × 10) ──────
   activeRoster.filter(p => p && p.name).forEach(p => {
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Team',      answer:activeTeam.name,  tag:'PLAYER', cat:'team'     });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Position',  answer:getPosLabel(p),   tag:'PLAYER', cat:'position' });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Jersey #',  answer:'#'+p.jersey,     tag:'PLAYER', cat:'jersey'   });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Height',    answer:p.height,         tag:'PLAYER', cat:'height'   });
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'College',   answer:p.college,        tag:'PLAYER', cat:'college'  });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Position', answer:getPosLabel(p), tag:'PLAYER', cat:'info' });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Height',   answer:p.height,       tag:'PLAYER', cat:'info' });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Jersey #', answer:'#'+p.jersey,   tag:'PLAYER', cat:'info' });
   });
-  // Player Career cards for all TM modes
+
+  // ── PLAYER CAREER (30 cards: Past Teams × 10, College × 10, Draft Info × 10) ──
   activeRoster.filter(p => p && p.name).forEach(p => {
     const hasPast = Array.isArray(p.past_teams) && p.past_teams.length > 0;
     const pastAns = hasPast ? p.past_teams.map(t => t.team).join(', ') : 'None';
-    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Past Teams', answer:pastAns, tag:'PLAYER', cat:'past_teams' });
-    if (p.draft_year) {
-      const draftAns = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
-        ? 'Undrafted' : p.draft_year + ' · ' + p.draft_pick + ' · ' + getDraftTeamNickname(p.draft_team);
-      pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Draft Info', answer:draftAns, tag:'PLAYER', cat:'draft' });
-    }
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Past Teams', answer:pastAns,    tag:'PLAYER', cat:'players' });
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'College',    answer:p.college,  tag:'PLAYER', cat:'players' });
+    const draftAns = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted' || !p.draft_year)
+      ? 'Undrafted'
+      : p.draft_year + ' · ' + p.draft_pick + ' · ' + getDraftTeamNickname(p.draft_team);
+    pool.push({ type:'player', entity:p.name, prompt:p.name, answerLabel:'Draft Info', answer:draftAns, tag:'PLAYER', cat:'players' });
   });
-  // Team-level cards from all TM categories
-  const lineupVals = Object.values(_activeLineup || {});
-  const bestPlayer = lineupVals[2] || lineupVals[0] || 'N/A';
-  const teamCards = [
-    { answerLabel:'Conference', answer:activeTeam.conference, cat:'teamfact' },
-    { answerLabel:'Division',   answer:activeTeam.division,   cat:'teamfact' },
-    { answerLabel:'Arena',      answer:activeTeam.arena,      cat:'teamfact' },
-    { answerLabel:'Head Coach', answer:activeTeam.coach,      cat:'coaches' },
-    { answerLabel:'City',       answer:activeTeam.city,       cat:'teamfact' },
-    { answerLabel:'Mascot',     answer:activeTeam.mascot,     cat:'teamfact' },
-    { answerLabel:'Best Player', answer:bestPlayer,           cat:'roster' },
-    { answerLabel:'Coach Since', answer:activeTeam.coachSince || 'N/A', cat:'coaches' },
-  ];
-  // Franchise Records
+
+  // ── ROSTER (3 cards: Best Player, Starting 5, Team Rotation) ─────────────
+  const lineupVals = Object.values(activeLineup);
+  const bestPlayer = (typeof TEAM_BEST_PLAYER !== 'undefined' && TEAM_BEST_PLAYER[activeTeam.name])
+    ? TEAM_BEST_PLAYER[activeTeam.name]
+    : lineupVals[0] || 'N/A';
+
+  // Starting 5 — formatted as top10-list style answer
+  const posOrder = ['PG','SG','SF','PF','C'];
+  const starting5Rows = posOrder.map(slot => {
+    const name = activeLineup[slot] || '—';
+    return '<div class="top10-row"><span class="top10-pos">' + slot + '</span><span class="top10-player">' + name + '</span></div>';
+  }).join('');
+  const starting5Ans = '<div class="top10-list"><div class="top10-section-label">Starting 5</div>' + starting5Rows + '</div>';
+
+  // Team Rotation — starters + bench
+  const rotationData = (activeTeam.name === 'Utah Jazz') ? (typeof JAZZ_ROTATION !== 'undefined' ? JAZZ_ROTATION : null)
+    : (activeTeam.name === 'Dallas Mavericks') ? (typeof MAVS_ROTATION !== 'undefined' ? MAVS_ROTATION : null)
+    : null;
+  let rotationAns;
+  if (rotationData) {
+    const makeRows = (players) => players.map(p =>
+      '<div class="top10-row"><span class="top10-pos">' + p.pos + '</span><span class="top10-player">' + p.name + '</span></div>'
+    ).join('');
+    rotationAns = '<div class="top10-list">' +
+      '<div class="top10-section-label">Starters</div>' + makeRows(rotationData.starters) +
+      '<div class="top10-section-label">Bench</div>'   + makeRows(rotationData.bench) +
+      '</div>';
+  } else {
+    rotationAns = starting5Ans; // fallback for teams without rotation data
+  }
+
+  pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, answerLabel:'Best Player',  answer:bestPlayer,    tag:'TEAM', cat:'roster', hint:'roster' });
+  pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, answerLabel:'Starting 5',   answer:starting5Ans,  tag:'TEAM', cat:'roster', hint:'__LINEUP__' });
+  pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, answerLabel:'Team Rotation', answer:rotationAns,  tag:'TEAM', cat:'roster', hint:'__LINEUP__' });
+
+  // ── COACHES (3 cards: Head Coach, Coach Since, Coaching Staff) ────────────
+  let staffAns = activeTeam.coach;
+  if (typeof TEAM_COACHING_STAFF !== 'undefined' && TEAM_COACHING_STAFF[activeTeam.name]) {
+    const staff = TEAM_COACHING_STAFF[activeTeam.name];
+    const headLabel = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Head Coach</span>';
+    const headRow   = '<div class="back-career-entry"><span class="back-career-team" style="font-size:20px;font-weight:600;">' + staff.head + '</span></div>';
+    const assistLbl = '<span class="back-career-dur" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;margin-bottom:2px;">Assistants</span>';
+    const assistRows = staff.assistants.map(a =>
+      '<div class="back-career-entry"><span class="back-career-team" style="font-size:18px;font-weight:500;">' + a + '</span></div>'
+    ).join('');
+    staffAns = '<div class="back-career-block" style="gap:6px;">' + headLabel + headRow + assistLbl + assistRows + '</div>';
+  }
+  const coachPrev = activeTeam.coachPrevTeam;
+  let coachPrevAns;
+  if (!coachPrev || coachPrev === 'None' || (coachPrev.team && coachPrev.team === 'None')) {
+    coachPrevAns = 'First NBA HC job';
+  } else if (typeof coachPrev === 'object' && coachPrev.team) {
+    coachPrevAns = coachPrev.team + ' (' + coachPrev.role + ')';
+  } else {
+    coachPrevAns = String(coachPrev);
+  }
+
+  pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.coach || activeTeam.name, answerLabel:'Head Coach',      answer:activeTeam.coach,             tag:'TEAM', cat:'coaches' });
+  pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.coach || activeTeam.name, answerLabel:'Coach Since',      answer:activeTeam.coachSince || 'N/A', tag:'TEAM', cat:'coaches' });
+  pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name,                     answerLabel:'Coaching Staff',   answer:staffAns,                     tag:'TEAM', cat:'coaches' });
+
+  // ── FRANCHISE RECORDS (3 cards) ───────────────────────────────────────────
   if (typeof TEAM_ALL_TIME_REBOUNDS_LEADER !== 'undefined' && TEAM_ALL_TIME_REBOUNDS_LEADER[activeTeam.name]) {
     const r = TEAM_ALL_TIME_REBOUNDS_LEADER[activeTeam.name];
-    teamCards.push({ answerLabel:'All-Time Rebounds Leader', answer:r.name + ' (' + r.stat + ')', cat:'history' });
+    pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, answerLabel:'All-Time Rebounds Leader', answer:r.name + ' (' + r.stat + ')', tag:'TEAM', cat:'history' });
   }
   if (typeof TEAM_ALL_TIME_ASSISTS !== 'undefined' && TEAM_ALL_TIME_ASSISTS[activeTeam.name]) {
     const r = TEAM_ALL_TIME_ASSISTS[activeTeam.name];
-    teamCards.push({ answerLabel:'All-Time Assists Leader', answer:r.name + ' (' + r.stat + ')', cat:'history' });
+    pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, answerLabel:'All-Time Assists Leader', answer:r.name + ' (' + r.stat + ')', tag:'TEAM', cat:'history' });
   }
   if (typeof TEAM_ALL_TIME_SCORER !== 'undefined' && TEAM_ALL_TIME_SCORER[activeTeam.name]) {
     const r = TEAM_ALL_TIME_SCORER[activeTeam.name];
-    teamCards.push({ answerLabel:'All-Time Scorer', answer:r.name + ' (' + r.stat + ')', cat:'history' });
+    pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, answerLabel:'All-Time Scorer', answer:r.name + ' (' + r.stat + ')', tag:'TEAM', cat:'history' });
   }
-  teamCards.forEach(tc => pool.push({ type:'team', entity:activeTeam.name, prompt:activeTeam.name, tag:'TEAM', ...tc }));
+
   return pool;
 }
 
@@ -10773,7 +10859,7 @@ function _lpRandRenderCard() {
       'Height':      `How tall is <em>${name}</em>?`,
       'College':     `Where did <em>${name}</em> go to college?`,
       'Past Teams':  `What teams did <em>${name}</em> play for before the Jazz?`,
-      'Draft Info':  `When and where was <em>${name}</em> drafted?`,
+      'Draft Info':  `What were <em>${name}'s</em> draft year, pick, and team?`,
     };
     question = playerQ[label] || `What is <em>${name}'s</em> ${label}?`;
   } else {
@@ -10789,6 +10875,9 @@ function _lpRandRenderCard() {
       'All-Time Rebounds Leader': `Who is the <em>${name}</em> all-time rebounds leader?`,
       'All-Time Assists Leader':  `Who is the <em>${name}</em> all-time assists leader?`,
       'All-Time Scorer':          `Who is the <em>${name}</em> all-time leading scorer?`,
+      'Starting 5':               `What is the <em>${name}</em> starting lineup?`,
+      'Team Rotation':            `What is the <em>${name}</em> 10-player rotation?`,
+      'Coaching Staff':           `Who are the <em>${name}</em> coaching staff?`,
     };
     question = teamQ[label] || `What is the <em>${name}</em> ${label}?`;
   }
@@ -10801,12 +10890,26 @@ function _lpRandRenderCard() {
   backPhotoEl.style.display = 'none';
   const backNameEl  = document.getElementById('backName');
   const cardBackEl  = document.querySelector('.card-back');
-  backNameEl.className   = 'back-name';
-  backNameEl.style.width = '';
-  backNameEl.innerHTML   = `<div class="rand-back-answer">${card.answer}</div>`;
-  if (cardBackEl) cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10');
   document.getElementById('backPos').textContent  = '';
   document.getElementById('backStats').innerHTML  = '';
+
+  // Lineup/rotation cards use top10 centered layout; everything else uses rand-center
+  if (cardBackEl) {
+    cardBackEl.classList.remove('card-back--list','card-back--centered-list','card-back--draft','card-back--top10','card-back--rand-center');
+    if (card.hint === '__LINEUP__') {
+      cardBackEl.classList.add('card-back--top10');
+      backNameEl.className   = 'back-name';
+      backNameEl.style.width = '100%';
+      backNameEl.innerHTML   = card.answer;
+    } else {
+      cardBackEl.classList.add('card-back--rand-center');
+      backNameEl.className   = 'back-name';
+      backNameEl.style.width = '';
+      // Use career-block HTML for coaching staff / complex HTML answers
+      const isHTML = typeof card.answer === 'string' && card.answer.startsWith('<');
+      backNameEl.innerHTML = isHTML ? card.answer : `<div class="rand-back-answer">${card.answer}</div>`;
+    }
+  }
 
   // ── Answer buttons: locked until flip ──────────────────────
   const btns = document.getElementById('answerBtns');
