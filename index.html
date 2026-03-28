@@ -3282,15 +3282,16 @@
   .lp-cat-card--random .lp-cat-icon { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.2); }
   .lp-cat-card--random .lp-cat-badge { background: rgba(34,197,94,0.08); color: rgba(34,197,94,0.7); border-color: rgba(34,197,94,0.15); }
 
-  /* Team mastery random card — boosted green glow to stand out */
+  /* Team mastery random card — full card glow to stand out */
   #lp-team-cat-grid .lp-prog-card--mixed {
-    border-color: rgba(34,197,94,0.52) !important;
-    box-shadow: 0 0 18px rgba(34,197,94,0.2), 0 3px 16px rgba(0,0,0,0.38) !important;
+    border-color: rgba(34,197,94,0.55) !important;
+    background: linear-gradient(135deg, rgba(34,197,94,0.14) 0%, rgba(16,185,129,0.08) 50%, rgba(10,10,18,0.98) 100%) !important;
+    box-shadow: 0 0 28px rgba(34,197,94,0.3), 0 4px 20px rgba(0,0,0,0.45) !important;
   }
   #lp-team-cat-grid .lp-prog-card--mixed .lp-prog-icon {
-    background: rgba(34,197,94,0.18) !important;
-    border-color: rgba(34,197,94,0.35) !important;
-    box-shadow: 0 0 10px rgba(34,197,94,0.3) !important;
+    background: rgba(34,197,94,0.22) !important;
+    border-color: rgba(34,197,94,0.4) !important;
+    box-shadow: 0 0 12px rgba(34,197,94,0.35) !important;
   }
 
   /* Current category — purple glow */
@@ -4689,12 +4690,13 @@
   .lp-lk-modecard--magenta:hover::before { opacity: 1; }
 
   .lp-lk-modecard--mixed  {
-    border-color: rgba(34,197,94,0.52);
-    box-shadow: 0 0 22px rgba(34,197,94,0.22), 0 3px 18px rgba(0,0,0,0.45);
-    background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(16,185,129,0.06) 40%, rgba(10,10,18,0.99) 100%);
+    border-color: rgba(34,197,94,0.55);
+    box-shadow: 0 0 32px rgba(34,197,94,0.32), 0 4px 20px rgba(0,0,0,0.45);
+    background: linear-gradient(135deg, rgba(34,197,94,0.14) 0%, rgba(16,185,129,0.08) 40%, rgba(10,10,18,0.99) 100%);
+    margin-top: 10px;
   }
-  .lp-lk-modecard--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.2), transparent 60%); }
-  .lp-lk-modecard--mixed:hover    { border-color: rgba(34,197,94,0.82); box-shadow: 0 14px 40px rgba(34,197,94,0.28), 0 0 28px rgba(34,197,94,0.22); transform: translateY(-4px); }
+  .lp-lk-modecard--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.22), transparent 60%); }
+  .lp-lk-modecard--mixed:hover    { border-color: rgba(34,197,94,0.85); box-shadow: 0 0 42px rgba(34,197,94,0.42), 0 14px 40px rgba(0,0,0,0.5); transform: translateY(-4px); }
   .lp-lk-modecard--mixed:hover::before  { opacity: 1; }
   .lp-lk-modecard-left {
     display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
@@ -5909,27 +5911,27 @@
 
       <div class="lp-prog-grid" id="lp-team-cat-grid">
         <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-roster" onclick="lpSelectTeamCat('roster')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">👥</div><div class="lp-prog-body"><div class="lp-prog-title">👥 Roster</div></div></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">👥</div><div class="lp-prog-body"><div class="lp-prog-title">Roster</div></div></div>
           <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--coaches" id="lp-tcat-coaches" onclick="lpSelectTeamCat('coaches')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">👔</div><div class="lp-prog-body"><div class="lp-prog-title">👔 Coaches</div></div></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">👔</div><div class="lp-prog-body"><div class="lp-prog-title">Coaches</div></div></div>
           <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--info" id="lp-tcat-info" onclick="lpSelectTeamCat('info')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">📊</div><div class="lp-prog-body"><div class="lp-prog-title">📊 Player Info</div></div></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">📊</div><div class="lp-prog-body"><div class="lp-prog-title">Player Info</div></div></div>
           <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--players" id="lp-tcat-players" onclick="lpSelectTeamCat('players')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🏀</div><div class="lp-prog-body"><div class="lp-prog-title">🏀 Player Career</div></div></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🏀</div><div class="lp-prog-body"><div class="lp-prog-title">Player Career</div></div></div>
           <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--history" id="lp-tcat-history" onclick="lpSelectTeamCat('history')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🏛</div><div class="lp-prog-body"><div class="lp-prog-title">🏛 Franchise Records</div></div></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🏛</div><div class="lp-prog-body"><div class="lp-prog-title">Franchise Records</div></div></div>
           <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
         </div>
-        <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="startGeneratedMode('mixed','team')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title" style="color:rgb(134,239,172);text-shadow:0 0 10px rgba(34,197,94,0.5);letter-spacing:2px;">🎲 Random</div></div></div>
+        <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="startGeneratedMode('mixed','team')" style="margin-top:10px;">
+          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title" style="color:rgb(134,239,172);letter-spacing:2px;">Random</div></div></div>
           <span class="lp-prog-fraction" style="color:rgb(134,239,172);opacity:0.9;">All modes <span style="opacity:0.5;margin:0 2px;">·</span> <span>69 cards</span></span>
         </div>
       </div>
