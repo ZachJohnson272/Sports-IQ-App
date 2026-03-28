@@ -7678,6 +7678,7 @@ function buildPlayerToCountryHometownDeck(roster) {
 function buildPlayerToPastTeamsDeck(roster) {
   return roster.filter(p => p && p.name).map(p => {
     const hasPastTeams = Array.isArray(p.past_teams) && p.past_teams.length > 0;
+    const currentTeam = (typeof _activeTeam !== 'undefined') ? _activeTeam.name : 'Utah Jazz';
     const answer = hasPastTeams
       ? '<div class="back-career-block">' + p.past_teams.map(t =>
           '<div class="back-career-entry">' +
@@ -7687,7 +7688,7 @@ function buildPlayerToPastTeamsDeck(roster) {
         ).join('') + '</div>'
       : '<div class="back-career-block">' +
           '<div class="back-career-entry">' +
-            '<span class="back-career-team">Utah Jazz</span>' +
+            '<span class="back-career-team">' + currentTeam + '</span>' +
             '<span class="back-career-dur">No previous NBA teams</span>' +
           '</div>' +
         '</div>';
@@ -10803,7 +10804,7 @@ function _lpRandRenderCard() {
       'Position':    `What position does <em>${name}</em> play?`,
       'Height':      `How tall is <em>${name}</em>?`,
       'Jersey #':    `What is <em>${name}'s</em> jersey number?`,
-      'Past Teams':  `What teams did <em>${name}</em> play for before the Jazz?`,
+      'Past Teams':  `What teams did <em>${name}</em> play for before the ${(typeof _activeTeam !== 'undefined' ? _activeTeam.name.split(' ').pop() : 'Jazz')}?`,
       'College':     `Where did <em>${name}</em> go to college?`,
       'Draft Info':  `What were <em>${name}'s</em> draft year, pick, and team?`,
     };
