@@ -3136,9 +3136,13 @@
   .lp-prog-card--history:hover  { border-color: rgba(250,204,21,0.52); box-shadow: 0 12px 34px rgba(250,204,21,0.14); }
   .lp-prog-card--history:hover::before  { opacity: 1; }
 
-  .lp-prog-card--mixed  { border-color: rgba(34,197,94,0.22); }
-  .lp-prog-card--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.1), transparent 65%); }
-  .lp-prog-card--mixed:hover  { border-color: rgba(34,197,94,0.58); box-shadow: 0 12px 34px rgba(34,197,94,0.2); }
+  .lp-prog-card--mixed  {
+    border-color: rgba(34,197,94,0.72);
+    background: linear-gradient(135deg, rgba(34,197,94,0.22) 0%, rgba(16,185,129,0.12) 50%, rgba(10,10,18,0.99) 100%) !important;
+    box-shadow: 0 0 28px rgba(34,197,94,0.35), inset 0 1px 0 rgba(34,197,94,0.2);
+  }
+  .lp-prog-card--mixed::before  { background: radial-gradient(ellipse at top left, rgba(34,197,94,0.22), transparent 65%); opacity: 0.8; }
+  .lp-prog-card--mixed:hover  { border-color: rgba(34,197,94,0.85); box-shadow: 0 12px 34px rgba(34,197,94,0.4), 0 0 40px rgba(34,197,94,0.25); }
   .lp-prog-card--mixed:hover::before  { opacity: 1; }
 
   /* Top row: icon + title/desc */
@@ -3515,81 +3519,39 @@
   }
 
   /* ===================== LEADERBOARD PAGE ===================== */
-  #leaderboardPage .nav-content { width: 100%; max-width: 390px; padding: 12px 14px; }
+  #leaderboardPage .nav-content { width: 100%; max-width: 390px; padding: 16px 20px; }
   .lb-tabs {
     display: flex;
-    gap: 6px;
-    margin-bottom: 20px;
-    background: rgba(13,10,22,0.7);
-    border: 1px solid rgba(107,63,160,0.25);
-    border-radius: 14px;
-    padding: 5px;
+    gap: 8px;
+    margin-bottom: 18px;
   }
   .lb-tab {
     flex: 1;
-    background: transparent;
-    border: none;
+    background: var(--surface2);
+    border: 1px solid transparent;
     border-radius: 10px;
-    padding: 9px 6px;
+    padding: 8px;
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
     font-weight: 600;
     color: var(--muted);
     cursor: pointer;
-    transition: all 0.18s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    transition: all 0.15s;
   }
-  .lb-tab.active {
-    background: rgba(107,63,160,0.35);
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
+  .lb-tab.active { background: rgba(107,63,160,0.25); border-color: var(--jazz-purple); color: #fff; }
   .lb-row {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
+    gap: 12px;
+    padding: 12px 14px;
     background: var(--surface);
-    border: 1px solid rgba(107,63,160,0.18);
-    border-radius: 16px;
-    margin-bottom: 10px;
+    border: 1px solid rgba(107,63,160,0.2);
+    border-radius: 12px;
+    margin-bottom: 8px;
     animation: fadeUp 0.3s ease both;
     transition: all 0.15s;
-    position: relative;
-    overflow: hidden;
   }
-  .lb-row::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at left, rgba(107,63,160,0.06), transparent 60%);
-    pointer-events: none;
-  }
-  .lb-row.me {
-    border-color: rgba(107,63,160,0.6);
-    background: rgba(107,63,160,0.12);
-    box-shadow: 0 0 0 1px rgba(107,63,160,0.15), 0 4px 18px rgba(107,63,160,0.15);
-  }
-  .lb-row.me::before {
-    background: radial-gradient(ellipse at left, rgba(107,63,160,0.18), transparent 60%);
-  }
-  .lb-rank-wrap {
-    width: 36px;
-    text-align: center;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .lb-rank-medal { font-size: 26px; line-height: 1; }
-  .lb-rank-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    color: var(--muted);
-    line-height: 1;
-  }
+  .lb-row.me { border-color: var(--jazz-purple); background: rgba(107,63,160,0.15); }
   .lb-rank {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
@@ -3602,45 +3564,29 @@
   .lb-rank.silver { color: #c0c0c0; }
   .lb-rank.bronze { color: #cd7f32; }
   .lb-avatar {
-    width: 44px; height: 44px;
+    width: 38px; height: 38px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
+    font-size: 18px;
     flex-shrink: 0;
-    background: rgba(107,63,160,0.2);
-    border: 2px solid rgba(107,63,160,0.3);
   }
-  .lb-avatar.me-avatar {
-    background: linear-gradient(135deg, rgba(107,63,160,0.5), rgba(91,184,212,0.3));
-    border-color: rgba(107,63,160,0.6);
-    box-shadow: 0 0 10px rgba(107,63,160,0.3);
-  }
-  .lb-info { flex: 1; min-width: 0; }
-  .lb-name {
-    font-weight: 700;
-    font-size: 15px;
-    color: #fff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .lb-xp-label { font-size: 11px; color: var(--muted); margin-top: 2px; letter-spacing: 0.3px; }
+  .lb-info { flex: 1; }
+  .lb-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .lb-xp-label { font-size: 11px; color: var(--muted); margin-top: 1px; }
   .lb-xp-val {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     color: #f5c842;
     letter-spacing: 1px;
-    flex-shrink: 0;
-    text-shadow: 0 0 12px rgba(245,200,66,0.3);
   }
   .lb-coming {
     text-align: center;
-    padding: 48px 20px;
+    padding: 32px 20px;
     color: var(--muted);
     font-size: 14px;
   }
-  .lb-coming-icon { font-size: 48px; margin-bottom: 14px; }
-  .lb-coming-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: #fff; margin-bottom: 8px; }
+  .lb-coming-icon { font-size: 40px; margin-bottom: 12px; }
+  .lb-coming-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
 
   /* ===================== PROGRESS PAGE — REDESIGN ===================== */
   #progressPage .nav-content { width: 100%; max-width: 390px; padding: 14px 20px 32px; }
@@ -4725,6 +4671,11 @@
     font-size: 9px; font-weight: 800; letter-spacing: 2px;
     color: rgba(164,122,252,0.6); text-transform: uppercase;
   }
+  /* ── Team Mastery category card min-height matches LK mode cards ── */
+  #lp-team-cat-grid .lp-prog-card {
+    min-height: 90px;
+  }
+
   /* ── Team Mastery: diff-stack mobile layout ─── */
   .lp-tm-diff-stack { display: flex; flex-direction: column; gap: 10px; }
 
@@ -5584,7 +5535,7 @@
           <div class="lp-lk-modecard-left">
             <div class="lp-lk-modecard-icon">🎲</div>
             <div class="lp-lk-modecard-info">
-              <div class="lp-lk-modecard-name">Mixed Mode</div>
+              <div class="lp-lk-modecard-name">Random Mode</div>
               <div class="lp-lk-modecard-desc">All modes shuffled into one chaos run</div>
             </div>
           </div>
@@ -5623,15 +5574,13 @@
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Utah Jazz</div>
                 <div class="lp-ct-sub">10 players · Active</div>
-                <div class="lp-mastery-pct" id="lp-mastery-jazz-pct">0%</div>
-                <div class="lp-mastery-bar-wrap"><div class="lp-mastery-bar-fill" id="lp-mastery-jazz-fill" style="width:0%"></div></div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('mavs','Dallas Mavericks','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Dallas Mavericks</div>
-                <div class="lp-ct-sub">19 players · Active</div>
+                <div class="lp-ct-sub">10 players · Active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -5910,10 +5859,14 @@
           <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--history" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span></div>
           <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
         </div>
+        <div class="lp-lk-featured-divider" style="margin: 14px 0 6px;">
+          <span class="lp-lk-featured-divider-line"></span>
+          <span class="lp-lk-featured-divider-label">FEATURED</span>
+          <span class="lp-lk-featured-divider-line"></span>
+        </div>
         <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="startGeneratedMode('mixed','team')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title">🎲 Random/Mixed</div><div class="lp-prog-desc">Mixed flashcard sessions from all Team Mastery modes</div></div></div>
-          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--mixed" style="width:0%"></div></div><span class="lp-prog-fraction">All modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">69 cards</span></span></div>
-          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">All Tiers</span></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title" style="color:rgb(134,239,172);letter-spacing:2px;">Random Mode</div><div class="lp-prog-desc" style="color:rgba(134,239,172,0.6);">All categories shuffled · 69 cards</div></div></div>
+          <span class="lp-prog-fraction" style="color:rgb(134,239,172);opacity:0.9;">All modes <span style="opacity:0.5;margin:0 2px;">·</span> <span>69 cards</span></span>
         </div>
       </div>
 
@@ -7793,7 +7746,7 @@ function buildTeamToRosterDeck(team, roster) {
       '<div class="top10-section-label">Bench</div>' +
       makeRows(JAZZ_ROTATION.bench) +
     '</div>';
-  return [makeCard(team.name, answer, "What is the Jazz team rotation?")];
+  return [makeCard(team.name, answer, '__LINEUP__')];
 }
 const TEAM_COACHING_STAFF = {
   "Utah Jazz": {
@@ -8043,14 +7996,13 @@ function buildTeamToStarting5Deck(team) {
   const posOrder = ['PG','SG','SF','PF','C'];
   const rows = posOrder.map(slot => {
     const name = _activeLineup[slot] || '—';
-    return '<div class="back-career-entry">' +
-      '<span class="back-career-team" style="font-size:15px;font-weight:500;">' +
-        '<span style="color:rgba(180,144,255,0.8);font-size:12px;letter-spacing:1px;margin-right:8px;">' + slot + '</span>' +
-        name +
-      '</span></div>';
+    return '<div class="top10-row">' +
+      '<span class="top10-pos">' + slot + '</span>' +
+      '<span class="top10-player">' + name + '</span>' +
+    '</div>';
   }).join('');
   const front = team.name;
-  const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
+  const answer = '<div class="top10-list"><div class="top10-section-label">Starting 5</div>' + rows + '</div>';
   return [makeCard(front, answer, '__LINEUP__')];
 }
 function buildLeagueTeamToStarting5Deck() {
@@ -8599,7 +8551,7 @@ function buildPlayerToDraftInfoDeck(roster) {
     const answer = (p.draft_pick === 'Undrafted' || p.draft_team === 'Undrafted')
       ? 'Undrafted'
       : p.draft_year + ' · ' + p.draft_pick + ' · ' + getDraftTeamNickname(p.draft_team);
-    return makeCard(p.name, answer, "What are this player's draft year, pick, and drafting team?");
+    return makeCard(p.name, answer, "What were " + p.name + "'s draft year, pick, and team?");
   });
 }
 // ── End new Team Mastery builder functions ────────────────────────────────────
@@ -8718,7 +8670,7 @@ const SESSION_MODE_TITLES = {
   league_player_team:     'Player → Team',
   league_player_position: 'Player → Position',
   league_starter_player_team: 'Player → Team',
-  league_mixed:               'Mixed Mode',
+  league_mixed:               'Random Mode',
   league_team_city:         'Team → City',
   league_team_conference:     'Team → Conference',
   league_team_division:       'Team → Division',
@@ -11152,10 +11104,10 @@ function lbRender(type) {
     return;
   }
   const totalXp = xpGetTotal();
-  const myUsername = localStorage.getItem('siq_username') || 'You';
   let rows = JSON.parse(JSON.stringify(LB_GLOBAL));
+  // inject real XP for "YOU"
   rows = rows.map(r => {
-    if (r.isMe) { r.xp = totalXp; r.name = myUsername; }
+    if (r.isMe) r.xp = totalXp;
     if (r.belowMe) r.xp = Math.max(0, totalXp - Math.floor(Math.random()*80+20));
     return r;
   });
@@ -11163,20 +11115,17 @@ function lbRender(type) {
     rows = rows.map(r => ({ ...r, xp: Math.floor(r.xp * 0.15) }));
   }
   rows.sort((a,b) => b.xp - a.xp);
+  const rankClasses = ['gold','silver','bronze'];
   const rankEmojis = ['🥇','🥈','🥉'];
-  const periodLabel = type === 'weekly' ? 'This week' : 'All time';
-  el.innerHTML = rows.map((r, i) => {
-    const isTop3 = i < 3;
-    const rankDisplay = isTop3
-      ? `<span class="lb-rank-medal">${rankEmojis[i]}</span>`
-      : `<span class="lb-rank-num">${i + 1}</span>`;
-    const avatarClass = r.isMe ? 'lb-avatar me-avatar' : 'lb-avatar';
-    return `<div class="lb-row ${r.isMe ? 'me' : ''}">
-      <div class="lb-rank-wrap">${rankDisplay}</div>
-      <div class="${avatarClass}">${r.icon}</div>
+  el.innerHTML = rows.map((r,i) => {
+    const rClass = rankClasses[i] || '';
+    const rankDisplay = i < 3 ? rankEmojis[i] : (i+1);
+    return `<div class="lb-row ${r.isMe?'me':''}">
+      <div class="lb-rank ${rClass}">${rankDisplay}</div>
+      <div class="lb-avatar" style="background:rgba(107,63,160,0.2)">${r.icon}</div>
       <div class="lb-info">
-        <div class="lb-name">${r.isMe ? myUsername : r.name}</div>
-        <div class="lb-xp-label">${periodLabel}</div>
+        <div class="lb-name">${r.isMe ? 'You' : r.name}</div>
+        <div class="lb-xp-label">${type==='weekly'?'This week':'All time'}</div>
       </div>
       <div class="lb-xp-val">${r.xp.toLocaleString()} XP</div>
     </div>`;
