@@ -1203,16 +1203,45 @@
     color: #fff; margin: 0;
   }
   .round-complete p  { color: var(--muted); font-size: 14px; margin: 0; }
+  .rc-accuracy-hero {
+    width: 100%;
+    background: linear-gradient(160deg, rgba(28,20,48,0.95) 0%, rgba(16,18,28,0.98) 100%);
+    border: 1px solid rgba(107,63,160,0.35);
+    border-radius: 16px;
+    padding: 20px 16px 18px;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    position: relative; overflow: hidden;
+  }
+  .rc-accuracy-hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--jazz-purple), var(--jazz-sky));
+  }
+  .rc-accuracy-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top, rgba(107,63,160,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .rc-accuracy-icon { font-size: 28px; line-height: 1; position: relative; z-index: 1; }
+  .rc-accuracy-val {
+    font-family: 'Bebas Neue', sans-serif; font-size: 56px;
+    color: #fff; line-height: 1; letter-spacing: 2px;
+    position: relative; z-index: 1;
+  }
+  .rc-accuracy-lbl {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: var(--muted); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
   .rc-stats-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
     width: 100%;
   }
   .rc-stat--incorrect .rc-stat-val { color: #e05555; }
   .rc-stat {
     background: linear-gradient(160deg, rgba(28,20,48,0.95) 0%, rgba(16,18,28,0.98) 100%);
-    border: 1px solid rgba(107,63,160,0.28); border-radius: 14px;
-    padding: 14px 10px 12px;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    border: 1px solid rgba(107,63,160,0.28); border-radius: 12px;
+    padding: 12px 8px 10px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
     position: relative; overflow: hidden;
   }
   .rc-stat::before {
@@ -1220,9 +1249,9 @@
     background: radial-gradient(circle at top, rgba(107,63,160,0.1), transparent 70%);
     pointer-events: none;
   }
-  .rc-stat-icon { font-size: 18px; line-height: 1; }
+  .rc-stat-icon { font-size: 16px; line-height: 1; }
   .rc-stat-val {
-    font-family: 'Bebas Neue', sans-serif; font-size: 26px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px;
     color: #fff; line-height: 1;
   }
   .rc-stat-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
@@ -5269,6 +5298,11 @@
     <div class="round-complete" id="roundComplete">
       <div class="trophy" id="rcTrophy">🏆</div>
       <h2 id="rcTitle">Round Complete!</h2>
+      <div class="rc-accuracy-hero">
+        <div class="rc-accuracy-icon">🎯</div>
+        <div class="rc-accuracy-val" id="rcAccuracy">0%</div>
+        <div class="rc-accuracy-lbl">Accuracy</div>
+      </div>
       <div class="rc-stats-grid">
         <div class="rc-stat rc-stat--correct">
           <div class="rc-stat-icon">✅</div>
@@ -5279,11 +5313,6 @@
           <div class="rc-stat-icon">❌</div>
           <div class="rc-stat-val" id="rcIncorrect">0</div>
           <div class="rc-stat-lbl">Incorrect</div>
-        </div>
-        <div class="rc-stat">
-          <div class="rc-stat-icon">🎯</div>
-          <div class="rc-stat-val" id="rcAccuracy">0%</div>
-          <div class="rc-stat-lbl">Accuracy</div>
         </div>
         <div class="rc-stat rc-stat--streak">
           <div class="rc-stat-icon">🔥</div>
