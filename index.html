@@ -5856,10 +5856,7 @@
         <div class="lp-team-info-panel" id="lp-team-info-panel">
           <div class="lp-tip-top-row">
             <div class="lp-tip-name" id="lp-tip-name">Utah Jazz</div>
-            <div class="lp-tip-right">
-              <div class="lp-tip-mastery-pct" id="lp-ts-pct">0%</div>
-              <div class="lp-tip-mastery-lbl">Mastery</div>
-            </div>
+
           </div>
           <div class="lp-tip-inner-divider"></div>
           <div class="lp-tip-snap-grid" id="lp-team-inforow">
@@ -8814,7 +8811,17 @@ function loadSessionCard() {
   frontTextEl.style.display = '';
 
   // Show hint or generic label
-  const hint = _fcReversed ? (card.hint || 'Who is this?') : (card.hint || 'What is the answer?');
+  let hint;
+  if (_fcReversed) {
+    const reverseHints = {
+      player_jersey:     'Which player wears this jersey number?',
+      player_college:    'Which player went to this college?',
+      player_draft_info: 'Which player has this draft info?',
+    };
+    hint = reverseHints[_sessionMode] || 'Which player is this?';
+  } else {
+    hint = card.hint || 'What is the answer?';
+  }
   const displayFront = _fcReversed ? card.back  : card.front;
   const displayBack  = _fcReversed ? card.front : card.back;
 
@@ -11180,8 +11187,25 @@ function fcToggleReverse() {
   _fcReversed = !_fcReversed;
   const btn = document.getElementById('fcReverseBtn');
   if (btn) btn.classList.toggle('active', _fcReversed);
-  // Reload current card with reversed presentation
-  if (typeof loadCard === 'function') loadCard();
+  // Reset flip state so the new front face shows correctly
+  isFlipped = false;
+  cardAnswered = false;
+  const c3d = document.getElementById('card3d');
+  if (c3d) {
+    c3d.style.transition = 'none';
+    c3d.classList.remove('flipped');
+    void c3d.offsetWidth;
+    c3d.style.transition = '';
+  }
+  // Lock answer buttons again since we're back on the front
+  const btns = document.getElementById('answerBtns');
+  if (btns) btns.classList.add('answer-btns-hidden', 'answer-btns-locked');
+  // Route to correct loader: session engine for deck-builder modes, legacy for old modes
+  if (_sessionMode && typeof loadSessionCard === 'function') {
+    loadSessionCard();
+  } else if (typeof loadCard === 'function') {
+    loadCard();
+  }
 }
 
 
