@@ -8195,14 +8195,7 @@ function buildTeamToCoachPrevTeamDeck(team) {
   return [makeCard(team.coach || team.name, answer, "What was this head coach's most recent previous NBA team?")];
 }
 function buildTeamToCoachSinceDeck(team) {
-  const answer = team.coachSince
-    ? '<div class="back-conf-block">' +
-        '<span class="back-conf-label">Current Team</span>' +
-        '<span class="back-conf-val">' + team.name + '</span>' +
-        '<span class="back-conf-label">Head Coach Since</span>' +
-        '<span class="back-conf-val" style="font-size:28px;">' + team.coachSince + '</span>' +
-      '</div>'
-    : 'N/A';
+  const answer = team.coachSince || 'N/A';
   return [makeCard(team.coach || team.name, answer, "What year did this head coach join this team?")];
 }
 
