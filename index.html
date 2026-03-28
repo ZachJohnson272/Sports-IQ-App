@@ -232,13 +232,16 @@
 
   /* ===================== FLASHCARD PAGE ===================== */
   #flashcards {
-    padding: 0;
+    padding: 0 !important;
     justify-content: flex-start;
+    overflow: hidden !important;
+    height: 100dvh;
+    max-height: 100dvh;
   }
 
   .fc-header {
     width: 100%;
-    padding: 20px 24px 16px;
+    padding: 8px 16px 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -248,6 +251,7 @@
     position: sticky;
     top: 0;
     z-index: 10;
+    flex-shrink: 0;
   }
 
   .fc-progress-text {
@@ -299,17 +303,21 @@
     width: 100%;
     max-width: 390px;
     margin: 0 auto;
-    padding: 16px 16px 16px;
+    padding: 8px 14px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .card-scene {
     width: 100%;
     max-width: 350px;
-    aspect-ratio: 3/4;
+    flex: 1;
+    min-height: 0;
+    max-height: 420px;
     perspective: 1000px;
     cursor: pointer;
   }
@@ -753,27 +761,29 @@
 
   .answer-btns {
     display: flex;
-    gap: 16px;
+    gap: 10px;
     width: 100%;
     max-width: 350px;
+    flex-shrink: 0;
   }
 
   .btn-miss {
     flex: 1;
-    padding: 18px;
+    padding: 10px;
     background: rgba(220,60,60,0.12);
     border: 1.5px solid rgba(220,60,60,0.35);
     color: #e05555;
-    border-radius: 14px;
+    border-radius: 12px;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
+    flex-shrink: 0;
   }
 
   .btn-miss:hover {
@@ -784,20 +794,21 @@
 
   .btn-got {
     flex: 1;
-    padding: 18px;
+    padding: 10px;
     background: rgba(30,160,80,0.12);
     border: 1.5px solid rgba(30,160,80,0.35);
     color: #3dcc7a;
-    border-radius: 14px;
+    border-radius: 12px;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
+    flex-shrink: 0;
   }
 
   .btn-got:hover {
@@ -1232,7 +1243,9 @@
   .fc-mode-title {
     font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
     color: rgba(107,63,160,0.7); text-transform: uppercase;
-    text-align: center; padding: 5px 0 0;
+    text-align: center; padding: 1px 0 0;
+    flex-shrink: 0;
+    line-height: 1;
   }
 
   /* ===================== MODE SELECT ===================== */
