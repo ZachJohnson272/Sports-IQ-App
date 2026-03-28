@@ -3230,7 +3230,52 @@
   .lp-prog-tier--allstar { background: rgba(245,200,66,0.08); color: rgba(245,200,66,0.6);   border-color: rgba(245,200,66,0.18); }
   .lp-prog-tier--hof     { background: rgba(240,112,80,0.08); color: rgba(240,112,80,0.6);   border-color: rgba(240,112,80,0.18); }
 
-  /* ── Random category card ── */
+  /* ── Team Mastery category grid — compact league-style layout ── */
+  #lp-team-cat-grid { gap: 7px; }
+
+  #lp-team-cat-grid .lp-prog-card {
+    padding: 10px 13px;
+    gap: 0;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 13px;
+  }
+
+  #lp-team-cat-grid .lp-prog-top {
+    flex: 1; min-width: 0;
+    gap: 10px;
+    align-items: center;
+  }
+
+  #lp-team-cat-grid .lp-prog-icon {
+    width: 34px; height: 34px;
+    font-size: 16px;
+    border-radius: 9px;
+    flex-shrink: 0;
+  }
+
+  #lp-team-cat-grid .lp-prog-title {
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+  }
+
+  #lp-team-cat-grid .lp-prog-desc { display: none; }
+
+  #lp-team-cat-grid .lp-prog-bar-row { display: none; }
+
+  #lp-team-cat-grid .lp-prog-tiers { display: none; }
+
+  /* Right-side fraction label — modes · cards */
+  #lp-team-cat-grid .lp-prog-fraction-wrap {
+    display: flex; flex-direction: column; align-items: flex-end;
+    flex-shrink: 0; margin-left: 10px; gap: 1px;
+  }
+  #lp-team-cat-grid .lp-prog-fraction {
+    font-size: 10px; font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    white-space: nowrap;
+  }
   .lp-cat-card--random { border-color: rgba(34,197,94,0.22); }
   .lp-cat-card--random::before { background: radial-gradient(ellipse at left, rgba(34,197,94,0.1), transparent 60%); }
   .lp-cat-card--random:hover { border-color: rgba(34,197,94,0.65); box-shadow: 0 12px 32px rgba(34,197,94,0.2); }
@@ -5853,34 +5898,28 @@
 
       <div class="lp-prog-grid" id="lp-team-cat-grid">
         <div class="lp-prog-card lp-prog-card--current" id="lp-tcat-roster" onclick="lpSelectTeamCat('roster')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">👥</div><div class="lp-prog-body"><div class="lp-prog-title">👥 Roster</div><div class="lp-prog-desc">Best player, starting 5, and full team roster</div></div></div>
-          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--coaches" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span></div>
-          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">👥</div><div class="lp-prog-body"><div class="lp-prog-title">👥 Roster</div></div></div>
+          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--coaches" id="lp-tcat-coaches" onclick="lpSelectTeamCat('coaches')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">👔</div><div class="lp-prog-body"><div class="lp-prog-title">👔 Coaches</div><div class="lp-prog-desc">Head coach, tenure, and full coaching staff</div></div></div>
-          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--current" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span></div>
-          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">👔</div><div class="lp-prog-body"><div class="lp-prog-title">👔 Coaches</div></div></div>
+          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--info" id="lp-tcat-info" onclick="lpSelectTeamCat('info')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">📊</div><div class="lp-prog-body"><div class="lp-prog-title">📊 Player Info</div><div class="lp-prog-desc">Position, height, and jersey number</div></div></div>
-          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--info" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span></div>
-          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">📊</div><div class="lp-prog-body"><div class="lp-prog-title">📊 Player Info</div></div></div>
+          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--players" id="lp-tcat-players" onclick="lpSelectTeamCat('players')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🏀</div><div class="lp-prog-body"><div class="lp-prog-title">🏀 Player Career</div><div class="lp-prog-desc">Past teams, college, and draft info</div></div></div>
-          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--players" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span></div>
-          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🏀</div><div class="lp-prog-body"><div class="lp-prog-title">🏀 Player Career</div></div></div>
+          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">30 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--history" id="lp-tcat-history" onclick="lpSelectTeamCat('history')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🏛</div><div class="lp-prog-body"><div class="lp-prog-title">🏛 Franchise Records</div><div class="lp-prog-desc">All-time statistical leaders across franchise history</div></div></div>
-          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--history" style="width:0%"></div></div><span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span></div>
-          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">Rookie</span><span class="lp-prog-tier lp-prog-tier--starter">Starter</span><span class="lp-prog-tier lp-prog-tier--allstar">All-Star</span></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🏛</div><div class="lp-prog-body"><div class="lp-prog-title">🏛 Franchise Records</div></div></div>
+          <span class="lp-prog-fraction">3 modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">3 cards</span></span>
         </div>
         <div class="lp-prog-card lp-prog-card--mixed" id="lp-tcat-random" onclick="startGeneratedMode('mixed','team')">
-          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title">🎲 Random/Mixed</div><div class="lp-prog-desc">Mixed flashcard sessions from all Team Mastery modes</div></div></div>
-          <div class="lp-prog-bar-row"><div class="lp-prog-bar-wrap"><div class="lp-prog-bar-fill lp-prog-bar--mixed" style="width:0%"></div></div><span class="lp-prog-fraction">All modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">69 cards</span></span></div>
-          <div class="lp-prog-tiers"><span class="lp-prog-tier lp-prog-tier--rookie">All Tiers</span></div>
+          <div class="lp-prog-top"><div class="lp-prog-icon">🎲</div><div class="lp-prog-body"><div class="lp-prog-title">🎲 Random/Mixed</div></div></div>
+          <span class="lp-prog-fraction">All modes <span style="opacity:0.4;margin:0 2px;">·</span> <span style="color:rgba(255,255,255,0.6);">69 cards</span></span>
         </div>
       </div>
 
