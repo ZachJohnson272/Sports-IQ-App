@@ -8104,15 +8104,13 @@ function buildTeamToStarting5Deck(team) {
   const posOrder = ['PG','SG','SF','PF','C'];
   const rows = posOrder.map(slot => {
     const name = _activeLineup[slot] || '—';
-    return '<div class="back-career-entry">' +
-      '<span class="back-career-team" style="font-size:15px;font-weight:500;">' +
-        '<span style="color:rgba(180,144,255,0.8);font-size:12px;letter-spacing:1px;margin-right:8px;">' + slot + '</span>' +
-        name +
-      '</span></div>';
+    return '<div class="top10-row">' +
+      '<span class="top10-pos">' + slot + '</span>' +
+      '<span class="top10-player">' + name + '</span>' +
+    '</div>';
   }).join('');
-  const front = team.name;
-  const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
-  return [makeCard(front, answer, '__LINEUP__')];
+  const answer = '<div class="top10-list"><div class="top10-section-label">Starting 5</div>' + rows + '</div>';
+  return [makeCard(team.name, answer, '__LINEUP__')];
 }
 function buildLeagueTeamToStarting5Deck() {
   const posOrder = ['PG','SG','SF','PF','C'];
@@ -8120,15 +8118,13 @@ function buildLeagueTeamToStarting5Deck() {
     const lineup = LEAGUE_LINEUPS[t.name];
     const rows = posOrder.map(slot => {
       const name = lineup[slot] || '—';
-      return '<div class="back-career-entry">' +
-        '<span class="back-career-team" style="font-size:15px;font-weight:500;">' +
-          '<span style="color:rgba(180,144,255,0.8);font-size:12px;letter-spacing:1px;margin-right:8px;">' + slot + '</span>' +
-          name +
-        '</span></div>';
+      return '<div class="top10-row">' +
+        '<span class="top10-pos">' + slot + '</span>' +
+        '<span class="top10-player">' + name + '</span>' +
+      '</div>';
     }).join('');
-    const front = t.name;
-    const answer = '<div class="back-career-block" style="gap:6px;">' + rows + '</div>';
-    return makeCard(front, answer, '__LINEUP__');
+    const answer = '<div class="top10-list"><div class="top10-section-label">Starting 5</div>' + rows + '</div>';
+    return makeCard(t.name, answer, '__LINEUP__');
   });
 }
 function buildLeagueTeamToBestPlayerDeck() {
