@@ -1204,9 +1204,10 @@
   }
   .round-complete p  { color: var(--muted); font-size: 14px; margin: 0; }
   .rc-stats-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
     width: 100%;
   }
+  .rc-stat--incorrect .rc-stat-val { color: #e05555; }
   .rc-stat {
     background: linear-gradient(160deg, rgba(28,20,48,0.95) 0%, rgba(16,18,28,0.98) 100%);
     border: 1px solid rgba(107,63,160,0.28); border-radius: 14px;
@@ -5274,6 +5275,11 @@
           <div class="rc-stat-val" id="rcCorrect">0</div>
           <div class="rc-stat-lbl">Correct</div>
         </div>
+        <div class="rc-stat rc-stat--incorrect">
+          <div class="rc-stat-icon">❌</div>
+          <div class="rc-stat-val" id="rcIncorrect">0</div>
+          <div class="rc-stat-lbl">Incorrect</div>
+        </div>
         <div class="rc-stat">
           <div class="rc-stat-icon">🎯</div>
           <div class="rc-stat-val" id="rcAccuracy">0%</div>
@@ -8955,7 +8961,9 @@ function endSessionRound() {
   const correct  = _sessionScores.reduce((s, p) => s + p.correct, 0);
   const accuracy = total === 0 ? 0 : Math.round((correct / total) * 100);
 
+  const incorrect = total - correct;
   document.getElementById('rcCorrect').textContent    = correct;
+  document.getElementById('rcIncorrect').textContent  = incorrect;
   document.getElementById('rcAccuracy').textContent   = accuracy + '%';
   document.getElementById('rcBestStreak').textContent = fcBestStreak;
 
@@ -9416,6 +9424,7 @@ function endRound() {
   const m        = getModeMastery(currentMode);
 
   document.getElementById('rcCorrect').textContent    = fcCorrectCount + ' / ' + total;
+  document.getElementById('rcIncorrect').textContent  = (total - fcCorrectCount) + ' / ' + total;
   document.getElementById('rcAccuracy').textContent   = accuracy + '%';
   document.getElementById('rcBestStreak').textContent = fcBestStreak;
   document.getElementById('roundCompleteMsg').textContent =
@@ -11023,6 +11032,7 @@ function _lpRandShowComplete() {
   document.getElementById('rcTrophy').textContent        = trophy;
   document.getElementById('rcTitle').textContent         = title;
   document.getElementById('rcCorrect').textContent       = `${_randCorrect} / ${total}`;
+  document.getElementById('rcIncorrect').textContent     = `${total - _randCorrect} / ${total}`;
   document.getElementById('rcAccuracy').textContent      = pct + '%';
   document.getElementById('rcBestStreak').textContent    = '—'; // random doesn't track streak
   document.getElementById('roundCompleteMsg').textContent = msg;
