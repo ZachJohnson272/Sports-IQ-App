@@ -10684,20 +10684,14 @@ function _shuffle(arr) {
 // 1) Mixed Chaos — broad mix, lightly biased toward weak cards, anti-repeat
 function generateMixedRun() {
   const pool = _buildRandPool();
-  // Light difficulty weighting: weight = 1 + difficulty * 1.5
-  const weighted = [];
-  pool.forEach(card => {
-    const w = Math.round((1 + _getCardDifficulty(card) * 1.5));
-    for (let i = 0; i < w; i++) weighted.push(card);
-  });
-  const shuffled = _shuffle(weighted);
-  // Deduplicate by key, take 20
+  // Shuffle the full pool — all 69 cards, no cap
+  const shuffled = _shuffle(pool);
+  // Deduplicate by key (keep all unique cards)
   const seen = new Set();
   const deduped = [];
   for (const c of shuffled) {
     const k = _cardKey(c);
     if (!seen.has(k)) { seen.add(k); deduped.push(c); }
-    if (deduped.length >= 20) break;
   }
   return _antiRepeat(deduped);
 }
@@ -10752,7 +10746,7 @@ function generateDailyRun() {
 
 // ── Generator registry ──────────────────────────────────────
 const RANDOM_GENERATORS = {
-  mixed:     { fn: generateMixedRun,    name: 'Mixed Chaos',       emoji: '🎲', length: 20, color: 'chaos' },
+  mixed:     { fn: generateMixedRun,    name: 'Random Mode',       emoji: '🎲', length: 69, color: 'chaos' },
   weakSpots: { fn: generateWeakSpotsRun, name: 'Weak Spot Trainer', emoji: '🎯', length: 16, color: 'weak'  },
   daily:     { fn: generateDailyRun,    name: 'Daily Challenge',   emoji: '📅', length: 15, color: 'daily' },
 };
