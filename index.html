@@ -3064,33 +3064,40 @@
     background: linear-gradient(135deg, rgba(107,63,160,0.14) 0%, rgba(91,184,212,0.06) 100%);
     pointer-events: none;
   }
-  /* Top row: name left, mastery right */
+  /* Centred team name */
   .lp-tip-top-row {
-    display: flex; align-items: flex-start; justify-content: space-between;
+    display: flex; align-items: center; justify-content: center;
     position: relative; z-index: 1;
   }
   .lp-tip-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 32px; letter-spacing: 2px; color: #fff; line-height: 1;
+    text-align: center;
   }
   .lp-tip-meta { font-size: 11px; color: var(--jazz-sky); font-weight: 500; letter-spacing: 0.3px; }
-  .lp-tip-right { text-align: right; flex-shrink: 0; }
-  .lp-tip-mastery-pct {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px; color: #fff; line-height: 1;
-  }
-  .lp-tip-mastery-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+  .lp-tip-right { display: none; }
+  .lp-tip-mastery-pct { display: none; }
+  .lp-tip-mastery-lbl { display: none; }
   /* Thin inner divider */
   .lp-tip-inner-divider {
     height: 1px; background: rgba(107,63,160,0.22);
     margin: 12px 0; position: relative; z-index: 1;
   }
-  /* Snapshot 2×2 inside the card */
+  /* Snapshot: single centred row of 4 items */
   .lp-tip-snap-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 9px 8px;
+    display: flex; flex-direction: row;
+    justify-content: center; align-items: center;
+    gap: 0;
     position: relative; z-index: 1;
+    flex-wrap: nowrap;
   }
+  .lp-tir-item {
+    display: flex; align-items: center; gap: 6px;
+    padding: 0 14px;
+    border-right: 1px solid rgba(107,63,160,0.25);
+    white-space: nowrap;
+  }
+  .lp-tir-item:last-child { border-right: none; }
   /* Legacy compat — keep old refs from breaking */
   .lp-tip-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
   .lp-tip-divider { display: none; }
@@ -3131,9 +3138,7 @@
     gap: 12px 8px;
     font-family: 'DM Sans', sans-serif;
   }
-  .lp-tir-item {
-    display: flex; align-items: center; gap: 7px;
-  }
+
   .lp-tir-icon { font-size: 14px; flex-shrink: 0; }
   .lp-tir-val { font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,0.78); }
   .lp-tir-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-left: 1px; }
