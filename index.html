@@ -5320,7 +5320,6 @@
           <div class="rc-stat-lbl">Best Streak</div>
         </div>
       </div>
-      <p id="roundCompleteMsg"></p>
       <div id="rcDailyRow" style="display:none;font-size:12px;color:rgba(91,184,212,0.8);font-weight:600;text-align:center;"></div>
       <div class="rc-actions">
         <button class="btn-primary" style="width:100%" onclick="restartCurrentMode()">▶ &nbsp;Play Again</button>
@@ -8996,8 +8995,7 @@ function endSessionRound() {
   document.getElementById('rcAccuracy').textContent   = accuracy + '%';
   document.getElementById('rcBestStreak').textContent = fcBestStreak;
 
-  const msgs = ['Keep practicing! 💪', 'Great effort! 🎯', 'Solid round! 🏀', 'Impressive! ⭐', 'Perfect round! 🏆'];
-  document.getElementById('roundCompleteMsg').textContent = accuracy >= 90 ? msgs[4] : accuracy >= 70 ? msgs[3] : accuracy >= 50 ? msgs[2] : accuracy >= 30 ? msgs[1] : msgs[0];
+
 
   const rc = document.getElementById('roundComplete');
   rc.classList.add('show');
@@ -9456,11 +9454,7 @@ function endRound() {
   document.getElementById('rcIncorrect').textContent  = (total - fcCorrectCount) + ' / ' + total;
   document.getElementById('rcAccuracy').textContent   = accuracy + '%';
   document.getElementById('rcBestStreak').textContent = fcBestStreak;
-  document.getElementById('roundCompleteMsg').textContent =
-    accuracy === 100 ? '🌟 Perfect round! Incredible!' :
-    accuracy >= 80   ? 'Great session — keep it up!' :
-    accuracy >= 50   ? 'Solid effort. Another round will sharpen it.' :
-                       'Tough round. Try again to improve.';
+
 
   document.getElementById('roundComplete').classList.add('show');
   if (m === 100) xpAward(15);
@@ -11056,7 +11050,6 @@ function _lpRandShowComplete() {
   const trophy = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : '💪';
   const gen    = RANDOM_GENERATORS[_randGenType] || {};
   const title  = pct >= 90 ? 'Incredible!' : pct >= 70 ? (gen.name + ' Complete!') : 'Keep Training!';
-  const msg    = pct >= 90 ? '🌟 Perfect round!' : pct >= 70 ? 'Great session — keep it up!' : 'Tough run. Try again to improve.';
 
   document.getElementById('rcTrophy').textContent        = trophy;
   document.getElementById('rcTitle').textContent         = title;
@@ -11064,7 +11057,6 @@ function _lpRandShowComplete() {
   document.getElementById('rcIncorrect').textContent     = `${total - _randCorrect} / ${total}`;
   document.getElementById('rcAccuracy').textContent      = pct + '%';
   document.getElementById('rcBestStreak').textContent    = '—'; // random doesn't track streak
-  document.getElementById('roundCompleteMsg').textContent = msg;
 
   // Daily: save + show prior best
   const dailyRow = document.getElementById('rcDailyRow');
