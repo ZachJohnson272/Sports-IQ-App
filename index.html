@@ -7881,26 +7881,32 @@ const JAZZ_ROTATION = {
 };
 
 function buildTeamToRosterDeck(team, roster) {
-  // Non-Jazz teams: fall back to full roster HTML
-  if (team.name !== 'Utah Jazz') {
-    const answer = _buildRosterHTML(team.name, Array.from(roster));
-    return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
+  // Use TEAM_ROTATIONS for any team that has rotation data defined
+  const rotationMap = {
+    'Utah Jazz':        typeof JAZZ_ROTATION !== 'undefined'    ? JAZZ_ROTATION    : null,
+    'Dallas Mavericks': typeof MAVS_ROTATION !== 'undefined'    ? MAVS_ROTATION    : null,
+    'Denver Nuggets':   typeof NUGGETS_ROTATION !== 'undefined' ? NUGGETS_ROTATION : null,
+  };
+  const rotation = rotationMap[team.name];
+  if (rotation) {
+    const makeRows = (players) => players.map(p =>
+      '<div class="top10-row">' +
+        '<span class="top10-pos">' + p.pos + '</span>' +
+        '<span class="top10-player">' + p.name + '</span>' +
+      '</div>'
+    ).join('');
+    const answer =
+      '<div class="top10-list">' +
+        '<div class="top10-section-label">Starters</div>' +
+        makeRows(rotation.starters) +
+        '<div class="top10-section-label">Bench</div>' +
+        makeRows(rotation.bench) +
+      '</div>';
+    return [makeCard(team.name, answer, '__LINEUP__')];
   }
-  // Jazz: Team Rotation (10 Players)
-  const makeRows = (players) => players.map(p =>
-    '<div class="top10-row">' +
-      '<span class="top10-pos">' + p.pos + '</span>' +
-      '<span class="top10-player">' + p.name + '</span>' +
-    '</div>'
-  ).join('');
-  const answer =
-    '<div class="top10-list">' +
-      '<div class="top10-section-label">Starters</div>' +
-      makeRows(JAZZ_ROTATION.starters) +
-      '<div class="top10-section-label">Bench</div>' +
-      makeRows(JAZZ_ROTATION.bench) +
-    '</div>';
-  return [makeCard(team.name, answer, '__LINEUP__')];
+  // Fallback for teams without rotation data
+  const answer = _buildRosterHTML(team.name, Array.from(roster));
+  return [makeCard(team.name, answer, "Who are the current players on this team's roster?")];
 }
 const TEAM_COACHING_STAFF = {
   "Utah Jazz": {
