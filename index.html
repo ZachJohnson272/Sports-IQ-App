@@ -535,7 +535,7 @@
     font-size: 14px;
     color: rgba(180,144,255,0.7);
     flex-shrink: 0;
-    width: 28px;
+    width: 48px;
     text-align: right;
     line-height: 1;
     letter-spacing: 0.5px;
@@ -10635,9 +10635,11 @@ function _buildRandPool() {
   const starting5Ans = '<div class="top10-list"><div class="top10-section-label">Starting 5</div>' + starting5Rows + '</div>';
 
   // Team Rotation — starters + bench
-  const rotationData = (activeTeam.name === 'Utah Jazz') ? (typeof JAZZ_ROTATION !== 'undefined' ? JAZZ_ROTATION : null)
-    : (activeTeam.name === 'Dallas Mavericks') ? (typeof MAVS_ROTATION !== 'undefined' ? MAVS_ROTATION : null)
-    : null;
+  const TEAM_ROTATIONS = {
+    'Utah Jazz':       typeof JAZZ_ROTATION !== 'undefined' ? JAZZ_ROTATION : null,
+    'Dallas Mavericks': typeof MAVS_ROTATION !== 'undefined' ? MAVS_ROTATION : null,
+  };
+  const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
   if (rotationData) {
     const makeRows = (players) => players.map(p =>
@@ -10956,7 +10958,7 @@ function _lpRandRenderCard() {
       'Jersey #':    `What is <em>${name}'s</em> jersey number?`,
       'Height':      `How tall is <em>${name}</em>?`,
       'College':     `Where did <em>${name}</em> go to college?`,
-      'Past Teams':  `What teams did <em>${name}</em> play for before the Jazz?`,
+      'Past Teams':  `What teams did <em>${name}</em> play for before the ${(typeof _activeTeam !== 'undefined' ? _activeTeam.name.split(' ').pop() : 'team')}?`,
       'Draft Info':  `What were <em>${name}'s</em> draft year, pick, and team?`,
     };
     question = playerQ[label] || `What is <em>${name}'s</em> ${label}?`;
