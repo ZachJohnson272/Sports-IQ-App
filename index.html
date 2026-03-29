@@ -7780,7 +7780,7 @@ function makeCard(front, back, hint) {
 
 // -- Player deck builders (filter out blank/undefined answers) --
 function buildPlayerToTeamDeck(roster)     { return roster.filter(p => p.team).map(p => makeCard(p.name, p.team,       'Which team does this player play for?')); }
-function buildPlayerToPositionDeck(roster) { return roster.filter(p => p.position).map(p => makeCard(p.name, p.position,'What position does this player play?')); }
+function buildPlayerToPositionDeck(roster) { return roster.filter(p => p.position).map(p => makeCard(p.name, getPosLabel(p), 'What position does this player play?')); }
 function buildPlayerToJerseyDeck(roster)   { return roster.filter(p => p.jersey).map(p => makeCard(p.name, '#' + p.jersey, "What is this player's jersey number?")); }
 function buildPlayerToHeightDeck(roster)   { return roster.filter(p => p.height).map(p => makeCard(p.name, p.height,   "How tall is this player?")); }
 function buildPlayerToCollegeDeck(roster)  { return roster.filter(p => p.college).map(p => makeCard(p.name, p.college, "Where did this player go to college?")); }
