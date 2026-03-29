@@ -5149,7 +5149,7 @@
       <div class="division-label">Western Conference</div>
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Dallas Mavericks <span class="cs-tag">Soon</span></button>
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Denver Nuggets <span class="cs-tag">Soon</span></button>
-      <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Golden State Warriors <span class="cs-tag">Soon</span></button>
+      <button class="team-row-btn" onclick="lpSelectTeamNew('gsw','Golden State Warriors','nba')"><span>🏀</span> Golden State Warriors <span class="cs-tag" style="background:rgba(100,220,130,0.18);color:#7defa0;">10 players · Active</span></button>
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Houston Rockets <span class="cs-tag">Soon</span></button>
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> LA Clippers <span class="cs-tag">Soon</span></button>
       <button class="team-row-btn coming-soon-btn" onclick="showComingSoon()"><span>🏀</span> Los Angeles Lakers <span class="cs-tag">Soon</span></button>
@@ -6480,8 +6480,8 @@ const NUGGETS_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, then Mavs, then Nuggets, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// getPosLabel: checks Jazz, then Mavs, then Nuggets, then GSW, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -6624,25 +6624,47 @@ const GSW_TEAM = {
 
 const GSW_STARTING_LINEUP = { PG:"Stephen Curry", SG:"Brandin Podziemski", SF:"Jimmy Butler III", PF:"Draymond Green", C:"Kristaps Porzingis" };
 
+const GSW_POSITIONS = {
+  "Stephen Curry":       "PG/SG",
+  "Brandin Podziemski":  "SG/PG",
+  "Jimmy Butler III":    "SF/SG",
+  "Draymond Green":      "PF/C",
+  "Kristaps Porzingis":  "C/PF",
+  "Pat Spencer":         "PG/SG",
+  "De'Anthony Melton":   "SG/PG",
+  "Gary Payton II":      "SG/PG",
+  "Moses Moody":         "SF/SG",
+  "Al Horford":          "C/PF",
+};
+
+const GSW_ROTATION = {
+  starters: [
+    { pos:"PG/SG", name:"Stephen Curry" },
+    { pos:"SG/PG", name:"Brandin Podziemski" },
+    { pos:"SF/SG", name:"Jimmy Butler III" },
+    { pos:"PF/C",  name:"Draymond Green" },
+    { pos:"C/PF",  name:"Kristaps Porzingis" },
+  ],
+  bench: [
+    { pos:"PG/SG", name:"Pat Spencer" },
+    { pos:"SG/PG", name:"De'Anthony Melton" },
+    { pos:"SG/PG", name:"Gary Payton II" },
+    { pos:"SF/SG", name:"Moses Moody" },
+    { pos:"C/PF",  name:"Al Horford" },
+  ]
+};
+
 const GSW_ROSTER = [
-  { name:"Stephen Curry",        position:"G", jersey:"30", height:"6ft 2in",  college:"Davidson",        country:"USA",        hometown:"Charlotte, North Carolina",   draft_year:"2009", draft_pick:"7",         draft_team:"Golden State Warriors",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Seth Curry",           position:"G", jersey:"23", height:"6ft 2in",  college:"Duke",            country:"USA",        hometown:"Charlotte, North Carolina",   draft_year:"2013", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Dallas Mavericks",dur:"1 season"},{team:"Portland Trail Blazers",dur:"2 seasons"},{team:"Philadelphia 76ers",dur:"2 seasons"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Charlotte Hornets",dur:"1 season"},{team:"Milwaukee Bucks",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"Brandin Podziemski",   position:"G", jersey:"2",  height:"6ft 5in",  college:"Santa Clara",     country:"USA",        hometown:"Elmhurst, Illinois",          draft_year:"2023", draft_pick:"19",        draft_team:"Golden State Warriors",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"De'Anthony Melton",    position:"G", jersey:"8",  height:"6ft 4in",  college:"USC",             country:"USA",        hometown:"Compton, California",         draft_year:"2018", draft_pick:"46",        draft_team:"Houston Rockets",        past_teams:[{team:"Memphis Grizzlies",dur:"3 seasons"},{team:"Philadelphia 76ers",dur:"2 seasons"},{team:"Brooklyn Nets",dur:"1 season"}],                   jazz_years:"1 season" },
-  { name:"Gary Payton II",       position:"G", jersey:"0",  height:"6ft 3in",  college:"Oregon State",    country:"USA",        hometown:"Oakland, California",         draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Milwaukee Bucks",dur:"1 season"},{team:"Golden State Warriors",dur:"2 seasons"},{team:"Portland Trail Blazers",dur:"1 season"}],              jazz_years:"1 season" },
-  { name:"Moses Moody",          position:"G", jersey:"4",  height:"6ft 6in",  college:"Arkansas",        country:"USA",        hometown:"Little Rock, Arkansas",       draft_year:"2021", draft_pick:"14",        draft_team:"Golden State Warriors",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Pat Spencer",          position:"G", jersey:"9",  height:"6ft 3in",  college:"Northwestern",    country:"USA",        hometown:"Davidsonville, Maryland",     draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Chicago Bulls",dur:"1 season"},{team:"Boston Celtics",dur:"1 season"}],                                                                      jazz_years:"1 season" },
-  { name:"L.J. Cryer",           position:"G", jersey:"7",  height:"6ft 1in",  college:"Baylor",          country:"USA",        hometown:"Houston, Texas",              draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Nate Williams",        position:"G", jersey:"6",  height:"6ft 4in",  college:"Oklahoma State",  country:"USA",        hometown:"Oklahoma City, Oklahoma",     draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Will Richard",         position:"G", jersey:"5",  height:"6ft 5in",  college:"Florida",         country:"USA",        hometown:"West Palm Beach, Florida",    draft_year:"2024", draft_pick:"36",        draft_team:"Golden State Warriors",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jimmy Butler III",     position:"F", jersey:"10", height:"6ft 7in",  college:"Marquette",       country:"USA",        hometown:"Houston, Texas",              draft_year:"2011", draft_pick:"30",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"5 seasons"},{team:"Minnesota Timberwolves",dur:"1 season"},{team:"Philadelphia 76ers",dur:"1 season"},{team:"Miami Heat",dur:"5 seasons"}], jazz_years:"1 season" },
-  { name:"Draymond Green",       position:"F", jersey:"23", height:"6ft 6in",  college:"Michigan State",  country:"USA",        hometown:"Saginaw, Michigan",           draft_year:"2012", draft_pick:"35",        draft_team:"Golden State Warriors",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Gui Santos",           position:"F", jersey:"13", height:"6ft 8in",  college:"None",            country:"Brazil",     hometown:"Sao Paulo, Brazil",           draft_year:"2022", draft_pick:"55",        draft_team:"Golden State Warriors",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Malevy Leons",         position:"F", jersey:"15", height:"6ft 8in",  college:"None",            country:"France",     hometown:"Paris, France",               draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Kristaps Porzingis",   position:"C", jersey:"11", height:"7ft 2in",  college:"None",            country:"Latvia",     hometown:"Liepaja, Latvia",             draft_year:"2015", draft_pick:"4",         draft_team:"New York Knicks",        past_teams:[{team:"New York Knicks",dur:"4 seasons"},{team:"Dallas Mavericks",dur:"2 seasons"},{team:"Washington Wizards",dur:"1 season"},{team:"Boston Celtics",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"Al Horford",           position:"C", jersey:"42", height:"6ft 9in",  college:"Florida",         country:"Dominican Republic", hometown:"Puerto Plata, Dominican Republic", draft_year:"2007", draft_pick:"3", draft_team:"Atlanta Hawks", past_teams:[{team:"Atlanta Hawks",dur:"10 seasons"},{team:"Boston Celtics",dur:"2 seasons"},{team:"Philadelphia 76ers",dur:"2 seasons"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Boston Celtics",dur:"3 seasons"}], jazz_years:"1 season" },
-  { name:"Quinten Post",         position:"C", jersey:"33", height:"7ft 1in",  college:"Boston College",  country:"Netherlands",hometown:"Blaricum, Netherlands",       draft_year:"2024", draft_pick:"52",        draft_team:"Golden State Warriors",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Omer Yurtseven",       position:"C", jersey:"77", height:"7ft 0in",  college:"Georgetown",      country:"Turkey",     hometown:"Ankara, Turkey",              draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Miami Heat",dur:"2 seasons"},{team:"Utah Jazz",dur:"1 season"},{team:"Dallas Mavericks",dur:"1 season"}],                                   jazz_years:"1 season" },
+  { name:"Stephen Curry",       position:"PG/SG", jersey:"30", height:"6ft 2in", college:"Davidson",      country:"USA",                hometown:"Charlotte, North Carolina",             draft_year:"2009", draft_pick:"7",         draft_team:"Golden State Warriors", past_teams:"None" },
+  { name:"Brandin Podziemski",  position:"SG/PG", jersey:"2",  height:"6ft 5in", college:"Santa Clara",   country:"USA",                hometown:"Elmhurst, Illinois",                    draft_year:"2023", draft_pick:"19",        draft_team:"Golden State Warriors", past_teams:"None" },
+  { name:"Jimmy Butler III",    position:"SF/SG", jersey:"10", height:"6ft 7in", college:"Marquette",     country:"USA",                hometown:"Houston, Texas",                        draft_year:"2011", draft_pick:"30",        draft_team:"Chicago Bulls",         past_teams:[{team:"Chicago Bulls",dur:"5 seasons"},{team:"Minnesota Timberwolves",dur:"1 season"},{team:"Philadelphia 76ers",dur:"1 season"},{team:"Miami Heat",dur:"5 seasons"}] },
+  { name:"Draymond Green",      position:"PF/C",  jersey:"23", height:"6ft 6in", college:"Michigan State",country:"USA",                hometown:"Saginaw, Michigan",                     draft_year:"2012", draft_pick:"35",        draft_team:"Golden State Warriors", past_teams:"None" },
+  { name:"Kristaps Porzingis",  position:"C/PF",  jersey:"11", height:"7ft 2in", college:"None",          country:"Latvia",             hometown:"Liepaja, Latvia",                       draft_year:"2015", draft_pick:"4",         draft_team:"New York Knicks",       past_teams:[{team:"New York Knicks",dur:"4 seasons"},{team:"Dallas Mavericks",dur:"2 seasons"},{team:"Washington Wizards",dur:"1 season"},{team:"Boston Celtics",dur:"1 season"}] },
+  { name:"Pat Spencer",         position:"PG/SG", jersey:"9",  height:"6ft 3in", college:"Northwestern",  country:"USA",                hometown:"Davidsonville, Maryland",               draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Chicago Bulls",dur:"1 season"},{team:"Boston Celtics",dur:"1 season"}] },
+  { name:"De'Anthony Melton",   position:"SG/PG", jersey:"8",  height:"6ft 4in", college:"USC",           country:"USA",                hometown:"Compton, California",                   draft_year:"2018", draft_pick:"46",        draft_team:"Houston Rockets",       past_teams:[{team:"Memphis Grizzlies",dur:"3 seasons"},{team:"Philadelphia 76ers",dur:"2 seasons"},{team:"Brooklyn Nets",dur:"1 season"}] },
+  { name:"Gary Payton II",      position:"SG/PG", jersey:"0",  height:"6ft 3in", college:"Oregon State",  country:"USA",                hometown:"Oakland, California",                   draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Milwaukee Bucks",dur:"1 season"},{team:"Golden State Warriors",dur:"2 seasons"},{team:"Portland Trail Blazers",dur:"1 season"}] },
+  { name:"Moses Moody",         position:"SF/SG", jersey:"4",  height:"6ft 6in", college:"Arkansas",      country:"USA",                hometown:"Little Rock, Arkansas",                 draft_year:"2021", draft_pick:"14",        draft_team:"Golden State Warriors", past_teams:"None" },
+  { name:"Al Horford",          position:"C/PF",  jersey:"42", height:"6ft 9in", college:"Florida",       country:"Dominican Republic",  hometown:"Puerto Plata, Dominican Republic",      draft_year:"2007", draft_pick:"3",         draft_team:"Atlanta Hawks",         past_teams:[{team:"Atlanta Hawks",dur:"10 seasons"},{team:"Boston Celtics",dur:"2 seasons"},{team:"Philadelphia 76ers",dur:"2 seasons"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Boston Celtics",dur:"3 seasons"}] },
 ];
 
 const CLIPPERS_TEAM = {
@@ -7883,9 +7905,10 @@ const JAZZ_ROTATION = {
 function buildTeamToRosterDeck(team, roster) {
   // Use TEAM_ROTATIONS for any team that has rotation data defined
   const rotationMap = {
-    'Utah Jazz':        typeof JAZZ_ROTATION !== 'undefined'    ? JAZZ_ROTATION    : null,
-    'Dallas Mavericks': typeof MAVS_ROTATION !== 'undefined'    ? MAVS_ROTATION    : null,
-    'Denver Nuggets':   typeof NUGGETS_ROTATION !== 'undefined' ? NUGGETS_ROTATION : null,
+    'Utah Jazz':            typeof JAZZ_ROTATION    !== 'undefined' ? JAZZ_ROTATION    : null,
+    'Dallas Mavericks':     typeof MAVS_ROTATION    !== 'undefined' ? MAVS_ROTATION    : null,
+    'Denver Nuggets':       typeof NUGGETS_ROTATION !== 'undefined' ? NUGGETS_ROTATION : null,
+    'Golden State Warriors':typeof GSW_ROTATION     !== 'undefined' ? GSW_ROTATION     : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10667,9 +10690,10 @@ function _buildRandPool() {
 
   // Team Rotation — starters + bench
   const TEAM_ROTATIONS = {
-    'Utah Jazz':        typeof JAZZ_ROTATION !== 'undefined' ? JAZZ_ROTATION : null,
-    'Dallas Mavericks': typeof MAVS_ROTATION !== 'undefined' ? MAVS_ROTATION : null,
-    'Denver Nuggets':   typeof NUGGETS_ROTATION !== 'undefined' ? NUGGETS_ROTATION : null,
+    'Utah Jazz':            typeof JAZZ_ROTATION    !== 'undefined' ? JAZZ_ROTATION    : null,
+    'Dallas Mavericks':     typeof MAVS_ROTATION    !== 'undefined' ? MAVS_ROTATION    : null,
+    'Denver Nuggets':       typeof NUGGETS_ROTATION !== 'undefined' ? NUGGETS_ROTATION : null,
+    'Golden State Warriors':typeof GSW_ROTATION     !== 'undefined' ? GSW_ROTATION     : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
