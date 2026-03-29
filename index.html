@@ -3066,13 +3066,13 @@
   }
   /* Centred team name */
   .lp-tip-top-row {
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: center; justify-content: flex-start;
     position: relative; z-index: 1;
   }
   .lp-tip-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 32px; letter-spacing: 2px; color: #fff; line-height: 1;
-    text-align: center;
+    text-align: left;
   }
   .lp-tip-meta { font-size: 11px; color: var(--jazz-sky); font-weight: 500; letter-spacing: 0.3px; }
   .lp-tip-right { display: none; }
@@ -3086,7 +3086,7 @@
   /* Snapshot: single centred row of 4 items */
   .lp-tip-snap-grid {
     display: flex; flex-direction: row;
-    justify-content: center; align-items: center;
+    justify-content: flex-start; align-items: center;
     gap: 0;
     position: relative; z-index: 1;
     flex-wrap: nowrap;
@@ -3097,6 +3097,7 @@
     border-right: 1px solid rgba(107,63,160,0.25);
     white-space: nowrap;
   }
+  .lp-tir-item:first-child { padding-left: 0; }
   .lp-tir-item:last-child { border-right: none; }
   /* Legacy compat — keep old refs from breaking */
   .lp-tip-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
@@ -5916,7 +5917,6 @@
           <div class="lp-tip-inner-divider"></div>
           <div class="lp-tip-snap-grid" id="lp-team-inforow">
             <span class="lp-tir-item"><span class="lp-tir-icon">🏟</span><span class="lp-tir-val" id="lp-snap-arena">Delta Center</span></span>
-            <span class="lp-tir-item"><span class="lp-tir-icon">👔</span><span class="lp-tir-val" id="lp-snap-coach">Will Hardy</span></span>
             <span class="lp-tir-item"><span class="lp-tir-icon">🏀</span><span class="lp-tir-val" id="lp-snap-conf">West</span></span>
             <span class="lp-tir-item"><span class="lp-tir-icon">🏆</span><span class="lp-tir-val" id="lp-snap-titles">0</span><span class="lp-tir-label">Titles</span></span>
           </div>
