@@ -5701,7 +5701,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('rockets','Houston Rockets','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Houston Rockets</div>
-                <div class="lp-ct-sub">17 players · Active</div>
+                <div class="lp-ct-sub">10 players · active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -6480,8 +6480,40 @@ const NUGGETS_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, then Mavs, then Nuggets, then GSW, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// Rockets precise multi-position labels
+const ROCKETS_POSITIONS = {
+  "Fred VanVleet":    "PG/SG",
+  "Amen Thompson":    "PG/SG",
+  "Kevin Durant":     "SF/PF",
+  "Jabari Smith Jr.": "PF/SF",
+  "Alperen Sengun":   "C/PF",
+  "Reed Shepard":     "SG/PG",
+  "Josh Okogie":      "SG/SF",
+  "Dorian Finney-Smith": "PF/SF",
+  "Tari Eason":       "PF/SF",
+  "Clint Capela":     "C",
+};
+
+// Rockets 10-player rotation
+const ROCKETS_ROTATION = {
+  starters: [
+    { pos:"PG/SG", name:"Fred VanVleet" },
+    { pos:"PG/SG", name:"Amen Thompson" },
+    { pos:"SF/PF", name:"Kevin Durant" },
+    { pos:"PF/SF", name:"Jabari Smith Jr." },
+    { pos:"C/PF",  name:"Alperen Sengun" },
+  ],
+  bench: [
+    { pos:"SG/PG", name:"Reed Shepard" },
+    { pos:"SG/SF", name:"Josh Okogie" },
+    { pos:"PF/SF", name:"Tari Eason" },
+    { pos:"PF/SF", name:"Dorian Finney-Smith" },
+    { pos:"C",     name:"Clint Capela" },
+  ]
+};
+
+// getPosLabel: checks Jazz, then Mavs, then Nuggets, then GSW, then Rockets, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -6587,23 +6619,16 @@ const ROCKETS_TEAM = {
 const ROCKETS_STARTING_LINEUP = { PG:"Fred VanVleet", SG:"Amen Thompson", SF:"Kevin Durant", PF:"Jabari Smith Jr.", C:"Alperen Sengun" };
 
 const ROCKETS_ROSTER = [
-  { name:"Amen Thompson",         position:"G", jersey:"1",  height:"6ft 7in",  college:"None",          country:"Bahamas",   hometown:"Nassau, Bahamas",              draft_year:"2023", draft_pick:"4",         draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Fred VanVleet",         position:"G", jersey:"5",  height:"6ft 1in",  college:"Wichita State", country:"USA",       hometown:"Rockford, Illinois",           draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Toronto Raptors",dur:"6 seasons"}],                                                                                                    jazz_years:"1 season" },
-  { name:"Reed Sheppard",         position:"G", jersey:"15", height:"6ft 3in",  college:"Kentucky",      country:"USA",       hometown:"North Middletown, Kentucky",   draft_year:"2024", draft_pick:"3",         draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Aaron Holiday",         position:"G", jersey:"0",  height:"6ft 1in",  college:"UCLA",          country:"USA",       hometown:"Los Angeles, California",      draft_year:"2018", draft_pick:"23",        draft_team:"Indiana Pacers",        past_teams:[{team:"Indiana Pacers",dur:"3 seasons"},{team:"Washington Wizards",dur:"1 season"},{team:"Houston Rockets",dur:"2 seasons"},{team:"Milwaukee Bucks",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"J.D. Davison",          position:"G", jersey:"34", height:"6ft 3in",  college:"Alabama",       country:"USA",       hometown:"Letohatchee, Alabama",         draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Boston Celtics",dur:"2 seasons"}],                                                                                                     jazz_years:"1 season" },
-  { name:"Tristen Newton",        position:"G", jersey:"3",  height:"6ft 2in",  college:"Connecticut",   country:"USA",       hometown:"Beaumont, Texas",              draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Cleveland Cavaliers",dur:"1 season"}],                                                                                                  jazz_years:"1 season" },
-  { name:"Kevin Durant",          position:"F", jersey:"7",  height:"6ft 10in", college:"Texas",         country:"USA",       hometown:"Washington, D.C.",             draft_year:"2007", draft_pick:"2",         draft_team:"Seattle SuperSonics",   past_teams:[{team:"Oklahoma City Thunder",dur:"9 seasons"},{team:"Golden State Warriors",dur:"3 seasons"},{team:"Brooklyn Nets",dur:"2 seasons"},{team:"Phoenix Suns",dur:"2 seasons"}], jazz_years:"1 season" },
-  { name:"Tari Eason",            position:"F", jersey:"17", height:"6ft 7in",  college:"LSU",           country:"USA",       hometown:"Lakewood, Washington",         draft_year:"2022", draft_pick:"17",        draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jabari Smith Jr.",      position:"F", jersey:"10", height:"6ft 10in", college:"Auburn",        country:"USA",       hometown:"Fayetteville, Georgia",        draft_year:"2022", draft_pick:"3",         draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Dorian Finney-Smith",   position:"F", jersey:"28", height:"6ft 7in",  college:"Florida",       country:"USA",       hometown:"Norfolk, Virginia",            draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Dallas Mavericks",dur:"6 seasons"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Los Angeles Lakers",dur:"1 season"}],                    jazz_years:"1 season" },
-  { name:"Jae'Sean Tate",         position:"F", jersey:"8",  height:"6ft 4in",  college:"Ohio State",    country:"USA",       hometown:"Canton, Ohio",                 draft_year:"2018", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Josh Okogie",           position:"F", jersey:"2",  height:"6ft 4in",  college:"Georgia Tech",  country:"Nigeria",   hometown:"Lagos, Nigeria",               draft_year:"2018", draft_pick:"20",        draft_team:"Minnesota Timberwolves",past_teams:[{team:"Minnesota Timberwolves",dur:"4 seasons"},{team:"Phoenix Suns",dur:"2 seasons"}],                                                              jazz_years:"1 season" },
-  { name:"Isaiah Crawford",       position:"F", jersey:"6",  height:"6ft 6in",  college:"Virginia",      country:"USA",       hometown:"Chesapeake, Virginia",         draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jeff Green",            position:"F", jersey:"32", height:"6ft 8in",  college:"Georgetown",    country:"USA",       hometown:"Cheverly, Maryland",           draft_year:"2007", draft_pick:"5",         draft_team:"Seattle SuperSonics",   past_teams:[{team:"Oklahoma City Thunder",dur:"2 seasons"},{team:"Boston Celtics",dur:"3 seasons"},{team:"Memphis Grizzlies",dur:"1 season"},{team:"LA Clippers",dur:"1 season"},{team:"Washington Wizards",dur:"2 seasons"},{team:"Cleveland Cavaliers",dur:"1 season"},{team:"Utah Jazz",dur:"1 season"},{team:"Houston Rockets",dur:"1 season"},{team:"Denver Nuggets",dur:"2 seasons"}], jazz_years:"1 season" },
-  { name:"Alperen Sengun",        position:"C", jersey:"28", height:"6ft 10in", college:"None",          country:"Turkey",    hometown:"Osmaniye, Turkey",             draft_year:"2021", draft_pick:"16",        draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Steven Adams",          position:"C", jersey:"12", height:"6ft 11in", college:"Pittsburgh",    country:"New Zealand",hometown:"Rotorua, New Zealand",        draft_year:"2013", draft_pick:"12",        draft_team:"Oklahoma City Thunder", past_teams:[{team:"Oklahoma City Thunder",dur:"7 seasons"},{team:"New Orleans Pelicans",dur:"2 seasons"},{team:"Memphis Grizzlies",dur:"3 seasons"}],              jazz_years:"1 season" },
-  { name:"Clint Capela",          position:"C", jersey:"15", height:"6ft 10in", college:"None",          country:"Switzerland",hometown:"Geneva, Switzerland",         draft_year:"2014", draft_pick:"25",        draft_team:"Houston Rockets",       past_teams:[{team:"Houston Rockets",dur:"6 seasons"},{team:"Atlanta Hawks",dur:"5 seasons"}],                                                                   jazz_years:"1 season" },
+  { name:"Fred VanVleet",    position:"PG/SG", jersey:"5",  height:"6ft 1in",  college:"Wichita State", country:"USA",        hometown:"Rockford, Illinois",         draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Toronto Raptors",dur:"6 seasons"}],                                                                                                                           rockets_years:"1 season" },
+  { name:"Amen Thompson",    position:"PG/SG", jersey:"1",  height:"6ft 7in",  college:"None",          country:"Bahamas",    hometown:"Nassau, Bahamas",            draft_year:"2023", draft_pick:"4",         draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                                               rockets_years:"1 season" },
+  { name:"Kevin Durant",     position:"SF/PF", jersey:"7",  height:"6ft 10in", college:"Texas",         country:"USA",        hometown:"Washington, D.C.",           draft_year:"2007", draft_pick:"2",         draft_team:"Seattle SuperSonics",   past_teams:[{team:"Oklahoma City Thunder",dur:"9 seasons"},{team:"Golden State Warriors",dur:"3 seasons"},{team:"Brooklyn Nets",dur:"2 seasons"},{team:"Phoenix Suns",dur:"2 seasons"}], rockets_years:"1 season" },
+  { name:"Jabari Smith Jr.", position:"PF/SF", jersey:"10", height:"6ft 10in", college:"Auburn",        country:"USA",        hometown:"Fayetteville, Georgia",      draft_year:"2022", draft_pick:"3",         draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                                               rockets_years:"1 season" },
+  { name:"Alperen Sengun",   position:"C/PF",  jersey:"28", height:"6ft 10in", college:"None",          country:"Turkey",     hometown:"Osmaniye, Turkey",           draft_year:"2021", draft_pick:"16",        draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                                               rockets_years:"1 season" },
+  { name:"Reed Shepard",     position:"SG/PG", jersey:"15", height:"6ft 3in",  college:"Kentucky",      country:"USA",        hometown:"North Middletown, Kentucky", draft_year:"2024", draft_pick:"3",         draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                                               rockets_years:"1 season" },
+  { name:"Josh Okogie",      position:"SG/SF", jersey:"2",  height:"6ft 4in",  college:"Georgia Tech",  country:"Nigeria",    hometown:"Lagos, Nigeria",             draft_year:"2018", draft_pick:"20",        draft_team:"Minnesota Timberwolves",past_teams:[{team:"Minnesota Timberwolves",dur:"4 seasons"},{team:"Phoenix Suns",dur:"2 seasons"}],                                                                              rockets_years:"1 season" },
+  { name:"Dorian Finney-Smith", position:"PF/SF", jersey:"28", height:"6ft 7in",  college:"Florida",       country:"USA",        hometown:"Norfolk, Virginia",          draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Dallas Mavericks",dur:"6 seasons"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Los Angeles Lakers",dur:"1 season"}],                                                                                rockets_years:"1 season" },
+  { name:"Tari Eason",       position:"PF/SF", jersey:"17", height:"6ft 7in",  college:"LSU",           country:"USA",        hometown:"Lakewood, Washington",       draft_year:"2022", draft_pick:"17",        draft_team:"Houston Rockets",       past_teams:"None",                                                                                                                                                               rockets_years:"1 season" },
+  { name:"Clint Capela",     position:"C",     jersey:"15", height:"6ft 10in", college:"None",          country:"Switzerland",hometown:"Geneva, Switzerland",        draft_year:"2014", draft_pick:"25",        draft_team:"Houston Rockets",       past_teams:[{team:"Houston Rockets",dur:"6 seasons"},{team:"Atlanta Hawks",dur:"5 seasons"}],                                                                                   rockets_years:"1 season" },
 ];
 
 const GSW_TEAM = {
@@ -7909,6 +7934,7 @@ function buildTeamToRosterDeck(team, roster) {
     'Dallas Mavericks':     typeof MAVS_ROTATION    !== 'undefined' ? MAVS_ROTATION    : null,
     'Denver Nuggets':       typeof NUGGETS_ROTATION !== 'undefined' ? NUGGETS_ROTATION : null,
     'Golden State Warriors':typeof GSW_ROTATION     !== 'undefined' ? GSW_ROTATION     : null,
+    'Houston Rockets':      typeof ROCKETS_ROTATION !== 'undefined' ? ROCKETS_ROTATION : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10694,6 +10720,7 @@ function _buildRandPool() {
     'Dallas Mavericks':     typeof MAVS_ROTATION    !== 'undefined' ? MAVS_ROTATION    : null,
     'Denver Nuggets':       typeof NUGGETS_ROTATION !== 'undefined' ? NUGGETS_ROTATION : null,
     'Golden State Warriors':typeof GSW_ROTATION     !== 'undefined' ? GSW_ROTATION     : null,
+    'Houston Rockets':      typeof ROCKETS_ROTATION !== 'undefined' ? ROCKETS_ROTATION : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
@@ -11643,7 +11670,7 @@ function updateSportsDropdown() {
   // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-  if (subEl)    subEl.textContent = `Utah Jazz · ${learnedCount}/${totalPlayers} players learned`;
+  if (subEl)    subEl.textContent = `Houston Rockets · ${learnedCount}/${totalPlayers} players learned`;
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
