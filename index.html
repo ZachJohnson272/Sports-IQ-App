@@ -5743,7 +5743,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('okc','Oklahoma City Thunder','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Oklahoma City Thunder</div>
-                <div class="lp-ct-sub">15 players · Active</div>
+                <div class="lp-ct-sub">10 players · active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -6672,8 +6672,40 @@ const PELICANS_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// OKC precise multi-position labels
+const OKC_POSITIONS = {
+  "Shai Gilgeous-Alexander": "PG/SG",
+  "Luguentz Dort":           "SG/SF",
+  "Jalen Williams":          "SF/SG",
+  "Chet Holmgren":           "PF/C",
+  "Isaiah Hartenstein":      "C/PF",
+  "Ajay Mitchell":           "PG/SG",
+  "Alex Caruso":             "SG/PG",
+  "Cason Wallace":           "SG/PG",
+  "Isaiah Joe":              "SG/SF",
+  "Jaylin Williams":         "C/PF",
+};
+
+// OKC 10-player rotation
+const OKC_ROTATION = {
+  starters: [
+    { pos:"PG/SG", name:"Shai Gilgeous-Alexander" },
+    { pos:"SG/SF", name:"Luguentz Dort" },
+    { pos:"SF/SG", name:"Jalen Williams" },
+    { pos:"PF/C",  name:"Chet Holmgren" },
+    { pos:"C/PF",  name:"Isaiah Hartenstein" },
+  ],
+  bench: [
+    { pos:"PG/SG", name:"Ajay Mitchell" },
+    { pos:"SG/PG", name:"Alex Caruso" },
+    { pos:"SG/PG", name:"Cason Wallace" },
+    { pos:"SG/SF", name:"Isaiah Joe" },
+    { pos:"C/PF",  name:"Jaylin Williams" },
+  ]
+};
+
+// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, OKC, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || OKC_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -7026,21 +7058,16 @@ const OKC_TEAM = {
 const OKC_STARTING_LINEUP = { PG:"Shai Gilgeous-Alexander", SG:"Luguentz Dort", SF:"Jalen Williams", PF:"Chet Holmgren", C:"Isaiah Hartenstein" };
 
 const OKC_ROSTER = [
-  { name:"Shai Gilgeous-Alexander", position:"G", jersey:"2",  height:"6ft 6in",  college:"Kentucky",        country:"Canada",    hometown:"Hamilton, Ontario, Canada",    draft_year:"2018", draft_pick:"11",        draft_team:"Charlotte Hornets",      past_teams:[{team:"LA Clippers",dur:"1 season"}],                                                                                                              jazz_years:"1 season" },
-  { name:"Luguentz Dort",           position:"G", jersey:"5",  height:"6ft 4in",  college:"Arizona State",   country:"Canada",    hometown:"Montreal, Canada",             draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Cason Wallace",           position:"G", jersey:"6",  height:"6ft 4in",  college:"Kentucky",        country:"USA",       hometown:"Fort Worth, Texas",            draft_year:"2023", draft_pick:"10",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Alex Caruso",             position:"G", jersey:"9",  height:"6ft 5in",  college:"Texas A&M",       country:"USA",       hometown:"College Station, Texas",       draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Los Angeles Lakers",dur:"3 seasons"},{team:"Chicago Bulls",dur:"3 seasons"},{team:"Milwaukee Bucks",dur:"1 season"}],                   jazz_years:"1 season" },
-  { name:"Isaiah Joe",              position:"G", jersey:"11", height:"6ft 4in",  college:"Arkansas",        country:"USA",       hometown:"Fort Smith, Arkansas",         draft_year:"2020", draft_pick:"49",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"2 seasons"}],                                                                                                      jazz_years:"1 season" },
-  { name:"Ajay Mitchell",           position:"G", jersey:"12", height:"6ft 5in",  college:"UC Santa Barbara",country:"Canada",    hometown:"Nanaimo, British Columbia",    draft_year:"2024", draft_pick:"34",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jared McCain",            position:"G", jersey:"6",  height:"6ft 2in",  college:"Duke",            country:"USA",       hometown:"Riverside, California",        draft_year:"2024", draft_pick:"16",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"1 season"}],                                                                                                       jazz_years:"1 season" },
-  { name:"Nikola Topic",            position:"G", jersey:"10", height:"6ft 6in",  college:"None",            country:"Serbia",    hometown:"Belgrade, Serbia",             draft_year:"2024", draft_pick:"12",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jalen Williams",          position:"F", jersey:"8",  height:"6ft 6in",  college:"Santa Clara",     country:"USA",       hometown:"Gilbert, Arizona",             draft_year:"2022", draft_pick:"12",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Aaron Wiggins",           position:"F", jersey:"21", height:"6ft 5in",  college:"Maryland",        country:"Canada",    hometown:"Shelburne, Nova Scotia",       draft_year:"2021", draft_pick:"55",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Kenrich Williams",        position:"F", jersey:"34", height:"6ft 7in",  college:"TCU",             country:"USA",       hometown:"Monroe, Louisiana",            draft_year:"2018", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"New Orleans Pelicans",dur:"2 seasons"}],                                                                                                    jazz_years:"1 season" },
-  { name:"Jaylin Williams",         position:"F", jersey:"6",  height:"6ft 10in", college:"Arkansas",        country:"USA",       hometown:"Fort Smith, Arkansas",         draft_year:"2022", draft_pick:"34",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Chet Holmgren",           position:"C", jersey:"7",  height:"7ft 1in",  college:"Gonzaga",         country:"USA",       hometown:"Minneapolis, Minnesota",       draft_year:"2022", draft_pick:"2",         draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Isaiah Hartenstein",      position:"C", jersey:"55", height:"7ft 0in",  college:"None",            country:"Germany",   hometown:"Portland, Oregon",             draft_year:"2017", draft_pick:"43",        draft_team:"Houston Rockets",        past_teams:[{team:"Houston Rockets",dur:"1 season"},{team:"Cleveland Cavaliers",dur:"1 season"},{team:"Denver Nuggets",dur:"2 seasons"},{team:"Los Angeles Clippers",dur:"1 season"},{team:"New York Knicks",dur:"2 seasons"}], jazz_years:"1 season" },
-  { name:"Branden Carlson",         position:"C", jersey:"1",  height:"7ft 1in",  college:"Utah",            country:"USA",       hometown:"Long Beach, California",       draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Utah Jazz",dur:"2 seasons"}],                                                                                                               jazz_years:"1 season" },
+  { name:"Shai Gilgeous-Alexander", position:"PG/SG", jersey:"2",  height:"6ft 6in",  college:"Kentucky",        country:"Canada", hometown:"Hamilton, Ontario, Canada",  draft_year:"2018", draft_pick:"11",        draft_team:"Charlotte Hornets",      past_teams:[{team:"LA Clippers",dur:"1 season"}],                                                                                                                                                           okc_years:"1 season" },
+  { name:"Luguentz Dort",           position:"SG/SF", jersey:"5",  height:"6ft 4in",  college:"Arizona State",   country:"Canada", hometown:"Montreal, Canada",           draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                                                                   okc_years:"1 season" },
+  { name:"Jalen Williams",          position:"SF/SG", jersey:"8",  height:"6ft 6in",  college:"Santa Clara",     country:"USA",    hometown:"Gilbert, Arizona",           draft_year:"2022", draft_pick:"12",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                                                                   okc_years:"1 season" },
+  { name:"Chet Holmgren",           position:"PF/C",  jersey:"7",  height:"7ft 1in",  college:"Gonzaga",         country:"USA",    hometown:"Minneapolis, Minnesota",     draft_year:"2022", draft_pick:"2",         draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                                                                   okc_years:"1 season" },
+  { name:"Isaiah Hartenstein",      position:"C/PF",  jersey:"55", height:"7ft 0in",  college:"None",            country:"Germany",hometown:"Portland, Oregon",           draft_year:"2017", draft_pick:"43",        draft_team:"Houston Rockets",        past_teams:[{team:"Houston Rockets",dur:"1 season"},{team:"Cleveland Cavaliers",dur:"1 season"},{team:"Denver Nuggets",dur:"2 seasons"},{team:"Los Angeles Clippers",dur:"1 season"},{team:"New York Knicks",dur:"2 seasons"}], okc_years:"1 season" },
+  { name:"Ajay Mitchell",           position:"PG/SG", jersey:"12", height:"6ft 5in",  college:"UC Santa Barbara",country:"Canada", hometown:"Nanaimo, British Columbia",  draft_year:"2024", draft_pick:"34",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                                                                   okc_years:"1 season" },
+  { name:"Alex Caruso",             position:"SG/PG", jersey:"9",  height:"6ft 5in",  college:"Texas A&M",       country:"USA",    hometown:"College Station, Texas",     draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Los Angeles Lakers",dur:"3 seasons"},{team:"Chicago Bulls",dur:"3 seasons"},{team:"Milwaukee Bucks",dur:"1 season"}],                                                              okc_years:"1 season" },
+  { name:"Cason Wallace",           position:"SG/PG", jersey:"6",  height:"6ft 4in",  college:"Kentucky",        country:"USA",    hometown:"Fort Worth, Texas",          draft_year:"2023", draft_pick:"10",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                                                                   okc_years:"1 season" },
+  { name:"Isaiah Joe",              position:"SG/SF", jersey:"11", height:"6ft 4in",  college:"Arkansas",        country:"USA",    hometown:"Fort Smith, Arkansas",       draft_year:"2020", draft_pick:"49",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"2 seasons"}],                                                                                                                                              okc_years:"1 season" },
+  { name:"Jaylin Williams",         position:"C/PF",  jersey:"6",  height:"6ft 10in", college:"Arkansas",        country:"USA",    hometown:"Fort Smith, Arkansas",       draft_year:"2022", draft_pick:"34",        draft_team:"Oklahoma City Thunder",  past_teams:"None",                                                                                                                                                                                   okc_years:"1 season" },
 ];
 
 const SUNS_TEAM = {
@@ -8064,6 +8091,7 @@ function buildTeamToRosterDeck(team, roster) {
     'Memphis Grizzlies':    typeof GRIZZLIES_ROTATION !== 'undefined' ? GRIZZLIES_ROTATION : null,
     'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
     'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
+    'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10855,6 +10883,7 @@ function _buildRandPool() {
     'Memphis Grizzlies':    typeof GRIZZLIES_ROTATION !== 'undefined' ? GRIZZLIES_ROTATION : null,
     'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
     'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
+    'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
@@ -11804,7 +11833,7 @@ function updateSportsDropdown() {
   // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-  if (subEl)    subEl.textContent = `New Orleans Pelicans · ${learnedCount}/${totalPlayers} players learned`;
+  if (subEl)    subEl.textContent = `Oklahoma City Thunder · ${learnedCount}/${totalPlayers} players learned`;
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
