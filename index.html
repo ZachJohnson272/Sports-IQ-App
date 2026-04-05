@@ -5764,7 +5764,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('kings','Sacramento Kings','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Sacramento Kings</div>
-                <div class="lp-ct-sub">17 players · Active</div>
+                <div class="lp-ct-sub">10 players · active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -6768,8 +6768,40 @@ const BLAZERS_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, OKC, Suns, Blazers, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || OKC_POSITIONS[p.name] || SUNS_POSITIONS[p.name] || BLAZERS_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// Kings precise multi-position labels
+const KINGS_POSITIONS = {
+  "Russell Westbrook": "PG/SG",
+  "Zach LaVine":       "SG/SF",
+  "DeMar DeRozan":     "SF/SG",
+  "De'Andre Hunter":   "PF/SF",
+  "Domantas Sabonis":  "C/PF",
+  "Malik Monk":        "SG/PG",
+  "Devin Carter":      "SG/PG",
+  "Nique Clifford":    "SG/SF",
+  "Maxime Raynaud":    "C/PF",
+  "Precious Achiuwa":  "C/PF",
+};
+
+// Kings 10-player rotation
+const KINGS_ROTATION = {
+  starters: [
+    { pos:"PG/SG", name:"Russell Westbrook" },
+    { pos:"SG/SF", name:"Zach LaVine" },
+    { pos:"SF/SG", name:"DeMar DeRozan" },
+    { pos:"PF/SF", name:"De'Andre Hunter" },
+    { pos:"C/PF",  name:"Domantas Sabonis" },
+  ],
+  bench: [
+    { pos:"SG/PG", name:"Malik Monk" },
+    { pos:"SG/PG", name:"Devin Carter" },
+    { pos:"SG/SF", name:"Nique Clifford" },
+    { pos:"C/PF",  name:"Maxime Raynaud" },
+    { pos:"C/PF",  name:"Precious Achiuwa" },
+  ]
+};
+
+// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, OKC, Suns, Blazers, Kings, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || OKC_POSITIONS[p.name] || SUNS_POSITIONS[p.name] || BLAZERS_POSITIONS[p.name] || KINGS_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -7212,26 +7244,19 @@ const KINGS_TEAM = {
   coachSince: "2025"
 };
 
-const KINGS_STARTING_LINEUP = { PG:"Malik Monk", SG:"Zach LaVine", SF:"De'Andre Hunter", PF:"DeMar DeRozan", C:"Domantas Sabonis" };
+const KINGS_STARTING_LINEUP = { PG:"Russell Westbrook", SG:"Zach LaVine", SF:"DeMar DeRozan", PF:"De'Andre Hunter", C:"Domantas Sabonis" };
 
 const KINGS_ROSTER = [
-  { name:"Russell Westbrook",    position:"G", jersey:"0",  height:"6ft 3in",  college:"UCLA",            country:"USA",       hometown:"Los Angeles, California",      draft_year:"2008", draft_pick:"4",         draft_team:"Seattle SuperSonics",   past_teams:[{team:"Oklahoma City Thunder",dur:"11 seasons"},{team:"Houston Rockets",dur:"1 season"},{team:"Washington Wizards",dur:"1 season"},{team:"Indiana Pacers",dur:"1 season"},{team:"Los Angeles Lakers",dur:"3 seasons"},{team:"LA Clippers",dur:"1 season"},{team:"Utah Jazz",dur:"1 season"},{team:"Denver Nuggets",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"Malik Monk",           position:"G", jersey:"0",  height:"6ft 3in",  college:"Kentucky",        country:"USA",       hometown:"Lepanto, Arkansas",            draft_year:"2017", draft_pick:"11",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"4 seasons"},{team:"Los Angeles Lakers",dur:"1 season"}],                                                             jazz_years:"1 season" },
-  { name:"Killian Hayes",        position:"G", jersey:"7",  height:"6ft 5in",  college:"None",            country:"France",    hometown:"Lake Wales, Florida",          draft_year:"2020", draft_pick:"7",         draft_team:"Detroit Pistons",        past_teams:[{team:"Detroit Pistons",dur:"3 seasons"},{team:"Brooklyn Nets",dur:"1 season"}],                                                                    jazz_years:"1 season" },
-  { name:"Devin Carter",         position:"G", jersey:"22", height:"6ft 3in",  college:"Providence",      country:"USA",       hometown:"Waterbury, Connecticut",       draft_year:"2024", draft_pick:"13",        draft_team:"Sacramento Kings",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Isaiah Stevens",       position:"G", jersey:"8",  height:"6ft 1in",  college:"Colorado State",  country:"USA",       hometown:"Murrieta, California",         draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Zach LaVine",          position:"G", jersey:"8",  height:"6ft 5in",  college:"UCLA",            country:"USA",       hometown:"Renton, Washington",           draft_year:"2014", draft_pick:"13",        draft_team:"Minnesota Timberwolves", past_teams:[{team:"Minnesota Timberwolves",dur:"3 seasons"},{team:"Chicago Bulls",dur:"6 seasons"}],                                                           jazz_years:"1 season" },
-  { name:"DeMar DeRozan",        position:"F", jersey:"10", height:"6ft 6in",  college:"USC",             country:"USA",       hometown:"Compton, California",          draft_year:"2009", draft_pick:"9",         draft_team:"Toronto Raptors",        past_teams:[{team:"Toronto Raptors",dur:"9 seasons"},{team:"San Antonio Spurs",dur:"3 seasons"},{team:"Chicago Bulls",dur:"3 seasons"}],                       jazz_years:"1 season" },
-  { name:"Nique Clifford",       position:"F", jersey:"25", height:"6ft 7in",  college:"Colorado State",  country:"USA",       hometown:"Denver, Colorado",             draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Daeqwon Plowden",      position:"F", jersey:"14", height:"6ft 8in",  college:"Syracuse",        country:"USA",       hometown:"Brooklyn, New York",           draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Doug McDermott",       position:"F", jersey:"3",  height:"6ft 7in",  college:"Creighton",       country:"USA",       hometown:"Ames, Iowa",                   draft_year:"2014", draft_pick:"11",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"2 seasons"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"New York Knicks",dur:"1 season"},{team:"Indiana Pacers",dur:"2 seasons"},{team:"San Antonio Spurs",dur:"3 seasons"}], jazz_years:"1 season" },
-  { name:"De'Andre Hunter",      position:"F", jersey:"12", height:"6ft 7in",  college:"Virginia",        country:"USA",       hometown:"Philadelphia, Pennsylvania",   draft_year:"2019", draft_pick:"4",         draft_team:"Atlanta Hawks",          past_teams:[{team:"Atlanta Hawks",dur:"5 seasons"}],                                                                                                           jazz_years:"1 season" },
-  { name:"Patrick Baldwin Jr.",  position:"F", jersey:"7",  height:"6ft 9in",  college:"Milwaukee",       country:"USA",       hometown:"Lake Geneva, Wisconsin",       draft_year:"2022", draft_pick:"28",        draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"1 season"},{team:"Brooklyn Nets",dur:"1 season"}],                                                              jazz_years:"1 season" },
-  { name:"Precious Achiuwa",     position:"F", jersey:"5",  height:"6ft 8in",  college:"Memphis",         country:"Nigeria",   hometown:"Lagos, Nigeria",               draft_year:"2020", draft_pick:"20",        draft_team:"Miami Heat",             past_teams:[{team:"Miami Heat",dur:"1 season"},{team:"Toronto Raptors",dur:"3 seasons"},{team:"New York Knicks",dur:"1 season"},{team:"Indiana Pacers",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"Domantas Sabonis",     position:"C", jersey:"11", height:"6ft 11in", college:"Gonzaga",         country:"Lithuania", hometown:"Portland, Oregon",             draft_year:"2016", draft_pick:"11",        draft_team:"Orlando Magic",          past_teams:[{team:"Indiana Pacers",dur:"5 seasons"}],                                                                                                           jazz_years:"1 season" },
-  { name:"Drew Eubanks",         position:"C", jersey:"14", height:"6ft 10in", college:"Oregon State",    country:"USA",       hometown:"Tigard, Oregon",               draft_year:"2018", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"San Antonio Spurs",dur:"3 seasons"},{team:"Portland Trail Blazers",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}],                   jazz_years:"1 season" },
-  { name:"Maxime Raynaud",       position:"C", jersey:"42", height:"7ft 1in",  college:"Stanford",        country:"France",    hometown:"Paris, France",                draft_year:"2024", draft_pick:"43",        draft_team:"Sacramento Kings",       past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Dylan Cardwell",       position:"C", jersey:"15", height:"6ft 10in", college:"Auburn",          country:"USA",       hometown:"Huntsville, Alabama",          draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Russell Westbrook", position:"PG/SG", jersey:"0",  height:"6ft 3in",  college:"UCLA",         country:"USA",       hometown:"Los Angeles, California", draft_year:"2008", draft_pick:"4",         draft_team:"Seattle SuperSonics",   past_teams:[{team:"Oklahoma City Thunder",dur:"11 seasons"},{team:"Houston Rockets",dur:"1 season"},{team:"Washington Wizards",dur:"1 season"},{team:"Indiana Pacers",dur:"1 season"},{team:"Los Angeles Lakers",dur:"3 seasons"},{team:"LA Clippers",dur:"1 season"},{team:"Utah Jazz",dur:"1 season"},{team:"Denver Nuggets",dur:"1 season"}], kings_years:"1 season" },
+  { name:"Zach LaVine",       position:"SG/SF", jersey:"8",  height:"6ft 5in",  college:"UCLA",         country:"USA",       hometown:"Renton, Washington",      draft_year:"2014", draft_pick:"13",        draft_team:"Minnesota Timberwolves", past_teams:[{team:"Minnesota Timberwolves",dur:"3 seasons"},{team:"Chicago Bulls",dur:"6 seasons"}],                                                           kings_years:"1 season" },
+  { name:"DeMar DeRozan",     position:"SF/SG", jersey:"10", height:"6ft 6in",  college:"USC",          country:"USA",       hometown:"Compton, California",     draft_year:"2009", draft_pick:"9",         draft_team:"Toronto Raptors",        past_teams:[{team:"Toronto Raptors",dur:"9 seasons"},{team:"San Antonio Spurs",dur:"3 seasons"},{team:"Chicago Bulls",dur:"3 seasons"}],                       kings_years:"1 season" },
+  { name:"De'Andre Hunter",   position:"PF/SF", jersey:"12", height:"6ft 7in",  college:"Virginia",     country:"USA",       hometown:"Philadelphia, Pennsylvania",draft_year:"2019", draft_pick:"4",        draft_team:"Atlanta Hawks",          past_teams:[{team:"Atlanta Hawks",dur:"5 seasons"}],                                                                                                           kings_years:"1 season" },
+  { name:"Domantas Sabonis",  position:"C/PF",  jersey:"11", height:"6ft 11in", college:"Gonzaga",      country:"Lithuania", hometown:"Portland, Oregon",        draft_year:"2016", draft_pick:"11",        draft_team:"Orlando Magic",          past_teams:[{team:"Indiana Pacers",dur:"5 seasons"}],                                                                                                           kings_years:"1 season" },
+  { name:"Malik Monk",        position:"SG/PG", jersey:"0",  height:"6ft 3in",  college:"Kentucky",     country:"USA",       hometown:"Lepanto, Arkansas",       draft_year:"2017", draft_pick:"11",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"4 seasons"},{team:"Los Angeles Lakers",dur:"1 season"}],                                                             kings_years:"1 season" },
+  { name:"Devin Carter",      position:"SG/PG", jersey:"22", height:"6ft 3in",  college:"Providence",   country:"USA",       hometown:"Waterbury, Connecticut",  draft_year:"2024", draft_pick:"13",        draft_team:"Sacramento Kings",       past_teams:"None",                                                                                                                                              kings_years:"1 season" },
+  { name:"Nique Clifford",    position:"SG/SF", jersey:"25", height:"6ft 7in",  college:"Colorado State",country:"USA",      hometown:"Denver, Colorado",        draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              kings_years:"1 season" },
+  { name:"Maxime Raynaud",    position:"C/PF",  jersey:"42", height:"7ft 1in",  college:"Stanford",     country:"France",    hometown:"Paris, France",           draft_year:"2024", draft_pick:"43",        draft_team:"Sacramento Kings",       past_teams:"None",                                                                                                                                              kings_years:"1 season" },
+  { name:"Precious Achiuwa",  position:"C/PF",  jersey:"5",  height:"6ft 8in",  college:"Memphis",      country:"Nigeria",   hometown:"Lagos, Nigeria",          draft_year:"2020", draft_pick:"20",        draft_team:"Miami Heat",             past_teams:[{team:"Miami Heat",dur:"1 season"},{team:"Toronto Raptors",dur:"3 seasons"},{team:"New York Knicks",dur:"1 season"},{team:"Indiana Pacers",dur:"1 season"}], kings_years:"1 season" },
 ];
 
 const SPURS_TEAM = {
@@ -8147,6 +8172,7 @@ function buildTeamToRosterDeck(team, roster) {
     'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
     'Phoenix Suns':           typeof SUNS_ROTATION !== 'undefined' ? SUNS_ROTATION : null,
     'Portland Trail Blazers': typeof BLAZERS_ROTATION !== 'undefined' ? BLAZERS_ROTATION : null,
+    'Sacramento Kings':       typeof KINGS_ROTATION !== 'undefined' ? KINGS_ROTATION : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10941,6 +10967,7 @@ function _buildRandPool() {
     'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
     'Phoenix Suns':           typeof SUNS_ROTATION !== 'undefined' ? SUNS_ROTATION : null,
     'Portland Trail Blazers': typeof BLAZERS_ROTATION !== 'undefined' ? BLAZERS_ROTATION : null,
+    'Sacramento Kings':       typeof KINGS_ROTATION !== 'undefined' ? KINGS_ROTATION : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
@@ -11890,7 +11917,7 @@ function updateSportsDropdown() {
   // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-  if (subEl)    subEl.textContent = `Portland Trail Blazers · ${learnedCount}/${totalPlayers} players learned`;
+  if (subEl)    subEl.textContent = `Sacramento Kings · ${learnedCount}/${totalPlayers} players learned`;
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
