@@ -5750,7 +5750,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('suns','Phoenix Suns','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Phoenix Suns</div>
-                <div class="lp-ct-sub">14 players · Active</div>
+                <div class="lp-ct-sub">10 players · active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -6704,8 +6704,40 @@ const OKC_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, OKC, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || OKC_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// Suns precise multi-position labels
+const SUNS_POSITIONS = {
+  "Devin Booker":     "PG/SG",
+  "Jalen Green":      "SG/SF",
+  "Dillon Brooks":    "SF/SG",
+  "Royce O'Neale":   "PF/SF",
+  "Mark Williams":    "C/PF",
+  "Collin Gillespie": "PG/SG",
+  "Jordan Goodwin":   "PG/SG",
+  "Grayson Allen":    "SG/SF",
+  "Ryan Dunn":        "SF/PF",
+  "Oso Ighodaro":     "C/PF",
+};
+
+// Suns 10-player rotation
+const SUNS_ROTATION = {
+  starters: [
+    { pos:"PG/SG", name:"Devin Booker" },
+    { pos:"SG/SF", name:"Jalen Green" },
+    { pos:"SF/SG", name:"Dillon Brooks" },
+    { pos:"PF/SF", name:"Royce O'Neale" },
+    { pos:"C/PF",  name:"Mark Williams" },
+  ],
+  bench: [
+    { pos:"PG/SG", name:"Collin Gillespie" },
+    { pos:"PG/SG", name:"Jordan Goodwin" },
+    { pos:"SG/SF", name:"Grayson Allen" },
+    { pos:"SF/PF", name:"Ryan Dunn" },
+    { pos:"C/PF",  name:"Oso Ighodaro" },
+  ]
+};
+
+// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, OKC, Suns, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || OKC_POSITIONS[p.name] || SUNS_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -7089,20 +7121,16 @@ const SUNS_TEAM = {
 const SUNS_STARTING_LINEUP = { PG:"Devin Booker", SG:"Jalen Green", SF:"Dillon Brooks", PF:"Royce O'Neale", C:"Mark Williams" };
 
 const SUNS_ROSTER = [
-  { name:"Devin Booker",      position:"G", jersey:"1",  height:"6ft 5in",  college:"Kentucky",       country:"USA",      hometown:"Grand Rapids, Michigan",       draft_year:"2015", draft_pick:"13",        draft_team:"Phoenix Suns",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jalen Green",       position:"G", jersey:"14", height:"6ft 4in",  college:"None",            country:"USA",      hometown:"Fresno, California",           draft_year:"2021", draft_pick:"2",         draft_team:"Houston Rockets",        past_teams:[{team:"Houston Rockets",dur:"4 seasons"}],                                                                                                    jazz_years:"1 season" },
-  { name:"Grayson Allen",     position:"G", jersey:"8",  height:"6ft 4in",  college:"Duke",            country:"USA",      hometown:"Jacksonville, Florida",        draft_year:"2018", draft_pick:"21",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"1 season"},{team:"Memphis Grizzlies",dur:"1 season"},{team:"Milwaukee Bucks",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"Collin Gillespie",  position:"G", jersey:"7",  height:"6ft 3in",  college:"Villanova",       country:"USA",      hometown:"Philadelphia, Pennsylvania",   draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Toronto Raptors",dur:"1 season"},{team:"Los Angeles Lakers",dur:"1 season"}],                                                          jazz_years:"1 season" },
-  { name:"Jordan Goodwin",    position:"G", jersey:"4",  height:"6ft 3in",  college:"Saint Louis",     country:"USA",      hometown:"St. Louis, Missouri",          draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Washington Wizards",dur:"1 season"},{team:"Houston Rockets",dur:"1 season"},{team:"Memphis Grizzlies",dur:"1 season"}],                  jazz_years:"1 season" },
-  { name:"Jamaree Bouyea",    position:"G", jersey:"5",  height:"6ft 2in",  college:"San Francisco",   country:"USA",      hometown:"San Diego, California",        draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Golden State Warriors",dur:"1 season"},{team:"Portland Trail Blazers",dur:"1 season"}],                                                  jazz_years:"1 season" },
-  { name:"Koby Brea",         position:"G", jersey:"10", height:"6ft 6in",  college:"Dayton",          country:"Ivory Coast",hometown:"Abidjan, Ivory Coast",       draft_year:"2024", draft_pick:"27",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"1 season"}],                                                                                                            jazz_years:"1 season" },
-  { name:"Dillon Brooks",     position:"F", jersey:"9",  height:"6ft 7in",  college:"Oregon",          country:"Canada",   hometown:"Mississauga, Ontario",         draft_year:"2017", draft_pick:"45",        draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"6 seasons"},{team:"Houston Rockets",dur:"1 season"}],                                                            jazz_years:"1 season" },
-  { name:"Royce O'Neale",     position:"F", jersey:"0",  height:"6ft 5in",  college:"Baylor",          country:"USA",      hometown:"Cedar Hill, Texas",            draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Utah Jazz",dur:"4 seasons"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Houston Rockets",dur:"2 seasons"}],                              jazz_years:"1 season" },
-  { name:"Amir Coffey",       position:"F", jersey:"6",  height:"6ft 7in",  college:"Minnesota",       country:"USA",      hometown:"Burnsville, Minnesota",        draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"LA Clippers",dur:"4 seasons"},{team:"Houston Rockets",dur:"1 season"}],                                                                   jazz_years:"1 season" },
-  { name:"Ryan Dunn",         position:"F", jersey:"13", height:"6ft 7in",  college:"Virginia",        country:"USA",      hometown:"White Plains, New York",       draft_year:"2024", draft_pick:"28",        draft_team:"Phoenix Suns",          past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Rasheer Fleming",   position:"F", jersey:"20", height:"6ft 8in",  college:"Saint Joseph's",  country:"USA",      hometown:"Philadelphia, Pennsylvania",   draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Mark Williams",     position:"C", jersey:"5",  height:"7ft 0in",  college:"Duke",            country:"USA",      hometown:"Lake Norman, North Carolina",  draft_year:"2022", draft_pick:"15",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"2 seasons"}],                                                                                                    jazz_years:"1 season" },
-  { name:"Khaman Maluach",    position:"C", jersey:"6",  height:"7ft 2in",  college:"Duke",            country:"South Sudan",hometown:"Wau, South Sudan",           draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Devin Booker",     position:"PG/SG", jersey:"1",  height:"6ft 5in",  college:"Kentucky",     country:"USA",        hometown:"Grand Rapids, Michigan",      draft_year:"2015", draft_pick:"13",        draft_team:"Phoenix Suns",         past_teams:"None",                                                                                                                                                          suns_years:"1 season" },
+  { name:"Jalen Green",      position:"SG/SF", jersey:"14", height:"6ft 4in",  college:"None",          country:"USA",        hometown:"Fresno, California",          draft_year:"2021", draft_pick:"2",         draft_team:"Houston Rockets",       past_teams:[{team:"Houston Rockets",dur:"4 seasons"}],                                                                                                                suns_years:"1 season" },
+  { name:"Dillon Brooks",    position:"SF/SG", jersey:"9",  height:"6ft 7in",  college:"Oregon",        country:"Canada",     hometown:"Mississauga, Ontario",        draft_year:"2017", draft_pick:"45",        draft_team:"Memphis Grizzlies",     past_teams:[{team:"Memphis Grizzlies",dur:"6 seasons"},{team:"Houston Rockets",dur:"1 season"}],                                                                      suns_years:"1 season" },
+  { name:"Royce O'Neale",   position:"PF/SF", jersey:"0",  height:"6ft 5in",  college:"Baylor",        country:"USA",        hometown:"Cedar Hill, Texas",           draft_year:"2016", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Utah Jazz",dur:"4 seasons"},{team:"Brooklyn Nets",dur:"1 season"},{team:"Houston Rockets",dur:"2 seasons"}],                                      suns_years:"1 season" },
+  { name:"Mark Williams",    position:"C/PF",  jersey:"5",  height:"7ft 0in",  college:"Duke",          country:"USA",        hometown:"Lake Norman, North Carolina", draft_year:"2022", draft_pick:"15",        draft_team:"Charlotte Hornets",     past_teams:[{team:"Charlotte Hornets",dur:"2 seasons"}],                                                                                                            suns_years:"1 season" },
+  { name:"Collin Gillespie", position:"PG/SG", jersey:"7",  height:"6ft 3in",  college:"Villanova",     country:"USA",        hometown:"Philadelphia, Pennsylvania",  draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Toronto Raptors",dur:"1 season"},{team:"Los Angeles Lakers",dur:"1 season"}],                                                                    suns_years:"1 season" },
+  { name:"Jordan Goodwin",   position:"PG/SG", jersey:"4",  height:"6ft 3in",  college:"Saint Louis",   country:"USA",        hometown:"St. Louis, Missouri",        draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",             past_teams:[{team:"Washington Wizards",dur:"1 season"},{team:"Houston Rockets",dur:"1 season"},{team:"Memphis Grizzlies",dur:"1 season"}],                        suns_years:"1 season" },
+  { name:"Grayson Allen",    position:"SG/SF", jersey:"8",  height:"6ft 4in",  college:"Duke",          country:"USA",        hometown:"Jacksonville, Florida",       draft_year:"2018", draft_pick:"21",        draft_team:"Utah Jazz",             past_teams:[{team:"Utah Jazz",dur:"1 season"},{team:"Memphis Grizzlies",dur:"1 season"},{team:"Milwaukee Bucks",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}], suns_years:"1 season" },
+  { name:"Ryan Dunn",        position:"SF/PF", jersey:"13", height:"6ft 7in",  college:"Virginia",      country:"USA",        hometown:"White Plains, New York",      draft_year:"2024", draft_pick:"28",        draft_team:"Phoenix Suns",         past_teams:"None",                                                                                                                                                          suns_years:"1 season" },
+  { name:"Oso Ighodaro",     position:"C/PF",  jersey:"6",  height:"6ft 11in", college:"Marquette",     country:"USA",        hometown:"Coppell, Texas",              draft_year:"2024", draft_pick:"22",        draft_team:"Phoenix Suns",         past_teams:"None",                                                                                                                                                          suns_years:"1 season" },
 ];
 
 const BLAZERS_TEAM = {
@@ -8092,6 +8120,7 @@ function buildTeamToRosterDeck(team, roster) {
     'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
     'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
     'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
+    'Phoenix Suns':           typeof SUNS_ROTATION !== 'undefined' ? SUNS_ROTATION : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10884,6 +10913,7 @@ function _buildRandPool() {
     'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
     'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
     'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
+    'Phoenix Suns':           typeof SUNS_ROTATION !== 'undefined' ? SUNS_ROTATION : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
@@ -11833,7 +11863,7 @@ function updateSportsDropdown() {
   // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-  if (subEl)    subEl.textContent = `Oklahoma City Thunder · ${learnedCount}/${totalPlayers} players learned`;
+  if (subEl)    subEl.textContent = `Phoenix Suns · ${learnedCount}/${totalPlayers} players learned`;
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
