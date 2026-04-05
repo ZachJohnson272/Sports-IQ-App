@@ -5736,7 +5736,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('pelicans','New Orleans Pelicans','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">New Orleans Pelicans</div>
-                <div class="lp-ct-sub">19 players · Active</div>
+                <div class="lp-ct-sub">10 players · active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -6640,8 +6640,40 @@ const TWOLVES_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// Pelicans precise multi-position labels
+const PELICANS_POSITIONS = {
+  "Dejounte Murray":  "PG",
+  "Saddiq Bey":       "SF/PF",
+  "Trey Murphy III":  "SF/PF",
+  "Zion Williamson":  "PF/C",
+  "Derik Queen":      "C/PF",
+  "Jeremiah Fears":   "PG/SG",
+  "Jordan Hawkins":   "SG/PG",
+  "Bryce McGowens":   "SG/SF",
+  "Josh Oduro":       "C/PF",
+  "Yves Missi":       "C",
+};
+
+// Pelicans 10-player rotation
+const PELICANS_ROTATION = {
+  starters: [
+    { pos:"PG",    name:"Dejounte Murray" },
+    { pos:"SF/PF", name:"Saddiq Bey" },
+    { pos:"SF/PF", name:"Trey Murphy III" },
+    { pos:"PF/C",  name:"Zion Williamson" },
+    { pos:"C/PF",  name:"Derik Queen" },
+  ],
+  bench: [
+    { pos:"PG/SG", name:"Jeremiah Fears" },
+    { pos:"SG/PG", name:"Jordan Hawkins" },
+    { pos:"SG/SF", name:"Bryce McGowens" },
+    { pos:"C/PF",  name:"Josh Oduro" },
+    { pos:"C",     name:"Yves Missi" },
+  ]
+};
+
+// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -6960,28 +6992,19 @@ const PELICANS_TEAM = {
   coachSince: "2021"
 };
 
-const PELICANS_STARTING_LINEUP = { PG:"Dejounte Murray", SG:"Trey Murphy III", SF:"Saddiq Bey", PF:"Zion Williamson", C:"Derik Queen" };
+const PELICANS_STARTING_LINEUP = { PG:"Dejounte Murray", SG:"Saddiq Bey", SF:"Trey Murphy III", PF:"Zion Williamson", C:"Derik Queen" };
 
 const PELICANS_ROSTER = [
-  { name:"Dejounte Murray",    position:"G", jersey:"5",  height:"6ft 5in",  college:"Washington",    country:"USA",      hometown:"Seattle, Washington",          draft_year:"2016", draft_pick:"29",        draft_team:"San Antonio Spurs",     past_teams:[{team:"San Antonio Spurs",dur:"5 seasons"},{team:"Atlanta Hawks",dur:"2 seasons"}],                                                                    jazz_years:"1 season" },
-  { name:"Jordan Poole",       position:"G", jersey:"13", height:"6ft 4in",  college:"Michigan",      country:"USA",      hometown:"Milwaukee, Wisconsin",         draft_year:"2019", draft_pick:"28",        draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"4 seasons"},{team:"Washington Wizards",dur:"1 season"}],                                                          jazz_years:"1 season" },
-  { name:"Jeremiah Fears",     position:"G", jersey:"7",  height:"6ft 3in",  college:"Oklahoma",      country:"USA",      hometown:"Overland Park, Kansas",        draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jose Alvarado",      position:"G", jersey:"15", height:"6ft 0in",  college:"Georgia Tech",  country:"USA",      hometown:"Brooklyn, New York",           draft_year:"2021", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jordan Hawkins",     position:"G", jersey:"0",  height:"6ft 5in",  college:"Connecticut",   country:"USA",      hometown:"Brandywine, Maryland",         draft_year:"2023", draft_pick:"14",        draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Trey Alexander",     position:"G", jersey:"23", height:"6ft 4in",  college:"Creighton",     country:"USA",      hometown:"St. Louis, Missouri",          draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Zion Williamson",    position:"F", jersey:"1",  height:"6ft 6in",  college:"Duke",          country:"USA",      hometown:"Salisbury, North Carolina",    draft_year:"2019", draft_pick:"1",         draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Saddiq Bey",         position:"F", jersey:"41", height:"6ft 8in",  college:"Villanova",     country:"USA",      hometown:"Washington, D.C.",             draft_year:"2020", draft_pick:"19",        draft_team:"Detroit Pistons",        past_teams:[{team:"Detroit Pistons",dur:"2 seasons"},{team:"Atlanta Hawks",dur:"2 seasons"},{team:"Cleveland Cavaliers",dur:"1 season"}],                    jazz_years:"1 season" },
-  { name:"Herbert Jones",      position:"F", jersey:"5",  height:"6ft 7in",  college:"Alabama",       country:"USA",      hometown:"Greensboro, Alabama",          draft_year:"2021", draft_pick:"35",        draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Trey Murphy III",    position:"F", jersey:"25", height:"6ft 8in",  college:"Virginia",      country:"USA",      hometown:"Chapel Hill, North Carolina",  draft_year:"2021", draft_pick:"17",        draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Bryce McGowens",     position:"F", jersey:"8",  height:"6ft 7in",  college:"Nebraska",      country:"USA",      hometown:"Greenville, South Carolina",   draft_year:"2022", draft_pick:"40",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"1 season"},{team:"Portland Trail Blazers",dur:"1 season"},{team:"Minnesota Timberwolves",dur:"1 season"}],           jazz_years:"1 season" },
-  { name:"Micah Peavy",        position:"F", jersey:"6",  height:"6ft 7in",  college:"TCU",           country:"USA",      hometown:"Dallas, Texas",                draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Portland Trail Blazers",dur:"1 season"}],                                                                                                  jazz_years:"1 season" },
-  { name:"Derik Queen",        position:"C", jersey:"6",  height:"6ft 10in", college:"Maryland",      country:"USA",      hometown:"Baltimore, Maryland",          draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Karlo Matkovic",     position:"C", jersey:"9",  height:"7ft 0in",  college:"None",          country:"Croatia",  hometown:"Zagreb, Croatia",              draft_year:"2022", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Yves Missi",         position:"C", jersey:"21", height:"7ft 0in",  college:"Baylor",        country:"Cameroon", hometown:"Yaounde, Cameroon",            draft_year:"2024", draft_pick:"21",        draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Kevon Looney",       position:"C", jersey:"5",  height:"6ft 9in",  college:"UCLA",          country:"USA",      hometown:"Milwaukee, Wisconsin",         draft_year:"2015", draft_pick:"30",        draft_team:"Golden State Warriors",  past_teams:[{team:"Golden State Warriors",dur:"10 seasons"}],                                                                                                  jazz_years:"1 season" },
-  { name:"DeAndre Jordan",     position:"C", jersey:"6",  height:"6ft 11in", college:"Texas A&M",     country:"USA",      hometown:"Houston, Texas",               draft_year:"2008", draft_pick:"35",        draft_team:"Houston Rockets",        past_teams:[{team:"LA Clippers",dur:"9 seasons"},{team:"Dallas Mavericks",dur:"1 season"},{team:"New York Knicks",dur:"1 season"},{team:"Brooklyn Nets",dur:"2 seasons"},{team:"Los Angeles Lakers",dur:"1 season"},{team:"Philadelphia 76ers",dur:"1 season"},{team:"Denver Nuggets",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"Hunter Dickinson",   position:"C", jersey:"1",  height:"7ft 1in",  college:"Kansas",        country:"USA",      hometown:"Alexandria, Virginia",         draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Minnesota Timberwolves",dur:"1 season"}],                                                                                                   jazz_years:"1 season" },
-  { name:"Josh Oduro",         position:"C", jersey:"3",  height:"6ft 11in", college:"Providence",    country:"Ghana",    hometown:"Accra, Ghana",                 draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Dejounte Murray",   position:"PG",    jersey:"5",  height:"6ft 5in",  college:"Washington", country:"USA",      hometown:"Seattle, Washington",         draft_year:"2016", draft_pick:"29",        draft_team:"San Antonio Spurs",     past_teams:[{team:"San Antonio Spurs",dur:"5 seasons"},{team:"Atlanta Hawks",dur:"2 seasons"}],                                                                             pelicans_years:"1 season" },
+  { name:"Saddiq Bey",        position:"SF/PF", jersey:"41", height:"6ft 8in",  college:"Villanova",  country:"USA",      hometown:"Washington, D.C.",            draft_year:"2020", draft_pick:"19",        draft_team:"Detroit Pistons",        past_teams:[{team:"Detroit Pistons",dur:"2 seasons"},{team:"Atlanta Hawks",dur:"2 seasons"},{team:"Cleveland Cavaliers",dur:"1 season"}],                               pelicans_years:"1 season" },
+  { name:"Trey Murphy III",   position:"SF/PF", jersey:"25", height:"6ft 8in",  college:"Virginia",   country:"USA",      hometown:"Chapel Hill, North Carolina", draft_year:"2021", draft_pick:"17",        draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                                   pelicans_years:"1 season" },
+  { name:"Zion Williamson",   position:"PF/C",  jersey:"1",  height:"6ft 6in",  college:"Duke",       country:"USA",      hometown:"Salisbury, North Carolina",   draft_year:"2019", draft_pick:"1",         draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                                   pelicans_years:"1 season" },
+  { name:"Derik Queen",       position:"C/PF",  jersey:"6",  height:"6ft 10in", college:"Maryland",   country:"USA",      hometown:"Baltimore, Maryland",         draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                                   pelicans_years:"1 season" },
+  { name:"Jeremiah Fears",    position:"PG/SG", jersey:"7",  height:"6ft 3in",  college:"Oklahoma",   country:"USA",      hometown:"Overland Park, Kansas",       draft_year:"2025", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                                   pelicans_years:"1 season" },
+  { name:"Jordan Hawkins",    position:"SG/PG", jersey:"0",  height:"6ft 5in",  college:"Connecticut",country:"USA",      hometown:"Brandywine, Maryland",        draft_year:"2023", draft_pick:"14",        draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                                   pelicans_years:"1 season" },
+  { name:"Bryce McGowens",    position:"SG/SF", jersey:"8",  height:"6ft 7in",  college:"Nebraska",   country:"USA",      hometown:"Greenville, South Carolina",  draft_year:"2022", draft_pick:"40",        draft_team:"Charlotte Hornets",      past_teams:[{team:"Charlotte Hornets",dur:"1 season"},{team:"Portland Trail Blazers",dur:"1 season"},{team:"Minnesota Timberwolves",dur:"1 season"}],               pelicans_years:"1 season" },
+  { name:"Josh Oduro",        position:"C/PF",  jersey:"3",  height:"6ft 11in", college:"Providence", country:"Ghana",    hometown:"Accra, Ghana",                draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                                   pelicans_years:"1 season" },
+  { name:"Yves Missi",        position:"C",     jersey:"21", height:"7ft 0in",  college:"Baylor",     country:"Cameroon", hometown:"Yaounde, Cameroon",           draft_year:"2024", draft_pick:"21",        draft_team:"New Orleans Pelicans",   past_teams:"None",                                                                                                                                                   pelicans_years:"1 season" },
 ];
 
 const OKC_TEAM = {
@@ -8040,6 +8063,7 @@ function buildTeamToRosterDeck(team, roster) {
     'Los Angeles Lakers':   typeof LAKERS_ROTATION !== 'undefined' ? LAKERS_ROTATION : null,
     'Memphis Grizzlies':    typeof GRIZZLIES_ROTATION !== 'undefined' ? GRIZZLIES_ROTATION : null,
     'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
+    'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10830,6 +10854,7 @@ function _buildRandPool() {
     'Los Angeles Lakers':   typeof LAKERS_ROTATION !== 'undefined' ? LAKERS_ROTATION : null,
     'Memphis Grizzlies':    typeof GRIZZLIES_ROTATION !== 'undefined' ? GRIZZLIES_ROTATION : null,
     'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
+    'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
@@ -11779,7 +11804,7 @@ function updateSportsDropdown() {
   // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-  if (subEl)    subEl.textContent = `Minnesota Timberwolves · ${learnedCount}/${totalPlayers} players learned`;
+  if (subEl)    subEl.textContent = `New Orleans Pelicans · ${learnedCount}/${totalPlayers} players learned`;
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
