@@ -5757,7 +5757,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('blazers','Portland Trail Blazers','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Portland Trail Blazers</div>
-                <div class="lp-ct-sub">17 players · Active</div>
+                <div class="lp-ct-sub">10 players · active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -6736,8 +6736,40 @@ const SUNS_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, OKC, Suns, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || OKC_POSITIONS[p.name] || SUNS_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// Blazers precise multi-position labels
+const BLAZERS_POSITIONS = {
+  "Damian Lillard":      "PG/SG",
+  "Shaedon Sharpe":      "SG/SF",
+  "Deni Avdija":         "SF/PG",
+  "Jerami Grant":        "PF/SF",
+  "Donovan Clingan":     "C",
+  "Jrue Holiday":        "PG/SG",
+  "Scoot Henderson":     "PG/SG",
+  "Robert Williams III": "C/PF",
+  "Matisse Thybulle":    "SF/SG",
+  "Toumani Camara":      "PF/SF",
+};
+
+// Blazers 10-player rotation
+const BLAZERS_ROTATION = {
+  starters: [
+    { pos:"PG/SG", name:"Damian Lillard" },
+    { pos:"SG/SF", name:"Shaedon Sharpe" },
+    { pos:"SF/PG", name:"Deni Avdija" },
+    { pos:"PF/SF", name:"Jerami Grant" },
+    { pos:"C",     name:"Donovan Clingan" },
+  ],
+  bench: [
+    { pos:"PG/SG", name:"Jrue Holiday" },
+    { pos:"PG/SG", name:"Scoot Henderson" },
+    { pos:"C/PF",  name:"Robert Williams III" },
+    { pos:"SF/SG", name:"Matisse Thybulle" },
+    { pos:"PF/SF", name:"Toumani Camara" },
+  ]
+};
+
+// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, Pelicans, OKC, Suns, Blazers, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || PELICANS_POSITIONS[p.name] || OKC_POSITIONS[p.name] || SUNS_POSITIONS[p.name] || BLAZERS_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -7149,26 +7181,19 @@ const BLAZERS_TEAM = {
   coachSince: "2021"
 };
 
-const BLAZERS_STARTING_LINEUP = { PG:"Damian Lillard", SG:"Shaedon Sharpe", SF:"Deni Avdija", PF:"Toumani Camara", C:"Donovan Clingan" };
+const BLAZERS_STARTING_LINEUP = { PG:"Damian Lillard", SG:"Shaedon Sharpe", SF:"Deni Avdija", PF:"Jerami Grant", C:"Donovan Clingan" };
 
 const BLAZERS_ROSTER = [
-  { name:"Jrue Holiday",        position:"G", jersey:"12", height:"6ft 4in",  college:"UCLA",            country:"USA",       hometown:"Chatsworth, California",       draft_year:"2009", draft_pick:"17",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"4 seasons"},{team:"New Orleans Pelicans",dur:"7 seasons"},{team:"Milwaukee Bucks",dur:"3 seasons"},{team:"Boston Celtics",dur:"1 season"}], jazz_years:"1 season" },
-  { name:"Scoot Henderson",     position:"G", jersey:"0",  height:"6ft 2in",  college:"None",            country:"USA",       hometown:"Stone Mountain, Georgia",      draft_year:"2023", draft_pick:"3",         draft_team:"Portland Trail Blazers", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Damian Lillard",      position:"G", jersey:"0",  height:"6ft 2in",  college:"Weber State",     country:"USA",       hometown:"Oakland, California",          draft_year:"2012", draft_pick:"6",         draft_team:"Portland Trail Blazers", past_teams:[{team:"Milwaukee Bucks",dur:"2 seasons"}],                                                                                                    jazz_years:"1 season" },
-  { name:"Shaedon Sharpe",      position:"G", jersey:"17", height:"6ft 6in",  college:"Kentucky",        country:"Canada",    hometown:"London, Ontario, Canada",      draft_year:"2022", draft_pick:"7",         draft_team:"Portland Trail Blazers", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Blake Wesley",        position:"G", jersey:"9",  height:"6ft 5in",  college:"Notre Dame",      country:"USA",       hometown:"Indianapolis, Indiana",        draft_year:"2022", draft_pick:"25",        draft_team:"San Antonio Spurs",      past_teams:[{team:"San Antonio Spurs",dur:"2 seasons"}],                                                                                                    jazz_years:"1 season" },
-  { name:"Caleb Love",          position:"G", jersey:"2",  height:"6ft 4in",  college:"Arizona",         country:"USA",       hometown:"St. Louis, Missouri",          draft_year:"2023", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Golden State Warriors",dur:"1 season"}],                                                                                                jazz_years:"1 season" },
-  { name:"Vit Krejci",          position:"G", jersey:"12", height:"6ft 7in",  college:"None",            country:"Czech Republic",hometown:"Opava, Czech Republic",    draft_year:"2021", draft_pick:"37",        draft_team:"Oklahoma City Thunder",  past_teams:[{team:"Oklahoma City Thunder",dur:"2 seasons"},{team:"Atlanta Hawks",dur:"1 season"}],                                                          jazz_years:"1 season" },
-  { name:"Deni Avdija",         position:"F", jersey:"8",  height:"6ft 9in",  college:"None",            country:"Israel",    hometown:"Tel Aviv, Israel",             draft_year:"2020", draft_pick:"9",         draft_team:"Washington Wizards",     past_teams:[{team:"Washington Wizards",dur:"4 seasons"}],                                                                                                  jazz_years:"1 season" },
-  { name:"Jerami Grant",        position:"F", jersey:"9",  height:"6ft 8in",  college:"Syracuse",        country:"USA",       hometown:"Baltimore, Maryland",          draft_year:"2014", draft_pick:"39",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Denver Nuggets",dur:"2 seasons"},{team:"Detroit Pistons",dur:"2 seasons"}], jazz_years:"1 season" },
-  { name:"Toumani Camara",      position:"F", jersey:"33", height:"6ft 8in",  college:"Georgia",         country:"France",    hometown:"Paris, France",                draft_year:"2023", draft_pick:"43",        draft_team:"LA Clippers",            past_teams:[{team:"LA Clippers",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
-  { name:"Matisse Thybulle",    position:"F", jersey:"4",  height:"6ft 5in",  college:"Washington",      country:"Australia", hometown:"Los Angeles, California",      draft_year:"2019", draft_pick:"20",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"3 seasons"},{team:"Portland Trail Blazers",dur:"1 season"},{team:"Golden State Warriors",dur:"1 season"}],       jazz_years:"1 season" },
-  { name:"Kris Murray",         position:"F", jersey:"8",  height:"6ft 7in",  college:"Iowa",            country:"USA",       hometown:"Cedar Rapids, Iowa",           draft_year:"2023", draft_pick:"23",        draft_team:"Portland Trail Blazers", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Sidy Cissoko",        position:"F", jersey:"21", height:"6ft 7in",  college:"None",            country:"France",    hometown:"Brest, France",                draft_year:"2023", draft_pick:"44",        draft_team:"San Antonio Spurs",      past_teams:[{team:"San Antonio Spurs",dur:"1 season"}],                                                                                                     jazz_years:"1 season" },
-  { name:"Jayson Kent",         position:"F", jersey:"7",  height:"6ft 7in",  college:"Vermont",         country:"USA",       hometown:"Bronx, New York",              draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Donovan Clingan",     position:"C", jersey:"23", height:"7ft 2in",  college:"Connecticut",     country:"USA",       hometown:"Bristol, Connecticut",         draft_year:"2024", draft_pick:"7",         draft_team:"Portland Trail Blazers", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Robert Williams III", position:"C", jersey:"35", height:"6ft 9in",  college:"Texas A&M",       country:"USA",       hometown:"Barnhill, Texas",              draft_year:"2018", draft_pick:"27",        draft_team:"Boston Celtics",         past_teams:[{team:"Boston Celtics",dur:"5 seasons"}],                                                                                                       jazz_years:"1 season" },
-  { name:"Yang Hansen",         position:"C", jersey:"30", height:"7ft 0in",  college:"None",            country:"China",     hometown:"Beijing, China",               draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
+  { name:"Damian Lillard",      position:"PG/SG", jersey:"0",  height:"6ft 2in",  college:"Weber State",  country:"USA",       hometown:"Oakland, California",        draft_year:"2012", draft_pick:"6",         draft_team:"Portland Trail Blazers", past_teams:[{team:"Milwaukee Bucks",dur:"2 seasons"}],                                                                                                                                                         blazers_years:"1 season" },
+  { name:"Shaedon Sharpe",      position:"SG/SF", jersey:"17", height:"6ft 6in",  college:"Kentucky",     country:"Canada",    hometown:"London, Ontario, Canada",    draft_year:"2022", draft_pick:"7",         draft_team:"Portland Trail Blazers", past_teams:"None",                                                                                                                                                                                         blazers_years:"1 season" },
+  { name:"Deni Avdija",         position:"SF/PG", jersey:"8",  height:"6ft 9in",  college:"None",         country:"Israel",    hometown:"Tel Aviv, Israel",           draft_year:"2020", draft_pick:"9",         draft_team:"Washington Wizards",     past_teams:[{team:"Washington Wizards",dur:"4 seasons"}],                                                                                                                                              blazers_years:"1 season" },
+  { name:"Jerami Grant",        position:"PF/SF", jersey:"9",  height:"6ft 8in",  college:"Syracuse",     country:"USA",       hometown:"Baltimore, Maryland",        draft_year:"2014", draft_pick:"39",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"1 season"},{team:"Oklahoma City Thunder",dur:"1 season"},{team:"Denver Nuggets",dur:"2 seasons"},{team:"Detroit Pistons",dur:"2 seasons"}],                   blazers_years:"1 season" },
+  { name:"Donovan Clingan",     position:"C",     jersey:"23", height:"7ft 2in",  college:"Connecticut",  country:"USA",       hometown:"Bristol, Connecticut",       draft_year:"2024", draft_pick:"7",         draft_team:"Portland Trail Blazers", past_teams:"None",                                                                                                                                                                                         blazers_years:"1 season" },
+  { name:"Jrue Holiday",        position:"PG/SG", jersey:"12", height:"6ft 4in",  college:"UCLA",         country:"USA",       hometown:"Chatsworth, California",     draft_year:"2009", draft_pick:"17",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"4 seasons"},{team:"New Orleans Pelicans",dur:"7 seasons"},{team:"Milwaukee Bucks",dur:"3 seasons"},{team:"Boston Celtics",dur:"1 season"}],                   blazers_years:"1 season" },
+  { name:"Scoot Henderson",     position:"PG/SG", jersey:"0",  height:"6ft 2in",  college:"None",         country:"USA",       hometown:"Stone Mountain, Georgia",    draft_year:"2023", draft_pick:"3",         draft_team:"Portland Trail Blazers", past_teams:"None",                                                                                                                                                                                         blazers_years:"1 season" },
+  { name:"Robert Williams III", position:"C/PF",  jersey:"35", height:"6ft 9in",  college:"Texas A&M",    country:"USA",       hometown:"Barnhill, Texas",            draft_year:"2018", draft_pick:"27",        draft_team:"Boston Celtics",         past_teams:[{team:"Boston Celtics",dur:"5 seasons"}],                                                                                                                                                  blazers_years:"1 season" },
+  { name:"Matisse Thybulle",    position:"SF/SG", jersey:"4",  height:"6ft 5in",  college:"Washington",   country:"Australia", hometown:"Los Angeles, California",    draft_year:"2019", draft_pick:"20",        draft_team:"Philadelphia 76ers",     past_teams:[{team:"Philadelphia 76ers",dur:"3 seasons"},{team:"Portland Trail Blazers",dur:"1 season"},{team:"Golden State Warriors",dur:"1 season"}],                                                blazers_years:"1 season" },
+  { name:"Toumani Camara",      position:"PF/SF", jersey:"33", height:"6ft 8in",  college:"Georgia",      country:"France",    hometown:"Paris, France",              draft_year:"2023", draft_pick:"43",        draft_team:"LA Clippers",            past_teams:[{team:"LA Clippers",dur:"1 season"}],                                                                                                                                                      blazers_years:"1 season" },
 ];
 
 const KINGS_TEAM = {
@@ -8121,6 +8146,7 @@ function buildTeamToRosterDeck(team, roster) {
     'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
     'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
     'Phoenix Suns':           typeof SUNS_ROTATION !== 'undefined' ? SUNS_ROTATION : null,
+    'Portland Trail Blazers': typeof BLAZERS_ROTATION !== 'undefined' ? BLAZERS_ROTATION : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10914,6 +10940,7 @@ function _buildRandPool() {
     'New Orleans Pelicans':   typeof PELICANS_ROTATION !== 'undefined' ? PELICANS_ROTATION : null,
     'Oklahoma City Thunder':  typeof OKC_ROTATION !== 'undefined' ? OKC_ROTATION : null,
     'Phoenix Suns':           typeof SUNS_ROTATION !== 'undefined' ? SUNS_ROTATION : null,
+    'Portland Trail Blazers': typeof BLAZERS_ROTATION !== 'undefined' ? BLAZERS_ROTATION : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
@@ -11863,7 +11890,7 @@ function updateSportsDropdown() {
   // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-  if (subEl)    subEl.textContent = `Phoenix Suns · ${learnedCount}/${totalPlayers} players learned`;
+  if (subEl)    subEl.textContent = `Portland Trail Blazers · ${learnedCount}/${totalPlayers} players learned`;
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
