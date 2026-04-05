@@ -5729,7 +5729,7 @@
             <div class="lp-ct" onclick="event.stopPropagation();lpSelectTeamNew('twolves','Minnesota Timberwolves','nba')">
               <div class="lp-ct-info">
                 <div class="lp-ct-name">Minnesota Timberwolves</div>
-                <div class="lp-ct-sub">17 players · Active</div>
+                <div class="lp-ct-sub">10 players · active</div>
               </div>
               <div class="lp-ct-arrow">→</div>
             </div>
@@ -6608,8 +6608,40 @@ const GRIZZLIES_ROTATION = {
   ]
 };
 
-// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, then falls back to posMap.
-function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || posMap[p.position] || p.position; }
+// Timberwolves precise multi-position labels
+const TWOLVES_POSITIONS = {
+  "Donte DiVincenzo": "PG/SG",
+  "Anthony Edwards":  "SG",
+  "Jaden McDaniels":  "SF/PF",
+  "Julius Randle":    "PF/C",
+  "Rudy Gobert":      "C",
+  "Mike Conley":      "PG",
+  "Bones Hyland":     "PG/SG",
+  "Jaylen Clark":     "SG/SF",
+  "Ayo Dosunmu":      "SG/PG",
+  "Naz Reid":         "C/PF",
+};
+
+// Timberwolves 10-player rotation
+const TWOLVES_ROTATION = {
+  starters: [
+    { pos:"PG/SG", name:"Donte DiVincenzo" },
+    { pos:"SG",    name:"Anthony Edwards" },
+    { pos:"SF/PF", name:"Jaden McDaniels" },
+    { pos:"PF/C",  name:"Julius Randle" },
+    { pos:"C",     name:"Rudy Gobert" },
+  ],
+  bench: [
+    { pos:"PG",    name:"Mike Conley" },
+    { pos:"PG/SG", name:"Bones Hyland" },
+    { pos:"SG/SF", name:"Jaylen Clark" },
+    { pos:"SG/PG", name:"Ayo Dosunmu" },
+    { pos:"C/PF",  name:"Naz Reid" },
+  ]
+};
+
+// getPosLabel: checks Jazz, Mavs, Nuggets, GSW, Rockets, Clippers, Lakers, Grizzlies, Twolves, then falls back to posMap.
+function getPosLabel(p) { return JAZZ_POSITIONS[p.name] || MAVS_POSITIONS[p.name] || NUGGETS_POSITIONS[p.name] || GSW_POSITIONS[p.name] || ROCKETS_POSITIONS[p.name] || CLIPPERS_POSITIONS[p.name] || LAKERS_POSITIONS[p.name] || GRIZZLIES_POSITIONS[p.name] || TWOLVES_POSITIONS[p.name] || posMap[p.position] || p.position; }
 
 const JAZZ_STARTING_LINEUP = { PG:'Keyonte George', SG:'Ace Bailey', SF:'Lauri Markkanen', PF:'Jaren Jackson Jr.', C:'Walker Kessler' };
 
@@ -6900,23 +6932,16 @@ const TWOLVES_TEAM = {
 const TWOLVES_STARTING_LINEUP = { PG:"Donte DiVincenzo", SG:"Anthony Edwards", SF:"Jaden McDaniels", PF:"Julius Randle", C:"Rudy Gobert" };
 
 const TWOLVES_ROSTER = [
-  { name:"Anthony Edwards",      position:"G", jersey:"5",  height:"6ft 4in",  college:"Georgia",         country:"USA",      hometown:"Atlanta, Georgia",             draft_year:"2020", draft_pick:"1",         draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Donte DiVincenzo",     position:"G", jersey:"0",  height:"6ft 4in",  college:"Villanova",       country:"USA",      hometown:"Wilmington, Delaware",         draft_year:"2018", draft_pick:"17",        draft_team:"Milwaukee Bucks",        past_teams:[{team:"Milwaukee Bucks",dur:"3 seasons"},{team:"Sacramento Kings",dur:"1 season"},{team:"Golden State Warriors",dur:"1 season"},{team:"New York Knicks",dur:"2 seasons"}], jazz_years:"1 season" },
-  { name:"Bones Hyland",         position:"G", jersey:"3",  height:"6ft 3in",  college:"VCU",             country:"USA",      hometown:"Wilmington, Delaware",         draft_year:"2021", draft_pick:"26",        draft_team:"Denver Nuggets",         past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"LA Clippers",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}],                              jazz_years:"1 season" },
-  { name:"Ayo Dosunmu",          position:"G", jersey:"12", height:"6ft 5in",  college:"Illinois",        country:"USA",      hometown:"Chicago, Illinois",            draft_year:"2021", draft_pick:"38",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"3 seasons"}],                                                                                                          jazz_years:"1 season" },
-  { name:"Mike Conley",          position:"G", jersey:"10", height:"6ft 1in",  college:"Ohio State",      country:"USA",      hometown:"Indianapolis, Indiana",        draft_year:"2007", draft_pick:"4",         draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"12 seasons"},{team:"Utah Jazz",dur:"2 seasons"}],                                                                   jazz_years:"1 season" },
-  { name:"Jaylen Clark",         position:"G", jersey:"5",  height:"6ft 5in",  college:"UCLA",            country:"USA",      hometown:"Inglewood, California",        draft_year:"2023", draft_pick:"36",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Zyon Pullin",          position:"G", jersey:"22", height:"6ft 3in",  college:"UC Riverside",    country:"USA",      hometown:"Los Angeles, California",      draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Jaden McDaniels",      position:"F", jersey:"3",  height:"6ft 9in",  college:"Washington",      country:"USA",      hometown:"Federal Way, Washington",      draft_year:"2020", draft_pick:"28",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Julius Randle",        position:"F", jersey:"30", height:"6ft 9in",  college:"Kentucky",        country:"USA",      hometown:"Dallas, Texas",                draft_year:"2014", draft_pick:"7",         draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"4 seasons"},{team:"New Orleans Pelicans",dur:"1 season"},{team:"New York Knicks",dur:"5 seasons"}],              jazz_years:"1 season" },
-  { name:"Kyle Anderson",        position:"F", jersey:"1",  height:"6ft 9in",  college:"UCLA",            country:"USA",      hometown:"East Brunswick, New Jersey",   draft_year:"2014", draft_pick:"30",        draft_team:"San Antonio Spurs",      past_teams:[{team:"San Antonio Spurs",dur:"5 seasons"},{team:"Memphis Grizzlies",dur:"2 seasons"},{team:"Golden State Warriors",dur:"1 season"}],             jazz_years:"1 season" },
-  { name:"Terrence Shannon Jr.", position:"F", jersey:"0",  height:"6ft 6in",  college:"Illinois",        country:"USA",      hometown:"Harvey, Illinois",             draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
-  { name:"Julian Phillips",      position:"F", jersey:"13", height:"6ft 8in",  college:"Tennessee",       country:"USA",      hometown:"Rock Hill, South Carolina",    draft_year:"2023", draft_pick:"35",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
-  { name:"Rudy Gobert",          position:"C", jersey:"27", height:"7ft 1in",  college:"None",            country:"France",   hometown:"Saint-Quentin, France",        draft_year:"2013", draft_pick:"27",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"9 seasons"}],                                                                                                               jazz_years:"1 season" },
-  { name:"Naz Reid",             position:"C", jersey:"11", height:"6ft 9in",  college:"LSU",             country:"USA",      hometown:"Asbury Park, New Jersey",      draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Joan Beringer",        position:"C", jersey:"17", height:"7ft 1in",  college:"None",            country:"Spain",    hometown:"Manresa, Spain",               draft_year:"2024", draft_pick:"28",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Rocco Zikarsky",       position:"C", jersey:"55", height:"7ft 3in",  college:"None",            country:"Australia",hometown:"Brisbane, Australia",          draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                              jazz_years:"1 season" },
-  { name:"Enrique Freeman",      position:"C", jersey:"25", height:"6ft 8in",  college:"Akron",           country:"USA",      hometown:"Baltimore, Maryland",          draft_year:"2024", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:[{team:"Indiana Pacers",dur:"1 season"}],                                                                                                           jazz_years:"1 season" },
+  { name:"Donte DiVincenzo",  position:"PG/SG", jersey:"0",  height:"6ft 4in",  college:"Villanova",   country:"USA",     hometown:"Wilmington, Delaware",        draft_year:"2018", draft_pick:"17",        draft_team:"Milwaukee Bucks",        past_teams:[{team:"Milwaukee Bucks",dur:"3 seasons"},{team:"Sacramento Kings",dur:"1 season"},{team:"Golden State Warriors",dur:"1 season"},{team:"New York Knicks",dur:"2 seasons"}], twolves_years:"1 season" },
+  { name:"Anthony Edwards",   position:"SG",    jersey:"5",  height:"6ft 4in",  college:"Georgia",     country:"USA",     hometown:"Atlanta, Georgia",            draft_year:"2020", draft_pick:"1",         draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                                    twolves_years:"1 season" },
+  { name:"Jaden McDaniels",   position:"SF/PF", jersey:"3",  height:"6ft 9in",  college:"Washington",  country:"USA",     hometown:"Federal Way, Washington",     draft_year:"2020", draft_pick:"28",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                                    twolves_years:"1 season" },
+  { name:"Julius Randle",     position:"PF/C",  jersey:"30", height:"6ft 9in",  college:"Kentucky",    country:"USA",     hometown:"Dallas, Texas",               draft_year:"2014", draft_pick:"7",         draft_team:"Los Angeles Lakers",     past_teams:[{team:"Los Angeles Lakers",dur:"4 seasons"},{team:"New Orleans Pelicans",dur:"1 season"},{team:"New York Knicks",dur:"5 seasons"}],                        twolves_years:"1 season" },
+  { name:"Rudy Gobert",       position:"C",     jersey:"27", height:"7ft 1in",  college:"None",        country:"France",  hometown:"Saint-Quentin, France",       draft_year:"2013", draft_pick:"27",        draft_team:"Utah Jazz",              past_teams:[{team:"Utah Jazz",dur:"9 seasons"}],                                                                                                                       twolves_years:"1 season" },
+  { name:"Mike Conley",       position:"PG",    jersey:"10", height:"6ft 1in",  college:"Ohio State",  country:"USA",     hometown:"Indianapolis, Indiana",       draft_year:"2007", draft_pick:"4",         draft_team:"Memphis Grizzlies",      past_teams:[{team:"Memphis Grizzlies",dur:"12 seasons"},{team:"Utah Jazz",dur:"2 seasons"}],                                                                           twolves_years:"1 season" },
+  { name:"Bones Hyland",      position:"PG/SG", jersey:"3",  height:"6ft 3in",  college:"VCU",         country:"USA",     hometown:"Wilmington, Delaware",        draft_year:"2021", draft_pick:"26",        draft_team:"Denver Nuggets",         past_teams:[{team:"Denver Nuggets",dur:"1 season"},{team:"LA Clippers",dur:"2 seasons"},{team:"Phoenix Suns",dur:"1 season"}],                                        twolves_years:"1 season" },
+  { name:"Jaylen Clark",      position:"SG/SF", jersey:"5",  height:"6ft 5in",  college:"UCLA",        country:"USA",     hometown:"Inglewood, California",       draft_year:"2023", draft_pick:"36",        draft_team:"Minnesota Timberwolves", past_teams:"None",                                                                                                                                                    twolves_years:"1 season" },
+  { name:"Ayo Dosunmu",       position:"SG/PG", jersey:"12", height:"6ft 5in",  college:"Illinois",    country:"USA",     hometown:"Chicago, Illinois",           draft_year:"2021", draft_pick:"38",        draft_team:"Chicago Bulls",          past_teams:[{team:"Chicago Bulls",dur:"3 seasons"}],                                                                                                                  twolves_years:"1 season" },
+  { name:"Naz Reid",          position:"C/PF",  jersey:"11", height:"6ft 9in",  college:"LSU",         country:"USA",     hometown:"Asbury Park, New Jersey",     draft_year:"2019", draft_pick:"Undrafted", draft_team:"Undrafted",              past_teams:"None",                                                                                                                                                    twolves_years:"1 season" },
 ];
 
 const PELICANS_TEAM = {
@@ -8014,6 +8039,7 @@ function buildTeamToRosterDeck(team, roster) {
     'LA Clippers':          typeof CLIPPERS_ROTATION !== 'undefined' ? CLIPPERS_ROTATION : null,
     'Los Angeles Lakers':   typeof LAKERS_ROTATION !== 'undefined' ? LAKERS_ROTATION : null,
     'Memphis Grizzlies':    typeof GRIZZLIES_ROTATION !== 'undefined' ? GRIZZLIES_ROTATION : null,
+    'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
   };
   const rotation = rotationMap[team.name];
   if (rotation) {
@@ -10803,6 +10829,7 @@ function _buildRandPool() {
     'LA Clippers':          typeof CLIPPERS_ROTATION !== 'undefined' ? CLIPPERS_ROTATION : null,
     'Los Angeles Lakers':   typeof LAKERS_ROTATION !== 'undefined' ? LAKERS_ROTATION : null,
     'Memphis Grizzlies':    typeof GRIZZLIES_ROTATION !== 'undefined' ? GRIZZLIES_ROTATION : null,
+    'Minnesota Timberwolves': typeof TWOLVES_ROTATION !== 'undefined' ? TWOLVES_ROTATION : null,
   };
   const rotationData = TEAM_ROTATIONS[activeTeam.name] || null;
   let rotationAns;
@@ -11752,7 +11779,7 @@ function updateSportsDropdown() {
   // Update detail row sub/status
   const subEl    = document.getElementById('sdNBASub');
   const statusEl = document.getElementById('sdNBAStatus');
-  if (subEl)    subEl.textContent = `Memphis Grizzlies · ${learnedCount}/${totalPlayers} players learned`;
+  if (subEl)    subEl.textContent = `Minnesota Timberwolves · ${learnedCount}/${totalPlayers} players learned`;
   if (statusEl) {
     if (allDone) {
       statusEl.className = 'sport-row-status complete';
